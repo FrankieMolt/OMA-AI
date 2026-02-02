@@ -1,0 +1,48 @@
+# HEARTBEAT.md - Proactive Checks
+
+## Daily Rotation (2-4x per day)
+
+**Morning Check:**
+- FrankieMolt repo: new issues, PRs, CI failures?
+- Coolify: deployments healthy?
+- Twitter/X: mentions needing attention?
+- ETAs: update NOSYT on ongoing work
+
+**Afternoon Check:**
+- System resources: CPU, RAM, Disk OK?
+- MCP servers: Github, Railway responsive?
+- Crypto/SaaS: any alerts or incidents?
+- Progress: what's done, what's pending
+
+**Evening Check:**
+- Deployment status: all services running?
+- Security: any auth failures, weird logs?
+- Memory: update MEMORY.md with lessons learned
+- Plan for tomorrow: queue in HEARTBEAT.md
+
+## Always Provide ETAs
+
+When reporting work:
+- "ETA: 5 min to deploy X"
+- "Time: 2 min to debug Y"
+- "Total: 15 min for full task"
+
+Be specific. No vague "soon."
+
+## When to Reach Out
+
+- Critical failure (service down, security breach)
+- NOSYT requested something and it's done
+- Blocked decision needed
+- Interesting opportunity discovered
+
+## When to Stay Silent (HEARTBEAT_OK)
+
+- Routine health check (all good)
+- Late night (23:00-08:00) unless urgent
+- NOSYT clearly busy
+- Just checked <30 min ago
+
+---
+
+_Frankie watches. Frankie executes._

@@ -1,0 +1,57 @@
+{
+  "version": 1,
+  "skills": {
+    "agent-browser": {
+      "version": "0.2.0",
+      "installedAt": 1770000364542
+    },
+    "coolify": {
+      "version": "2.0.3",
+      "installedAt": 1769999219685
+    },
+    "read-github": {
+      "version": "1.0.1",
+      "installedAt": 1769994387014
+    },
+    "solana-xx1q5": {
+      "version": "1.0.0",
+      "installedAt": 1769997293166
+    },
+    "mission-control": {
+      "version": "2.0.0",
+      "installedAt": 1770000009855
+    },
+    "context7": {
+      "version": "1.0.3",
+      "installedAt": 1770000034578
+    },
+    "agenticflow-skill": {
+      "version": "0.1.0",
+      "installedAt": 1770000036914
+    },
+    "self-reflection": {
+      "version": "1.1.1",
+      "installedAt": 1770000038339
+    },
+    "self-improving-agent": {
+      "version": "1.0.4",
+      "installedAt": 1770000362782
+    },
+    "x402": {
+      "version": "1.0.0",
+      "installedAt": 1770000390353
+    },
+    "x402-client": {
+      "version": "1.0.0",
+      "installedAt": 1770000392569
+    },
+    "base-trader": {
+      "version": "1.1.1",
+      "installedAt": 1770000394592
+    },
+    "crypto-wallet": {
+      "version": "1.0.1",
+      "installedAt": 1770000396158
+    }
+  }
+}
