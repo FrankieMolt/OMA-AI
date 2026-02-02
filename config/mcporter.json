@@ -1,0 +1,31 @@
+{
+  "mcpServers": {
+    "github-mcp": {
+      "command": "npx",
+      "args": ["-y", "github-mcp"],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": ""
+      }
+    },
+    "railway-mcp": {
+      "command": "npx",
+      "args": ["-y", "railway-mcp"],
+      "env": {}
+    },
+    "sendai-mcp": {
+      "command": "npx",
+      "args": ["-y", "@sendai/mcp"],
+      "env": {},
+      "transport": "stdio",
+      "keepAlive": true,
+      "description": "SendAI MCP for Solana Agent Kit knowledge and tools"
+    },
+    "solana-mcp": {
+      "command": "npx",
+      "args": ["-y", "solana-mcp"],
+      "env": {},
+      "keepAlive": true,
+      "description": "Solana MCP for documentation and program examples"
+    }
+  }
+}
