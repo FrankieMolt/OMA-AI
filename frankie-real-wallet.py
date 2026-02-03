@@ -241,6 +241,7 @@ class x402PaymentClient:
         
         try:
             from web3 import Web3
+            from eth_account import Account
             
             # Setup Web3
             rpc_url = "https://mainnet.base.org" if wallet.chain == "base" else "https://api.mainnet-beta.solana.com"
@@ -250,35 +251,34 @@ class x402PaymentClient:
             nonce = w3.eth.get_transaction_count(wallet.wallet_address, 'pending')
             
             # Prepare Transaction (Sending ETH/USDC requires different handling)
-            # For demo, we send 0.001 ETH (Base) as the "payment" for the gateway
+            # For demo, we send 0.00001 ETH (Base) as the "payment" for the gateway
             # In real x402, you'd transfer USDC via contract call, not raw ETH value
             
             tx = {
                 'nonce': nonce,
                 'to': wallet.wallet_address,  # Send to self to test (or specific recipient)
-                'value': 0,  # No ETH value transfer for x402 demo, just a signature proof
+                'value': w3.to_wei(0.00001, 'ether'),  # Small amount for testing
                 'gas': 21000,
-                'maxFeePerGas': 1000000000,  # 1 gwei
-                'chainId': 8453 if wallet.chain == "base" else 101
+                'maxFeePerGas': w3.to_wei('1', 'gwei'),  # 1 gwei
+                'maxPriorityFeePerGas': w3.to_wei('0.1', 'gwei'),
+                'chainId': 8453 if wallet.chain == "base" else 101,
+                'type': 2
             }
             
             # Sign Transaction
-            # signed_tx = w3.eth.account.sign_transaction(tx, wallet.private_key)
+            signed_tx = w3.eth.account.sign_transaction(tx, wallet.private_key)
             
             # In production, we would broadcast:
-            # tx_hash = w3.eth.send_raw_transaction(signed_tx.rawTransaction)
+            tx_hash = w3.eth.send_raw_transaction(signed_tx.rawTransaction)
             
-            # FOR DEMO SAFETY: We return the unsigned tx info
-            # To make it REAL, uncomment the lines above
-            
-            logger.warning(f"[DEMO MODE] Skipping actual broadcast. Uncomment lines in code to enable.")
+            logger.info(f"Transaction sent: {tx_hash.hex()}")
             
             return {
-                "status": "simulated_execution",
+                "status": "executed",
                 "chain": wallet.chain,
                 "nonce": nonce,
-                "tx": tx,
-                "message": "Transaction prepared but NOT broadcasted. Add keys and uncomment broadcast to go LIVE."
+                "tx_hash": tx_hash.hex(),
+                "message": "Real transaction broadcasted."
             }
             
         except Exception as e:
@@ -319,3 +319,40 @@ def main():
 if __name__ == "__main__":
     import requests
     main()
+# ============================================================================
+# REAL ON-CHAIN FUNCTIONS
+# ============================================================================
+
+def get_real_balance(chain: str = "base") -> Dict:
+    """Get REAL wallet balance from blockchain."""
+    try:
+        from web3 import Web3
+        
+        if chain == "base":
+            rpc = "https://mainnet.base.org"
+            address = "0x1CF2ed05339745dF06b881ef0E4323c0ADBd89b5"
+        else:
+            return {"error": "Solana not implemented in this function"}
+        
+        w3 = Web3(Web3.HTTPProvider(rpc))
+        
+        if not w3.is_connected():
+            return {"error": "Cannot connect to Base RPC"}
+        
+        balance_wei = w3.eth.get_balance(address)
+        balance_eth = balance_wei / 1e18
+        
+        return {
+            "chain": chain,
+            "address": address,
+            "balance_eth": balance_eth,
+            "balance_usdc": "N/A (need USDC contract)",
+            "status": "success"
+        }
+    except Exception as e:
+        return {"error": str(e)}
+
+if __name__ == "__main__":
+    print("=== REAL WALLET BALANCE ===")
+    result = get_real_balance()
+    print(result)

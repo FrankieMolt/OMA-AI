@@ -1,5 +1,0 @@
-include README.md
-include LICENSE
-include tooling/schema.json
-include requirements.txt
-recursive-include examples *.md

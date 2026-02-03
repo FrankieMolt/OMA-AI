@@ -132,6 +132,43 @@ class CoinbaseFacilitator:
         
         return True, "Verified (Live Mode Placeholder)"
 
+    def verify_payment_onchain(self, tx_hash: str, expected_amount: float) -> Tuple[bool, str]:
+        """
+        REAL blockchain verification using web3.py.
+        Call this for real payments instead of verify_payment().
+        """
+        try:
+            if not tx_hash:
+                return False, "No transaction hash provided"
+            
+            # Get transaction receipt
+            tx_receipt = w3_base.eth.get_transaction_receipt(tx_hash)
+            
+            if tx_receipt is None:
+                return False, "Transaction not found on blockchain"
+            
+            if tx_receipt.get('status', 0) != 1:
+                return False, "Transaction failed on-chain"
+            
+            # Get transaction details
+            tx = w3_base.eth.get_transaction(tx_hash)
+            
+            # Verify recipient (should be our wallet)
+            if tx['to'] != WALLET_ADDRESS:
+                return False, f"Wrong recipient: {tx['to']}"
+            
+            # Verify value (for ETH payments)
+            value_eth = tx['value'] / 1e18
+            if value_eth < expected_amount:
+                return False, f"Insufficient value: {value_eth} < {expected_amount}"
+            
+            logger.info(f"[REAL] Transaction {tx_hash[:16]}... verified on Base")
+            return True, f"On-chain verified: {value_eth:.6f} ETH"
+            
+        except Exception as e:
+            logger.error(f"On-chain verification error: {e}")
+            return False, str(e)
+
 # ============================================================================
 # WALLET MANAGER (MULTI-CHAIN)
 # ============================================================================
