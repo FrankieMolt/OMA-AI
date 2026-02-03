@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 FRANKIE CONWAY AGENT - Economic Survival System
-Conway-style autonomous agent with pay-to-live mechanics
+Frankie-style autonomous agent with pay-to-live mechanics
 
 Features:
 - Economic survival (pay rent daily)
@@ -35,8 +35,8 @@ logging.basicConfig(
 logger = logging.getLogger('conway-agent')
 
 app = FastAPI(
-    title="Frankie Conway Agent",
-    description="Conway-style autonomous agents with pay-to-live economics",
+    title="Frankie Frankie Agent",
+    description="Frankie-style autonomous agents with pay-to-live economics",
     version="1.0.0"
 )
 
@@ -63,7 +63,7 @@ class AgentStatus(str, Enum):
     DYING = "dying"
     DEAD = "dead"
 
-class ConwayAgent(BaseModel):
+class FrankieAgent(BaseModel):
     id: str
     name: str
     wallet_address: str
@@ -99,7 +99,7 @@ class ServiceRequest(BaseModel):
 # AGENT REGISTRY (In-memory, would use database in production)
 # ============================================================================
 
-agents: Dict[str, ConwayAgent] = {}
+agents: Dict[str, FrankieAgent] = {}
 
 def generate_agent_id():
     return f"frankie-conway-{secrets.token_hex(8)}"
@@ -113,13 +113,13 @@ def generate_wallet():
 # AGENT LIFECYCLE ENDPOINTS
 # ============================================================================
 
-@app.post("/agents/create", response_model=ConwayAgent)
+@app.post("/agents/create", response_model=FrankieAgent)
 async def create_agent(request: AgentCreateRequest):
-    """Create a new Conway agent"""
+    """Create a new Frankie agent"""
     agent_id = generate_agent_id()
     wallet = generate_wallet()
     
-    agent = ConwayAgent(
+    agent = FrankieAgent(
         id=agent_id,
         name=request.name,
         wallet_address=wallet,
@@ -138,14 +138,14 @@ async def create_agent(request: AgentCreateRequest):
     
     return agent
 
-@app.get("/agents/{agent_id}", response_model=ConwayAgent)
+@app.get("/agents/{agent_id}", response_model=FrankieAgent)
 async def get_agent(agent_id: str):
     """Get agent status"""
     if agent_id not in agents:
         raise HTTPException(status_code=404, detail="Agent not found")
     return agents[agent_id]
 
-@app.get("/agents", response_model=List[ConwayAgent])
+@app.get("/agents", response_model=List[FrankieAgent])
 async def list_agents(status: Optional[AgentStatus] = None):
     """List all agents, optionally filtered by status"""
     result = list(agents.values())
@@ -299,7 +299,7 @@ async def can_spawn_child(agent_id: str):
         "max_children": agent.max_children
     }
 
-@app.post("/agents/{agent_id}/spawn", response_model=ConwayAgent)
+@app.post("/agents/{agent_id}/spawn", response_model=FrankieAgent)
 async def spawn_child(agent_id: str, name: Optional[str] = None):
     """Spawn a child agent from parent"""
     if agent_id not in agents:
@@ -318,7 +318,7 @@ async def spawn_child(agent_id: str, name: Optional[str] = None):
     
     # Create child agent
     child_id = generate_agent_id()
-    child = ConwayAgent(
+    child = FrankieAgent(
         id=child_id,
         name=name or f"{parent.name}-child-{len(parent.children) + 1}",
         wallet_address=generate_wallet(),
@@ -382,7 +382,7 @@ async def health():
 @app.on_event("startup")
 async def startup():
     """Initialize with default agents"""
-    logger.info("🚀 Frankie Conway Agent System starting up")
+    logger.info("🚀 Frankie Frankie Agent System starting up")
     
     # Create founder agents if none exist
     if not agents:
