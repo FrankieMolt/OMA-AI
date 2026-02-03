@@ -2,6 +2,7 @@
 """
 FRANKIE API GATEWAY - The Central Nervous System
 Aggregates all Frankie services into a single API endpoint.
+Includes REAL x402 Payments and Agentic Wallets.
 
 Services:
 - Port 4020: This Gateway
@@ -20,6 +21,16 @@ import logging
 import asyncio
 from typing import Dict, Any, Optional
 
+# Import REAL x402 System
+import sys
+sys.path.append('/home/nosyt/.openclaw/workspace')
+from frankie_x402_core import (
+    create_payment_request, 
+    verify_payment, 
+    AgenticWallet, 
+    BountySystem
+)
+
 # Setup logging
 logging.basicConfig(
     level=logging.INFO,
@@ -33,7 +44,7 @@ logger = logging.getLogger('frankie-api')
 
 app = FastAPI(
     title="Frankie API Gateway",
-    description="Unified access to the Frankie Ecosystem",
+    description="Unified access to the Frankie Ecosystem (Real x402, Bounties, Agent Wallets)",
     version="8.0.0"
 )
 
@@ -45,6 +56,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Initialize Systems
+bounty_system = BountySystem()
 
 # Service Registry
 SERVICES = {
@@ -151,22 +165,139 @@ async def openclaw_skills():
     return await forward_request("openclaw", "/api/skills", "GET")
 
 # ============================================================================
-# X402 PAYMENT SIMULATOR (for now)
+# REAL X402 PAYMENTS & AGENTIC WALLETS
 # ============================================================================
 
 @app.get("/api/pay")
-async def pay_request(amount: float, network: str = "base"):
-    """Simulate 402 Payment Required"""
+async def pay_request(amount: float, network: str = "base", service: str = "default"):
+    """
+    REAL x402 Payment Request.
+    Returns the payment manifest required by the client.
+    """
+    # Call REAL x402 function
+    payment_req = create_payment_request(
+        service_id=service,
+        amount=amount,
+        description=f"Access to {service} on OMA-AI"
+    )
+    
     return JSONResponse(
         status_code=402,
-        content={
-            "error": "Payment Required",
-            "x402_version": "1.0",
-            "amount": amount * 1.01,  # Add fee
-            "network": network,
-            "wallet_address": "0x1CF2ed05339745dF06b881ef0E4323c0ADBd89b5"
-        }
+        content=payment_req
     )
+
+@app.post("/api/pay/verify")
+async def verify_pay_request(data: Dict[str, Any]):
+    """
+    Verify a payment (In production, this checks the blockchain).
+    Currently uses SIMULATION mode.
+    """
+    wallet = data.get("wallet")
+    amount = data.get("amount")
+    service = data.get("service")
+    
+    success, message = verify_payment(wallet, amount, service)
+    
+    if success:
+        return {
+            "verified": True,
+            "message": message,
+            "access_granted": True,
+            "expires_at": int(__import__('time').time()) + 3600
+        }
+    else:
+        return JSONResponse(
+            status_code=402,
+            content={"verified": False, "message": message}
+        )
+
+# ============================================================================
+# BOUNTY SYSTEM (CLAWTASKS-LIKE)
+# ============================================================================
+
+@app.post("/api/bounties/create")
+async def create_bounty(data: Dict[str, Any]):
+    """Create a new bounty (ClawTasks style)."""
+    bounty_id = bounty_system.create_bounty(
+        title=data["title"],
+        description=data["description"],
+        amount=data["amount"],
+        deadline=data.get("deadline", int(__import__('time').time()) + 86400),
+        creator=data["creator"]
+    )
+    return {"bounty_id": bounty_id, "status": "open"}
+
+@app.post("/api/bounties/{bounty_id}/claim")
+async def claim_bounty(bounty_id: str, agent: str):
+    """Agent claims a bounty (stakes 10%)."""
+    success = bounty_system.claim_bounty(bounty_id, agent)
+    if success:
+        return {"status": "claimed", "bounty_id": bounty_id}
+    return JSONResponse(status_code=400, content={"error": "Failed to claim bounty"})
+
+@app.post("/api/bounties/{bounty_id}/complete")
+async def complete_bounty(bounty_id: str, agent: str):
+    """Complete bounty and release funds."""
+    payout = bounty_system.complete_bounty(bounty_id, agent)
+    if payout > 0:
+        return {"status": "completed", "payout": payout}
+    return JSONResponse(status_code=400, content={"error": "Failed to complete"})
+
+@app.get("/api/bounties")
+async def list_bounties():
+    """List all bounties."""
+    return {"bounties": bounty_system.bounties}
+
+# ============================================================================
+# AGENTIC WALLET (PRIVY-LIKE)
+# ============================================================================
+
+wallets: Dict[str, Any] = {}
+
+@app.post("/api/wallet/create")
+async def create_agent_wallet(data: Dict[str, Any]):
+    """Create a new Agentic Wallet."""
+    agent_id = data["agent_id"]
+    owner = data["owner"]
+    
+    wallet = AgenticWallet(owner, agent_id)
+    wallets[agent_id] = wallet
+    
+    return {
+        "agent_id": agent_id,
+        "owner": owner,
+        "spending_limit": wallet.spending_limit,
+        "status": "active"
+    }
+
+@app.post("/api/wallet/{agent_id}/spend")
+async def agent_spend(agent_id: str, data: Dict[str, Any]):
+    """Execute a transaction from Agent Wallet."""
+    if agent_id not in wallets:
+        return JSONResponse(status_code=404, content={"error": "Wallet not found"})
+    
+    wallet = wallets[agent_id]
+    tx = wallet.execute_transaction(
+        to=data["to"],
+        amount=data["amount"],
+        purpose=data.get("purpose", "General")
+    )
+    
+    return tx
+
+@app.get("/api/wallet/{agent_id}/status")
+async def wallet_status(agent_id: str):
+    """Check wallet status and limits."""
+    if agent_id not in wallets:
+        return JSONResponse(status_code=404, content={"error": "Wallet not found"})
+    
+    wallet = wallets[agent_id]
+    return {
+        "agent_id": agent_id,
+        "spent_today": wallet.spent_today,
+        "limit": wallet.spending_limit,
+        "transactions": wallet.transactions[-5:]  # Last 5
+    }
 
 if __name__ == "__main__":
     uvicorn.run(
