@@ -1,0 +1,51 @@
+groups:
+  - name: oma.api
+    interval: 30s
+    rules:
+      - alert: HighErrorRate
+        expr: |
+          sum(rate(http_requests_total{status=~"5.."}[5m])) by (endpoint)
+          /
+          sum(rate(http_requests_total[5m])) by (endpoint)
+          > 0.05
+        for: 5m
+        labels:
+          severity: critical
+          component: api
+        annotations:
+          summary: "High error rate on {{ $labels.endpoint }}"
+          description: "Error rate is {{ $value | humanizePercentage }} (threshold: 5%)"
+
+      - alert: HighResponseTime
+        expr: |
+          histogram_quantile(0.95,
+            sum(rate(http_request_duration_seconds_bucket[5m])) by (le, endpoint)
+          ) > 0.5
+        for: 5m
+        labels:
+          severity: warning
+          component: api
+        annotations:
+          summary: "High response time on {{ $labels.endpoint }}"
+          description: "P95 response time is {{ $value }}s (threshold: 500ms)"
+
+      - alert: HighRequestRate
+        expr: |
+          sum(rate(http_requests_total[5m])) by (endpoint) > 1000
+        for: 10m
+        labels:
+          severity: warning
+          component: api
+        annotations:
+          summary: "High request rate on {{ $labels.endpoint }}"
+          description: "Request rate is {{ $value }}/s (threshold: 1000/s)"
+
+      - alert: ServiceDown
+        expr: up{job=~"nextjs-app|fastapi-cortex"} == 0
+        for: 1m
+        labels:
+          severity: critical
+          component: api
+        annotations:
+          summary: "{{ $labels.job }} service is down"
+          description: "Service has been down for more than 1 minute"

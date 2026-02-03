@@ -25,10 +25,9 @@ from typing import Dict, Any, Optional
 import sys
 sys.path.append('/home/nosyt/.openclaw/workspace')
 from frankie_x402_core import (
-    create_payment_request, 
-    verify_payment, 
-    AgenticWallet, 
-    BountySystem
+    facilitator,
+    wallet_manager,
+    bounty_system
 )
 
 # Setup logging

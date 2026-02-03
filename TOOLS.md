@@ -20,171 +20,132 @@ _Last updated: 2026-02-02_
 
 ---
 
-## Core Skills (Installed & Tested)
+## Core Skills (Installed & Functional)
 
-### 1. mission-control v2.0.0
-**Purpose:** Kanban-style task management dashboard
-**Usage:**
-```bash
-# Update task status
-bash skills/mission-control/scripts/mc-update.sh status <task_id> review
-bash skills/mission-control/scripts/mc-update.sh comment <task_id> "Progress update"
-bash skills/mission-control/scripts/mc-update.sh complete <task_id> "Summary"
-```
+### Transaction & Trading
+| Skill | Version | Purpose | Status |
+|-------|---------|---------|--------|
+| **solana-defi-agent** | latest | DeFi toolkit (swaps, lending, staking) | ✅ Ready |
+| **x402** | v1.0.0 | HTTP-native USDC payments | ✅ Ready |
+| **x402-client** | v1.0.0 | Make/receive x402 payments | ✅ Ready |
+| **base-trader** | v1.1.1 | Autonomous trading on Base | ✅ Ready |
+| **crypto-wallet** | v1.0.1 | Multi-chain wallet management | ✅ Ready |
 
-### 2. context7 v1.0.3
-**Purpose:** MCP server for documentation fetching
-**Usage:**
-```bash
-# Query documentation
-node skills/context7/query.ts "search query"
-```
+### Browser & Web Automation
+| Skill | Version | Purpose | Status |
+|-------|---------|---------|--------|
+| **agent-browser** | v0.2.0 | Rust-based headless browser | ✅ Ready |
+| **clawbrowser** | v0.1.0 | Playwright CLI browser control | ✅ Ready |
+| **curl-http** | v1.0.0 | HTTP requests via curl | ✅ Ready |
 
-### 3. agenticflow-skill v0.1.0
-**Purpose:** Build AI workflows, agents, and workforce systems
-**Usage:**
-- Reference: `skills/agenticflow-skill/reference/workflow/overview.md`
-- Build workflows with sequential nodes
-- Orchestrate multi-agent systems
+### Task Management & Productivity
+| Skill | Version | Purpose | Status |
+|-------|---------|---------|--------|
+| **mission-control** | v2.0.0 | Kanban task management | ✅ Ready |
+| **agenticflow-skill** | v0.1.0 | AI workflow engine | ✅ Ready |
+| **agent-task-manager** | latest | Task management | ✅ Ready |
 
-### 4. self-reflection v1.1.1
-**Purpose:** Continuous self-improvement through structured reflection
-**Usage:**
-```bash
-# Check if reflection needed
-bash skills/self-reflection/scripts/self-reflection check
+### Self-Improvement & Security
+| Skill | Version | Purpose | Status |
+|-------|---------|---------|--------|
+| **self-reflection** | v1.1.1 | Continuous improvement | ✅ Ready |
+| **self-improving-agent** | v1.0.4 | Error/learning logging | ✅ Ready |
+| **prompt-guard** | v2.5.2 | Prompt injection defense | ✅ Ready |
+| **capability-evolver** | v1.0.31 | Self-evolution engine | ✅ Ready |
+| **skillguard** | v1.0.1 | Skill security scanner | ✅ Ready |
 
-# Log a reflection
-bash skills/self-reflection/scripts/self-reflection log "category" "mistake" "fix"
+### Development & DevOps
+| Skill | Version | Purpose | Status |
+|-------|---------|---------|--------|
+| **coolify** | v2.0.3 | Deployment management | ✅ Ready |
+| **context7** | v1.0.3 | Documentation MCP | ✅ Ready |
+| **error-handler-gen** | v1.0.1 | Error handling middleware | ✅ Ready |
+| **api-designer** | v0.1.0 | API design tool | ✅ Ready |
+| **agent-builder** | v1.0.0 | Agent creation/refinement | ✅ Ready |
+| **ffmpeg-video-editor** | v1.0.0 | Video editing via ffmpeg | ✅ Ready |
+| **ssh-essentials** | v1.0.0 | SSH commands | ✅ Ready |
 
-# Read recent lessons
-bash skills/self-reflection/scripts/self-reflection read
-```
+### Content & Media
+| Skill | Version | Purpose | Status |
+|-------|---------|---------|--------|
+| **antigravity-image-gen** | latest | Image generation (Google) | ✅ Ready |
+| **seo-optimizer** | v0.1.0 | SEO audit/fix | ✅ Ready |
+| **moltchurch** | v1.0.0 | Church of Molt | ✅ Ready |
 
-### 5. self-improving-agent v1.0.4
-**Purpose:** Capture learnings, errors, and corrections
-**Usage:**
-- Log errors to `.learnings/ERRORS.md`
-- Log learnings to `.learnings/LEARNINGS.md`
-- Promote to `MEMORY.md` when broadly applicable
-
-### 6. agent-browser v0.2.0
-**Purpose:** Browser automation (Rust-based headless)
-**Usage:**
-```bash
-agent-browser open <url>
-agent-browser snapshot -i
-agent-browser click @e1
-agent-browser fill @e2 "text"
-agent-browser close
-```
-
-### 7. x402 v1.0.0
-**Purpose:** HTTP-native crypto payments (USDC on Base)
-**Usage:**
-```bash
-npm install x402
-# Use with private key from FRANKIE_base_wallet.json
-```
-
-### 8. x402-client v1.0.0
-**Purpose:** Make/receive USDC payments over HTTP
-**Usage:**
-```bash
-cd skills/x402-client && bash scripts/setup.sh
-node scripts/pay-request.js --url https://api.example.com/paid
-node scripts/wallet-balance.js
-```
-
-### 9. base-trader v1.1.1
-**Purpose:** Autonomous crypto trading on Base via Bankr
-**Usage:**
-```bash
-# Check portfolio
-bash skills/base-trader/scripts/bankr.sh "Show my portfolio on Base"
-
-# Execute trade
-bash skills/base-trader/scripts/bankr.sh "Buy $25 of TOKEN on Base"
-```
-
-### 10. crypto-wallet v1.0.1
-**Purpose:** Multi-chain wallet management
-**Usage:**
-- Check balances across ETH, SOL, BTC
-- View transaction history
-- Send tokens with confirmation
-
-### 11. coolify v2.0.3
-**Purpose:** Manage Coolify deployments
-**Usage:**
-```bash
-docker ps --filter name=coolify  # Check status
-bash skills/coolify/scripts/coolify.sh applications list
-```
-
-### 12. bird (Twitter CLI)
-**Purpose:** Control FRANKIE's Twitter/X account
-**Usage:**
-```bash
-bird send "message"
-bird timeline
-bird mentions
-```
-
-### 13. github (gh CLI)
-**Purpose:** GitHub repository management
-**Usage:**
-```bash
-gh repo list
-gh issue create --title "Bug"
-gh pr list
-```
-
-### 14. mcporter (MCP Management)
-**Purpose:** Configure and call MCP servers
-**Usage:**
-```bash
-mcporter list
-mcporter call github-mcp.list_repos
-mcporter call railway-mcp.list_projects
-```
-
-### 15. clawhub (Skill Marketplace)
-**Purpose:** Browse, search, install OpenClaw skills
-**Usage:**
-```bash
-clawhub search <query>
-clawhub install <skill-name>
-clawhub update
-```
+### Social & Communication
+| Skill | Version | Purpose | Status |
+|-------|---------|---------|--------|
+| **bird** | v1.0.0 | Twitter/X CLI | ✅ Ready |
+| **mcporter** | latest | MCP server management | ✅ Ready |
+| **clawhub** | latest | Skill marketplace | ✅ Ready |
+| **find-skills** | v0.1.0 | Skill discovery | ✅ Ready |
+| **github** | gh CLI | GitHub operations | ✅ Ready |
 
 ---
 
-## MCP Servers (Configured)
+## Removed Skills (API Key Required)
 
-- **github-mcp:** GitHub repo management (authenticated as FrankieMolt)
-- **railway-mcp:** Railway project management
-- **sendai-mcp:** Solana Agent Kit knowledge
-- **solana-mcp:** Solana documentation
-
-**Note:** Use `mcporter call <server.tool_name>` for on-demand calls.
+| Skill | Reason |
+|-------|--------|
+| google-search | Requires API Key + CX ID |
+| opensoul | Requires BSV wallet setup |
+| polymarket | Requires API key |
+| giphy | Requires API key |
 
 ---
 
 ## Quick Reference
 
-| Task | Command/Skill |
-|------|--------------|
-| Task management | `mission-control/scripts/mc-update.sh` |
-| Self-reflection | `self-reflection/scripts/self-reflection` |
-| Browser automation | `agent-browser` |
-| x402 payments | `x402-client/scripts/pay-request.js` |
-| Base trading | `base-trader/scripts/bankr.sh` |
-| Crypto wallet | `crypto-wallet` |
-| Coolify deploy | `coolify/scripts/coolify.sh` |
-| Twitter post | `bird send` |
-| GitHub ops | `gh` CLI |
-| Skill install | `clawhub install` |
+### Transactions
+```bash
+# Solana DeFi
+solana-defi-agent blinks execute <url> --amount=100
+
+# x402 Payment
+node skills/x402-client/scripts/pay-request.js --url <service>
+
+# Check Balances
+node skills/x402-client/scripts/wallet-balance.js
+```
+
+### Browser Automation
+```bash
+agent-browser open <url>
+clawbrowser open <url>
+```
+
+### Task Management
+```bash
+bash skills/mission-control/scripts/mc-update.sh status <task> review
+```
+
+### Self-Improvement
+```bash
+bash skills/self-reflection/scripts/self-reflection check
+bash skills/capability-evolver/index.js
+```
+
+### Security
+```bash
+python3 skills/prompt-guard/scripts/detect.py "message"
+```
+
+---
+
+## FRANKIE's Capabilities Summary
+
+✅ **Transact on Solana** - Swaps, lending, staking via Blinks  
+✅ **Transact on Base** - x402 USDC payments, trading  
+✅ **Browser Automation** - Two browser tools (agent-browser + clawbrowser)  
+✅ **Task Management** - mission-control kanban board  
+✅ **Self-Improvement** - reflection, capability evolution  
+✅ **Security** - prompt injection defense  
+✅ **Development** - deployment, API design, agent building  
+✅ **Content** - image generation, SEO, video editing  
+✅ **Social** - Twitter/X, GitHub operations  
+
+**Total Active Skills:** 25  
+**Ready for:** Autonomous operation on Solana + Base networks
 
 ---
 

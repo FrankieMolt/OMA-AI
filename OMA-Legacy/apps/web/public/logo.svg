@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="280" height="80" viewBox="0 0 280 80" fill="none">
+    <defs>
+        <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#00ffd9" />
+            <stop offset="100%" stop-color="#7b00ff" />
+        </linearGradient>
+    </defs>
+    <!-- Icon: 4 squares -->
+    <g>
+        <rect x="8" y="8" width="28" height="28" rx="5" fill="url(#logoGrad)" />
+        <rect x="44" y="8" width="28" height="28" rx="5" fill="url(#logoGrad)" opacity="0.85" />
+        <rect x="8" y="44" width="28" height="28" rx="5" fill="url(#logoGrad)" opacity="0.85" />
+        <rect x="44" y="44" width="28" height="28" rx="5" fill="url(#logoGrad)" />
+    </g>
+    <!-- Text: OMA -->
+    <text x="96" y="55" font-family="system-ui, -apple-system, sans-serif" font-size="42" font-weight="700"
+        fill="#ffffff">OMA</text>
+</svg>

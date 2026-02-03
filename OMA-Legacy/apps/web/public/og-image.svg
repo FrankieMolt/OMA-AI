@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" fill="none">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0c0c0d" />
+      <stop offset="100%" stop-color="#131420" />
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00ffd9" />
+      <stop offset="100%" stop-color="#7b00ff" />
+    </linearGradient>
+    <filter id="ogGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="20" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bgGrad)" />
+  <!-- Decorative lines -->
+  <line x1="0" y1="315" x2="1200" y2="315" stroke="url(#accentGrad)" stroke-width="1" opacity="0.1" />
+  <line x1="600" y1="0" x2="600" y2="630" stroke="url(#accentGrad)" stroke-width="1" opacity="0.1" />
+  <!-- Main Icon (centered) -->
+  <g transform="translate(520, 180)" filter="url(#ogGlow)">
+    <rect x="0" y="0" width="64" height="64" rx="10" fill="url(#accentGrad)" />
+    <rect x="80" y="0" width="64" height="64" rx="10" fill="url(#accentGrad)" opacity="0.85" />
+    <rect x="0" y="80" width="64" height="64" rx="10" fill="url(#accentGrad)" opacity="0.85" />
+    <rect x="80" y="80" width="64" height="64" rx="10" fill="url(#accentGrad)" />
+  </g>
+  <!-- OMA Text -->
+  <text x="600" y="420" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="64"
+    font-weight="700" fill="#ffffff">OMA</text>
+  <!-- Tagline -->
+  <text x="600" y="480" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="24"
+    fill="#888888">The App Store for AI Agents</text>
+</svg>

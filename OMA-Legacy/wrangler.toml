@@ -1,0 +1,14 @@
+name = "oma-mcp"
+main = "src/index.js"
+compatibility_date = "2024-01-01"
+
+[build]
+command = "npm run build"
+
+[[mcp_servers]]
+name = "oma-marketplace"
+command = "node"
+args = ["dist/mcp-server.js"]
+
+[env.production]
+workers_dev = false

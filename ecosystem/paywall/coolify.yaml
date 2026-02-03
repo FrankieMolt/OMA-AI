@@ -1,0 +1,17 @@
+version: '1'
+
+services:
+  api:
+    image: node:20-alpine
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "4021:4021"
+    environment:
+      - NODE_ENV=production
+      - PORT=4021
+      - NETWORK=base
+    volumes:
+      - ./data:/app/data
+    restart: always

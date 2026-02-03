@@ -1,0 +1,1 @@
+- [2026-02-02 16:47:38] **mcp-config**: npx timeouts caused offline servers -> Fix: Switch to local npm install + node execution

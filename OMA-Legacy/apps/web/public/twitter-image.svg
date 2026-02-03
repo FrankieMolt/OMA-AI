@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" fill="none">
+  <defs>
+    <linearGradient id="twBgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0c0c0d" />
+      <stop offset="100%" stop-color="#131420" />
+    </linearGradient>
+    <linearGradient id="twAccentGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00ffd9" />
+      <stop offset="100%" stop-color="#7b00ff" />
+    </linearGradient>
+    <filter id="twGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="25" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+  <rect width="1600" height="900" fill="url(#twBgGrad)" />
+  <!-- Decorative elements -->
+  <circle cx="200" cy="200" r="300" fill="url(#twAccentGrad)" opacity="0.03" />
+  <circle cx="1400" cy="700" r="400" fill="url(#twAccentGrad)" opacity="0.02" />
+  <!-- Main Icon -->
+  <g transform="translate(680, 280)" filter="url(#twGlow)">
+    <rect x="0" y="0" width="100" height="100" rx="16" fill="url(#twAccentGrad)" />
+    <rect x="120" y="0" width="100" height="100" rx="16" fill="url(#twAccentGrad)" opacity="0.85" />
+    <rect x="0" y="120" width="100" height="100" rx="16" fill="url(#twAccentGrad)" opacity="0.85" />
+    <rect x="120" y="120" width="100" height="100" rx="16" fill="url(#twAccentGrad)" />
+  </g>
+  <!-- Text -->
+  <text x="800" y="620" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="80"
+    font-weight="700" fill="#ffffff">OMA</text>
+  <text x="800" y="700" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="28"
+    fill="#888888">The App Store for AI Agents</text>
+</svg>

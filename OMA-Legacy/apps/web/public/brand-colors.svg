@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400" viewBox="0 0 600 400" fill="none">
+    <defs>
+        <linearGradient id="bcGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#00ffd9" />
+            <stop offset="100%" stop-color="#7b00ff" />
+        </linearGradient>
+    </defs>
+    <!-- Title -->
+    <text x="300" y="40" text-anchor="middle" font-family="system-ui" font-size="24" font-weight="700"
+        fill="#ffffff">OMA Brand Colors</text>
+    <!-- Primary: Electric Cyan -->
+    <rect x="20" y="70" width="120" height="120" rx="8" fill="#00ffd9" />
+    <text x="80" y="220" text-anchor="middle" font-family="monospace" font-size="12" fill="#ffffff">Primary</text>
+    <text x="80" y="240" text-anchor="middle" font-family="monospace" font-size="14" fill="#00ffd9">#00ffd9</text>
+    <!-- Secondary: Purple -->
+    <rect x="160" y="70" width="120" height="120" rx="8" fill="#7b00ff" />
+    <text x="220" y="220" text-anchor="middle" font-family="monospace" font-size="12" fill="#ffffff">Secondary</text>
+    <text x="220" y="240" text-anchor="middle" font-family="monospace" font-size="14" fill="#7b00ff">#7b00ff</text>
+    <!-- Background -->
+    <rect x="300" y="70" width="120" height="120" rx="8" fill="#0c0c0d" stroke="#333" stroke-width="1" />
+    <text x="360" y="220" text-anchor="middle" font-family="monospace" font-size="12" fill="#ffffff">Background</text>
+    <text x="360" y="240" text-anchor="middle" font-family="monospace" font-size="14" fill="#888888">#0c0c0d</text>
+    <!-- Surface -->
+    <rect x="440" y="70" width="120" height="120" rx="8" fill="#131314" stroke="#333" stroke-width="1" />
+    <text x="500" y="220" text-anchor="middle" font-family="monospace" font-size="12" fill="#ffffff">Surface</text>
+    <text x="500" y="240" text-anchor="middle" font-family="monospace" font-size="14" fill="#888888">#131314</text>
+    <!-- Gradient Bar -->
+    <rect x="20" y="280" width="540" height="40" rx="8" fill="url(#bcGrad)" />
+    <text x="300" y="350" text-anchor="middle" font-family="monospace" font-size="12" fill="#888888">Brand Gradient:
+        #00ffd9 → #7b00ff</text>
+</svg>

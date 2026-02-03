@@ -31,7 +31,7 @@
     },
     "self-reflection": {
       "version": "1.1.1",
-      "installedAt": 1770000038339
+      "installedAt": 1770050687078
     },
     "self-improving-agent": {
       "version": "1.0.4",
@@ -52,6 +52,118 @@
     "crypto-wallet": {
       "version": "1.0.1",
       "installedAt": 1770000396158
+    },
+    "error-handler-gen": {
+      "version": "1.0.1",
+      "installedAt": 1770001816617
+    },
+    "skillguard": {
+      "version": "1.0.1",
+      "installedAt": 1770001819733
+    },
+    "api-designer": {
+      "version": "0.1.0",
+      "installedAt": 1770001821144
+    },
+    "curl-http": {
+      "version": "1.0.0",
+      "installedAt": 1770001822602
+    },
+    "moltspace": {
+      "version": "1.0.0",
+      "installedAt": 1770001824031
+    },
+    "solana-defi-agent": {
+      "version": "1.2.0",
+      "installedAt": 1770001826666
+    },
+    "taskmaster": {
+      "version": "1.0.0",
+      "installedAt": 1770001828533
+    },
+    "giphy": {
+      "version": "1.0.0",
+      "installedAt": 1770001830221
+    },
+    "clawbrowser": {
+      "version": "0.1.0",
+      "installedAt": 1770001831571
+    },
+    "opensoul": {
+      "version": "1.0.0",
+      "installedAt": 1770001833537
+    },
+    "agent-directory": {
+      "version": "1.2.0",
+      "installedAt": 1770001834778
+    },
+    "agent-builder": {
+      "version": "1.0.0",
+      "installedAt": 1770001836142
+    },
+    "polymarket": {
+      "version": "1.0.0",
+      "installedAt": 1770001837463
+    },
+    "ffmpeg-video-editor": {
+      "version": "1.0.0",
+      "installedAt": 1770001839139
+    },
+    "auto-updater": {
+      "version": "1.0.0",
+      "installedAt": 1770001840704
+    },
+    "human-optimized-frontend": {
+      "version": "1.0.0",
+      "installedAt": 1770001842213
+    },
+    "ssh-essentials": {
+      "version": "1.0.0",
+      "installedAt": 1770001843675
+    },
+    "moltchurch": {
+      "version": "1.0.0",
+      "installedAt": 1770001845229
+    },
+    "search": {
+      "version": "1.0.0",
+      "installedAt": 1770001846463
+    },
+    "antigravity-image-gen": {
+      "version": "1.0.0",
+      "installedAt": 1770001848113
+    },
+    "seo-optimizer": {
+      "version": "0.1.0",
+      "installedAt": 1770001849600
+    },
+    "google-search": {
+      "version": "1.0.0",
+      "installedAt": 1770001850950
+    },
+    "bird": {
+      "version": "1.0.0",
+      "installedAt": 1770001852260
+    },
+    "find-skills": {
+      "version": "0.1.0",
+      "installedAt": 1770001853890
+    },
+    "api-gateway": {
+      "version": "1.0.1",
+      "installedAt": 1770001856176
+    },
+    "prompt-guard": {
+      "version": "2.5.2",
+      "installedAt": 1770001857890
+    },
+    "capability-evolver": {
+      "version": "1.0.31",
+      "installedAt": 1770001859928
+    },
+    "clawdex": {
+      "version": "1.0.2",
+      "installedAt": 1770065238317
     }
   }
 }

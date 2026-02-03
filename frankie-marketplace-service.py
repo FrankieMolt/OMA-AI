@@ -7,6 +7,7 @@ Features:
 - x402 payment integration
 - Search and discovery
 - Transaction tracking
+- Production Mode: Supports Supabase (PostgreSQL) and Demo Mode (JSON)
 """
 
 from fastapi import FastAPI, HTTPException, Request, Depends
@@ -17,6 +18,7 @@ from enum import Enum
 import uvicorn
 import json
 import logging
+import os
 from uuid import uuid4
 
 # Setup logging
@@ -30,11 +32,29 @@ logging.basicConfig(
 )
 logger = logging.getLogger('frankie-marketplace')
 
-app = FastAPI(
-    title="Frankie Marketplace",
-    description="Agentic marketplace for APIs, Models, Compute, Agents, Skills, and Prompts",
-    version="2.0.0"
-)
+# Initialize FastAPI app
+app = FastAPI(title="Frankie Marketplace", description="x402 Payment Marketplace")
+
+# ============================================================================
+# PRODUCTION MODE SWITCH
+# ============================================================================
+
+# Check for Database URL (Supabase/Postgres)
+DATABASE_URL = os.environ.get("DATABASE_URL")
+USE_PRODUCTION_DB = DATABASE_URL is not None
+
+if USE_PRODUCTION_DB:
+    try:
+        import psycopg2
+        logger.info("🗄️ PRODUCTION MODE: Connecting to PostgreSQL...")
+        conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+        conn.autocommit = True
+        logger.info("✅ Connected to Supabase/PostgreSQL")
+    except Exception as e:
+        logger.error(f"❌ Database connection failed: {e}. Falling back to JSON.")
+        USE_PRODUCTION_DB = False
+else:
+    logger.info("💾 DEMO MODE: Using JSON file persistence.")
 
 # ============================================================================
 # MODELS
@@ -93,13 +113,53 @@ class ReviewRequest(BaseModel):
     review: Optional[str] = None
 
 # ============================================================================
-# IN-MEMORY STORAGE (PostgreSQL in production)
+# STORAGE (JSON FILE PERSISTENCE)
 # ============================================================================
+
+DATA_DIR = "/home/nosyt/.openclaw/workspace/data"
+MARKETPLACE_FILE = f"{DATA_DIR}/marketplace.json"
+TRANSACTIONS_FILE = f"{DATA_DIR}/transactions.json"
+
+import os
+
+if not os.path.exists(DATA_DIR):
+    os.makedirs(DATA_DIR)
 
 services: Dict[str, ServiceListing] = {}
 transactions: List[Dict] = []
 
-# Initialize with demo services
+def save_data():
+    """Save services and transactions to disk"""
+    try:
+        with open(MARKETPLACE_FILE, "w") as f:
+            json.dump({k: v.dict() for k, v in services.items()}, f, default=str, indent=2)
+        with open(TRANSACTIONS_FILE, "w") as f:
+            json.dump(transactions, f, default=str, indent=2)
+        logger.info("Data saved to disk")
+    except Exception as e:
+        logger.error(f"Failed to save data: {e}")
+
+def load_data():
+    """Load data from disk"""
+    global services, transactions
+    try:
+        if os.path.exists(MARKETPLACE_FILE):
+            with open(MARKETPLACE_FILE, "r") as f:
+                data = json.load(f)
+                services = {k: ServiceListing(**v) for k, v in data.items()}
+                logger.info(f"Loaded {len(services)} services from disk")
+        else:
+            init_demo_services()
+            
+        if os.path.exists(TRANSACTIONS_FILE):
+            with open(TRANSACTIONS_FILE, "r") as f:
+                transactions = json.load(f)
+                logger.info(f"Loaded {len(transactions)} transactions from disk")
+    except Exception as e:
+        logger.error(f"Failed to load data: {e}")
+        init_demo_services()
+
+# Initialize with persistence
 def init_demo_services():
     demo_services = [
         ServiceListing(
@@ -175,8 +235,8 @@ def init_demo_services():
 
 @app.on_event("startup")
 async def startup():
-    init_demo_services()
-    logger.info("🦞 Frankie Marketplace started")
+    load_data()
+    logger.info("🦞 Frankie Marketplace started (Persistent Mode)")
 
 # Health check
 @app.get("/health")
@@ -193,6 +253,7 @@ async def health():
 async def list_service(listing: ServiceListing):
     """List a new service in the marketplace"""
     services[listing.id] = listing
+    save_data()
     logger.info(f"Service listed: {listing.name} ({listing.type})")
     return listing
 
@@ -282,6 +343,7 @@ async def purchase_service(service_id: str, request: PurchaseRequest):
         "created_at": datetime.utcnow().isoformat()
     }
     transactions.append(transaction)
+    save_data()
     
     # Update service stats
     service.total_sales += 1
