@@ -1,8 +1,6 @@
-import type { Metadata, Viewport } from 'next';
+import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
-import { Analytics } from '@vercel/analytics/next';
-import { SpeedInsights } from '@vercel/speed-insights/next';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -32,14 +30,13 @@ export const metadata: Metadata = {
     images: ['https://oma-ai.com/og-image.png'],
     creator: '@NOSYTLABS',
   },
-  manifest: '/manifest.json',
-};
-
-export const viewport: Viewport = {
-  width: 'device-width',
-  initialScale: 1,
-  maximumScale: 1,
+  viewport: {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 1,
+  },
   themeColor: '#000000',
+  manifest: '/manifest.json',
 };
 
 export default function RootLayout({
@@ -49,11 +46,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        {children}
-        <Analytics />
-        <SpeedInsights />
-      </body>
+      <body className={inter.className}>{children}</body>
     </html>
   );
 }

@@ -1,1 +1,17 @@
-{"buildCommand": "cd frontend && npm install && npm run build", "outputDirectory": "frontend/.next", "installCommand": "cd frontend && npm install", "framework": "nextjs", "env": {"OPENROUTER_API_KEY": "@openrouter-api-key", "NEXT_PUBLIC_API_URL": "https://api.oma-ai.com", "NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID": "@wallet-connect-project-id", "NEXT_PUBLIC_SOLANA_RPC": "https://api.mainnet-beta.solana.com", "NEXT_PUBLIC_BASE_RPC": "https://mainnet.base.org"}}
+{
+  "buildCommand": "npm install && npm run build",
+  "outputDirectory": ".next",
+  "installCommand": "npm install",
+  "framework": "nextjs",
+  "env": {
+    "OPENROUTER_API_KEY": "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",
+    "NEXT_PUBLIC_API_URL": "https://api.oma-ai.com",
+    "NEXT_PUBLIC_SITE_URL": "https://oma-ai.com",
+    "NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID": "",
+    "NEXT_PUBLIC_SOLANA_RPC": "https://api.mainnet-beta.solana.com",
+    "NEXT_PUBLIC_BASE_RPC": "https://mainnet.base.org",
+    "SUPABASE_URL": "https://oooijcrqpuqymgzlidrw.supabase.co",
+    "SUPABASE_ANON_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9vb2lqY3JxcHVxeW1nemxpZHJ3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAyNDY0MjcsImV4cCI6MjA4NTgyMjQyN30.EhnfDdDPRjlOK7OzJCpAF7aGG4fDtf9bE39QmxBhytw",
+    "X402_TREASURY_WALLET": "0x590FdA238A52bBA79fD4635e73bDAC1eAe558e784"
+  }
+}

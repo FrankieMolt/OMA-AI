@@ -7,24 +7,9 @@
   --foreground: #ffffff;
   --glass-bg: rgba(255, 255, 255, 0.03);
   --glass-border: rgba(255, 255, 255, 0.08);
-  --purple: #8b5cf6;
-  --purple-dark: #6d28d9;
-  --purple-light: #a78bfa;
+  --purple: #a855f7;
   --blue: #3b82f6;
-  --blue-dark: #1e40af;
-  --blue-light: #60a5fa;
-  --green: #10b981;
-  --green-dark: #047857;
-  --green-light: #34d399;
-  --yellow: #f59e0b;
-  --yellow-dark: #d97706;
-  --yellow-light: #fbbf24;
-  --red: #ef4444;
-  --red-dark: #dc2626;
-  --red-light: #f87171;
-  --gray: #6b7280;
-  --gray-dark: #374151;
-  --gray-light: #9ca3af;
+  --green: #22c55e;
 }
 
 * {
@@ -66,54 +51,11 @@ body {
 
 /* Gradient Text */
 .gradient-text {
-  background: linear-gradient(135deg, var(--purple) 0%, var(--blue) 50%, var(--green) 100%);
+  background: linear-gradient(135deg, #a855f7 0%, #3b82f6 50%, #22c55e 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
-
-/* Consistent Button Colors */
-.btn-primary {
-  background: linear-gradient(135deg, var(--purple) 0%, var(--purple-dark) 100%);
-  color: white;
-  border: none;
-  padding: 12px 24px;
-  border-radius: 12px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(139, 92, 246, 0.4);
-  background: linear-gradient(135deg, var(--purple-light) 0%, var(--purple) 100%);
-}
-
-.btn-secondary {
-  background: rgba(255, 255, 255, 0.05);
-  color: var(--foreground);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 12px 24px;
-  border-radius: 12px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: var(--purple-light);
-  color: var(--purple-light);
-}
-
-/* Icon Colors */
-.icon-purple { color: var(--purple); }
-.icon-blue { color: var(--blue); }
-.icon-green { color: var(--green); }
-.icon-yellow { color: var(--yellow); }
-.icon-red { color: var(--red); }
-.icon-gray { color: var(--gray); }
 
 /* Animated Pulse Glow */
 @keyframes pulse-glow {
