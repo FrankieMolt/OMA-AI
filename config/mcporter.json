@@ -34,19 +34,18 @@
       "description": "Context7 Documentation MCP by Upstash"
     },
     "vercel-mcp": {
-      "url": "https://mcp.vercel.com",
-      "auth": "oauth",
+      "command": "npx",
+      "args": ["-y", "@quegenx/vercel-mcp-server"],
+      "env": {
+        "VERCEL_TOKEN": "SBEIlqy5XcZtRZ1kbnJtAlC6"
+      },
       "keepAlive": true,
-      "description": "Vercel MCP for deployment and project management"
+      "description": "Vercel MCP for deployment and project management (via Quegenx)"
     },
     "supabase-mcp": {
-      "url": "https://mcp.supabase.com",
-      "headers": {
-        "Authorization": "Bearer ${SUPABASE_ACCESS_TOKEN}"
-      },
+      "url": "https://mcp.supabase.com/mcp?project_ref=oooijcrqpuqymgzlidrw",
       "env": {
-        "SUPABASE_ACCESS_TOKEN": "eyJhbGciOiJIUzI1NiIsInR5cCI6pXQ...",
-        "SUPABASE_PROJECT_ID": "oooijcrqpuqymgzlidrw"
+        "SUPABASE_ACCESS_TOKEN": "SBEIlqy5XcZtRZ1kbnJtAlC6"
       },
       "keepAlive": true,
       "description": "Supabase MCP for database operations"
