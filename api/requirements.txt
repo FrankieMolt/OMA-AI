@@ -1,13 +1,13 @@
+# OMA-AI Python Backend Requirements
+# Note: This backend should be deployed separately (Railway, Render, etc.)
+
 fastapi==0.109.2
 uvicorn==0.27.1
 pydantic==2.6.1
 httpx==0.26.0
 python-multipart==0.0.9
-pytest==8.0.0
-pytest-cov==4.1.0
 requests==2.31.0
 python-dotenv==1.0.1
-psycopg2-binary==2.9.9
 
 # Supabase
 supabase==2.3.4
@@ -19,7 +19,7 @@ groq==0.4.1
 
 # Wallet & Blockchain
 web3==6.11.3
-solana-py==0.34.0
+solana==0.30.0
 eth-account==0.10.0
 
 # x402

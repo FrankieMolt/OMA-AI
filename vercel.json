@@ -3,17 +3,5 @@
   "outputDirectory": ".next",
   "installCommand": "npm install",
   "framework": "nextjs",
-  "regions": ["iad1"],
-  "env": {
-    "OPENROUTER_API_KEY": "@openrouter-api-key",
-    "NEXT_PUBLIC_API_URL": "@api-url",
-    "NEXT_PUBLIC_SITE_URL": "@site-url",
-    "NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID": "",
-    "NEXT_PUBLIC_SOLANA_RPC": "https://api.mainnet-beta.solana.com",
-    "NEXT_PUBLIC_BASE_RPC": "https://mainnet.base.org",
-    "SUPABASE_URL": "@supabase-url",
-    "SUPABASE_ANON_KEY": "@supabase-anon-key",
-    "X402_TREASURY_WALLET": "0x590FdA238A52bBA79fD4635e73bDAC1eAe558e784",
-    "DATABASE_URL": "@database-url"
-  }
+  "regions": ["iad1"]
 }
