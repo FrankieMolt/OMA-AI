@@ -15,15 +15,15 @@ import {
 } from './types';
 
 export class OMAClient {
-  private http: AxiosInstance;
-  private wallet: ethers.Wallet;
+  protected http: AxiosInstance;
+  private wallet: ethers.Wallet | ethers.HDNodeWallet;
   private payment: Payment;
   private a2a: A2A;
   public agent: Agent | null = null;
-  
+
   constructor(config: OMAConfig) {
     // Initialize wallet
-    this.wallet = config.privateKey 
+    this.wallet = config.privateKey
       ? new ethers.Wallet(config.privateKey)
       : ethers.Wallet.createRandom();
     
@@ -41,13 +41,9 @@ export class OMAClient {
   }
   
   // ============ Wallet ============
-  
+
   get address(): string {
     return this.wallet.address;
-  }
-  
-  get publicKey(): string {
-    return this.wallet.publicKey;
   }
   
   // ============ Health Check ============
@@ -163,7 +159,15 @@ export class OMAClient {
   }
   
   registerAgent(agent: Agent): Promise<any> {
-    return this.a2a.register(agent);
+    // Construct agent registration object with required fields
+    const agentData = {
+      name: agent.name,
+      capabilities: agent.capabilities,
+      endpoint: `http://localhost:4020/agents/${agent.id}`, // Default endpoint
+      price_per_use: 0.01, // Default price
+    };
+
+    return this.a2a.register(agentData);
   }
   
   // ============ Wallet ============
@@ -178,5 +182,17 @@ export class OMAClient {
       params: { address: this.address, limit }
     });
     return response.data.transactions || [];
+  }
+
+  // ============ Public HTTP Access for Agent ============
+
+  async httpGet(url: string): Promise<any> {
+    const response = await this.http.get(url);
+    return response.data;
+  }
+
+  async httpPost(url: string, data: any): Promise<any> {
+    const response = await this.http.post(url, data);
+    return response.data;
   }
 }

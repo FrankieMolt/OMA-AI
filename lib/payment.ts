@@ -16,10 +16,10 @@ interface PaymentInfo {
 }
 
 export class Payment {
-  private wallet: ethers.Wallet;
+  private wallet: ethers.Wallet | ethers.HDNodeWallet;
   private http: AxiosInstance;
-  
-  constructor(wallet: ethers.Wallet, http: AxiosInstance) {
+
+  constructor(wallet: ethers.Wallet | ethers.HDNodeWallet, http: AxiosInstance) {
     this.wallet = wallet;
     this.http = http;
   }

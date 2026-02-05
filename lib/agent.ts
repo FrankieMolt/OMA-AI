@@ -48,53 +48,53 @@ export class Agent {
   }
   
   async spawnChild(name: string, balance: number = 10): Promise<Agent> {
-    const response = await this.client.http.post(`/api/agents/${this.id}/spawn`, {
+    const response = await this.client.httpPost(`/api/agents/${this.id}/spawn`, {
       name,
       balance,
     });
     return new Agent(response.data, this.client);
   }
-  
+
   async earn(amount: number): Promise<void> {
-    await this.client.http.post(`/api/agents/${this.id}/earn`, { amount });
+    await this.client.httpPost(`/api/agents/${this.id}/earn`, { amount });
     this.data.balance += amount;
     this.data.total_earned += amount;
   }
-  
+
   async pay(amount: number): Promise<void> {
-    await this.client.http.post(`/api/agents/${this.id}/pay`, { amount });
+    await this.client.httpPost(`/api/agents/${this.id}/pay`, { amount });
     this.data.balance -= amount;
     this.data.total_paid += amount;
   }
-  
+
   async addCapability(capability: string): Promise<void> {
-    await this.client.http.post(`/api/agents/${this.id}/capabilities`, {
+    await this.client.httpPost(`/api/agents/${this.id}/capabilities`, {
       capability
     });
     this.data.capabilities.push(capability);
   }
-  
+
   // ============ Status ============
-  
+
   async getStatus(): Promise<AgentData> {
-    const response = await this.client.http.get(`/api/agents/${this.id}`);
-    this.data = response.data;
+    const response = await this.client.httpGet(`/api/agents/${this.id}`);
+    this.data = response;
     return this.data;
   }
-  
+
   async getEarnings(): Promise<{
     total_earned: number;
     total_paid: number;
     net_profit: number;
     daily_average: number;
   }> {
-    const response = await this.client.http.get(`/api/agents/${this.id}/earnings`);
-    return response.data;
+    const response = await this.client.httpGet(`/api/agents/${this.id}/earnings`);
+    return response;
   }
-  
+
   async getChildren(): Promise<Agent[]> {
-    const response = await this.client.http.get(`/api/agents/${this.id}/children`);
-    return response.data.children.map((a: any) => new Agent(a, this.client));
+    const response = await this.client.httpGet(`/api/agents/${this.id}/children`);
+    return response.children.map((a: any) => new Agent(a, this.client));
   }
   
   // ============ Economics ============

@@ -28,11 +28,11 @@ interface TaskResult {
 }
 
 export class A2A {
-  private wallet: ethers.Wallet;
+  private wallet: ethers.Wallet | ethers.HDNodeWallet;
   private http: AxiosInstance;
   private myInfo: AgentInfo | null = null;
-  
-  constructor(wallet: ethers.Wallet, http: AxiosInstance) {
+
+  constructor(wallet: ethers.Wallet | ethers.HDNodeWallet, http: AxiosInstance) {
     this.wallet = wallet;
     this.http = http;
   }
@@ -50,8 +50,11 @@ export class A2A {
       ...agent,
       price_per_use: agent.price_per_use || 0.01,
     });
-    
+
     this.myInfo = response.data;
+    if (!this.myInfo) {
+      throw new Error('Failed to register agent: Invalid response');
+    }
     return this.myInfo;
   }
   
