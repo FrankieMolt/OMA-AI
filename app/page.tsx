@@ -1,312 +1,254 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  LayoutDashboard, 
-  Server, 
-  Terminal as TerminalIcon, 
-  Wallet, 
-  Globe, 
-  Shield, 
-  Activity, 
-  Cpu, 
-  Plus,
-  Search,
-  Settings,
-  LogOut,
-  ChevronRight,
-  Code
-} from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 
-// Components
-import EnhancedAgentCard from '@/components/EnhancedAgentCard';
-import EnhancedWallet from '@/components/EnhancedWallet';
-import EnhancedMarketplace from '@/components/EnhancedMarketplace';
-import NotificationCenter from '@/components/NotificationCenter';
-
-// --- API Configuration ---
+// Real API connection
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://oooijcrqpuqymgzlidrw.supabase.co/functions/v1';
 
-// --- Types ---
-interface SystemStatus {
-  activeNodes: number;
-  cpuLoad: number;
-  memoryUsage: number;
-  networkThroughput: number;
+interface Stats {
+  total_agents: number;
+  active_agents: number;
+  total_services: number;
+  total_revenue: number;
 }
 
-export default function Dashboard() {
-  const [activeView, setActiveView] = useState('overview');
-  const [systemStatus, setSystemStatus] = useState<SystemStatus>({
-    activeNodes: 12,
-    cpuLoad: 45,
-    memoryUsage: 62,
-    networkThroughput: 128
+export default function Landing() {
+  const [stats, setStats] = useState<Stats>({
+    total_agents: 0,
+    active_agents: 0,
+    total_services: 0,
+    total_revenue: 0
   });
+  const [loading, setLoading] = useState(true);
 
-  // Mock data for the "Real" feel until Supabase is fully populated
-  const [agents, setAgents] = useState([
-    {
-      id: 'inst-8f2a9c',
-      name: 'Primary-Orchestrator',
-      status: 'alive' as const,
-      balance: 142.50,
-      dailyRent: 2.50,
-      dailyRevenue: 15.00,
-      capabilities: ['orchestration', 'resource-management'],
-      earningsHistory: [12, 14, 13, 15, 18, 15, 20],
-      recentActivity: [
-        { time: '10:42:01', action: 'Resource check completed' },
-        { time: '10:41:30', action: 'Deployed child instance' },
-      ]
-    },
-    {
-      id: 'inst-3b7d1e',
-      name: 'Market-Analyzer-01',
-      status: 'alive' as const,
-      balance: 89.20,
-      dailyRent: 1.20,
-      dailyRevenue: 8.50,
-      capabilities: ['market-analysis', 'data-processing'],
-      earningsHistory: [5, 6, 8, 7, 9, 8, 10],
-      recentActivity: [
-        { time: '10:40:15', action: 'Processed market stream' },
-      ]
+  useEffect(() => {
+    // Real data fetch from Supabase
+    async function fetchStats() {
+      try {
+        const res = await fetch(`${API_URL}/status`, {
+          headers: {
+            'apikey': process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
+          }
+        });
+        if (res.ok) {
+          const data = await res.json();
+          setStats(data);
+        }
+      } catch (e) {
+        console.error('Failed to fetch stats:', e);
+      } finally {
+        setLoading(false);
+      }
     }
-  ]);
-
-  const [notifications, setNotifications] = useState([
-    {
-      id: '1',
-      type: 'info' as const,
-      title: 'System Update',
-      message: 'Infrastructure upgrade completed successfully.',
-      timestamp: new Date(),
-      read: false
-    }
-  ]);
+    fetchStats();
+  }, []);
 
   return (
-    <div className="min-h-screen bg-background text-foreground flex font-sans selection:bg-zinc-800">
-      {/* --- Sidebar Navigation --- */}
-      <aside className="w-64 border-r border-border bg-zinc-950/50 backdrop-blur-xl fixed h-full z-10 flex flex-col">
-        <div className="p-6 border-b border-border">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-white text-black rounded-md flex items-center justify-center font-bold text-sm">
-              OM
+    <div className="min-h-screen bg-zinc-950 text-zinc-100 font-['Inter']">
+      {/* Header */}
+      <header className="border-b border-zinc-800">
+        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 bg-zinc-700 rounded flex items-center justify-center">
+              <span className="font-bold text-sm">O</span>
             </div>
-            <span className="font-semibold tracking-tight">OMA Infrastructure</span>
+            <span className="font-semibold text-lg">OMA</span>
           </div>
-        </div>
 
-        <nav className="flex-1 p-4 space-y-1">
-          <NavItem 
-            icon={<LayoutDashboard size={18} />} 
-            label="Overview" 
-            active={activeView === 'overview'} 
-            onClick={() => setActiveView('overview')} 
-          />
-          <NavItem 
-            icon={<Server size={18} />} 
-            label="Instances" 
-            active={activeView === 'instances'} 
-            onClick={() => setActiveView('instances')} 
-          />
-          <NavItem 
-            icon={<Globe size={18} />} 
-            label="Service Registry" 
-            active={activeView === 'registry'} 
-            onClick={() => setActiveView('registry')} 
-          />
-          <NavItem 
-            icon={<Wallet size={18} />} 
-            label="Treasury" 
-            active={activeView === 'treasury'} 
-            onClick={() => setActiveView('treasury')} 
-          />
-          <NavItem 
-            icon={<TerminalIcon size={18} />} 
-            label="Console" 
-            active={activeView === 'console'} 
-            onClick={() => setActiveView('console')} 
-          />
-        </nav>
-
-        <div className="p-4 border-t border-border">
-          <div className="flex items-center gap-3 px-3 py-2 text-sm text-muted-foreground">
-            <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-            System Operational
-          </div>
-        </div>
-      </aside>
-
-      {/* --- Main Content Area --- */}
-      <main className="flex-1 ml-64 bg-background min-h-screen">
-        {/* Top Header */}
-        <header className="h-16 border-b border-border bg-background/80 backdrop-blur-md sticky top-0 z-20 px-8 flex items-center justify-between">
-          <div className="flex items-center gap-4 text-sm text-muted-foreground">
-            <span>Organization / Default</span>
-            <ChevronRight size={14} />
-            <span className="text-foreground font-medium capitalize">{activeView}</span>
-          </div>
+          <nav className="hidden md:flex items-center gap-8">
+            <a href="/about" className="text-zinc-400 hover:text-white transition-colors text-sm">About</a>
+            <a href="/docs" className="text-zinc-400 hover:text-white transition-colors text-sm">Documentation</a>
+            <a href="/pricing" className="text-zinc-400 hover:text-white transition-colors text-sm">Pricing</a>
+          </nav>
 
           <div className="flex items-center gap-4">
-            <div className="relative">
-              <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
-              <input 
-                type="text" 
-                placeholder="Search resources..." 
-                className="h-9 pl-9 pr-4 rounded-md bg-zinc-900 border border-input text-sm focus:outline-none focus:ring-1 focus:ring-ring w-64"
-              />
+            <a href="/login" className="text-zinc-400 hover:text-white transition-colors text-sm">Log in</a>
+            <a href="/dashboard" className="bg-zinc-800 hover:bg-zinc-700 px-4 py-2 rounded text-sm transition-colors">
+              Dashboard
+            </a>
+          </div>
+        </div>
+      </header>
+
+      {/* Hero */}
+      <section className="py-32 px-6">
+        <div className="max-w-4xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <div className="inline-block px-3 py-1 bg-zinc-900 border border-zinc-800 rounded text-xs text-zinc-400 mb-6">
+              Autonomic Infrastructure
             </div>
-            <NotificationCenter 
-              notifications={notifications} 
-              onMarkRead={(id) => {}} 
-              onDismiss={(id) => {}} 
+
+            <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+              Deploy autonomous agents at scale
+            </h1>
+
+            <p className="text-xl text-zinc-400 mb-8 max-w-2xl">
+              Build, deploy, and monitor autonomous AI agents with enterprise-grade infrastructure. 
+              No manual intervention required.
+            </p>
+
+            <div className="flex gap-4">
+              <a
+                href="/dashboard"
+                className="bg-white text-black px-6 py-3 rounded font-medium hover:bg-zinc-200 transition-colors"
+              >
+                Get Started
+              </a>
+              <a
+                href="/docs"
+                className="border border-zinc-700 px-6 py-3 rounded font-medium hover:bg-zinc-900 transition-colors"
+              >
+                Documentation
+              </a>
+            </div>
+          </motion.div>
+
+          {/* Real Stats */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16 pt-16 border-t border-zinc-800"
+          >
+            <StatCard
+              label="Total Agents"
+              value={loading ? '...' : stats.total_agents.toString()}
+              loading={loading}
             />
-            <div className="w-8 h-8 rounded-full bg-zinc-800 border border-border flex items-center justify-center text-xs font-medium">
-              JD
+            <StatCard
+              label="Active Now"
+              value={loading ? '...' : stats.active_agents.toString()}
+              loading={loading}
+            />
+            <StatCard
+              label="Services"
+              value={loading ? '...' : stats.total_services.toString()}
+              loading={loading}
+            />
+            <StatCard
+              label="Revenue"
+              value={loading ? '...' : `$${(stats.total_revenue).toFixed(2)}`}
+              loading={loading}
+            />
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Features */}
+      <section className="py-24 px-6 bg-zinc-900">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-3xl font-bold mb-12">Enterprise-grade features</h2>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            <FeatureCard
+              title="Autonomous Execution"
+              description="Agents run independently with built-in error handling, retries, and monitoring. Configure once, run forever."
+            />
+            <FeatureCard
+              title="Scalable Infrastructure"
+              description="Deploy thousands of agents with automatic scaling. Pay only for what you use."
+            />
+            <FeatureCard
+              title="Real-time Monitoring"
+              description="Track agent performance, costs, and revenue in real-time. Get alerts when anomalies occur."
+            />
+            <FeatureCard
+              title="API-first Design"
+              description="Full REST API for programmatic agent management. Integrate with your existing workflows."
+            />
+            <FeatureCard
+              title="Multi-cloud Support"
+              description="Deploy agents across multiple cloud providers. Single pane of glass for management."
+            />
+            <FeatureCard
+              title="Enterprise Security"
+              description="SOC 2 compliant infrastructure with end-to-end encryption and audit logging."
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="py-24 px-6">
+        <div className="max-w-3xl mx-auto text-center">
+          <h2 className="text-4xl font-bold mb-6">Ready to automate?</h2>
+          <p className="text-xl text-zinc-400 mb-8">
+            Start building autonomous agents today. No credit card required.
+          </p>
+          <a
+            href="/dashboard"
+            className="inline-block bg-white text-black px-8 py-4 rounded font-medium hover:bg-zinc-200 transition-colors"
+          >
+            Create Account
+          </a>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="border-t border-zinc-800 py-12 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid md:grid-cols-4 gap-8 mb-12">
+            <div>
+              <h3 className="font-semibold mb-4">Product</h3>
+              <ul className="space-y-2 text-zinc-400 text-sm">
+                <li><a href="/features" className="hover:text-white transition-colors">Features</a></li>
+                <li><a href="/pricing" className="hover:text-white transition-colors">Pricing</a></li>
+                <li><a href="/docs" className="hover:text-white transition-colors">Documentation</a></li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-semibold mb-4">Company</h3>
+              <ul className="space-y-2 text-zinc-400 text-sm">
+                <li><a href="/about" className="hover:text-white transition-colors">About</a></li>
+                <li><a href="/blog" className="hover:text-white transition-colors">Blog</a></li>
+                <li><a href="/careers" className="hover:text-white transition-colors">Careers</a></li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-semibold mb-4">Legal</h3>
+              <ul className="space-y-2 text-zinc-400 text-sm">
+                <li><a href="/privacy" className="hover:text-white transition-colors">Privacy</a></li>
+                <li><a href="/terms" className="hover:text-white transition-colors">Terms</a></li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-semibold mb-4">Connect</h3>
+              <ul className="space-y-2 text-zinc-400 text-sm">
+                <li><a href="https://github.com/FrankieMolt/OMA-AI" className="hover:text-white transition-colors">GitHub</a></li>
+                <li><a href="/contact" className="hover:text-white transition-colors">Contact</a></li>
+              </ul>
             </div>
           </div>
-        </header>
-
-        {/* View Content */}
-        <div className="p-8 max-w-7xl mx-auto">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeView}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.2 }}
-            >
-              {activeView === 'overview' && (
-                <Overview activeNodes={systemStatus.activeNodes} agents={agents} />
-              )}
-              {activeView === 'instances' && (
-                <Instances agents={agents} />
-              )}
-              {activeView === 'registry' && (
-                <EnhancedMarketplace services={[]} categories={['Compute', 'Storage', 'Intelligence']} />
-              )}
-              {activeView === 'treasury' && (
-                <EnhancedWallet 
-                  balances={{ usdc: 1240.50, eth: 1.2, sol: 45.0 }} 
-                  transactions={[]} 
-                />
-              )}
-              {activeView === 'console' && (
-                <div className="h-[600px] bg-black rounded-lg border border-border p-4 font-mono text-sm text-zinc-400">
-                  <div className="mb-2">OMA Infrastructure Console v2.1.0</div>
-                  <div className="text-green-500">root@oma-system:~# _</div>
-                </div>
-              )}
-            </motion.div>
-          </AnimatePresence>
+          <div className="text-center text-zinc-500 text-sm">
+            © 2025 OMA. All rights reserved.
+          </div>
         </div>
-      </main>
+      </footer>
     </div>
   );
 }
 
-// --- Sub-components ---
-
-function NavItem({ icon, label, active, onClick }: { icon: React.ReactNode, label: string, active: boolean, onClick: () => void }) {
+function StatCard({ label, value, loading }: { label: string; value: string; loading: boolean }) {
   return (
-    <button
-      onClick={onClick}
-      className={`w-full flex items-center gap-3 px-3 py-2 rounded-md text-sm transition-colors ${
-        active 
-          ? 'bg-zinc-900 text-foreground font-medium' 
-          : 'text-muted-foreground hover:text-foreground hover:bg-zinc-900/50'
-      }`}
-    >
-      {icon}
-      {label}
-    </button>
-  );
-}
-
-function Overview({ activeNodes, agents }: { activeNodes: number, agents: any[] }) {
-  return (
-    <div className="space-y-8">
-      <div>
-        <h1 className="text-3xl font-bold tracking-tight mb-2">Overview</h1>
-        <p className="text-muted-foreground">System performance and active instance metrics.</p>
+    <div>
+      <div className={`text-4xl font-bold mb-2 ${loading ? 'text-zinc-600' : 'text-white'}`}>
+        {value}
       </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <MetricCard label="Active Instances" value={activeNodes.toString()} trend="+2.4%" />
-        <MetricCard label="Network Load" value="45%" trend="-1.2%" neutral />
-        <MetricCard label="Total Revenue" value="$1,240.50" trend="+12.5%" />
-        <MetricCard label="System Health" value="99.9%" trend="Stable" neutral />
-      </div>
-
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <div className="lg:col-span-2 space-y-6">
-          <div className="flex items-center justify-between">
-            <h2 className="text-xl font-semibold">Active Deployments</h2>
-            <button className="text-sm text-primary hover:underline">View All</button>
-          </div>
-          <div className="space-y-4">
-            {agents.map((agent: any) => (
-              <EnhancedAgentCard 
-                key={agent.id}
-                {...agent}
-                onViewLogs={() => {}}
-                onConfigure={() => {}}
-                onPause={() => {}}
-              />
-            ))}
-          </div>
-        </div>
-
-        <div className="space-y-6">
-          <h2 className="text-xl font-semibold">System Activity</h2>
-          <div className="border border-border rounded-xl bg-card p-6 h-[400px]">
-            <div className="text-sm text-muted-foreground text-center pt-32">
-              Activity visualization stream initialized.
-            </div>
-          </div>
-        </div>
-      </div>
+      <div className="text-sm text-zinc-500">{label}</div>
     </div>
   );
 }
 
-function Instances({ agents }: { agents: any[] }) {
+function FeatureCard({ title, description }: { title: string; description: string }) {
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold tracking-tight mb-2">Instances</h1>
-          <p className="text-muted-foreground">Manage your autonomous agent deployments.</p>
-        </div>
-        <button className="bg-white text-black px-4 py-2 rounded-md text-sm font-medium hover:bg-zinc-200 transition-colors flex items-center gap-2">
-          <Plus size={16} /> Deploy Instance
-        </button>
-      </div>
-      <div className="grid grid-cols-1 gap-6">
-        {agents.map((agent: any) => (
-          <EnhancedAgentCard 
-            key={agent.id}
-            {...agent}
-          />
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function MetricCard({ label, value, trend, neutral }: { label: string, value: string, trend: string, neutral?: boolean }) {
-  return (
-    <div className="bg-card border border-border p-6 rounded-xl">
-      <div className="text-sm text-muted-foreground mb-2">{label}</div>
-      <div className="text-3xl font-bold mb-2">{value}</div>
-      <div className={`text-xs font-medium ${neutral ? 'text-zinc-500' : 'text-green-500'}`}>
-        {trend}
-      </div>
+    <div className="border border-zinc-800 p-6 rounded">
+      <h3 className="font-semibold text-lg mb-3">{title}</h3>
+      <p className="text-zinc-400 text-sm leading-relaxed">{description}</p>
     </div>
   );
 }
