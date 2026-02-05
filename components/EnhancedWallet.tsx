@@ -226,13 +226,12 @@ export default function EnhancedWallet({ balances, transactions }: EnhancedWalle
               ? 'text-green-400'
               : 'text-red-400'
           }`}>
-            {transactions.filter(t => t.type === 'receive').reduce((sum, t) => sum + t.amount, 0) >
-            transactions.filter(t => t.type === 'send').reduce((sum, t) => sum + t.amount, 0)
-              ? '+'
-              : ''}${
-              transactions.filter(t => t.type === 'receive').reduce((sum, t) => sum + t.amount, 0) -
-              transactions.filter(t => t.type === 'send').reduce((sum, t) => sum + t.amount, 0)
-            ).toFixed(2)}
+            {(() => {
+              const received = transactions.filter(t => t.type === 'receive').reduce((sum, t) => sum + t.amount, 0);
+              const sent = transactions.filter(t => t.type === 'send').reduce((sum, t) => sum + t.amount, 0);
+              const net = received - sent;
+              return `${net > 0 ? '+' : ''}${net.toFixed(2)}`;
+            })()}
           </div>
         </div>
       </motion.div>

@@ -1,12 +1,48 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
 
+export const viewport: Viewport = {
+  themeColor: '#09090b',
+  colorScheme: 'dark',
+}
+
 export const metadata: Metadata = {
-  title: 'OMA - Autonomous Agent Infrastructure',
-  description: 'Build, deploy, and monitor autonomous AI agents at scale',
+  title: {
+    default: 'OMA - Autonomous Agent Infrastructure',
+    template: '%s | OMA Infrastructure'
+  },
+  description: 'Enterprise-grade infrastructure for building, deploying, and monitoring autonomous AI agents at scale. The standard for agentic compute.',
+  keywords: ['autonomous agents', 'AI infrastructure', 'agent orchestration', 'enterprise AI', 'x402 protocol'],
+  authors: [{ name: 'OMA Systems' }],
+  openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    url: 'https://oma-ai.com',
+    siteName: 'OMA Infrastructure',
+    title: 'OMA - Autonomous Agent Infrastructure',
+    description: 'Build, deploy, and monitor autonomous AI agents at scale.',
+    images: [
+      {
+        url: 'https://oma-ai.com/og-image.png', // We should create this or use a placeholder
+        width: 1200,
+        height: 630,
+        alt: 'OMA Infrastructure Dashboard',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'OMA - Autonomous Agent Infrastructure',
+    description: 'Build, deploy, and monitor autonomous AI agents at scale.',
+    creator: '@OMA_Infrastructure',
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 }
 
 export default function RootLayout({
@@ -16,7 +52,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark">
-      <body className={inter.className}>{children}</body>
+      <body className={`${inter.className} bg-zinc-950 text-zinc-50 antialiased selection:bg-zinc-800`}>
+        {children}
+      </body>
     </html>
   )
 }
