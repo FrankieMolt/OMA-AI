@@ -48,8 +48,8 @@ interface Stats {
   total_transactions: number;
 }
 
-// API URL
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+// API URL - Production Supabase backend
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://oooijcrqpuqymgzlidrw.supabase.co/functions/v1';
 
 // API Functions
 async function fetchStats(): Promise<Stats> {
@@ -129,15 +129,17 @@ async function createBounty(data: any): Promise<Bounty> {
 }
 
 // Components
+import MobileMenu from '@/components/MobileMenu';
+import LoadingSpinner from '@/components/LoadingSpinner';
 
 function Navbar({ activeTab, setActiveTab }: { activeTab: string; setActiveTab: (t: string) => void }) {
   const tabs = ['dashboard', 'marketplace', 'agents', 'personas', 'skills', 'wallet', 'bounties', 'terminal'];
-  
+
   return (
     <nav className="glass sticky top-0 z-50 px-6 py-4">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         <div className="flex items-center space-x-8">
-          <h1 
+          <h1
             className="text-2xl font-bold gradient-text cursor-pointer"
             onClick={() => setActiveTab('dashboard')}
           >
@@ -158,9 +160,10 @@ function Navbar({ activeTab, setActiveTab }: { activeTab: string; setActiveTab: 
           </div>
         </div>
         <div className="flex items-center space-x-4">
-          <button className="btn-secondary px-4 py-2 rounded-lg text-sm">
+          <button className="btn-secondary px-4 py-2 rounded-lg text-sm hidden sm:block">
             Connect Wallet
           </button>
+          <MobileMenu activeTab={activeTab} setActiveTab={setActiveTab} />
         </div>
       </div>
     </nav>
