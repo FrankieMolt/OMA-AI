@@ -47,3 +47,19 @@ id_rsa.pub
 # Archive
 archive/
 *.node
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+db.json
+sessions.json
+state.json
+tasks.json
+starter.json
+pro.json
+oma.db
+
+# Temporary files
+.temp/
+*.temp
