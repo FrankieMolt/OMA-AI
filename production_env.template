@@ -1,0 +1,29 @@
+# OMA-AI Production Environment Variables
+# Copy this to your production environment setup
+
+# Database Configuration
+DATABASE_URL=postgresql://postgres:[PASSWORD]@[PROJECT].supabase.co:5432/postgres
+SUPABASE_URL=https://[PROJECT].supabase.co
+SUPABASE_SERVICE_KEY=[SERVICE-KEY]
+
+# API Configuration  
+API_PUBLIC_URL=https://api.oma-ai.com
+API_PRIVATE_URL=http://localhost:8080
+NEXT_PUBLIC_API_URL=https://api.oma-ai.com
+
+# Security Configuration
+JWT_SECRET=$(openssl rand -base64 32)
+CORS_ORIGINS=https://oma-ai.com,https://api.oma-ai.com,https://www.oma-ai.com
+
+# x402 Payment Configuration
+X402_SECRET=production-x402-secret-$(openssl rand -hex 16)
+X402_NETWORK=base
+X402_WEBHOOK_SECRET=$(openssl rand -hex 16)
+
+# Monitoring & Analytics
+VERCEL_ANALYTICS_ID=auto
+LOG_LEVEL=info
+
+# Production Settings
+NODE_ENV=production
+ENVIRONMENT=production

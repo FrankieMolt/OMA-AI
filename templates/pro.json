@@ -1,0 +1,20 @@
+{
+  "id": "pro-plan",
+  "name": "Pro Agent",
+  "description": "Full autonomy with browser capabilities.",
+  "resources": {
+    "cpu": 4,
+    "memory": 8192,
+    "storage": 50
+  },
+  "capabilities": [
+    "web_search",
+    "agent_browser",
+    "long_term_memory",
+    "x402_wallet",
+    "file_system"
+  ],
+  "isolation_level": "microvm",
+  "hypercore_template": "hac.toml",
+  "price_monthly_usdc": 39.00
+}

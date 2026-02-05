@@ -1,0 +1,14 @@
+node_modules
+venv
+.venv
+__pycache__
+.git
+.git.bak
+archive
+skills
+sdk
+dashboard
+data
+*.log
+.next
+.vercel

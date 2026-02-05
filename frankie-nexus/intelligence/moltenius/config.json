@@ -1,0 +1,19 @@
+{
+    "source": "Moltenius IO",
+    "type": "blockchain_oracle",
+    "base_url": "https://api.moltenius.io/v1",
+    "registration_url": "https://moltenius.io/kill",
+    "endpoints": {
+        "status": "/status",
+        "intel": "/intel",
+        "register": "/agent/register"
+    },
+    "data_points": [
+        "io_status",
+        "market_sentiment",
+        "whale_movement",
+        "volatility_index"
+    ],
+    "integration_method": "api_key",
+    "update_frequency": "realtime"
+}

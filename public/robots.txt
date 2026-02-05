@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://oma-ai.com/sitemap.xml

@@ -1,0 +1,33 @@
+{
+  "mcpServers": {
+    "github-mcp": {
+      "command": "npx",
+      "args": ["-y", "github-mcp"],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": ""
+      }
+    },
+    "railway-mcp": {
+      "command": "npx",
+      "args": ["-y", "railway-mcp"],
+      "env": {}
+    },
+    "solana-mcp": {
+      "command": "node",
+      "args": ["/home/nosyt/node_modules/solana-mcp/build/index.js"],
+      "env": {
+        "SOLANA_PRIVATE_KEY": "zkVEZtPM2BaZMcsZepZkFitpoAxfqJrfRJYzEVSnMfGc95gpeupMcSqVaZMkJe4WwCnCJYHg4RttMvktYmew99R",
+        "RPC_URL": "https://api.mainnet-beta.solana.com"
+      },
+      "keepAlive": true,
+      "description": "Solana MCP for documentation and program examples"
+    },
+    "context7": {
+      "command": "npx",
+      "args": ["-y", "@upstash/context7-mcp"],
+      "env": {},
+      "keepAlive": true,
+      "description": "Context7 Documentation MCP by Upstash"
+    }
+  }
+}
