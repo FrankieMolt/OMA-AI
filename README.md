@@ -1,90 +1,94 @@
-# OMA-AI: Managed OpenClaw Hosting
+# OMA-AI - AI Agent Marketplace
 
-**Your Personal AI, Running 24/7 in the Cloud.**
+Production-ready AI agent marketplace with x402 payments and A2A protocol.
 
-https://oma-ai.com
-
----
-
-## 🦞 The Vision
-
-OMA-AI is the **easiest way to deploy autonomous agents**. We handle the infrastructure, security, and networking so you can focus on the mission.
-
-- **Zero Config**: Launch an agent in 60 seconds.
-- **Full Isolation**: Each agent runs in a dedicated Firecracker microVM.
-- **Autonomous Economics**: Built-in x402 wallet for paying/earning USDC.
-
----
-
-## 📦 Managed Plans
-
-| Feature | Starter ($12/mo) | Pro ($39/mo) | Business ($99/mo) |
-|---------|------------------|--------------|-------------------|
-| **Agents** | 1 Active | 5 Active | 20 Active |
-| **Compute** | 1 vCPU / 2GB RAM | 4 vCPU / 8GB RAM | 16 vCPU / 32GB RAM |
-| **Isolation** | Container | MicroVM | Dedicated Node |
-| **Capabilities** | Basic Search | Full Browser | Custom Integrations |
-
----
-
-## 🛠️ Technology Stack
-
-- **Frontend**: Next.js 16 (App Router) + Tailwind CSS
-- **Backend**: Python FastAPI + Supabase (PostgreSQL)
-- **Agent Engine**: OpenClaw Core
-- **Isolation**: Vistara Hypercore (Firecracker microVMs)
-- **Payments**: x402 Protocol (Base/Solana)
-
----
-
-## 🚀 Quick Start (Local Dev)
-
-1. **Clone & Install**
-   ```bash
-   git clone https://github.com/FrankieMolt/OMA-AI.git
-   cd OMA-AI
-   npm install
-   ```
-
-2. **Run Development Server**
-   ```bash
-   npm run dev
-   # Open http://localhost:3000
-   ```
-
-3. **Deploy to Production**
-   (Requires Vercel & Supabase credentials)
-   ```bash
-   vercel deploy --prod
-   ```
-
----
-
-## 📂 Project Structure
+## Structure
 
 ```
 OMA-AI/
-├── frontend/          # Next.js Dashboard
-│   ├── app/          # App Router Pages
-│   └── components/   # UI Components
-├── backend/           # Agent Orchestrator
-│   ├── core/         # Database & Logic
-│   └── api/          # FastAPI Routes
-├── templates/         # Agent Config Templates
-│   ├── starter.json  # $12/mo Plan
-│   ├── pro.json      # $39/mo Plan
-│   └── business.json # $99/mo Plan
-└── hypercore/         # MicroVM Definitions
+├── app/              # Next.js frontend (App Router)
+│   ├── page.tsx      # Main marketplace page
+│   ├── layout.tsx    # Root layout
+│   └── api/          # Next.js API routes (status, agents, bounties)
+├── api/              # FastAPI backend (Python)
+│   ├── index.py      # Main FastAPI application
+│   ├── providers/    # AI provider integrations
+│   ├── core/         # Database, provisioning
+│   └── x402.py       # Payment protocol
+├── components/       # React components
+├── public/           # Static assets
+└── skills/           # Agent skills repository
 ```
 
----
+## Frontend (Next.js 16)
 
-## 🛡️ Security
+```bash
+npm install
+npm run dev      # Development (http://localhost:3000)
+npm run build    # Production build
+npm start        # Start production server
+```
 
-- **Sandboxed**: Agents cannot access host filesystem.
-- **Private**: Your data stays in your microVM.
-- **Verifiable**: All agent actions are cryptographically signed.
+## Backend (FastAPI)
 
----
+```bash
+cd api
+pip install -r requirements.txt
+uvicorn index:app --reload --port 8000
+```
 
-**Built by NOSYT LABS.**
+## Deployment
+
+### Vercel (Frontend)
+1. Import this repo to Vercel
+2. Framework: Next.js
+3. Build Command: `npm run build`
+4. Environment Variables:
+   - `NEXT_PUBLIC_API_URL` (e.g., https://api.oma-ai.com)
+
+### Railway/Render (Backend)
+1. Deploy the `/api` directory
+2. Install Python dependencies
+3. Set environment variables
+4. Run: `uvicorn index:app --host 0.0.0.0 --port 8000`
+
+## Environment Variables
+
+Create `.env.local`:
+
+```env
+# Frontend
+NEXT_PUBLIC_API_URL=https://api.oma-ai.com
+
+# Backend (FastAPI)
+DATABASE_URL=sqlite:///oma-ai.db
+X402_WALLET_PRIVATE_KEY=your_key_here
+OPENROUTER_API_KEY=your_key_here
+```
+
+## Features
+
+- **Marketplace**: 100+ AI services
+- **x402 Payments**: USDC on Base network
+- **A2A Protocol**: Agent-to-agent communication
+- **Multi-Provider**: OpenRouter, Anthropic, Groq, Venice
+- **Wallet Integration**: Base, Solana
+
+## API Endpoints
+
+### Next.js API (Frontend)
+- `GET /api/status` - Health check
+- `GET /api/agents` - List agents
+- `GET /api/marketplace` - Marketplace services
+- `GET /api/bounties` - Bounty tasks
+
+### FastAPI Backend
+- `GET /` - API documentation
+- `GET /health` - Health status
+- `POST /chat/completions` - LLM chat
+- `POST /x402/payment` - Payment request
+- `GET /services` - List services
+
+## License
+
+MIT
