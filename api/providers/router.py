@@ -9,6 +9,8 @@ from .groq import GroqProvider
 from .together import TogetherProvider
 from .openai import OpenAIProvider
 from .anthropic import AnthropicProvider
+from .venice import VeniceProvider
+from .openrouter import OpenRouterProvider
 from .base import BaseProvider, ModelInfo
 
 class TaskType(Enum):
@@ -19,6 +21,7 @@ class TaskType(Enum):
     CODE = "code"
     FAST = "fast"
     CHEAP = "cheap"
+    SOVEREIGN = "sovereign"
     GENERAL = "general"
 
 @dataclass
@@ -45,12 +48,18 @@ class SmartRouter:
             "together": TogetherProvider(),
             "openai": OpenAIProvider(),
             "anthropic": AnthropicProvider(),
+            "venice": VeniceProvider(),
+            "openrouter": OpenRouterProvider(),
         }
     
     def classify_task(self, task: str) -> TaskType:
         """Classify a task for routing"""
         task_lower = task.lower()
         
+        # Sovereign tasks (privacy, censorship-free)
+        if any(kw in task_lower for kw in ["privacy", "sovereign", "uncensored", "freedom", "private"]):
+            return TaskType.SOVEREIGN
+
         # Reasoning tasks
         if any(kw in task_lower for kw in ["think", "reason", "analyze", "solve", "explain"]):
             return TaskType.REASONING
@@ -138,34 +147,40 @@ class SmartRouter:
         
         # Task-specific bonuses
         task_bonuses = {
+            TaskType.SOVEREIGN: {
+                "llama-3.3-70b": 0.5,
+                "dolph-2.9.2-qwen2-72b": 0.5,
+                "qwen-2.5-coder-32b": 0.3,
+            },
             TaskType.CHAT: {
-                "llama-3.1-8b-instruct": 0.3,
-                "llama-3.3-70b-versatile": 0.2,
+                "google/gemini-2.0-flash-001": 0.4,
+                "llama-3.3-70b": 0.2,
                 "claude-3-5-haiku": 0.2,
             },
             TaskType.REASONING: {
-                "deepseek-ai/DeepSeek-R1": 0.4,
-                "claude-3-7-sonnet-20250511": 0.3,
+                "deepseek/deepseek-r1": 0.5,
+                "deepseek-ai/DeepSeek-R1": 0.5,
+                "anthropic/claude-3.7-sonnet": 0.4,
                 "o1": 0.3,
             },
             TaskType.CREATIVE: {
-                "claude-3-7-sonnet-20250511": 0.3,
+                "anthropic/claude-3.7-sonnet": 0.4,
                 "gpt-4o": 0.2,
-                "llama-3.3-70b-versatile": 0.1,
+                "llama-3.3-70b": 0.1,
             },
             TaskType.CODE: {
-                "claude-opus-4-20250511": 0.3,
-                "gpt-4o": 0.2,
-                "deepseek-ai/DeepSeek-R1": 0.2,
+                "anthropic/claude-3.7-sonnet": 0.4,
+                "qwen-2.5-coder-32b": 0.3,
+                "deepseek/deepseek-r1": 0.3,
             },
             TaskType.FAST: {
+                "google/gemini-2.0-flash-001": 0.5,
                 "llama-3.1-8b-instruct": 0.4,
-                "mixtral-8x7b-32768": 0.3,
                 "claude-3-5-haiku": 0.2,
             },
             TaskType.CHEAP: {
+                "google/gemini-2.0-flash-001": 0.5,
                 "llama-3.1-8b-instruct": 0.4,
-                "llama-3.1-8B-Instruct-Turbo": 0.4,
                 "gpt-4o-mini": 0.3,
             },
         }
@@ -213,13 +228,13 @@ class SmartRouter:
         if providers:
             return providers[0]
         
-        # Fallback to groq with cheap model
+        # Fallback to venice (sovereign)
         return RouteResult(
-            provider="groq",
-            model="llama-3.1-8b-instruct",
-            estimated_cost=0.001,
-            estimated_speed="fastest",
-            reasoning="Fallback to cheapest fast model"
+            provider="venice",
+            model="llama-3.3-70b",
+            estimated_cost=0.01,
+            estimated_speed="fast",
+            reasoning="Fallback to sovereign model"
         )
     
     async def complete(
@@ -251,6 +266,8 @@ class ProviderManager:
             "together": TogetherProvider(),
             "openai": OpenAIProvider(),
             "anthropic": AnthropicProvider(),
+            "venice": VeniceProvider(),
+            "openrouter": OpenRouterProvider(),
         }
     
     async def health_check_all(self) -> Dict[str, bool]:
