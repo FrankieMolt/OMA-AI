@@ -14,18 +14,16 @@
 - **Capabilities:** Repository management, issues, PRs, releases
 - **Auth:** GitHub PAT configured via gh CLI
 
-#### Vercel MCP ✅
-- **Status:** Configured
-- **Transport:** STDIO (npx -y @quegenx/vercel-mcp-server)
-- **Token:** `SBEIlqy5XcZtRZ1kbnJtAlC6`
-- **Capabilities:** Deployments, project management, logs, env vars
+#### Vercel MCP ⚠️
+- **Status:** Quegenx server has build errors (use Vercel CLI for now)
+- **Workaround:** Use `vercel --prod --yes --force` for deployments
+- **Note:** Try official Vercel MCP (https://mcp.vercel.com) with OAuth later
 
-#### Supabase MCP ✅
-- **Status:** Configured
+#### Supabase MCP ⚠️
+- **Status:** Requires OAuth (401 error - no browser access)
 - **Transport:** HTTP (https://mcp.supabase.com/mcp?project_ref=oooijcrqpuqymgzlidrw)
-- **Project ID:** `oooijcrqpuqymgzlidrw`
-- **Token:** `SBEIlqy5XcZtRZ1kbnJtAlC6`
-- **Capabilities:** Database operations, tables, queries
+- **Workaround:** Use Supabase CLI or direct API calls
+- **Note:** Requires browser for OAuth authorization
 
 #### Railway MCP ✅
 - **Status:** Connected
@@ -66,11 +64,13 @@ mcporter config add my-server https://mcp.example.com
 - **Token:** `SBEIlqy5XcZtRZ1kbnJtAlC6`
 - **Dashboard:** https://vercel.com
 - **Projects:** oma-ai (FrankieMolt)
+- **CLI Usage:** `vercel --prod --yes --force`
 
 ### Supabase
 - **Project ID:** `oooijcrqpuqymgzlidrw`
 - **Dashboard:** https://supabase.com/dashboard/project/oooijcrqpuqymgzlidrw
 - **Token:** `SBEIlqy5XcZtRZ1kbnJtAlC6`
+- **Note:** MCP requires OAuth (not available in current environment)
 
 ### GitHub
 - **User:** frankiemolt
@@ -79,83 +79,28 @@ mcporter config add my-server https://mcp.example.com
 
 ---
 
-## 🎯 Active Skills (Core)
+## 🎯 Active Skills (13 Core Skills)
 
 **Installed via npm in `/home/nosyt/.npm-global/lib/node_modules/openclaw/skills/`:**
 
-### Essential
+### Core Development
 - **mcporter** - MCP server management & configuration
 - **github** - GitHub operations via gh CLI
-- **agent-builder** - Build OpenClaw agents
 - **skill-creator** - Create AgentSkills
 - **clawhub** - Skill marketplace (if available)
-- **web-search** - Web search via Brave API
-- **healthcheck** - Security & hardening
-
-### Development
-- **frontend-design** - Production-grade UI/UX
-- **api-designer** - REST/GraphQL API design
-- **api-gateway** - Third-party API management
-- **docker-essentials** - Container operations
-- **curl-http** - HTTP requests
-
-### Browser & Automation
-- **clawbrowser** - Playwright-based browser automation
-- **browse** - Browser automation via stagehand
-- **tmux** - Remote tmux control
-
-### Data & Memory
-- **chromadb-memory** - Long-term memory with Ollama
-- **session-logs** - Session log analysis
-
-### Security
-- **skill-vetter** - Skill security scanner
-- **skillguard** - Advanced skill security
-- **clawdex** - ClawHub security checks
-- **prompt-guard** - Prompt injection defense
-- **security-monitor** - Real-time security
-
-### Task Management
-- **taskmaster** - Project delegation & management
-- **mission-control** - Kanban task dashboard
-- **cron** - Job scheduling
-
-### Video & Media
-- **video-frames** - Frame extraction
-- **FFmpeg Video Editor** - Video editing
-
-### Tools & Utilities
-- **weather** - Weather forecasts
+- **coding-agent** - Code generation and assistance
 - **tmux** - Remote tmux sessions
-- **ssh-essentials** - Secure shell
-- **error-handler-gen** - Error middleware
+- **session-logs** - Session log analysis with jq
 
-### Specialized
-- **base-trader** - Crypto trading on Base
-- **crypto-wallet** - Multi-chain wallet
-- **solana-defi-agent** - Solana DeFi
-- **x402** - USDC payments over HTTP
-- **uptime-kuma** - Server monitoring
-- **vercel** - Vercel CLI (deprecation note below)
-- **gemini** - Gemini AI CLI
+### AI & Models
+- **gemini** - Gemini AI CLI for Q&A and generation
+- **model-usage** - Track AI model usage
 
----
-
-## ⚠️ Deprecation Notes
-
-### Vercel CLI (vercel skill)
-**Status:** DEPRECATED - Use **Vercel MCP** instead
-
-The `vercel` skill is being phased out in favor of the Vercel MCP server via mcporter.
-
-**Migration:**
-```bash
-# Old way (deprecated)
-vercel --prod
-
-# New way (MCP)
-mcporter call vercel-mcp.deploy
-```
+### Utilities
+- **healthcheck** - Security & hardening
+- **weather** - Weather forecasts
+- **canvas** - Present/eval/snapshot UI
+- **video-frames** - Extract frames from videos
 
 ---
 
@@ -187,11 +132,11 @@ squirrelscan scan https://oma-ai.com
 
 ### Deploy to Vercel
 ```bash
-# Using MCP (recommended)
-mcporter call vercel-mcp.deploy
-
-# Legacy CLI (deprecated)
+# Using CLI (recommended until MCP auth is fixed)
 vercel --prod --yes --force
+
+# MCP (when auth works)
+mcporter call vercel-mcp.deploy
 ```
 
 ### GitHub operations
@@ -206,11 +151,23 @@ gh pr create --title "Fix" --body "Description"
 mcporter call github-mcp.list_issues owner=FrankieMolt repo=OMA-AI
 ```
 
-### Supabase queries
+### Supabase operations
 ```bash
-# Using MCP
-mcporter call supabase-mcp.query table=agents
+# Direct API (MCP requires OAuth)
+curl -X POST https://oooijcrqpuqymgzlidrw.supabase.co/rest/v1/agents \
+  -H "apikey: YOUR_KEY" \
+  -H "Authorization: Bearer YOUR_KEY"
 ```
+
+---
+
+## 🧹 Cleanup Summary
+
+**Removed 39 unused skills:**
+- 11 Mac/iOS-only skills (apple-notes, imsg, obsidian, etc.)
+- 28 niche service skills (1password, discord, spotify, etc.)
+
+**Kept 13 core skills** for development workflow
 
 ---
 
