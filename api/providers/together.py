@@ -4,7 +4,7 @@ import os
 import httpx
 import json
 from typing import List, Dict, Any, Optional
-from ..base import BaseProvider, ModelInfo
+from .base import BaseProvider, ModelInfo
 
 class TogetherProvider(BaseProvider):
     """Together AI - Open-source models at 11x lower cost than GPT-4o"""

@@ -3,7 +3,7 @@
 import os
 import httpx
 from typing import List, Dict, Any, Optional
-from ..base import BaseProvider, ModelInfo
+from .base import BaseProvider, ModelInfo
 
 class GroqProvider(BaseProvider):
     """Groq API for ultra-fast inference (276 tokens/sec for Llama 3.3 70B)"""

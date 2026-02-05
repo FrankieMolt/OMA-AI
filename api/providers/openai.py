@@ -4,7 +4,7 @@ import os
 import httpx
 import json
 from typing import List, Dict, Any, Optional
-from ..base import BaseProvider, ModelInfo
+from .base import BaseProvider, ModelInfo
 
 class OpenAIProvider(BaseProvider):
     """OpenAI API for GPT-4o, o1, and GPT-4o-mini"""
@@ -122,8 +122,8 @@ class OpenAIProvider(BaseProvider):
     
     async def embeddings(
         self,
-        model: str = "text-embedding-3-small",
-        texts: List[str]
+        texts: List[str],
+        model: str = "text-embedding-3-small"
     ) -> List[List[float]]:
         """Get embeddings"""
         

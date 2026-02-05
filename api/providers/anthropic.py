@@ -4,7 +4,7 @@ import os
 import httpx
 import json
 from typing import List, Dict, Any, Optional
-from ..base import BaseProvider, ModelInfo
+from .base import BaseProvider, ModelInfo
 
 class AnthropicProvider(BaseProvider):
     """Anthropic API for Claude 3.7, 3.5"""
