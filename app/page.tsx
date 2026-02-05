@@ -129,8 +129,13 @@ async function createBounty(data: any): Promise<Bounty> {
 }
 
 // Components
-import MobileMenu from '@/components/MobileMenu';
-import LoadingSpinner from '@/components/LoadingSpinner';
+import MobileMenu from '../../components/MobileMenu';
+import LoadingSpinner from '../../components/LoadingSpinner';
+import Sparkline from '../../components/Sparkline';
+import NotificationCenter from '../../components/NotificationCenter';
+import EnhancedAgentCard from '../../components/EnhancedAgentCard';
+import EnhancedWallet from '../../components/EnhancedWallet';
+import EnhancedMarketplace from '../../components/EnhancedMarketplace';
 
 function Navbar({ activeTab, setActiveTab }: { activeTab: string; setActiveTab: (t: string) => void }) {
   const tabs = ['dashboard', 'marketplace', 'agents', 'personas', 'skills', 'wallet', 'bounties', 'terminal'];
@@ -163,6 +168,11 @@ function Navbar({ activeTab, setActiveTab }: { activeTab: string; setActiveTab: 
           <button className="btn-secondary px-4 py-2 rounded-lg text-sm hidden sm:block">
             Connect Wallet
           </button>
+          <NotificationCenter
+            notifications={notifications}
+            onMarkRead={handleMarkRead}
+            onDismiss={handleDismiss}
+          />
           <MobileMenu activeTab={activeTab} setActiveTab={setActiveTab} />
         </div>
       </div>
@@ -261,6 +271,43 @@ function BountyCard({ bounty }: { bounty: Bounty }) {
 // Main Page Component
 export default function OMAAIPage() {
   const [activeTab, setActiveTab] = useState('dashboard');
+  const [notifications, setNotifications] = useState([
+    {
+      id: '1',
+      type: 'success' as const,
+      title: 'Agent Spawned',
+      message: 'Founder-Agent has been created successfully',
+      timestamp: new Date(Date.now() - 5 * 60 * 1000),
+      read: false
+    },
+    {
+      id: '2',
+      type: 'info' as const,
+      title: 'New Service Listed',
+      message: 'Text Generation skill added to marketplace',
+      timestamp: new Date(Date.now() - 30 * 60 * 1000),
+      read: false
+    },
+    {
+      id: '3',
+      type: 'warning' as const,
+      title: 'Low Balance Alert',
+      message: 'Agent-1 balance is below $5.00',
+      timestamp: new Date(Date.now() - 60 * 60 * 1000),
+      read: true
+    }
+  ]);
+
+  const handleMarkRead = (id: string) => {
+    setNotifications(prev =>
+      prev.map(n => n.id === id ? { ...n, read: true } : n)
+    );
+  };
+
+  const handleDismiss = (id: string) => {
+    setNotifications(prev => prev.filter(n => n.id !== id));
+  };
+
   const [stats, setStats] = useState<Stats>({
     total_agents: 0,
     alive_agents: 0,
@@ -381,14 +428,11 @@ export default function OMAAIPage() {
           className="glass px-4 py-2 rounded-lg w-64"
         />
       </div>
-      
-      <div className="marketplace-grid">
-        {services
-          .filter(s => s.name.toLowerCase().includes(filter.toLowerCase()))
-          .map(service => (
-            <ServiceCard key={service.id} service={service} />
-          ))}
-      </div>
+
+      <EnhancedMarketplace
+        services={services}
+        categories={['text', 'image', 'search', 'data', 'code', 'automation', 'database']}
+      />
     </div>
   );
 
@@ -404,81 +448,43 @@ export default function OMAAIPage() {
           + Spawn Agent
         </button>
       </div>
-      
+
       <div className="grid grid-cols-1 gap-6">
         {agents.map(agent => (
-          <motion.div 
+          <EnhancedAgentCard
             key={agent.id}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="glass-card p-6"
-          >
-            <div className="flex justify-between items-start mb-6">
-                <div>
-                    <h3 className="text-2xl font-bold">{agent.name}</h3>
-                    <div className="text-gray-400 font-mono text-sm">{agent.id}</div>
-                </div>
-                <div className="flex space-x-3">
-                    <button className="btn-secondary px-4 py-2 rounded text-sm">View Logs</button>
-                    <button className="btn-secondary px-4 py-2 rounded text-sm">Config</button>
-                    <div className={`px-4 py-2 rounded font-bold ${
-                      agent.status === 'alive' ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-400'
-                    }`}>
-                      {agent.status.toUpperCase()}
-                    </div>
-                </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {/* Stats */}
-                <div className="space-y-4">
-                    <div className="bg-white/5 rounded p-4">
-                        <div className="text-gray-400 text-sm">Wallet Balance</div>
-                        <div className="text-2xl font-mono text-green-400">{agent.balance.toFixed(2)} USDC</div>
-                    </div>
-                    <div className="bg-white/5 rounded p-4">
-                        <div className="text-gray-400 text-sm">Daily Cost/Rev</div>
-                        <div className="flex justify-between mt-1">
-                            <span className="text-red-400">-${agent.daily_rent}</span>
-                            <span className="text-blue-400">+{agent.daily_revenue}</span>
-                        </div>
-                    </div>
-                </div>
-
-                {/* Capabilities */}
-                <div className="bg-white/5 rounded p-4">
-                    <div className="text-gray-400 text-sm mb-3">Capabilities</div>
-                    <div className="flex flex-wrap gap-2">
-                        {agent.capabilities.length > 0 ? agent.capabilities.map(cap => (
-                            <span key={cap} className="px-2 py-1 bg-white/10 rounded text-xs">{cap}</span>
-                        )) : <span className="text-gray-600 italic">No capabilities installed</span>}
-                    </div>
-                </div>
-
-                {/* Activity Mock */}
-                <div className="bg-white/5 rounded p-4 font-mono text-xs text-gray-400 overflow-hidden">
-                    <div className="mb-2 text-white font-bold">Recent Activity</div>
-                    <div>[19:42:01] Heartbeat check... OK</div>
-                    <div>[19:41:30] Searching marketplace...</div>
-                    <div>[19:40:15] Earned revenue (+{agent.daily_revenue})</div>
-                    <div>[19:00:00] Rent paid (-{agent.daily_rent})</div>
-                </div>
-            </div>
-          </motion.div>
+            id={agent.id}
+            name={agent.name}
+            status={agent.status}
+            balance={agent.balance}
+            dailyRent={agent.daily_rent}
+            dailyRevenue={agent.daily_revenue}
+            capabilities={agent.capabilities}
+            earningsHistory={[agent.balance - 50, agent.balance - 40, agent.balance - 30, agent.balance - 25, agent.balance - 20, agent.balance - 15]}
+            recentActivity={[
+              { time: '19:42:01', action: 'Heartbeat check... OK' },
+              { time: '19:41:30', action: 'Searching marketplace...' },
+              { time: '19:40:15', action: `Earned revenue (+${agent.daily_revenue})` },
+              { time: '19:00:00', action: `Rent paid (-${agent.daily_rent})` }
+            ]}
+            onViewLogs={() => console.log(`View logs for ${agent.id}`)}
+            onConfigure={() => console.log(`Configure ${agent.id}`)}
+            onPause={() => console.log(`Pause ${agent.id}`)}
+          />
         ))}
+
+        {agents.length === 0 && (
+          <div className="text-center py-16 text-gray-400">
+            <p className="text-xl mb-4">No agents spawned yet</p>
+            <button
+              onClick={() => createAgent(`Founder-Agent`).then(refreshData)}
+              className="btn-primary px-6 py-3 rounded-lg"
+            >
+              Create First Agent
+            </button>
+          </div>
+        )}
       </div>
-      
-      {agents.length === 0 && (
-        <div className="text-center py-16 text-gray-400">
-          <p className="text-xl mb-4">No agents spawned yet</p>
-          <button
-            onClick={() => createAgent(`Founder-Agent`).then(refreshData)}
-            className="btn-primary px-6 py-3 rounded-lg"
-          >
-            Create First Agent
-          </button>
-        </div>
-      )}
     </div>
   );
 
@@ -649,57 +655,39 @@ export default function OMAAIPage() {
     );
   };
 
-  // Render wallet
+  // Render wallet with enhanced component
   const renderWallet = () => (
-    <div className="space-y-6">
-      <h2 className="text-3xl font-bold">💰 x402 Wallet</h2>
-      
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="glass-card p-8 bg-gradient-to-br from-purple-600 to-blue-600">
-          <div className="text-purple-200 text-sm mb-2">Total Balance</div>
-          <div className="text-5xl font-mono font-bold">0.00 USDC</div>
-          <div className="text-purple-200 text-sm mt-2">≈ $0.00 USD</div>
-        </div>
-        
-        <div className="glass-card p-6">
-          <div className="text-gray-400 text-sm mb-2">Base (EVM)</div>
-          <div className="text-2xl font-mono">0.00</div>
-          <div className="text-gray-500 text-xs mt-2 font-mono">0x1CF2...9b5</div>
-        </div>
-        
-        <div className="glass-card p-6">
-          <div className="text-gray-400 text-sm mb-2">Solana</div>
-          <div className="text-2xl font-mono">0.00</div>
-          <div className="text-gray-500 text-xs mt-2 font-mono">DFTTq...psgb</div>
-        </div>
-      </div>
-      
-      <div className="glass-card p-6">
-        <h3 className="text-xl font-bold mb-4">📜 Recent Transactions</h3>
-        <div className="space-y-3">
-          <div className="flex items-center justify-between p-3 bg-white/5 rounded">
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center">💸</div>
-              <div>
-                <div className="text-white">Payment Sent</div>
-                <div className="text-gray-400 text-xs">OMA Agent Rent</div>
-              </div>
-            </div>
-            <div className="text-red-400 font-mono">-1.00 USDC</div>
-          </div>
-          <div className="flex items-center justify-between p-3 bg-white/5 rounded">
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center">💰</div>
-              <div>
-                <div className="text-white">Service Revenue</div>
-                <div className="text-gray-400 text-xs">Marketplace Sale</div>
-              </div>
-            </div>
-            <div className="text-green-400 font-mono">+0.05 USDC</div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <EnhancedWallet
+      balances={{
+        usdc: stats.total_balance,
+        eth: 0,
+        sol: 0
+      }}
+      transactions={[
+        {
+          id: '1',
+          type: 'send' as const,
+          amount: 1.0,
+          currency: 'USDC',
+          from: '0x590Fd...e784',
+          to: 'System Rent',
+          timestamp: new Date(Date.now() - 10 * 60 * 1000),
+          status: 'completed' as const,
+          description: 'Agent infrastructure costs'
+        },
+        {
+          id: '2',
+          type: 'receive' as const,
+          amount: 0.05,
+          currency: 'USDC',
+          from: 'Marketplace',
+          to: 'Treasury',
+          timestamp: new Date(Date.now() - 30 * 60 * 1000),
+          status: 'completed' as const,
+          description: 'Service: Text Generation'
+        }
+      ]}
+    />
   );
 
   // Render bounties
@@ -736,36 +724,99 @@ export default function OMAAIPage() {
 
   // Render terminal
   const [terminalOutput, setTerminalOutput] = useState<{text: string, color: string, input?: boolean}[]>([
-      { text: 'Welcome to OMA-AI Terminal', color: 'text-white' },
+      { text: 'Welcome to OMA-AI Terminal v2.0', color: 'text-white' },
       { text: 'Type "help" for available commands', color: 'text-gray-400' },
       { text: '', color: '' },
   ]);
   const [terminalInput, setTerminalInput] = useState('');
+  const [commandHistory, setCommandHistory] = useState<string[]>([]);
+  const [historyIndex, setHistoryIndex] = useState(-1);
 
   const handleTerminalSubmit = async () => {
     if (!terminalInput.trim()) return;
-    
-    const cmd = terminalInput;
+
+    const cmd = terminalInput.trim();
     setTerminalInput('');
-    
+
+    // Add to command history
+    setCommandHistory(prev => {
+      const newHistory = [cmd, ...prev].slice(0, 50); // Keep last 50 commands
+      setHistoryIndex(-1); // Reset history index
+      return newHistory;
+    });
+
     // Add user input to history
     setTerminalOutput(prev => [...prev, { text: `root@oma-ai:~# ${cmd}`, color: 'text-purple-400', input: true }]);
-    
+
     if (cmd.trim() === 'clear') {
-        setTerminalOutput([]);
-        return;
+      setTerminalOutput([]);
+      return;
+    }
+
+    if (cmd.trim() === 'history') {
+      const historyList = commandHistory.map((c, i) => `${i + 1}  ${c}`).join('\n');
+      setTerminalOutput(prev => [...prev,
+        { text: 'Command History:', color: 'text-yellow-400' },
+        { text: historyList, color: 'text-gray-300' },
+        { text: '', color: '' }
+      ]);
+      return;
+    }
+
+    // Built-in commands
+    if (cmd.trim() === 'help') {
+      const helpText = [
+        'Available Commands:',
+        '  help     - Show this help message',
+        '  clear    - Clear terminal output',
+        '  history  - Show command history',
+        '  agents   - List all agents',
+        '  status   - Show system status',
+        '  balance  - Show wallet balance',
+        '',
+        'Navigation:',
+        '  ↑/↓   - Navigate command history',
+        '  Ctrl+C  - Cancel current command'
+      ].join('\n');
+      setTerminalOutput(prev => [...prev,
+        { text: helpText, color: 'text-green-400' },
+        { text: '', color: '' }
+      ]);
+      return;
     }
 
     try {
-        const res = await fetch(`${API_URL}/api/terminal/exec`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ command: cmd })
-        });
-        const data = await res.json();
-        setTerminalOutput(prev => [...prev, ...data.output, { text: '', color: '' }]);
+      const res = await fetch(`${API_URL}/api/terminal/exec`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ command: cmd })
+      });
+      const data = await res.json();
+      setTerminalOutput(prev => [...prev, ...data.output, { text: '', color: '' }]);
     } catch (e) {
-        setTerminalOutput(prev => [...prev, { text: 'Error connecting to terminal backend.', color: 'text-red-500' }, { text: '', color: '' }]);
+      setTerminalOutput(prev => [...prev,
+        { text: 'Error: Command execution failed', color: 'text-red-500' },
+        { text: `Details: ${e instanceof Error ? e.message : 'Unknown error'}`, color: 'text-red-300' },
+        { text: '', color: '' }
+      ]);
+    }
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    // Navigate history with up/down arrows
+    if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      if (commandHistory.length > 0) {
+        const newIndex = historyIndex < commandHistory.length - 1 ? historyIndex + 1 : 0;
+        setHistoryIndex(newIndex);
+        setTerminalInput(commandHistory[commandHistory.length - 1 - newIndex]);
+      }
+    } else if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      if (historyIndex > 0) {
+        setHistoryIndex(historyIndex - 1);
+        setTerminalInput(commandHistory[commandHistory.length - historyIndex]);
+      }
     }
   };
 
@@ -782,19 +833,38 @@ export default function OMAAIPage() {
           ))}
         </div>
         
-        <div className="flex space-x-2">
-          <input
-            type="text"
-            placeholder="Enter command..."
-            value={terminalInput}
-            onChange={(e) => setTerminalInput(e.target.value)}
-            onKeyDown={(e) => e.key === 'Enter' && handleTerminalSubmit()}
-            className="flex-1 glass px-4 py-3 rounded-lg"
-          />
-          <button onClick={handleTerminalSubmit} className="btn-primary px-6 py-3 rounded-lg">
-            Send
-          </button>
+        <div className="flex items-center gap-2 mb-2">
+          <div className="flex-1">
+            <input
+              type="text"
+              placeholder="Enter command... (↑↓ for history, Ctrl+C to cancel)"
+              value={terminalInput}
+              onChange={(e) => setTerminalInput(e.target.value)}
+              onKeyDown={handleKeyDown}
+              className="flex-1 glass px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+            />
+          </div>
+          <div className="flex gap-2">
+            <button
+              onClick={handleTerminalSubmit}
+              className="btn-primary px-6 py-3 rounded-lg"
+            >
+              Send
+            </button>
+            <button
+              onClick={() => setTerminalOutput([])}
+              className="btn-secondary px-3 py-3 rounded-lg"
+              title="Clear terminal (Ctrl+L)"
+            >
+              Clear
+            </button>
+          </div>
         </div>
+        {commandHistory.length > 0 && (
+          <div className="text-xs text-gray-500 font-mono">
+            History: {commandHistory.slice(-5).map((c, i) => i < 4 ? `${i + 1}. ${c}` : `...${commandHistory.length - 4}`).join(', ')}
+          </div>
+        )}
       </div>
     );
   };
