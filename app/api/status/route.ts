@@ -3,13 +3,24 @@ import { NextRequest, NextResponse } from 'next/server';
 export const runtime = 'edge';
 
 export async function GET(request: NextRequest) {
-  const url = new URL(request.url);
-  const searchParams = url.searchParams;
+  const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
 
-  // Check if it's a status request
-  if (request.nextUrl.pathname === '/api/status') {
+  try {
+    const response = await fetch(`${API_URL}/health`, {
+      cache: 'no-store'
+    });
+
+    if (!response.ok) {
+      throw new Error('Backend not available');
+    }
+
+    const data = await response.json();
+    return NextResponse.json(data);
+  } catch (error) {
+    // Fallback when backend not deployed
     return NextResponse.json({
       status: 'healthy',
+      backend_status: 'offline',
       timestamp: new Date().toISOString(),
       total_agents: 0,
       alive_agents: 0,
@@ -18,35 +29,8 @@ export async function GET(request: NextRequest) {
       total_balance: 0,
       total_earned: 0,
       total_paid: 0,
-      total_transactions: 0
+      total_transactions: 0,
+      message: 'Frontend running, backend deployment pending'
     });
   }
-
-  // Check if it's an agents request
-  if (request.nextUrl.pathname === '/api/agents') {
-    return NextResponse.json({
-      agents: []
-    });
-  }
-
-  // Check if it's a marketplace request
-  if (request.nextUrl.pathname === '/api/marketplace') {
-    return NextResponse.json({
-      services: []
-    });
-  }
-
-  // Check if it's a bounties request
-  if (request.nextUrl.pathname === '/api/bounties') {
-    return NextResponse.json({
-      bounties: []
-    });
-  }
-
-  // Default response
-  return NextResponse.json({
-    message: 'OMA-AI API',
-    status: 'Backend deployment pending',
-    endpoints: ['/api/status', '/api/agents', '/api/marketplace', '/api/bounties']
-  });
 }
