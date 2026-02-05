@@ -5,12 +5,16 @@
       "args": ["-y", "github-mcp"],
       "env": {
         "GITHUB_PERSONAL_ACCESS_TOKEN": ""
-      }
+      },
+      "keepAlive": true,
+      "description": "GitHub MCP for repository and issue management"
     },
     "railway-mcp": {
       "command": "npx",
       "args": ["-y", "railway-mcp"],
-      "env": {}
+      "env": {},
+      "keepAlive": true,
+      "description": "Railway MCP for cloud deployment"
     },
     "solana-mcp": {
       "command": "node",
@@ -28,6 +32,24 @@
       "env": {},
       "keepAlive": true,
       "description": "Context7 Documentation MCP by Upstash"
+    },
+    "vercel-mcp": {
+      "url": "https://mcp.vercel.com",
+      "auth": "oauth",
+      "keepAlive": true,
+      "description": "Vercel MCP for deployment and project management"
+    },
+    "supabase-mcp": {
+      "url": "https://mcp.supabase.com",
+      "headers": {
+        "Authorization": "Bearer ${SUPABASE_ACCESS_TOKEN}"
+      },
+      "env": {
+        "SUPABASE_ACCESS_TOKEN": "eyJhbGciOiJIUzI1NiIsInR5cCI6pXQ...",
+        "SUPABASE_PROJECT_ID": "oooijcrqpuqymgzlidrw"
+      },
+      "keepAlive": true,
+      "description": "Supabase MCP for database operations"
     }
   }
 }
