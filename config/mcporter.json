@@ -13,6 +13,18 @@
       "env": {},
       "keepAlive": true,
       "description": "Context7 Documentation MCP by Upstash"
+    },
+    "solana-mcp": {
+      "command": "node",
+      "args": ["/home/nosyt/.npm-global/lib/node_modules/solana-mcp/build/index.js"],
+      "env": {
+        "SOLANA_PRIVATE_KEY": "zkVEZtPM2BaZMcsZepZkFitpoAxfqJrfRJYzEVSnMfGc95gpeupMcSqVaZMkJe4WwCnCJYHg4RttMvktYmew99RlbnQ6ZGV2ZWxvcG9wbWVudCIsInBsYW4iLCJpYXQiOjE3NzAyNDY0MjcsImV4cCI6MjA4NTgyMjQyN30.EhnfDdDPRjlOK7OzJCpAF7aGG4fDtf9bE39QmxBhytw"
+      }
+    },
+    "vercel-mcp": {
+      "url": "https://mcp.vercel.com/mcp",
+      "keepAlive": true,
+      "description": "Vercel MCP for deployment and project management"
     }
   }
 }
