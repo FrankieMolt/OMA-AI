@@ -1,10 +1,1 @@
-{
-  "buildCommand": "npm run build",
-  "outputDirectory": ".next",
-  "installCommand": "npm install",
-  "framework": "nextjs",
-  "rewrites": [
-    { "source": "/api/(.*)", "destination": "/api/index.py" },
-    { "source": "/health", "destination": "/api/index.py" }
-  ]
-}
+{"buildCommand": "cd frontend && npm install && npm run build", "outputDirectory": "frontend/.next", "installCommand": "cd frontend && npm install", "framework": "nextjs", "env": {"OPENROUTER_API_KEY": "@openrouter-api-key", "NEXT_PUBLIC_API_URL": "https://api.oma-ai.com", "NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID": "@wallet-connect-project-id", "NEXT_PUBLIC_SOLANA_RPC": "https://api.mainnet-beta.solana.com", "NEXT_PUBLIC_BASE_RPC": "https://mainnet.base.org"}}
