@@ -150,10 +150,52 @@ export default function Dashboard() {
       tags: ['crypto', 'payments', 'base'],
       featured: true,
       provider: 'OMA Network'
+    },
+    {
+      id: 'github-mcp',
+      name: 'GitHub MCP Server',
+      description: 'Connect your agents to GitHub repositories, issues, and PRs via Model Context Protocol',
+      category: 'MCP Servers',
+      rating: 4.9,
+      price: 0,
+      priceType: 'per_call',
+      calls: 500000,
+      endpoint: 'https://github.com/model-context-protocol/servers/tree/main/src/github',
+      tags: ['mcp', 'github', 'dev-tools'],
+      featured: true,
+      provider: 'Model Context Protocol'
+    },
+    {
+      id: 'brave-search-mcp',
+      name: 'Brave Search MCP',
+      description: 'Enable web search capabilities for your agents using Brave Search API',
+      category: 'MCP Servers',
+      rating: 4.8,
+      price: 0.001,
+      priceType: 'per_call',
+      calls: 200000,
+      endpoint: 'https://github.com/model-context-protocol/servers/tree/main/src/brave-search',
+      tags: ['mcp', 'search', 'web'],
+      featured: false,
+      provider: 'Brave Software'
+    },
+    {
+      id: 'filesystem-mcp',
+      name: 'Filesystem MCP',
+      description: 'Secure local file system access for autonomous agents',
+      category: 'MCP Servers',
+      rating: 4.7,
+      price: 0,
+      priceType: 'per_call',
+      calls: 100000,
+      endpoint: 'https://github.com/model-context-protocol/servers/tree/main/src/filesystem',
+      tags: ['mcp', 'system', 'files'],
+      featured: false,
+      provider: 'Community'
     }
   ];
 
-  const categories = ['all', 'AI & ML', 'Blockchain', 'Data', 'Communication', 'Finance'];
+  const categories = ['all', 'MCP Servers', 'AI & ML', 'Blockchain', 'Data', 'Communication', 'Finance'];
 
   const filteredServices = apiServices.filter(service => {
     const matchesCategory = selectedCategory === 'all' || service.category === selectedCategory;
@@ -222,6 +264,17 @@ export default function Dashboard() {
               <button className="absolute right-2 top-1/2 -translate-y-1/2 btn-primary px-6 py-2 rounded-lg">
                 Search
               </button>
+            </div>
+
+            <div className="mt-6 flex justify-center gap-4 text-sm text-zinc-500">
+              <span>Popular:</span>
+              <button onClick={() => { setSearchQuery('mcp'); setSelectedCategory('MCP Servers'); }} className="hover:text-purple-400 transition-colors">MCP Servers</button>
+              <button onClick={() => setSearchQuery('gpt')} className="hover:text-purple-400 transition-colors">GPT-4</button>
+              <button onClick={() => setSearchQuery('solana')} className="hover:text-purple-400 transition-colors">Solana</button>
+              <span className="border-l border-zinc-800 mx-2"></span>
+              <a href="https://smithery.ai" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:text-white transition-colors">
+                <ExternalLink size={12} /> Import from Smithery.ai
+              </a>
             </div>
 
             {/* Stats */}

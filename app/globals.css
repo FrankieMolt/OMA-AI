@@ -49,3 +49,15 @@
 .glass-card:hover {
   @apply bg-zinc-900/60 border-white/10;
 }
+
+.gradient-text {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-500;
+}
+
+.btn-primary {
+  @apply bg-white text-black hover:bg-zinc-200 transition-colors font-medium;
+}
+
+.btn-secondary {
+  @apply bg-zinc-800 text-white hover:bg-zinc-700 transition-colors font-medium;
+}
