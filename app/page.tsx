@@ -19,6 +19,8 @@ import {
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import NewsletterSignup from '@/components/NewsletterSignup';
+import { LiveStats } from '@/components/LiveStats';
+import { TrendingAPIs } from '@/components/TrendingAPIs';
 
 // --- API Marketplace Types ---
 interface ApiService {
@@ -537,6 +539,20 @@ export default function MarketplaceHome() {
               <StatCard icon={Star} value="4.7" label="Avg Rating" />
             </div>
           </motion.div>
+        </div>
+      </section>
+
+      {/* Live Stats */}
+      <section className="py-8 px-6">
+        <div className="max-w-7xl mx-auto">
+          <LiveStats />
+        </div>
+      </section>
+
+      {/* Trending APIs */}
+      <section className="py-8 px-6 bg-zinc-900/30">
+        <div className="max-w-7xl mx-auto">
+          <TrendingAPIs />
         </div>
       </section>
 
