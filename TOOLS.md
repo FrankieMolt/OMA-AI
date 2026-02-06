@@ -71,11 +71,13 @@ mcporter config add my-server https://mcp.example.com
 ## 🔑 Credentials
 
 ### Vercel
-- **Status:** ⚠️ Token EXPIRED/INVALID - Needs refresh
+- **Token:** `QyhX0ndRnOOmiv4uyc3JfCrr` ✅ VALID (Full account scope)
+- **Status:** ✅ Working - Verified CLI access
 - **Dashboard:** https://vercel.com
 - **Projects:** oma-ai (FrankieMolt)
-- **Note:** Token `SBEIlqy5XcZtRZ1kbnJtAlC6` is invalid, login required
-- **CLI Usage:** `vercel login` to get new token, then `vercel --prod --yes --force`
+- **User:** frankiemolt
+- **CLI Usage:** `vercel --token=QyhX0ndRnOOmiv4uyc3JfCrr --prod --yes --force`
+- **Verification:** `vercel whoami --token=QyhX0ndRnOOmiv4uyc3JfCrr`
 
 ### Supabase
 - **Project ID:** `oooijcrqpuqymgzlidrw`

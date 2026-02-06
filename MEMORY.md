@@ -69,13 +69,29 @@ _This file contains distilled wisdom about Nosyt, OMA-AI, and important decision
 
 **Lesson:** Always keep identity documentation current. Never rely on "mental notes."
 
-### 2026-02-06: Deployment Workflow
+### 2026-02-06: Deployment Workflow & Vercel Token
 **Vercel Deployment Command:**
 ```bash
-vercel --prod --yes --force
+vercel --token=QyhX0ndRnOOmiv4uyc3JfCrr --prod --yes --force
 ```
 
-**Note:** Vercel MCP has build errors - use CLI for now until auth is fixed.
+**Vercel Token (VALID - Full Account Scope):**
+```
+Token: QyhX0ndRnOOmiv4uyc3JfCrr
+Scope: Full account access
+Expiry: None (permanent)
+Type: CLI Token (for command-line deployments)
+Status: ✅ VERIFIED - Works with vercel CLI
+User: frankiemolt
+```
+
+**Verification:**
+```bash
+vercel whoami --token=QyhX0ndRnOOmiv4uyc3JfCrr
+# Output: frankiemolt
+```
+
+**Note:** Previous token (SBEIlqy5XcZtRZ1kbnJtAlC6) was invalid CLI format. New token verified working on 2026-02-06 23:41 UTC.
 
 ### 2026-02-06: MCP Server Status
 - **GitHub MCP:** ✅ Working via STDIO
