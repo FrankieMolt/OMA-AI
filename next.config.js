@@ -1,5 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Fix Turbopack workspace root detection
+  turbopack: {
+    root: __dirname,
+  },
   output: 'standalone',
   reactStrictMode: true,
   env: {
