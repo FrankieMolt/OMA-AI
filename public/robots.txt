@@ -1,4 +1,33 @@
+# OMA-AI Robots.txt
+# API Marketplace for AI Agents and Developers
+
 User-agent: *
 Allow: /
 
+# Sitemap
 Sitemap: https://oma-ai.com/sitemap.xml
+
+# Crawl delay (be kind to our servers)
+Crawl-delay: 1
+
+# Disallow sensitive paths
+Disallow: /api/
+Disallow: /.env
+Disallow: /_next
+Disallow: /.next
+
+# Block bad bots
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: BLEXBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /

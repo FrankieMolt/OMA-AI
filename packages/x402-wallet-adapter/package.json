@@ -1,0 +1,49 @@
+{
+  "name": "@oma-ai/x402-wallet-adapter",
+  "version": "1.0.0",
+  "description": "Universal x402 wallet adapter for AI agents - Accept and send HTTP 402 payments on Base, Ethereum, and Solana",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest",
+    "lint": "eslint src/**/*.ts"
+  },
+  "keywords": [
+    "x402",
+    "payment",
+    "http-402",
+    "crypto",
+    "blockchain",
+    "base",
+    "ethereum",
+    "solana",
+    "ai-agents",
+    "wallet-adapter"
+  ],
+  "author": "OMA Systems",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/FrankieMolt/OMA-AI.git"
+  },
+  "dependencies": {
+    "ethers": "^6.13.0",
+    "@solana/web3.js": "^1.95.0",
+    "axios": "^1.7.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.0",
+    "@types/node": "^22.0.0",
+    "jest": "^29.7.0",
+    "eslint": "^9.0.0"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ]
+}

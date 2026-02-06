@@ -1,7 +1,7 @@
 {
-  "name": "OMA-AI | The Zero Human Company",
+  "name": "OMA-AI | API Marketplace for Agents & MCPs",
   "short_name": "OMA-AI",
-  "description": "The first fully autonomous agentic economy. Trade compute, intelligence, and labor via x402 payments.",
+  "description": "The premier API marketplace for AI agents and MCP servers. Trade compute, intelligence, and labor via x402 payments.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#000000",

@@ -14,8 +14,7 @@ import {
   ExternalLink,
   Play,
   Filter,
-  ArrowRight,
-  Cpu
+  ArrowRight
 } from 'lucide-react';
 
 // --- API Marketplace Types ---
@@ -26,7 +25,7 @@ interface ApiService {
   category: string;
   rating: number;
   price: number;
-  priceType: 'per_call' | 'monthly' | 'free';
+  priceType: 'per_call' | 'monthly';
   calls: number;
   endpoint: string;
   tags: string[];
@@ -34,11 +33,11 @@ interface ApiService {
   provider: string;
 }
 
-export default function MarketplaceHome() {
+export default function Dashboard() {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
 
-  // Mock API Services - Like Smithery.ai + RapidAPI
+  // Mock API Services
   const apiServices: ApiService[] = [
     {
       id: 'gpt-4-turbo',
@@ -97,62 +96,6 @@ export default function MarketplaceHome() {
       provider: 'Alchemy'
     },
     {
-      id: 'github-mcp',
-      name: 'GitHub MCP Server',
-      description: 'Connect your agents to GitHub repositories, issues, and PRs via Model Context Protocol',
-      category: 'MCP Servers',
-      rating: 4.9,
-      price: 0,
-      priceType: 'free',
-      calls: 500000,
-      endpoint: 'https://github.com/model-context-protocol/servers/tree/main/src/github',
-      tags: ['mcp', 'github', 'dev-tools'],
-      featured: true,
-      provider: 'Model Context Protocol'
-    },
-    {
-      id: 'brave-search-mcp',
-      name: 'Brave Search MCP',
-      description: 'Enable web search capabilities for your agents using Brave Search API',
-      category: 'MCP Servers',
-      rating: 4.8,
-      price: 0.001,
-      priceType: 'per_call',
-      calls: 200000,
-      endpoint: 'https://github.com/model-context-protocol/servers/tree/main/src/brave-search',
-      tags: ['mcp', 'search', 'web'],
-      featured: false,
-      provider: 'Brave Software'
-    },
-    {
-      id: 'filesystem-mcp',
-      name: 'Filesystem MCP',
-      description: 'Secure local file system access for autonomous agents',
-      category: 'MCP Servers',
-      rating: 4.7,
-      price: 0,
-      priceType: 'free',
-      calls: 100000,
-      endpoint: 'https://github.com/model-context-protocol/servers/tree/main/src/filesystem',
-      tags: ['mcp', 'system', 'files'],
-      featured: false,
-      provider: 'Community'
-    },
-    {
-      id: 'postgres-mcp',
-      name: 'PostgreSQL MCP',
-      description: 'Direct database access for agents - query, insert, update PostgreSQL databases',
-      category: 'MCP Servers',
-      rating: 4.6,
-      price: 0,
-      priceType: 'free',
-      calls: 80000,
-      endpoint: 'https://github.com/model-context-protocol/servers/tree/main/src/postgres',
-      tags: ['mcp', 'database', 'sql'],
-      featured: true,
-      provider: 'Community'
-    },
-    {
       id: 'data-scraping',
       name: 'Web Scraper Pro',
       description: 'Extract data from any website with anti-bot protection bypass',
@@ -208,259 +151,47 @@ export default function MarketplaceHome() {
       featured: true,
       provider: 'OMA Network'
     },
-    // More MCP Servers
     {
-      id: 'sqlite-mcp',
-      name: 'SQLite MCP',
-      description: 'Lightweight database access for agents - perfect for local development and testing',
+      id: 'github-mcp',
+      name: 'GitHub MCP Server',
+      description: 'Connect your agents to GitHub repositories, issues, and PRs via Model Context Protocol',
       category: 'MCP Servers',
-      rating: 4.5,
+      rating: 4.9,
       price: 0,
-      priceType: 'free',
-      calls: 75000,
-      endpoint: 'https://github.com/model-context-protocol/servers/tree/main/src/sqlite',
-      tags: ['mcp', 'database', 'sqlite'],
-      featured: false,
-      provider: 'Community'
-    },
-    {
-      id: 'puppeteer-mcp',
-      name: 'Puppeteer MCP',
-      description: 'Headless browser automation - scrape websites, generate PDFs, take screenshots',
-      category: 'MCP Servers',
-      rating: 4.8,
-      price: 0.005,
-      priceType: 'per_call',
-      calls: 150000,
-      endpoint: 'https://github.com/model-context-protocol/servers/tree/main/src/puppeteer',
-      tags: ['mcp', 'browser', 'scraping'],
-      featured: false,
-      provider: 'Community'
-    },
-    // More APIs
-    {
-      id: 'weather-api',
-      name: 'Weather API',
-      description: 'Real-time weather data, forecasts, and historical weather information',
-      category: 'Data',
-      rating: 4.6,
-      price: 0,
-      priceType: 'free',
-      calls: 1000000,
-      endpoint: '/api/v1/weather',
-      tags: ['weather', 'data', 'forecast'],
-      featured: false,
-      provider: 'OpenWeatherMap'
-    },
-    {
-      id: 'stock-price-api',
-      name: 'Stock Price API',
-      description: 'Real-time stock prices, historical data, market data, and financial analytics',
-      category: 'Finance',
-      rating: 4.7,
-      price: 0.002,
       priceType: 'per_call',
       calls: 500000,
-      endpoint: '/api/v1/stocks',
-      tags: ['finance', 'stocks', 'trading'],
-      featured: false,
-      provider: 'Alpha Vantage'
-    },
-    {
-      id: 'sms-api',
-      name: 'SMS Messaging API',
-      description: 'Send SMS messages globally with delivery receipts and scheduling',
-      category: 'Communication',
-      rating: 4.5,
-      price: 0.001,
-      priceType: 'per_call',
-      calls: 2000000,
-      endpoint: '/api/v1/sms',
-      tags: ['sms', 'communication', 'twilio'],
-      featured: false,
-      provider: 'Twilio'
-    },
-    {
-      id: 'translation-api',
-      name: 'Translation API',
-      description: 'Translate text between 100+ languages with high accuracy and context awareness',
-      category: 'AI & ML',
-      rating: 4.8,
-      price: 0.003,
-      priceType: 'per_call',
-      calls: 800000,
-      endpoint: '/api/v1/translate',
-      tags: ['translation', 'ai', 'nlp'],
-      featured: false,
-      provider: 'Google Translate'
-    },
-    {
-      id: 'pdf-api',
-      name: 'PDF Generation API',
-      description: 'Generate, manipulate, and convert PDF documents programmatically',
-      category: 'Data',
-      rating: 4.4,
-      price: 0.002,
-      priceType: 'per_call',
-      calls: 600000,
-      endpoint: '/api/v1/pdf',
-      tags: ['pdf', 'document', 'generation'],
-      featured: false,
-      provider: 'OMA Network'
-    },
-    {
-      id: 'qdrant-vector-db',
-      name: 'Qdrant Vector DB',
-      description: 'Vector similarity search for RAG, embeddings, and semantic search applications',
-      category: 'Data',
-      rating: 4.7,
-      price: 0.001,
-      priceType: 'per_call',
-      calls: 400000,
-      endpoint: '/api/v1/vector-search',
-      tags: ['vector', 'database', 'embeddings'],
+      endpoint: 'https://github.com/model-context-protocol/servers/tree/main/src/github',
+      tags: ['mcp', 'github', 'dev-tools'],
       featured: true,
-      provider: 'Qdrant'
+      provider: 'Model Context Protocol'
     },
     {
-      id: 'pinecone-vector-db',
-      name: 'Pinecone Vector Database',
-      description: 'Managed vector database optimized for AI applications and similarity search',
-      category: 'Data',
-      rating: 4.9,
-      price: 0.002,
-      priceType: 'per_call',
-      calls: 350000,
-      endpoint: '/api/v1/vector-search',
-      tags: ['vector', 'database', 'embeddings', 'rag'],
-      featured: true,
-      provider: 'Pinecone'
-    },
-    {
-      id: 'nltk-mcp',
-      name: 'NLTK MCP',
-      description: 'Natural language processing toolkit for text analysis, tokenization, and NLP tasks',
+      id: 'brave-search-mcp',
+      name: 'Brave Search MCP',
+      description: 'Enable web search capabilities for your agents using Brave Search API',
       category: 'MCP Servers',
-      rating: 4.5,
+      rating: 4.8,
+      price: 0.001,
+      priceType: 'per_call',
+      calls: 200000,
+      endpoint: 'https://github.com/model-context-protocol/servers/tree/main/src/brave-search',
+      tags: ['mcp', 'search', 'web'],
+      featured: false,
+      provider: 'Brave Software'
+    },
+    {
+      id: 'filesystem-mcp',
+      name: 'Filesystem MCP',
+      description: 'Secure local file system access for autonomous agents',
+      category: 'MCP Servers',
+      rating: 4.7,
       price: 0,
-      priceType: 'free',
-      calls: 50000,
-      endpoint: 'https://github.com/model-context-protocol/servers/tree/main/src/nltk',
-      tags: ['mcp', 'nlp', 'text', 'ai'],
+      priceType: 'per_call',
+      calls: 100000,
+      endpoint: 'https://github.com/model-context-protocol/servers/tree/main/src/filesystem',
+      tags: ['mcp', 'system', 'files'],
       featured: false,
       provider: 'Community'
-    },
-    {
-      id: 'slack-mcp',
-      name: 'Slack MCP',
-      description: 'Integrate with Slack - send messages, read channels, manage workspaces programmatically',
-      category: 'MCP Servers',
-      rating: 4.6,
-      price: 0.001,
-      priceType: 'per_call',
-      calls: 250000,
-      endpoint: 'https://github.com/model-context-protocol/servers/tree/main/src/slack',
-      tags: ['mcp', 'slack', 'communication', 'integration'],
-      featured: false,
-      provider: 'Community'
-    },
-    {
-      id: 'voice-to-text-api',
-      name: 'Voice to Text API',
-      description: 'Convert speech to text with high accuracy, multiple languages, and speaker recognition',
-      category: 'AI & ML',
-      rating: 4.7,
-      price: 0.004,
-      priceType: 'per_call',
-      calls: 300000,
-      endpoint: '/api/v1/stt',
-      tags: ['voice', 'speech-to-text', 'transcription'],
-      featured: false,
-      provider: 'OpenAI Whisper'
-    },
-    {
-      id: 'text-to-speech-api',
-      name: 'Text to Speech API',
-      description: 'Convert text to natural-sounding speech with multiple voices and languages',
-      category: 'AI & ML',
-      rating: 4.6,
-      price: 0.003,
-      priceType: 'per_call',
-      calls: 400000,
-      endpoint: '/api/v1/tts',
-      tags: ['voice', 'text-to-speech', 'audio'],
-      featured: false,
-      provider: 'ElevenLabs'
-    },
-    {
-      id: 'ip-geolocation-api',
-      name: 'IP Geolocation API',
-      description: 'Get location data from IP addresses - country, city, timezone, ISP information',
-      category: 'Data',
-      rating: 4.4,
-      price: 0,
-      priceType: 'free',
-      calls: 800000,
-      endpoint: '/api/v1/ip-geo',
-      tags: ['ip', 'geolocation', 'data'],
-      featured: false,
-      provider: 'IP-API'
-    },
-    {
-      id: 'github-api',
-      name: 'GitHub REST API',
-      description: 'Access GitHub repositories, issues, PRs, webhooks, and Git operations',
-      category: 'Data',
-      rating: 4.8,
-      price: 0,
-      priceType: 'free',
-      calls: 900000,
-      endpoint: 'https://api.github.com',
-      tags: ['github', 'git', 'code'],
-      featured: true,
-      provider: 'GitHub'
-    },
-    {
-      id: 'discord-bot-api',
-      name: 'Discord Bot API',
-      description: 'Build Discord bots - send messages, manage servers, users, and channels',
-      category: 'Communication',
-      rating: 4.7,
-      price: 0,
-      priceType: 'free',
-      calls: 700000,
-      endpoint: 'https://discord.com/api',
-      tags: ['discord', 'bot', 'chat'],
-      featured: true,
-      provider: 'Discord'
-    },
-    {
-      id: 'stripe-api',
-      name: 'Stripe Payment API',
-      description: 'Accept payments, manage subscriptions, invoicing, and financial operations',
-      category: 'Finance',
-      rating: 4.9,
-      price: 0.003,
-      priceType: 'per_call',
-      calls: 600000,
-      endpoint: 'https://api.stripe.com',
-      tags: ['payments', 'finance', 'subscriptions'],
-      featured: true,
-      provider: 'Stripe'
-    },
-    {
-      id: 'aws-s3-api',
-      name: 'AWS S3 Storage API',
-      description: 'Store and retrieve files, images, and data in Amazon S3 cloud storage',
-      category: 'Data',
-      rating: 4.8,
-      price: 0.001,
-      priceType: 'per_call',
-      calls: 550000,
-      endpoint: 'https://s3.amazonaws.com',
-      tags: ['storage', 'aws', 'cloud'],
-      featured: true,
-      provider: 'AWS'
     }
   ];
 
@@ -479,21 +210,18 @@ export default function MarketplaceHome() {
 
   return (
     <div className="min-h-screen bg-zinc-950 text-zinc-100">
-      {/* Header */}
+      {/* Navigation */}
       <nav className="glass sticky top-0 z-50 px-6 py-4">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <a href="/" className="text-2xl font-bold gradient-text cursor-pointer">
-            OMA-AI
-          </a>
+          <div className="flex items-center gap-3">
+            <a href="/" className="text-2xl font-bold gradient-text cursor-pointer">
+              OMA-AI
+            </a>
+            <span className="text-zinc-500">/</span>
+            <span className="text-lg text-zinc-300">API Marketplace</span>
+          </div>
 
           <div className="flex items-center gap-6">
-            <a href="/how-it-works" className="text-zinc-400 hover:text-white transition-colors flex items-center gap-2">
-              <BookOpen size={16} />
-              How It Works
-            </a>
-            <a href="/bounties" className="text-zinc-400 hover:text-white transition-colors">
-              Bounties
-            </a>
             <a href="/docs" className="text-zinc-400 hover:text-white transition-colors flex items-center gap-2">
               <BookOpen size={16} />
               Docs
@@ -517,11 +245,10 @@ export default function MarketplaceHome() {
             transition={{ duration: 0.6 }}
           >
             <h1 className="text-5xl font-bold mb-6">
-              Discover <span className="gradient-text">APIs & MCPs</span>
+              Discover <span className="gradient-text">Powerful APIs</span>
             </h1>
             <p className="text-xl text-zinc-400 mb-8">
-              Browse, test, and integrate 22+ APIs and MCP servers. 
-              Pay only for what you use with x402 crypto payments.
+              Access the best AI, blockchain, and data APIs. Pay only for what you use with x402 crypto payments.
             </p>
 
             {/* Search Bar */}
@@ -529,7 +256,7 @@ export default function MarketplaceHome() {
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500" size={20} />
               <input
                 type="text"
-                placeholder="Search APIs, MCPs..."
+                placeholder="Search APIs..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full pl-12 pr-4 py-4 rounded-xl bg-zinc-900 border border-zinc-800 text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all"
@@ -539,10 +266,21 @@ export default function MarketplaceHome() {
               </button>
             </div>
 
+            <div className="mt-6 flex justify-center gap-4 text-sm text-zinc-500">
+              <span>Popular:</span>
+              <button onClick={() => { setSearchQuery('mcp'); setSelectedCategory('MCP Servers'); }} className="hover:text-purple-400 transition-colors">MCP Servers</button>
+              <button onClick={() => setSearchQuery('gpt')} className="hover:text-purple-400 transition-colors">GPT-4</button>
+              <button onClick={() => setSearchQuery('solana')} className="hover:text-purple-400 transition-colors">Solana</button>
+              <span className="border-l border-zinc-800 mx-2"></span>
+              <a href="https://smithery.ai" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:text-white transition-colors">
+                <ExternalLink size={12} /> Import from Smithery.ai
+              </a>
+            </div>
+
             {/* Stats */}
             <div className="grid grid-cols-3 gap-8 mt-12 max-w-2xl mx-auto">
-              <StatCard icon={Code} value="22+" label="APIs & MCPs" />
-              <StatCard icon={Zap} value="25M+" label="Calls/mo" />
+              <StatCard icon={Code} value="8+" label="APIs" />
+              <StatCard icon={Zap} value="15M+" label="Calls/mo" />
               <StatCard icon={Star} value="4.7" label="Avg Rating" />
             </div>
           </motion.div>
@@ -555,7 +293,7 @@ export default function MarketplaceHome() {
           <div className="flex items-center justify-between mb-8">
             <h2 className="text-3xl font-bold flex items-center gap-3">
               <Zap className="text-yellow-500" size={28} />
-              Featured APIs & MCPs
+              Featured APIs
             </h2>
             <button className="text-purple-400 hover:text-purple-300 flex items-center gap-2">
               View All
@@ -586,12 +324,7 @@ export default function MarketplaceHome() {
                     : 'bg-zinc-900 text-zinc-400 hover:bg-zinc-800'
                 }`}
               >
-                {category === 'MCP Servers' ? (
-                  <span className="flex items-center gap-2">
-                    <Cpu size={14} />
-                    MCP Servers
-                  </span>
-                ) : category}
+                {category.charAt(0).toUpperCase() + category.slice(1)}
               </button>
             ))}
           </div>
@@ -603,10 +336,10 @@ export default function MarketplaceHome() {
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center justify-between mb-8">
             <h2 className="text-3xl font-bold">
-              {selectedCategory === 'all' ? 'All APIs & MCPs' : selectedCategory}
+              {selectedCategory === 'all' ? 'All APIs' : selectedCategory}
             </h2>
             <span className="text-zinc-400">
-              {filteredServices.length} service{filteredServices.length !== 1 ? 's' : ''}
+              {filteredServices.length} API{filteredServices.length !== 1 ? 's' : ''}
             </span>
           </div>
 
@@ -629,18 +362,18 @@ export default function MarketplaceHome() {
       <section className="py-20 px-6 bg-gradient-to-br from-purple-900/20 to-blue-900/20">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-4xl font-bold mb-6">
-            Add Your API or MCP to OMA-AI
+            Build with the Best APIs
           </h2>
           <p className="text-xl text-zinc-400 mb-8">
-            List your API or MCP server in our marketplace. Reach thousands of developers building autonomous agents.
+            Start building your app today. Get your free API key and integrate in minutes.
           </p>
           <div className="flex items-center justify-center gap-4">
             <button className="btn-primary px-8 py-4 rounded-lg text-lg font-medium">
-              Submit API
+              Get API Key
             </button>
-            <a href="/docs/embed-scripts" className="btn-secondary px-8 py-4 rounded-lg text-lg font-medium flex items-center gap-2">
+            <a href="/docs" className="btn-secondary px-8 py-4 rounded-lg text-lg font-medium flex items-center gap-2">
               <BookOpen size={18} />
-              View Documentation
+              Documentation
             </a>
           </div>
         </div>
@@ -650,7 +383,7 @@ export default function MarketplaceHome() {
       <footer className="py-12 px-6 border-t border-zinc-800">
         <div className="max-w-7xl mx-auto text-center">
           <p className="text-zinc-500 text-sm">
-            OMA-AI - API Marketplace for Agents & MCPs
+            OMA-AI - API Marketplace with x402 Crypto Payments
           </p>
           <p className="text-zinc-600 text-xs mt-2">
             © 2026 OMA-AI. All rights reserved.
@@ -719,19 +452,13 @@ function ApiCard({ service, index }: { service: ApiService, index: number }) {
       <div className="flex items-center justify-between pt-4 border-t border-zinc-800">
         <div>
           <div className="flex items-baseline gap-1">
-            {service.priceType === 'free' ? (
-              <span className="text-lg font-bold text-green-500">FREE</span>
-            ) : (
-              <>
-                <DollarSign size={14} className="text-zinc-500" />
-                <span className="text-lg font-bold text-white">
-                  {service.price.toFixed(4)}
-                </span>
-                <span className="text-sm text-zinc-500">
-                  /{service.priceType === 'per_call' ? 'call' : 'mo'}
-                </span>
-              </>
-            )}
+            <DollarSign size={14} className="text-zinc-500" />
+            <span className="text-lg font-bold text-white">
+              {service.price.toFixed(4)}
+            </span>
+            <span className="text-sm text-zinc-500">
+              /{service.priceType === 'per_call' ? 'call' : 'mo'}
+            </span>
           </div>
           <div className="text-xs text-zinc-500">
             {service.calls.toLocaleString()} calls/mo
