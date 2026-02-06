@@ -239,7 +239,7 @@
 
 /* Improved tooltip */
 .tooltip {
-  @apply relative group;
+  position: relative;
 }
 
 .tooltip::after {
@@ -423,7 +423,7 @@
 
 /* Improved card hover states */
 .card-hover {
-  @apply group;
+  @apply transition-all duration-200;
 }
 
 .card-hover:hover {
@@ -637,7 +637,7 @@ h4 {
 
 /* Animation utilities */
 .animate-in {
-  @apply animate-fade-in;
+  animation: fade-in 0.3s ease-out;
 }
 
 @keyframes fade-in {

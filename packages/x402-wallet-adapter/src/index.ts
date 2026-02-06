@@ -199,7 +199,7 @@ export class X402Wallet {
     );
 
     // Sign and send
-    const signature = await connection.sendTransaction(transaction, this.solanaKeypair);
+    const signature = await connection.sendTransaction(transaction, [this.solanaKeypair]);
     
     return {
       txHash: signature,
