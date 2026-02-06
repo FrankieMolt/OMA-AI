@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { Mail, MessageCircle, Github, Twitter, Send, CheckCircle } from 'lucide-react';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -83,8 +85,10 @@ export default function ContactPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-black py-20 px-6">
-      <div className="max-w-6xl mx-auto">
+    <div className="min-h-screen bg-zinc-950 flex flex-col">
+      <Navbar />
+      <div className="flex-1 py-20 px-6">
+        <div className="max-w-6xl mx-auto">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -276,6 +280,8 @@ export default function ContactPage() {
           </Link>
         </motion.div>
       </div>
+      <Footer />
+    </div>
     </div>
   );
 }

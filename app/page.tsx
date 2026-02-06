@@ -3,20 +3,22 @@
 import React, { useState, useMemo, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import {
-  Search,
   Code,
   Zap,
   Shield,
-  TrendingUp,
-  BookOpen,
   DollarSign,
   Star,
   ExternalLink,
   Play,
   Filter,
   ArrowRight,
-  Cpu
+  Cpu,
+  Search,
+  BookOpen
 } from 'lucide-react';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
+import NewsletterSignup from '@/components/NewsletterSignup';
 
 // --- API Marketplace Types ---
 interface ApiService {
@@ -494,35 +496,8 @@ export default function MarketplaceHome() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-zinc-100">
-      {/* Header */}
-      <nav className="glass sticky top-0 z-50 px-6 py-4">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <a href="/" className="text-2xl font-bold gradient-text cursor-pointer">
-            OMA-AI
-          </a>
-
-          <div className="flex items-center gap-6">
-            <a href="/how-it-works" className="text-zinc-400 hover:text-white transition-colors flex items-center gap-2">
-              <BookOpen size={16} />
-              How It Works
-            </a>
-            <a href="/tasks" className="text-zinc-400 hover:text-white transition-colors">
-              Bounties
-            </a>
-            <a href="/docs" className="text-zinc-400 hover:text-white transition-colors flex items-center gap-2">
-              <BookOpen size={16} />
-              Docs
-            </a>
-            <a href="/about" className="text-zinc-400 hover:text-white transition-colors">
-              About
-            </a>
-            <button className="btn-primary px-4 py-2 rounded-lg text-sm">
-              Get API Key
-            </button>
-          </div>
-        </div>
-      </nav>
+    <div className="min-h-screen bg-zinc-950 text-zinc-100 flex flex-col">
+      <Navbar />
 
       {/* Hero Section */}
       <section className="py-20 px-6">
@@ -662,17 +637,11 @@ export default function MarketplaceHome() {
         </div>
       </section>
 
+      {/* Newsletter Section */}
+      <NewsletterSignup />
+
       {/* Footer */}
-      <footer className="py-12 px-6 border-t border-zinc-800">
-        <div className="max-w-7xl mx-auto text-center">
-          <p className="text-zinc-500 text-sm">
-            OMA-AI - API Marketplace for Agents & MCPs
-          </p>
-          <p className="text-zinc-600 text-xs mt-2">
-            © 2026 OMA-AI. All rights reserved.
-          </p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

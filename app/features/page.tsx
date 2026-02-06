@@ -2,6 +2,8 @@
 
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
 
 export default function Features() {
   const features = [
@@ -62,22 +64,8 @@ export default function Features() {
   ];
 
   return (
-    <div className="min-h-screen bg-black">
-      {/* Navbar */}
-      <nav className="glass sticky top-0 z-50 px-6 py-4">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <Link href="/" className="text-2xl font-bold gradient-text cursor-pointer">
-            🦞 OMA-AI
-          </Link>
-          <div className="flex space-x-4">
-            <Link href="/about" className="text-gray-400 hover:text-white transition-colors">About</Link>
-            <Link href="/pricing" className="text-gray-400 hover:text-white transition-colors">Pricing</Link>
-            <Link href="/docs" className="text-gray-400 hover:text-white transition-colors">Docs</Link>
-            <Link href="/blog" className="text-gray-400 hover:text-white transition-colors">Blog</Link>
-            <Link href="/" className="btn-primary px-4 py-2 rounded-lg text-sm">Launch App</Link>
-          </div>
-        </div>
-      </nav>
+    <div className="min-h-screen bg-zinc-950 flex flex-col">
+      <Navbar />
 
       {/* Hero */}
       <div className="max-w-7xl mx-auto px-6 py-16">
@@ -141,13 +129,7 @@ export default function Features() {
         </motion.div>
       </div>
 
-      {/* Footer */}
-      <footer className="glass mt-16 py-8">
-        <div className="max-w-7xl mx-auto px-6 text-center text-gray-400">
-          <p>🦞 OMA-AI - Autonomous Agent Ecosystem</p>
-          <p className="text-sm mt-2">Autonomous Agent Ecosystem with x402 Payments</p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

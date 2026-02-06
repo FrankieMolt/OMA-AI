@@ -1,4 +1,6 @@
-# TOOLS.md - OpenClaw Workspace Tools & Configuration
+# TOOLS.md - Frankie's Tools & Configuration
+
+_Frankie's toolkit for serving Nosyt and building OMA-AI_
 
 ---
 
@@ -171,5 +173,6 @@ curl -X POST https://oooijcrqpuqymgzlidrw.supabase.co/rest/v1/agents \
 
 ---
 
-*Last updated: 2026-02-05*
+*Last updated: 2026-02-06*
+*Maintained by Frankie 🧟‍♂️ for Nosyt (MASTA)*
 *Configuration managed via mcporter*

@@ -60,8 +60,47 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'OMA-AI - Open Market Access for AI Agents',
+    description: 'The API marketplace for humans and AI agents. Browse, test, and integrate 22+ APIs and MCP servers with x402 crypto payments.',
+    url: 'https://oma-ai.com',
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: 'https://oma-ai.com/search?q={search_term_string}',
+      'query-input': 'required name=search_term_string',
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'OMA-AI',
+      url: 'https://oma-ai.com',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://oma-ai.com/favicon-512x512.png',
+        width: 512,
+        height: 512,
+      },
+      contactPoint: {
+        '@type': 'ContactPoint',
+        contactType: 'sales',
+        email: 'hello@oma-ai.com',
+      },
+    },
+    sameAs: [
+      'https://twitter.com/oma_ai',
+      'https://github.com/FrankieMolt/OMA-AI',
+    ],
+  };
+
   return (
     <html lang="en" className="dark">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body className={`${inter.className} bg-zinc-950 text-zinc-50 antialiased selection:bg-zinc-800`}>
         {children}
       </body>
