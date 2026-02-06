@@ -184,6 +184,7 @@ export default function ContactPage() {
                   <button
                     type="submit"
                     disabled={isSubmitting}
+                    aria-label="Send contact form message"
                     className="w-full btn-primary py-3 rounded-lg font-bold flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {isSubmitting ? (

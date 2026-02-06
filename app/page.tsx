@@ -557,7 +557,7 @@ export default function MarketplaceHome() {
               <Zap className="text-yellow-500" size={28} />
               Featured APIs & MCPs
             </h2>
-            <button className="text-purple-400 hover:text-purple-300 flex items-center gap-2">
+            <button aria-label="View all APIs" className="text-purple-400 hover:text-purple-300 flex items-center gap-2">
               View All
               <ArrowRight size={16} />
             </button>
@@ -739,13 +739,14 @@ function ApiCard({ service, index }: { service: ApiService, index: number }) {
         </div>
 
         <div className="flex gap-2">
-          <button className="p-2 rounded-lg bg-zinc-800 hover:bg-zinc-700 transition-colors group-hover:text-purple-400">
+          <button aria-label={`Try ${service.name} API`} className="p-2 rounded-lg bg-zinc-800 hover:bg-zinc-700 transition-colors group-hover:text-purple-400">
             <Play size={16} />
           </button>
           <a
             href={service.endpoint}
             target="_blank"
             rel="noopener noreferrer"
+            aria-label={`Open ${service.name} API documentation`}
             className="p-2 rounded-lg bg-zinc-800 hover:bg-zinc-700 transition-colors group-hover:text-purple-400"
           >
             <ExternalLink size={16} />
