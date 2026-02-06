@@ -33,7 +33,7 @@ interface ApiService {
   provider: string;
 }
 
-export default function Dashboard() {
+export default function TasksPage() {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
 

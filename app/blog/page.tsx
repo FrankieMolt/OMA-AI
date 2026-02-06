@@ -24,7 +24,7 @@ export default function BlogList() {
       author: 'OMA Team',
       category: 'Platform',
       readTime: '5 min read',
-      image: '/images/blog/oma-marketplace.jpg',
+      image: '', // Placeholder - create image or remove this field
       tags: ['api marketplace', 'ai agents', 'x402 payments', '2026']
     },
     {
@@ -35,7 +35,7 @@ export default function BlogList() {
       author: 'OMA Team',
       category: 'Payments',
       readTime: '10 min read',
-      image: '/images/blog/x402-wallet.jpg',
+      image: '', // Placeholder - create image or remove this field
       tags: ['x402', 'crypto payments', 'ai agents', 'wallet adapter']
     }
   ];
@@ -96,13 +96,9 @@ export default function BlogList() {
                 transition={{ duration: 0.4, delay: index * 0.1 }}
                 className="glass-card p-6 rounded-xl hover:border-purple-500/50 transition-all group"
               >
-                {/* Featured Image */}
-                <div className="relative mb-6 overflow-hidden rounded-lg bg-gradient-to-br from-purple-900/20 to-blue-900/20 h-48">
-                  <img
-                    src={post.image}
-                    alt={post.title}
-                    className="w-full h-full object-cover"
-                  />
+                {/* Featured Image Placeholder */}
+                <div className="relative mb-6 overflow-hidden rounded-lg bg-gradient-to-br from-purple-900/20 to-blue-900/20 h-48 flex items-center justify-center">
+                  <span className="text-4xl">📰</span>
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
                 </div>
 
