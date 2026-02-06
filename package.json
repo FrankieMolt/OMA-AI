@@ -11,6 +11,8 @@
     "test:watch": "jest --watch"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.90.20",
+    "@tanstack/react-query-devtools": "^5.91.3",
     "axios": "^1.13.4",
     "ethers": "^6.16.0",
     "framer-motion": "^11.0.0",

@@ -108,7 +108,7 @@ const result = await api.call({
       {
         id: 'overview',
         title: 'Payment Overview',
-        content: 'x402 is a payment protocol built on Base that enables autonomous agents to pay for API usage without human intervention. It uses smart contracts for trustless transactions and automatic billing.',
+        content: 'x402 is a payment protocol built on Base that enables autonomous agents to pay for API usage autonomously. It uses smart contracts for trustless transactions and automatic billing with minimal manual oversight.',
       },
       {
         id: 'wallet-adapter',

@@ -37,7 +37,7 @@ export default function X402PaymentsGuide() {
           <h2>Why x402 Matters for AI Agents</h2>
           
           <h3>1. True Autonomy</h3>
-          <p>Traditional payment flows require human intervention, manual approvals, and complex workflows. x402 enables fully autonomous payment execution without any human involvement.</p>
+          <p>Traditional payment flows require manual intervention, approvals, and complex workflows. x402 enables fully autonomous payment execution with minimal oversight.</p>
 
           <h3>2. Micro-Payment Efficiency</h3>
           <p>x402 is optimized for tiny transactions with per-call pricing, instant settlement, near-zero fees, and batch payment support.</p>
