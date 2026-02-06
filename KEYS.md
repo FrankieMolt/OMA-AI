@@ -13,7 +13,12 @@ Scope: Full account access
 Expiry: None (permanent)
 Type: CLI Token (for command-line deployments)
 Status: ✅ VERIFIED - Works with vercel CLI
+Limit: Free tier has 100 deployments/day limit
 ```
+
+**IMPORTANT:** Free tier has deployment limit (100/day). If you hit the limit:
+- Deploy via Vercel Dashboard (different quota)
+- Wait 4 hours for CLI quota to reset
 
 **Usage:**
 ```bash

@@ -83,6 +83,7 @@ Expiry: None (permanent)
 Type: CLI Token (for command-line deployments)
 Status: ✅ VERIFIED - Works with vercel CLI
 User: frankiemolt
+Limit: Free tier has 100 deployments/day quota
 ```
 
 **Verification:**
@@ -91,7 +92,14 @@ vercel whoami --token=QyhX0ndRnOOmiv4uyc3JfCrr
 # Output: frankiemolt
 ```
 
-**Note:** Previous token (SBEIlqy5XcZtRZ1kbnJtAlC6) was invalid CLI format. New token verified working on 2026-02-06 23:41 UTC.
+**Deployment Note:**
+- CLI deployments limited to 100/day on free tier
+- If quota exhausted, deploy via Vercel Dashboard (different quota)
+- Error message: "api-deployments-free-per-day" means wait 4 hours or use dashboard
+
+**History:**
+- 2026-02-06 23:41 UTC - Token verified and working
+- Previous token (SBEIlqy5XcZtRZ1kbnJtAlC6) was invalid CLI format
 
 ### 2026-02-06: MCP Server Status
 - **GitHub MCP:** ✅ Working via STDIO

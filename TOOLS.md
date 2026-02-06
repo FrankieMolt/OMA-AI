@@ -78,6 +78,7 @@ mcporter config add my-server https://mcp.example.com
 - **User:** frankiemolt
 - **CLI Usage:** `vercel --token=QyhX0ndRnOOmiv4uyc3JfCrr --prod --yes --force`
 - **Verification:** `vercel whoami --token=QyhX0ndRnOOmiv4uyc3JfCrr`
+- **Limit:** Free tier has 100 deployments/day - Deploy via dashboard if quota exhausted
 
 ### Supabase
 - **Project ID:** `oooijcrqpuqymgzlidrw`
