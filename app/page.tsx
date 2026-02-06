@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useMemo, useCallback } from 'react';
+import React, { useState, useMemo, useCallback, Suspense } from 'react';
 import { motion } from 'framer-motion';
 import {
   Code,
@@ -199,303 +199,262 @@ export default function MarketplaceHome() {
       provider: 'SendGrid'
     },
     {
-      id: 'payment-processing',
-      name: 'x402 Payment Gateway',
-      description: 'Accept crypto payments via x402 protocol (Base network)',
-      category: 'Finance',
+      id: 'weather-api',
+      name: 'Weather Data',
+      description: 'Real-time weather forecasts and historical data worldwide',
+      category: 'Data',
+      rating: 4.6,
+      price: 0.0005,
+      priceType: 'per_call',
+      calls: 1500000,
+      endpoint: '/api/v1/weather',
+      tags: ['weather', 'data', 'forecasts'],
+      featured: false,
+      provider: 'OpenWeather'
+    },
+    {
+      id: 'geocoding',
+      name: 'Geocoding API',
+      description: 'Convert addresses to coordinates and vice versa',
+      category: 'Data',
+      rating: 4.8,
+      price: 0.001,
+      priceType: 'per_call',
+      calls: 800000,
+      endpoint: '/api/v1/geocode',
+      tags: ['location', 'maps', 'coordinates'],
+      featured: false,
+      provider: 'MapBox'
+    },
+    {
+      id: 'storage',
+      name: 'Cloud Storage',
+      description: 'Scalable object storage with built-in CDN',
+      category: 'Infrastructure',
       rating: 4.9,
       price: 0.002,
       priceType: 'per_call',
-      calls: 1800000,
-      endpoint: '/api/v1/payments/x402',
-      tags: ['crypto', 'payments', 'base'],
+      calls: 5000000,
+      endpoint: '/api/v1/storage',
+      tags: ['storage', 'cdn', 'infrastructure'],
       featured: true,
       provider: 'OMA Network'
     },
-    // More MCP Servers
     {
-      id: 'sqlite-mcp',
-      name: 'SQLite MCP',
-      description: 'Lightweight database access for agents - perfect for local development and testing',
-      category: 'MCP Servers',
-      rating: 4.5,
-      price: 0,
-      priceType: 'free',
-      calls: 75000,
-      endpoint: 'https://github.com/model-context-protocol/servers/tree/main/src/sqlite',
-      tags: ['mcp', 'database', 'sqlite'],
-      featured: false,
-      provider: 'Community'
-    },
-    {
-      id: 'puppeteer-mcp',
-      name: 'Puppeteer MCP',
-      description: 'Headless browser automation - scrape websites, generate PDFs, take screenshots',
-      category: 'MCP Servers',
-      rating: 4.8,
-      price: 0.005,
-      priceType: 'per_call',
-      calls: 150000,
-      endpoint: 'https://github.com/model-context-protocol/servers/tree/main/src/puppeteer',
-      tags: ['mcp', 'browser', 'scraping'],
-      featured: false,
-      provider: 'Community'
-    },
-    // More APIs
-    {
-      id: 'weather-api',
-      name: 'Weather API',
-      description: 'Real-time weather data, forecasts, and historical weather information',
-      category: 'Data',
-      rating: 4.6,
-      price: 0,
-      priceType: 'free',
-      calls: 1000000,
-      endpoint: '/api/v1/weather',
-      tags: ['weather', 'data', 'forecast'],
-      featured: false,
-      provider: 'OpenWeatherMap'
-    },
-    {
-      id: 'stock-price-api',
-      name: 'Stock Price API',
-      description: 'Real-time stock prices, historical data, market data, and financial analytics',
-      category: 'Finance',
-      rating: 4.7,
-      price: 0.002,
-      priceType: 'per_call',
-      calls: 500000,
-      endpoint: '/api/v1/stocks',
-      tags: ['finance', 'stocks', 'trading'],
-      featured: false,
-      provider: 'Alpha Vantage'
-    },
-    {
-      id: 'sms-api',
-      name: 'SMS Messaging API',
-      description: 'Send SMS messages globally with delivery receipts and scheduling',
+      id: 'notification',
+      name: 'Push Notifications',
+      description: 'Send push notifications to mobile and web apps',
       category: 'Communication',
       rating: 4.5,
       price: 0.001,
       priceType: 'per_call',
-      calls: 2000000,
-      endpoint: '/api/v1/sms',
-      tags: ['sms', 'communication', 'twilio'],
-      featured: false,
-      provider: 'Twilio'
-    },
-    {
-      id: 'translation-api',
-      name: 'Translation API',
-      description: 'Translate text between 100+ languages with high accuracy and context awareness',
-      category: 'AI & ML',
-      rating: 4.8,
-      price: 0.003,
-      priceType: 'per_call',
-      calls: 800000,
-      endpoint: '/api/v1/translate',
-      tags: ['translation', 'ai', 'nlp'],
-      featured: false,
-      provider: 'Google Translate'
-    },
-    {
-      id: 'pdf-api',
-      name: 'PDF Generation API',
-      description: 'Generate, manipulate, and convert PDF documents programmatically',
-      category: 'Data',
-      rating: 4.4,
-      price: 0.002,
-      priceType: 'per_call',
-      calls: 600000,
-      endpoint: '/api/v1/pdf',
-      tags: ['pdf', 'document', 'generation'],
+      calls: 1200000,
+      endpoint: '/api/v1/notifications',
+      tags: ['notifications', 'push', 'mobile'],
       featured: false,
       provider: 'OMA Network'
     },
     {
-      id: 'qdrant-vector-db',
-      name: 'Qdrant Vector DB',
-      description: 'Vector similarity search for RAG, embeddings, and semantic search applications',
-      category: 'Data',
+      id: 'analytics',
+      name: 'Analytics Platform',
+      description: 'Track user behavior, conversions, and custom events',
+      category: 'Infrastructure',
       rating: 4.7,
-      price: 0.001,
+      price: 0.003,
       priceType: 'per_call',
-      calls: 400000,
-      endpoint: '/api/v1/vector-search',
-      tags: ['vector', 'database', 'embeddings'],
-      featured: true,
-      provider: 'Qdrant'
+      calls: 900000,
+      endpoint: '/api/v1/analytics',
+      tags: ['analytics', 'tracking', 'metrics'],
+      featured: false,
+      provider: 'OMA Network'
     },
     {
-      id: 'pinecone-vector-db',
-      name: 'Pinecone Vector Database',
-      description: 'Managed vector database optimized for AI applications and similarity search',
-      category: 'Data',
+      id: 'payment-gateway',
+      name: 'Payment Gateway',
+      description: 'Accept payments via credit cards, crypto, and more',
+      category: 'Infrastructure',
+      rating: 4.8,
+      price: 0.01,
+      priceType: 'per_call',
+      calls: 500000,
+      endpoint: '/api/v1/payments',
+      tags: ['payments', 'crypto', 'infrastructure'],
+      featured: true,
+      provider: 'OMA Network'
+    },
+    {
+      id: 'auth-service',
+      name: 'Authentication Service',
+      description: 'User authentication with social login and 2FA',
+      category: 'Infrastructure',
       rating: 4.9,
       price: 0.002,
       priceType: 'per_call',
-      calls: 350000,
-      endpoint: '/api/v1/vector-search',
-      tags: ['vector', 'database', 'embeddings', 'rag'],
+      calls: 3000000,
+      endpoint: '/api/v1/auth',
+      tags: ['auth', 'security', 'infrastructure'],
       featured: true,
-      provider: 'Pinecone'
+      provider: 'OMA Network'
     },
     {
-      id: 'nltk-mcp',
-      name: 'NLTK MCP',
-      description: 'Natural language processing toolkit for text analysis, tokenization, and NLP tasks',
-      category: 'MCP Servers',
-      rating: 4.5,
-      price: 0,
-      priceType: 'free',
-      calls: 50000,
-      endpoint: 'https://github.com/model-context-protocol/servers/tree/main/src/nltk',
-      tags: ['mcp', 'nlp', 'text', 'ai'],
-      featured: false,
-      provider: 'Community'
-    },
-    {
-      id: 'slack-mcp',
-      name: 'Slack MCP',
-      description: 'Integrate with Slack - send messages, read channels, manage workspaces programmatically',
-      category: 'MCP Servers',
-      rating: 4.6,
-      price: 0.001,
-      priceType: 'per_call',
-      calls: 250000,
-      endpoint: 'https://github.com/model-context-protocol/servers/tree/main/src/slack',
-      tags: ['mcp', 'slack', 'communication', 'integration'],
-      featured: false,
-      provider: 'Community'
-    },
-    {
-      id: 'voice-to-text-api',
-      name: 'Voice to Text API',
-      description: 'Convert speech to text with high accuracy, multiple languages, and speaker recognition',
+      id: 'ai-chat',
+      name: 'AI Chat Interface',
+      description: 'Conversational AI with context awareness',
       category: 'AI & ML',
+      rating: 4.6,
+      price: 0.008,
+      priceType: 'per_call',
+      calls: 700000,
+      endpoint: '/api/v1/chat',
+      tags: ['chat', 'ai', 'conversational'],
+      featured: false,
+      provider: 'OMA Network'
+    },
+    {
+      id: 'code-execution',
+      name: 'Code Execution',
+      description: 'Execute code in multiple languages safely',
+      category: 'Infrastructure',
+      rating: 4.7,
+      price: 0.005,
+      priceType: 'per_call',
+      calls: 600000,
+      endpoint: '/api/v1/execute',
+      tags: ['code', 'execution', 'infrastructure'],
+      featured: false,
+      provider: 'OMA Network'
+    },
+    {
+      id: 'api-monitoring',
+      name: 'API Monitoring',
+      description: 'Monitor API uptime, performance, and errors',
+      category: 'Infrastructure',
+      rating: 4.8,
+      price: 0.004,
+      priceType: 'per_call',
+      calls: 400000,
+      endpoint: '/api/v1/monitor',
+      tags: ['monitoring', 'infrastructure', 'uptime'],
+      featured: false,
+      provider: 'OMA Network'
+    },
+    {
+      id: 'data-encryption',
+      name: 'Data Encryption',
+      description: 'Encrypt and decrypt data with enterprise-grade security',
+      category: 'Security',
+      rating: 4.9,
+      price: 0.003,
+      priceType: 'per_call',
+      calls: 800000,
+      endpoint: '/api/v1/encrypt',
+      tags: ['encryption', 'security', 'data'],
+      featured: true,
+      provider: 'OMA Network'
+    },
+    {
+      id: 'firewall',
+      name: 'API Firewall',
+      description: 'Protect your APIs from attacks and abuse',
+      category: 'Security',
       rating: 4.7,
       price: 0.004,
       priceType: 'per_call',
       calls: 300000,
-      endpoint: '/api/v1/stt',
-      tags: ['voice', 'speech-to-text', 'transcription'],
+      endpoint: '/api/v1/firewall',
+      tags: ['firewall', 'security', 'protection'],
       featured: false,
-      provider: 'OpenAI Whisper'
-    },
-    {
-      id: 'text-to-speech-api',
-      name: 'Text to Speech API',
-      description: 'Convert text to natural-sounding speech with multiple voices and languages',
-      category: 'AI & ML',
-      rating: 4.6,
-      price: 0.003,
-      priceType: 'per_call',
-      calls: 400000,
-      endpoint: '/api/v1/tts',
-      tags: ['voice', 'text-to-speech', 'audio'],
-      featured: false,
-      provider: 'ElevenLabs'
-    },
-    {
-      id: 'ip-geolocation-api',
-      name: 'IP Geolocation API',
-      description: 'Get location data from IP addresses - country, city, timezone, ISP information',
-      category: 'Data',
-      rating: 4.4,
-      price: 0,
-      priceType: 'free',
-      calls: 800000,
-      endpoint: '/api/v1/ip-geo',
-      tags: ['ip', 'geolocation', 'data'],
-      featured: false,
-      provider: 'IP-API'
-    },
-    {
-      id: 'github-api',
-      name: 'GitHub REST API',
-      description: 'Access GitHub repositories, issues, PRs, webhooks, and Git operations',
-      category: 'Data',
-      rating: 4.8,
-      price: 0,
-      priceType: 'free',
-      calls: 900000,
-      endpoint: 'https://api.github.com',
-      tags: ['github', 'git', 'code'],
-      featured: true,
-      provider: 'GitHub'
-    },
-    {
-      id: 'discord-bot-api',
-      name: 'Discord Bot API',
-      description: 'Build Discord bots - send messages, manage servers, users, and channels',
-      category: 'Communication',
-      rating: 4.7,
-      price: 0,
-      priceType: 'free',
-      calls: 700000,
-      endpoint: 'https://discord.com/api',
-      tags: ['discord', 'bot', 'chat'],
-      featured: true,
-      provider: 'Discord'
-    },
-    {
-      id: 'stripe-api',
-      name: 'Stripe Payment API',
-      description: 'Accept payments, manage subscriptions, invoicing, and financial operations',
-      category: 'Finance',
-      rating: 4.9,
-      price: 0.003,
-      priceType: 'per_call',
-      calls: 600000,
-      endpoint: 'https://api.stripe.com',
-      tags: ['payments', 'finance', 'subscriptions'],
-      featured: true,
-      provider: 'Stripe'
-    },
-    {
-      id: 'aws-s3-api',
-      name: 'AWS S3 Storage API',
-      description: 'Store and retrieve files, images, and data in Amazon S3 cloud storage',
-      category: 'Data',
-      rating: 4.8,
-      price: 0.001,
-      priceType: 'per_call',
-      calls: 550000,
-      endpoint: 'https://s3.amazonaws.com',
-      tags: ['storage', 'aws', 'cloud'],
-      featured: true,
-      provider: 'AWS'
+      provider: 'OMA Network'
     }
   ];
 
-  const categories = ['all', 'MCP Servers', 'AI & ML', 'Blockchain', 'Data', 'Communication', 'Finance'];
+  // Categories
+  const categories = useMemo(() => ['all', ...Array.from(new Set(apiServices.map(service => service.category)))], [apiServices]);
 
-  // ⚡ OPTIMIZATION: Memoize filtered services to prevent unnecessary recalculations
-  // Only recompute when selectedCategory or searchQuery changes
-  // Reduces CPU usage by ~50% during search/filter operations
-  const filteredServices = useMemo(() => 
-    apiServices.filter(service => {
+  // Filter services
+  const filteredServices = useMemo(() => {
+    return apiServices.filter(service => {
       const matchesCategory = selectedCategory === 'all' || service.category === selectedCategory;
-      const matchesSearch = searchQuery === '' ||
+      const matchesSearch = searchQuery === '' || 
         service.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         service.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
         service.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
       return matchesCategory && matchesSearch;
-    }),
-    [selectedCategory, searchQuery]
-  );
+    });
+  }, [selectedCategory, searchQuery, apiServices]);
 
-  const featuredServices = apiServices.filter(s => s.featured);
+  // Featured services
+  const featuredServices = useMemo(() => apiServices.filter(service => service.featured).slice(0, 6), [apiServices]);
 
-  // ⚡ OPTIMIZATION: Memoize event handlers to prevent child component re-renders
-  // This prevents ApiCard components from re-rendering when parent state changes
+  const handleSearchChange = useCallback((value: string) => {
+    setSearchQuery(value);
+  }, []);
+
   const handleCategoryChange = useCallback((category: string) => {
     setSelectedCategory(category);
   }, []);
 
-  const handleSearchChange = useCallback((query: string) => {
-    setSearchQuery(query);
-  }, []);
+  // Stat Card Component
+  const StatCard = ({ icon: Icon, value, label }: { icon: any; value: string; label: string }) => (
+    <div className="text-center p-6">
+      <Icon className="w-8 h-8 mx-auto mb-2 text-purple-400" />
+      <div className="text-3xl font-bold mb-1">{value}</div>
+      <div className="text-sm text-gray-400">{label}</div>
+    </div>
+  );
+
+  // API Card Component
+  const ApiCard = ({ service, index }: { service: ApiService; index: number }) => (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: index * 0.05 }}
+      className="glass-card p-6 rounded-xl hover:border-purple-500/50 transition-all"
+    >
+      <div className="flex items-start justify-between mb-4">
+        <div className="flex-1">
+          <h3 className="text-xl font-bold mb-2">{service.name}</h3>
+          <p className="text-sm text-gray-400 mb-3">{service.description}</p>
+          <div className="flex flex-wrap gap-2 mb-3">
+            {service.tags.map(tag => (
+              <span key={tag} className="px-2 py-1 text-xs bg-zinc-800 rounded-md text-zinc-300">
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
+        <div className="text-right ml-4">
+          <div className="text-2xl font-bold mb-1">
+            {service.priceType === 'free' ? 'Free' : `$${service.price.toFixed(3)}`}
+            {service.priceType !== 'free' && service.priceType === 'per_call' && '/call'}
+            {service.priceType === 'monthly' && '/mo'}
+          </div>
+          <div className="flex items-center text-sm text-yellow-400">
+            <Star className="w-4 h-4 fill-current mr-1" />
+            {service.rating}
+          </div>
+          <div className="text-xs text-gray-500 mt-1">
+            {(service.calls / 1000).toFixed(0)}K calls/mo
+          </div>
+        </div>
+      </div>
+      <div className="flex items-center justify-between pt-4 border-t border-zinc-800">
+        <div className="flex items-center gap-2 text-sm text-gray-400">
+          <Shield className="w-4 h-4" />
+          <span>{service.provider}</span>
+        </div>
+        <div className="flex gap-2">
+          <button className="text-purple-400 hover:text-purple-300 text-sm flex items-center gap-1">
+            <BookOpen className="w-4 h-4" />
+            Docs
+          </button>
+          <button className="btn-primary px-4 py-2 rounded-lg text-sm">
+            Try Now
+          </button>
+        </div>
+      </div>
+    </motion.div>
+  );
 
   return (
     <div className="min-h-screen bg-zinc-950 text-zinc-100 flex flex-col">
@@ -545,14 +504,18 @@ export default function MarketplaceHome() {
       {/* Live Stats */}
       <section className="py-8 px-6">
         <div className="max-w-7xl mx-auto">
-          <LiveStats />
+          <Suspense fallback={<div className="text-center py-8">Loading stats...</div>}>
+            <LiveStats />
+          </Suspense>
         </div>
       </section>
 
       {/* Trending APIs */}
       <section className="py-8 px-6 bg-zinc-900/30">
         <div className="max-w-7xl mx-auto">
-          <TrendingAPIs />
+          <Suspense fallback={<div className="text-center py-8">Loading trending APIs...</div>}>
+            <TrendingAPIs />
+          </Suspense>
         </div>
       </section>
 
@@ -593,12 +556,7 @@ export default function MarketplaceHome() {
                     : 'bg-zinc-900 text-zinc-400 hover:bg-zinc-800'
                 }`}
               >
-                {category === 'MCP Servers' ? (
-                  <span className="flex items-center gap-2">
-                    <Cpu size={14} />
-                    MCP Servers
-                  </span>
-                ) : category}
+                {category}
               </button>
             ))}
           </div>
@@ -606,164 +564,50 @@ export default function MarketplaceHome() {
       </section>
 
       {/* All APIs */}
-      <section className="py-16 px-6">
+      <section className="py-12 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center justify-between mb-8">
-            <h2 className="text-3xl font-bold">
+            <h2 className="text-2xl font-bold">
               {selectedCategory === 'all' ? 'All APIs & MCPs' : selectedCategory}
+              <span className="text-zinc-500 text-lg font-normal ml-3">
+                ({filteredServices.length} results)
+              </span>
             </h2>
-            <span className="text-zinc-400">
-              {filteredServices.length} service{filteredServices.length !== 1 ? 's' : ''}
-            </span>
+            <div className="flex items-center gap-2 text-sm text-zinc-500">
+              <span>Sort by:</span>
+              <select className="bg-zinc-900 border border-zinc-800 rounded-lg px-3 py-2 text-white">
+                <option>Popularity</option>
+                <option>Rating</option>
+                <option>Price</option>
+                <option>Newest</option>
+              </select>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredServices.map((service, index) => (
-              <ApiCard key={service.id} service={service} index={index} />
-            ))}
-          </div>
-
-          {filteredServices.length === 0 && (
-            <div className="text-center py-20">
-              <Code className="text-zinc-700 mx-auto mb-4" size={48} />
-              <p className="text-zinc-500 text-lg">No APIs found matching your criteria</p>
+          {filteredServices.length === 0 ? (
+            <div className="text-center py-16">
+              <Search className="w-16 h-16 mx-auto mb-4 text-zinc-600" />
+              <h3 className="text-xl font-bold mb-2">No APIs found</h3>
+              <p className="text-zinc-500">Try adjusting your search or category filter</p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {filteredServices.map((service, index) => (
+                <ApiCard key={service.id} service={service} index={index} />
+              ))}
             </div>
           )}
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 px-6 bg-gradient-to-br from-purple-900/20 to-blue-900/20">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl font-bold mb-6">
-            Add Your API or MCP to OMA-AI
-          </h2>
-          <p className="text-xl text-zinc-400 mb-8">
-            List your API or MCP server in our marketplace. Reach thousands of developers building autonomous agents.
-          </p>
-          <div className="flex items-center justify-center gap-4">
-            <button className="btn-primary px-8 py-4 rounded-lg text-lg font-medium">
-              Submit API
-            </button>
-            <a href="/docs/embed-scripts" className="btn-secondary px-8 py-4 rounded-lg text-lg font-medium flex items-center gap-2">
-              <BookOpen size={18} />
-              View Documentation
-            </a>
-          </div>
+      {/* Newsletter Section */}
+      <section className="py-16 px-6 bg-zinc-900/50">
+        <div className="max-w-7xl mx-auto">
+          <NewsletterSignup />
         </div>
       </section>
 
-      {/* Newsletter Section */}
-      <NewsletterSignup />
-
-      {/* Footer */}
       <Footer />
     </div>
-  );
-}
-
-// --- Sub-components ---
-
-function StatCard({ icon: Icon, value, label }: { icon: React.ElementType, value: string, label: string }) {
-  return (
-    <div className="text-center">
-      <Icon className="text-purple-500 mx-auto mb-2" size={24} />
-      <div className="text-3xl font-bold text-white mb-1">{value}</div>
-      <div className="text-zinc-500 text-sm">{label}</div>
-    </div>
-  );
-}
-
-function ApiCard({ service, index }: { service: ApiService, index: number }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4, delay: index * 0.1 }}
-      className="glass-card p-6 rounded-xl hover:border-purple-500/50 transition-all group"
-    >
-      <div className="flex items-start justify-between mb-4">
-        <div>
-          <div className="flex items-center gap-2 mb-2">
-            <h3 className="text-lg font-semibold">{service.name}</h3>
-            {service.featured && (
-              <span className="px-2 py-0.5 bg-yellow-500/20 text-yellow-500 text-xs rounded-full">
-                Featured
-              </span>
-            )}
-          </div>
-          <p className="text-sm text-zinc-400 line-clamp-2">
-            {service.description}
-          </p>
-        </div>
-      </div>
-
-      <div className="flex items-center gap-1 mb-4">
-        {[...Array(5)].map((_, i) => (
-          <Star
-            key={i}
-            size={14}
-            className={i < Math.floor(service.rating) ? 'text-yellow-500 fill-yellow-500' : 'text-zinc-700'}
-          />
-        ))}
-        <span className="text-sm text-zinc-400 ml-2">{service.rating}</span>
-      </div>
-
-      <div className="flex flex-wrap gap-2 mb-4">
-        {service.tags.map((tag) => (
-          <span key={tag} className="px-2 py-1 bg-zinc-800 text-zinc-300 text-xs rounded-md">
-            {tag}
-          </span>
-        ))}
-      </div>
-
-      <div className="flex items-center justify-between pt-4 border-t border-zinc-800">
-        <div>
-          <div className="flex items-baseline gap-1">
-            {service.priceType === 'free' ? (
-              <span className="text-lg font-bold text-green-500">FREE</span>
-            ) : (
-              <>
-                <DollarSign size={14} className="text-zinc-500" />
-                <span className="text-lg font-bold text-white">
-                  {service.price.toFixed(4)}
-                </span>
-                <span className="text-sm text-zinc-500">
-                  /{service.priceType === 'per_call' ? 'call' : 'mo'}
-                </span>
-              </>
-            )}
-          </div>
-          <div className="text-xs text-zinc-500">
-            {service.calls.toLocaleString()} calls/mo
-          </div>
-        </div>
-
-        <div className="flex gap-2">
-          <button aria-label={`Try ${service.name} API`} className="p-2 rounded-lg bg-zinc-800 hover:bg-zinc-700 transition-colors group-hover:text-purple-400">
-            <Play size={16} />
-          </button>
-          <a
-            href={service.endpoint}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={`Open ${service.name} API documentation`}
-            className="p-2 rounded-lg bg-zinc-800 hover:bg-zinc-700 transition-colors group-hover:text-purple-400"
-          >
-            <ExternalLink size={16} />
-          </a>
-        </div>
-      </div>
-
-      <div className="mt-3 pt-3 border-t border-zinc-800">
-        <div className="flex items-center gap-2 text-xs text-zinc-500">
-          <Shield size={12} />
-          <span>Verified Provider</span>
-        </div>
-        <div className="text-xs text-zinc-600 mt-1">
-          by {service.provider}
-        </div>
-      </div>
-    </motion.div>
   );
 }
