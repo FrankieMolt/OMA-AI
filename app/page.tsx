@@ -507,7 +507,7 @@ export default function MarketplaceHome() {
               <BookOpen size={16} />
               How It Works
             </a>
-            <a href="/bounties" className="text-zinc-400 hover:text-white transition-colors">
+            <a href="/tasks" className="text-zinc-400 hover:text-white transition-colors">
               Bounties
             </a>
             <a href="/docs" className="text-zinc-400 hover:text-white transition-colors flex items-center gap-2">

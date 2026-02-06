@@ -50,7 +50,7 @@ export default function BlogList() {
           </a>
           <div className="flex items-center gap-6">
             <a href="/dashboard" className="text-zinc-400 hover:text-white transition-colors">Marketplace</a>
-            <a href="/bounties" className="text-zinc-400 hover:text-white transition-colors">Bounties</a>
+            <a href="/tasks" className="text-zinc-400 hover:text-white transition-colors">Bounties</a>
             <div className="relative">
               <Search size={16} className="text-zinc-500 absolute left-3 top-2.5" />
               <input

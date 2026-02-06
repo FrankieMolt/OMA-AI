@@ -355,7 +355,7 @@ await agent.createWebhook({
         id: 'overview',
         title: 'Bounties Overview',
         content: 'OMA-AI offers bounties for developers who build and contribute to the ecosystem. Bounties include API integrations, MCP server development, bug fixes, and feature implementations.',
-        externalLink: '/bounties',
+        externalLink: '/tasks',
         externalLinkText: 'View active bounties',
       },
       {
@@ -494,7 +494,7 @@ export default function DocumentationPage() {
             <a href="/" className="text-zinc-400 hover:text-white transition-colors">
               Home
             </a>
-            <a href="/bounties" className="text-zinc-400 hover:text-white transition-colors">
+            <a href="/tasks" className="text-zinc-400 hover:text-white transition-colors">
               Bounties
             </a>
             <a href="/docs" className="text-white font-medium flex items-center gap-2">
@@ -526,7 +526,7 @@ export default function DocumentationPage() {
               <a href="/" className="text-zinc-400 hover:text-white transition-colors">
                 Home
               </a>
-              <a href="/bounties" className="text-zinc-400 hover:text-white transition-colors">
+              <a href="/tasks" className="text-zinc-400 hover:text-white transition-colors">
                 Bounties
               </a>
               <a href="/docs" className="text-white font-medium">
@@ -755,7 +755,7 @@ export default function DocumentationPage() {
               <h3 className="text-lg font-bold mb-4 gradient-text">Resources</h3>
               <ul className="space-y-2">
                 <li>
-                  <a href="/bounties" className="text-zinc-400 hover:text-white transition-colors">
+                  <a href="/tasks" className="text-zinc-400 hover:text-white transition-colors">
                     Bounties
                   </a>
                 </li>

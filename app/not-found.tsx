@@ -69,7 +69,7 @@ export default function NotFound() {
             <Link href="/wallet" className="text-gray-400 hover:text-white transition-colors">
               Wallet
             </Link>
-            <Link href="/bounties" className="text-gray-400 hover:text-white transition-colors">
+            <Link href="/tasks" className="text-gray-400 hover:text-white transition-colors">
               Bounties
             </Link>
             <Link href="/terminal" className="text-gray-400 hover:text-white transition-colors">
