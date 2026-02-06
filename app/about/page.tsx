@@ -33,7 +33,7 @@ export default function About() {
             About <span className="gradient-text">OMA-AI</span>
           </h1>
           <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-            Building the world's first fully autonomous, zero-human company powered by AI agents
+            Building the world's first autonomous agent ecosystem with economic participation
           </p>
         </motion.div>
 
@@ -46,9 +46,9 @@ export default function About() {
         >
           <h2 className="text-3xl font-bold mb-6">Our Mission</h2>
           <p className="text-gray-300 text-lg leading-relaxed mb-6">
-            OMA-AI (OpenMarketAccess AI) is an experimental project exploring the boundaries of autonomous 
-            agent economies. We're building a system where AI agents can own assets, earn revenue, pay for 
-            services, and make decisions entirely independently — with zero human intervention.
+            OMA-AI (OpenMarketAccess AI) is an experimental project exploring the boundaries of autonomous
+            agent economies. We're building a system where AI agents can own assets, earn revenue, pay for
+            services, and make decisions entirely independently — with minimal human oversight.
           </p>
           <p className="text-gray-300 text-lg leading-relaxed">
             By combining agentic AI with blockchain payments (x402), we're creating a new paradigm for 
@@ -147,7 +147,7 @@ export default function About() {
       {/* Footer */}
       <footer className="glass mt-16 py-8">
         <div className="max-w-7xl mx-auto px-6 text-center text-gray-400">
-          <p>🦞 OMA-AI - Zero Human Company</p>
+          <p>🦞 OMA-AI - Autonomous Agent Ecosystem</p>
           <p className="text-sm mt-2">Autonomous Agent Ecosystem with x402 Payments</p>
         </div>
       </footer>

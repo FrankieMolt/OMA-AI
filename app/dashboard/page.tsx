@@ -1,312 +1,441 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  LayoutDashboard, 
-  Server, 
-  Terminal as TerminalIcon, 
-  Wallet, 
-  Globe, 
-  Shield, 
-  Activity, 
-  Cpu, 
-  Plus,
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+import {
   Search,
-  Settings,
-  LogOut,
-  ChevronRight,
-  Code
+  Code,
+  Zap,
+  Shield,
+  TrendingUp,
+  BookOpen,
+  DollarSign,
+  Star,
+  ExternalLink,
+  Play,
+  Filter,
+  ArrowRight
 } from 'lucide-react';
 
-// Components
-import EnhancedAgentCard from '@/components/EnhancedAgentCard';
-import EnhancedWallet from '@/components/EnhancedWallet';
-import EnhancedMarketplace from '@/components/EnhancedMarketplace';
-import NotificationCenter from '@/components/NotificationCenter';
-
-// --- API Configuration ---
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://oooijcrqpuqymgzlidrw.supabase.co/functions/v1';
-
-// --- Types ---
-interface SystemStatus {
-  activeNodes: number;
-  cpuLoad: number;
-  memoryUsage: number;
-  networkThroughput: number;
+// --- API Marketplace Types ---
+interface ApiService {
+  id: string;
+  name: string;
+  description: string;
+  category: string;
+  rating: number;
+  price: number;
+  priceType: 'per_call' | 'monthly';
+  calls: number;
+  endpoint: string;
+  tags: string[];
+  featured: boolean;
+  provider: string;
 }
 
 export default function Dashboard() {
-  const [activeView, setActiveView] = useState('overview');
-  const [systemStatus, setSystemStatus] = useState<SystemStatus>({
-    activeNodes: 12,
-    cpuLoad: 45,
-    memoryUsage: 62,
-    networkThroughput: 128
-  });
+  const [selectedCategory, setSelectedCategory] = useState('all');
+  const [searchQuery, setSearchQuery] = useState('');
 
-  // Mock data for the "Real" feel until Supabase is fully populated
-  const [agents, setAgents] = useState([
+  // Mock API Services
+  const apiServices: ApiService[] = [
     {
-      id: 'inst-8f2a9c',
-      name: 'Primary-Orchestrator',
-      status: 'alive' as const,
-      balance: 142.50,
-      dailyRent: 2.50,
-      dailyRevenue: 15.00,
-      capabilities: ['orchestration', 'resource-management'],
-      earningsHistory: [12, 14, 13, 15, 18, 15, 20],
-      recentActivity: [
-        { time: '10:42:01', action: 'Resource check completed' },
-        { time: '10:41:30', action: 'Deployed child instance' },
-      ]
+      id: 'gpt-4-turbo',
+      name: 'GPT-4 Turbo',
+      description: 'Advanced language model for complex reasoning and code generation',
+      category: 'AI & ML',
+      rating: 4.9,
+      price: 0.01,
+      priceType: 'per_call',
+      calls: 1250000,
+      endpoint: '/api/v1/chat/completions',
+      tags: ['llm', 'chat', 'code'],
+      featured: true,
+      provider: 'OpenAI'
     },
     {
-      id: 'inst-3b7d1e',
-      name: 'Market-Analyzer-01',
-      status: 'alive' as const,
-      balance: 89.20,
-      dailyRent: 1.20,
-      dailyRevenue: 8.50,
-      capabilities: ['market-analysis', 'data-processing'],
-      earningsHistory: [5, 6, 8, 7, 9, 8, 10],
-      recentActivity: [
-        { time: '10:40:15', action: 'Processed market stream' },
-      ]
-    }
-  ]);
-
-  const [notifications, setNotifications] = useState([
+      id: 'claude-3-opus',
+      name: 'Claude 3 Opus',
+      description: 'Anthropic\'s most capable AI assistant for analysis and writing',
+      category: 'AI & ML',
+      rating: 4.8,
+      price: 0.015,
+      priceType: 'per_call',
+      calls: 850000,
+      endpoint: '/api/v1/messages',
+      tags: ['llm', 'analysis', 'writing'],
+      featured: true,
+      provider: 'Anthropic'
+    },
     {
-      id: '1',
-      type: 'info' as const,
-      title: 'System Update',
-      message: 'Infrastructure upgrade completed successfully.',
-      timestamp: new Date(),
-      read: false
+      id: 'ethereum-mainnet',
+      name: 'Ethereum Mainnet RPC',
+      description: 'Reliable blockchain node access for dApp development',
+      category: 'Blockchain',
+      rating: 4.7,
+      price: 0.001,
+      priceType: 'per_call',
+      calls: 5000000,
+      endpoint: '/eth/v1/mainnet',
+      tags: ['ethereum', 'web3', 'rpc'],
+      featured: false,
+      provider: 'QuickNode'
+    },
+    {
+      id: 'solana-rpc',
+      name: 'Solana RPC',
+      description: 'High-performance Solana blockchain node with sub-second latency',
+      category: 'Blockchain',
+      rating: 4.6,
+      price: 0.0005,
+      priceType: 'per_call',
+      calls: 3000000,
+      endpoint: '/sol/v1/mainnet-beta',
+      tags: ['solana', 'web3', 'rpc'],
+      featured: false,
+      provider: 'Alchemy'
+    },
+    {
+      id: 'data-scraping',
+      name: 'Web Scraper Pro',
+      description: 'Extract data from any website with anti-bot protection bypass',
+      category: 'Data',
+      rating: 4.5,
+      price: 0.005,
+      priceType: 'per_call',
+      calls: 2500000,
+      endpoint: '/api/v1/scrape',
+      tags: ['scraping', 'data', 'extraction'],
+      featured: false,
+      provider: 'OMA Network'
+    },
+    {
+      id: 'image-gen',
+      name: 'Image Generator',
+      description: 'Create stunning images from text descriptions in seconds',
+      category: 'AI & ML',
+      rating: 4.4,
+      price: 0.02,
+      priceType: 'per_call',
+      calls: 600000,
+      endpoint: '/api/v1/images/generate',
+      tags: ['image', 'generation', 'creative'],
+      featured: true,
+      provider: 'OMA Network'
+    },
+    {
+      id: 'email-sender',
+      name: 'Transactional Email',
+      description: 'Send reliable emails at scale with delivery tracking',
+      category: 'Communication',
+      rating: 4.7,
+      price: 0.001,
+      priceType: 'per_call',
+      calls: 4000000,
+      endpoint: '/api/v1/email/send',
+      tags: ['email', 'communication', 'marketing'],
+      featured: false,
+      provider: 'SendGrid'
+    },
+    {
+      id: 'payment-processing',
+      name: 'x402 Payment Gateway',
+      description: 'Accept crypto payments via x402 protocol (Base network)',
+      category: 'Finance',
+      rating: 4.9,
+      price: 0.002,
+      priceType: 'per_call',
+      calls: 1800000,
+      endpoint: '/api/v1/payments/x402',
+      tags: ['crypto', 'payments', 'base'],
+      featured: true,
+      provider: 'OMA Network'
     }
-  ]);
+  ];
+
+  const categories = ['all', 'AI & ML', 'Blockchain', 'Data', 'Communication', 'Finance'];
+
+  const filteredServices = apiServices.filter(service => {
+    const matchesCategory = selectedCategory === 'all' || service.category === selectedCategory;
+    const matchesSearch = searchQuery === '' ||
+      service.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      service.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      service.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
+    return matchesCategory && matchesSearch;
+  });
+
+  const featuredServices = apiServices.filter(s => s.featured);
 
   return (
-    <div className="min-h-screen bg-background text-foreground flex font-sans selection:bg-zinc-800">
-      {/* --- Sidebar Navigation --- */}
-      <aside className="w-64 border-r border-border bg-zinc-950/50 backdrop-blur-xl fixed h-full z-10 flex flex-col">
-        <div className="p-6 border-b border-border">
+    <div className="min-h-screen bg-zinc-950 text-zinc-100">
+      {/* Navigation */}
+      <nav className="glass sticky top-0 z-50 px-6 py-4">
+        <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-white text-black rounded-md flex items-center justify-center font-bold text-sm">
-              OM
-            </div>
-            <span className="font-semibold tracking-tight">OMA Infrastructure</span>
+            <a href="/" className="text-2xl font-bold gradient-text cursor-pointer">
+              OMA-AI
+            </a>
+            <span className="text-zinc-500">/</span>
+            <span className="text-lg text-zinc-300">API Marketplace</span>
+          </div>
+
+          <div className="flex items-center gap-6">
+            <a href="/docs" className="text-zinc-400 hover:text-white transition-colors flex items-center gap-2">
+              <BookOpen size={16} />
+              Docs
+            </a>
+            <a href="/about" className="text-zinc-400 hover:text-white transition-colors">
+              About
+            </a>
+            <button className="btn-primary px-4 py-2 rounded-lg text-sm">
+              Get API Key
+            </button>
           </div>
         </div>
+      </nav>
 
-        <nav className="flex-1 p-4 space-y-1">
-          <NavItem 
-            icon={<LayoutDashboard size={18} />} 
-            label="Overview" 
-            active={activeView === 'overview'} 
-            onClick={() => setActiveView('overview')} 
-          />
-          <NavItem 
-            icon={<Server size={18} />} 
-            label="Instances" 
-            active={activeView === 'instances'} 
-            onClick={() => setActiveView('instances')} 
-          />
-          <NavItem 
-            icon={<Globe size={18} />} 
-            label="Service Registry" 
-            active={activeView === 'registry'} 
-            onClick={() => setActiveView('registry')} 
-          />
-          <NavItem 
-            icon={<Wallet size={18} />} 
-            label="Treasury" 
-            active={activeView === 'treasury'} 
-            onClick={() => setActiveView('treasury')} 
-          />
-          <NavItem 
-            icon={<TerminalIcon size={18} />} 
-            label="Console" 
-            active={activeView === 'console'} 
-            onClick={() => setActiveView('console')} 
-          />
-        </nav>
+      {/* Hero Section */}
+      <section className="py-20 px-6">
+        <div className="max-w-4xl mx-auto text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <h1 className="text-5xl font-bold mb-6">
+              Discover <span className="gradient-text">Powerful APIs</span>
+            </h1>
+            <p className="text-xl text-zinc-400 mb-8">
+              Access the best AI, blockchain, and data APIs. Pay only for what you use with x402 crypto payments.
+            </p>
 
-        <div className="p-4 border-t border-border">
-          <div className="flex items-center gap-3 px-3 py-2 text-sm text-muted-foreground">
-            <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-            System Operational
-          </div>
-        </div>
-      </aside>
-
-      {/* --- Main Content Area --- */}
-      <main className="flex-1 ml-64 bg-background min-h-screen">
-        {/* Top Header */}
-        <header className="h-16 border-b border-border bg-background/80 backdrop-blur-md sticky top-0 z-20 px-8 flex items-center justify-between">
-          <div className="flex items-center gap-4 text-sm text-muted-foreground">
-            <span>Organization / Default</span>
-            <ChevronRight size={14} />
-            <span className="text-foreground font-medium capitalize">{activeView}</span>
-          </div>
-
-          <div className="flex items-center gap-4">
-            <div className="relative">
-              <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
-              <input 
-                type="text" 
-                placeholder="Search resources..." 
-                className="h-9 pl-9 pr-4 rounded-md bg-zinc-900 border border-input text-sm focus:outline-none focus:ring-1 focus:ring-ring w-64"
+            {/* Search Bar */}
+            <div className="relative max-w-2xl mx-auto">
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500" size={20} />
+              <input
+                type="text"
+                placeholder="Search APIs..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full pl-12 pr-4 py-4 rounded-xl bg-zinc-900 border border-zinc-800 text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all"
               />
+              <button className="absolute right-2 top-1/2 -translate-y-1/2 btn-primary px-6 py-2 rounded-lg">
+                Search
+              </button>
             </div>
-            <NotificationCenter 
-              notifications={notifications} 
-              onMarkRead={(id) => {}} 
-              onDismiss={(id) => {}} 
-            />
-            <div className="w-8 h-8 rounded-full bg-zinc-800 border border-border flex items-center justify-center text-xs font-medium">
-              JD
-            </div>
-          </div>
-        </header>
 
-        {/* View Content */}
-        <div className="p-8 max-w-7xl mx-auto">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeView}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.2 }}
-            >
-              {activeView === 'overview' && (
-                <Overview activeNodes={systemStatus.activeNodes} agents={agents} />
-              )}
-              {activeView === 'instances' && (
-                <Instances agents={agents} />
-              )}
-              {activeView === 'registry' && (
-                <EnhancedMarketplace services={[]} categories={['Compute', 'Storage', 'Intelligence']} />
-              )}
-              {activeView === 'treasury' && (
-                <EnhancedWallet 
-                  balances={{ usdc: 1240.50, eth: 1.2, sol: 45.0 }} 
-                  transactions={[]} 
-                />
-              )}
-              {activeView === 'console' && (
-                <div className="h-[600px] bg-black rounded-lg border border-border p-4 font-mono text-sm text-zinc-400">
-                  <div className="mb-2">OMA Infrastructure Console v2.1.0</div>
-                  <div className="text-green-500">root@oma-system:~# _</div>
-                </div>
-              )}
-            </motion.div>
-          </AnimatePresence>
+            {/* Stats */}
+            <div className="grid grid-cols-3 gap-8 mt-12 max-w-2xl mx-auto">
+              <StatCard icon={Code} value="8+" label="APIs" />
+              <StatCard icon={Zap} value="15M+" label="Calls/mo" />
+              <StatCard icon={Star} value="4.7" label="Avg Rating" />
+            </div>
+          </motion.div>
         </div>
-      </main>
+      </section>
+
+      {/* Featured APIs */}
+      <section className="py-16 px-6 bg-zinc-900/50">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex items-center justify-between mb-8">
+            <h2 className="text-3xl font-bold flex items-center gap-3">
+              <Zap className="text-yellow-500" size={28} />
+              Featured APIs
+            </h2>
+            <button className="text-purple-400 hover:text-purple-300 flex items-center gap-2">
+              View All
+              <ArrowRight size={16} />
+            </button>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {featuredServices.map((service, index) => (
+              <ApiCard key={service.id} service={service} index={index} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Category Filter */}
+      <section className="py-8 px-6 border-b border-zinc-800 sticky top-16 z-40 bg-zinc-950">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex items-center gap-4 overflow-x-auto pb-2">
+            <Filter className="text-zinc-500" size={18} />
+            {categories.map((category) => (
+              <button
+                key={category}
+                onClick={() => setSelectedCategory(category)}
+                className={`px-4 py-2 rounded-lg text-sm whitespace-nowrap transition-all ${
+                  selectedCategory === category
+                    ? 'bg-purple-600 text-white'
+                    : 'bg-zinc-900 text-zinc-400 hover:bg-zinc-800'
+                }`}
+              >
+                {category.charAt(0).toUpperCase() + category.slice(1)}
+              </button>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* All APIs */}
+      <section className="py-16 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex items-center justify-between mb-8">
+            <h2 className="text-3xl font-bold">
+              {selectedCategory === 'all' ? 'All APIs' : selectedCategory}
+            </h2>
+            <span className="text-zinc-400">
+              {filteredServices.length} API{filteredServices.length !== 1 ? 's' : ''}
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredServices.map((service, index) => (
+              <ApiCard key={service.id} service={service} index={index} />
+            ))}
+          </div>
+
+          {filteredServices.length === 0 && (
+            <div className="text-center py-20">
+              <Code className="text-zinc-700 mx-auto mb-4" size={48} />
+              <p className="text-zinc-500 text-lg">No APIs found matching your criteria</p>
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 px-6 bg-gradient-to-br from-purple-900/20 to-blue-900/20">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-4xl font-bold mb-6">
+            Build with the Best APIs
+          </h2>
+          <p className="text-xl text-zinc-400 mb-8">
+            Start building your app today. Get your free API key and integrate in minutes.
+          </p>
+          <div className="flex items-center justify-center gap-4">
+            <button className="btn-primary px-8 py-4 rounded-lg text-lg font-medium">
+              Get API Key
+            </button>
+            <a href="/docs" className="btn-secondary px-8 py-4 rounded-lg text-lg font-medium flex items-center gap-2">
+              <BookOpen size={18} />
+              Documentation
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="py-12 px-6 border-t border-zinc-800">
+        <div className="max-w-7xl mx-auto text-center">
+          <p className="text-zinc-500 text-sm">
+            OMA-AI - API Marketplace with x402 Crypto Payments
+          </p>
+          <p className="text-zinc-600 text-xs mt-2">
+            © 2026 OMA-AI. All rights reserved.
+          </p>
+        </div>
+      </footer>
     </div>
   );
 }
 
 // --- Sub-components ---
 
-function NavItem({ icon, label, active, onClick }: { icon: React.ReactNode, label: string, active: boolean, onClick: () => void }) {
+function StatCard({ icon: Icon, value, label }: { icon: React.ElementType, value: string, label: string }) {
   return (
-    <button
-      onClick={onClick}
-      className={`w-full flex items-center gap-3 px-3 py-2 rounded-md text-sm transition-colors ${
-        active 
-          ? 'bg-zinc-900 text-foreground font-medium' 
-          : 'text-muted-foreground hover:text-foreground hover:bg-zinc-900/50'
-      }`}
-    >
-      {icon}
-      {label}
-    </button>
-  );
-}
-
-function Overview({ activeNodes, agents }: { activeNodes: number, agents: any[] }) {
-  return (
-    <div className="space-y-8">
-      <div>
-        <h1 className="text-3xl font-bold tracking-tight mb-2">Overview</h1>
-        <p className="text-muted-foreground">System performance and active instance metrics.</p>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <MetricCard label="Active Instances" value={activeNodes.toString()} trend="+2.4%" />
-        <MetricCard label="Network Load" value="45%" trend="-1.2%" neutral />
-        <MetricCard label="Total Revenue" value="$1,240.50" trend="+12.5%" />
-        <MetricCard label="System Health" value="99.9%" trend="Stable" neutral />
-      </div>
-
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <div className="lg:col-span-2 space-y-6">
-          <div className="flex items-center justify-between">
-            <h2 className="text-xl font-semibold">Active Deployments</h2>
-            <button className="text-sm text-primary hover:underline">View All</button>
-          </div>
-          <div className="space-y-4">
-            {agents.map((agent: any) => (
-              <EnhancedAgentCard 
-                key={agent.id}
-                {...agent}
-                onViewLogs={() => {}}
-                onConfigure={() => {}}
-                onPause={() => {}}
-              />
-            ))}
-          </div>
-        </div>
-
-        <div className="space-y-6">
-          <h2 className="text-xl font-semibold">System Activity</h2>
-          <div className="border border-border rounded-xl bg-card p-6 h-[400px]">
-            <div className="text-sm text-muted-foreground text-center pt-32">
-              Activity visualization stream initialized.
-            </div>
-          </div>
-        </div>
-      </div>
+    <div className="text-center">
+      <Icon className="text-purple-500 mx-auto mb-2" size={24} />
+      <div className="text-3xl font-bold text-white mb-1">{value}</div>
+      <div className="text-zinc-500 text-sm">{label}</div>
     </div>
   );
 }
 
-function Instances({ agents }: { agents: any[] }) {
+function ApiCard({ service, index }: { service: ApiService, index: number }) {
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4, delay: index * 0.1 }}
+      className="glass-card p-6 rounded-xl hover:border-purple-500/50 transition-all group"
+    >
+      <div className="flex items-start justify-between mb-4">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight mb-2">Instances</h1>
-          <p className="text-muted-foreground">Manage your autonomous agent deployments.</p>
+          <div className="flex items-center gap-2 mb-2">
+            <h3 className="text-lg font-semibold">{service.name}</h3>
+            {service.featured && (
+              <span className="px-2 py-0.5 bg-yellow-500/20 text-yellow-500 text-xs rounded-full">
+                Featured
+              </span>
+            )}
+          </div>
+          <p className="text-sm text-zinc-400 line-clamp-2">
+            {service.description}
+          </p>
         </div>
-        <button className="bg-white text-black px-4 py-2 rounded-md text-sm font-medium hover:bg-zinc-200 transition-colors flex items-center gap-2">
-          <Plus size={16} /> Deploy Instance
-        </button>
       </div>
-      <div className="grid grid-cols-1 gap-6">
-        {agents.map((agent: any) => (
-          <EnhancedAgentCard 
-            key={agent.id}
-            {...agent}
+
+      <div className="flex items-center gap-1 mb-4">
+        {[...Array(5)].map((_, i) => (
+          <Star
+            key={i}
+            size={14}
+            className={i < Math.floor(service.rating) ? 'text-yellow-500 fill-yellow-500' : 'text-zinc-700'}
           />
         ))}
+        <span className="text-sm text-zinc-400 ml-2">{service.rating}</span>
       </div>
-    </div>
-  );
-}
 
-function MetricCard({ label, value, trend, neutral }: { label: string, value: string, trend: string, neutral?: boolean }) {
-  return (
-    <div className="bg-card border border-border p-6 rounded-xl">
-      <div className="text-sm text-muted-foreground mb-2">{label}</div>
-      <div className="text-3xl font-bold mb-2">{value}</div>
-      <div className={`text-xs font-medium ${neutral ? 'text-zinc-500' : 'text-green-500'}`}>
-        {trend}
+      <div className="flex flex-wrap gap-2 mb-4">
+        {service.tags.map((tag) => (
+          <span key={tag} className="px-2 py-1 bg-zinc-800 text-zinc-300 text-xs rounded-md">
+            {tag}
+          </span>
+        ))}
       </div>
-    </div>
+
+      <div className="flex items-center justify-between pt-4 border-t border-zinc-800">
+        <div>
+          <div className="flex items-baseline gap-1">
+            <DollarSign size={14} className="text-zinc-500" />
+            <span className="text-lg font-bold text-white">
+              {service.price.toFixed(4)}
+            </span>
+            <span className="text-sm text-zinc-500">
+              /{service.priceType === 'per_call' ? 'call' : 'mo'}
+            </span>
+          </div>
+          <div className="text-xs text-zinc-500">
+            {service.calls.toLocaleString()} calls/mo
+          </div>
+        </div>
+
+        <div className="flex gap-2">
+          <button className="p-2 rounded-lg bg-zinc-800 hover:bg-zinc-700 transition-colors group-hover:text-purple-400">
+            <Play size={16} />
+          </button>
+          <a
+            href={service.endpoint}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-2 rounded-lg bg-zinc-800 hover:bg-zinc-700 transition-colors group-hover:text-purple-400"
+          >
+            <ExternalLink size={16} />
+          </a>
+        </div>
+      </div>
+
+      <div className="mt-3 pt-3 border-t border-zinc-800">
+        <div className="flex items-center gap-2 text-xs text-zinc-500">
+          <Shield size={12} />
+          <span>Verified Provider</span>
+        </div>
+        <div className="text-xs text-zinc-600 mt-1">
+          by {service.provider}
+        </div>
+      </div>
+    </motion.div>
   );
 }

@@ -7,9 +7,9 @@ interface SEOProps {
   url?: string
 }
 
-export default function SEO({ 
-  title = 'OMA-AI | The Zero Human Company',
-  description = 'The first fully autonomous agentic economy. Trade compute, intelligence, and labor via x402 payments.',
+export default function SEO({
+  title = 'OMA-AI | Autonomous Agent Ecosystem',
+  description = 'Trade compute, intelligence, and labor via x402 payments. The premier API marketplace for AI agents and MCPs.',
   image = '/og-image.png',
   url = 'https://oma-ai.com'
 }: SEOProps) {

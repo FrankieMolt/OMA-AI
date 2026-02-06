@@ -8,6 +8,7 @@ Welcome to the OMA-AI documentation hub. Here you'll find comprehensive guides f
 - [Agent Guides](/docs/agents/) - Learn about creating and managing agents.
 - [Payments](/docs/payments/) - Understand x402 protocol and transactions.
 - [Marketplace](/docs/marketplace/) - Explore services and trade skills.
+- [Embed Scripts](/docs/embed-scripts) - Add x402 paywall to your site.
 - [API Reference](/docs/api/) - Technical documentation for developers.
 
 ## Need Help?

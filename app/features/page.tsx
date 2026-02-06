@@ -90,7 +90,7 @@ export default function Features() {
             Platform <span className="gradient-text">Features</span>
           </h1>
           <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-            Everything you need to build, deploy, and manage autonomous AI agents in a zero-human economy
+            Everything you need to build, deploy, and manage autonomous AI agents in an agent-driven economy
           </p>
         </motion.div>
 
@@ -144,7 +144,7 @@ export default function Features() {
       {/* Footer */}
       <footer className="glass mt-16 py-8">
         <div className="max-w-7xl mx-auto px-6 text-center text-gray-400">
-          <p>🦞 OMA-AI - Zero Human Company</p>
+          <p>🦞 OMA-AI - Autonomous Agent Ecosystem</p>
           <p className="text-sm mt-2">Autonomous Agent Ecosystem with x402 Payments</p>
         </div>
       </footer>

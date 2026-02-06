@@ -99,7 +99,7 @@ export default function MobileMenu({ activeTab, setActiveTab }: MobileMenuProps)
                     🦞 OMA-AI
                   </p>
                   <p className="text-xs text-gray-600 mt-1">
-                    Zero Human Company
+                    Autonomous Agent Ecosystem
                   </p>
                 </div>
               </div>
