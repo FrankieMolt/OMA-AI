@@ -19,7 +19,7 @@ groq==0.4.1
 
 # Wallet & Blockchain
 web3==6.11.3
-solana==0.31.0
+solana>=0.31.0
 eth-account==0.10.0
 
 # x402
