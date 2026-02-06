@@ -1,49 +1,38 @@
 /**
- * x402 Wallet Adapter for AI Agents - Production Ready
+ * x402 Wallet Adapter for AI Agents - Production Ready (Base + Ethereum)
  * 
  * Universal wallet adapter for accepting and sending HTTP 402 payments
- * Supports Base, Ethereum, and Solana networks
+ * Supports Base and Ethereum networks
  * 
  * @license MIT
  * @author OMA Systems
  */
 
 import { ethers } from 'ethers';
-import { 
-  Connection, 
-  Keypair, 
-  PublicKey,
-  Transaction,
-  SystemProgram,
-  LAMPORTS_PER_SOL
-} from '@solana/web3.js';
 
 // --- Default RPC URLs ---
 
 const DEFAULT_RPC_URLS = {
   base: 'https://mainnet.base.org',
-  ethereum: 'https://eth.llamarpc.com',
-  solana: 'https://api.mainnet-beta.solana.com'
+  ethereum: 'https://eth.llamarpc.com'
 };
 
 const USDC_CONTRACTS = {
   base: '0x833589fCD6eDb6E08f4c7C32D4f71b54bDA02513',
-  ethereum: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48',
-  solana: 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTD'
+  ethereum: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48'
 };
 
 // --- x402 Wallet Class ---
 
 export class X402Wallet {
   private network: string;
-  private provider: ethers.Provider | Connection;
+  private provider: ethers.Provider;
   private signer?: ethers.Signer;
-  private solanaKeypair?: Keypair;
   private rpcUrl: string;
   private apiKey?: string;
 
   constructor(options: { 
-    network?: 'base' | 'ethereum' | 'solana', 
+    network?: 'base' | 'ethereum', 
     privateKey?: string, 
     rpcUrl?: string,
     apiKey?: string 
@@ -52,24 +41,14 @@ export class X402Wallet {
     this.rpcUrl = options.rpcUrl || DEFAULT_RPC_URLS[this.network as keyof typeof DEFAULT_RPC_URLS];
     this.apiKey = options.apiKey;
 
-    if (this.network === 'solana') {
-      // Initialize Solana
-      if (options.privateKey) {
-        this.solanaKeypair = Keypair.fromSecretKey(
-          Buffer.from(options.privateKey, 'base64')
-        );
-      }
-      this.provider = new Connection(this.rpcUrl);
-    } else {
-      // Initialize EVM (Base/Ethereum)
-      const evmProvider = new ethers.JsonRpcProvider(this.rpcUrl);
-      
-      if (options.privateKey) {
-        this.signer = new ethers.Wallet(options.privateKey, evmProvider);
-      }
-      
-      this.provider = evmProvider;
+    // Initialize EVM (Base/Ethereum)
+    const evmProvider = new ethers.JsonRpcProvider(this.rpcUrl);
+    
+    if (options.privateKey) {
+      this.signer = new ethers.Wallet(options.privateKey, evmProvider);
     }
+    
+    this.provider = evmProvider;
   }
 
   // --- Private Helper Methods ---
@@ -101,40 +80,6 @@ export class X402Wallet {
     
     return {
       txHash: tx.hash,
-      status: 'pending',
-      amount: options.amount.toString()
-    };
-  }
-
-  private async sendSolanaPayment(options: {
-    to: string; 
-    amount: number; 
-  }): Promise<{
-    txHash: string;
-    status: string;
-    amount: string;
-  }> {
-    if (!this.solanaKeypair) {
-      throw new Error('No Solana keypair configured');
-    }
-
-    const connection = this.provider as Connection;
-    const fromPubkey = this.solanaKeypair.publicKey;
-    const toPubkey = new PublicKey(options.to);
-    const amount = options.amount * LAMPORTS_PER_SOL;
-
-    const transaction = new Transaction().add(
-      SystemProgram.transfer({
-        fromPubkey: fromPubkey,
-        toPubkey: toPubkey,
-        lamports: amount
-      })
-    );
-
-    const signature = await connection.sendTransaction(transaction, [this.solanaKeypair]);
-    
-    return {
-      txHash: signature,
       status: 'pending',
       amount: options.amount.toString()
     };
@@ -180,11 +125,7 @@ export class X402Wallet {
     amount: string;
   }> {
     try {
-      if (this.network === 'solana') {
-        return await this.sendSolanaPayment(options);
-      } else {
-        return await this.sendEVMPayment(options);
-      }
+      return await this.sendEVMPayment(options);
     } catch (error: any) {
       console.error('Payment failed:', error);
       throw new Error(`Payment failed: ${error.message || error}`);
@@ -197,42 +138,30 @@ export class X402Wallet {
     currency: string;
   }> {
     try {
-      if (this.network === 'solana') {
-        const balance = await (this.provider as Connection).getBalance(
-          this.solanaKeypair!.publicKey
+      const address = await (this.signer as ethers.Wallet).getAddress();
+      
+      if (currency === 'USDC') {
+        const usdcContract = new ethers.Contract(
+          USDC_CONTRACTS[this.network as keyof typeof USDC_CONTRACTS],
+          ['function balanceOf(address account) view returns (uint256)'],
+          this.provider as ethers.Provider
         );
-        
+          
+        const balance = await usdcContract.balanceOf(address);
+          
         return {
           amount: balance.toString(),
-          formatted: (balance / LAMPORTS_PER_SOL).toFixed(9),
-          currency: 'SOL'
+          formatted: ethers.formatUnits(balance, 6),
+          currency: 'USDC'
         };
       } else {
-        const address = await (this.signer as ethers.Wallet).getAddress();
-        
-        if (currency === 'USDC') {
-          const usdcContract = new ethers.Contract(
-            USDC_CONTRACTS[this.network as keyof typeof USDC_CONTRACTS],
-            ['function balanceOf(address account) view returns (uint256)'],
-            this.provider as ethers.Provider
-          );
+        const balance = await this.provider.getBalance(address);
           
-          const balance = await usdcContract.balanceOf(address);
-          
-          return {
-            amount: balance.toString(),
-            formatted: ethers.formatUnits(balance, 6),
-            currency: 'USDC'
-          };
-        } else {
-          const balance = await (this.provider as ethers.Provider).getBalance(address);
-          
-          return {
-            amount: balance.toString(),
-            formatted: ethers.formatEther(balance),
-            currency: 'ETH'
-          };
-        }
+        return {
+          amount: balance.toString(),
+          formatted: ethers.formatEther(balance),
+          currency: 'ETH'
+        };
       }
     } catch (error: any) {
       console.error('Failed to get balance:', error);
