@@ -11,37 +11,47 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: {
-    default: 'OMA - Autonomous Agent Infrastructure',
-    template: '%s | OMA Infrastructure'
+    default: 'OMA-AI - Open Market Access for AI Agents',
+    template: '%s | OMA-AI',
   },
-  description: 'Enterprise-grade infrastructure for building, deploying, and monitoring autonomous AI agents at scale. The standard for agentic compute.',
-  keywords: ['autonomous agents', 'AI infrastructure', 'agent orchestration', 'enterprise AI', 'x402 protocol'],
+  description: 'Browse, test, and integrate 22+ APIs and MCP servers. Pay only for what you use with x402 crypto payments (USDC on Base). The API marketplace for humans and AI agents.',
+  keywords: ['OMA-AI', 'API marketplace', 'AI agents', 'MCP servers', 'x402 payments', 'USDC', 'Base network', 'Ethereum', 'autonomous agents', 'agent commerce', 'crypto payments', 'API integration'],
   authors: [{ name: 'OMA Systems' }],
   openGraph: {
     type: 'website',
     locale: 'en_US',
     url: 'https://oma-ai.com',
-    siteName: 'OMA Infrastructure',
-    title: 'OMA - Autonomous Agent Infrastructure',
-    description: 'Build, deploy, and monitor autonomous AI agents at scale.',
+    siteName: 'OMA-AI',
+    title: 'OMA-AI - Open Market Access for AI Agents',
+    description: 'The API marketplace for humans and AI agents. Browse, test, and integrate 22+ APIs and MCP servers with x402 crypto payments.',
     images: [
       {
-        url: 'https://oma-ai.com/og-image.png', // We should create this or use a placeholder
+        url: 'https://oma-ai.com/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'OMA Infrastructure Dashboard',
+        alt: 'OMA-AI - API Marketplace',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'OMA - Autonomous Agent Infrastructure',
-    description: 'Build, deploy, and monitor autonomous AI agents at scale.',
-    creator: '@OMA_Infrastructure',
+    title: 'OMA-AI - Open Market Access for AI Agents',
+    description: 'The API marketplace for humans and AI agents. Pay only for what you use with x402 crypto payments.',
+    creator: '@oma_ai',
   },
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  alternates: {
+    canonical: 'https://oma-ai.com',
   },
 }
 
