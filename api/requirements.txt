@@ -10,7 +10,7 @@ requests==2.31.0
 python-dotenv==1.0.1
 
 # Supabase
-supabase==2.3.4
+supabase>=2.4.0
 
 # AI Providers
 openai==1.10.0
