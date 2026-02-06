@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useMemo, useCallback, Suspense } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import {
   Code,
@@ -504,18 +504,14 @@ export default function MarketplaceHome() {
       {/* Live Stats */}
       <section className="py-8 px-6">
         <div className="max-w-7xl mx-auto">
-          <Suspense fallback={<div className="text-center py-8">Loading stats...</div>}>
-            <LiveStats />
-          </Suspense>
+          <LiveStats />
         </div>
       </section>
 
       {/* Trending APIs */}
       <section className="py-8 px-6 bg-zinc-900/30">
         <div className="max-w-7xl mx-auto">
-          <Suspense fallback={<div className="text-center py-8">Loading trending APIs...</div>}>
-            <TrendingAPIs />
-          </Suspense>
+          <TrendingAPIs />
         </div>
       </section>
 
