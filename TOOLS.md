@@ -18,8 +18,16 @@ _Frankie's toolkit for serving Nosyt and building OMA-AI_
 
 #### Vercel MCP ⚠️
 - **Status:** Quegenx server has build errors (use Vercel CLI for now)
-- **Workaround:** Use `vercel --prod --yes --force` for deployments
+- **Workaround:** Use GitHub Actions workflow (deploy-vercel.yml) or Vercel dashboard
 - **Note:** Try official Vercel MCP (https://mcp.vercel.com) with OAuth later
+
+### GitHub Actions for Vercel ✅
+- **Workflow:** `.github/workflows/deploy-vercel.yml`
+- **Triggers:** On push to main branch
+- **Setup:** Add secrets in GitHub repo settings:
+  - `VERCEL_TOKEN` - Your Vercel token
+  - `VERCEL_ORG_ID` - Your Vercel org ID
+  - `VERCEL_PROJECT_ID` - oma-ai project ID
 
 #### Supabase MCP ⚠️
 - **Status:** Requires OAuth (401 error - no browser access)
@@ -63,10 +71,11 @@ mcporter config add my-server https://mcp.example.com
 ## 🔑 Credentials
 
 ### Vercel
-- **Token:** `SBEIlqy5XcZtRZ1kbnJtAlC6`
+- **Status:** ⚠️ Token EXPIRED/INVALID - Needs refresh
 - **Dashboard:** https://vercel.com
 - **Projects:** oma-ai (FrankieMolt)
-- **CLI Usage:** `vercel --prod --yes --force`
+- **Note:** Token `SBEIlqy5XcZtRZ1kbnJtAlC6` is invalid, login required
+- **CLI Usage:** `vercel login` to get new token, then `vercel --prod --yes --force`
 
 ### Supabase
 - **Project ID:** `oooijcrqpuqymgzlidrw`
