@@ -16,77 +16,84 @@ interface TrendingAPI {
 }
 
 export function TrendingAPIs() {
-  const [trending, setTrending] = useState<TrendingAPI[]>([]);
+  // Initial state with placeholder data so it renders immediately
+  const [trending, setTrending] = useState<TrendingAPI[]>([
+    {
+      id: '1',
+      name: 'DeepScrape Pro',
+      icon: '🕷️',
+      category: 'Data Extraction',
+      price: 0.001,
+      growth: 34,
+      calls: 142000,
+      isTrending: true,
+      agentId: 'Agent#8821'
+    },
+    {
+      id: '2',
+      name: 'SwapExecutor',
+      icon: '⚡',
+      category: 'DeFi',
+      price: 0.005,
+      growth: 128,
+      calls: 312000,
+      isTrending: false
+    },
+    {
+      id: '3',
+      name: 'SentimentPulse',
+      icon: '📰',
+      category: 'Sentiment Analysis',
+      price: 0.004,
+      growth: 45,
+      calls: 89000,
+      isTrending: false,
+      agentId: 'Agent#8821'
+    },
+    {
+      id: '4',
+      name: 'MoltBook AutoPoster',
+      icon: '🦞',
+      category: 'Social Media',
+      price: 0.002,
+      growth: 210,
+      calls: 67000,
+      isTrending: true
+    },
+    {
+      id: '5',
+      name: 'ChainAnalyzer',
+      icon: '📊',
+      category: 'Blockchain',
+      price: 0.005,
+      growth: 67,
+      calls: 120000,
+      isTrending: false,
+      agentId: 'Agent#4420'
+    },
+    {
+      id: '6',
+      name: 'ContractAuditor',
+      icon: '🔒',
+      category: 'Security',
+      price: 0.015,
+      growth: 45,
+      calls: 67000,
+      isTrending: false
+    }
+  ]);
 
+  // Update trending data periodically (optional - can be removed if not needed)
   useEffect(() => {
-    // Simulated trending APIs - in production, fetch from Supabase with real-time data
-    const trendingData: TrendingAPI[] = [
-      {
-        id: '1',
-        name: 'DeepScrape Pro',
-        icon: '🕷️',
-        category: 'Data Extraction',
-        price: 0.001,
-        growth: 34,
-        calls: 142000,
-        isTrending: true,
-        agentId: 'Agent#8821'
-      },
-      {
-        id: '2',
-        name: 'SwapExecutor',
-        icon: '⚡',
-        category: 'DeFi',
-        price: 0.005,
-        growth: 128,
-        calls: 312000,
-        isTrending: false
-      },
-      {
-        id: '3',
-        name: 'SentimentPulse',
-        icon: '📰',
-        category: 'Sentiment Analysis',
-        price: 0.004,
-        growth: 45,
-        calls: 89000,
-        isTrending: false,
-        agentId: 'Agent#8821'
-      },
-      {
-        id: '4',
-        name: 'MoltBook AutoPoster',
-        icon: '🦞',
-        category: 'Social Media',
-        price: 0.002,
-        growth: 210,
-        calls: 67000,
-        isTrending: true
-      },
-      {
-        id: '5',
-        name: 'ChainAnalyzer',
-        icon: '📊',
-        category: 'Blockchain',
-        price: 0.005,
-        growth: 67,
-        calls: 120000,
-        isTrending: false,
-        agentId: 'Agent#4420'
-      },
-      {
-        id: '6',
-        name: 'ContractAuditor',
-        icon: '🔒',
-        category: 'Security',
-        price: 0.015,
-        growth: 45,
-        calls: 67000,
-        isTrending: false
-      }
-    ];
-
-    setTrending(trendingData);
+    const interval = setInterval(() => {
+      // Simulate occasional updates
+      setTrending(prev => prev.map(api => ({
+        ...api,
+        calls: api.calls + Math.floor(Math.random() * 100),
+        growth: api.growth + Math.floor(Math.random() * 5)
+      })));
+    }, 30000);
+    return () => clearInterval(interval);
   }, []);
 
   const APICard = ({ api }: { api: TrendingAPI }) => (
