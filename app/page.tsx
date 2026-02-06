@@ -18,7 +18,7 @@ import {
 } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import NewsletterSignup from '@/components/NewsletterSignup';
+import { NewsletterSignup } from '@/components/NewsletterSignup';
 import { LiveStats } from '@/components/LiveStats';
 import { TrendingAPIs } from '@/components/TrendingAPIs';
 

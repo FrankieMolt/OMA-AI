@@ -6,9 +6,20 @@ const nextConfig = {
   },
   output: 'standalone',
   reactStrictMode: true,
+
+  // Performance Optimizations
+  compress: true,
+  poweredByHeader: false,
+
+  // Enable experimental features for better performance
+  experimental: {
+    optimizePackageImports: ['lucide-react', 'framer-motion'],
+  },
+
   env: {
     NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL || 'https://api.oma-ai.com',
   },
+
   // Enable Next.js Image Optimization for better performance
   // This provides automatic image resizing, compression, and format conversion (WebP/AVIF)
   // Improves Core Web Vitals (LCP, CLS) and reduces bandwidth usage by 30-50%
@@ -22,7 +33,9 @@ const nextConfig = {
     formats: ['image/avif', 'image/webp'], // Prefer modern formats
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    minimumCacheTTL: 60,
   },
+
   // Security Headers for improved security
   // These headers protect against XSS, clickjacking, and enforce HTTPS
   async headers() {
@@ -55,9 +68,29 @@ const nextConfig = {
             key: 'Referrer-Policy',
             value: 'strict-origin-when-cross-origin',
           },
+          // Cache Control for static assets
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
         ],
       },
     ]
+  },
+
+  // Bundle Analysis
+  webpack: (config, { isServer }) => {
+    // Optimize bundle size
+    config.resolve.fallback = { ...config.resolve.fallback, fs: false };
+
+    // Tree shaking for better bundle optimization
+    config.optimization = {
+      ...config.optimization,
+      usedExports: true,
+      sideEffects: false,
+    };
+
+    return config;
   },
 };
 

@@ -54,6 +54,7 @@ export function QueryProvider({ children }: ProvidersProps) {
             onError: (error) => {
               console.error('Mutation error:', error);
             },
+          },
         },
       })
   );

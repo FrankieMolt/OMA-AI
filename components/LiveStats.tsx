@@ -33,10 +33,10 @@ export function LiveStats() {
     return () => clearInterval(interval);
   }, []);
 
-  const StatCard = ({ label, value, suffix = '' }: { label: string; value: number; suffix?: string }) => (
+  const StatCard = ({ label, value, prefix = '', suffix = '' }: { label: string; value: number; prefix?: string; suffix?: string }) => (
     <div className="glass-card p-6 text-center hover:border-purple-500/50 transition-all">
       <div className="text-4xl font-black gradient-text mb-2">
-        {value.toLocaleString()}{suffix}
+        {prefix}{value.toLocaleString()}{suffix}
       </div>
       <div className="text-sm text-zinc-500 uppercase tracking-wider">{label}</div>
     </div>
