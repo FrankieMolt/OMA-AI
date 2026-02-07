@@ -150,16 +150,16 @@
       "installedAt": 1770001853890
     },
     "api-gateway": {
-      "version": "1.0.1",
-      "installedAt": 1770001856176
+      "version": "1.0.12",
+      "installedAt": 1770432655816
     },
     "prompt-guard": {
       "version": "2.5.2",
       "installedAt": 1770001857890
     },
     "capability-evolver": {
-      "version": "1.0.31",
-      "installedAt": 1770001859928
+      "version": "1.4.4",
+      "installedAt": 1770441319960
     },
     "clawdex": {
       "version": "1.0.2",
@@ -172,6 +172,46 @@
     "vercel": {
       "version": "1.0.1",
       "installedAt": 1770146337447
+    },
+    "vercel-deploy": {
+      "version": "1.0.0",
+      "installedAt": 1770431891825
+    },
+    "mcp-adapter": {
+      "version": "0.1.0",
+      "installedAt": 1770431944355
+    },
+    "security-auditor": {
+      "version": "1.0.0",
+      "installedAt": 1770432010503
+    },
+    "database-operations": {
+      "version": "1.0.0",
+      "installedAt": 1770432042512
+    },
+    "test-master": {
+      "version": "0.1.0",
+      "installedAt": 1770432209011
+    },
+    "openclaw-self-backup": {
+      "version": "1.0.1",
+      "installedAt": 1770432784564
+    },
+    "desktop-control": {
+      "version": "1.0.0",
+      "installedAt": 1770439006737
+    },
+    "self-improving-agent-1-0-2": {
+      "version": "1.0.0",
+      "installedAt": 1770440602643
+    },
+    "computer-use-1-0-1": {
+      "version": "1.0.0",
+      "installedAt": 1770440613293
+    },
+    "linux-service-triage": {
+      "version": "1.0.0",
+      "installedAt": 1770440630854
     }
   }
 }

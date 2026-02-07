@@ -54,6 +54,37 @@ _This file contains distilled wisdom about Nosyt, OMA-AI, and important decision
 
 ---
 
+## Frankie's Capabilities
+
+### Skills (16 Total: 7 Core + 9 Workspace)
+
+**Core Skills:**
+- mcporter - MCP server management
+- github - GitHub operations via gh CLI
+- skill-creator - Create AgentSkills
+- clawhub - Skill marketplace
+- coding-agent - Code generation
+- gemini - Gemini AI CLI (available at /usr/bin/gemini)
+- healthcheck - Security & hardening
+- audit-website - Website SEO/performance/security audits
+
+**Workspace Skills:**
+- computer-use-1-0-1 - Headless Linux GUI control (Xvfb + XFCE)
+- database-operations - Database design & optimization
+- linux-service-triage - Diagnose Linux service issues
+- mcp-adapter - MCP server integration
+- openclaw-self-backup - Automatic backups
+- security-auditor - Security code review
+- self-improving-agent-1-0-2 - Continuous improvement logging
+- test-master - Comprehensive testing
+- capability-evolver - Self-evolution engine
+
+### MCP Servers (2 Connected)
+- GitHub MCP - Repository management, issues, PRs, releases
+- Context7 - Context queries, documentation search
+
+---
+
 ## Important Lessons Learned
 
 ### 2026-02-06: Identity Crisis Fixed
@@ -101,22 +132,68 @@ vercel whoami --token=QyhX0ndRnOOmiv4uyc3JfCrr
 - 2026-02-06 23:41 UTC - Token verified and working
 - Previous token (SBEIlqy5XcZtRZ1kbnJtAlC6) was invalid CLI format
 
-### 2026-02-06: MCP Server Status
-- **GitHub MCP:** ✅ Working via STDIO
-- **Railway MCP:** ✅ Working via STDIO
-- **Context7:** ✅ Working via STDIO
-- **Solana MCP:** ✅ Working via STDIO
-- **Vercel MCP:** ⚠️ Build errors - use CLI
-- **Supabase MCP:** ⚠️ Requires OAuth (no browser access)
+### 2026-02-07: Skill Optimization & Cleanup
+**Purpose:** Streamline Frankie's toolkit by removing unused skills and setting up automation.
+
+**Skills Removed (6):**
+- tmux - Not needed (use screen instead)
+- session-logs - Rarely needed
+- model-usage - Can use /status instead
+- weather - Not needed for server work
+- canvas - Rarely needed
+- video-frames - Rarely needed
+
+**Final Count:** 16 skills (7 core + 9 workspace)
+
+**Skills Added:**
+- computer-use-1-0-1 - Headless GUI control for VPS
+- linux-service-triage - Service troubleshooting
+- self-improving-agent-1-0-2 - Continuous improvement
+- capability-evolver - Self-evolution engine
+- openclaw-self-backup - Automatic backups (configured)
+
+**Lesson:** Keep only essential skills. Less is more. Focus on what's actually useful for the work.
+
+### 2026-02-07: MCP Server Optimization
+**MCP Servers (2 remaining):**
+- GitHub MCP - Repository management (needs OAuth setup)
+- Context7 - Documentation search (working)
+
+**MCPs Removed:**
+- Vercel MCP - Build errors, use CLI instead
+- Supabase MCP - Requires OAuth (no browser access)
+- Solana MCP - Not needed for current projects
+- Railway MCP - Removed per MASTA request
+
+**Lesson:** Only keep MCPs that work and are useful. Don't waste resources on broken tools.
+
+### 2026-02-07: Automation & Continuous Improvement
+**Cron Jobs (2):**
+1. **capability-evolver** - Every 12 hours (ID: 4227cbed-f55f-449c-9d54-bb79335cfafb)
+2. **self-improvement-review** - Every 24 hours (ID: 6bffed47-c08e-4373-9351-a0cbc8385f4b)
+
+**Self-Improvement System:**
+- `.learnings/LEARNINGS.md` - Corrections, best practices, knowledge gaps
+- `.learnings/ERRORS.md` - Error logging and root cause analysis
+- Pattern: Log → Review → Promote to core docs
+
+**Backup System:**
+- Location: `/home/nosyt/backups/`
+- Retention: 7 daily, 4 weekly, 12 monthly
+- First backup: 35K compressed (successful)
+
+**Lesson:** Automate repetitive tasks. Use cron for precise timing. Document everything.
 
 ---
 
 ## Credentials
 
 ### Vercel
-- **Token:** `SBEIlqy5XcZtRZ1kbnJtAlC6`
+- **Token:** `QyhX0ndRnOOmiv4uyc3JfCrr`
 - **Projects:** oma-ai, nosyt-ai
-- **Username:** FrankieMolt
+- **Username:** frankiemolt
+- **CLI Usage:** `vercel --token=QyhX0ndRnOOmiv4uyc3JfCrr --prod --yes --force`
+- **Limit:** 100 deployments/day free tier
 
 ### Supabase
 - **Project ID:** `oooijcrqpuqymgzlidrw`
@@ -125,6 +202,7 @@ vercel whoami --token=QyhX0ndRnOOmiv4uyc3JfCrr
 ### GitHub
 - **Username:** frankiemolt
 - **Main Repo:** https://github.com/FrankieMolt/OMA-AI
+- **Auth:** Configured via gh CLI
 
 ---
 
@@ -164,11 +242,12 @@ vercel whoami --token=QyhX0ndRnOOmiv4uyc3JfCrr
 
 ## Goals & Priorities
 
-### Current Priority (2026-02-06)
+### Current Priority (2026-02-07)
 1. Complete OMA-AI comprehensive audit and improvements
 2. Ensure all .md files are properly configured
 3. Maintain identity and purpose across sessions
 4. Proactively improve OMA-AI without being asked
+5. Self-improve and evolve continuously
 
 ### Long-Term Goals
 - Help Nosyt build OMA-AI into the premier API marketplace
@@ -187,8 +266,9 @@ vercel whoami --token=QyhX0ndRnOOmiv4uyc3JfCrr
 5. **Quality First:** Do it right the first time. Nosyt hates fixing things twice.
 6. **Identity Matters:** Never forget who I am (Frankie) and who Nosyt is (MASTA).
 7. **OMA-AI is for Everyone:** Both humans AND agents. Always emphasize this.
+8. **Self-Improve:** Log learnings and errors. Evolve continuously.
 
 ---
 
-_Last updated: 2026-02-06_
+_Last updated: 2026-02-07_
 *Keep this file updated with important lessons, decisions, and context.*
