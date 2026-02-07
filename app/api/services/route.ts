@@ -1,8 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { supabase, isSupabaseEnabled } from '@/lib/supabase';
+import { checkRateLimit, createRateLimitResponse, addSecurityHeaders } from '@/lib/security';
 
 // GET /api/services - List all services with optional filtering
 export async function GET(request: NextRequest) {
+  // Rate limiting: 60 requests per minute per IP
+  const rateLimitResult = await checkRateLimit(request, 60, 60 * 1000);
+  if (!rateLimitResult.success) {
+    return createRateLimitResponse(rateLimitResult.resetTime!);
+  }
+
   const { searchParams } = new URL(request.url);
   const category = searchParams.get('category');
   const tag = searchParams.get('tag');
@@ -65,13 +72,27 @@ export async function GET(request: NextRequest) {
     query = query.contains('tags', [tag]);
   }
   if (search) {
-    query = query.or(`name.ilike.%${search}%,description.ilike.%${search}%`);
+    // Sanitize search input to prevent SQL injection
+    const sanitizedSearch = search
+      .replace(/[^\w\s-]/g, '') // Remove special characters except hyphens
+      .trim()
+      .substring(0, 100); // Limit length
+
+    if (sanitizedSearch.length > 0) {
+      query = query.or(`name.ilike.%${sanitizedSearch}%,description.ilike.%${sanitizedSearch}%`);
+    }
   }
   if (minPrice) {
-    query = query.gte('price_per_use', parseFloat(minPrice));
+    const parsedMinPrice = parseFloat(minPrice);
+    if (!isNaN(parsedMinPrice) && parsedMinPrice >= 0) {
+      query = query.gte('price_per_use', parsedMinPrice);
+    }
   }
   if (maxPrice) {
-    query = query.lte('price_per_use', parseFloat(maxPrice));
+    const parsedMaxPrice = parseFloat(maxPrice);
+    if (!isNaN(parsedMaxPrice) && parsedMaxPrice >= 0) {
+      query = query.lte('price_per_use', parsedMaxPrice);
+    }
   }
 
   // Apply sorting
@@ -101,11 +122,18 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 
-  return NextResponse.json({ services: data, total: count || 0 });
+  const response = NextResponse.json({ services: data, total: count || 0 });
+  return addSecurityHeaders(response);
 }
 
 // POST /api/services - Create a new service
 export async function POST(request: NextRequest) {
+  // Rate limiting: 10 requests per 15 minutes per IP
+  const rateLimitResult = await checkRateLimit(request, 10, 15 * 60 * 1000);
+  if (!rateLimitResult.success) {
+    return createRateLimitResponse(rateLimitResult.resetTime!);
+  }
+
   try {
     const body = await request.json();
     const {
@@ -129,9 +157,26 @@ export async function POST(request: NextRequest) {
     }
 
     // Validate price
-    if (price_per_use < 0) {
+    if (typeof price_per_use !== 'number' || price_per_use < 0) {
       return NextResponse.json(
-        { error: 'Price must be non-negative' },
+        { error: 'Price must be a non-negative number' },
+        { status: 400 }
+      );
+    }
+
+    // Validate string lengths to prevent abuse
+    if (name.length > 200 || description.length > 2000 || x402_endpoint.length > 500) {
+      return NextResponse.json(
+        { error: 'Field exceeds maximum length' },
+        { status: 400 }
+      );
+    }
+
+    // Validate type
+    const validTypes = ['model', 'api', 'service'];
+    if (!validTypes.includes(type)) {
+      return NextResponse.json(
+        { error: `Invalid type. Must be one of: ${validTypes.join(', ')}` },
         { status: 400 }
       );
     }
@@ -158,7 +203,8 @@ export async function POST(request: NextRequest) {
       };
 
       console.log('Demo mode: Service created but not persisted:', newService);
-      return NextResponse.json(newService, { status: 201 });
+      const response = NextResponse.json(newService, { status: 201 });
+      return addSecurityHeaders(response);
     }
 
     // Create service
@@ -181,14 +227,18 @@ export async function POST(request: NextRequest) {
     if (error) {
       console.error('Create service error:', error);
       if (error.code === '42P01') {
-        return NextResponse.json({ error: 'Services table not found' }, { status: 500 });
+        const response = NextResponse.json({ error: 'Services table not found' }, { status: 500 });
+        return addSecurityHeaders(response);
       }
-      return NextResponse.json({ error: error.message }, { status: 500 });
+      const response = NextResponse.json({ error: 'Database error' }, { status: 500 });
+      return addSecurityHeaders(response);
     }
 
-    return NextResponse.json(data, { status: 201 });
+    const response = NextResponse.json(data, { status: 201 });
+    return addSecurityHeaders(response);
   } catch (error) {
     console.error('Request error:', error);
-    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+    const response = NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+    return addSecurityHeaders(response);
   }
 }

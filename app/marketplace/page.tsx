@@ -8,6 +8,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/Card';
 import { SectionHeader } from '@/components/ui/SectionHeader';
+import { useMetadata } from '@/lib/usePageTitle';
 
 interface ApiService {
   id: string;
@@ -28,6 +29,11 @@ interface ApiService {
 }
 
 export default function MarketplacePage() {
+  useMetadata(
+    'API Marketplace',
+    'Browse and discover 22+ APIs and MCP servers on OMA-AI marketplace. Filter by category, search, and integrate services with x402 payments.'
+  );
+
   const [services, setServices] = useState<ApiService[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState('all');

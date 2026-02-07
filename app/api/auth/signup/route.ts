@@ -1,33 +1,34 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { createClient } from '@supabase/supabase-js';
+import { checkRateLimit, createRateLimitResponse, addSecurityHeaders, isValidEmail } from '@/lib/security';
+import * as bcrypt from 'bcryptjs';
 
-// Demo authentication (replace with real Supabase auth in production)
-const DEMO_TOKEN = 'demo-token-123456';
-const DEMO_USER = {
-  id: 'user-123',
-  email: 'demo@oma-ai.com',
-  fullName: 'Demo User',
-  username: 'demo',
-  role: 'user',
-  wallet: '0x1234567890abcdef1234567890abcdef12345678'
-};
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+const supabase = createClient(supabaseUrl, supabaseKey);
 
 // POST /api/auth/signup - Create new user account
 export async function POST(request: NextRequest) {
+  // Rate limiting: 3 signups per hour per IP
+  const rateLimitResult = await checkRateLimit(request, 3, 60 * 60 * 1000);
+  if (!rateLimitResult.success) {
+    return createRateLimitResponse(rateLimitResult.resetTime!);
+  }
+
   try {
     const body = await request.json();
     const { email, password, fullName, username } = body;
 
     // Validate required fields
-    if (!email || !password || !fullName || !username) {
+    if (!email || !password) {
       return NextResponse.json(
-        { error: 'Missing required fields' },
+        { error: 'Email and password are required' },
         { status: 400 }
       );
     }
 
     // Validate email format
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
+    if (!isValidEmail(email)) {
       return NextResponse.json(
         { error: 'Invalid email format' },
         { status: 400 }
@@ -42,48 +43,101 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Validate username
-    const usernameRegex = /^[a-zA-Z0-9_]{3,20}$/;
-    if (!usernameRegex.test(username)) {
+    // Validate username format if provided
+    if (username && !/^[a-zA-Z0-9_]{3,20}$/.test(username)) {
       return NextResponse.json(
-        { error: 'Username must be 3-20 characters (letters, numbers, underscores only)' },
+        { error: 'Username must be 3-20 characters and contain only letters, numbers, and underscores' },
         { status: 400 }
       );
     }
 
-    // Check if demo mode
-    const isDemo = process.env.NODE_ENV === 'development';
+    // Check if email already exists
+    const { data: existingUser } = await supabase
+      .from('users')
+      .select('id')
+      .eq('email', email.toLowerCase())
+      .single();
 
-    if (isDemo) {
-      // Demo mode: Return success
-      return NextResponse.json({
-        success: true,
-        message: 'Account created successfully',
-        user: {
-          ...DEMO_USER,
-          email,
-          fullName,
-          username
-        }
-      });
+    if (existingUser) {
+      return NextResponse.json(
+        { error: 'An account with this email already exists' },
+        { status: 409 }
+      );
     }
 
-    // TODO: Implement real Supabase auth signup
-    // 1. Create Supabase user
-    // 2. Create user profile in public.users table
-    // 3. Return user data and token
+    // Check if username is taken (if provided)
+    if (username) {
+      const { data: existingUsername } = await supabase
+        .from('users')
+        .select('id')
+        .eq('username', username.toLowerCase())
+        .single();
 
-    return NextResponse.json({
+      if (existingUsername) {
+        return NextResponse.json(
+          { error: 'This username is already taken' },
+          { status: 409 }
+        );
+      }
+    }
+
+    // Hash password
+    const passwordHash = await bcrypt.hash(password, 12);
+
+    // Create user
+    const { data: newUser, error: insertError } = await supabase
+      .from('users')
+      .insert({
+        email: email.toLowerCase(),
+        password_hash: passwordHash,
+        full_name: fullName || null,
+        username: username?.toLowerCase() || email.split('@')[0].toLowerCase(),
+        auth_type: 'email',
+        role: 'user'
+      })
+      .select()
+      .single();
+
+    if (insertError) {
+      console.error('Signup insert error:', insertError);
+      return NextResponse.json(
+        { error: 'Failed to create account' },
+        { status: 500 }
+      );
+    }
+
+    // Generate session token
+    const token = Buffer.from(JSON.stringify({
+      userId: newUser.id,
+      email: newUser.email,
+      exp: Date.now() + (7 * 24 * 60 * 60 * 1000) // 7 days
+    })).toString('base64');
+
+    // Log signup event (non-blocking, fire-and-forget)
+    (async () => {
+      try {
+        await supabase.from('audit_logs').insert({
+          user_id: newUser.id,
+          action: 'signup',
+          details: { ip: request.headers.get('x-forwarded-for') || 'unknown' }
+        });
+      } catch {}
+    })();
+
+    const response = NextResponse.json({
       success: true,
       message: 'Account created successfully',
+      token,
       user: {
-        id: crypto.randomUUID(),
-        email,
-        fullName,
-        username,
-        role: 'user'
+        id: newUser.id,
+        email: newUser.email,
+        fullName: newUser.full_name,
+        username: newUser.username,
+        role: newUser.role
       }
-    }, { status: 201 });
+    });
+
+    return addSecurityHeaders(response);
 
   } catch (error) {
     console.error('Signup error:', error);

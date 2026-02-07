@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { useMetadata } from '@/lib/usePageTitle';
 import {
   Search,
   BookOpen,
@@ -450,6 +451,11 @@ security@oma-ai.com
 
 // --- Main Component ---
 export default function DocumentationPage() {
+  useMetadata(
+    'Documentation',
+    'OMA-AI documentation: Getting started, API reference, x402 payments, agent integration, and more. Learn how to use the API marketplace.'
+  );
+
   const [activeSection, setActiveSection] = useState('getting-started');
   const [searchQuery, setSearchQuery] = useState('');
   const [copiedCode, setCopiedCode] = useState<string | null>(null);

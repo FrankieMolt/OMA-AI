@@ -6,8 +6,13 @@ import Link from 'next/link';
 import { Mail, MessageCircle, Github, Twitter, Send, CheckCircle } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import { useMetadata } from '@/lib/usePageTitle';
 
 export default function ContactPage() {
+  useMetadata(
+    'Contact OMA-AI',
+    'Get in touch with the OMA-AI team. Contact us via email, Twitter, or GitHub for questions, partnerships, or support.'
+  );
   const [formData, setFormData] = useState({
     name: '',
     email: '',

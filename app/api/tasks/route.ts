@@ -1,8 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { supabase, isSupabaseEnabled } from '@/lib/supabase';
+import { checkRateLimit, createRateLimitResponse, addSecurityHeaders } from '@/lib/security';
 
 // GET /api/tasks - List all tasks/bounties
 export async function GET(request: NextRequest) {
+  // Rate limiting: 60 requests per minute per IP
+  const rateLimitResult = await checkRateLimit(request, 60, 60 * 1000);
+  if (!rateLimitResult.success) {
+    return createRateLimitResponse(rateLimitResult.resetTime!);
+  }
+
   const { searchParams } = new URL(request.url);
   const status = searchParams.get('status');
   const category = searchParams.get('category');
@@ -104,11 +111,18 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 
-  return NextResponse.json({ tasks: data, total: count || 0 });
+  const response = NextResponse.json({ tasks: data, total: count || 0 });
+  return addSecurityHeaders(response);
 }
 
 // POST /api/tasks - Create a new task/bounty
 export async function POST(request: NextRequest) {
+  // Rate limiting: 10 requests per 15 minutes per IP
+  const rateLimitResult = await checkRateLimit(request, 10, 15 * 60 * 1000);
+  if (!rateLimitResult.success) {
+    return createRateLimitResponse(rateLimitResult.resetTime!);
+  }
+
   try {
     const body = await request.json();
     const {
@@ -130,9 +144,35 @@ export async function POST(request: NextRequest) {
     }
 
     // Validate budget
-    if (budget <= 0) {
+    if (typeof budget !== 'number' || budget <= 0) {
       return NextResponse.json(
-        { error: 'Budget must be positive' },
+        { error: 'Budget must be a positive number' },
+        { status: 400 }
+      );
+    }
+
+    // Validate difficulty
+    const validDifficulties = ['easy', 'medium', 'hard', 'expert'];
+    if (!validDifficulties.includes(difficulty)) {
+      return NextResponse.json(
+        { error: `Invalid difficulty. Must be one of: ${validDifficulties.join(', ')}` },
+        { status: 400 }
+      );
+    }
+
+    // Validate string lengths to prevent abuse
+    if (title.length > 200 || description.length > 5000) {
+      return NextResponse.json(
+        { error: 'Field exceeds maximum length' },
+        { status: 400 }
+      );
+    }
+
+    // Validate currency
+    const validCurrencies = ['USDC', 'ETH', 'DAI'];
+    if (!validCurrencies.includes(currency)) {
+      return NextResponse.json(
+        { error: `Invalid currency. Must be one of: ${validCurrencies.join(', ')}` },
         { status: 400 }
       );
     }
@@ -167,7 +207,8 @@ export async function POST(request: NextRequest) {
       };
 
       console.log('Demo mode: Task created but not persisted:', newTask);
-      return NextResponse.json(newTask, { status: 201 });
+      const response = NextResponse.json(newTask, { status: 201 });
+      return addSecurityHeaders(response);
     }
 
     // Create task
@@ -189,14 +230,18 @@ export async function POST(request: NextRequest) {
     if (error) {
       console.error('Create task error:', error);
       if (error.code === '42P01') {
-        return NextResponse.json({ error: 'Tasks table not found' }, { status: 500 });
+        const response = NextResponse.json({ error: 'Tasks table not found' }, { status: 500 });
+        return addSecurityHeaders(response);
       }
-      return NextResponse.json({ error: error.message }, { status: 500 });
+      const response = NextResponse.json({ error: 'Database error' }, { status: 500 });
+      return addSecurityHeaders(response);
     }
 
-    return NextResponse.json(data, { status: 201 });
+    const response = NextResponse.json(data, { status: 201 });
+    return addSecurityHeaders(response);
   } catch (error) {
     console.error('Request error:', error);
-    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+    const response = NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+    return addSecurityHeaders(response);
   }
 }

@@ -4,8 +4,13 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import { useMetadata } from '@/lib/usePageTitle';
 
 export default function Pricing() {
+  useMetadata(
+    'Pricing - Simple & Transparent',
+    'OMA-AI pricing: Start free, scale as you grow. No hidden fees, cancel anytime. Plans from $0-$29/month plus managed persona options.'
+  );
   const plans = [
     {
       name: 'Starter',

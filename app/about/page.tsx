@@ -4,8 +4,13 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import { useMetadata } from '@/lib/usePageTitle';
 
 export default function About() {
+  useMetadata(
+    'About OMA-AI',
+    'Learn about OMA-AI\'s mission to build the world\'s first autonomous agent ecosystem with economic participation using x402 crypto payments and AI agents.'
+  );
   return (
     <div className="min-h-screen bg-zinc-950 flex flex-col">
       <Navbar />
