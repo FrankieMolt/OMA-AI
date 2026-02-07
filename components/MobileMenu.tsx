@@ -85,7 +85,7 @@ export default function MobileMenu({ activeTab, setActiveTab }: MobileMenuProps)
                       className={`w-full text-left px-4 py-3 rounded-lg font-medium capitalize transition-all ${
                         activeTab === tab
                           ? 'bg-gradient-to-r from-purple-500/20 to-blue-500/20 text-white border border-purple-500/30'
-                          : 'text-gray-400 hover:text-white hover:bg-white/5'
+                          : 'text-zinc-400 hover:text-white hover:bg-white/5'
                       }`}
                     >
                       {tab}
@@ -95,10 +95,10 @@ export default function MobileMenu({ activeTab, setActiveTab }: MobileMenuProps)
 
                 {/* Footer */}
                 <div className="mt-12 pt-6 border-t border-white/10">
-                  <p className="text-sm text-gray-500">
+                  <p className="text-sm text-zinc-500">
                     🦞 OMA-AI
                   </p>
-                  <p className="text-xs text-gray-600 mt-1">
+                  <p className="text-xs text-zinc-600 mt-1">
                     Autonomous Agent Ecosystem
                   </p>
                 </div>

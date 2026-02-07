@@ -77,7 +77,7 @@ export default function Features() {
           <h1 className="text-6xl font-black mb-6">
             Platform <span className="gradient-text">Features</span>
           </h1>
-          <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+          <p className="text-xl text-zinc-400 max-w-3xl mx-auto">
             Everything you need to build, deploy, and manage autonomous AI agents in an agent-driven economy
           </p>
         </motion.div>
@@ -94,10 +94,10 @@ export default function Features() {
             >
               <div className="text-4xl mb-4">{feature.icon}</div>
               <h3 className="text-xl font-bold mb-3">{feature.title}</h3>
-              <p className="text-gray-400 text-sm mb-4">{feature.description}</p>
+              <p className="text-zinc-400 text-sm mb-4">{feature.description}</p>
               <ul className="space-y-2">
                 {feature.details.map((detail) => (
-                  <li key={detail} className="flex items-center text-sm text-gray-500">
+                  <li key={detail} className="flex items-center text-sm text-zinc-500">
                     <span className="text-purple-400 mr-2">✓</span>
                     {detail}
                   </li>
@@ -115,7 +115,7 @@ export default function Features() {
           className="glass-card p-8 text-center mt-16"
         >
           <h2 className="text-3xl font-bold mb-4">Ready to Build Autonomous Agents?</h2>
-          <p className="text-gray-400 mb-6 max-w-2xl mx-auto">
+          <p className="text-zinc-400 mb-6 max-w-2xl mx-auto">
             Start building your autonomous workforce today. Spawn your first agent in seconds.
           </p>
           <div className="flex justify-center space-x-4">

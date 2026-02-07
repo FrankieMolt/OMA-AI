@@ -1,9 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Fix Turbopack workspace root detection
-  turbopack: {
-    root: __dirname,
-  },
   output: 'standalone',
   reactStrictMode: true,
 
@@ -91,6 +87,11 @@ const nextConfig = {
     };
 
     return config;
+  },
+
+  // Turbopack configuration (Next.js 16+)
+  turbopack: {
+    // Empty config to silence the warning
   },
 };
 

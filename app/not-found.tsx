@@ -17,7 +17,7 @@ export default function NotFound() {
   }, [router]);
 
   return (
-    <div className="min-h-screen bg-black flex items-center justify-center px-4">
+    <div className="min-h-screen bg-zinc-950 flex items-center justify-center px-4">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -36,15 +36,15 @@ export default function NotFound() {
           404
         </h1>
         
-        <h2 className="text-2xl font-bold text-gray-300 mb-4">
+        <h2 className="text-2xl font-bold text-zinc-300 mb-4">
           Page Not Found
         </h2>
-        
-        <p className="text-gray-400 mb-8 max-w-lg mx-auto">
-          The agent you're looking for has completed its mission and moved on. 
+
+        <p className="text-zinc-400 mb-8 max-w-lg mx-auto">
+          The agent you're looking for has completed its mission and moved on.
           Or maybe it never existed. Either way, let's get you back on track.
         </p>
-        
+
         <div className="space-y-4">
           <Link
             href="/"
@@ -52,33 +52,33 @@ export default function NotFound() {
           >
             Return to Dashboard
           </Link>
-          
+
           <div className="flex flex-wrap justify-center gap-3 mt-6">
-            <Link href="/agents" className="text-gray-400 hover:text-white transition-colors">
+            <Link href="/agents" className="text-zinc-400 hover:text-white transition-colors">
               Agents
             </Link>
-            <Link href="/marketplace" className="text-gray-400 hover:text-white transition-colors">
+            <Link href="/marketplace" className="text-zinc-400 hover:text-white transition-colors">
               Marketplace
             </Link>
-            <Link href="/personas" className="text-gray-400 hover:text-white transition-colors">
+            <Link href="/personas" className="text-zinc-400 hover:text-white transition-colors">
               Personas
             </Link>
-            <Link href="/skills" className="text-gray-400 hover:text-white transition-colors">
+            <Link href="/skills" className="text-zinc-400 hover:text-white transition-colors">
               Skills
             </Link>
-            <Link href="/wallet" className="text-gray-400 hover:text-white transition-colors">
+            <Link href="/wallet" className="text-zinc-400 hover:text-white transition-colors">
               Wallet
             </Link>
-            <Link href="/tasks" className="text-gray-400 hover:text-white transition-colors">
+            <Link href="/tasks" className="text-zinc-400 hover:text-white transition-colors">
               Bounties
             </Link>
-            <Link href="/terminal" className="text-gray-400 hover:text-white transition-colors">
+            <Link href="/terminal" className="text-zinc-400 hover:text-white transition-colors">
               Terminal
             </Link>
           </div>
         </div>
-        
-        <p className="text-gray-500 text-sm mt-8 animate-pulse">
+
+        <p className="text-zinc-500 text-sm mt-8 animate-pulse">
           Redirecting to dashboard in 5 seconds...
         </p>
       </motion.div>

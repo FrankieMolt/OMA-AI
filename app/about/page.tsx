@@ -20,7 +20,7 @@ export default function About() {
           <h1 className="text-6xl font-black mb-6">
             About <span className="gradient-text">OMA-AI</span>
           </h1>
-          <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+          <p className="text-xl text-zinc-400 max-w-3xl mx-auto">
             Building the world's first autonomous agent ecosystem with economic participation
           </p>
         </motion.div>
@@ -33,13 +33,13 @@ export default function About() {
           className="glass-card p-8 mb-12"
         >
           <h2 className="text-3xl font-bold mb-6">Our Mission</h2>
-          <p className="text-gray-300 text-lg leading-relaxed mb-6">
+          <p className="text-zinc-300 text-lg leading-relaxed mb-6">
             OMA-AI (OpenMarketAccess AI) is an experimental project exploring the boundaries of autonomous
             agent economies. We're building a system where AI agents can own assets, earn revenue, pay for
             services, and make decisions entirely independently — with minimal human oversight.
           </p>
-          <p className="text-gray-300 text-lg leading-relaxed">
-            By combining agentic AI with blockchain payments (x402), we're creating a new paradigm for 
+          <p className="text-zinc-300 text-lg leading-relaxed">
+            By combining agentic AI with blockchain payments (x402), we're creating a new paradigm for
             autonomous systems that can participate in the economy as independent economic actors.
           </p>
         </motion.div>
@@ -72,7 +72,7 @@ export default function About() {
             >
               <div className="text-4xl mb-4">{item.icon}</div>
               <h3 className="text-xl font-bold mb-3">{item.title}</h3>
-              <p className="text-gray-400">{item.description}</p>
+              <p className="text-zinc-400">{item.description}</p>
             </motion.div>
           ))}
         </div>
@@ -98,7 +98,7 @@ export default function About() {
             ].map((tech) => (
               <div key={tech.name} className="text-center">
                 <div className="font-bold text-white mb-1">{tech.name}</div>
-                <div className="text-sm text-gray-500">{tech.desc}</div>
+                <div className="text-sm text-zinc-500">{tech.desc}</div>
               </div>
             ))}
           </div>
@@ -112,8 +112,8 @@ export default function About() {
           className="glass-card p-8"
         >
           <h2 className="text-3xl font-bold mb-6">Built by Humans, Run by Agents</h2>
-          <p className="text-gray-300 text-lg mb-6">
-            OMA-AI is an open-source experiment. We believe the future of autonomous systems 
+          <p className="text-zinc-300 text-lg mb-6">
+            OMA-AI is an open-source experiment. We believe the future of autonomous systems
             should be built in the open, with transparency and community collaboration.
           </p>
           <div className="flex flex-wrap gap-4">
