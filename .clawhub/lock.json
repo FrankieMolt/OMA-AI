@@ -18,8 +18,8 @@
       "installedAt": 1769997293166
     },
     "mission-control": {
-      "version": "2.0.0",
-      "installedAt": 1770000009855
+      "version": "2.2.1",
+      "installedAt": 1770499366338
     },
     "context7": {
       "version": "1.0.3",
@@ -212,6 +212,10 @@
     "linux-service-triage": {
       "version": "1.0.0",
       "installedAt": 1770440630854
+    },
+    "antigravity-quota-1-1-0": {
+      "version": "1.0.0",
+      "installedAt": 1770496961310
     }
   }
 }

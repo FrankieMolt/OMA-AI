@@ -6,7 +6,6 @@ import Link from 'next/link';
 import {
   Mail,
   Lock,
-  Wallet,
   ArrowRight,
   Eye,
   EyeOff,
@@ -16,6 +15,7 @@ import {
 } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import { WalletConnect } from '@/components/WalletConnect';
 
 export default function LoginPage() {
   const [formData, setFormData] = useState({
@@ -51,39 +51,10 @@ export default function LoginPage() {
         throw new Error(data.error || 'Login failed');
       }
 
-      // Store token
       localStorage.setItem('token', data.token);
-      
-      // Redirect to dashboard
       window.location.href = '/dashboard';
     } catch (err: any) {
       setError(err.message || 'Login failed. Please try again.');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleWalletLogin = async () => {
-    setLoading(true);
-    setError('');
-
-    try {
-      // TODO: Implement x402 wallet connection
-      const response = await fetch('/api/auth/wallet', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'connect' })
-      });
-
-      const data = await response.json();
-      
-      if (!response.ok) {
-        throw new Error(data.error || 'Wallet connection failed');
-      }
-
-      window.location.href = '/dashboard';
-    } catch (err: any) {
-      setError(err.message || 'Wallet connection failed.');
     } finally {
       setLoading(false);
     }
@@ -198,21 +169,13 @@ export default function LoginPage() {
                 <Github size={20} />
                 <span>GitHub</span>
               </button>
-              <button
-                type="button"
-                onClick={handleWalletLogin}
-                disabled={loading}
-                className="flex items-center justify-center gap-2 py-3 bg-gradient-to-r from-purple-600/20 to-blue-600/20 border border-purple-500/50 text-purple-300 rounded-lg hover:border-purple-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                <Wallet size={20} />
-                <span>x402 Wallet</span>
-              </button>
+              <WalletConnect label="Wallet" />
             </div>
           </div>
 
           {/* Footer */}
           <p className="text-center text-zinc-400">
-            Don't have an account?{' '}
+            Don&apos;t have an account?{' '}
             <Link href="/signup" className="text-purple-400 hover:text-purple-300">
               Sign up
             </Link>

@@ -7,7 +7,6 @@ import {
   Mail,
   Lock,
   User,
-  Wallet,
   ArrowRight,
   Eye,
   EyeOff,
@@ -16,6 +15,7 @@ import {
 } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import { WalletConnect } from '@/components/WalletConnect';
 
 export default function SignupPage() {
   const [formData, setFormData] = useState({
@@ -53,7 +53,6 @@ export default function SignupPage() {
     setLoading(true);
 
     try {
-      // TODO: Implement Supabase auth signup
       const response = await fetch('/api/auth/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -71,7 +70,6 @@ export default function SignupPage() {
         throw new Error(data.error || 'Signup failed');
       }
 
-      // Redirect to dashboard
       window.location.href = '/dashboard';
     } catch (err: any) {
       setError(err.message || 'Signup failed. Please try again.');
@@ -227,13 +225,7 @@ export default function SignupPage() {
                 <Github size={20} />
                 <span>GitHub</span>
               </button>
-              <button
-                type="button"
-                className="flex items-center justify-center gap-2 py-3 bg-zinc-800/50 border border-zinc-700 rounded-lg hover:bg-zinc-800 transition-colors"
-              >
-                <Wallet size={20} />
-                <span>Wallet</span>
-              </button>
+              <WalletConnect label="Wallet" />
             </div>
           </div>
 
