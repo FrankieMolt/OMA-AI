@@ -2,37 +2,24 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { 
-  Code, 
-  Zap, 
-  Shield, 
-  DollarSign, 
-  ArrowRight, 
-  CheckCircle, 
+import {
+  Code,
+  Zap,
+  Shield,
+  DollarSign,
+  ArrowRight,
+  CheckCircle,
   Users,
   Globe,
   Lock
 } from 'lucide-react';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
 
 export default function HowItWorks() {
   return (
     <div className="min-h-screen bg-zinc-950 text-zinc-100">
-      {/* Header */}
-      <nav className="glass sticky top-0 z-50 px-6 py-4">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <a href="/" className="text-2xl font-bold gradient-text cursor-pointer">
-            OMA-AI
-          </a>
-          <div className="flex items-center gap-4">
-            <a href="/" className="text-zinc-400 hover:text-white transition-colors">
-              Marketplace
-            </a>
-            <a href="/docs" className="btn-primary px-4 py-2 rounded-lg text-sm">
-              Get API Key
-            </a>
-          </div>
-        </div>
-      </nav>
+      <Navbar />
 
       {/* Hero */}
       <section className="py-20 px-6">
@@ -218,14 +205,7 @@ export default function HowItWorks() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="py-12 px-6 border-t border-zinc-800">
-        <div className="max-w-7xl mx-auto text-center">
-          <p className="text-zinc-500 text-sm">
-            OMA-AI - API Marketplace for Agents & MCPs
-          </p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

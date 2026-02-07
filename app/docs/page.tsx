@@ -28,6 +28,7 @@ import {
   Info,
   Lightbulb
 } from 'lucide-react';
+import Navbar from '@/components/Navbar';
 
 // --- Types ---
 interface DocSection {
@@ -452,7 +453,6 @@ export default function DocumentationPage() {
   const [activeSection, setActiveSection] = useState('getting-started');
   const [searchQuery, setSearchQuery] = useState('');
   const [copiedCode, setCopiedCode] = useState<string | null>(null);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [filteredSections, setFilteredSections] = useState(docSections);
 
   // Filter documentation based on search
@@ -483,62 +483,8 @@ export default function DocumentationPage() {
 
   return (
     <div className="min-h-screen bg-zinc-950 text-zinc-100">
-      {/* Header */}
-      <nav className="glass sticky top-0 z-50 px-6 py-4">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <a href="/" className="text-2xl font-bold gradient-text cursor-pointer">
-            OMA-AI
-          </a>
-
-          <div className="hidden md:flex items-center gap-6">
-            <a href="/" className="text-zinc-400 hover:text-white transition-colors">
-              Home
-            </a>
-            <a href="/tasks" className="text-zinc-400 hover:text-white transition-colors">
-              Bounties
-            </a>
-            <a href="/docs" className="text-white font-medium flex items-center gap-2">
-              <BookOpen size={16} />
-              Docs
-            </a>
-            <a href="/about" className="text-zinc-400 hover:text-white transition-colors">
-              About
-            </a>
-          </div>
-
-          <div className="flex items-center gap-4">
-            <button className="btn-primary px-4 py-2 rounded-lg text-sm">
-              Get API Key
-            </button>
-            <button
-              className="md:hidden p-2 rounded-lg bg-zinc-800 hover:bg-zinc-700"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            >
-              {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
-            </button>
-          </div>
-        </div>
-
-        {/* Mobile Menu */}
-        {isMobileMenuOpen && (
-          <div className="md:hidden mt-4 pt-4 border-t border-zinc-800">
-            <div className="flex flex-col gap-4">
-              <a href="/" className="text-zinc-400 hover:text-white transition-colors">
-                Home
-              </a>
-              <a href="/tasks" className="text-zinc-400 hover:text-white transition-colors">
-                Bounties
-              </a>
-              <a href="/docs" className="text-white font-medium">
-                Docs
-              </a>
-              <a href="/about" className="text-zinc-400 hover:text-white transition-colors">
-                About
-              </a>
-            </div>
-          </div>
-        )}
-      </nav>
+      {/* Header - Using Navbar component for consistency */}
+      <Navbar />
 
       {/* Search Bar */}
       <section className="py-8 px-6 border-b border-zinc-800">

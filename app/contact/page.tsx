@@ -55,13 +55,6 @@ export default function ContactPage() {
       value: 'FrankieMolt/OMA-AI',
       link: 'https://github.com/FrankieMolt/OMA-AI',
       description: 'Open source code and issues'
-    },
-    {
-      icon: <MessageCircle className="w-6 h-6" />,
-      title: 'Discord',
-      value: 'OMA-AI Community',
-      link: '#',
-      description: 'Join our community chat'
     }
   ];
 

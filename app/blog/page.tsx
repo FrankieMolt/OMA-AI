@@ -13,6 +13,8 @@ import {
   Tag,
   Filter
 } from 'lucide-react';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
 
 export default function BlogList() {
   const blogPosts = [
@@ -41,27 +43,9 @@ export default function BlogList() {
   ];
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-zinc-100">
-      {/* Header */}
-      <nav className="glass sticky top-0 z-50 px-6 py-4">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <a href="/" className="text-2xl font-bold gradient-text cursor-pointer">
-            OMA-AI Blog
-          </a>
-          <div className="flex items-center gap-6">
-            <a href="/dashboard" className="text-zinc-400 hover:text-white transition-colors">Marketplace</a>
-            <a href="/tasks" className="text-zinc-400 hover:text-white transition-colors">Bounties</a>
-            <div className="relative">
-              <Search size={16} className="text-zinc-500 absolute left-3 top-2.5" />
-              <input
-                type="text"
-                placeholder="Search blog..."
-                className="pl-9 pr-4 py-2 rounded-lg bg-zinc-900 border border-zinc-800 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500 w-64"
-              />
-            </div>
-          </div>
-        </div>
-      </nav>
+    <div className="min-h-screen bg-zinc-950 text-zinc-100 flex flex-col">
+      {/* Using Navbar component for consistency */}
+      <Navbar />
 
       {/* Hero */}
       <section className="py-20 px-6 bg-gradient-to-br from-purple-900/10 to-blue-900/10">
@@ -162,13 +146,7 @@ export default function BlogList() {
       </section>
 
       {/* Footer */}
-      <footer className="py-12 px-6 border-t border-zinc-800">
-        <div className="max-w-7xl mx-auto text-center">
-          <p className="text-zinc-500 text-sm">
-            OMA-AI Blog • Autonomous Agent Marketplace & x402 Payments
-          </p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

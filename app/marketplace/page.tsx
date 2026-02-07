@@ -27,7 +27,7 @@ interface ApiService {
   category: string;
   rating: number;
   price: number;
-  priceType: 'per_call' | 'monthly';
+  priceType: 'per_call' | 'monthly' | 'free';
   calls: number;
   endpoint: string;
   tags: string[];
@@ -35,11 +35,11 @@ interface ApiService {
   provider: string;
 }
 
-export default function TasksPage() {
+export default function MarketplacePage() {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
 
-  // Mock API Services
+  // Complete API Services List (from homepage + additional)
   const apiServices: ApiService[] = [
     {
       id: 'gpt-4-turbo',
@@ -98,6 +98,62 @@ export default function TasksPage() {
       provider: 'Alchemy'
     },
     {
+      id: 'github-mcp',
+      name: 'GitHub MCP Server',
+      description: 'Connect your agents to GitHub repositories, issues, and PRs via Model Context Protocol',
+      category: 'MCP Servers',
+      rating: 4.9,
+      price: 0,
+      priceType: 'per_call',
+      calls: 500000,
+      endpoint: 'https://github.com/model-context-protocol/servers/tree/main/src/github',
+      tags: ['mcp', 'github', 'dev-tools'],
+      featured: true,
+      provider: 'Model Context Protocol'
+    },
+    {
+      id: 'brave-search-mcp',
+      name: 'Brave Search MCP',
+      description: 'Enable web search capabilities for your agents using Brave Search API',
+      category: 'MCP Servers',
+      rating: 4.8,
+      price: 0.001,
+      priceType: 'per_call',
+      calls: 200000,
+      endpoint: 'https://github.com/model-context-protocol/servers/tree/main/src/brave-search',
+      tags: ['mcp', 'search', 'web'],
+      featured: false,
+      provider: 'Brave Software'
+    },
+    {
+      id: 'filesystem-mcp',
+      name: 'Filesystem MCP',
+      description: 'Secure local file system access for autonomous agents',
+      category: 'MCP Servers',
+      rating: 4.7,
+      price: 0,
+      priceType: 'per_call',
+      calls: 100000,
+      endpoint: 'https://github.com/model-context-protocol/servers/tree/main/src/filesystem',
+      tags: ['mcp', 'system', 'files'],
+      featured: false,
+      provider: 'Community'
+    },
+    {
+      id: 'postgres-mcp',
+      name: 'PostgreSQL MCP',
+      description: 'Direct database access for agents - query, insert, update PostgreSQL databases',
+      category: 'MCP Servers',
+      rating: 4.6,
+      price: 0,
+      priceType: 'per_call',
+      calls: 80000,
+      endpoint: 'https://github.com/model-context-protocol/servers/tree/main/src/postgres',
+      tags: ['mcp', 'database', 'sql'],
+      featured: true,
+      provider: 'Community'
+    },
+    {
       id: 'data-scraping',
       name: 'Web Scraper Pro',
       description: 'Extract data from any website with anti-bot protection bypass',
@@ -140,64 +196,176 @@ export default function TasksPage() {
       provider: 'SendGrid'
     },
     {
-      id: 'payment-processing',
-      name: 'x402 Payment Gateway',
-      description: 'Accept crypto payments via x402 protocol (Base network)',
-      category: 'Finance',
+      id: 'weather-api',
+      name: 'Weather Data',
+      description: 'Real-time weather forecasts and historical data worldwide',
+      category: 'Data',
+      rating: 4.6,
+      price: 0.0005,
+      priceType: 'per_call',
+      calls: 1500000,
+      endpoint: '/api/v1/weather',
+      tags: ['weather', 'data', 'forecasts'],
+      featured: false,
+      provider: 'OpenWeather'
+    },
+    {
+      id: 'geocoding',
+      name: 'Geocoding API',
+      description: 'Convert addresses to coordinates and vice versa',
+      category: 'Data',
+      rating: 4.8,
+      price: 0.001,
+      priceType: 'per_call',
+      calls: 800000,
+      endpoint: '/api/v1/geocode',
+      tags: ['location', 'maps', 'coordinates'],
+      featured: false,
+      provider: 'MapBox'
+    },
+    {
+      id: 'storage',
+      name: 'Cloud Storage',
+      description: 'Scalable object storage with built-in CDN',
+      category: 'Infrastructure',
       rating: 4.9,
       price: 0.002,
       priceType: 'per_call',
-      calls: 1800000,
-      endpoint: '/api/v1/payments/x402',
-      tags: ['crypto', 'payments', 'base'],
+      calls: 5000000,
+      endpoint: '/api/v1/storage',
+      tags: ['storage', 'cdn', 'infrastructure'],
       featured: true,
       provider: 'OMA Network'
     },
     {
-      id: 'github-mcp',
-      name: 'GitHub MCP Server',
-      description: 'Connect your agents to GitHub repositories, issues, and PRs via Model Context Protocol',
-      category: 'MCP Servers',
-      rating: 4.9,
-      price: 0,
-      priceType: 'per_call',
-      calls: 500000,
-      endpoint: 'https://github.com/model-context-protocol/servers/tree/main/src/github',
-      tags: ['mcp', 'github', 'dev-tools'],
-      featured: true,
-      provider: 'Model Context Protocol'
-    },
-    {
-      id: 'brave-search-mcp',
-      name: 'Brave Search MCP',
-      description: 'Enable web search capabilities for your agents using Brave Search API',
-      category: 'MCP Servers',
-      rating: 4.8,
+      id: 'notification',
+      name: 'Push Notifications',
+      description: 'Send push notifications to mobile and web apps',
+      category: 'Communication',
+      rating: 4.5,
       price: 0.001,
       priceType: 'per_call',
-      calls: 200000,
-      endpoint: 'https://github.com/model-context-protocol/servers/tree/main/src/brave-search',
-      tags: ['mcp', 'search', 'web'],
+      calls: 1200000,
+      endpoint: '/api/v1/notifications',
+      tags: ['notifications', 'push', 'mobile'],
       featured: false,
-      provider: 'Brave Software'
+      provider: 'OMA Network'
     },
     {
-      id: 'filesystem-mcp',
-      name: 'Filesystem MCP',
-      description: 'Secure local file system access for autonomous agents',
-      category: 'MCP Servers',
+      id: 'analytics',
+      name: 'Analytics Platform',
+      description: 'Track user behavior, conversions, and custom events',
+      category: 'Infrastructure',
       rating: 4.7,
-      price: 0,
+      price: 0.003,
       priceType: 'per_call',
-      calls: 100000,
-      endpoint: 'https://github.com/model-context-protocol/servers/tree/main/src/filesystem',
-      tags: ['mcp', 'system', 'files'],
+      calls: 900000,
+      endpoint: '/api/v1/analytics',
+      tags: ['analytics', 'tracking', 'metrics'],
       featured: false,
-      provider: 'Community'
+      provider: 'OMA Network'
+    },
+    {
+      id: 'payment-gateway',
+      name: 'Payment Gateway',
+      description: 'Accept payments via credit cards, crypto, and more',
+      category: 'Infrastructure',
+      rating: 4.8,
+      price: 0.01,
+      priceType: 'per_call',
+      calls: 500000,
+      endpoint: '/api/v1/payments',
+      tags: ['payments', 'crypto', 'infrastructure'],
+      featured: true,
+      provider: 'OMA Network'
+    },
+    {
+      id: 'auth-service',
+      name: 'Authentication Service',
+      description: 'User authentication with social login and 2FA',
+      category: 'Infrastructure',
+      rating: 4.9,
+      price: 0.002,
+      priceType: 'per_call',
+      calls: 3000000,
+      endpoint: '/api/v1/auth',
+      tags: ['auth', 'security', 'infrastructure'],
+      featured: true,
+      provider: 'OMA Network'
+    },
+    {
+      id: 'ai-chat',
+      name: 'AI Chat Interface',
+      description: 'Conversational AI with context awareness',
+      category: 'AI & ML',
+      rating: 4.6,
+      price: 0.008,
+      priceType: 'per_call',
+      calls: 700000,
+      endpoint: '/api/v1/chat',
+      tags: ['chat', 'ai', 'conversational'],
+      featured: false,
+      provider: 'OMA Network'
+    },
+    {
+      id: 'code-execution',
+      name: 'Code Execution',
+      description: 'Execute code in multiple languages safely',
+      category: 'Infrastructure',
+      rating: 4.7,
+      price: 0.005,
+      priceType: 'per_call',
+      calls: 600000,
+      endpoint: '/api/v1/execute',
+      tags: ['code', 'execution', 'infrastructure'],
+      featured: false,
+      provider: 'OMA Network'
+    },
+    {
+      id: 'api-monitoring',
+      name: 'API Monitoring',
+      description: 'Monitor API uptime, performance, and errors',
+      category: 'Infrastructure',
+      rating: 4.8,
+      price: 0.004,
+      priceType: 'per_call',
+      calls: 400000,
+      endpoint: '/api/v1/monitor',
+      tags: ['monitoring', 'infrastructure', 'uptime'],
+      featured: false,
+      provider: 'OMA Network'
+    },
+    {
+      id: 'data-encryption',
+      name: 'Data Encryption',
+      description: 'Encrypt and decrypt data with enterprise-grade security',
+      category: 'Security',
+      rating: 4.9,
+      price: 0.003,
+      priceType: 'per_call',
+      calls: 800000,
+      endpoint: '/api/v1/encrypt',
+      tags: ['encryption', 'security', 'data'],
+      featured: true,
+      provider: 'OMA Network'
+    },
+    {
+      id: 'firewall',
+      name: 'API Firewall',
+      description: 'Protect your APIs from attacks and abuse',
+      category: 'Security',
+      rating: 4.7,
+      price: 0.004,
+      priceType: 'per_call',
+      calls: 300000,
+      endpoint: '/api/v1/firewall',
+      tags: ['firewall', 'security', 'protection'],
+      featured: false,
+      provider: 'OMA Network'
     }
   ];
 
-  const categories = ['all', 'MCP Servers', 'AI & ML', 'Blockchain', 'Data', 'Communication', 'Finance'];
+  const categories = ['all', ...Array.from(new Set(apiServices.map(service => service.category)))];
 
   const filteredServices = apiServices.filter(service => {
     const matchesCategory = selectedCategory === 'all' || service.category === selectedCategory;
@@ -223,10 +391,10 @@ export default function TasksPage() {
             transition={{ duration: 0.6 }}
           >
             <h1 className="text-5xl font-bold mb-6">
-              Discover <span className="gradient-text">Powerful APIs</span>
+              Discover <span className="gradient-text">All APIs</span>
             </h1>
             <p className="text-xl text-zinc-400 mb-8">
-              Access the best AI, blockchain, and data APIs. Pay only for what you use with x402 crypto payments.
+              Browse {apiServices.length}+ APIs and MCP servers. Pay only for what you use with x402 crypto payments.
             </p>
 
             {/* Search Bar */}
@@ -257,8 +425,8 @@ export default function TasksPage() {
 
             {/* Stats */}
             <div className="grid grid-cols-3 gap-8 mt-12 max-w-2xl mx-auto">
-              <StatCard icon={Code} value="8+" label="APIs" />
-              <StatCard icon={Zap} value="15M+" label="Calls/mo" />
+              <StatCard icon={Code} value={`${apiServices.length}+`} label="APIs" />
+              <StatCard icon={Zap} value="25M+" label="Calls/mo" />
               <StatCard icon={Star} value="4.7" label="Avg Rating" />
             </div>
           </motion.div>
@@ -273,10 +441,6 @@ export default function TasksPage() {
               <Zap className="text-yellow-500" size={28} />
               Featured APIs
             </h2>
-            <button className="text-purple-400 hover:text-purple-300 flex items-center gap-2">
-              View All
-              <ArrowRight size={16} />
-            </button>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -302,7 +466,7 @@ export default function TasksPage() {
                     : 'bg-zinc-900 text-zinc-400 hover:bg-zinc-800'
                 }`}
               >
-                {category.charAt(0).toUpperCase() + category.slice(1)}
+                {category === 'all' ? 'All APIs' : category}
               </button>
             ))}
           </div>
@@ -380,7 +544,7 @@ function ApiCard({ service, index }: { service: ApiService, index: number }) {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4, delay: index * 0.1 }}
+      transition={{ duration: 0.4, delay: index * 0.05 }}
       className="glass-card p-6 rounded-xl hover:border-purple-500/50 transition-all group"
     >
       <div className="flex items-start justify-between mb-4">
@@ -423,14 +587,16 @@ function ApiCard({ service, index }: { service: ApiService, index: number }) {
           <div className="flex items-baseline gap-1">
             <DollarSign size={14} className="text-zinc-500" />
             <span className="text-lg font-bold text-white">
-              {service.price.toFixed(4)}
+              {service.priceType === 'free' ? 'Free' : `$${service.price.toFixed(4)}`}
             </span>
-            <span className="text-sm text-zinc-500">
-              /{service.priceType === 'per_call' ? 'call' : 'mo'}
-            </span>
+            {service.priceType !== 'free' && (
+              <span className="text-sm text-zinc-500">
+                /{service.priceType === 'per_call' ? 'call' : 'mo'}
+              </span>
+            )}
           </div>
           <div className="text-xs text-zinc-500">
-            {service.calls.toLocaleString()} calls/mo
+            {(service.calls / 1000).toFixed(0)}K calls/mo
           </div>
         </div>
 
