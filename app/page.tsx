@@ -557,10 +557,14 @@ export default function MarketplaceHome() {
                 onChange={(e) => handleSearchChange(e.target.value)}
                 className="w-full pl-12 pr-4 py-4 rounded-xl bg-zinc-900 border border-zinc-800 text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all"
                 aria-label="Search APIs and MCPs"
+                role="searchbox"
+                id="main-search"
               />
               <button
+                type="submit"
+                form="search-form"
                 className="absolute right-2 top-1/2 -translate-y-1/2 btn-primary px-6 py-2 rounded-lg"
-                aria-label="Search"
+                aria-label="Submit search"
               >
                 Search
               </button>
