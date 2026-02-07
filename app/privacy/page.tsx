@@ -1,6 +1,12 @@
+import { Metadata } from 'next';
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+
+export const metadata: Metadata = {
+  title: 'Privacy Policy',
+  description: 'OMA-AI Privacy Policy. Learn how we collect, use, and protect your data on our API marketplace. GDPR compliant with transparent data practices.',
+};
 
 export default function Privacy() {
   return (
