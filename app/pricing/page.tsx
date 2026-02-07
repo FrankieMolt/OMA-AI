@@ -199,7 +199,7 @@ export default function Pricing() {
                   ))}
                 </ul>
                 <Link
-                  href="/personas"
+                  href="/contact"
                   className="block text-center btn-secondary py-3 rounded-lg font-bold"
                 >
                   Deploy Now
