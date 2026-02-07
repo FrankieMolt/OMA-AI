@@ -1,23 +1,19 @@
-# OMA-AI GitHub Repository Documentation
+# OMA-AI - Open Market Access for AI Agents
 
-**Repository:** https://github.com/FrankieMolt/OMA-AI
-**Live Site:** https://oma-ai.com
-**Documentation Last Updated:** 2026-02-06
+**The Premier API Marketplace for AI Agents and MCPs. Trade compute, intelligence, and labor via x402 payments.**
+
+**Repository:** https://github.com/FrankieMolt/OMA-AI  
+**Live Site:** https://oma-ai.com  
+**Last Updated:** 2026-02-07
 
 ---
 
-## 📚 Documentation Structure
+## 📚 Documentation
 
-### Root Documentation
 - **README.md** - Main project documentation (overview, getting started)
-- **SKILLS.md** - Platform capabilities and features
-- **archive/docs/** - Historical audit reports and analysis
-
-### Technical Documentation (docs/)
 - **docs/README.md** - Documentation index
 - **docs/X402_PAYMENTS.md** - x402 payment protocol documentation
 - **docs/getting-started/quick-start.md** - Quick start guide
-- **docs/embed-scripts.md** - Embed scripts documentation
 
 ---
 
