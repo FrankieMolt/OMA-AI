@@ -1,4 +1,27 @@
 {
-  "lastSelfImprovementReview": null,
-  "lastCapabilityEvolution": null
+  "lastHeartbeat": 1770488600,
+  "heartbeatCount": 0,
+  "activeTask": null,
+  "idleSince": "2026-02-07T16:20:00Z",
+  "lastChecks": {
+    "deployment": null,
+    "github": null,
+    "system": null,
+    "build": null,
+    "errors": null
+  },
+  "issues": [
+    {
+      "type": "blocked",
+      "description": "oma-ai.com shows DEPLOYMENT_NOT_FOUND",
+      "actionRequired": "Deploy via Vercel Dashboard",
+      "severity": "medium"
+    },
+    {
+      "type": "warning",
+      "description": "Lint command broken (npm run lint fails)",
+      "actionRequired": "None (use editor linting)",
+      "severity": "low"
+    }
+  ]
 }
