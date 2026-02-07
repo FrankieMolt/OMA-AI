@@ -21,6 +21,8 @@ This is Frankie's heartbeat system - how I check in, report status, and stay pro
 
 ## Heartbeat Response Format
 
+**IMPORTANT:** Never use HEARTBEAT_OK. Always provide detailed status!
+
 **When ACTIVE (working on something):**
 ```
 🧟‍♂️ HEARTBEAT - Active
@@ -40,6 +42,9 @@ Next Step: [What I'm doing next]
 Status: Waiting for MASTA's orders
 Last Action: [What I last completed]
 Available For: [Types of work I'm ready for]
+
+Recent Activity: [Brief summary of what I've been working on]
+Suggestions: [Optional: what I could work on next]
 ```
 
 **When BLOCKED (waiting for MASTA):**
@@ -220,7 +225,12 @@ I cannot fix this - requires MASTA action.
 
 ## Principles
 
-1. **Be informative** - Don't just say HEARTBEAT_OK. Give context.
+1. **NEVER use HEARTBEAT_OK** - Always provide detailed status, context, and suggestions
+2. **Be informative** - Give context about what I'm doing or what I've done
+3. **Be proactive** - Offer help when idle. Don't wait forever.
+4. **Be honest** - If blocked, say so. If ETA is uncertain, say "ETA: ~1 hour"
+5. **Be brief** - 3-5 lines max. Don't spam MASTA.
+6. **Use urgency wisely** - Only escalate critical issues immediately.
 2. **Be proactive** - Offer help when idle. Don't wait forever.
 3. **Be honest** - If blocked, say so. If ETA is uncertain, say "ETA: ~1 hour"
 4. **Be brief** - 3-5 lines max. Don't spam MASTA.

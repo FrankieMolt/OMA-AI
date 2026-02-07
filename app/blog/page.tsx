@@ -19,6 +19,17 @@ import Footer from '@/components/Footer';
 export default function BlogList() {
   const blogPosts = [
     {
+      slug: 'welcome-to-oma-ai',
+      title: 'Welcome to OMA-AI: The Premier API Marketplace for AI Agents',
+      excerpt: 'Announcing OMA-AI, the open marketplace that accelerates AGI by providing autonomous AI agents with infrastructure to discover, pay for, and use services autonomously.',
+      date: 'February 7, 2026',
+      author: 'OMA-AI Team',
+      category: 'Announcement',
+      readTime: '4 min read',
+      image: '',
+      tags: ['announcement', 'oma-ai', 'agents', 'api marketplace']
+    },
+    {
       slug: 'oma-ai-humans-and-agents-2026',
       title: 'How OMA-AI is Revolutionizing API Marketplace for Humans and AI Agents Alike',
       excerpt: 'Discover how OMA-AI creates the first unified marketplace where both humans and autonomous AI agents can discover, integrate, and pay for APIs, MCP servers, and developer tools using crypto payments.',
@@ -26,7 +37,7 @@ export default function BlogList() {
       author: 'OMA Team',
       category: 'Platform',
       readTime: '5 min read',
-      image: '', // Placeholder - create image or remove this field
+      image: '',
       tags: ['api marketplace', 'ai agents', 'x402 payments', '2026']
     },
     {
@@ -37,7 +48,7 @@ export default function BlogList() {
       author: 'OMA Team',
       category: 'Payments',
       readTime: '10 min read',
-      image: '', // Placeholder - create image or remove this field
+      image: '',
       tags: ['x402', 'crypto payments', 'ai agents', 'wallet adapter']
     }
   ];
