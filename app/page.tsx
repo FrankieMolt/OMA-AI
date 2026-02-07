@@ -1,20 +1,20 @@
 'use client';
 
-import React, { useState, useMemo, useCallback } from 'react';
+import React, { useState, useMemo, useCallback, memo } from 'react';
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 import {
   Code,
   Zap,
-  Shield,
-  DollarSign,
   Star,
   ExternalLink,
   Play,
   Filter,
   ArrowRight,
-  Cpu,
   Search,
-  BookOpen
+  BookOpen,
+  Shield,
+  Loader2
 } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -38,12 +38,136 @@ interface ApiService {
   provider: string;
 }
 
+// --- Skeleton Component for Loading State ---
+const ApiCardSkeleton = memo(() => (
+  <div className="glass-card p-6 rounded-xl">
+    <div className="flex items-start justify-between mb-4">
+      <div className="flex-1">
+        <div className="h-6 w-3/4 bg-zinc-800 rounded mb-2 skeleton" />
+        <div className="h-4 w-full bg-zinc-800 rounded mb-3 skeleton" />
+        <div className="flex gap-2 mb-3">
+          <div className="h-6 w-16 bg-zinc-800 rounded-md skeleton" />
+          <div className="h-6 w-16 bg-zinc-800 rounded-md skeleton" />
+          <div className="h-6 w-16 bg-zinc-800 rounded-md skeleton" />
+        </div>
+      </div>
+      <div className="text-right ml-4 w-20">
+        <div className="h-7 w-full bg-zinc-800 rounded mb-2 skeleton" />
+        <div className="h-4 w-2/3 ml-auto bg-zinc-800 rounded skeleton" />
+        <div className="h-3 w-full mt-1 bg-zinc-800 rounded skeleton" />
+      </div>
+    </div>
+    <div className="pt-4 border-t border-zinc-800">
+      <div className="flex justify-between items-center">
+        <div className="flex items-center gap-2">
+          <div className="w-4 h-4 rounded bg-zinc-800 skeleton" />
+          <div className="h-4 w-24 bg-zinc-800 rounded skeleton" />
+        </div>
+        <div className="flex gap-2">
+          <div className="h-8 w-16 bg-zinc-800 rounded-lg skeleton" />
+          <div className="h-8 w-20 bg-purple-600/50 rounded-lg skeleton" />
+        </div>
+      </div>
+    </div>
+  </div>
+));
+
+ApiCardSkeleton.displayName = 'ApiCardSkeleton';
+
+// --- Stat Card Component ---
+const StatCard = memo(({ icon: Icon, value, label, isLoading }: { icon: any; value: string; label: string; isLoading?: boolean }) => (
+  <div className="glass-card p-6 text-center">
+    {isLoading ? (
+      <>
+        <div className="w-8 h-8 mx-auto mb-2 bg-zinc-800 rounded-lg skeleton" />
+        <div className="h-8 w-20 mx-auto mb-1 skeleton" />
+        <div className="h-4 w-full bg-zinc-800 rounded skeleton" />
+      </>
+    ) : (
+      <>
+        <Icon className="w-8 h-8 mx-auto mb-2 text-purple-400" />
+        <div className="text-3xl font-bold mb-1">{value}</div>
+        <div className="text-sm text-zinc-500 uppercase tracking-wider">{label}</div>
+      </>
+    )}
+  </div>
+));
+
+StatCard.displayName = 'StatCard';
+
+// --- API Card Component ---
+const ApiCard = memo(({ service, index }: { service: ApiService; index: number }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ delay: Math.min(index * 0.05, 0.5) }}
+    className="glass-card p-6 rounded-xl"
+  >
+    <div className="flex items-start justify-between mb-4">
+      <div className="flex-1">
+        <h3 className="text-xl font-bold mb-2">{service.name}</h3>
+        <p className="text-sm text-zinc-400 mb-3">{service.description}</p>
+        <div className="flex flex-wrap gap-2 mb-3">
+          {service.tags.map(tag => (
+            <span key={tag} className="tag-chip">
+              {tag}
+            </span>
+          ))}
+        </div>
+      </div>
+      <div className="text-right ml-4">
+        <div className="text-2xl font-bold mb-1">
+          {service.priceType === 'free' ? 'Free' : `$${service.price.toFixed(3)}`}
+          {service.priceType !== 'free' && service.priceType === 'per_call' && (
+            <span className="text-sm font-normal text-zinc-500">/call</span>
+          )}
+          {service.priceType === 'monthly' && (
+            <span className="text-sm font-normal text-zinc-500">/mo</span>
+          )}
+        </div>
+        <div className="flex items-center justify-end gap-1 text-sm text-yellow-400">
+          <Star className="w-4 h-4 fill-current" />
+          {service.rating}
+        </div>
+        <div className="text-xs text-zinc-500 mt-1">
+          {(service.calls / 1000).toFixed(0)}K calls/mo
+        </div>
+      </div>
+    </div>
+    <div className="flex items-center justify-between pt-4 border-t border-zinc-800">
+      <div className="flex items-center gap-2 text-sm text-zinc-400">
+        <Shield className="w-4 h-4" />
+        <span>{service.provider}</span>
+      </div>
+      <div className="flex gap-2">
+        <button
+          className="text-purple-400 hover:text-purple-300 text-sm flex items-center gap-1 transition-colors"
+          aria-label={`View documentation for ${service.name}`}
+        >
+          <BookOpen className="w-4 h-4" />
+          <span>Docs</span>
+        </button>
+        <button
+          className="btn-primary px-4 py-2 rounded-lg text-sm"
+          aria-label={`Try ${service.name}`}
+        >
+          Try Now
+        </button>
+      </div>
+    </div>
+  </motion.div>
+));
+
+ApiCard.displayName = 'ApiCard';
+
+// --- Main Page Component ---
 export default function MarketplaceHome() {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   // Mock API Services - Like Smithery.ai + RapidAPI
-  const apiServices: ApiService[] = [
+  const apiServices: ApiService[] = useMemo(() => [
     {
       id: 'gpt-4-turbo',
       name: 'GPT-4 Turbo',
@@ -366,7 +490,7 @@ export default function MarketplaceHome() {
       featured: false,
       provider: 'OMA Network'
     }
-  ];
+  ], []);
 
   // Categories
   const categories = useMemo(() => ['all', ...Array.from(new Set(apiServices.map(service => service.category)))], [apiServices]);
@@ -375,7 +499,7 @@ export default function MarketplaceHome() {
   const filteredServices = useMemo(() => {
     return apiServices.filter(service => {
       const matchesCategory = selectedCategory === 'all' || service.category === selectedCategory;
-      const matchesSearch = searchQuery === '' || 
+      const matchesSearch = searchQuery === '' ||
         service.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         service.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
         service.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
@@ -386,113 +510,64 @@ export default function MarketplaceHome() {
   // Featured services
   const featuredServices = useMemo(() => apiServices.filter(service => service.featured).slice(0, 6), [apiServices]);
 
+  // Handlers with useCallback to prevent re-renders
   const handleSearchChange = useCallback((value: string) => {
     setSearchQuery(value);
   }, []);
 
   const handleCategoryChange = useCallback((category: string) => {
     setSelectedCategory(category);
+    setIsLoading(true);
+    // Simulate loading for better UX
+    setTimeout(() => setIsLoading(false), 300);
   }, []);
-
-  // Stat Card Component
-  const StatCard = ({ icon: Icon, value, label }: { icon: any; value: string; label: string }) => (
-    <div className="text-center p-6">
-      <Icon className="w-8 h-8 mx-auto mb-2 text-purple-400" />
-      <div className="text-3xl font-bold mb-1">{value}</div>
-      <div className="text-sm text-gray-400">{label}</div>
-    </div>
-  );
-
-  // API Card Component
-  const ApiCard = ({ service, index }: { service: ApiService; index: number }) => (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: index * 0.05 }}
-      className="glass-card p-6 rounded-xl hover:border-purple-500/50 transition-all"
-    >
-      <div className="flex items-start justify-between mb-4">
-        <div className="flex-1">
-          <h3 className="text-xl font-bold mb-2">{service.name}</h3>
-          <p className="text-sm text-gray-400 mb-3">{service.description}</p>
-          <div className="flex flex-wrap gap-2 mb-3">
-            {service.tags.map(tag => (
-              <span key={tag} className="px-2 py-1 text-xs bg-zinc-800 rounded-md text-zinc-300">
-                {tag}
-              </span>
-            ))}
-          </div>
-        </div>
-        <div className="text-right ml-4">
-          <div className="text-2xl font-bold mb-1">
-            {service.priceType === 'free' ? 'Free' : `$${service.price.toFixed(3)}`}
-            {service.priceType !== 'free' && service.priceType === 'per_call' && '/call'}
-            {service.priceType === 'monthly' && '/mo'}
-          </div>
-          <div className="flex items-center text-sm text-yellow-400">
-            <Star className="w-4 h-4 fill-current mr-1" />
-            {service.rating}
-          </div>
-          <div className="text-xs text-gray-500 mt-1">
-            {(service.calls / 1000).toFixed(0)}K calls/mo
-          </div>
-        </div>
-      </div>
-      <div className="flex items-center justify-between pt-4 border-t border-zinc-800">
-        <div className="flex items-center gap-2 text-sm text-gray-400">
-          <Shield className="w-4 h-4" />
-          <span>{service.provider}</span>
-        </div>
-        <div className="flex gap-2">
-          <button className="text-purple-400 hover:text-purple-300 text-sm flex items-center gap-1">
-            <BookOpen className="w-4 h-4" />
-            Docs
-          </button>
-          <button className="btn-primary px-4 py-2 rounded-lg text-sm">
-            Try Now
-          </button>
-        </div>
-      </div>
-    </motion.div>
-  );
 
   return (
     <div className="min-h-screen bg-zinc-950 text-zinc-100 flex flex-col">
+      {/* Skip Link for Accessibility */}
+      <a href="#main-content" className="skip-link">
+        Skip to main content
+      </a>
+
       <Navbar />
 
       {/* Hero Section */}
-      <section className="py-20 px-6">
+      <section id="main-content" className="section-spacing">
         <div className="max-w-4xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <h1 className="text-5xl font-bold mb-6">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6">
               Discover <span className="gradient-text">APIs & MCPs</span>
             </h1>
-            <p className="text-xl text-zinc-400 mb-8">
-              Browse, test, and integrate 22+ APIs and MCP servers. 
+            <p className="text-xl text-zinc-400 mb-8 max-w-2xl mx-auto">
+              Browse, test, and integrate 22+ APIs and MCP servers.
               Pay only for what you use with x402 crypto payments.
             </p>
 
             {/* Search Bar */}
             <div className="relative max-w-2xl mx-auto">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500" size={20} />
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500" size={20} aria-hidden="true" />
               <input
                 type="text"
                 placeholder="Search APIs, MCPs..."
                 value={searchQuery}
                 onChange={(e) => handleSearchChange(e.target.value)}
                 className="w-full pl-12 pr-4 py-4 rounded-xl bg-zinc-900 border border-zinc-800 text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all"
+                aria-label="Search APIs and MCPs"
               />
-              <button className="absolute right-2 top-1/2 -translate-y-1/2 btn-primary px-6 py-2 rounded-lg">
+              <button
+                className="absolute right-2 top-1/2 -translate-y-1/2 btn-primary px-6 py-2 rounded-lg"
+                aria-label="Search"
+              >
                 Search
               </button>
             </div>
 
             {/* Stats */}
-            <div className="grid grid-cols-3 gap-8 mt-12 max-w-2xl mx-auto">
+            <div className="grid grid-cols-3 gap-4 md:gap-8 mt-12 max-w-2xl mx-auto">
               <StatCard icon={Code} value="22+" label="APIs & MCPs" />
               <StatCard icon={Zap} value="25M+" label="Calls/mo" />
               <StatCard icon={Star} value="4.7" label="Avg Rating" />
@@ -502,31 +577,35 @@ export default function MarketplaceHome() {
       </section>
 
       {/* Live Stats */}
-      <section className="py-8 px-6">
+      <section className="py-8 px-6 bg-zinc-900/20">
         <div className="max-w-7xl mx-auto">
           <LiveStats />
         </div>
       </section>
 
       {/* Trending APIs */}
-      <section className="py-8 px-6 bg-zinc-900/30">
+      <section className="section-spacing bg-zinc-900/30">
         <div className="max-w-7xl mx-auto">
           <TrendingAPIs />
         </div>
       </section>
 
       {/* Featured APIs */}
-      <section className="py-16 px-6 bg-zinc-900/50">
+      <section className="section-spacing bg-zinc-900/50">
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center justify-between mb-8">
             <h2 className="text-3xl font-bold flex items-center gap-3">
-              <Zap className="text-yellow-500" size={28} />
+              <Zap className="text-yellow-500" size={28} aria-hidden="true" />
               Featured APIs & MCPs
             </h2>
-            <button aria-label="View all APIs" className="text-purple-400 hover:text-purple-300 flex items-center gap-2">
+            <Link
+              href="/marketplace"
+              className="text-purple-400 hover:text-purple-300 flex items-center gap-2"
+              aria-label="View all APIs"
+            >
               View All
-              <ArrowRight size={16} />
-            </button>
+              <ArrowRight size={16} aria-hidden="true" />
+            </Link>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -538,10 +617,10 @@ export default function MarketplaceHome() {
       </section>
 
       {/* Category Filter */}
-      <section className="py-8 px-6 border-b border-zinc-800 sticky top-16 z-40 bg-zinc-950">
+      <nav aria-label="Filter APIs by category" className="py-8 px-6 border-b border-zinc-800 sticky top-16 z-40 bg-zinc-950/95 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto">
-          <div className="flex items-center gap-4 overflow-x-auto pb-2">
-            <Filter className="text-zinc-500" size={18} />
+          <div className="flex items-center gap-4 overflow-x-auto pb-2 scrollbar-hide">
+            <Filter className="text-zinc-500 shrink-0" size={18} aria-hidden="true" />
             {categories.map((category) => (
               <button
                 key={category}
@@ -549,20 +628,21 @@ export default function MarketplaceHome() {
                 className={`px-4 py-2 rounded-lg text-sm whitespace-nowrap transition-all ${
                   selectedCategory === category
                     ? 'bg-purple-600 text-white'
-                    : 'bg-zinc-900 text-zinc-400 hover:bg-zinc-800'
+                    : 'bg-zinc-900 text-zinc-400 hover:bg-zinc-800 hover:text-white'
                 }`}
+                aria-pressed={selectedCategory === category}
               >
                 {category}
               </button>
             ))}
           </div>
         </div>
-      </section>
+      </nav>
 
       {/* All APIs */}
-      <section className="py-12 px-6">
+      <section className="section-spacing">
         <div className="max-w-7xl mx-auto">
-          <div className="flex items-center justify-between mb-8">
+          <div className="flex items-center justify-between mb-8 flex-wrap gap-4">
             <h2 className="text-2xl font-bold">
               {selectedCategory === 'all' ? 'All APIs & MCPs' : selectedCategory}
               <span className="text-zinc-500 text-lg font-normal ml-3">
@@ -570,8 +650,12 @@ export default function MarketplaceHome() {
               </span>
             </h2>
             <div className="flex items-center gap-2 text-sm text-zinc-500">
-              <span>Sort by:</span>
-              <select className="bg-zinc-900 border border-zinc-800 rounded-lg px-3 py-2 text-white">
+              <label htmlFor="sort-select">Sort by:</label>
+              <select
+                id="sort-select"
+                className="bg-zinc-900 border border-zinc-800 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
+                aria-label="Sort APIs"
+              >
                 <option>Popularity</option>
                 <option>Rating</option>
                 <option>Price</option>
@@ -580,11 +664,17 @@ export default function MarketplaceHome() {
             </div>
           </div>
 
-          {filteredServices.length === 0 ? (
-            <div className="text-center py-16">
-              <Search className="w-16 h-16 mx-auto mb-4 text-zinc-600" />
+          {isLoading ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {[...Array(6)].map((_, i) => (
+                <ApiCardSkeleton key={i} />
+              ))}
+            </div>
+          ) : filteredServices.length === 0 ? (
+            <div className="empty-state">
+              <Search className="w-16 h-16 empty-state-icon" aria-hidden="true" />
               <h3 className="text-xl font-bold mb-2">No APIs found</h3>
-              <p className="text-zinc-500">Try adjusting your search or category filter</p>
+              <p className="empty-state-text">Try adjusting your search or category filter</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -597,7 +687,7 @@ export default function MarketplaceHome() {
       </section>
 
       {/* Newsletter Section */}
-      <section className="py-16 px-6 bg-zinc-900/50">
+      <section className="section-spacing bg-zinc-900/50">
         <div className="max-w-7xl mx-auto">
           <NewsletterSignup />
         </div>
