@@ -36,9 +36,39 @@ interface ApiService {
 export default function Dashboard() {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
+  const [services, setServices] = useState<ApiService[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
-  // Mock API Services
-  const apiServices: ApiService[] = [
+  // Fetch services from API on mount
+  useEffect(() => {
+    async function fetchServices() {
+      setLoading(true);
+      setError('');
+      
+      try {
+        const response = await fetch('/api/services?limit=100');
+        const data = await response.json();
+        
+        if (!response.ok) {
+          throw new Error(data.error || 'Failed to fetch services');
+        }
+        
+        setServices(data.services || []);
+      } catch (err: any) {
+        console.error('Error fetching services:', err);
+        setError(err.message || 'Failed to load services');
+        setServices([]);
+      } finally {
+        setLoading(false);
+      }
+    }
+    
+    fetchServices();
+  }, []);
+
+  // Fetch real API Services (replacing mock data)
+  const apiServices = services;
     {
       id: 'gpt-4-turbo',
       name: 'GPT-4 Turbo',
