@@ -56,18 +56,11 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ services: demoServices, total: demoServices.length });
   }
 
-  // Build query
+  // Build query - simplified without joins to missing tables
   let query = supabase!.from('services')
-    .select(`
-      *,
-      categories (name, slug, color, icon),
-      service_tags (tags (name, slug))
-    `);
+    .select('*');
 
   // Apply filters
-  if (category) {
-    query = query.eq('category_id', category);
-  }
   if (tag) {
     query = query.contains('tags', [tag]);
   }
