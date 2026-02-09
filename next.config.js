@@ -91,7 +91,8 @@ const nextConfig = {
 
   // Turbopack configuration (Next.js 16+)
   turbopack: {
-    // Empty config to silence the warning
+    // Explicitly set root directory to prevent building subdirectories
+    root: __dirname,
   },
 };
 
