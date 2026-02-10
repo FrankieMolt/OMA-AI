@@ -1,0 +1,15 @@
+{
+  "type": "GepPromptArtifact",
+  "at": "2026-02-10T17:22:40.414Z",
+  "cycle_id": "Cycle #0001",
+  "run_id": "run_1770744160402",
+  "prompt_path": "/home/nosyt/.openclaw/workspace/memory/gep_prompt_Cycle_#0001_run_1770744160402.txt",
+  "meta": {
+    "agent": "main",
+    "drift_enabled": false,
+    "review_mode": false,
+    "dry_run": false,
+    "mutation_id": "mut_1770744160401",
+    "personality_key": "rigor=0.7|creativity=0.3|verbosity=0.3|risk_tolerance=0.4|obedience=0.9"
+  }
+}

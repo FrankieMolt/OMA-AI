@@ -1,10 +1,12 @@
 /**
  * App Layout - Root layout with providers and metadata
+ * UPDATED: Added mobile menu support with hamburger button
  */
 
 import type { Metadata, Viewport } from 'next'
 import { Inter, Playfair_Display, Source_Sans_3 } from 'next/font/google'
 import './globals.css'
+import { MobileMenu } from './components/mobile-menu'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 const playfairDisplay = Playfair_Display({
@@ -28,23 +30,13 @@ export const metadata: Metadata = {
     default: 'SpendThrone - The Kingdom of Weird Stuff',
     template: '%s | SpendThrone',
   },
-  description: 'Discover the weirdest, most viral products on Earth. Extreme tech, luxury items, and WTF technology for the modern age. A curated collection of bizarre innovation.',
-  keywords: [
-    'SpendThrone',
-    'weird products',
-    'extreme tech',
-    'viral products',
-    'luxury items',
-    'WTF technology',
-    'bizarre innovations',
-    'strange gadgets',
-    'unusual products',
-    'kingdom of weird',
-    'viral marketplace',
-  ],
-  authors: [{ name: 'Nosyt LLC' }],
+  description: 'Discover unique and extraordinary products at SpendThrone. The kingdom of weird stuff for the modern connoisseur.',
+  keywords: ['SpendThrone', 'luxury shopping', 'unique products', 'premium goods', 'tech gadgets', 'home living', 'gaming accessories'],
   icons: {
-    icon: '/favicon.ico',
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/favicon.ico', sizes: 'any' },
+    ],
     apple: '/apple-touch-icon.png',
   },
   openGraph: {
@@ -53,107 +45,76 @@ export const metadata: Metadata = {
     url: 'https://spendthrone.com',
     siteName: 'SpendThrone',
     title: 'SpendThrone - The Kingdom of Weird Stuff',
-    description: 'The curated kingdom of the weirdest, most viral products on Earth. WTF-level technology for the modern age.',
+    description: 'Discover unique and extraordinary products at SpendThrone. The kingdom of weird stuff for the modern connoisseur.',
     images: [
       {
         url: 'https://spendthrone.com/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'SpendThrone - Weird Products Kingdom',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'SpendThrone - The Kingdom of Weird Stuff',
-    description: 'The ultimate collection of viral, weird, and extreme products. WTF-level technology for the modern age.',
     creator: '@spendthrone',
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
-  },
-  alternates: {
-    canonical: 'https://spendthrone.com',
+    title: 'SpendThrone - The Kingdom of Weird Stuff',
+    description: 'Discover unique and extraordinary products at SpendThrone. The kingdom of weird stuff for the modern connoisseur.',
+    images: [
+      {
+        url: 'https://spendthrone.com/og-image.png',
+        width: 1200,
+        height: 630,
+      },
+    ],
   },
 }
-
-import { AppProvider } from '@/components/providers/AppProvider'
-import { ToastProvider } from '@/components/providers/ToastProvider'
-import { ErrorBoundary } from '@/components/ErrorBoundary'
-import { Navbar } from '@/components/layout/Navbar'
-import { Footer } from '@/components/layout/Footer'
-import { CartDrawerWrapper } from '@/components/cart/CartDrawerWrapper'
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'WebSite',
-    name: 'SpendThrone - The Kingdom of Weird Stuff',
-    description: 'The curated kingdom of the weirdest, most viral products on Earth. WTF-level technology for the modern age.',
-    url: 'https://spendthrone.com',
-    potentialAction: {
-      '@type': 'SearchAction',
-      target: 'https://spendthrone.com/search?q={search_term_string}',
-      'query-input': 'required name=search_term_string',
-    },
-    publisher: {
-      '@type': 'Organization',
-      name: 'SpendThrone',
-      url: 'https://spendthrone.com',
-      logo: {
-        '@type': 'ImageObject',
-        url: 'https://spendthrone.com/logo-512x512.png',
-        width: 512,
-        height: 512,
-      },
-      contactPoint: {
-        '@type': 'ContactPoint',
-        contactType: 'sales',
-        email: 'hello@spendthrone.com',
-      },
-    },
-    sameAs: [
-      'https://twitter.com/spendthrone',
-    ],
-  };
-
   return (
     <html lang="en" className="dark">
-      <head>
-        <link rel="canonical" href="https://spendthrone.com" />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
-      </head>
-      <body className={`${inter.variable} ${playfairDisplay.variable} ${sourceSansPro.variable} bg-zinc-950 text-zinc-50 antialiased selection:bg-purple-500 selection:text-white`}>
-        <ErrorBoundary>
-          <ToastProvider>
-            <AppProvider>
-              <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-purple-600 focus:text-white focus:rounded-lg">
-                Skip to main content
-              </a>
-              <Navbar />
-              <main id="main-content">
-                {children}
-              </main>
-              <Footer />
-              <CartDrawerWrapper />
-            </AppProvider>
-          </ToastProvider>
-        </ErrorBoundary>
+      <body className={`${inter.variable} ${playfairDisplay.variable} ${sourceSansPro.variable} font-sans antialiased`}>
+        {/* Mobile Menu Component */}
+        <MobileMenu />
+
+        {/* Desktop Navigation (hidden on mobile) */}
+        <nav className="hidden md:flex items-center gap-8 px-8 py-4 bg-zinc-950 border-b border-zinc-800 backdrop-blur-md">
+          <a className="flex items-center gap-3" href="/">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-600 to-purple-700 flex items-center justify-center">
+              <span className="text-2xl font-bold text-white">ST</span>
+            </div>
+            <span className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-purple-600">SpendThrone</span>
+          </a>
+
+          <div className="flex items-center gap-1">
+            <a className="text-sm font-medium text-zinc-400 hover:text-white hover:bg-zinc-800 px-4 py-2 rounded-xl transition-colors duration-200" href="/">
+              Home
+            </a>
+            <a className="text-sm font-medium text-zinc-400 hover:text-white hover:bg-zinc-800 px-4 py-2 rounded-xl transition-colors duration-200" href="/category/tech-gadgets">
+              Tech Gadgets
+            </a>
+            <a className="text-sm font-medium text-zinc-400 hover:text-white hover:bg-zinc-800 px-4 py-2 rounded-xl transition-colors duration-200" href="/category/home-living">
+              Home Living
+            </a>
+            <a className="text-sm font-medium text-zinc-400 hover:text-white hover:bg-zinc-800 px-4 py-2 rounded-xl transition-colors duration-200" href="/category/outdoor">
+              Outdoor
+            </a>
+            <a className="text-sm font-medium text-zinc-400 hover:text-white hover:bg-zinc-800 px-4 py-2 rounded-xl transition-colors duration-200" href="/category/gaming">
+              Gaming
+            </a>
+          </div>
+
+          <button className="flex items-center gap-2 px-6 py-2.5 rounded-xl bg-purple-600 text-white font-semibold hover:bg-purple-700 transition-colors shadow-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
+            <ShoppingBag size={20} />
+            <span>Cart</span>
+          </button>
+        </nav>
+
+        {/* Main content */}
+        <main className="flex-1">{children}</main>
       </body>
     </html>
   )
