@@ -1,9 +1,8 @@
 {
   "buildCommand": "npm run build",
-  "outputDirectory": ".next",
+  "outputDirectory": "dist",
   "installCommand": "npm install",
   "framework": "nextjs",
-  "regions": ["iad1"],
   "headers": [
     {
       "source": "/:path*",

@@ -574,7 +574,7 @@ const realProducts = [
         price: 49.99,
         originalPrice: 59.99,
         category: "tech-gadgets",
-        image: "/images/products/pura-diffuser.jpg",
+        image: "/images/products/pura-diffuser.svg",
         affiliateLink: "https://www.amazon.com/Pura-Smart-Home-Fragrance-Diffuser/dp/B09X5Z5Z5Z?tag=spendthrone-20",
         tags: [
             "smart home",
@@ -603,7 +603,7 @@ const realProducts = [
         shortDescription: "Compact waterproof speaker with powerful JBL sound",
         price: 39.95,
         category: "tech-gadgets",
-        image: "/images/products/jbl-go-4.jpg",
+        image: "/images/products/jbl-go-4.svg",
         affiliateLink: "https://www.amazon.com/JBL-Go-4-Portable-Bluetooth/dp/B0CF5X5X5X?tag=spendthrone-20",
         tags: [
             "speaker",
@@ -631,7 +631,7 @@ const realProducts = [
         shortDescription: "Modern virtual pet with color screen and planetary habitats",
         price: 59.99,
         category: "tech-gadgets",
-        image: "/images/products/tamagotchi-paradise.jpg",
+        image: "/images/products/tamagotchi-paradise.svg",
         affiliateLink: "https://www.amazon.com/Tamagotchi-Paradise-Color-Screen/dp/B0GX5Z5Z5Z?tag=spendthrone-20",
         tags: [
             "virtual pet",
@@ -660,7 +660,7 @@ const realProducts = [
         shortDescription: "Convert wired CarPlay to wireless - no more cables!",
         price: 89.99,
         category: "tech-gadgets",
-        image: "/images/products/carlinkit-5.jpg",
+        image: "/images/products/carlinkit-5.svg",
         affiliateLink: "https://www.amazon.com/CarLinkit-5-Wireless-CarPlay-Adapter/dp/B0BZ5Z5Z5Z?tag=spendthrone-20",
         tags: [
             "car tech",
@@ -688,7 +688,7 @@ const realProducts = [
         shortDescription: "Revolutionary color e-ink photo frame with realistic print quality",
         price: 299.00,
         category: "tech-gadgets",
-        image: "/images/products/aura-ink-frame.jpg",
+        image: "/images/products/aura-ink-frame.svg",
         affiliateLink: "https://www.amazon.com/Aura-Ink-Frame-Color-E-Ink/dp/B0HJ5Z5Z5Z?tag=spendthrone-20",
         tags: [
             "digital frame",
@@ -717,7 +717,7 @@ const realProducts = [
         shortDescription: "65W laptop charger with built-in USB-C cables - no more lost cables!",
         price: 79.99,
         category: "tech-gadgets",
-        image: "/images/products/anker-power-bank.jpg",
+        image: "/images/products/anker-power-bank.svg",
         affiliateLink: "https://www.amazon.com/Anker-Portable-Multi-Device-Charging-Retractable/dp/B0DCBB2YTR?tag=spendthrone-20",
         tags: [
             "power bank",
@@ -745,7 +745,7 @@ const realProducts = [
         shortDescription: "Waterproof tech organizer with smart origami pockets",
         price: 69.95,
         category: "tech-gadgets",
-        image: "/images/products/peak-design-tech-pouch.jpg",
+        image: "/images/products/peak-design-tech-pouch.svg",
         affiliateLink: "https://www.amazon.com/Peak-Design-Tech-Pouch-Organizer/dp/B08P5Z5Z5Z?tag=spendthrone-20",
         tags: [
             "organizer",
@@ -774,7 +774,7 @@ const realProducts = [
         price: 34.99,
         originalPrice: 49.99,
         category: "tech-gadgets",
-        image: "/images/products/bonaok-karaoke-mic.jpg",
+        image: "/images/products/bonaok-karaoke-mic.svg",
         affiliateLink: "https://www.amazon.com/BONAOK-Microphone-Portable-Bluetooth-Smartphone/dp/B08LYL3MRY?tag=spendthrone-20",
         tags: [
             "karaoke",
@@ -803,7 +803,7 @@ const realProducts = [
         shortDescription: "Ultra-portable beginner drone with palm takeoff and smart shots",
         price: 199.00,
         category: "tech-gadgets",
-        image: "/images/products/dji-neo-drone.jpg",
+        image: "/images/products/dji-neo-drone.svg",
         affiliateLink: "https://www.amazon.com/DJI-Neo-Drone-Black/dp/B0DZ5Z5Z5Z?tag=spendthrone-20",
         tags: [
             "drone",
@@ -833,7 +833,7 @@ const realProducts = [
         price: 349.00,
         originalPrice: 399.99,
         category: "tech-gadgets",
-        image: "/images/products/sony-wh-100xm6.jpg",
+        image: "/images/products/sony-wh-100xm6.svg",
         affiliateLink: "https://www.amazon.com/Sony-WH-100XM6-Canceling-Headphones/dp/B0DX5Z5Z5Z?tag=spendthrone-20",
         tags: [
             "headphones",
@@ -863,7 +863,7 @@ const realProducts = [
         shortDescription: "900-piece vintage radio Lego set with phone holder and sound effects",
         price: 49.99,
         category: "home-living",
-        image: "/images/products/lego-retro-radio.jpg",
+        image: "/images/products/lego-retro-radio.svg",
         affiliateLink: "https://www.amazon.com/LEGO-Transistors-Compartment-Integration-10334/dp/B0D738JLYR?tag=spendthrone-20",
         tags: [
             "Lego",
@@ -892,7 +892,7 @@ const realProducts = [
         price: 29.99,
         originalPrice: 39.99,
         category: "home-living",
-        image: "/images/products/mason-jar-sconces.jpg",
+        image: "/images/products/mason-jar-sconces.svg",
         affiliateLink: "https://www.amazon.com/Mason-Sconces-Handmade-Wall-Christmas/dp/B07Z5Z5Z5Z?tag=spendthrone-20",
         tags: [
             "wall decor",
@@ -921,7 +921,7 @@ const realProducts = [
         shortDescription: "Indoor hydroponic garden with auto-watering and LED grow light",
         price: 99.99,
         category: "home-living",
-        image: "/images/products/smart-garden.jpg",
+        image: "/images/products/smart-garden.svg",
         affiliateLink: "https://www.amazon.com/Indoor-Hydroponic-Growing-Automatic-Watering/dp/B08N5Z5Z5Z?tag=spendthrone-20",
         tags: [
             "garden",
@@ -949,7 +949,7 @@ const realProducts = [
         shortDescription: "Projects realistic sunset glow - viral TikTok mood lighting",
         price: 24.99,
         category: "home-living",
-        image: "/images/products/sunset-lamp.jpg",
+        image: "/images/products/sunset-lamp.svg",
         affiliateLink: "https://www.amazon.com/Sunset-Projector-Romantic-Atmosphere-Decoration/dp/B08Q5Z5Z5Z?tag=spendthrone-20",
         tags: [
             "lighting",
@@ -978,7 +978,7 @@ const realProducts = [
         shortDescription: "2-foot tall pieces for epic backyard tic-tac-toe battles",
         price: 44.99,
         category: "weird-awesome",
-        image: "/images/products/giant-tic-tac-toe.jpg",
+        image: "/images/products/giant-tic-tac-toe.svg",
         affiliateLink: "https://www.amazon.com/Giant-Tic-Tac-Toe-Outdoor/dp/B07K5Z5Z5Z?tag=spendthrone-20",
         tags: [
             "lawn game",
@@ -1006,7 +1006,7 @@ const realProducts = [
         shortDescription: "Animated plant that talks back - weirdly hilarious desk buddy!",
         price: 19.99,
         category: "weird-awesome",
-        image: "/images/products/talking-plant.jpg",
+        image: "/images/products/talking-plant.svg",
         affiliateLink: "https://www.amazon.com/Talking-Animated-Plant-Phrases/dp/B09J5Z5Z5Z?tag=spendthrone-20",
         tags: [
             "novelty",
@@ -1034,7 +1034,7 @@ const realProducts = [
         shortDescription: "NASA-accurate 3D moon with touch control - out of this world!",
         price: 34.99,
         category: "weird-awesome",
-        image: "/images/products/moon-lamp.jpg",
+        image: "/images/products/moon-lamp.svg",
         affiliateLink: "https://www.amazon.com/Moon-Lamp-Realistic-Craters-3D-Printed/dp/B07X5Z5Z5Z?tag=spendthrone-20",
         tags: [
             "moon",
@@ -1063,7 +1063,7 @@ const realProducts = [
         shortDescription: "Turn your phone into a mini arcade machine with joystick!",
         price: 29.99,
         category: "gaming",
-        image: "/images/products/arcade-cabinet.jpg",
+        image: "/images/products/arcade-cabinet.svg",
         affiliateLink: "https://www.amazon.com/Retro-Arcade-Cabinet-Controller/dp/B08L5Z5Z5Z?tag=spendthrone-20",
         tags: [
             "arcade",
@@ -1091,7 +1091,7 @@ const realProducts = [
         shortDescription: "Insulated bottle with 8-bit pixel art - gaming nostalgia!",
         price: 24.99,
         category: "gaming",
-        image: "/images/products/8bit-water-bottle.jpg",
+        image: "/images/products/8bit-water-bottle.svg",
         affiliateLink: "https://www.amazon.com/Pixel-Water-Bottle-8-Bit-Design/dp/B08Z5Z5Z5Z?tag=spendthrone-20",
         tags: [
             "water bottle",
@@ -1121,7 +1121,7 @@ const realProducts = [
         price: 349.00,
         originalPrice: 399.00,
         category: "outdoor",
-        image: "/images/products/portable-pizza-oven.jpg",
+        image: "/images/products/portable-pizza-oven.svg",
         affiliateLink: "https://www.amazon.com/Portable-Pizza-Oven-950°F-Stainless/dp/B07Z5Z5Z5Z?tag=spendthrone-20",
         tags: [
             "pizza",
@@ -1150,7 +1150,7 @@ const realProducts = [
         shortDescription: "Solar lantern + fan combo - stay cool and lit outdoors!",
         price: 19.99,
         category: "outdoor",
-        image: "/images/products/solar-lantern-fan.jpg",
+        image: "/images/products/solar-lantern-fan.svg",
         affiliateLink: "https://www.amazon.com/Solar-Camping-Lantern-Fan-Portable/dp/B08K5Z5Z5Z?tag=spendthrone-20",
         tags: [
             "lantern",
@@ -1179,7 +1179,7 @@ const realProducts = [
         shortDescription: "4-in-1 beauty tech device for professional skincare at home",
         price: 229.00,
         category: "health-wellness",
-        image: "/images/products/medicube-booster-pro.jpg",
+        image: "/images/products/medicube-booster-pro.svg",
         affiliateLink: "https://www.amazon.com/Medicube-Booster-Pro-Multifunction/dp/B0D5Z5Z5Z?tag=spendthrone-20",
         tags: [
             "skincare",
@@ -1207,7 +1207,7 @@ const realProducts = [
         shortDescription: "Sleep mask with built-in headphones - dream better!",
         price: 29.99,
         category: "health-wellness",
-        image: "/images/products/sleep-headphones-mask.jpg",
+        image: "/images/products/sleep-headphones-mask.svg",
         affiliateLink: "https://www.amazon.com/Sleep-Headphones-Mask-Wireless-Music/dp/B07Z5Z5Z5Z?tag=spendthrone-20",
         tags: [
             "sleep",
@@ -1236,7 +1236,7 @@ const realProducts = [
         shortDescription: "Draw in 3D - create sculptures, art, and DIY projects!",
         price: 39.99,
         category: "art-design",
-        image: "/images/products/3d-printing-pen.jpg",
+        image: "/images/products/3d-printing-pen.svg",
         affiliateLink: "https://www.amazon.com/3D-Printing-Pen-Beginners-Temperature/dp/B08X5Z5Z5Z?tag=spendthrone-20",
         tags: [
             "3D printing",
@@ -1264,7 +1264,7 @@ const realProducts = [
         shortDescription: "Mesmerizing infinite depth illusion - stunning centerpiece!",
         price: 49.99,
         category: "art-design",
-        image: "/images/products/infinity-mirror.jpg",
+        image: "/images/products/infinity-mirror.svg",
         affiliateLink: "https://www.amazon.com/Infinity-Mirror-Color-Changing-Decorative/dp/B08N5Z5Z5Z?tag=spendthrone-20",
         tags: [
             "mirror",
@@ -1293,7 +1293,7 @@ const realProducts = [
         shortDescription: "Mouse pad with built-in wireless phone charging + RGB!",
         price: 34.99,
         category: "tech-gadgets",
-        image: "/images/products/wireless-mouse-pad.jpg",
+        image: "/images/products/wireless-mouse-pad.svg",
         affiliateLink: "https://www.amazon.com/Wireless-Charging-Mouse-Pad-RGB/dp/B08K5Z5Z5Z?tag=spendthrone-20",
         tags: [
             "mouse pad",
@@ -1321,7 +1321,7 @@ const realProducts = [
         shortDescription: "Adorable mini vacuum for desk and keyboard cleaning!",
         price: 14.99,
         category: "home-living",
-        image: "/images/products/mini-vacuum.jpg",
+        image: "/images/products/mini-vacuum.svg",
         affiliateLink: "https://www.amazon.com/Mini-Desktop-Vacuum-Cleaner-Rechargeable/dp/B07Z5Z5Z5Z?tag=spendthrone-20",
         tags: [
             "vacuum",
@@ -1349,7 +1349,7 @@ const realProducts = [
         shortDescription: "Smart bottle that tracks hydration and reminds you to drink!",
         price: 34.99,
         category: "health-wellness",
-        image: "/images/products/smart-water-bottle.jpg",
+        image: "/images/products/smart-water-bottle.svg",
         affiliateLink: "https://www.amazon.com/Smart-Water-Bottle-Hydration-Reminder/dp/B08X5Z5Z5Z?tag=spendthrone-20",
         tags: [
             "water bottle",
@@ -1377,7 +1377,7 @@ const realProducts = [
         shortDescription: "Galaxy projector that syncs with music - immersive stargazing!",
         price: 49.99,
         category: "home-living",
-        image: "/images/products/galaxy-projector.jpg",
+        image: "/images/products/galaxy-projector.svg",
         affiliateLink: "https://www.amazon.com/Galaxy-Star-Projector-Music-Sync/dp/B08N5Z5Z5Z?tag=spendthrone-20",
         tags: [
             "projector",
@@ -1405,7 +1405,7 @@ const realProducts = [
         shortDescription: "Wearable neck fan - personal AC for hot days!",
         price: 24.99,
         category: "outdoor",
-        image: "/images/products/neck-fan.jpg",
+        image: "/images/products/neck-fan.svg",
         affiliateLink: "https://www.amazon.com/Portable-Neck-Fan-Hands-Free-Cooling/dp/B08K5Z5Z5Z?tag=spendthrone-20",
         tags: [
             "fan",
@@ -1434,7 +1434,7 @@ const realProducts = [
         shortDescription: "Reusable cloud-connected notebook - scan and wipe clean!",
         price: 34.00,
         category: "office-setup",
-        image: "/images/products/rocketbook.jpg",
+        image: "/images/products/rocketbook.svg",
         affiliateLink: "https://www.amazon.com/Rocketbook-Smart-Reusable-Notebook-Dot-Grid/dp/B01GU6T722?tag=spendthrone-20",
         tags: [
             "notebook",
@@ -1462,7 +1462,7 @@ const realProducts = [
         shortDescription: "Premium monitor light bar with wireless controller and backlight",
         price: 179.00,
         category: "office-setup",
-        image: "/images/products/screenbar-halo.jpg",
+        image: "/images/products/screenbar-halo.svg",
         affiliateLink: "https://www.amazon.com/BenQ-ScreenBar-Halo-Controller-Brightness/dp/B08WT889P3?tag=spendthrone-20",
         tags: [
             "monitor light",
@@ -1491,7 +1491,7 @@ const realProducts = [
         shortDescription: "Sleek desk organizer with integrated wireless charging lid",
         price: 109.00,
         category: "office-setup",
-        image: "/images/products/orbitkey-nest.jpg",
+        image: "/images/products/orbitkey-nest.svg",
         affiliateLink: "https://www.amazon.com/Orbitkey-Nest-Portable-Organizer-Wireless/dp/B08HJ5Z5Z5?tag=spendthrone-20",
         tags: [
             "organizer",
@@ -1519,7 +1519,7 @@ const realProducts = [
         shortDescription: "Premium all-aluminum customizable mechanical keyboard",
         price: 169.00,
         category: "gaming",
-        image: "/images/products/keychron-q1.jpg",
+        image: "/images/products/keychron-q1.svg",
         affiliateLink: "https://www.amazon.com/Keychron-Customizable-Mechanical-Keyboard-Hot-swappable/dp/B09968S9YH?tag=spendthrone-20",
         tags: [
             "keyboard",
@@ -1547,7 +1547,7 @@ const realProducts = [
         shortDescription: "App-controlled heated mug - keeps coffee perfectly hot!",
         price: 129.00,
         category: "home-living",
-        image: "/images/products/ember-mug-2.jpg",
+        image: "/images/products/ember-mug-2.svg",
         affiliateLink: "https://www.amazon.com/Ember-Temperature-Control-Smart-10-oz/dp/B07W8L8TGD?tag=spendthrone-20",
         tags: [
             "smart mug",
@@ -1575,7 +1575,7 @@ const realProducts = [
         shortDescription: "Modular smart LED light panels with touch and music sync",
         price: 199.99,
         category: "weird-awesome",
-        image: "/images/products/nanoleaf-triangles.jpg",
+        image: "/images/products/nanoleaf-triangles.svg",
         affiliateLink: "https://www.amazon.com/Nanoleaf-Shapes-Triangles-Smarter-Kit/dp/B08L5Z5Z5Z?tag=spendthrone-20",
         tags: [
             "lighting",
@@ -1603,7 +1603,7 @@ const realProducts = [
         shortDescription: "Magnetic levitating 3D printed moon - floats in mid-air!",
         price: 89.99,
         category: "weird-awesome",
-        image: "/images/products/levitating-moon.jpg",
+        image: "/images/products/levitating-moon.svg",
         affiliateLink: "https://www.amazon.com/Levitating-Moon-Lamp-Floating-Spinning/dp/B08X5Z5Z5Z?tag=spendthrone-20",
         tags: [
             "levitating",
@@ -1631,7 +1631,7 @@ const realProducts = [
         shortDescription: "Premium weighted blanket for better sleep and stress relief",
         price: 249.00,
         category: "health-wellness",
-        image: "/images/products/gravity-blanket.jpg",
+        image: "/images/products/gravity-blanket.svg",
         affiliateLink: "https://www.amazon.com/Gravity-Blanket-Original-Weighted-Premium/dp/B0734297CC?tag=spendthrone-20",
         tags: [
             "sleep",
@@ -1659,7 +1659,7 @@ const realProducts = [
         shortDescription: "Stealthy titanium smart ring for health and sleep tracking",
         price: 299.00,
         category: "health-wellness",
-        image: "/images/products/oura-ring.jpg",
+        image: "/images/products/oura-ring.svg",
         affiliateLink: "https://ouraring.com/product/heritage-silver?tag=spendthrone-20",
         tags: [
             "wearable",
@@ -1687,7 +1687,7 @@ const realProducts = [
         shortDescription: "Ultra-portable percussive massage gun for muscle recovery",
         price: 199.00,
         category: "health-wellness",
-        image: "/images/products/theragun-mini.jpg",
+        image: "/images/products/theragun-mini.svg",
         affiliateLink: "https://www.amazon.com/Theragun-Mini-Portable-Percussive-Therapy/dp/B0B6ZS5Z5Z?tag=spendthrone-20",
         tags: [
             "massage",
@@ -1715,7 +1715,7 @@ const realProducts = [
         shortDescription: "Upgraded Nintendo Switch with stunning 7-inch OLED screen",
         price: 349.99,
         category: "gaming",
-        image: "/images/products/switch-oled.jpg",
+        image: "/images/products/switch-oled.svg",
         affiliateLink: "https://www.amazon.com/Nintendo-Switch-OLED-Model-Neon-Blue/dp/B098RKBCS6?tag=spendthrone-20",
         tags: [
             "nintendo",
@@ -1743,7 +1743,7 @@ const realProducts = [
         shortDescription: "Powerful handheld PC gaming with HDR OLED display",
         price: 549.00,
         category: "gaming",
-        image: "/images/products/steam-deck-oled.jpg",
+        image: "/images/products/steam-deck-oled.svg",
         affiliateLink: "https://store.steampowered.com/steamdeck",
         tags: [
             "pc gaming",
@@ -1771,7 +1771,7 @@ const realProducts = [
         shortDescription: "Turn your smartphone into a portable gaming console",
         price: 99.99,
         category: "gaming",
-        image: "/images/products/backbone-one.jpg",
+        image: "/images/products/backbone-one.svg",
         affiliateLink: "https://www.amazon.com/Backbone-One-Mobile-Gaming-Controller-iPhone/dp/B08RL7VK7B?tag=spendthrone-20",
         tags: [
             "controller",
@@ -1799,7 +1799,7 @@ const realProducts = [
         shortDescription: "Smokeless wood stove that generates electricity to charge gadgets",
         price: 149.95,
         category: "outdoor",
-        image: "/images/products/biolite-campstove.jpg",
+        image: "/images/products/biolite-campstove.svg",
         affiliateLink: "https://www.amazon.com/BioLite-CampStove-Electricity-Generating-Smokeless-Burning/dp/B08L5Z5Z5Z?tag=spendthrone-20",
         tags: [
             "camping",
@@ -1827,7 +1827,7 @@ const realProducts = [
         shortDescription: "Purify water in 8 seconds - removes viruses and bacteria",
         price: 99.95,
         category: "outdoor",
-        image: "/images/products/grayl-geopress.jpg",
+        image: "/images/products/grayl-geopress.svg",
         affiliateLink: "https://www.amazon.com/GRAYL-GeoPress-Water-Purifier-Bottle/dp/B07M6T7S5Z?tag=spendthrone-20",
         tags: [
             "water filter",
@@ -1855,7 +1855,7 @@ const realProducts = [
         shortDescription: "Weatherproof packable blanket made from recycled materials",
         price: 179.00,
         category: "outdoor",
-        image: "/images/products/rumpl-blanket.jpg",
+        image: "/images/products/rumpl-blanket.svg",
         affiliateLink: "https://www.amazon.com/Rumpl-NanoLoft-Puffy-Blanket-Outdoor/dp/B08N5Z5Z5Z?tag=spendthrone-20",
         tags: [
             "blanket",
@@ -1883,7 +1883,7 @@ const realProducts = [
         shortDescription: "Countertop appliance that turns food waste into dirt in hours",
         price: 499.00,
         category: "kitchen-gadgets",
-        image: "/images/products/lomi-composter.jpg",
+        image: "/images/products/lomi-composter.svg",
         affiliateLink: "https://www.amazon.com/Lomi-Kitchen-Composter-Turn-Waste/dp/B09R5Z5Z5Z?tag=spendthrone-20",
         tags: [
             "composter",
@@ -1912,7 +1912,7 @@ const realProducts = [
         shortDescription: "Wireless smart meat thermometer with AI cook time estimation",
         price: 129.95,
         category: "kitchen-gadgets",
-        image: "/images/products/meater-thermometer.jpg",
+        image: "/images/products/meater-thermometer.svg",
         affiliateLink: "https://www.amazon.com/MEATER-Thermometer-Rotisserie-Bluetooth-Connectivity/dp/B0CN5Z5Z5Z?tag=spendthrone-20",
         tags: [
             "thermometer",
@@ -1940,7 +1940,7 @@ const realProducts = [
         shortDescription: "Automatic cocktail maker with real spirit bottles and capsules",
         price: 369.00,
         category: "kitchen-gadgets",
-        image: "/images/products/bartesian.jpg",
+        image: "/images/products/bartesian.svg",
         affiliateLink: "https://www.amazon.com/Bartesian-Premium-Cocktail-Margarita-Machine/dp/B07N8Z5Z5Z?tag=spendthrone-20",
         tags: [
             "cocktail",
@@ -1968,7 +1968,7 @@ const realProducts = [
         shortDescription: "Touchscreen smart toaster with InstaGLO flash-searing tech",
         price: 349.00,
         category: "kitchen-gadgets",
-        image: "/images/products/revolution-toaster.jpg",
+        image: "/images/products/revolution-toaster.svg",
         affiliateLink: "https://www.amazon.com/Revolution-InstaGLO-2-Slice-Smart-Toaster/dp/B08X5Z5Z5Z?tag=spendthrone-20",
         tags: [
             "toaster",
@@ -1997,7 +1997,7 @@ const realProducts = [
         shortDescription: "Paper-like digital tablet for distraction-free writing",
         price: 399.00,
         category: "office-setup",
-        image: "/images/products/remarkable-2.jpg",
+        image: "/images/products/remarkable-2.svg",
         affiliateLink: "https://remarkable.com/store/remarkable-2",
         tags: [
             "e-ink",
@@ -2025,7 +2025,7 @@ const realProducts = [
         shortDescription: "The world's most ergonomic office chair for modern work",
         price: 1399.00,
         category: "office-setup",
-        image: "/images/products/steelcase-gesture.jpg",
+        image: "/images/products/steelcase-gesture.svg",
         affiliateLink: "https://www.amazon.com/Steelcase-Gesture-Chair-Graphite-Fabric/dp/B00HFE27GM?tag=spendthrone-20",
         tags: [
             "ergonomic",
@@ -2053,7 +2053,7 @@ const realProducts = [
         shortDescription: "Customizable LCD key controller for automation and streaming",
         price: 149.99,
         category: "office-setup",
-        image: "/images/products/stream-deck.jpg",
+        image: "/images/products/stream-deck.svg",
         affiliateLink: "https://www.amazon.com/Elgato-Stream-Deck-MK-2-Customizable/dp/B09738CV2G?tag=spendthrone-20",
         tags: [
             "automation",
@@ -2081,7 +2081,7 @@ const realProducts = [
         shortDescription: "Professional 32\" 4K monitor with flawless color accuracy",
         price: 1099.00,
         category: "office-setup",
-        image: "/images/products/benq-monitor.jpg",
+        image: "/images/products/benq-monitor.svg",
         affiliateLink: "https://www.amazon.com/BenQ-PD3220U-Monitor-Thunderbolt-DisplayPort/dp/B07N4PS6GR?tag=spendthrone-20",
         tags: [
             "monitor",
@@ -2109,7 +2109,7 @@ const realProducts = [
         shortDescription: "The most advanced gaming chair designed for posture and health",
         price: 1995.00,
         category: "gaming",
-        image: "/images/products/embody-gaming.jpg",
+        image: "/images/products/embody-gaming.svg",
         affiliateLink: "https://www.hermanmiller.com/products/seating/office-chairs/embody-gaming-chair?tag=spendthrone-20",
         tags: [
             "gaming chair",
@@ -2137,7 +2137,7 @@ const realProducts = [
         shortDescription: "Ultra-lightweight wireless pro gaming mouse for esports",
         price: 159.00,
         category: "gaming",
-        image: "/images/products/gpro-superlight.jpg",
+        image: "/images/products/gpro-superlight.svg",
         affiliateLink: "https://www.amazon.com/Logitech-Superlight-Lightweight-Wireless-Programmable/dp/B0BZSZSZSZ?tag=spendthrone-20",
         tags: [
             "gaming mouse",
@@ -2165,7 +2165,7 @@ const realProducts = [
         shortDescription: "Futuristic 3D hexagonal LED wall panels with RGBIC",
         price: 179.99,
         category: "weird-awesome",
-        image: "/images/products/govee-hexa.jpg",
+        image: "/images/products/govee-hexa.svg",
         affiliateLink: "https://www.amazon.com/Govee-Glide-Hexa-Light-Panels/dp/B09968S9YH?tag=spendthrone-20",
         tags: [
             "lighting",
@@ -2193,7 +2193,7 @@ const realProducts = [
         shortDescription: "Powerful cordless vacuum with laser dust detection",
         price: 749.99,
         category: "home-living",
-        image: "/images/products/dyson-v15.jpg",
+        image: "/images/products/dyson-v15.svg",
         affiliateLink: "https://www.amazon.com/Dyson-V15-Detect-Cordless-Vacuum/dp/B08X5Z5Z5Z?tag=spendthrone-20",
         tags: [
             "vacuum",
@@ -2222,7 +2222,7 @@ const realProducts = [
         shortDescription: "4K QLED TV that looks like a masterpiece on your wall",
         price: 1499.00,
         category: "home-living",
-        image: "/images/products/samsung-frame.jpg",
+        image: "/images/products/samsung-frame.svg",
         affiliateLink: "https://www.amazon.com/SAMSUNG-55-Inch-Class-QLED-Frame/dp/B0CXSZSZSZ?tag=spendthrone-20",
         tags: [
             "TV",
@@ -2250,7 +2250,7 @@ const realProducts = [
         shortDescription: "Precision electric gooseneck kettle with glass base",
         price: 255.00,
         category: "kitchen-gadgets",
-        image: "/images/products/fellow-stagg.jpg",
+        image: "/images/products/fellow-stagg.svg",
         affiliateLink: "https://www.amazon.com/Fellow-Stagg-Pro-Studio-Gooseneck/dp/B0BZSZSZSZ?tag=spendthrone-20",
         tags: [
             "coffee",
