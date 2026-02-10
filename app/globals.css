@@ -1,4 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+/* Local fonts loaded via next/font in layout.tsx */
+/* IBM_Plex_Sans: --font-ibm-plex */
+/* Space_Grotesk: --font-space-grotesk */
 
 @tailwind base;
 @tailwind components;
@@ -27,8 +29,8 @@
     --input: 240 10% 16%;
     --ring: 217 91% 60%;
     --radius: 0.5rem;
-    --font-heading: 'Space Grotesk', sans-serif;
-    --font-body: 'IBM Plex Sans', sans-serif;
+    --font-heading: var(--font-space-grotesk);
+    --font-body: var(--font-ibm-plex);
   }
 }
 

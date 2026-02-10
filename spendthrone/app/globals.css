@@ -1,4 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Source+Sans+Pro:wght@300;400;600;700&display=swap');
+/* Local fonts loaded via next/font in layout.tsx */
+/* Playfair_Display: --font-playfair-display */
+/* Source_Sans_3: --font-source-sans */
 
 /**
  * Global Styles - Tailwind CSS + custom styles
@@ -26,8 +28,8 @@
   --input: 0 0% 16%;
   --ring: 270 83% 67%;
   --radius: 0.75rem;
-  --font-heading: 'Playfair Display', serif;
-  --font-body: 'Source Sans Pro', sans-serif;
+  --font-heading: var(--font-playfair-display);
+  --font-body: var(--font-source-sans);
 }
 
 * {

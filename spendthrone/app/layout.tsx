@@ -3,10 +3,20 @@
  */
 
 import type { Metadata, Viewport } from 'next'
-import { Inter } from 'next/font/google'
+import { Inter, Playfair_Display, Source_Sans_3 } from 'next/font/google'
 import './globals.css'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
+const playfairDisplay = Playfair_Display({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-playfair-display',
+})
+const sourceSansPro = Source_Sans_3({
+  subsets: ['latin'],
+  weight: ['300', '400', '600', '700'],
+  variable: '--font-source-sans',
+})
 
 export const viewport: Viewport = {
   themeColor: '#7c3aed',
@@ -128,7 +138,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className={`${inter.className} ${inter.variable} bg-zinc-950 text-zinc-50 antialiased selection:bg-purple-500 selection:text-white`}>
+      <body className={`${inter.variable} ${playfairDisplay.variable} ${sourceSansPro.variable} bg-zinc-950 text-zinc-50 antialiased selection:bg-purple-500 selection:text-white`}>
         <ErrorBoundary>
           <ToastProvider>
             <AppProvider>

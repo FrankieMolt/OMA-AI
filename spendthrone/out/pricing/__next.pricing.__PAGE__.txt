@@ -1,5 +1,0 @@
-1:"$Sreact.fragment"
-2:I[97367,["/_next/static/chunks/ff1a16fafef87110.js","/_next/static/chunks/d2be314c3ece3fbe.js"],"OutletBoundary"]
-3:"$Sreact.suspense"
-0:{"buildId":"Iz0ydzfDqGtnQhEzrCWQG","rsc":["$","$1","c",{"children":[["$","div",null,{"className":"min-h-screen bg-zinc-950 text-zinc-50 py-20","children":["$","div",null,{"className":"max-w-4xl mx-auto px-4","children":[["$","h1",null,{"className":"text-4xl font-bold mb-8 bg-gradient-to-r from-purple-400 via-pink-500 to-amber-400 bg-clip-text text-transparent","children":"Pricing"}],["$","p",null,{"className":"text-zinc-400 text-lg","children":"All products are free to browse. Click \"Buy Now\" on any product to be redirected to our affiliate partners."}]]}]}],null,["$","$L2",null,{"children":["$","$3",null,{"name":"Next.MetadataOutlet","children":"$@4"}]}]]}],"loading":null,"isPartial":false}
-4:null

@@ -1,3 +1,0 @@
-:HL["/_next/static/chunks/60fef2cdf0e76a6a.css","style"]
-:HL["/_next/static/media/83afe278b6a6bb3c-s.p.3a6ba036.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
-0:{"buildId":"Iz0ydzfDqGtnQhEzrCWQG","tree":{"name":"","paramType":null,"paramKey":"","hasRuntimePrefetch":false,"slots":{"children":{"name":"product","paramType":null,"paramKey":"product","hasRuntimePrefetch":false,"slots":{"children":{"name":"slug","paramType":"d","paramKey":"nintendo-switch-oled-model","hasRuntimePrefetch":false,"slots":{"children":{"name":"__PAGE__","paramType":null,"paramKey":"__PAGE__","hasRuntimePrefetch":false,"slots":null,"isRootLayout":false}},"isRootLayout":false}},"isRootLayout":false}},"isRootLayout":true},"staleTime":300}
