@@ -21,19 +21,25 @@ export type Category =
 
 export interface Product {
   id: string;
-  title: string;
-  category: Category;
+  name?: string; // For real products
+  title?: string; // For mock products
+  category: string;
   price: number;
-  priceType: PriceType;
+  priceType?: PriceType;
   image: string;
   description: string;
-  verified: boolean;
+  verified?: boolean;
   tags: string[];
   rating?: number;
   reviewCount?: number;
   inStock?: boolean;
   popularity?: number; // 0-100 score
   addedAt?: string; // ISO date
+  affiliateLink?: string; // For real products
+  brand?: string;
+  features?: string[];
+  isNew?: boolean;
+  isOnSale?: boolean;
 }
 
 export interface CartItem {

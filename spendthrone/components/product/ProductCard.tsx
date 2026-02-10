@@ -69,7 +69,7 @@ export function ProductCard({ product, onInspect, index = 0 }: ProductCardProps)
         {!imageError ? (
           <Image
             src={product.image}
-            alt={product.title}
+            alt={product.name || product.title || 'Product Image'}
             fill
             className="object-cover transition-transform duration-500 group-hover:scale-110"
             onError={() => setImageError(true)}
@@ -152,15 +152,15 @@ export function ProductCard({ product, onInspect, index = 0 }: ProductCardProps)
         
         {/* Title */}
         <h3 className="text-lg font-bold text-white mb-2 group-hover:text-purple-400 transition-colors line-clamp-2 leading-tight">
-          {product.title}
+          {product.name || product.title}
         </h3>
         
         {/* Rating */}
-        {product.rating && (
+        {(product.rating !== undefined) && (
           <div className="mb-3">
             <StarRating 
               rating={product.rating} 
-              reviewCount={product.reviewCount}
+              reviewCount={product.reviewCount || 0}
               size="sm"
             />
           </div>
@@ -174,9 +174,9 @@ export function ProductCard({ product, onInspect, index = 0 }: ProductCardProps)
         {/* Price */}
         <div className="flex items-baseline gap-2 mb-4">
           <span className="text-2xl font-mono font-bold text-white">
-            {formatPrice(product.price, product.priceType)}
+            {formatPrice(product.price, product.priceType || 'unit_usd')}
           </span>
-          {product.priceType !== 'unit_usd' && (
+          {product.priceType && product.priceType !== 'unit_usd' && (
             <span className="text-[10px] font-bold text-zinc-600 uppercase tracking-widest">
               {product.priceType === 'monthly_usd' ? '/month' : '/year'}
             </span>
@@ -197,14 +197,31 @@ export function ProductCard({ product, onInspect, index = 0 }: ProductCardProps)
 
         {/* Actions */}
         <div className="flex gap-2">
-          <Button
-            variant="outline"
-            size="md"
-            className="flex-1"
-            onClick={() => onInspect(product)}
-          >
-            Quick View
-          </Button>
+          {product.affiliateLink ? (
+            <a 
+              href={product.affiliateLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1"
+            >
+              <Button
+                variant="primary"
+                size="md"
+                className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-bold"
+              >
+                Buy Now
+              </Button>
+            </a>
+          ) : (
+            <Button
+              variant="outline"
+              size="md"
+              className="flex-1"
+              onClick={() => onInspect(product)}
+            >
+              Quick View
+            </Button>
+          )}
           
           <Button
             variant={inCompare ? 'primary' : 'secondary'}

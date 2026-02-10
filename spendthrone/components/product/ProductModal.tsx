@@ -141,13 +141,13 @@ export function ProductModal({ product, onClose }: ProductModalProps) {
                       {product.category}
                     </Badge>
                     <h2 className="text-2xl md:text-3xl font-bold text-white mb-2">
-                      {product.title}
+                      {product.name || product.title}
                     </h2>
                     
-                    {product.rating && (
+                    {(product.rating !== undefined) && (
                       <StarRating 
                         rating={product.rating} 
-                        reviewCount={product.reviewCount}
+                        reviewCount={product.reviewCount || 0}
                         size="md"
                       />
                     )}
@@ -172,7 +172,7 @@ export function ProductModal({ product, onClose }: ProductModalProps) {
                   {/* Price */}
                   <div className="flex items-baseline gap-3 p-4 bg-zinc-800/50 rounded-2xl">
                     <span className="text-4xl font-mono font-bold text-white">
-                      {formatPrice(product.price, product.priceType)}
+                      {formatPrice(product.price, product.priceType || 'unit_usd')}
                     </span>
                     {product.inStock ? (
                       <Badge variant="success">In Stock</Badge>
@@ -228,8 +228,8 @@ export function ProductModal({ product, onClose }: ProductModalProps) {
                         <div className="aspect-square bg-zinc-800 rounded-lg mb-2 flex items-center justify-center">
                           <ShoppingBag className="text-zinc-600" size={20} />
                         </div>
-                        <p className="text-sm font-medium text-white line-clamp-1">{related.title}</p>
-                        <p className="text-xs text-purple-400">{formatPrice(related.price, related.priceType)}</p>
+                        <p className="text-sm font-medium text-white line-clamp-1">{related.name || related.title}</p>
+                        <p className="text-xs text-purple-400">{formatPrice(related.price, related.priceType || 'unit_usd')}</p>
                       </button>
                     ))}
                   </div>

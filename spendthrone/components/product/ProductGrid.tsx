@@ -42,7 +42,7 @@ export function ProductGrid({
           new Date(b.addedAt || '').getTime() - new Date(a.addedAt || '').getTime()
         );
       case 'name':
-        return sorted.sort((a, b) => a.title.localeCompare(b.title));
+        return sorted.sort((a, b) => (a.name || a.title || '').localeCompare(b.name || b.title || ''));
       default:
         return sorted;
     }

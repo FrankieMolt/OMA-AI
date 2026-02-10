@@ -4,19 +4,13 @@
 
 export const CATEGORIES = [
   'all',
-  'Extreme Tech',
-  'Luxury',
-  'Pets',
-  'Clothing',
-  'Food',
-  'Survival',
-  'Art & Culture',
-  'Gadgets',
-  'Metaverse',
-  'Real Estate',
-  'Travel',
-  'Medical',
-  'Transportation',
+  'tech-gadgets',
+  'home-living',
+  'outdoor',
+  'weird-awesome',
+  'gaming',
+  'health-wellness',
+  'art-design',
 ] as const;
 
 export const SORT_OPTIONS = [

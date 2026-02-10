@@ -58,6 +58,12 @@ export function Navbar() {
 
           {/* Actions */}
           <div className="flex items-center gap-1 md:gap-2">
+            {/* Submit Product Button (Desktop) */}
+            <button className="hidden lg:flex items-center gap-2 px-4 py-2 bg-zinc-900 border border-zinc-800 hover:border-purple-500/50 rounded-xl text-xs font-bold text-zinc-400 hover:text-white transition-all mr-2">
+              <Sparkles size={14} className="text-purple-500" />
+              SUBMIT PRODUCT
+            </button>
+
             {/* Wishlist Button */}
             <button
               className="p-2 text-zinc-400 hover:text-pink-400 hover:bg-zinc-900 rounded-xl transition-all relative"

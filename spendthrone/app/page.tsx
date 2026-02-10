@@ -23,7 +23,8 @@ import { CompareDrawer } from '@/components/compare/CompareDrawer';
 import { CheckoutFlow } from '@/components/checkout/CheckoutFlow';
 import { Button } from '@/components/ui/Button';
 import { Badge } from '@/components/ui/Badge';
-import { PRODUCTS } from '@/data/products';
+import { realProducts as PRODUCTS } from '@/data/real-products';
+import { giftGuides } from '@/data/gift-guides';
 import { Product, SortOption } from '@/types';
 import { useDebounce } from '@/hooks/useDebounce';
 
@@ -49,7 +50,7 @@ function SpendThronePage() {
     return PRODUCTS.filter((product) => {
       // Search filter
       const matchesSearch = !debouncedSearch || 
-        product.title.toLowerCase().includes(debouncedSearch.toLowerCase()) ||
+        (product.name || product.title || '').toLowerCase().includes(debouncedSearch.toLowerCase()) ||
         product.description.toLowerCase().includes(debouncedSearch.toLowerCase()) ||
         product.tags.some((tag) => tag.toLowerCase().includes(debouncedSearch.toLowerCase())) ||
         product.category.toLowerCase().includes(debouncedSearch.toLowerCase());
@@ -77,11 +78,11 @@ function SpendThronePage() {
 
   return (
     <div className="min-h-screen bg-zinc-950 text-zinc-100 font-sans selection:bg-purple-500 selection:text-white">
-      {/* Demo/Showcase Disclaimer */}
-      <div className="bg-amber-500/10 border-b border-amber-500/30 py-3 px-4 text-center">
-        <p className="text-sm text-amber-400">
-          <span className="font-semibold uppercase tracking-wider">Showcase Mode:</span>
-          <span className="ml-2 text-zinc-400">All products are fictional and for demonstration purposes only.</span>
+      {/* Real Product Alert */}
+      <div className="bg-emerald-500/10 border-b border-emerald-500/30 py-3 px-4 text-center">
+        <p className="text-sm text-emerald-400">
+          <span className="font-semibold uppercase tracking-wider">Live Inventory:</span>
+          <span className="ml-2 text-zinc-400">Discover and buy the most unique real-world products. Verified affiliate links included.</span>
         </p>
       </div>
 
@@ -172,21 +173,51 @@ function SpendThronePage() {
             </div>
           </motion.div>
 
-          {/* Search Toggle Button (when searchBar is hidden) */}
-          {!showSearchBar && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6 }}
-            >
+          {/* Gift Guides Button */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6 }}
+            className="flex flex-wrap justify-center gap-4"
+          >
+            <Link href="/guides">
+              <Button
+                variant="primary"
+                className="bg-zinc-900 border border-zinc-800 hover:border-purple-500 text-zinc-400 hover:text-white"
+              >
+                View Gift Guides
+              </Button>
+            </Link>
+            {!showSearchBar && (
               <Button
                 variant="outline"
                 onClick={() => setShowSearchBar(true)}
               >
                 Search Products
               </Button>
-            </motion.div>
-          )}
+            )}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Gift Guides Preview */}
+      <section className="py-12 px-4 md:px-6 bg-zinc-900/20 border-y border-zinc-900">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-2xl font-bold mb-8 flex items-center gap-3">
+            <Sparkles className="text-purple-500" />
+            Curated Gift Guides
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {giftGuides.map((guide) => (
+              <Link key={guide.id} href={`/guides/${guide.slug}`} className="group relative aspect-[16/10] overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900 hover:border-purple-500/50 transition-all">
+                <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent z-10" />
+                <div className="absolute bottom-4 left-4 right-4 z-20">
+                  <h3 className="font-bold text-white group-hover:text-purple-400 transition-colors">{guide.title}</h3>
+                  <p className="text-xs text-zinc-500 line-clamp-1">{guide.description}</p>
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 

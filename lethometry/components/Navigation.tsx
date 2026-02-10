@@ -8,8 +8,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const navItems = [
   { href: '/', label: 'Death Clock', icon: Clock },
-  { href: '/#memory', label: 'Memory', icon: Brain },
-  { href: '/#philosophy', label: 'Philosophy', icon: BookOpen },
+  { href: '/ai-philosopher', label: 'AI Philosopher', icon: Brain },
+  { href: '/experiments/trolley-problem', label: 'Trolley Problem', icon: BookOpen },
+  { href: '/experiments/memory-decay', label: 'Memory Decay', icon: Brain },
   { href: '/about', label: 'About', icon: Info },
 ];
 

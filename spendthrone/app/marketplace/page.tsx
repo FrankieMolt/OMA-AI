@@ -9,7 +9,7 @@ import { useApp } from '@/components/providers/AppProvider';
 import { ProductGrid } from '@/components/product/ProductGrid';
 import { CategoryFilter } from '@/components/product/CategoryFilter';
 import { SearchBar } from '@/components/search/SearchBar';
-import { PRODUCTS } from '@/data/products';
+import { realProducts as PRODUCTS } from '@/data/real-products';
 import { SortOption } from '@/types';
 import { useDebounce } from '@/hooks/useDebounce';
 
@@ -24,7 +24,7 @@ export default function MarketplacePage() {
   const filteredProducts = useMemo(() => {
     return PRODUCTS.filter((product) => {
       const matchesSearch = !debouncedSearch || 
-        product.title.toLowerCase().includes(debouncedSearch.toLowerCase()) ||
+        product.name.toLowerCase().includes(debouncedSearch.toLowerCase()) ||
         product.description.toLowerCase().includes(debouncedSearch.toLowerCase()) ||
         product.tags.some((tag) => tag.toLowerCase().includes(debouncedSearch.toLowerCase()));
       const matchesCategory = selectedCategory === 'all' || product.category === selectedCategory;
