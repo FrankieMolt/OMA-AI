@@ -1,0 +1,35 @@
+# Reports and generated artifacts
+reports/
+screenshots/
+test-results/
+*.log
+
+# Dependencies
+node_modules/
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Playwright
+playwright/.cache/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Test artifacts
+/test-results/
+/playwright-report/
+/playwright/.cache/

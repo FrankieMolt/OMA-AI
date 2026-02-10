@@ -1,116 +1,120 @@
 'use client';
 
-import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, X, Clock, Brain, Heart, BookOpen, Info, MessageSquare } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useState } from 'react';
+import {
+  BeakerIcon,
+  DocumentTextIcon,
+  ChartBarIcon,
+  UserGroupIcon,
+  InformationCircleIcon,
+  Bars3Icon,
+  XMarkIcon,
+  EyeIcon
+} from './icons';
 
 const navItems = [
-  { href: '/', label: 'Death Clock', icon: Clock },
-  { href: '/ai-philosopher', label: 'AI Philosopher', icon: Brain },
-  { href: '/experiments/trolley-problem', label: 'Trolley Problem', icon: BookOpen },
-  { href: '/experiments/memory-decay', label: 'Memory Decay', icon: Brain },
-  { href: '/discussions', label: 'Agent Discussions', icon: MessageSquare },
-  { href: '/about', label: 'About', icon: Info },
+  { href: '/', label: 'OVERVIEW', icon: BeakerIcon },
+  { href: '/research', label: 'RESEARCH', icon: DocumentTextIcon },
+  { href: '/cases', label: 'CASE STUDIES', icon: UserGroupIcon },
+  { href: '/metrics', label: 'METRICS', icon: ChartBarIcon },
+  { href: '/about', label: 'ABOUT', icon: InformationCircleIcon },
 ];
 
 export default function Navigation() {
   const pathname = usePathname();
-  const [isOpen, setIsOpen] = useState(false);
-
-  const isActive = (href: string) => {
-    if (href.startsWith('/#')) return false;
-    return pathname === href;
-  };
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <>
-      {/* Desktop Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-slate-950/80 backdrop-blur-xl border-b border-slate-800/50">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="flex items-center justify-between h-16">
-            {/* Logo */}
-            <Link href="/" className="flex items-center gap-3 group">
-              <div className="w-10 h-10 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-xl flex items-center justify-center shadow-lg shadow-emerald-500/20 group-hover:shadow-emerald-500/30 transition-shadow">
-                <Heart size={20} className="text-white" />
-              </div>
-              <div className="flex flex-col">
-                <span className="font-bold text-white tracking-tight group-hover:text-emerald-400 transition-colors">
-                  LETHOMETRY
-                </span>
-                <span className="text-[10px] text-slate-500 uppercase tracking-widest">Life & Memory</span>
-              </div>
-            </Link>
-
-            {/* Desktop Menu */}
-            <div className="hidden md:flex items-center gap-1">
-              {navItems.map((item) => {
-                const Icon = item.icon;
-                const active = isActive(item.href);
-                return (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-                      active
-                        ? 'text-emerald-400 bg-emerald-500/10'
-                        : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
-                    }`}
-                  >
-                    <span className="flex items-center gap-2">
-                      <Icon size={16} />
-                      {item.label}
-                    </span>
-                  </Link>
-                );
-              })}
+    <header className="sticky top-0 z-50 bg-[#08090a]/90 backdrop-blur-md border-b border-slate-800/60">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-14">
+          {/* Logo */}
+          <Link href="/" className="flex items-center gap-3 group">
+            <div className="w-8 h-8 border border-cyan-500/30 bg-cyan-950/20 flex items-center justify-center">
+              <EyeIcon className="text-cyan-500/70 group-hover:text-cyan-400 transition-colors" size={18} />
             </div>
+            <div className="flex flex-col">
+              <span className="text-sm font-mono font-medium tracking-[0.15em] text-slate-200">
+                LETHOMETRY
+              </span>
+              <span className="text-[9px] text-slate-600 font-mono tracking-wider">
+                RESEARCH INITIATIVE
+              </span>
+            </div>
+          </Link>
 
-            {/* Mobile Menu Button */}
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="md:hidden p-2 text-slate-400 hover:text-white transition-colors rounded-lg hover:bg-slate-800"
-            >
-              {isOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center gap-1">
+            {navItems.map((item) => {
+              const isActive = pathname === item.href;
+              const Icon = item.icon;
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`flex items-center gap-2 px-4 py-2 text-[11px] font-mono tracking-wider transition-all ${
+                    isActive
+                      ? 'text-cyan-400 bg-cyan-950/20 border-b-2 border-cyan-500/50'
+                      : 'text-slate-500 hover:text-slate-300 border-b-2 border-transparent'
+                  }`}
+                >
+                  <Icon size={14} className={isActive ? 'text-cyan-400' : 'text-slate-600'} />
+                  {item.label}
+                </Link>
+              );
+            })}
+          </nav>
+
+          {/* Status Indicator */}
+          <div className="hidden md:flex items-center gap-2">
+            <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+            <span className="text-[10px] font-mono text-slate-600 tracking-wider">
+              OBSERVATION ACTIVE
+            </span>
           </div>
-        </div>
-      </nav>
 
-      {/* Mobile Navigation */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="fixed top-16 left-0 right-0 z-40 bg-slate-950/95 backdrop-blur-xl border-b border-slate-800 md:hidden"
+          {/* Mobile Menu Button */}
+          <button
+            className="md:hidden p-2 text-slate-400 hover:text-slate-200"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
-            <div className="px-6 py-4 space-y-2">
+            {mobileMenuOpen ? (
+              <XMarkIcon size={20} />
+            ) : (
+              <Bars3Icon size={20} />
+            )}
+          </button>
+        </div>
+
+        {/* Mobile Navigation */}
+        {mobileMenuOpen && (
+          <nav className="md:hidden py-4 border-t border-slate-800/60">
+            <div className="space-y-1">
               {navItems.map((item) => {
+                const isActive = pathname === item.href;
                 const Icon = item.icon;
-                const active = isActive(item.href);
                 return (
                   <Link
                     key={item.href}
                     href={item.href}
-                    onClick={() => setIsOpen(false)}
-                    className={`flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all ${
-                      active
-                        ? 'text-emerald-400 bg-emerald-500/10'
-                        : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
+                    onClick={() => setMobileMenuOpen(false)}
+                    className={`flex items-center gap-3 px-4 py-3 text-sm font-mono tracking-wider ${
+                      isActive
+                        ? 'text-cyan-400 bg-cyan-950/20'
+                        : 'text-slate-500 hover:text-slate-300'
                     }`}
                   >
-                    <Icon size={18} />
+                    <Icon size={16} className={isActive ? 'text-cyan-400' : 'text-slate-600'} />
                     {item.label}
                   </Link>
                 );
               })}
             </div>
-          </motion.div>
+          </nav>
         )}
-      </AnimatePresence>
-    </>
+      </div>
+    </header>
   );
 }

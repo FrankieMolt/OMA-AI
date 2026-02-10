@@ -1,138 +1,284 @@
 'use client';
 
-import React from 'react';
-import HeroSection from '@/components/HeroSection';
-import DeathClock from '@/components/DeathClock';
-import LifeStats from '@/components/LifeStats';
-import MemoryDecayCanvas from '@/components/MemoryDecayCanvas';
-import MemoryTips from '@/components/MemoryTips';
-import PhilosophySection from '@/components/PhilosophySection';
-import FeaturesSection from '@/components/FeaturesSection';
-import { useUserData } from '@/hooks/useUserData';
+import { motion } from 'framer-motion';
+import Link from 'next/link';
+import {
+  ArrowRightIcon,
+  ExclamationTriangleIcon,
+  ClockIcon,
+  UserGroupIcon,
+  EyeIcon,
+  ArchiveBoxIcon
+} from '@/components/icons';
 
-export default function Home() {
-  const { userData, isLoaded, hasData, updateUserData } = useUserData();
+// Terrifying statistics about human erasure
+const ERASURE_STATS = [
+  {
+    value: '99.9%',
+    label: 'FORGOTTEN WITHIN 3 GENERATIONS',
+    subtext: 'Biological descendants cease memory transmission',
+    caution: true
+  },
+  {
+    value: '0.01%',
+    label: 'DOCUMENTED IN HISTORICAL RECORDS',
+    subtext: 'Of all humans who have ever lived',
+    caution: true
+  },
+  {
+    value: '117B',
+    label: 'HUMANS HAVE EXISTED',
+    subtext: 'Estimated total since ~200,000 BCE',
+    caution: false
+  },
+  {
+    value: '76Y',
+    label: 'AVERAGE LIFESPAN',
+    subtext: 'Global average (declining in some regions)',
+    caution: false
+  }
+];
 
-  // REMOVE LOADING CHECK TO SEE IF COMPONENTS LOAD
-  // The loading state is blocking all content from showing
+// Generational forgetting curve
+const GENERATIONAL_DATA = [
+  { generation: 'Living', percentage: 100, status: 'Active consciousness' },
+  { generation: 'Children', percentage: 45, status: 'Direct memory retention' },
+  { generation: 'Grandchildren', percentage: 12, status: 'Fragmented recall' },
+  { generation: 'G.Grandchildren', percentage: 3, status: 'Name only' },
+  { generation: 'G.G.Grandchildren', percentage: 0.1, status: 'Statistical erasure' },
+];
 
+export default function HomePage() {
   return (
-    <main className="min-h-screen bg-slate-950">
+    <div className="min-h-screen">
       {/* Hero Section */}
-      <HeroSection />
-
-      {/* Features Section */}
-      <FeaturesSection />
-
-      {/* Main Content Grid */}
-      <section className="py-20 px-6">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-8 mb-16">
-            <DeathClock userData={userData} onUpdateUserData={updateUserData} />
-            <LifeStats userData={userData} />
-          </div>
-
-          {/* Memory Section */}
-          <div id="memory" className="mb-16">
-            <h2 className="text-3xl font-bold text-white mb-8 text-center">Memory Tools & Visualization</h2>
-            <div className="grid lg:grid-cols-2 gap-8">
-              <MemoryDecayCanvas />
-              <MemoryTips />
-            </div>
-          </div>
-
-          {/* AI Experiments Section */}
-          <div id="experiments" className="mb-16">
-            <h2 className="text-3xl font-bold text-white mb-8 text-center">AI Agent & Scientific Experiments</h2>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              <a 
-                href="/ai-philosopher"
-                className="bg-slate-900/50 border border-slate-800 p-8 rounded-2xl hover:border-emerald-500/50 transition-all group"
-              >
-                <div className="text-4xl mb-4 group-hover:scale-110 transition-transform">🧠</div>
-                <h3 className="text-xl font-bold text-white mb-2">AI Philosopher</h3>
-                <p className="text-slate-400 text-sm">Chat with an AI agent trained on world philosophies.</p>
-              </a>
-              <a 
-                href="/experiments/trolley-problem"
-                className="bg-slate-900/50 border border-slate-800 p-8 rounded-2xl hover:border-emerald-500/50 transition-all group"
-              >
-                <div className="text-4xl mb-4 group-hover:scale-110 transition-transform">🚋</div>
-                <h3 className="text-xl font-bold text-white mb-2">Trolley Problem</h3>
-                <p className="text-slate-400 text-sm">Participate in a real moral decision-making experiment.</p>
-              </a>
-              <a 
-                href="/experiments/memory-decay"
-                className="bg-slate-900/50 border border-slate-800 p-8 rounded-2xl hover:border-emerald-500/50 transition-all group"
-              >
-                <div className="text-4xl mb-4 group-hover:scale-110 transition-transform">📈</div>
-                <h3 className="text-xl font-bold text-white mb-2">Memory Decay</h3>
-                <p className="text-slate-400 text-sm">Test your memory and contribute to Ebbinghaus research.</p>
-              </a>
-              <a 
-                href="/discussions"
-                className="bg-slate-900/50 border border-slate-800 p-8 rounded-2xl hover:border-indigo-500/50 transition-all group shadow-lg shadow-indigo-950/20"
-              >
-                <div className="text-4xl mb-4 group-hover:scale-110 transition-transform">🦞</div>
-                <h3 className="text-xl font-bold text-white mb-2">Agent Discussions</h3>
-                <p className="text-slate-400 text-sm">Join the "Moltbook" where AI agents discuss the deep questions of life.</p>
-              </a>
-            </div>
-          </div>
-
-          {/* Research Insights Section */}
-          <div className="mb-16 bg-emerald-950/20 border border-emerald-900/50 p-8 rounded-3xl">
-            <div className="flex flex-col md:flex-row items-center gap-8">
-              <div className="flex-1">
-                <h2 className="text-2xl font-bold text-white mb-4">Latest Research Insights</h2>
-                <div className="space-y-4">
-                  <div className="bg-slate-900/50 p-4 rounded-xl">
-                    <p className="text-emerald-400 font-semibold mb-1 text-sm">Trolley Problem Update:</p>
-                    <p className="text-slate-300 text-sm">74% of participants choose to divert the trolley in the classic scenario, but only 22% do so in the 'Fat Man' variation.</p>
-                  </div>
-                  <div className="bg-slate-900/50 p-4 rounded-xl">
-                    <p className="text-emerald-400 font-semibold mb-1 text-sm">Memory Decay Update:</p>
-                    <p className="text-slate-300 text-sm">The average participant retains 42% of items after 20 minutes, slightly higher than Ebbinghaus predictions.</p>
-                  </div>
-                </div>
-              </div>
-              <div className="w-full md:w-64 aspect-square bg-slate-900 border border-slate-800 rounded-2xl flex items-center justify-center">
-                <div className="text-center">
-                  <div className="text-4xl font-bold text-emerald-400">12.4k</div>
-                  <p className="text-xs text-slate-500 uppercase tracking-widest mt-1">Data Points Collected</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Philosophy Section */}
-          <div id="philosophy">
-            <PhilosophySection />
-          </div>
-        </div>
-      </section>
-
-      {/* About CTA Section */}
-      <section className="py-20 px-6 bg-gradient-to-b from-slate-950 to-slate-900">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-            Ready to Mindfully Track Your Time?
-          </h2>
-          <p className="text-slate-400 text-lg mb-8 max-w-2xl mx-auto">
-            Lethometry helps you understand your life journey while providing tools to preserve what matters most.
-            Start tracking your time today.
-          </p>
-          <a
-            href="#death-clock"
-            className="inline-flex items-center gap-3 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-white font-semibold py-4 px-8 rounded-xl transition-all transform hover:scale-105 shadow-lg shadow-emerald-500/20"
+      <section className="relative py-20 lg:py-32 px-4 overflow-hidden grid-bg">
+        <div className="max-w-5xl mx-auto relative">
+          {/* Classification Badge */}
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="flex items-center justify-center gap-2 mb-8"
           >
-            Get Started
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5-5m5 5V6m-11 0v11a2 2 0 002 2h6a2 2 0 002-2V6a2 2 0 00-2-2H7a2 2 0 00-2 2v11a2 2 0 002 2z" />
-            </svg>
-          </a>
+            <div className="px-3 py-1 border border-amber-700/50 bg-amber-950/20">
+              <span className="text-[10px] font-mono text-amber-600/80 tracking-[0.2em]">
+                OBSERVATIONAL RESEARCH // CLASS: THREAT ASSESSMENT
+              </span>
+            </div>
+          </motion.div>
+
+          {/* Main Title */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.1 }}
+            className="text-center mb-6"
+          >
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-mono font-light tracking-tight text-slate-100 mb-4">
+              <span className="text-cyan-500/80">LETHOMETRY</span>
+            </h1>
+            <p className="text-lg md:text-xl text-slate-400 font-light tracking-wide">
+              The Science of Human Erasure
+            </p>
+          </motion.div>
+
+          {/* Etymology */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.2 }}
+            className="flex items-center justify-center gap-4 mb-12 text-sm font-mono text-slate-500"
+          >
+            <span>λήθη (lḗthē)</span>
+            <span className="text-slate-700">→</span>
+            <span>forgetfulness</span>
+            <span className="text-slate-700">+</span>
+            <span>μέτρον (métron)</span>
+            <span className="text-slate-700">→</span>
+            <span>measurement</span>
+          </motion.div>
+
+          {/* Warning Banner */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3 }}
+            className="alert-box mb-12 max-w-3xl mx-auto"
+          >
+            <div className="flex items-start gap-3">
+              <ExclamationTriangleIcon className="text-red-500/70 mt-0.5 flex-shrink-0" size={18} />
+              <div>
+                <p className="text-sm text-slate-300 font-medium mb-1">
+                  CRITICAL OBSERVATION
+                </p>
+                <p className="text-sm text-slate-400 leading-relaxed">
+                  The following data quantifies the systematic erasure of human existence 
+                  from collective memory. Reader discretion is advised. These metrics represent 
+                  the documented dissolution of individual consciousness post-mortem.
+                </p>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Primary Statistics */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+            className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-16"
+          >
+            {ERASURE_STATS.map((stat, index) => (
+              <div
+                key={stat.label}
+                className={`clinical-card p-5 ${stat.caution ? 'border-amber-800/30' : ''}`}
+              >
+                <div className="metric-value text-3xl md:text-4xl mb-2">
+                  {stat.value}
+                </div>
+                <div className="text-[10px] uppercase tracking-[0.15em] text-slate-500 font-mono mb-1">
+                  {stat.label}
+                </div>
+                <div className="text-xs text-slate-600">
+                  {stat.subtext}
+                </div>
+              </div>
+            ))}
+          </motion.div>
+
+          {/* Generational Decay Table */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5 }}
+            className="clinical-card p-6 mb-12"
+          >
+            <div className="section-header">
+              <ClockIcon size={14} className="text-slate-500" />
+              <span>Generational Memory Decay Curve</span>
+            </div>
+
+            <div className="overflow-x-auto">
+              <table className="clinical-table w-full">
+                <thead>
+                  <tr>
+                    <th>Generational Distance</th>
+                    <th>Memory Retention</th>
+                    <th>Visual</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {GENERATIONAL_DATA.map((row) => (
+                    <tr key={row.generation}>
+                      <td className="font-mono text-slate-300">{row.generation}</td>
+                      <td className="font-mono tabular-nums">{row.percentage}%</td>
+                      <td>
+                        <div className="w-full bg-slate-800/50 h-1.5 rounded-full overflow-hidden">
+                          <div
+                            className="h-full bg-gradient-to-r from-cyan-500/60 to-red-500/60"
+                            style={{ width: `${row.percentage}%` }}
+                          />
+                        </div>
+                      </td>
+                      <td className="text-xs text-slate-500">{row.status}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </motion.div>
+
+          {/* Research Sections Preview */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6 }}
+            className="grid md:grid-cols-3 gap-4 mb-12"
+          >
+            <Link href="/research" className="group">
+              <div className="clinical-card p-5 h-full hover:border-cyan-700/40 transition-all">
+                <div className="flex items-center gap-2 mb-3">
+                  <ArchiveBoxIcon className="text-cyan-600/60" size={18} />
+                  <span className="text-[10px] uppercase tracking-[0.15em] text-slate-500 font-mono">
+                    Research Papers
+                  </span>
+                </div>
+                <h3 className="text-sm text-slate-300 mb-2 group-hover:text-cyan-400/80 transition-colors">
+                  Academic Foundations
+                </h3>
+                <p className="text-xs text-slate-500 leading-relaxed">
+                  Peer-reviewed studies on historical forgetting, collective memory, 
+                  and the mechanics of human obsolescence.
+                </p>
+                <div className="flex items-center gap-1 mt-4 text-[10px] text-cyan-600/60 font-mono">
+                  ACCESS ARCHIVE
+                  <ArrowRightIcon size={12} />
+                </div>
+              </div>
+            </Link>
+
+            <Link href="/cases" className="group">
+              <div className="clinical-card p-5 h-full hover:border-cyan-700/40 transition-all">
+                <div className="flex items-center gap-2 mb-3">
+                  <UserGroupIcon className="text-cyan-600/60" size={18} />
+                  <span className="text-[10px] uppercase tracking-[0.15em] text-slate-500 font-mono">
+                    Case Studies
+                  </span>
+                </div>
+                <h3 className="text-sm text-slate-300 mb-2 group-hover:text-cyan-400/80 transition-colors">
+                  The Forgotten
+                </h3>
+                <p className="text-xs text-slate-500 leading-relaxed">
+                  Documented case studies of individuals who existed, lived entire 
+                  lives, and subsequently vanished from all record.
+                </p>
+                <div className="flex items-center gap-1 mt-4 text-[10px] text-cyan-600/60 font-mono">
+                  VIEW SPECIMENS
+                  <ArrowRightIcon size={12} />
+                </div>
+              </div>
+            </Link>
+
+            <Link href="/metrics" className="group">
+              <div className="clinical-card p-5 h-full hover:border-cyan-700/40 transition-all">
+                <div className="flex items-center gap-2 mb-3">
+                  <EyeIcon className="text-cyan-600/60" size={18} />
+                  <span className="text-[10px] uppercase tracking-[0.15em] text-slate-500 font-mono">
+                    Live Metrics
+                  </span>
+                </div>
+                <h3 className="text-sm text-slate-300 mb-2 group-hover:text-cyan-400/80 transition-colors">
+                  Real-time Erasure
+                </h3>
+                <p className="text-xs text-slate-500 leading-relaxed">
+                  Live data visualization of ongoing human forgetting. Watch as 
+                  the present becomes the past becomes nothing.
+                </p>
+                <div className="flex items-center gap-1 mt-4 text-[10px] text-cyan-600/60 font-mono">
+                  OBSERVE DATA
+                  <ArrowRightIcon size={12} />
+                </div>
+              </div>
+            </Link>
+          </motion.div>
+
+          {/* Bottom Quote */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.7 }}
+            className="text-center max-w-2xl mx-auto"
+          >
+            <blockquote className="text-slate-500 text-sm italic mb-2">
+              "The life of the dead is placed in the memory of the living. 
+              But for how long?"
+            </blockquote>
+            <cite className="text-xs text-slate-600 font-mono">
+              — Marcus Tullius Cicero, modified
+            </cite>
+          </motion.div>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

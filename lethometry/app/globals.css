@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;500;600;700&family=Lato:wght@300;400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -10,319 +10,227 @@
   }
 
   :root {
-    /* Color Palette - Serene Minimal Dark Mode */
-    --background: 222 47% 11%;
-    --foreground: 215 16% 82%;
-    --card: 215 28% 17%;
-    --card-foreground: 215 16% 82%;
-    --primary: 243 75% 59%;         /* indigo-600 */
-    --primary-foreground: 255 255 255;
-    --muted: 215 25% 27%;
-    --muted-foreground: 215 16% 82%;
-    --border: 215 25% 27%;
-    --radius: 0.75rem;
-    --font-heading: 'Merriweather', serif;
-    --font-body: 'Lato', sans-serif;
+    /* Clinical Laboratory Color Palette */
+    --background: 220 20% 4%;
+    --foreground: 210 20% 85%;
+    --card: 220 15% 8%;
+    --card-foreground: 210 20% 85%;
+    --primary: 0 70% 45%;
+    --primary-foreground: 0 0% 100%;
+    --muted: 220 15% 12%;
+    --muted-foreground: 210 15% 55%;
+    --accent: 190 80% 40%;
+    --accent-foreground: 0 0% 100%;
+    --border: 220 15% 15%;
+    --radius: 0.25rem;
+    --font-mono: 'JetBrains Mono', monospace;
+    --font-sans: 'Inter', sans-serif;
+    
+    /* Clinical accent colors */
+    --clinical-cyan: 190 80% 45%;
+    --clinical-red: 0 70% 45%;
+    --clinical-amber: 35 90% 45%;
+    --clinical-green: 150 60% 35%;
   }
 
   body {
-    @apply bg-slate-950 text-slate-200;
-    font-family: var(--font-body);
-    font-size: 17px;
+    @apply bg-[#08090a] text-slate-300;
+    font-family: var(--font-sans);
+    font-size: 15px;
     line-height: 1.6;
-    letter-spacing: 0.5%;
-    font-feature-settings: 'rlig' 1, 'calt' 1;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
-  /* Typography System */
+  /* Clinical Typography */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-mono);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+  }
+
   h1 {
-    font-family: var(--font-heading);
-    font-size: 42px;
-    line-height: 1.2;
-    letter-spacing: -1.5%;
+    font-size: 2.5rem;
+    line-height: 1.1;
   }
 
   h2 {
-    font-family: var(--font-heading);
-    font-size: 30px;
-    line-height: 1.25;
-    letter-spacing: -1%;
+    font-size: 1.75rem;
+    line-height: 1.2;
   }
 
   h3 {
-    font-family: var(--font-heading);
-    font-size: 24px;
+    font-size: 1.25rem;
     line-height: 1.3;
-    letter-spacing: -0.5%;
   }
 
-  /* Smooth Scrolling */
-  html {
-    scroll-behavior: smooth;
+  /* Monospace for data */
+  .font-mono {
+    font-family: var(--font-mono);
   }
 
-  h4 {
-    @apply text-lg md:text-xl;
-  }
-
-  /* Links */
-  a {
-    @apply transition-colors duration-200;
-  }
-
-  /* Selection */
+  /* Selection - clinical cyan */
   ::selection {
-    @apply bg-emerald-500/30 text-emerald-100;
-  }
-}
-
-@layer components {
-  /* Glass Effect */
-  .glass {
-    @apply bg-slate-900/60 backdrop-blur-xl border border-slate-800/50;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    @apply bg-cyan-500/20 text-cyan-100;
   }
 
-  .glass-card {
-    @apply bg-slate-900/40 border border-slate-800/50 rounded-2xl backdrop-blur-sm;
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
-    @apply transition-all duration-300;
-  }
-
-  /* Gradient Text */
-  .gradient-text {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-amber-400 to-orange-400;
-    background-size: 200% auto;
-  }
-
-  .gradient-text-emerald {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-teal-400;
-    background-size: 200% auto;
-  }
-
-  @keyframes gradient-shift {
-    0%, 100% {
-      background-position: 0% center;
-    }
-    50% {
-      background-position: 100% center;
-    }
-  }
-
-  /* Buttons */
-  .btn-primary {
-    @apply bg-gradient-to-r from-amber-500 to-orange-500 text-white px-6 py-3 rounded-xl font-semibold
-           hover:from-amber-400 hover:to-orange-400
-           transition-all duration-300 transform hover:scale-105 active:scale-95
-           shadow-lg shadow-amber-500/20;
-  }
-
-  .btn-secondary {
-    @apply bg-slate-800 text-slate-200 border border-slate-700 px-6 py-3 rounded-xl font-semibold
-           hover:bg-slate-700 hover:border-slate-600 hover:text-white
-           transition-all duration-300 transform hover:scale-105 active:scale-95;
-  }
-
-  /* Input Fields */
-  .input-field {
-    @apply w-full px-4 py-3 bg-slate-950 border border-slate-800 rounded-xl
-           text-white placeholder:text-slate-600
-           focus:outline-none focus:border-amber-500/50
-           transition-all duration-200;
-  }
-
-  .input-field:focus {
-    @apply ring-2 ring-amber-500/20;
-  }
-
-  /* Badges */
-  .badge {
-    @apply px-3 py-1.5 rounded-full text-xs font-medium;
-  }
-
-  .badge-amber {
-    @apply bg-amber-500/10 text-amber-400 border border-amber-500/30;
-  }
-
-  .badge-emerald {
-    @apply bg-emerald-500/10 text-emerald-400 border border-emerald-500/30;
-  }
-
-  .badge-rose {
-    @apply bg-rose-500/10 text-rose-400 border border-rose-500/30;
-  }
-
-  /* Cards */
-  .feature-card {
-    @apply glass-card p-8;
-  }
-
-  .stat-card {
-    @apply bg-slate-950 rounded-xl border border-slate-800 p-6;
-  }
-
-  /* Progress Bar */
-  .progress-bar {
-    @apply w-full h-3 bg-slate-800 rounded-full overflow-hidden;
-  }
-
-  .progress-fill-amber {
-    @apply h-full bg-gradient-to-r from-amber-500 via-orange-500 to-rose-500
-           transition-all duration-500 ease-out;
-  }
-
-  .progress-fill-emerald {
-    @apply h-full bg-gradient-to-r from-emerald-500 via-amber-500 to-rose-500
-           transition-all duration-500 ease-out;
-  }
-
-  .progress-fill {
-    @apply h-full bg-gradient-to-r from-amber-500 via-orange-500 to-rose-500
-           transition-all duration-500 ease-out;
-  }
-}
-
-@layer utilities {
-  /* Scrollbar */
+  /* Scrollbar - minimal clinical */
   ::-webkit-scrollbar {
-    @apply w-10;
+    width: 6px;
+    height: 6px;
   }
 
   ::-webkit-scrollbar-track {
-    @apply bg-slate-950;
+    @apply bg-transparent;
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply bg-slate-800 rounded-full hover:bg-slate-700 transition-colors;
+    @apply bg-slate-800 rounded-sm;
   }
 
   ::-webkit-scrollbar-thumb:hover {
     @apply bg-slate-700;
   }
+}
 
-  /* Focus Styles */
-  *:focus-visible {
-    @apply outline-2 outline-amber-500/50 outline-offset-2;
+@layer components {
+  /* Clinical Card */
+  .clinical-card {
+    @apply bg-slate-950/50 border border-slate-800/80 rounded-sm;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
   }
 
-  /* Smooth Transitions */
-  .smooth-transition {
+  /* Data Display Box */
+  .data-box {
+    @apply bg-slate-900/30 border border-slate-800/60 p-4 font-mono text-sm;
+  }
+
+  /* Warning/Caution Box */
+  .caution-box {
+    @apply border-l-2 border-amber-600/60 bg-amber-950/10 pl-4 py-3;
+  }
+
+  /* Alert/Critical Box */
+  .alert-box {
+    @apply border-l-2 border-red-700/60 bg-red-950/10 pl-4 py-3;
+  }
+
+  /* Specimen Label */
+  .specimen-label {
+    @apply text-[10px] uppercase tracking-[0.2em] text-slate-500 font-mono;
+  }
+
+  /* Metric Value */
+  .metric-value {
+    @apply font-mono text-2xl text-slate-200 tracking-tight;
+  }
+
+  /* Section Header */
+  .section-header {
+    @apply flex items-center gap-3 text-xs uppercase tracking-[0.15em] text-slate-500 font-mono border-b border-slate-800/60 pb-2 mb-6;
+  }
+
+  /* Table Styles */
+  .clinical-table {
+    @apply w-full text-sm;
+  }
+
+  .clinical-table th {
+    @apply text-left py-3 px-4 text-xs uppercase tracking-wider text-slate-500 font-mono border-b border-slate-800;
+  }
+
+  .clinical-table td {
+    @apply py-3 px-4 border-b border-slate-800/40 text-slate-400;
+  }
+
+  .clinical-table tr:hover td {
+    @apply bg-slate-900/30 text-slate-300;
+  }
+
+  /* Status Indicators */
+  .status-active {
+    @apply inline-flex items-center gap-1.5 text-xs text-emerald-500/80;
+  }
+
+  .status-active::before {
+    content: '';
+    @apply w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse;
+  }
+
+  .status-warning {
+    @apply inline-flex items-center gap-1.5 text-xs text-amber-500/80;
+  }
+
+  .status-warning::before {
+    content: '';
+    @apply w-1.5 h-1.5 rounded-full bg-amber-500;
+  }
+
+  .status-critical {
+    @apply inline-flex items-center gap-1.5 text-xs text-red-500/80;
+  }
+
+  .status-critical::before {
+    content: '';
+    @apply w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse;
+  }
+
+  /* Reference Citation */
+  .citation {
+    @apply text-xs text-slate-500 font-mono;
+  }
+
+  /* Grid Pattern Background */
+  .grid-bg {
+    background-image: 
+      linear-gradient(rgba(30, 41, 59, 0.3) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(30, 41, 59, 0.3) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  /* Scanline Effect */
+  .scanlines {
+    position: relative;
+  }
+
+  .scanlines::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.03) 2px,
+      rgba(0, 0, 0, 0.03) 4px
+    );
+    pointer-events: none;
+  }
+}
+
+@layer utilities {
+  /* Gradient Text - Clinical */
+  .text-gradient-clinical {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-cyan-400/80 to-slate-300;
+  }
+
+  /* Subtle Glow */
+  .glow-cyan {
+    box-shadow: 0 0 20px rgba(6, 182, 212, 0.1);
+  }
+
+  /* Monospace Numbers */
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Focus States */
+  .focus-clinical:focus {
+    @apply outline-none ring-1 ring-cyan-500/30;
+  }
+
+  /* Transitions */
+  .transition-clinical {
     @apply transition-all duration-200 ease-out;
-  }
-
-  /* Card Hover */
-  .card-hover {
-    @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-xl;
-  }
-
-  /* Focus Ring */
-  .focus-ring {
-    @apply focus:outline-none focus:ring-2 focus:ring-amber-500/50
-          focus:ring-offset-2 focus:ring-offset-slate-950;
-  }
-
-  /* Text Gradients */
-  .text-gradient-emerald {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-teal-400;
-  }
-
-  .text-gradient-rose {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-rose-400 to-orange-400;
-  }
-
-  /* Animations */
-  @keyframes pulse-slow {
-    0%, 100% {
-      opacity: 0.3;
-    }
-    50% {
-      opacity: 0.6;
-    }
-  }
-
-  .animate-pulse-slow {
-    animation: pulse-slow 4s ease-in-out infinite;
-  }
-
-  @keyframes float {
-    0%, 100% {
-      transform: translateY(0px);
-    }
-    50% {
-      transform: translateY(-10px);
-    }
-  }
-
-  .animate-float {
-    animation: float 3s ease-in-out infinite;
-  }
-
-  @keyframes shimmer {
-    0% {
-      background-position: -200% 0;
-    }
-    100% {
-      background-position: 200% 0;
-    }
-  }
-
-  .animate-shimmer {
-    animation: shimmer 3s linear infinite;
-    background-size: 200% 100%;
-  }
-
-  /* Responsive Helpers */
-  @media (max-width: 768px) {
-    h1 {
-      @apply text-3xl;
-    }
-
-    h2 {
-      @apply text-2xl;
-    }
-  }
-
-  /* Print Styles */
-  @media print {
-    body {
-      @apply bg-white text-black;
-    }
-
-    .no-print {
-      @apply hidden;
-    }
-  }
-}
-
-/* Custom Classes for Animations */
-.fade-in {
-  animation: fadeIn 0.5s ease-out forwards;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.slide-up {
-  animation: slideUp 0.6s ease-out forwards;
-}
-
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
   }
 }
