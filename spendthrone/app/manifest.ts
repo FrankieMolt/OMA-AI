@@ -1,0 +1,29 @@
+import type { MetadataRoute } from 'next'
+
+export default function manifest(): MetadataRoute.Manifest {
+  return {
+    name: 'SpendThrone - The Kingdom of Weird Stuff',
+    short_name: 'SpendThrone',
+    description: 'The curated kingdom of the weirdest, most viral products on Earth. WTF-level technology for the modern age.',
+    start_url: '/',
+    display: 'standalone',
+    background_color: '#09090b',
+    theme_color: '#7c3aed',
+    orientation: 'portrait',
+    icons: [
+      {
+        src: '/favicon-192x192.png',
+        sizes: '192x192',
+        type: 'image/png',
+        purpose: 'any',
+      },
+      {
+        src: '/favicon-512x512.png',
+        sizes: '512x512',
+        type: 'image/png',
+        purpose: 'maskable',
+      },
+    ],
+    categories: ['shopping', 'entertainment'],
+  }
+}

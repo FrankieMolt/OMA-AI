@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import {
   Search,
@@ -67,8 +67,8 @@ export default function Dashboard() {
     fetchServices();
   }, []);
 
-  // Fetch real API Services (replacing mock data)
-  const apiServices = services;
+  // Fetch real API Services (using mock data as fallback)
+  const apiServices: ApiService[] = services.length > 0 ? services : [
     {
       id: 'gpt-4-turbo',
       name: 'GPT-4 Turbo',

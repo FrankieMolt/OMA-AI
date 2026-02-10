@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Homepage -->
+  <url>
+    <loc>https://oma-ai.com/</loc>
+    <lastmod>2026-02-06</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- API Marketplace -->
+  <url>
+    <loc>https://oma-ai.com/dashboard</loc>
+    <lastmod>2026-02-06</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Bounties -->
+  <url>
+    <loc>https://oma-ai.com/bounties</loc>
+    <lastmod>2026-02-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- How It Works -->
+  <url>
+    <loc>https://oma-ai.com/how-it-works</loc>
+    <lastmod>2026-02-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Features -->
+  <url>
+    <loc>https://oma-ai.com/features</loc>
+    <lastmod>2026-02-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Pricing -->
+  <url>
+    <loc>https://oma-ai.com/pricing</loc>
+    <lastmod>2026-02-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- About -->
+  <url>
+    <loc>https://oma-ai.com/about</loc>
+    <lastmod>2026-02-06</lastmod>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- Contact -->
+  <url>
+    <loc>https://oma-ai.com/contact</loc>
+    <lastmod>2026-02-06</lastmod>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- Privacy -->
+  <url>
+    <loc>https://oma-ai.com/privacy</loc>
+    <lastmod>2026-02-06</lastmod>
+    <priority>0.3</priority>
+  </url>
+
+  <!-- Terms -->
+  <url>
+    <loc>https://oma-ai.com/terms</loc>
+    <lastmod>2026-02-06</lastmod>
+    <priority>0.3</priority>
+  </url>
+
+  <!-- Blog Posts -->
+  <url>
+    <loc>https://oma-ai.com/blog/oma-ai-humans-and-agents-2026</loc>
+    <lastmod>2026-02-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://oma-ai.com/blog/x402-payments-complete-guide-2026</loc>
+    <lastmod>2026-02-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+</urlset>

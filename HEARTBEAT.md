@@ -221,6 +221,12 @@ I cannot fix this - requires MASTA action.
 **Idle Timeout:** 1 hour (before offering help)
 **Critical Alert:** Immediate (no waiting for heartbeat)
 
+**Model Configuration:**
+- **Heartbeat Model:** Flash (google-antigravity/gemini-3-flash) - LOW COST
+- **Reason:** Heartbeat responses should be brief and status-focused
+- **Cost Benefit:** 90% cost reduction vs high-end models
+- **When to Upgrade:** Complex decision-making, deep analysis required
+
 ---
 
 ## Principles

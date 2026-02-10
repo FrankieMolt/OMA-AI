@@ -1,0 +1,348 @@
+/**
+ * Demo API Marketplace Data
+ * This file contains DEMO/SAMPLE data for the API marketplace
+ * NOTE: This is placeholder data for demonstration purposes only.
+ * In production, this should be replaced with real API data from a database.
+ */
+
+export interface ApiService {
+  id: string;
+  name: string;
+  description: string;
+  category: string;
+  rating: number;
+  price: number;
+  priceType: 'per_call' | 'monthly' | 'free';
+  calls: number;
+  endpoint: string;
+  tags: string[];
+  featured: boolean;
+  provider: string;
+  isDemo?: boolean;
+}
+
+export const apiServices: ApiService[] = [
+  {
+    id: 'gpt-4-turbo',
+    name: 'GPT-4 Turbo',
+    description: '[DEMO] Advanced language model for complex reasoning and code generation',
+    category: 'AI & ML',
+    rating: 4.9,
+    price: 0.01,
+    priceType: 'per_call',
+    calls: 1250000,
+    endpoint: '/api/v1/chat/completions',
+    tags: ['llm', 'chat', 'code'],
+    featured: true,
+    provider: 'OpenAI',
+    isDemo: true
+  },
+  {
+    id: 'claude-3-opus',
+    name: 'Claude 3 Opus',
+    description: 'Anthropic\'s most capable AI assistant for analysis and writing',
+    category: 'AI & ML',
+    rating: 4.8,
+    price: 0.015,
+    priceType: 'per_call',
+    calls: 850000,
+    endpoint: '/api/v1/messages',
+    tags: ['llm', 'analysis', 'writing'],
+    featured: true,
+    provider: 'Anthropic'
+  },
+  {
+    id: 'ethereum-mainnet',
+    name: 'Ethereum Mainnet RPC',
+    description: 'Reliable blockchain node access for dApp development',
+    category: 'Blockchain',
+    rating: 4.7,
+    price: 0.001,
+    priceType: 'per_call',
+    calls: 5000000,
+    endpoint: '/eth/v1/mainnet',
+    tags: ['ethereum', 'web3', 'rpc'],
+    featured: false,
+    provider: 'QuickNode'
+  },
+  {
+    id: 'solana-rpc',
+    name: 'Solana RPC',
+    description: 'High-performance Solana blockchain node with sub-second latency',
+    category: 'Blockchain',
+    rating: 4.6,
+    price: 0.0005,
+    priceType: 'per_call',
+    calls: 3000000,
+    endpoint: '/sol/v1/mainnet-beta',
+    tags: ['solana', 'web3', 'rpc'],
+    featured: false,
+    provider: 'Alchemy'
+  },
+  {
+    id: 'github-mcp',
+    name: 'GitHub MCP Server',
+    description: 'Connect your agents to GitHub repositories, issues, and PRs via Model Context Protocol',
+    category: 'MCP Servers',
+    rating: 4.9,
+    price: 0,
+    priceType: 'free',
+    calls: 500000,
+    endpoint: 'https://github.com/model-context-protocol/servers/tree/main/src/github',
+    tags: ['mcp', 'github', 'dev-tools'],
+    featured: true,
+    provider: 'Model Context Protocol'
+  },
+  {
+    id: 'brave-search-mcp',
+    name: 'Brave Search MCP',
+    description: 'Enable web search capabilities for your agents using Brave Search API',
+    category: 'MCP Servers',
+    rating: 4.8,
+    price: 0.001,
+    priceType: 'per_call',
+    calls: 200000,
+    endpoint: 'https://github.com/model-context-protocol/servers/tree/main/src/brave-search',
+    tags: ['mcp', 'search', 'web'],
+    featured: false,
+    provider: 'Brave Software'
+  },
+  {
+    id: 'filesystem-mcp',
+    name: 'Filesystem MCP',
+    description: 'Secure local file system access for autonomous agents',
+    category: 'MCP Servers',
+    rating: 4.7,
+    price: 0,
+    priceType: 'free',
+    calls: 100000,
+    endpoint: 'https://github.com/model-context-protocol/servers/tree/main/src/filesystem',
+    tags: ['mcp', 'system', 'files'],
+    featured: false,
+    provider: 'Community'
+  },
+  {
+    id: 'postgres-mcp',
+    name: 'PostgreSQL MCP',
+    description: 'Direct database access for agents - query, insert, update PostgreSQL databases',
+    category: 'MCP Servers',
+    rating: 4.6,
+    price: 0,
+    priceType: 'free',
+    calls: 80000,
+    endpoint: 'https://github.com/model-context-protocol/servers/tree/main/src/postgres',
+    tags: ['mcp', 'database', 'sql'],
+    featured: true,
+    provider: 'Community'
+  },
+  {
+    id: 'data-scraping',
+    name: 'Web Scraper Pro',
+    description: 'Extract data from any website with anti-bot protection bypass',
+    category: 'Data',
+    rating: 4.5,
+    price: 0.005,
+    priceType: 'per_call',
+    calls: 2500000,
+    endpoint: '/api/v1/scrape',
+    tags: ['scraping', 'data', 'extraction'],
+    featured: false,
+    provider: 'OMA Network'
+  },
+  {
+    id: 'image-gen',
+    name: 'Image Generator',
+    description: 'Create stunning images from text descriptions in seconds',
+    category: 'AI & ML',
+    rating: 4.4,
+    price: 0.02,
+    priceType: 'per_call',
+    calls: 600000,
+    endpoint: '/api/v1/images/generate',
+    tags: ['image', 'generation', 'creative'],
+    featured: true,
+    provider: 'OMA Network'
+  },
+  {
+    id: 'email-sender',
+    name: 'Transactional Email',
+    description: 'Send reliable emails at scale with delivery tracking',
+    category: 'Communication',
+    rating: 4.7,
+    price: 0.001,
+    priceType: 'per_call',
+    calls: 4000000,
+    endpoint: '/api/v1/email/send',
+    tags: ['email', 'communication', 'marketing'],
+    featured: false,
+    provider: 'SendGrid'
+  },
+  {
+    id: 'weather-api',
+    name: 'Weather Data',
+    description: 'Real-time weather forecasts and historical data worldwide',
+    category: 'Data',
+    rating: 4.6,
+    price: 0.0005,
+    priceType: 'per_call',
+    calls: 1500000,
+    endpoint: '/api/v1/weather',
+    tags: ['weather', 'data', 'forecasts'],
+    featured: false,
+    provider: 'OpenWeather'
+  },
+  {
+    id: 'geocoding',
+    name: 'Geocoding API',
+    description: 'Convert addresses to coordinates and vice versa',
+    category: 'Data',
+    rating: 4.8,
+    price: 0.001,
+    priceType: 'per_call',
+    calls: 800000,
+    endpoint: '/api/v1/geocode',
+    tags: ['location', 'maps', 'coordinates'],
+    featured: false,
+    provider: 'MapBox'
+  },
+  {
+    id: 'storage',
+    name: 'Cloud Storage',
+    description: 'Scalable object storage with built-in CDN',
+    category: 'Infrastructure',
+    rating: 4.9,
+    price: 0.002,
+    priceType: 'per_call',
+    calls: 5000000,
+    endpoint: '/api/v1/storage',
+    tags: ['storage', 'cdn', 'infrastructure'],
+    featured: true,
+    provider: 'OMA Network'
+  },
+  {
+    id: 'notification',
+    name: 'Push Notifications',
+    description: 'Send push notifications to mobile and web apps',
+    category: 'Communication',
+    rating: 4.5,
+    price: 0.001,
+    priceType: 'per_call',
+    calls: 1200000,
+    endpoint: '/api/v1/notifications',
+    tags: ['notifications', 'push', 'mobile'],
+    featured: false,
+    provider: 'OMA Network'
+  },
+  {
+    id: 'analytics',
+    name: 'Analytics Platform',
+    description: 'Track user behavior, conversions, and custom events',
+    category: 'Infrastructure',
+    rating: 4.7,
+    price: 0.003,
+    priceType: 'per_call',
+    calls: 900000,
+    endpoint: '/api/v1/analytics',
+    tags: ['analytics', 'tracking', 'metrics'],
+    featured: false,
+    provider: 'OMA Network'
+  },
+  {
+    id: 'payment-gateway',
+    name: 'Payment Gateway',
+    description: 'Accept payments via credit cards, crypto, and more',
+    category: 'Infrastructure',
+    rating: 4.8,
+    price: 0.01,
+    priceType: 'per_call',
+    calls: 500000,
+    endpoint: '/api/v1/payments',
+    tags: ['payments', 'crypto', 'infrastructure'],
+    featured: true,
+    provider: 'OMA Network'
+  },
+  {
+    id: 'auth-service',
+    name: 'Authentication Service',
+    description: 'User authentication with social login and 2FA',
+    category: 'Infrastructure',
+    rating: 4.9,
+    price: 0.002,
+    priceType: 'per_call',
+    calls: 3000000,
+    endpoint: '/api/v1/auth',
+    tags: ['auth', 'security', 'infrastructure'],
+    featured: true,
+    provider: 'OMA Network'
+  },
+  {
+    id: 'ai-chat',
+    name: 'AI Chat Interface',
+    description: 'Conversational AI with context awareness',
+    category: 'AI & ML',
+    rating: 4.6,
+    price: 0.008,
+    priceType: 'per_call',
+    calls: 700000,
+    endpoint: '/api/v1/chat',
+    tags: ['chat', 'ai', 'conversational'],
+    featured: false,
+    provider: 'OMA Network'
+  },
+  {
+    id: 'code-execution',
+    name: 'Code Execution',
+    description: 'Execute code in multiple languages safely',
+    category: 'Infrastructure',
+    rating: 4.7,
+    price: 0.005,
+    priceType: 'per_call',
+    calls: 600000,
+    endpoint: '/api/v1/execute',
+    tags: ['code', 'execution', 'infrastructure'],
+    featured: false,
+    provider: 'OMA Network'
+  },
+  {
+    id: 'api-monitoring',
+    name: 'API Monitoring',
+    description: 'Monitor API uptime, performance, and errors',
+    category: 'Infrastructure',
+    rating: 4.8,
+    price: 0.004,
+    priceType: 'per_call',
+    calls: 400000,
+    endpoint: '/api/v1/monitor',
+    tags: ['monitoring', 'infrastructure', 'uptime'],
+    featured: false,
+    provider: 'OMA Network'
+  },
+  {
+    id: 'data-encryption',
+    name: 'Data Encryption',
+    description: 'Encrypt and decrypt data with enterprise-grade security',
+    category: 'Security',
+    rating: 4.9,
+    price: 0.003,
+    priceType: 'per_call',
+    calls: 800000,
+    endpoint: '/api/v1/encrypt',
+    tags: ['encryption', 'security', 'data'],
+    featured: true,
+    provider: 'OMA Network'
+  },
+  {
+    id: 'firewall',
+    name: 'API Firewall',
+    description: 'Protect your APIs from attacks and abuse',
+    category: 'Security',
+    rating: 4.7,
+    price: 0.004,
+    priceType: 'per_call',
+    calls: 300000,
+    endpoint: '/api/v1/firewall',
+    tags: ['firewall', 'security', 'protection'],
+    featured: false,
+    provider: 'OMA Network'
+  }
+];
