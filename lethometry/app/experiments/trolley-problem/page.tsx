@@ -7,6 +7,10 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Brain, Heart, Info, ArrowLeft, RefreshCcw, CheckCircle2, AlertTriangle, ShieldCheck } from 'lucide-react';
+import Navigation from '@/components/Navigation';
+import Footer from '@/components/Footer';
 
 interface TrolleyVariation {
   id: string;
@@ -102,13 +106,13 @@ export default function TrolleyProblemPage() {
     setDifficulty(0);
   };
 
-  const handleChoice = (choice: 'divert' | 'not-divert', reasoning?: string) => {
+  const handleChoice = (choiceValue: 'divert' | 'not-divert', reasoning?: string) => {
     if (!selectedVariation || currentQuestionIndex >= trolleyVariations.length) return;
 
-    const choice: UserChoice = {
+    const newChoice: UserChoice = {
       userId: `user-${Date.now()}`,
       variation: selectedVariation || trolleyVariations[currentQuestionIndex].id,
-      choice,
+      choice: choiceValue,
       reasoning: reasoning || '',
       difficulty: difficulty,
       timeTaken: timeSpent,
@@ -117,7 +121,7 @@ export default function TrolleyProblemPage() {
 
     setResponses(prev => ({
       ...prev,
-      [selectedVariation || trolleyVariations[currentQuestionIndex].id]: choice
+      [selectedVariation || trolleyVariations[currentQuestionIndex].id]: newChoice
     }));
 
     if (currentQuestionIndex < trolleyVariations.length - 1) {
@@ -139,8 +143,9 @@ export default function TrolleyProblemPage() {
   const avgTime = completedCount > 0 ? timeSpent / completedCount : 0;
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-amber-950/50">
-      <div className="max-w-6xl mx-auto px-4 py-8">
+    <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-amber-950/50 selection:bg-amber-500 selection:text-white">
+      <Navigation />
+      <div className="max-w-6xl mx-auto px-4 py-24">
         {/* Header */}
         <div className="text-center mb-8">
           <h1 className="text-5xl font-bold text-white mb-4 flex items-center justify-center gap-3">
@@ -430,6 +435,7 @@ export default function TrolleyProblemPage() {
           </div>
         )}
       </div>
+      <Footer />
     </div>
   );
 }

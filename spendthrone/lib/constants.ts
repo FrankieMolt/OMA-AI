@@ -11,6 +11,8 @@ export const CATEGORIES = [
   'gaming',
   'health-wellness',
   'art-design',
+  'office-setup',
+  'kitchen-gadgets',
 ] as const;
 
 export const SORT_OPTIONS = [

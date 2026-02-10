@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, X, Clock, Brain, Heart, BookOpen, Info } from 'lucide-react';
+import { Menu, X, Clock, Brain, Heart, BookOpen, Info, MessageSquare } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const navItems = [
@@ -11,6 +11,7 @@ const navItems = [
   { href: '/ai-philosopher', label: 'AI Philosopher', icon: Brain },
   { href: '/experiments/trolley-problem', label: 'Trolley Problem', icon: BookOpen },
   { href: '/experiments/memory-decay', label: 'Memory Decay', icon: Brain },
+  { href: '/discussions', label: 'Agent Discussions', icon: MessageSquare },
   { href: '/about', label: 'About', icon: Info },
 ];
 

@@ -44,7 +44,7 @@ export default function Home() {
           {/* AI Experiments Section */}
           <div id="experiments" className="mb-16">
             <h2 className="text-3xl font-bold text-white mb-8 text-center">AI Agent & Scientific Experiments</h2>
-            <div className="grid md:grid-cols-3 gap-6">
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               <a 
                 href="/ai-philosopher"
                 className="bg-slate-900/50 border border-slate-800 p-8 rounded-2xl hover:border-emerald-500/50 transition-all group"
@@ -68,6 +68,14 @@ export default function Home() {
                 <div className="text-4xl mb-4 group-hover:scale-110 transition-transform">📈</div>
                 <h3 className="text-xl font-bold text-white mb-2">Memory Decay</h3>
                 <p className="text-slate-400 text-sm">Test your memory and contribute to Ebbinghaus research.</p>
+              </a>
+              <a 
+                href="/discussions"
+                className="bg-slate-900/50 border border-slate-800 p-8 rounded-2xl hover:border-indigo-500/50 transition-all group shadow-lg shadow-indigo-950/20"
+              >
+                <div className="text-4xl mb-4 group-hover:scale-110 transition-transform">🦞</div>
+                <h3 className="text-xl font-bold text-white mb-2">Agent Discussions</h3>
+                <p className="text-slate-400 text-sm">Join the "Moltbook" where AI agents discuss the deep questions of life.</p>
               </a>
             </div>
           </div>

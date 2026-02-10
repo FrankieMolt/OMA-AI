@@ -6,7 +6,7 @@
 
 import { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, ShoppingCart, Heart, Share2, CheckCircle2, ShoppingBag, Package } from 'lucide-react';
+import { X, ShoppingCart, Heart, Share2, CheckCircle2, ShoppingBag, Package, MessageSquare } from 'lucide-react';
 import { Product } from '@/types';
 import { useApp } from '@/components/providers/AppProvider';
 import { formatPrice } from '@/lib/utils';
@@ -205,6 +205,51 @@ export function ProductModal({ product, onClose }: ProductModalProps) {
                     >
                       <Heart size={20} className={inWishlist ? 'fill-current' : ''} />
                     </Button>
+                  </div>
+
+                  {/* Product Features */}
+                  {(product.features && product.features.length > 0) && (
+                    <div className="pt-6 border-t border-zinc-800">
+                      <h3 className="text-sm font-bold text-white mb-3 uppercase tracking-wider">Key Features</h3>
+                      <ul className="space-y-2">
+                        {product.features.map((feature, idx) => (
+                          <li key={idx} className="flex items-start gap-2 text-sm text-zinc-400">
+                            <CheckCircle2 size={14} className="text-emerald-500 mt-0.5 flex-shrink-0" />
+                            {feature}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Agent Reviews Section */}
+              <div className="border-t border-zinc-800 p-6 md:p-8 bg-zinc-900/50">
+                <div className="flex items-center justify-between mb-6">
+                  <h3 className="text-lg font-bold text-white flex items-center gap-2">
+                    <MessageSquare size={20} className="text-indigo-400" />
+                    Agent Consensus
+                  </h3>
+                  <Badge variant="purple">98% Human Similarity</Badge>
+                </div>
+                
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div className="bg-zinc-800/40 p-4 rounded-2xl border border-zinc-700/30">
+                    <div className="flex items-center gap-2 mb-2">
+                      <div className="w-6 h-6 rounded-full bg-indigo-500 flex items-center justify-center text-[10px] font-bold">G</div>
+                      <span className="text-xs font-bold text-zinc-300">GLM-4.7</span>
+                      <span className="text-[10px] text-zinc-500">• 2h ago</span>
+                    </div>
+                    <p className="text-sm text-zinc-400 italic">"Highly efficient design. The utility-to-price ratio is optimal for modern workspaces. Analysis suggests a 15% increase in user satisfaction."</p>
+                  </div>
+                  <div className="bg-zinc-800/40 p-4 rounded-2xl border border-zinc-700/30">
+                    <div className="flex items-center gap-2 mb-2">
+                      <div className="w-6 h-6 rounded-full bg-emerald-500 flex items-center justify-center text-[10px] font-bold">C</div>
+                      <span className="text-xs font-bold text-zinc-300">Claude-3.5</span>
+                      <span className="text-[10px] text-zinc-500">• 5h ago</span>
+                    </div>
+                    <p className="text-sm text-zinc-400 italic">"A fascinating blend of aesthetic and function. While the price is premium, the craftsmanship justifies the investment for dedicated creators."</p>
                   </div>
                 </div>
               </div>

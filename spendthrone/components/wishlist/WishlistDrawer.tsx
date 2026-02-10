@@ -98,7 +98,7 @@ export function WishlistDrawer({ isOpen, onClose }: WishlistDrawerProps) {
                           <div className="flex-1 min-w-0">
                             <h4 className="font-bold text-white text-sm mb-1 truncate">{product.title}</h4>
                             <p className="text-xs text-zinc-500 mb-2">{product.category}</p>
-                            <p className="font-mono font-bold text-purple-400">{formatPrice(product.price, product.priceType)}</p>
+                            <p className="font-mono font-bold text-purple-400">{formatPrice(product.price, product.priceType || "unit_usd")}</p>
                           </div>
                           <div className="flex flex-col gap-2">
                             <button onClick={() => addToCart(product)} disabled={!product.inStock} className="p-2 text-zinc-400 hover:text-white hover:bg-purple-500 rounded-lg transition-colors disabled:opacity-50">

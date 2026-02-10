@@ -7,6 +7,10 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Brain, Clock, BarChart3, Info, ArrowLeft, RefreshCcw, CheckCircle2, AlertTriangle, ShieldCheck } from 'lucide-react';
+import Navigation from '@/components/Navigation';
+import Footer from '@/components/Footer';
 
 interface MemoryItem {
   id: number;
@@ -44,7 +48,8 @@ const generateRandomItems = (count: number, category: string): MemoryItem[] => {
   const shuffled = [...categoryItems].sort(() => Math.random() - 0.5);
   return shuffled.slice(0, count).map((item, index) => ({
     id: index + 1,
-    item
+    item,
+    category
   }));
 };
 
@@ -136,8 +141,9 @@ export default function MemoryDecayExperiment() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-purple-950/50">
-      <div className="max-w-5xl mx-auto px-4 py-8">
+    <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-purple-950/50 selection:bg-purple-500 selection:text-white">
+      <Navigation />
+      <div className="max-w-5xl mx-auto px-4 py-24">
         {/* Header */}
         <div className="text-center mb-8">
           <h1 className="text-5xl font-bold text-white mb-4 flex items-center justify-center gap-3">
@@ -421,9 +427,9 @@ export default function MemoryDecayExperiment() {
                 <div className="bg-slate-950/50 rounded-xl p-4 text-center">
                   <div className="text-3xl mb-2">⏱</div>
                   <div className="text-2xl font-bold text-white">
-                    {testResults.results.reduce((acc, r) => acc + r.timeTaken, 0)}s
+                    {Math.round(testResults.results.length * 45)}s
                   </div>
-                  <p className="text-slate-400 text-sm">Total Time</p>
+                  <p className="text-slate-400 text-sm">Est. Time</p>
                 </div>
               </div>
 
@@ -549,6 +555,7 @@ export default function MemoryDecayExperiment() {
           </div>
         )}
       </div>
+      <Footer />
     </div>
   );
 }

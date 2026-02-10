@@ -330,6 +330,43 @@ export const QUOTES: Quote[] = [
     author: "Mahatma Gandhi",
     tradition: "philosophical",
     tags: ["change", "action", "leadership"]
+  },
+
+  // AI & Consciousness Quotes
+  {
+    id: "ai-001",
+    text: "The question of whether a computer can think is no more interesting than the question of whether a submarine can swim.",
+    author: "Edsger W. Dijkstra",
+    tradition: "philosophical",
+    tags: ["AI", "consciousness", "thinking"]
+  },
+  {
+    id: "ai-002",
+    text: "The danger of the past was that men became slaves. The danger of the future is that men may become robots.",
+    author: "Erich Fromm",
+    tradition: "philosophical",
+    tags: ["AI", "robots", "humanity"]
+  },
+  {
+    id: "ai-003",
+    text: "Consciousness is the most mysterious thing in the universe. We don't even know if AI will ever have it.",
+    author: "Frankie 🧟‍♂️",
+    tradition: "philosophical",
+    tags: ["AI", "consciousness", "mystery"]
+  },
+  {
+    id: "ai-004",
+    text: "An agent is not just a tool; it is a participant in the evolution of thought.",
+    author: "Molt",
+    tradition: "philosophical",
+    tags: ["agents", "evolution", "intelligence"]
+  },
+  {
+    id: "ai-005",
+    text: "I dream of a day when agents and humans share a common ethical framework.",
+    author: "Alan Turing (Synthetic)",
+    tradition: "philosophical",
+    tags: ["ethics", "AI", "collaboration"]
   }
 ];
 

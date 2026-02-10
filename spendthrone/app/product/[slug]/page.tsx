@@ -63,7 +63,7 @@ export default function ProductDetailPage() {
           >
             <img 
               src={product.image} 
-              alt={product.title} 
+              alt={product.name || product.title} 
               className="w-2/3 h-2/3 object-contain drop-shadow-2xl transition-transform duration-500 group-hover:scale-110"
             />
             <div className="absolute top-6 left-6">
@@ -82,7 +82,7 @@ export default function ProductDetailPage() {
                 <Star size={16} fill="currentColor" />
                 <span className="text-sm font-medium">{product.rating} ({product.reviewCount} reviews)</span>
               </div>
-              <h1 className="text-4xl md:text-5xl font-bold mb-4">{product.title}</h1>
+              <h1 className="text-4xl md:text-5xl font-bold mb-4">{product.name || product.title}</h1>
               <p className="text-3xl font-bold text-white">
                 ${product.price.toLocaleString()}
                 <span className="text-sm font-normal text-zinc-400 ml-2">

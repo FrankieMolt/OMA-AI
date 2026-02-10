@@ -137,7 +137,7 @@ export function CompareDrawer({ isOpen, onClose }: CompareDrawerProps) {
                               Price
                             </p>
                             <p className="text-lg font-mono font-bold text-white">
-                              {formatPrice(product.price, product.priceType)}
+                              {formatPrice(product.price, product.priceType || 'unit_usd')}
                             </p>
                           </div>
 

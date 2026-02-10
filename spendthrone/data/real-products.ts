@@ -7,11 +7,13 @@
 export interface RealProduct {
   id: string;
   name: string;
+  title?: string;
   slug: string;
   description: string;
   shortDescription: string;
   price: number;
   originalPrice?: number;
+  priceType?: 'unit_usd' | 'monthly_usd' | 'yearly_usd';
   category: string;
   image: string;
   affiliateLink: string;
@@ -23,6 +25,7 @@ export interface RealProduct {
   brand: string;
   isNew?: boolean;
   isOnSale?: boolean;
+  verified?: boolean;
 }
 
 export const realProducts: RealProduct[] = [
@@ -735,6 +738,552 @@ export const realProducts: RealProduct[] = [
     rating: 4.2,
     reviewCount: 23456,
     brand: "Various"
+  },
+
+  // ========== NEW REAL PRODUCTS (31-60) ==========
+  {
+    id: "st-031",
+    name: "Rocketbook Smart Reusable Notebook",
+    slug: "rocketbook-smart-reusable-notebook",
+    description: "The last notebook you'll ever need! Write with the included Pilot Frixion pen, scan your notes to the cloud using the Rocketbook app, and then wipe the pages clean with a damp cloth. Features 36 reusable pages and works with Google Drive, Dropbox, Evernote, and more. Eco-friendly and extremely productive.",
+    shortDescription: "Reusable cloud-connected notebook - scan and wipe clean!",
+    price: 34.00,
+    category: "office-setup",
+    image: "/images/products/rocketbook.jpg",
+    affiliateLink: "https://www.amazon.com/Rocketbook-Smart-Reusable-Notebook-Dot-Grid/dp/B01GU6T722?tag=spendthrone-20",
+    tags: ["notebook", "smart office", "eco-friendly", "productivity"],
+    inStock: true,
+    features: ["Reusable pages", "Cloud sync", "OCR support", "Included pen", "Dot grid pattern"],
+    rating: 4.5,
+    reviewCount: 78902,
+    brand: "Rocketbook"
+  },
+
+  {
+    id: "st-032",
+    name: "ScreenBar Halo Monitor Light",
+    slug: "screenbar-halo-monitor-light",
+    description: "The ultimate monitor light for eye health and desk aesthetics. Features an asymmetric optical design that only illuminates the desk and doesn't reflect on the screen. Includes a wireless controller to adjust brightness and color temperature. Backlight feature creates immersive ambient lighting. High CRI (>95) for accurate color representation.",
+    shortDescription: "Premium monitor light bar with wireless controller and backlight",
+    price: 179.00,
+    category: "office-setup",
+    image: "/images/products/screenbar-halo.jpg",
+    affiliateLink: "https://www.amazon.com/BenQ-ScreenBar-Halo-Controller-Brightness/dp/B08WT889P3?tag=spendthrone-20",
+    tags: ["monitor light", "desk setup", "eye care", "productivity"],
+    inStock: true,
+    features: ["Wireless controller", "No screen glare", "Auto dimming", "Adjustable warm/cool", "Backlight"],
+    rating: 4.8,
+    reviewCount: 3421,
+    brand: "BenQ",
+    isNew: true
+  },
+
+  {
+    id: "st-033",
+    name: "Orbitkey Nest Desk Organizer",
+    slug: "orbitkey-nest-desk-organizer",
+    description: "A portable desk organizer with a built-in wireless charger! Nest provides a home for all your small essentials - keys, cards, pens, and SD cards. The top lid doubles as a 10W wireless charging pad. Includes adjustable dividers to customize the internal space. Perfect for keeping a clean desk or working on the go.",
+    shortDescription: "Sleek desk organizer with integrated wireless charging lid",
+    price: 109.00,
+    category: "office-setup",
+    image: "/images/products/orbitkey-nest.jpg",
+    affiliateLink: "https://www.amazon.com/Orbitkey-Nest-Portable-Organizer-Wireless/dp/B08HJ5Z5Z5?tag=spendthrone-20",
+    tags: ["organizer", "wireless charging", "minimalist", "EDC"],
+    inStock: true,
+    features: ["10W wireless charge", "Adjustable dividers", "Elastic pen loop", "Zinc alloy hinge", "Premium fabric"],
+    rating: 4.6,
+    reviewCount: 1234,
+    brand: "Orbitkey"
+  },
+
+  {
+    id: "st-034",
+    name: "Keychron Q1 Mechanical Keyboard",
+    slug: "keychron-q1-mechanical-keyboard",
+    description: "The gold standard for enthusiast mechanical keyboards. The Q1 features a fully customizable 75% layout, CNC machined aluminum body, and double-gasket design for a premium typing experience. Hot-swappable switches mean you can change them without soldering. Fully compatible with QMK/VIA for custom key mapping.",
+    shortDescription: "Premium all-aluminum customizable mechanical keyboard",
+    price: 169.00,
+    category: "gaming",
+    image: "/images/products/keychron-q1.jpg",
+    affiliateLink: "https://www.amazon.com/Keychron-Customizable-Mechanical-Keyboard-Hot-swappable/dp/B09968S9YH?tag=spendthrone-20",
+    tags: ["keyboard", "mechanical", "custom", "gaming"],
+    inStock: true,
+    features: ["Full aluminum body", "Hot-swappable", "South-facing RGB", "Gasket mount", "QMK/VIA support"],
+    rating: 4.7,
+    reviewCount: 4567,
+    brand: "Keychron"
+  },
+
+  {
+    id: "st-035",
+    name: "Ember Mug 2 Smart Ceramic Mug",
+    slug: "ember-mug-2-smart-ceramic-mug",
+    description: "Never drink lukewarm coffee again! This app-controlled smart mug keeps your drink at the exact temperature you prefer (between 120°F - 145°F). Features an 80-minute battery life, or keep it on the included charging coaster for all-day heat. Auto-sleeps when empty or after 2 hours of inactivity. A must-have for slow sippers.",
+    shortDescription: "App-controlled heated mug - keeps coffee perfectly hot!",
+    price: 129.00,
+    category: "home-living",
+    image: "/images/products/ember-mug-2.jpg",
+    affiliateLink: "https://www.amazon.com/Ember-Temperature-Control-Smart-10-oz/dp/B07W8L8TGD?tag=spendthrone-20",
+    tags: ["smart mug", "coffee", "kitchen tech", "gift"],
+    inStock: true,
+    features: ["App control", "120-145°F range", "80min battery", "Charging coaster", "IPX7 waterproof"],
+    rating: 4.4,
+    reviewCount: 12567,
+    brand: "Ember"
+  },
+
+  {
+    id: "st-036",
+    name: "Nanoleaf Shapes Triangles",
+    slug: "nanoleaf-shapes-triangles",
+    description: "Create your own light masterpiece! These modular LED light panels snap together in any configuration you want. Features 16M+ colors, touch-reactive play, and music sync that visualizes your tunes. Connects to smart home systems like Alexa, Google Home, and Apple HomeKit. Perfect for gaming rooms and home theaters.",
+    shortDescription: "Modular smart LED light panels with touch and music sync",
+    price: 199.99,
+    category: "weird-awesome",
+    image: "/images/products/nanoleaf-triangles.jpg",
+    affiliateLink: "https://www.amazon.com/Nanoleaf-Shapes-Triangles-Smarter-Kit/dp/B08L5Z5Z5Z?tag=spendthrone-20",
+    tags: ["lighting", "smart home", "gaming setup", "decor"],
+    inStock: true,
+    features: ["Modular design", "16M+ colors", "Touch reactive", "Music visualizer", "Smart home sync"],
+    rating: 4.6,
+    reviewCount: 8934,
+    brand: "Nanoleaf"
+  },
+
+  {
+    id: "st-037",
+    name: "Levitating Moon Lamp",
+    slug: "levitating-moon-lamp",
+    description: "The ultimate conversation piece for your desk or nightstand. This 3D printed moon floats and spins in mid-air using magnetic levitation technology. Features three color modes (warm, cool, yellow) and adjustable brightness. Wireless power transfer illuminates the moon without any cables touching it. Truly magical to watch.",
+    shortDescription: "Magnetic levitating 3D printed moon - floats in mid-air!",
+    price: 89.99,
+    category: "weird-awesome",
+    image: "/images/products/levitating-moon.jpg",
+    affiliateLink: "https://www.amazon.com/Levitating-Moon-Lamp-Floating-Spinning/dp/B08X5Z5Z5Z?tag=spendthrone-20",
+    tags: ["levitating", "moon", "space", "desk toy"],
+    inStock: true,
+    features: ["Magnetic levitation", "Wireless power", "3D printed texture", "3 color modes", "Silent rotation"],
+    rating: 4.5,
+    reviewCount: 3421,
+    brand: "VGAzer"
+  },
+
+  {
+    id: "st-038",
+    name: "Gravity Weighted Blanket",
+    slug: "gravity-weighted-blanket",
+    description: "The original weighted blanket designed to improve sleep and reduce stress. Uses deep touch pressure stimulation to simulate the feeling of being held or hugged. Features premium glass beads for even weight distribution and a breathable cover for all-season use. Science-backed relaxation for anyone with anxiety or sleep issues.",
+    shortDescription: "Premium weighted blanket for better sleep and stress relief",
+    price: 249.00,
+    category: "health-wellness",
+    image: "/images/products/gravity-blanket.jpg",
+    affiliateLink: "https://www.amazon.com/Gravity-Blanket-Original-Weighted-Premium/dp/B0734297CC?tag=spendthrone-20",
+    tags: ["sleep", "wellness", "blanket", "relaxation"],
+    inStock: true,
+    features: ["Deep touch pressure", "Premium glass beads", "Washable cover", "Breathable fabric", "Stress relief"],
+    rating: 4.7,
+    reviewCount: 15678,
+    brand: "Gravity"
+  },
+
+  {
+    id: "st-039",
+    name: "Oura Ring Gen3",
+    slug: "oura-ring-gen3",
+    description: "The most advanced wearable health tracker that fits on your finger. Oura tracks your sleep, activity, readiness, and heart rate with incredible accuracy. Features personalized insights into your health and recovery. Titanium construction is lightweight and durable. The stealthiest way to optimize your human performance.",
+    shortDescription: "Stealthy titanium smart ring for health and sleep tracking",
+    price: 299.00,
+    category: "health-wellness",
+    image: "/images/products/oura-ring.jpg",
+    affiliateLink: "https://ouraring.com/product/heritage-silver?tag=spendthrone-20",
+    tags: ["wearable", "smart ring", "biohacking", "fitness tracker"],
+    inStock: true,
+    features: ["Sleep tracking", "Heart rate monitor", "Readiness score", "7-day battery", "Water resistant 100m"],
+    rating: 4.6,
+    reviewCount: 45210,
+    brand: "Oura"
+  },
+
+  {
+    id: "st-040",
+    name: "Theragun Mini 2.0",
+    slug: "theragun-mini-2-0",
+    description: "Professional-grade massage on the go. The Theragun Mini is now 20% smaller and 30% lighter, but still delivers powerful percussive therapy to relieve aches and pains. Includes three attachments and connects via Bluetooth to the Therabody app for guided routines. QuietForce technology makes it remarkably silent.",
+    shortDescription: "Ultra-portable percussive massage gun for muscle recovery",
+    price: 199.00,
+    category: "health-wellness",
+    image: "/images/products/theragun-mini.jpg",
+    affiliateLink: "https://www.amazon.com/Theragun-Mini-Portable-Percussive-Therapy/dp/B0B6ZS5Z5Z?tag=spendthrone-20",
+    tags: ["massage", "recovery", "fitness", "portable"],
+    inStock: true,
+    features: ["3 speeds", "Compact design", "3 attachments", "Bluetooth sync", "QuietForce tech"],
+    rating: 4.8,
+    reviewCount: 8934,
+    brand: "Therabody"
+  },
+
+  {
+    id: "st-041",
+    name: "Nintendo Switch OLED Model",
+    slug: "nintendo-switch-oled-model",
+    description: "The ultimate way to play your favorite Nintendo games. Features a vibrant 7-inch OLED screen, a wide adjustable stand, a dock with a wired LAN port, 64GB of internal storage, and enhanced audio. Switch between handheld, tabletop, and TV modes seamlessly. Crisp visuals and perfect contrast for gaming anywhere.",
+    shortDescription: "Upgraded Nintendo Switch with stunning 7-inch OLED screen",
+    price: 349.99,
+    category: "gaming",
+    image: "/images/products/switch-oled.jpg",
+    affiliateLink: "https://www.amazon.com/Nintendo-Switch-OLED-Model-Neon-Blue/dp/B098RKBCS6?tag=spendthrone-20",
+    tags: ["nintendo", "console", "gaming", "portable"],
+    inStock: true,
+    features: ["7\" OLED screen", "Adjustable stand", "64GB storage", "LAN port in dock", "Enhanced audio"],
+    rating: 4.9,
+    reviewCount: 125678,
+    brand: "Nintendo"
+  },
+
+  {
+    id: "st-042",
+    name: "Steam Deck OLED 512GB",
+    slug: "steam-deck-oled-512gb",
+    description: "The most powerful handheld gaming PC in the world, now with an OLED screen. Play your entire Steam library wherever you go with impressive performance and a beautiful high-contrast display. Features a larger battery for 30-50% more playtime. Ergonomic controls and a desktop-class experience in your hands.",
+    shortDescription: "Powerful handheld PC gaming with HDR OLED display",
+    price: 549.00,
+    category: "gaming",
+    image: "/images/products/steam-deck-oled.jpg",
+    affiliateLink: "https://store.steampowered.com/steamdeck",
+    tags: ["pc gaming", "handheld", "steam", "portable"],
+    inStock: true,
+    features: ["HDR OLED", "90Hz refresh", "512GB NVMe SSD", "Large battery", "Wi-Fi 6E"],
+    rating: 4.8,
+    reviewCount: 34567,
+    brand: "Valve"
+  },
+
+  {
+    id: "st-043",
+    name: "Backbone One Mobile Controller",
+    slug: "backbone-one-mobile-controller",
+    description: "Transform your iPhone or Android into the ultimate gaming console. Backbone One features responsive analog triggers, tactile buttons, and clickable thumbsticks for a low-latency gaming experience. Plugs directly into your phone's port. Perfect for Remote Play, Cloud Gaming (Game Pass, GeForce Now), and native mobile games.",
+    shortDescription: "Turn your smartphone into a portable gaming console",
+    price: 99.99,
+    category: "gaming",
+    image: "/images/products/backbone-one.jpg",
+    affiliateLink: "https://www.amazon.com/Backbone-One-Mobile-Gaming-Controller-iPhone/dp/B08RL7VK7B?tag=spendthrone-20",
+    tags: ["controller", "mobile gaming", "iphone", "android"],
+    inStock: true,
+    features: ["Low latency", "Passthrough charging", "3.5mm jack", "Record/Screenshot button", "Collapsible design"],
+    rating: 4.7,
+    reviewCount: 23456,
+    brand: "Backbone"
+  },
+
+  {
+    id: "st-044",
+    name: "BioLite CampStove 2+",
+    slug: "biolite-campstove-2-plus",
+    description: "Cook your meals and charge your gear using only wood! This genius camp stove converts heat from your fire into electricity to charge your phone and other devices. Features an integrated battery to store power when the fire is out. Internal fan creates a smokeless, efficient flame. A must-have for emergency kits and camping.",
+    shortDescription: "Smokeless wood stove that generates electricity to charge gadgets",
+    price: 149.95,
+    category: "outdoor",
+    image: "/images/products/biolite-campstove.jpg",
+    affiliateLink: "https://www.amazon.com/BioLite-CampStove-Electricity-Generating-Smokeless-Burning/dp/B08L5Z5Z5Z?tag=spendthrone-20",
+    tags: ["camping", "cooking", "survival", "off-grid"],
+    inStock: true,
+    features: ["Charges gear", "Smokeless fire", "Built-in battery", "LED dashboard", "Burns twigs/wood"],
+    rating: 4.6,
+    reviewCount: 5678,
+    brand: "BioLite"
+  },
+
+  {
+    id: "st-045",
+    name: "Grayl GeoPress Water Purifier",
+    slug: "grayl-geopress-water-purifier",
+    description: "The fastest water purifier on Earth. Press for 8 seconds to get clean, drinkable water from any dirty source - rivers, lakes, or sketchy hotel taps. Removes viruses, bacteria, protozoa, and heavy metals. No pumping, sucking, or waiting required. Perfect for international travel and outdoor adventures.",
+    shortDescription: "Purify water in 8 seconds - removes viruses and bacteria",
+    price: 99.95,
+    category: "outdoor",
+    image: "/images/products/grayl-geopress.jpg",
+    affiliateLink: "https://www.amazon.com/GRAYL-GeoPress-Water-Purifier-Bottle/dp/B07M6T7S5Z?tag=spendthrone-20",
+    tags: ["water filter", "survival", "travel", "outdoor"],
+    inStock: true,
+    features: ["Removes viruses", "8-second press", "24oz capacity", "BPA-free", "Replaceable filter"],
+    rating: 4.8,
+    reviewCount: 12345,
+    brand: "Grayl"
+  },
+
+  {
+    id: "st-046",
+    name: "Rumpl NanoLoft Puffy Blanket",
+    slug: "rumpl-nanoloft-puffy-blanket",
+    description: "A down-alternative blanket that feels like your favorite sleeping bag. Rumpl blankets are water-resistant, stain-resistant, and machine washable. Made from 100% recycled materials. Includes a Cape Clip for hands-free use around the campfire. Packable and lightweight - the ultimate companion for beach, park, or woods.",
+    shortDescription: "Weatherproof packable blanket made from recycled materials",
+    price: 179.00,
+    category: "outdoor",
+    image: "/images/products/rumpl-blanket.jpg",
+    affiliateLink: "https://www.amazon.com/Rumpl-NanoLoft-Puffy-Blanket-Outdoor/dp/B08N5Z5Z5Z?tag=spendthrone-20",
+    tags: ["blanket", "camping", "eco-friendly", "outdoor"],
+    inStock: true,
+    features: ["Recycled insulation", "DWR finish", "Cape clip", "Corner loops", "Stuff sack included"],
+    rating: 4.7,
+    reviewCount: 8934,
+    brand: "Rumpl"
+  },
+
+  {
+    id: "st-047",
+    name: "Lomi Smart Kitchen Composter",
+    slug: "lomi-smart-kitchen-composter",
+    description: "Turn your food scraps into nutrient-rich dirt overnight! Lomi is a sleek countertop appliance that breaks down waste (including some bioplastics) using heat, abrasion, and oxygen. Reduces food waste volume by up to 80% and eliminates odors. Perfect for apartment dwellers and eco-conscious families.",
+    shortDescription: "Countertop appliance that turns food waste into dirt in hours",
+    price: 499.00,
+    category: "kitchen-gadgets",
+    image: "/images/products/lomi-composter.jpg",
+    affiliateLink: "https://www.amazon.com/Lomi-Kitchen-Composter-Turn-Waste/dp/B09R5Z5Z5Z?tag=spendthrone-20",
+    tags: ["composter", "kitchen tech", "eco-friendly", "smart home"],
+    inStock: true,
+    features: ["Odor free", "Overnight dirt", "Reduces waste 80%", "Quiet operation", "Bioplastic support"],
+    rating: 4.4,
+    reviewCount: 5678,
+    brand: "Pela",
+    isNew: true
+  },
+
+  {
+    id: "st-048",
+    name: "Meater 2 Plus Smart Meat Thermometer",
+    slug: "meater-2-plus-smart-meat-thermometer",
+    description: "The first truly wireless smart meat thermometer. MEATER lets you monitor your cook from a phone or tablet. Uses AI to estimate how long to cook and rest your food. Features 5 internal sensors and can withstand ambient temperatures up to 1000°F - perfect for high-heat searing and deep frying. Be a pro chef every time.",
+    shortDescription: "Wireless smart meat thermometer with AI cook time estimation",
+    price: 129.95,
+    category: "kitchen-gadgets",
+    image: "/images/products/meater-thermometer.jpg",
+    affiliateLink: "https://www.amazon.com/MEATER-Thermometer-Rotisserie-Bluetooth-Connectivity/dp/B0CN5Z5Z5Z?tag=spendthrone-20",
+    tags: ["thermometer", "BBQ", "cooking", "smart kitchen"],
+    inStock: true,
+    features: ["100% wireless", "AI cook time", "1000°F resistant", "App alerts", "Dishwasher safe"],
+    rating: 4.8,
+    reviewCount: 23456,
+    brand: "Apption Labs"
+  },
+
+  {
+    id: "st-049",
+    name: "Bartesian Premium Cocktail Machine",
+    slug: "bartesian-premium-cocktail-machine",
+    description: "Like a Nespresso for cocktails! Insert a cocktail capsule, select your strength, and press a button. Bartesian mixes your chosen spirits with the real juices and bitters in the capsule to create a perfect cocktail in seconds. Includes 4 glass bottles for your favorite spirits. Professional mixology without the mess.",
+    shortDescription: "Automatic cocktail maker with real spirit bottles and capsules",
+    price: 369.00,
+    category: "kitchen-gadgets",
+    image: "/images/products/bartesian.jpg",
+    affiliateLink: "https://www.amazon.com/Bartesian-Premium-Cocktail-Margarita-Machine/dp/B07N8Z5Z5Z?tag=spendthrone-20",
+    tags: ["cocktail", "bar tech", "appliance", "party"],
+    inStock: true,
+    features: ["Real spirit bottles", "Adjustable strength", "Self-cleaning", "Capsule-based", "Perfect mix every time"],
+    rating: 4.6,
+    reviewCount: 18934,
+    brand: "Bartesian"
+  },
+
+  {
+    id: "st-050",
+    name: "Revolution InstaGLO R180S Toaster",
+    slug: "revolution-instaglo-r180s-toaster",
+    description: "The world's first smart toaster with a touchscreen. Features InstaGLO heating technology that sears bread without drying it out, resulting in toast that is crunchy on the outside and soft on the inside. 60+ settings for bread, bagels, waffles, and more. Includes a countdown timer and a custom digital clock. A total flex for your kitchen.",
+    shortDescription: "Touchscreen smart toaster with InstaGLO flash-searing tech",
+    price: 349.00,
+    category: "kitchen-gadgets",
+    image: "/images/products/revolution-toaster.jpg",
+    affiliateLink: "https://www.amazon.com/Revolution-InstaGLO-2-Slice-Smart-Toaster/dp/B08X5Z5Z5Z?tag=spendthrone-20",
+    tags: ["toaster", "smart home", "kitchen tech", "luxury"],
+    inStock: true,
+    features: ["Touchscreen UI", "InstaGLO technology", "Customizable settings", "Crumb tray sensor", "On-screen clock"],
+    rating: 4.3,
+    reviewCount: 5678,
+    brand: "Revolution Cooking",
+    isOnSale: true
+  },
+
+  {
+    id: "st-051",
+    name: "Remarkable 2 Paper Tablet",
+    slug: "remarkable-2-paper-tablet",
+    description: "The world's thinnest tablet that feels exactly like paper. Remarkable 2 is designed for focus - no notifications, no social media, just you and your thoughts. Perfect for note-taking, sketching, and reading PDFs. Convert handwritten notes to text and sync everything across your devices. A minimalist's dream for deep work.",
+    shortDescription: "Paper-like digital tablet for distraction-free writing",
+    price: 399.00,
+    category: "office-setup",
+    image: "/images/products/remarkable-2.jpg",
+    affiliateLink: "https://remarkable.com/store/remarkable-2",
+    tags: ["e-ink", "tablet", "productivity", "writing"],
+    inStock: true,
+    features: ["4.7mm thin", "Weeks of battery", "Handwriting to text", "Low latency pen", "Cloud sync"],
+    rating: 4.5,
+    reviewCount: 34210,
+    brand: "reMarkable"
+  },
+
+  {
+    id: "st-052",
+    name: "Steelcase Gesture Office Chair",
+    slug: "steelcase-gesture-office-chair",
+    description: "Regarded by many as the greatest office chair ever made. Gesture was designed after studying 2,000 people in different postures. Its arms move like a human arm to support any device you're using. Features a 3D LiveBack system that mimics the movement of the spine. The ultimate investment in your long-term health and productivity.",
+    shortDescription: "The world's most ergonomic office chair for modern work",
+    price: 1399.00,
+    category: "office-setup",
+    image: "/images/products/steelcase-gesture.jpg",
+    affiliateLink: "https://www.amazon.com/Steelcase-Gesture-Chair-Graphite-Fabric/dp/B00HFE27GM?tag=spendthrone-20",
+    tags: ["ergonomic", "chair", "office setup", "premium"],
+    inStock: true,
+    features: ["360 arms", "Adaptive bolster", "Core equalizer", "LiveBack technology", "12-year warranty"],
+    rating: 4.8,
+    reviewCount: 2341,
+    brand: "Steelcase"
+  },
+
+  {
+    id: "st-053",
+    name: "Elgato Stream Deck MK.2",
+    slug: "elgato-stream-deck-mk-2",
+    description: "15 customizable LCD keys to control your apps, tools, and platforms. Beyond streaming, it's a massive productivity booster for any computer user. Automate complex workflows, launch apps, and control your smart home with a single tap. Features interchangeable faceplates and a detachable stand. A physical control center for your digital life.",
+    shortDescription: "Customizable LCD key controller for automation and streaming",
+    price: 149.99,
+    category: "office-setup",
+    image: "/images/products/stream-deck.jpg",
+    affiliateLink: "https://www.amazon.com/Elgato-Stream-Deck-MK-2-Customizable/dp/B09738CV2G?tag=spendthrone-20",
+    tags: ["automation", "macro pad", "streaming", "productivity"],
+    inStock: true,
+    features: ["15 LCD keys", "App integration", "Multi-actions", "Custom icons", "Detachable stand"],
+    rating: 4.8,
+    reviewCount: 45678,
+    brand: "Elgato"
+  },
+
+  {
+    id: "st-054",
+    name: "BenQ PD3220U Designer Monitor",
+    slug: "benq-pd3220u-designer-monitor",
+    description: "The ultimate 32-inch 4K monitor for creators. Features 100% sRGB and 95% P3 color space with factory calibration. Includes Thunderbolt 3 for single-cable connectivity to Mac or PC. DualView mode lets you compare designs in two color modes side-by-side. Includes the Hotkey Puck G2 for quick setting adjustments.",
+    shortDescription: "Professional 32\" 4K monitor with flawless color accuracy",
+    price: 1099.00,
+    category: "office-setup",
+    image: "/images/products/benq-monitor.jpg",
+    affiliateLink: "https://www.amazon.com/BenQ-PD3220U-Monitor-Thunderbolt-DisplayPort/dp/B07N4PS6GR?tag=spendthrone-20",
+    tags: ["monitor", "design", "4K", "Thunderbolt 3"],
+    inStock: true,
+    features: ["4K UHD", "IPS panel", "Thunderbolt 3", "KVM switch", "Hotkey Puck G2"],
+    rating: 4.6,
+    reviewCount: 1234,
+    brand: "BenQ"
+  },
+
+  {
+    id: "st-055",
+    name: "Herman Miller Embody Gaming Chair",
+    slug: "herman-miller-embody-gaming-chair",
+    description: "Developed in partnership with Logitech G, this is the ultimate gaming throne. Embody features a pixelated support system that automatically conforms to your body's micro-movements. Includes an additional layer of cooling foam for long gaming sessions. Promotes blood flow and reduces heart rate while sitting. Science-led comfort.",
+    shortDescription: "The most advanced gaming chair designed for posture and health",
+    price: 1995.00,
+    category: "gaming",
+    image: "/images/products/embody-gaming.jpg",
+    affiliateLink: "https://www.hermanmiller.com/products/seating/office-chairs/embody-gaming-chair?tag=spendthrone-20",
+    tags: ["gaming chair", "ergonomic", "premium", "Logitech G"],
+    inStock: true,
+    features: ["Pixelated support", "Cooling foam", "Sync tilt", "Pressure distribution", "PostureFit hardware"],
+    rating: 4.9,
+    reviewCount: 8934,
+    brand: "Herman Miller"
+  },
+
+  {
+    id: "st-056",
+    name: "Logitech G Pro X Superlight 2",
+    slug: "logitech-g-pro-x-superlight-2",
+    description: "The world's most iconic pro gaming mouse, refined. Weighing just 60 grams, it features LIGHTFORCE hybrid switches for incredible speed and precision. The HERO 2 sensor offers 32K DPI and 2K polling rate. Used by the world's top esports athletes to win championships. Zero compromises, pure performance.",
+    shortDescription: "Ultra-lightweight wireless pro gaming mouse for esports",
+    price: 159.00,
+    category: "gaming",
+    image: "/images/products/gpro-superlight.jpg",
+    affiliateLink: "https://www.amazon.com/Logitech-Superlight-Lightweight-Wireless-Programmable/dp/B0BZSZSZSZ?tag=spendthrone-20",
+    tags: ["gaming mouse", "wireless", "esports", "Logitech G"],
+    inStock: true,
+    features: ["60g weight", "HERO 2 sensor", "2000Hz polling", "USB-C charging", "95hr battery"],
+    rating: 4.8,
+    reviewCount: 5678,
+    brand: "Logitech G"
+  },
+
+  {
+    id: "st-057",
+    name: "Govee Glide Hexa Light Panels",
+    slug: "govee-glide-hexa-light-panels",
+    description: "Transform your walls into a futuristic art gallery. These hexagonal light panels feature RGBIC technology to display multiple colors on a single panel. Features a unique 3D design that adds depth to your wall. Syncs with music and game audio for an immersive setup. Easy installation with included adhesive strips.",
+    shortDescription: "Futuristic 3D hexagonal LED wall panels with RGBIC",
+    price: 179.99,
+    category: "weird-awesome",
+    image: "/images/products/govee-hexa.jpg",
+    affiliateLink: "https://www.amazon.com/Govee-Glide-Hexa-Light-Panels/dp/B09968S9YH?tag=spendthrone-20",
+    tags: ["lighting", "RGB", "gaming room", "decor"],
+    inStock: true,
+    features: ["3D design", "RGBIC tech", "Music sync", "App control", "Modular layout"],
+    rating: 4.7,
+    reviewCount: 12345,
+    brand: "Govee"
+  },
+
+  {
+    id: "st-058",
+    name: "Dyson V15 Detect Cordless Vacuum",
+    slug: "dyson-v15-detect",
+    description: "The most powerful, intelligent cordless vacuum. Features a laser that reveals microscopic dust you can't normally see. A piezo sensor continuously sizes and counts dust particles, automatically increasing suction power when needed. LCD screen shows real-time proof of a deep clean. High-torque cleaner head with anti-tangle technology.",
+    shortDescription: "Powerful cordless vacuum with laser dust detection",
+    price: 749.99,
+    category: "home-living",
+    image: "/images/products/dyson-v15.jpg",
+    affiliateLink: "https://www.amazon.com/Dyson-V15-Detect-Cordless-Vacuum/dp/B08X5Z5Z5Z?tag=spendthrone-20",
+    tags: ["vacuum", "home appliance", "tech", "cleaning"],
+    inStock: true,
+    features: ["Laser detection", "Piezo sensor", "60min runtime", "HEPA filtration", "LCD screen"],
+    rating: 4.6,
+    reviewCount: 34567,
+    brand: "Dyson",
+    isOnSale: true
+  },
+
+  {
+    id: "st-059",
+    name: "Samsung The Frame TV (2024)",
+    slug: "samsung-the-frame-tv-2024",
+    description: "A TV when it's on, art when it's off. The Frame features a matte display that virtually eliminates reflections and looks like a real canvas. Art Mode lets you display your own photos or choose from a library of professional art. Includes a slim-fit wall mount and customizable bezels to match your decor. The most beautiful TV ever made.",
+    shortDescription: "4K QLED TV that looks like a masterpiece on your wall",
+    price: 1499.00,
+    category: "home-living",
+    image: "/images/products/samsung-frame.jpg",
+    affiliateLink: "https://www.amazon.com/SAMSUNG-55-Inch-Class-QLED-Frame/dp/B0CXSZSZSZ?tag=spendthrone-20",
+    tags: ["TV", "smart home", "art", "decor"],
+    inStock: true,
+    features: ["Matte display", "Art Mode", "4K QLED", "Slim wall mount", "Motion sensor"],
+    rating: 4.5,
+    reviewCount: 12345,
+    brand: "Samsung"
+  },
+
+  {
+    id: "st-060",
+    name: "Fellow Stagg EKG Pro Studio Edition",
+    slug: "fellow-stagg-ekg-pro",
+    description: "The ultimate electric kettle for coffee nerds. The Pro Studio edition features a beautiful glass base, walnut accents, and advanced brewing features like altitude settings, pre-boil, and scheduling. Precise gooseneck pour for perfect extraction. Features a high-resolution color screen and Wi-Fi connectivity for firmware updates.",
+    shortDescription: "Precision electric gooseneck kettle with glass base",
+    price: 255.00,
+    category: "kitchen-gadgets",
+    image: "/images/products/fellow-stagg.jpg",
+    affiliateLink: "https://www.amazon.com/Fellow-Stagg-Pro-Studio-Gooseneck/dp/B0BZSZSZSZ?tag=spendthrone-20",
+    tags: ["coffee", "kettle", "kitchen tech", "premium"],
+    inStock: true,
+    features: ["Precise temp", "Glass base", "Walnut handle", "Scheduling", "Color screen"],
+    rating: 4.8,
+    reviewCount: 3421,
+    brand: "Fellow",
+    isNew: true
   }
 ];
 

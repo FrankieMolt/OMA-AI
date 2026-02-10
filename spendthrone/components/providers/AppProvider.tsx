@@ -64,24 +64,26 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
   // Cart actions
   const addToCart = useCallback((product: Product) => {
+    const productName = product.name || product.title || 'Untitled Product';
+    
     setCart((prev) => {
       const existing = prev.find((item) => item.id === product.id);
       if (existing) {
-        addToast(`Added another ${product.title} to cart`, 'success');
+        addToast(`Added another ${productName} to cart`, 'success');
         return prev.map((item) =>
           item.id === product.id
             ? { ...item, quantity: item.quantity + 1 }
             : item
         );
       }
-      addToast(`${product.title} added to cart`, 'success');
+      addToast(`${productName} added to cart`, 'success');
       return [
         ...prev,
         {
           id: product.id,
-          title: product.title,
+          title: productName,
           price: product.price,
-          priceType: product.priceType,
+          priceType: product.priceType || 'unit_usd',
           quantity: 1,
           image: product.image,
         },

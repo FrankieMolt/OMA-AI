@@ -7,7 +7,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ShoppingBag, Menu, X, Heart, Scale, ShoppingCart, Search, User } from 'lucide-react';
+import { ShoppingBag, Menu, X, Heart, Scale, ShoppingCart, Search, User, Sparkles } from 'lucide-react';
 import { useApp } from '@/components/providers/AppProvider';
 import { cn } from '@/lib/utils';
 

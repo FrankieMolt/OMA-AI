@@ -5,6 +5,7 @@
 'use client';
 
 import { useState, useMemo } from 'react';
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Zap, ShoppingBag, Sparkles } from 'lucide-react';
 import { AppProvider, useApp } from '@/components/providers/AppProvider';
@@ -50,7 +51,7 @@ function SpendThronePage() {
     return PRODUCTS.filter((product) => {
       // Search filter
       const matchesSearch = !debouncedSearch || 
-        (product.name || product.title || '').toLowerCase().includes(debouncedSearch.toLowerCase()) ||
+        (product.name || '').toLowerCase().includes(debouncedSearch.toLowerCase()) ||
         product.description.toLowerCase().includes(debouncedSearch.toLowerCase()) ||
         product.tags.some((tag) => tag.toLowerCase().includes(debouncedSearch.toLowerCase())) ||
         product.category.toLowerCase().includes(debouncedSearch.toLowerCase());
