@@ -1,9 +1,50 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createClient } from '@/lib/supabase';
+import { createClient, isSupabaseEnabled } from '@/lib/supabase';
 import { buildShortUrl } from '@/lib/shortener';
+
+// Demo data for when Supabase is not configured
+const DEMO_LINKS = [
+  {
+    id: 'demo-1',
+    short_code: 'demo123',
+    short_url: 'https://oma-ai.com/s/demo123',
+    original_url: 'https://example.com/very-long-url',
+    created_at: new Date().toISOString(),
+    clicks: 42,
+    title: 'Demo Link 1'
+  },
+  {
+    id: 'demo-2',
+    short_code: 'test456',
+    short_url: 'https://oma-ai.com/s/test456',
+    original_url: 'https://another-example.com/page',
+    created_at: new Date(Date.now() - 86400000).toISOString(),
+    clicks: 128,
+    title: 'Demo Link 2'
+  }
+];
 
 export async function GET(request: NextRequest) {
   try {
+    // DEMO MODE: Return demo links when Supabase not configured
+    if (!isSupabaseEnabled) {
+      return NextResponse.json({
+        success: true,
+        data: {
+          links: DEMO_LINKS,
+          pagination: {
+            total: DEMO_LINKS.length,
+            limit: 50,
+            offset: 0,
+            has_more: false
+          }
+        },
+        demo: true,
+        message: 'Demo mode - configure Supabase for persistence'
+      });
+    }
+    
+    // PRODUCTION MODE: Use Supabase
     const supabase = createClient();
     
     // Get user session

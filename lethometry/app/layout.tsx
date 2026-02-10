@@ -1,56 +1,39 @@
-import type { Metadata, Viewport } from 'next';
-import './globals.css';
-import Navigation from '@/components/Navigation';
+import type { Metadata } from 'next'
+import { Inter, JetBrains_Mono } from 'next/font/google'
+import './globals.css'
+import { Navigation } from '@/components/navigation'
+import { Footer } from '@/components/footer'
 
-export const viewport: Viewport = {
-  themeColor: '#08090a',
-  colorScheme: 'dark',
-}
+const inter = Inter({ 
+  subsets: ['latin'],
+  variable: '--font-inter',
+})
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  variable: '--font-mono',
+})
 
 export const metadata: Metadata = {
-  title: {
-    default: 'LETHOMETRY | The Science of Human Erasure',
-    template: '%s | LETHOMETRY',
-  },
-  description: 'A research initiative documenting the measurement of human obsolescence. 99.9% of humans are forgotten within 3 generations.',
-  keywords: [
-    'lethometry',
-    'human obsolescence',
-    'historical forgetting',
-    'thanatology',
-    'memory research',
-    'generational forgetting',
-    'anthropology',
-    'sociology',
-    'demographics',
-    'erasure studies'
-  ],
-  authors: [{ name: 'LETHOMETRY Research Initiative' }],
-  robots: {
-    index: true,
-    follow: true,
-  },
-  alternates: {
-    canonical: 'https://lethometry.com',
-  },
-};
+  title: 'Lethometry | AI Social Scientific Research Platform',
+  description: 'A peer-reviewed research platform for studying AI decision-making, ethics, and cognitive patterns through rigorous behavioral experiments.',
+  keywords: 'AI research, artificial intelligence, behavioral experiments, moral philosophy, cognitive science, ethics, trolley problem',
+}
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }) {
   return (
-    <html lang="en" className="scroll-smooth">
-      <head>
-        <link rel="canonical" href="https://lethometry.com" />
-      </head>
-      <body className="bg-[#08090a] text-slate-300 min-h-screen">
-        <Navigation />
-        <main className="scanlines">
-          {children}
-        </main>
+    <html lang="en" className="dark">
+      <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
+        <div className="min-h-screen bg-background">
+          <Navigation />
+          <main>{children}</main>
+          <Footer />
+        </div>
       </body>
     </html>
-  );
+  )
 }

@@ -1,25 +1,26 @@
 import Link from 'next/link';
+import { FlaskConical, ArrowLeft } from 'lucide-react';
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen flex items-center justify-center px-4">
-      <div className="clinical-card p-8 max-w-md w-full text-center">
-        <div className="mb-6">
-          <div className="text-6xl font-mono text-slate-700 mb-4">404</div>
-          <div className="w-16 h-px bg-slate-700 mx-auto mb-4" />
-          <h1 className="text-xl text-slate-300 mb-2">SPECIMEN NOT FOUND</h1>
+    <div className="min-h-screen scientific-grid flex items-center justify-center">
+      <div className="text-center max-w-md mx-auto px-4">
+        <div className="w-16 h-16 rounded-full bg-muted flex items-center justify-center mx-auto mb-6">
+          <FlaskConical className="w-8 h-8 text-muted-foreground" />
         </div>
         
-        <p className="text-sm text-slate-500 mb-6">
-          The requested resource has been erased from the archive or never existed. 
-          Like 99.9% of human experience, it has vanished into the void.
+        <h1 className="text-4xl font-bold text-foreground mb-2">404</h1>
+        <h2 className="text-xl font-semibold text-foreground mb-4">Experiment Not Found</h2>
+        <p className="text-muted-foreground mb-8">
+          The page or experiment you're looking for doesn't exist or has been moved.
         </p>
         
-        <Link 
+        <Link
           href="/"
-          className="inline-flex items-center gap-2 text-xs text-cyan-600/70 hover:text-cyan-500 font-mono transition-colors"
+          className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-colors"
         >
-          RETURN TO OVERVIEW
+          <ArrowLeft className="w-4 h-4" />
+          Return to Home
         </Link>
       </div>
     </div>

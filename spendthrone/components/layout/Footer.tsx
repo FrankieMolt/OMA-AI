@@ -85,7 +85,7 @@ export function Footer() {
               The curated kingdom of the weirdest, most viral products on Earth. WTF-level technology for the modern age.
             </p>
             <p className="text-zinc-600 text-sm">
-              Made with <Heart className="inline w-4 h-4 text-red-500 fill-current" /> by Nosyt LLC
+              Made with <Heart className="inline w-4 h-4 text-red-500 fill-current" aria-label="Love" /> by Nosyt LLC
             </p>
           </div>
 

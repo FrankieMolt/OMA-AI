@@ -63,21 +63,25 @@ export default async function RedirectPage({ params }: RedirectPageProps) {
                  null;
   
   // Record the click asynchronously (fire and forget)
-  supabase.from('link_clicks').insert({
-    link_id: link.id,
-    ip_address: ipAddress,
-    user_agent: userAgent,
-    referrer: referrer,
-    country: country,
-    device_type: deviceType,
-    browser: browser,
-    os: os
-  }).then(() => {
-    // Also increment the click count
-    supabase.rpc('increment_link_clicks', { link_uuid: link.id });
-  }).catch(err => {
-    console.error('Failed to record click:', err);
-  });
+  // Use void to explicitly ignore the promise
+  void (async () => {
+    try {
+      await supabase.from('link_clicks').insert({
+        link_id: link.id,
+        ip_address: ipAddress,
+        user_agent: userAgent,
+        referrer: referrer,
+        country: country,
+        device_type: deviceType,
+        browser: browser,
+        os: os
+      });
+      // Also increment the click count
+      await supabase.rpc('increment_link_clicks', { link_uuid: link.id });
+    } catch (err) {
+      console.error('Failed to record click:', err);
+    }
+  })();
   
   // Perform the redirect
   redirect(link.original_url);

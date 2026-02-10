@@ -80,6 +80,7 @@ import { ToastProvider } from '@/components/providers/ToastProvider'
 import { ErrorBoundary } from '@/components/ErrorBoundary'
 import { Navbar } from '@/components/layout/Navbar'
 import { Footer } from '@/components/layout/Footer'
+import { CartDrawerWrapper } from '@/components/cart/CartDrawerWrapper'
 
 export default function RootLayout({
   children,
@@ -139,6 +140,7 @@ export default function RootLayout({
                 {children}
               </main>
               <Footer />
+              <CartDrawerWrapper />
             </AppProvider>
           </ToastProvider>
         </ErrorBoundary>

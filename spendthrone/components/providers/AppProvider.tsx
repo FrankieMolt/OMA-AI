@@ -4,7 +4,7 @@
 
 'use client';
 
-import React, { createContext, useContext, useCallback, ReactNode } from 'react';
+import React, { createContext, useContext, useCallback, useState, ReactNode } from 'react';
 import { CartItem, Product } from '@/types';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
 import { useRecentlyViewed } from '@/hooks/useRecentlyViewed';
@@ -21,6 +21,8 @@ interface AppContextType {
   clearCart: () => void;
   cartTotal: number;
   cartCount: number;
+  isCartOpen: boolean;
+  toggleCart: () => void;
 
   // Products
   PRODUCTS: Product[];
@@ -49,9 +51,10 @@ const AppContext = createContext<AppContextType | undefined>(undefined);
 
 export function AppProvider({ children }: { children: ReactNode }) {
   const { addToast } = useToast();
-  
+
   // Cart state
   const [cart, setCart] = useLocalStorage<CartItem[]>(STORAGE_KEYS.CART, []);
+  const [isCartOpen, setIsCartOpen] = useState(false);
   
   // Wishlist state
   const [wishlist, setWishlist] = useLocalStorage<string[]>(STORAGE_KEYS.WISHLIST, []);
@@ -112,6 +115,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
     setCart([]);
     addToast('Cart cleared', 'info');
   }, [setCart, addToast]);
+
+  const toggleCart = useCallback(() => {
+    setIsCartOpen((prev) => !prev);
+  }, []);
 
   // Cart computed values
   const cartTotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
@@ -178,6 +185,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
         clearCart,
         cartTotal,
         cartCount,
+        isCartOpen,
+        toggleCart,
         PRODUCTS,
         wishlist,
         addToWishlist,

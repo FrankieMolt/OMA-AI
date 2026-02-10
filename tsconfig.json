@@ -42,6 +42,7 @@
     "sdk",
     "skills",
     "spendthrone",
-    "lethometry"
+    "lethometry",
+    "app/shorten"
   ]
 }

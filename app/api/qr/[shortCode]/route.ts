@@ -45,7 +45,7 @@ export async function GET(
     
     // Generate QR code
     const qrOptions: QRCode.QRCodeToStringOptions = {
-      type: format === 'png' ? 'image/png' : 'svg',
+      type: 'svg',
       width: size,
       margin: 2,
       color: {
@@ -68,7 +68,7 @@ export async function GET(
       
       const buffer = await QRCode.toBuffer(shortUrl, qrPngOptions);
       
-      return new NextResponse(buffer, {
+      return new NextResponse(new Uint8Array(buffer), {
         status: 200,
         headers: {
           'Content-Type': 'image/png',

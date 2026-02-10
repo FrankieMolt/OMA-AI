@@ -1,0 +1,8 @@
+# Night Monitoring for All Sites
+# Runs every 2 hours from 00:00 to 08:00 UTC
+
+# Check all sites every 2 hours overnight
+0 */2 * * * /home/nosyt/.openclaw/workspace/night-monitor.sh >> /home/nosyt/.openclaw/workspace/logs/night-monitor.log 2>&1
+
+# Morning startup check (restarting services if needed)
+0 8 * * * cd /home/nosyt/.openclaw/workspace/skills && ./restart-all.sh >> /home/nosyt/.openclaw/workspace/logs/morning-check.log 2>&1

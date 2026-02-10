@@ -7,19 +7,21 @@ import {
   Code,
   Zap,
   Star,
-  ExternalLink,
-  Filter,
   ArrowRight,
   Search,
   BookOpen,
   Shield,
-  Loader2
+  Sparkles,
+  TrendingUp
 } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { NewsletterSignup } from '@/components/NewsletterSignup';
 import { LiveStats } from '@/components/LiveStats';
 import { TrendingAPIs } from '@/components/TrendingAPIs';
+import { AnimatedBackground } from '@/components/ui/AnimatedBackground';
+import { AnimatedCard, fadeInUp, staggerContainer, staggerItem } from '@/lib/animations';
+import { CardSkeleton, StatCardSkeleton } from '@/components/ui/SkeletonLoader';
 
 // --- API Marketplace Types ---
 interface ApiService {
@@ -39,60 +41,38 @@ interface ApiService {
   capabilities?: string[];
 }
 
-// --- Skeleton Component for Loading State ---
-const ApiCardSkeleton = memo(() => (
-  <div className="glass-card p-6 rounded-xl">
-    <div className="flex items-start justify-between mb-4">
-      <div className="flex-1">
-        <div className="h-6 w-3/4 bg-zinc-800 rounded mb-2 skeleton" />
-        <div className="h-4 w-full bg-zinc-800 rounded mb-3 skeleton" />
-        <div className="flex gap-2 mb-3">
-          <div className="h-6 w-16 bg-zinc-800 rounded-md skeleton" />
-          <div className="h-6 w-16 bg-zinc-800 rounded-md skeleton" />
-          <div className="h-6 w-16 bg-zinc-800 rounded-md skeleton" />
-        </div>
-      </div>
-      <div className="text-right ml-4 w-20">
-        <div className="h-7 w-full bg-zinc-800 rounded mb-2 skeleton" />
-        <div className="h-4 w-2/3 ml-auto bg-zinc-800 rounded skeleton" />
-        <div className="h-3 w-full mt-1 bg-zinc-800 rounded skeleton" />
-      </div>
-    </div>
-    <div className="pt-4 border-t border-zinc-800">
-      <div className="flex justify-between items-center">
-        <div className="flex items-center gap-2">
-          <div className="w-4 h-4 rounded bg-zinc-800 skeleton" />
-          <div className="h-4 w-24 bg-zinc-800 rounded skeleton" />
-        </div>
-        <div className="flex gap-2">
-          <div className="h-8 w-16 bg-zinc-800 rounded-lg skeleton" />
-          <div className="h-8 w-20 bg-purple-600/50 rounded-lg skeleton" />
-        </div>
-      </div>
-    </div>
-  </div>
-));
-
-ApiCardSkeleton.displayName = 'ApiCardSkeleton';
-
 // --- Stat Card Component ---
-const StatCard = memo(({ icon: Icon, value, label, isLoading }: { icon: any; value: string; label: string; isLoading?: boolean }) => (
-  <div className="glass-card p-6 text-center">
-    {isLoading ? (
-      <>
-        <div className="w-8 h-8 mx-auto mb-2 bg-zinc-800 rounded-lg skeleton" />
-        <div className="h-8 w-20 mx-auto mb-1 skeleton" />
-        <div className="h-4 w-full bg-zinc-800 rounded skeleton" />
-      </>
-    ) : (
-      <>
-        <Icon className="w-8 h-8 mx-auto mb-2 text-purple-400" />
-        <div className="text-3xl font-bold mb-1">{value}</div>
-        <div className="text-sm text-zinc-500 uppercase tracking-wider">{label}</div>
-      </>
-    )}
-  </div>
-));
+const StatCard = memo(({ icon: Icon, value, label, isLoading }: { icon: any; value: string; label: string; isLoading?: boolean }) => {
+  if (isLoading) {
+    return <StatCardSkeleton />;
+  }
+  
+  return (
+    <motion.div
+      whileHover={{ y: -4, scale: 1.02 }}
+      transition={{ duration: 0.2 }}
+      className="glass-card p-5 md:p-6 text-center rounded-xl cursor-default"
+    >
+      <motion.div
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
+        transition={{ type: 'spring', stiffness: 260, damping: 20 }}
+      >
+        <Icon className="w-7 h-7 md:w-8 md:h-8 mx-auto mb-2 text-purple-400" />
+      </motion.div>
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.1 }}
+        className="text-2xl md:text-3xl font-bold text-white mb-1">
+        {value}
+      </motion.div>
+      <div className="text-xs md:text-sm text-zinc-500 uppercase tracking-wider font-medium">
+        {label}
+      </div>
+    </motion.div>
+  );
+});
 
 StatCard.displayName = 'StatCard';
 
@@ -104,53 +84,83 @@ const ApiCard = memo(({ service, index }: { service: ApiService; index: number }
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: Math.min(index * 0.05, 0.5) }}
-      className="glass-card p-6 rounded-xl"
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-30px' }}
+      transition={{ 
+        duration: 0.5, 
+        delay: Math.min(index * 0.05, 0.5),
+        ease: [0.25, 0.1, 0.25, 1]
+      }}
+      whileHover={{ 
+        y: -8,
+        transition: { duration: 0.25 }
+      }}
+      className="group glass-card p-5 md:p-6 rounded-xl cursor-pointer"
     >
       <div className="flex items-start justify-between mb-4">
-        <div className="flex-1">
-          <h3 className="text-xl font-bold mb-2">{service.name}</h3>
-          <p className="text-sm text-zinc-400 mb-3">{service.description}</p>
-          <div className="flex flex-wrap gap-2 mb-3">
+        <div className="flex-1 min-w-0 pr-3">
+          <h3 className="text-lg md:text-xl font-bold text-white mb-2 truncate">
+            {service.name}
+          </h3>
+          <p className="text-sm text-zinc-400 mb-3 line-clamp-2">
+            {service.description}
+          </p>
+          <div className="flex flex-wrap gap-1.5">
             {(service.tags || service.capabilities || []).slice(0, 3).map((tag, i) => (
-              <span key={i} className="tag-chip">
+              <motion.span
+                key={i}
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.1 + i * 0.05 }}
+                className="tag-chip hover:bg-purple-500/20 hover:text-purple-300 hover:border-purple-500/30 transition-colors cursor-default"
+              >
                 {tag}
-              </span>
+              </motion.span>
             ))}
           </div>
         </div>
-        <div className="text-right ml-4">
-          <div className="text-2xl font-bold mb-1">
-            {price === 0 ? 'Free' : `$${price.toFixed(3)}`}
-            {price > 0 && <span className="text-sm font-normal text-zinc-500">/call</span>}
+        <div className="text-right shrink-0">
+          <div className="text-xl md:text-2xl font-bold text-white">
+            {price === 0 ? (
+              <span className="text-green-400">Free</span>
+            ) : (
+              <>
+                ${price.toFixed(3)}
+                <span className="text-xs font-normal text-zinc-500 block">/call</span>
+              </>
+            )}
           </div>
-          <div className="flex items-center justify-end gap-1 text-sm text-yellow-400">
+          <div className="flex items-center justify-end gap-1 text-sm text-yellow-400 mt-1">
             <Star className="w-4 h-4 fill-current" />
-            {rating.toFixed(1)}
+            <span>{rating.toFixed(1)}</span>
           </div>
         </div>
       </div>
-      <div className="flex items-center justify-between pt-4 border-t border-zinc-800">
+      
+      <div className="flex items-center justify-between pt-4 border-t border-zinc-800/50">
         <div className="flex items-center gap-2 text-sm text-zinc-400">
           <Shield className="w-4 h-4" />
-          <span>{provider}</span>
+          <span className="truncate max-w-[100px] md:max-w-[140px]">{provider}</span>
         </div>
         <div className="flex gap-2">
-          <button
-            className="text-purple-400 hover:text-purple-300 text-sm flex items-center gap-1 transition-colors"
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="text-purple-400 hover:text-purple-300 text-sm flex items-center gap-1 px-2 py-1 rounded-lg hover:bg-purple-500/10 transition-colors"
             aria-label={`View documentation for ${service.name}`}
           >
             <BookOpen className="w-4 h-4" />
-            <span>Docs</span>
-          </button>
-          <button
-            className="btn-primary px-4 py-2 rounded-lg text-sm"
+            <span className="hidden sm:inline">Docs</span>
+          </motion.button>
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg text-sm font-medium shadow-lg shadow-purple-500/20 hover:shadow-purple-500/40 transition-all"
             aria-label={`Try ${service.name}`}
           >
             Try Now
-          </button>
+          </motion.button>
         </div>
       </div>
     </motion.div>
@@ -187,7 +197,8 @@ export default function MarketplaceHome() {
         setError(err.message || 'Failed to load services');
         setServices([]);
       } finally {
-        setIsLoading(false);
+        // Add a small delay for smooth transition
+        setTimeout(() => setIsLoading(false), 300);
       }
     }
 
@@ -221,12 +232,11 @@ export default function MarketplaceHome() {
   const categories = useMemo(() => {
     const allTags = services.flatMap(s => s.tags || s.capabilities || []);
     const uniqueTags = ['all', ...Array.from(new Set(allTags))];
-    return uniqueTags.slice(0, 10); // Limit to 10 categories
+    return uniqueTags.slice(0, 10);
   }, [services]);
 
   // Stats
   const stats = useMemo(() => {
-    // Demo multiplier to make platform look impressive
     const baselineServices = 450;
     const baselineCalls = 12000000;
     
@@ -249,143 +259,247 @@ export default function MarketplaceHome() {
       <Navbar />
 
       {/* Hero Section */}
-      <section id="main-content" className="section-spacing">
-        <div className="max-w-4xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6">
-              Discover <span className="gradient-text">APIs & MCPs</span>
-            </h1>
-            <p className="text-xl text-zinc-400 mb-8 max-w-2xl mx-auto">
+      <section id="main-content" className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
+        {/* Animated Background */}
+        <AnimatedBackground />
+        
+        <div className="relative z-10 w-full px-4 sm:px-6 lg:px-8 py-20 md:py-32">
+          <div className="max-w-4xl mx-auto text-center">
+            {/* Badge */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="mb-6"
+            >
+              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-sm font-medium">
+                <Sparkles size={16} />
+                <span>Now with MCP Server Support</span>
+              </span>
+            </motion.div>
+
+            {/* Main Heading */}
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 tracking-tight"
+            >
+              Discover{' '}
+              <span className="gradient-text">
+                APIs & MCPs
+              </span>
+            </motion.h1>
+            
+            {/* Subtitle */}
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="text-lg md:text-xl text-zinc-400 mb-10 max-w-2xl mx-auto leading-relaxed"
+            >
               Browse, test, and integrate APIs and MCP servers.
-              Pay only for what you use with x402 crypto payments.
-            </p>
+              Pay only for what you use with{' '}
+              <span className="text-purple-400 font-medium">x402 crypto payments</span>.
+            </motion.p>
 
             {/* Search Bar */}
-            <div className="relative max-w-2xl mx-auto">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500" size={20} aria-hidden="true" />
-              <input
-                type="text"
-                placeholder="Search APIs, MCPs..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-12 pr-4 py-4 rounded-xl bg-zinc-900 border border-zinc-800 text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all"
-                aria-label="Search APIs and MCPs"
-                role="searchbox"
-                id="main-search"
-              />
-              <button
-                type="submit"
-                form="search-form"
-                className="absolute right-2 top-1/2 -translate-y-1/2 btn-primary px-6 py-2 rounded-lg"
-                aria-label="Submit search"
-              >
-                Search
-              </button>
-            </div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="relative max-w-2xl mx-auto mb-8"
+            >
+              <div className="relative group">
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500 group-focus-within:text-purple-400 transition-colors" size={20} aria-hidden="true" />
+                <input
+                  type="text"
+                  placeholder="Search APIs, MCPs..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full pl-12 pr-28 py-4 md:py-5 rounded-2xl bg-zinc-900/80 border border-zinc-800 text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 transition-all duration-200 backdrop-blur-sm"
+                  aria-label="Search APIs and MCPs"
+                  role="searchbox"
+                  id="main-search"
+                />
+                <motion.button
+                  type="submit"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="absolute right-2 top-1/2 -translate-y-1/2 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-5 md:px-6 py-2.5 md:py-3 rounded-xl font-medium shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40 transition-all duration-200"
+                  aria-label="Submit search"
+                >
+                  Search
+                </motion.button>
+              </div>
+            </motion.div>
+
+            {/* Quick Links */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              className="flex flex-wrap items-center justify-center gap-3 text-sm text-zinc-500 mb-12"
+            >
+              <span>Popular:</span>
+              {['GPT-4', 'Solana', 'MCP', 'Image Gen'].map((term, i) => (
+                <motion.button
+                  key={term}
+                  onClick={() => setSearchQuery(term)}
+                  whileHover={{ scale: 1.05, color: '#a855f7' }}
+                  whileTap={{ scale: 0.95 }}
+                  className="hover:text-purple-400 transition-colors"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.5 + i * 0.05 }}
+                >
+                  {term}
+                </motion.button>
+              ))}
+            </motion.div>
 
             {/* Stats */}
-            <div className="grid grid-cols-3 gap-4 md:gap-8 mt-12 max-w-2xl mx-auto">
-              <StatCard icon={Code} value={`${stats.totalServices}+`} label="APIs & MCPs" isLoading={isLoading} />
-              <StatCard icon={Zap} value={`${(stats.totalCalls / 1000000).toFixed(0)}M+`} label="Total Calls" isLoading={isLoading} />
-              <StatCard icon={Star} value={stats.avgRating} label="Avg Rating" isLoading={isLoading} />
-            </div>
-          </motion.div>
+            <motion.div
+              variants={staggerContainer}
+              initial="hidden"
+              animate="visible"
+              className="grid grid-cols-3 gap-3 md:gap-6 max-w-2xl mx-auto"
+            >
+              <motion.div variants={staggerItem}>
+                <StatCard icon={Code} value={`${stats.totalServices}+`} label="APIs & MCPs" isLoading={isLoading} />
+              </motion.div>
+              <motion.div variants={staggerItem}>
+                <StatCard icon={Zap} value={`${(stats.totalCalls / 1000000).toFixed(0)}M+`} label="Total Calls" isLoading={isLoading} />
+              </motion.div>
+              <motion.div variants={staggerItem}>
+                <StatCard icon={Star} value={stats.avgRating} label="Avg Rating" isLoading={isLoading} />
+              </motion.div>
+            </motion.div>
+          </div>
         </div>
+
+        {/* Scroll Indicator */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1 }}
+          className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        >
+          <motion.div
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+            className="w-6 h-10 rounded-full border-2 border-zinc-700 flex items-start justify-center p-2"
+          >
+            <motion.div
+              animate={{ opacity: [0.5, 1, 0.5], y: [0, 8, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+              className="w-1.5 h-1.5 rounded-full bg-zinc-500"
+            />
+          </motion.div>
+        </motion.div>
       </section>
 
       {/* Live Stats */}
-      <section className="py-8 px-6 bg-zinc-900/20">
+      <section className="py-8 md:py-12 px-4 sm:px-6 lg:px-8 bg-zinc-900/20 border-y border-zinc-800/30">
         <div className="max-w-7xl mx-auto">
           <LiveStats />
         </div>
       </section>
 
       {/* Trending APIs */}
-      <section className="section-spacing bg-zinc-900/30">
+      <section className="py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-zinc-900/30">
         <div className="max-w-7xl mx-auto">
           <TrendingAPIs />
         </div>
       </section>
 
       {/* Featured APIs */}
-      <section className="section-spacing bg-zinc-900/50">
+      <section className="py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-zinc-900/50">
         <div className="max-w-7xl mx-auto">
-          <div className="flex items-center justify-between mb-8">
-            <h2 className="text-3xl font-bold flex items-center gap-3">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="flex items-center justify-between mb-8 md:mb-12"
+          >
+            <h2 className="text-2xl md:text-3xl font-bold flex items-center gap-3">
               <Zap className="text-yellow-500" size={28} aria-hidden="true" />
               Featured APIs & MCPs
             </h2>
             <Link
               href="/marketplace"
-              className="text-purple-400 hover:text-purple-300 flex items-center gap-2"
+              className="group flex items-center gap-2 text-purple-400 hover:text-purple-300 transition-colors"
               aria-label="View all APIs"
             >
-              View All
-              <ArrowRight size={16} aria-hidden="true" />
+              <span className="hidden sm:inline">View All</span>
+              <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" aria-hidden="true" />
             </Link>
-          </div>
+          </motion.div>
 
           {isLoading ? (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {[...Array(6)].map((_, i) => <ApiCardSkeleton key={i} />)}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {[...Array(6)].map((_, i) => <CardSkeleton key={i} />)}
             </div>
           ) : featuredServices.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {featuredServices.map((service, index) => (
                 <ApiCard key={service.id} service={service} index={index} />
               ))}
             </div>
           ) : (
-            <div className="text-center py-12 text-zinc-400">
-              <Shield size={48} className="mx-auto mb-4 opacity-50" />
-              <p className="text-lg">No featured services yet. Check back soon!</p>
-            </div>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="text-center py-16 text-zinc-400"
+            >
+              <Shield size={64} className="mx-auto mb-4 opacity-30" />
+              <p className="text-xl">No featured services yet. Check back soon!</p>
+            </motion.div>
           )}
         </div>
       </section>
 
       {/* Category Filter */}
-      <nav aria-label="Filter APIs by category" className="py-8 px-6 border-b border-zinc-800 sticky top-16 z-40 bg-zinc-950/95 backdrop-blur-sm">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex items-center gap-4 overflow-x-auto pb-2 scrollbar-hide">
-            <Filter className="text-zinc-500 shrink-0" size={18} aria-hidden="true" />
+      <nav aria-label="Filter APIs by category" className="sticky top-16 md:top-20 z-30 bg-zinc-950/95 backdrop-blur-xl border-b border-zinc-800/50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <div className="flex items-center gap-3 overflow-x-auto pb-2 scrollbar-hide">
+            <TrendingUp className="text-zinc-500 shrink-0" size={18} aria-hidden="true" />
             {categories.map((category) => (
-              <button
+              <motion.button
                 key={category}
                 onClick={() => setSelectedCategory(category)}
-                className={`px-4 py-2 rounded-lg text-sm whitespace-nowrap transition-all ${
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className={`px-4 py-2 rounded-xl text-sm font-medium whitespace-nowrap transition-all duration-200 ${
                   selectedCategory === category
-                    ? 'bg-purple-600 text-white'
-                    : 'bg-zinc-900 text-zinc-400 hover:bg-zinc-800 hover:text-white'
+                    ? 'bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-lg shadow-purple-500/25'
+                    : 'bg-zinc-900 text-zinc-400 hover:bg-zinc-800 hover:text-white border border-zinc-800'
                 }`}
                 aria-pressed={selectedCategory === category}
               >
-                {category}
-              </button>
+                {category.charAt(0).toUpperCase() + category.slice(1)}
+              </motion.button>
             ))}
           </div>
         </div>
       </nav>
 
       {/* All APIs */}
-      <section className="section-spacing">
+      <section className="py-12 md:py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <div className="flex items-center justify-between mb-8 flex-wrap gap-4">
-            <h2 className="text-2xl font-bold">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-8 gap-4">
+            <h2 className="text-xl md:text-2xl font-bold">
               {selectedCategory === 'all' ? 'All APIs & MCPs' : selectedCategory}
-              <span className="text-zinc-500 text-lg font-normal ml-3">
+              <span className="text-zinc-500 text-base font-normal ml-3">
                 ({filteredServices.length} results)
               </span>
             </h2>
-            <div className="flex items-center gap-2 text-sm text-zinc-500">
-              <label htmlFor="sort-select">Sort by:</label>
+            <div className="flex items-center gap-3 text-sm text-zinc-500">
+              <label htmlFor="sort-select" className="hidden sm:inline">Sort by:</label>
               <select
                 id="sort-select"
-                className="bg-zinc-900 border border-zinc-800 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
+                className="bg-zinc-900 border border-zinc-800 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500 transition-all cursor-pointer"
                 aria-label="Sort APIs"
               >
                 <option>Popularity</option>
@@ -398,26 +512,44 @@ export default function MarketplaceHome() {
 
           {isLoading ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {[...Array(9)].map((_, i) => <ApiCardSkeleton key={i} />)}
+              {[...Array(9)].map((_, i) => <CardSkeleton key={i} />)}
             </div>
           ) : error ? (
-            <div className="glass-card p-8 text-center">
-              <Shield size={48} className="mx-auto mb-4 text-red-400" />
-              <h3 className="text-xl font-bold mb-2">Failed to Load Services</h3>
-              <p className="text-zinc-400 mb-4">{error}</p>
-              <button
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="glass-card p-8 md:p-12 text-center rounded-2xl"
+            >
+              <Shield size={64} className="mx-auto mb-4 text-red-400" />
+              <h3 className="text-xl md:text-2xl font-bold mb-2 text-white">Failed to Load Services</h3>
+              <p className="text-zinc-400 mb-6 max-w-md mx-auto">{error}</p>
+              <motion.button
                 onClick={() => window.location.reload()}
-                className="btn-primary px-6 py-2 rounded-lg"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="btn-primary px-6 py-3 rounded-xl"
               >
                 Try Again
-              </button>
-            </div>
+              </motion.button>
+            </motion.div>
           ) : filteredServices.length === 0 ? (
-            <div className="empty-state">
-              <Search className="w-16 h-16 empty-state-icon" aria-hidden="true" />
-              <h3 className="text-xl font-bold mb-2">No APIs found</h3>
-              <p className="empty-state-text">Try adjusting your search or category filter</p>
-            </div>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="text-center py-16 md:py-24"
+            >
+              <Search className="w-16 h-16 mx-auto mb-4 text-zinc-600" aria-hidden="true" />
+              <h3 className="text-xl md:text-2xl font-bold mb-2 text-white">No APIs found</h3>
+              <p className="text-zinc-400 mb-6">Try adjusting your search or category filter</p>
+              <motion.button
+                onClick={() => { setSearchQuery(''); setSelectedCategory('all'); }}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="btn-secondary px-6 py-3 rounded-xl"
+              >
+                Clear Filters
+              </motion.button>
+            </motion.div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredServices.map((service, index) => (
@@ -429,7 +561,7 @@ export default function MarketplaceHome() {
       </section>
 
       {/* Newsletter Section */}
-      <section className="section-spacing bg-zinc-900/50">
+      <section className="py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-zinc-900/50 border-t border-zinc-800/50">
         <div className="max-w-7xl mx-auto">
           <NewsletterSignup />
         </div>

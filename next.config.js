@@ -42,7 +42,7 @@ const nextConfig = {
           // Content Security Policy - Prevent XSS attacks
           {
             key: 'Content-Security-Policy',
-            value: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.vercel.app; style-src 'self' 'unsafe-inline' https://*.vercel.app; img-src 'self' data: https:*.vercel.app blob:; font-src 'self' data:; connect-src 'self' https://*.vercel.app https://api.oma-ai.com; frame-ancestors 'self';",
+            value: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.vercel.app; style-src 'self' 'unsafe-inline' https://*.vercel.app https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: https://*.vercel.app blob:; connect-src 'self' https://*.vercel.app https://api.oma-ai.com; frame-ancestors 'self';",
           },
           // Strict Transport Security - Enforce HTTPS
           {

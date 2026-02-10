@@ -13,7 +13,7 @@ import { cn } from '@/lib/utils';
 
 export function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { cart, wishlist, compareList } = useApp();
+  const { cart, wishlist, compareList, isCartOpen, toggleCart } = useApp();
 
   const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
   const wishlistCount = wishlist.length;
@@ -92,6 +92,7 @@ export function Navbar() {
 
             {/* Cart Button */}
             <button
+              onClick={toggleCart}
               className="p-2 text-zinc-400 hover:text-white hover:bg-zinc-900 rounded-xl transition-all relative"
               aria-label="Open cart"
             >

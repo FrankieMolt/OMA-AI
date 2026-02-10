@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createClient } from '@/lib/supabase';
+import { createClient, isSupabaseEnabled } from '@/lib/supabase';
 import { 
   generateShortCode, 
   isValidUrl, 
@@ -12,10 +12,18 @@ import { headers } from 'next/headers';
 const RATE_LIMIT = 100; // requests per hour
 const RATE_WINDOW = 60 * 60 * 1000; // 1 hour in ms
 
+// Demo data for when Supabase is not configured
+const DEMO_LINKS: Map<string, any> = new Map();
+
 async function checkRateLimit(
   ipAddress: string, 
   userId: string | null
 ): Promise<{ allowed: boolean; remaining: number; resetAt: Date }> {
+  // If Supabase not enabled, allow all requests (demo mode)
+  if (!isSupabaseEnabled) {
+    return { allowed: true, remaining: RATE_LIMIT, resetAt: new Date(Date.now() + RATE_WINDOW) };
+  }
+  
   const supabase = createClient();
   const windowStart = new Date(Date.now() - RATE_WINDOW);
   
@@ -66,13 +74,8 @@ export async function POST(request: NextRequest) {
                      headersList.get('x-real-ip') || 
                      'unknown';
     
-    const supabase = createClient();
-    
-    // Get user session if authenticated
-    const { data: { user } } = await supabase.auth.getUser();
-    
     // Check rate limit
-    const rateLimitCheck = await checkRateLimit(ipAddress, user?.id || null);
+    const rateLimitCheck = await checkRateLimit(ipAddress, null);
     
     if (!rateLimitCheck.allowed) {
       return NextResponse.json(
@@ -121,8 +124,41 @@ export async function POST(request: NextRequest) {
           { status: 400 }
         );
       }
+      shortCode = custom_code;
+    } else {
+      shortCode = generateShortCode(7);
+    }
+    
+    // DEMO MODE: Return demo response when Supabase not configured
+    if (!isSupabaseEnabled) {
+      const demoLink = {
+        short_code: shortCode,
+        short_url: buildShortUrl(shortCode, custom_domain),
+        original_url: normalizedUrl,
+        created_at: new Date().toISOString()
+      };
       
-      // Check if custom code is available
+      DEMO_LINKS.set(shortCode, demoLink);
+      
+      return NextResponse.json(
+        {
+          success: true,
+          data: demoLink,
+          demo: true,
+          message: 'Demo mode - configure Supabase for persistence'
+        },
+        { status: 201 }
+      );
+    }
+    
+    // PRODUCTION MODE: Use Supabase
+    const supabase = createClient();
+    
+    // Get user session if authenticated
+    const { data: { user } } = await supabase.auth.getUser();
+    
+    // Check if custom code is available
+    if (custom_code) {
       const { data: existing } = await supabase
         .from('links')
         .select('id')
@@ -135,8 +171,6 @@ export async function POST(request: NextRequest) {
           { status: 409 }
         );
       }
-      
-      shortCode = custom_code;
     } else {
       // Generate unique short code
       let attempts = 0;
@@ -215,6 +249,26 @@ export async function POST(request: NextRequest) {
 
 export async function GET(request: NextRequest) {
   try {
+    // DEMO MODE: Return demo links when Supabase not configured
+    if (!isSupabaseEnabled) {
+      const demoLinks = Array.from(DEMO_LINKS.values()).slice(0, 50);
+      return NextResponse.json({
+        success: true,
+        data: {
+          links: demoLinks,
+          pagination: {
+            total: demoLinks.length,
+            limit: 50,
+            offset: 0,
+            has_more: false
+          }
+        },
+        demo: true,
+        message: 'Demo mode - configure Supabase for persistence'
+      });
+    }
+    
+    // PRODUCTION MODE: Use Supabase
     const supabase = createClient();
     
     // Get user session

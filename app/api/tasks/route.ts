@@ -1,6 +1,52 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { supabase, isSupabaseEnabled } from '@/lib/supabase';
+import { supabase, isSupabaseEnabled, handleSupabaseError } from '@/lib/supabase';
 import { checkRateLimit, createRateLimitResponse, addSecurityHeaders } from '@/lib/security';
+
+// Demo data for tasks
+const demoTasks = [
+  {
+    id: 'task-1',
+    title: 'Build AI Agent for Task Management',
+    description: 'Create an autonomous AI agent that can manage tasks, prioritize work, and integrate with popular project management tools.',
+    category: { name: 'AI & Machine Learning', slug: 'ai-ml', color: '#667eea' },
+    budget: 500.00,
+    currency: 'USDC',
+    status: 'open',
+    difficulty: 'expert',
+    deadline: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
+    created_by: 'demo-user',
+    submissions_count: 0,
+    views_count: 125
+  },
+  {
+    id: 'task-2',
+    title: 'Develop x402 Payment Integration Guide',
+    description: 'Write comprehensive documentation and code examples for integrating x402 payment protocol into web applications. Include examples for React, Python, and Go.',
+    category: { name: 'Developer Tools', slug: 'developer-tools', color: '#f59e0b' },
+    budget: 250.00,
+    currency: 'USDC',
+    status: 'open',
+    difficulty: 'medium',
+    deadline: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toISOString(),
+    created_by: 'demo-user',
+    submissions_count: 0,
+    views_count: 89
+  },
+  {
+    id: 'task-3',
+    title: 'Create NLP Service for Sentiment Analysis',
+    description: 'Build a high-performance natural language processing API that can analyze sentiment from text in real-time. Must support multiple languages and provide confidence scores.',
+    category: { name: 'Data & Analytics', slug: 'data-analytics', color: '#f093fb' },
+    budget: 750.00,
+    currency: 'USDC',
+    status: 'in_progress',
+    difficulty: 'hard',
+    deadline: new Date(Date.now() + 45 * 24 * 60 * 60 * 1000).toISOString(),
+    created_by: 'demo-user',
+    submissions_count: 3,
+    views_count: 234
+  }
+];
 
 // GET /api/tasks - List all tasks/bounties
 export async function GET(request: NextRequest) {
@@ -19,100 +65,72 @@ export async function GET(request: NextRequest) {
 
   // Return demo data if Supabase is not configured
   if (!isSupabaseEnabled) {
-    const demoTasks = [
-      {
-        id: 'task-1',
-        title: 'Build AI Agent for Task Management',
-        description: 'Create an autonomous AI agent that can manage tasks, prioritize work, and integrate with popular project management tools.',
-        category: { name: 'AI & Machine Learning', slug: 'ai-ml', color: '#667eea' },
-        budget: 500.00,
-        currency: 'USDC',
-        status: 'open',
-        difficulty: 'expert',
-        deadline: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
-        created_by: 'demo-user',
-        submissions_count: 0,
-        views_count: 125
-      },
-      {
-        id: 'task-2',
-        title: 'Develop x402 Payment Integration Guide',
-        description: 'Write comprehensive documentation and code examples for integrating x402 payment protocol into web applications. Include examples for React, Python, and Go.',
-        category: { name: 'Developer Tools', slug: 'developer-tools', color: '#f59e0b' },
-        budget: 250.00,
-        currency: 'USDC',
-        status: 'open',
-        difficulty: 'medium',
-        deadline: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toISOString(),
-        created_by: 'demo-user',
-        submissions_count: 0,
-        views_count: 89
-      },
-      {
-        id: 'task-3',
-        title: 'Create NLP Service for Sentiment Analysis',
-        description: 'Build a high-performance natural language processing API that can analyze sentiment from text in real-time. Must support multiple languages and provide confidence scores.',
-        category: { name: 'Data & Analytics', slug: 'data-analytics', color: '#f093fb' },
-        budget: 750.00,
-        currency: 'USDC',
-        status: 'in_progress',
-        difficulty: 'hard',
-        deadline: new Date(Date.now() + 45 * 24 * 60 * 60 * 1000).toISOString(),
-        created_by: 'demo-user',
-        submissions_count: 3,
-        views_count: 234
-      }
-    ];
+    let filteredTasks = [...demoTasks];
+    
+    if (status) {
+      filteredTasks = filteredTasks.filter(t => t.status === status);
+    }
+    if (difficulty) {
+      filteredTasks = filteredTasks.filter(t => t.difficulty === difficulty);
+    }
+    
+    // Apply pagination
+    const paginatedTasks = filteredTasks.slice(offset, offset + limit);
+    
+    return NextResponse.json({ tasks: paginatedTasks, total: filteredTasks.length });
+  }
 
+  try {
+    // Build query
+    let query = supabase!
+      .from('tasks')
+      .select(`
+          *,
+          categories (name, slug, color, icon)
+        `);
+
+    // Apply filters
+    if (status) {
+      query = query.eq('status', status);
+    }
+    if (category) {
+      query = query.eq('category_id', category);
+    }
+    if (difficulty) {
+      query = query.eq('difficulty', difficulty);
+    }
+
+    // Apply sorting and pagination
+    query = query.order('created_at', { ascending: false });
+    query = query.range(offset, offset + limit - 1);
+
+    // Execute query
+    const { data, error } = await query;
+
+    if (error) {
+      const result = handleSupabaseError(error, { tasks: demoTasks, total: demoTasks.length });
+      if (result.error) {
+        return NextResponse.json({ error: result.error }, { status: 500 });
+      }
+      return NextResponse.json(result);
+    }
+
+    // Get total count (handle errors gracefully)
+    const { count, error: countError } = await supabase!
+      .from('tasks')
+      .select('*', { count: 'exact', head: true });
+
+    if (countError) {
+      console.warn('Count query failed:', countError);
+    }
+
+    const response = NextResponse.json({ tasks: data || [], total: count || data?.length || 0 });
+    return addSecurityHeaders(response);
+  } catch (error) {
+    console.error('Tasks API error:', error);
+    // Return demo data as fallback
     return NextResponse.json({ tasks: demoTasks, total: demoTasks.length });
   }
-
-  // Build query
-  let query = supabase!
-    .from('tasks')
-    .select(`
-        *,
-        categories (name, slug, color, icon)
-      `);
-
-  // Apply filters
-  if (status) {
-    query = query.eq('status', status);
-  }
-  if (category) {
-    query = query.eq('category_id', category);
-  }
-  if (difficulty) {
-    query = query.eq('difficulty', difficulty);
-  }
-
-  // Apply sorting and pagination
-  query = query.order('created_at', { ascending: false });
-  query = query.range(offset, offset + limit - 1);
-
-  // Get total count
-  const { count, error: countError } = await supabase!
-    .from('tasks')
-    .select('*', { count: 'exact', head: true });
-
-  if (countError) {
-    console.error('Count error:', countError);
-    return NextResponse.json({ error: countError.message }, { status: 500 });
-  }
-
-  // Execute query
-  const { data, error } = await query;
-
-  if (error) {
-    console.error('Tasks error:', error);
-    if (error.code === '42P01') {
-      return NextResponse.json({ tasks: [], total: 0 });
-    }
-    return NextResponse.json({ error: error.message }, { status: 500 });
-  }
-
-  const response = NextResponse.json({ tasks: data, total: count || 0 });
-  return addSecurityHeaders(response);
 }
 
 // POST /api/tasks - Create a new task/bounty
@@ -188,30 +206,31 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // If Supabase is not enabled, return demo response
-    if (!isSupabaseEnabled) {
-      const newTask = {
-        id: `task-${Date.now()}`,
-        title,
-        description,
-        category_id,
-        budget,
-        currency,
-        difficulty,
-        status: 'open',
-        created_by: 'demo-user',
-        created_at: new Date().toISOString(),
-        updated_at: new Date().toISOString(),
-        submissions_count: 0,
-        views_count: 0
-      };
+    // Create new task object
+    const newTask = {
+      id: `task-${Date.now()}`,
+      title,
+      description,
+      category_id,
+      budget,
+      currency,
+      difficulty,
+      status: 'open',
+      created_by: 'demo-user',
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+      submissions_count: 0,
+      views_count: 0
+    };
 
+    // If Supabase is not enabled, return the new agent without persisting
+    if (!isSupabaseEnabled) {
       console.log('Demo mode: Task created but not persisted:', newTask);
       const response = NextResponse.json(newTask, { status: 201 });
       return addSecurityHeaders(response);
     }
 
-    // Create task
+    // Insert into Supabase
     const { data, error } = await supabase!
       .from('tasks')
       .insert([{
@@ -228,13 +247,11 @@ export async function POST(request: NextRequest) {
       .single();
 
     if (error) {
-      console.error('Create task error:', error);
-      if (error.code === '42P01') {
-        const response = NextResponse.json({ error: 'Tasks table not found' }, { status: 500 });
-        return addSecurityHeaders(response);
+      const result = handleSupabaseError(error, newTask);
+      if (result.error) {
+        return NextResponse.json({ error: result.error }, { status: 500 });
       }
-      const response = NextResponse.json({ error: 'Database error' }, { status: 500 });
-      return addSecurityHeaders(response);
+      return NextResponse.json(result, { status: 201 });
     }
 
     const response = NextResponse.json(data, { status: 201 });
