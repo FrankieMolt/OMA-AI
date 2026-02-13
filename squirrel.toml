@@ -1,6 +1,6 @@
 [project]
 domains = []
-name = "oma-ai"
+name = "oma-ai-audit"
 
 [crawler]
 max_pages = 100

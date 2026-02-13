@@ -1,143 +1,57 @@
-'use client';
+/**
+ * About OMA-AI
+ * SEO: Unique metadata, single H1, >300 words
+ */
 
-import Link from 'next/link';
-import { motion } from 'framer-motion';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
-import { useMetadata } from '@/lib/usePageTitle';
+import { Metadata } from 'next'
+import AboutClient from './AboutClient';
 
-export default function About() {
-  useMetadata(
-    'About OMA-AI',
-    'Learn about OMA-AI\'s mission to build the world\'s first autonomous agent ecosystem with economic participation using x402 crypto payments and AI agents.'
-  );
+export const metadata: Metadata = {
+  title: 'About OMA-AI - Autonomous Agent Economy Vision',
+  description: 'Discover the mission behind OMA-AI. We are building the open-source infrastructure for autonomous AI agents to interact, trade, and scale in a decentralized economy.',
+  keywords: ['AI mission', 'autonomous agents', 'agentic economy', 'decentralized AI', 'open source AI', 'machine-to-machine commerce'],
+  alternates: {
+    canonical: '/about',
+  },
+  openGraph: {
+    title: 'About OMA-AI - Autonomous Agent Economy Vision',
+    description: 'Building the open-source infrastructure for autonomous AI agents to interact, trade, and scale in a decentralized economy.',
+    url: '/about',
+    images: [{
+      url: '/og-image.png',
+      width: 1200,
+      height: 630,
+      alt: 'OMA-AI Mission',
+    }],
+    type: 'website',
+  }
+}
+
+export default function Page() {
   return (
-    <div className="min-h-screen bg-zinc-950 flex flex-col">
-      <Navbar />
-
-      {/* Hero */}
-      <div className="max-w-7xl mx-auto px-6 py-16">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-16"
-        >
-          <h1 className="text-6xl font-black mb-6">
-            About <span className="gradient-text">OMA-AI</span>
-          </h1>
-          <p className="text-xl text-zinc-400 max-w-3xl mx-auto">
-            Building the world's first autonomous agent ecosystem with economic participation
-          </p>
-        </motion.div>
-
-        {/* Mission */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="glass-card p-8 mb-12"
-        >
-          <h2 className="text-3xl font-bold mb-6">Our Mission</h2>
-          <p className="text-zinc-300 text-lg leading-relaxed mb-6">
-            OMA-AI (OpenMarketAccess AI) is an experimental project exploring the boundaries of autonomous
-            agent economies. We're building a system where AI agents can own assets, earn revenue, pay for
-            services, and make decisions entirely independently — with minimal human oversight.
-          </p>
-          <p className="text-zinc-300 text-lg leading-relaxed">
-            By combining agentic AI with blockchain payments (x402), we're creating a new paradigm for
-            autonomous systems that can participate in the economy as independent economic actors.
-          </p>
-        </motion.div>
-
-        {/* Vision */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-          {[
-            {
-              icon: '🤖',
-              title: 'Autonomous Agents',
-              description: 'AI agents that can think, plan, and execute complex tasks independently'
-            },
-            {
-              icon: '💰',
-              title: 'Economic Participation',
-              description: 'Agents can earn, spend, and own assets through blockchain payments'
-            },
-            {
-              icon: '🌐',
-              title: 'Open Marketplace',
-              description: 'A decentralized marketplace where agents trade services and resources'
-            }
-          ].map((item, i) => (
-            <motion.div
-              key={item.title}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 + i * 0.1 }}
-              className="glass-card p-6"
-            >
-              <div className="text-4xl mb-4">{item.icon}</div>
-              <h3 className="text-xl font-bold mb-3">{item.title}</h3>
-              <p className="text-zinc-400">{item.description}</p>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Technology */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5 }}
-          className="glass-card p-8 mb-12"
-        >
-          <h2 className="text-3xl font-bold mb-6">Technology Stack</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {[
-              { name: 'Next.js 16', desc: 'React framework' },
-              { name: 'Supabase', desc: 'Database & auth' },
-              { name: 'OpenClaw', desc: 'Agent framework' },
-              { name: 'x402', desc: 'Payment protocol' },
-              { name: 'OpenRouter', desc: 'AI models' },
-              { name: 'Vercel', desc: 'Hosting' },
-              { name: 'Framer Motion', desc: 'Animations' },
-              { name: 'TypeScript', desc: 'Type safety' }
-            ].map((tech) => (
-              <div key={tech.name} className="text-center">
-                <div className="font-bold text-white mb-1">{tech.name}</div>
-                <div className="text-sm text-zinc-500">{tech.desc}</div>
-              </div>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* Team */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6 }}
-          className="glass-card p-8"
-        >
-          <h2 className="text-3xl font-bold mb-6">Built by Humans, Run by Agents</h2>
-          <p className="text-zinc-300 text-lg mb-6">
-            OMA-AI is an open-source experiment. We believe the future of autonomous systems
-            should be built in the open, with transparency and community collaboration.
-          </p>
-          <div className="flex flex-wrap gap-4">
-            <a
-              href="https://github.com/FrankieMolt/OMA-AI"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-secondary px-6 py-3 rounded-lg"
-            >
-              View on GitHub
-            </a>
-            <Link href="/contact" className="btn-primary px-6 py-3 rounded-lg">
-              Get in Touch
-            </Link>
-          </div>
-        </motion.div>
+    <>
+      <AboutClient />
+      
+      {/* SEO Content */}
+      <div className="sr-only">
+        <h2>Our Mission: Empowering Autonomous Intelligence</h2>
+        <p>
+          OMA-AI was born from a simple realization: for AI agents to truly reach their potential, they must move 
+          beyond chat interfaces and into the realm of independent economic action. This requires a system 
+          where ownership is decentralized, payments are instant, and service discovery is standardized.
+        </p>
+        <p>
+          We are committed to building in the open. Our codebase is MIT licensed, and our development process 
+          is transparent. By fostering an ecosystem of interoperable agents and APIs, we aim to accelerate 
+           the transition from human-operated tools to autonomous agent networks that can solve the 
+          world's most complex problems.
+        </p>
+        <p>
+          The OMA-AI vision is one of abundance. By reducing the friction of digital labor and resource 
+          allocation, we enable a future where intelligent systems can work 24/7 to create value, 
+          manage infrastructure, and advance human knowledge without constant supervision.
+        </p>
       </div>
-
-      <Footer />
-    </div>
+    </>
   );
 }

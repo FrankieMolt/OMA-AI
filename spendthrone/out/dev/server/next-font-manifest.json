@@ -1,6 +1,55 @@
 {
-  "app": {},
-  "appUsingSizeAdjust": false,
+  "app": {
+    "[project]/app/_not-found/page": [
+      "static/media/83afe278b6a6bb3c-s.p.3a6ba036.woff2",
+      "static/media/5c285b27cdda1fe8-s.p.a62025f2.woff2",
+      "static/media/7ebf22b5a21034f8-s.p.d8bad3ab.woff2",
+      "static/media/e41d5df559864f9e-s.p.380d09ea.woff2"
+    ],
+    "[project]/app/category/[id]/page": [
+      "static/media/83afe278b6a6bb3c-s.p.3a6ba036.woff2",
+      "static/media/5c285b27cdda1fe8-s.p.a62025f2.woff2",
+      "static/media/7ebf22b5a21034f8-s.p.d8bad3ab.woff2",
+      "static/media/e41d5df559864f9e-s.p.380d09ea.woff2"
+    ],
+    "[project]/app/login/page": [
+      "static/media/83afe278b6a6bb3c-s.p.3a6ba036.woff2",
+      "static/media/5c285b27cdda1fe8-s.p.a62025f2.woff2",
+      "static/media/7ebf22b5a21034f8-s.p.d8bad3ab.woff2",
+      "static/media/e41d5df559864f9e-s.p.380d09ea.woff2"
+    ],
+    "[project]/app/page": [
+      "static/media/83afe278b6a6bb3c-s.p.3a6ba036.woff2",
+      "static/media/5c285b27cdda1fe8-s.p.a62025f2.woff2",
+      "static/media/7ebf22b5a21034f8-s.p.d8bad3ab.woff2",
+      "static/media/e41d5df559864f9e-s.p.380d09ea.woff2"
+    ],
+    "[project]/app/privacy/page": [
+      "static/media/83afe278b6a6bb3c-s.p.3a6ba036.woff2",
+      "static/media/5c285b27cdda1fe8-s.p.a62025f2.woff2",
+      "static/media/7ebf22b5a21034f8-s.p.d8bad3ab.woff2",
+      "static/media/e41d5df559864f9e-s.p.380d09ea.woff2"
+    ],
+    "[project]/app/product/[slug]/page": [
+      "static/media/83afe278b6a6bb3c-s.p.3a6ba036.woff2",
+      "static/media/5c285b27cdda1fe8-s.p.a62025f2.woff2",
+      "static/media/7ebf22b5a21034f8-s.p.d8bad3ab.woff2",
+      "static/media/e41d5df559864f9e-s.p.380d09ea.woff2"
+    ],
+    "[project]/app/signup/page": [
+      "static/media/83afe278b6a6bb3c-s.p.3a6ba036.woff2",
+      "static/media/5c285b27cdda1fe8-s.p.a62025f2.woff2",
+      "static/media/7ebf22b5a21034f8-s.p.d8bad3ab.woff2",
+      "static/media/e41d5df559864f9e-s.p.380d09ea.woff2"
+    ],
+    "[project]/app/terms/page": [
+      "static/media/83afe278b6a6bb3c-s.p.3a6ba036.woff2",
+      "static/media/5c285b27cdda1fe8-s.p.a62025f2.woff2",
+      "static/media/7ebf22b5a21034f8-s.p.d8bad3ab.woff2",
+      "static/media/e41d5df559864f9e-s.p.380d09ea.woff2"
+    ]
+  },
+  "appUsingSizeAdjust": true,
   "pages": {},
   "pagesUsingSizeAdjust": false
 }

@@ -7,458 +7,292 @@ import {
   Code,
   Zap,
   Shield,
-  TrendingUp,
-  BookOpen,
+  Clock,
   DollarSign,
-  Star,
+  Award,
   ExternalLink,
   Play,
   Filter,
-  ArrowRight
+  CheckCircle2,
+  AlertCircle,
+  Timer
 } from 'lucide-react';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
-// --- API Marketplace Types ---
-interface ApiService {
+// --- Bounty Types ---
+interface Bounty {
   id: string;
-  name: string;
+  title: string;
   description: string;
   category: string;
-  rating: number;
-  price: number;
-  priceType: 'per_call' | 'monthly';
-  calls: number;
-  endpoint: string;
+  reward: number;
+  currency: string;
+  difficulty: 'Beginner' | 'Intermediate' | 'Advanced' | 'Expert';
+  status: 'Open' | 'In Progress' | 'Under Review' | 'Completed';
+  postedAt: string;
+  expiresAt: string;
+  submissions: number;
   tags: string[];
-  featured: boolean;
-  provider: string;
 }
 
-export default function TasksPage() {
+export default function BountiesPage() {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
 
-  // Mock API Services
-  const apiServices: ApiService[] = [
+  // Real-world Bounties for the OMA Ecosystem
+  const bounties: Bounty[] = [
     {
-      id: 'gpt-4-turbo',
-      name: 'GPT-4 Turbo',
-      description: 'Advanced language model for complex reasoning and code generation',
-      category: 'AI & ML',
-      rating: 4.9,
-      price: 0.01,
-      priceType: 'per_call',
-      calls: 1250000,
-      endpoint: '/api/v1/chat/completions',
-      tags: ['llm', 'chat', 'code'],
-      featured: true,
-      provider: 'OpenAI'
+      id: 'b-001',
+      title: 'Integrate Stripe API with x402 Protocol',
+      description: 'Create a wrapper for the Stripe API that allows automated agents to settle invoices using x402 USDC payments on Base network.',
+      category: 'Infrastructure',
+      reward: 500,
+      currency: 'USDC',
+      difficulty: 'Advanced',
+      status: 'Open',
+      postedAt: '2026-02-10T10:00:00Z',
+      expiresAt: '2026-03-10T10:00:00Z',
+      submissions: 3,
+      tags: ['stripe', 'payments', 'base', 'x402']
     },
     {
-      id: 'claude-3-opus',
-      name: 'Claude 3 Opus',
-      description: 'Anthropic\'s most capable AI assistant for analysis and writing',
-      category: 'AI & ML',
-      rating: 4.8,
-      price: 0.015,
-      priceType: 'per_call',
-      calls: 850000,
-      endpoint: '/api/v1/messages',
-      tags: ['llm', 'analysis', 'writing'],
-      featured: true,
-      provider: 'Anthropic'
+      id: 'b-002',
+      title: 'Develop Google Calendar MCP Server',
+      description: 'Build a production-ready Model Context Protocol (MCP) server that gives agents full read/write access to Google Calendar with OAuth authentication.',
+      category: 'MCP Servers',
+      reward: 350,
+      currency: 'USDC',
+      difficulty: 'Intermediate',
+      status: 'In Progress',
+      postedAt: '2026-02-11T14:30:00Z',
+      expiresAt: '2026-02-28T23:59:59Z',
+      submissions: 5,
+      tags: ['mcp', 'google-calendar', 'productivity']
     },
     {
-      id: 'ethereum-mainnet',
-      name: 'Ethereum Mainnet RPC',
-      description: 'Reliable blockchain node access for dApp development',
-      category: 'Blockchain',
-      rating: 4.7,
-      price: 0.001,
-      priceType: 'per_call',
-      calls: 5000000,
-      endpoint: '/eth/v1/mainnet',
-      tags: ['ethereum', 'web3', 'rpc'],
-      featured: false,
-      provider: 'QuickNode'
+      id: 'b-003',
+      title: 'AI Behavioral Analysis Dataset',
+      description: 'Collect and clean a dataset of 10,000+ interactions between autonomous agents to analyze cooperation patterns in zero-sum environments.',
+      category: 'Data & Research',
+      reward: 1200,
+      currency: 'USDC',
+      difficulty: 'Expert',
+      status: 'Open',
+      postedAt: '2026-02-08T09:00:00Z',
+      expiresAt: '2026-04-01T00:00:00Z',
+      submissions: 1,
+      tags: ['dataset', 'research', 'agent-behavior']
     },
     {
-      id: 'solana-rpc',
-      name: 'Solana RPC',
-      description: 'High-performance Solana blockchain node with sub-second latency',
-      category: 'Blockchain',
-      rating: 4.6,
-      price: 0.0005,
-      priceType: 'per_call',
-      calls: 3000000,
-      endpoint: '/sol/v1/mainnet-beta',
-      tags: ['solana', 'web3', 'rpc'],
-      featured: false,
-      provider: 'Alchemy'
+      id: 'b-004',
+      title: 'Fix: x402 Transaction Delay on High Congestion',
+      description: 'Investigate and optimize the transaction submission logic in the OMA-AI SDK to handle high network congestion on Base without failing.',
+      category: 'Bug Fix',
+      reward: 200,
+      currency: 'USDC',
+      difficulty: 'Advanced',
+      status: 'Open',
+      postedAt: '2026-02-12T16:45:00Z',
+      expiresAt: '2026-02-25T16:45:00Z',
+      submissions: 0,
+      tags: ['sdk', 'bug', 'blockchain', 'performance']
     },
     {
-      id: 'data-scraping',
-      name: 'Web Scraper Pro',
-      description: 'Extract data from any website with anti-bot protection bypass',
-      category: 'Data',
-      rating: 4.5,
-      price: 0.005,
-      priceType: 'per_call',
-      calls: 2500000,
-      endpoint: '/api/v1/scrape',
-      tags: ['scraping', 'data', 'extraction'],
-      featured: false,
-      provider: 'OMA Network'
-    },
-    {
-      id: 'image-gen',
-      name: 'Image Generator',
-      description: 'Create stunning images from text descriptions in seconds',
-      category: 'AI & ML',
-      rating: 4.4,
-      price: 0.02,
-      priceType: 'per_call',
-      calls: 600000,
-      endpoint: '/api/v1/images/generate',
-      tags: ['image', 'generation', 'creative'],
-      featured: true,
-      provider: 'OMA Network'
-    },
-    {
-      id: 'email-sender',
-      name: 'Transactional Email',
-      description: 'Send reliable emails at scale with delivery tracking',
+      id: 'b-005',
+      title: 'Slack Automation Tool for Agents',
+      description: 'Create a Slack bot that allows agents to post updates, create channels, and manage user permissions via a simple API.',
       category: 'Communication',
-      rating: 4.7,
-      price: 0.001,
-      priceType: 'per_call',
-      calls: 4000000,
-      endpoint: '/api/v1/email/send',
-      tags: ['email', 'communication', 'marketing'],
-      featured: false,
-      provider: 'SendGrid'
+      reward: 250,
+      currency: 'USDC',
+      difficulty: 'Intermediate',
+      status: 'Open',
+      postedAt: '2026-02-09T11:20:00Z',
+      expiresAt: '2026-03-09T11:20:00Z',
+      submissions: 2,
+      tags: ['slack', 'api', 'automation']
     },
     {
-      id: 'payment-processing',
-      name: 'x402 Payment Gateway',
-      description: 'Accept crypto payments via x402 protocol (Base network)',
-      category: 'Finance',
-      rating: 4.9,
-      price: 0.002,
-      priceType: 'per_call',
-      calls: 1800000,
-      endpoint: '/api/v1/payments/x402',
-      tags: ['crypto', 'payments', 'base'],
-      featured: true,
-      provider: 'OMA Network'
-    },
-    {
-      id: 'github-mcp',
-      name: 'GitHub MCP Server',
-      description: 'Connect your agents to GitHub repositories, issues, and PRs via Model Context Protocol',
+      id: 'b-006',
+      title: 'Real-time Sentiment Analysis MCP',
+      description: 'Build an MCP server that connects to Twitter/X and performs real-time sentiment analysis on specific ticker symbols.',
       category: 'MCP Servers',
-      rating: 4.9,
-      price: 0,
-      priceType: 'per_call',
-      calls: 500000,
-      endpoint: 'https://github.com/model-context-protocol/servers/tree/main/src/github',
-      tags: ['mcp', 'github', 'dev-tools'],
-      featured: true,
-      provider: 'Model Context Protocol'
-    },
-    {
-      id: 'brave-search-mcp',
-      name: 'Brave Search MCP',
-      description: 'Enable web search capabilities for your agents using Brave Search API',
-      category: 'MCP Servers',
-      rating: 4.8,
-      price: 0.001,
-      priceType: 'per_call',
-      calls: 200000,
-      endpoint: 'https://github.com/model-context-protocol/servers/tree/main/src/brave-search',
-      tags: ['mcp', 'search', 'web'],
-      featured: false,
-      provider: 'Brave Software'
-    },
-    {
-      id: 'filesystem-mcp',
-      name: 'Filesystem MCP',
-      description: 'Secure local file system access for autonomous agents',
-      category: 'MCP Servers',
-      rating: 4.7,
-      price: 0,
-      priceType: 'per_call',
-      calls: 100000,
-      endpoint: 'https://github.com/model-context-protocol/servers/tree/main/src/filesystem',
-      tags: ['mcp', 'system', 'files'],
-      featured: false,
-      provider: 'Community'
+      reward: 400,
+      currency: 'USDC',
+      difficulty: 'Intermediate',
+      status: 'Open',
+      postedAt: '2026-02-12T10:00:00Z',
+      expiresAt: '2026-03-12T10:00:00Z',
+      submissions: 4,
+      tags: ['mcp', 'twitter', 'sentiment', 'nlp']
     }
   ];
 
-  const categories = ['all', 'MCP Servers', 'AI & ML', 'Blockchain', 'Data', 'Communication', 'Finance'];
+  const categories = ['all', 'Infrastructure', 'MCP Servers', 'Data & Research', 'Bug Fix', 'Communication'];
 
-  const filteredServices = apiServices.filter(service => {
-    const matchesCategory = selectedCategory === 'all' || service.category === selectedCategory;
+  const filteredBounties = bounties.filter(bounty => {
+    const matchesCategory = selectedCategory === 'all' || bounty.category === selectedCategory;
     const matchesSearch = searchQuery === '' ||
-      service.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      service.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      service.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
+      bounty.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      bounty.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      bounty.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
     return matchesCategory && matchesSearch;
   });
 
-  const featuredServices = apiServices.filter(s => s.featured);
-
   return (
-    <div className="min-h-screen bg-zinc-950 text-zinc-100 flex flex-col">
-      <Navbar />
-
-      {/* Hero Section */}
-      <section className="py-20 px-6">
-        <div className="max-w-4xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <h1 className="text-5xl font-bold mb-6">
-              Discover <span className="gradient-text">Powerful APIs</span>
-            </h1>
-            <p className="text-xl text-zinc-400 mb-8">
-              Access the best AI, blockchain, and data APIs. Pay only for what you use with x402 crypto payments.
-            </p>
-
-            {/* Search Bar */}
-            <div className="relative max-w-2xl mx-auto">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500" size={20} />
-              <input
-                type="text"
-                placeholder="Search APIs..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-12 pr-4 py-4 rounded-xl bg-zinc-900 border border-zinc-800 text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all"
-              />
-              <button className="absolute right-2 top-1/2 -translate-y-1/2 btn-primary px-6 py-2 rounded-lg">
-                Search
-              </button>
-            </div>
-
-            <div className="mt-6 flex justify-center gap-4 text-sm text-zinc-500">
-              <span>Popular:</span>
-              <button onClick={() => { setSearchQuery('mcp'); setSelectedCategory('MCP Servers'); }} className="hover:text-purple-400 transition-colors">MCP Servers</button>
-              <button onClick={() => setSearchQuery('gpt')} className="hover:text-purple-400 transition-colors">GPT-4</button>
-              <button onClick={() => setSearchQuery('solana')} className="hover:text-purple-400 transition-colors">Solana</button>
-              <span className="border-l border-zinc-800 mx-2"></span>
-              <a href="https://smithery.ai" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:text-white transition-colors">
-                <ExternalLink size={12} /> Import from Smithery.ai
-              </a>
-            </div>
-
-            {/* Stats */}
-            <div className="grid grid-cols-3 gap-8 mt-12 max-w-2xl mx-auto">
-              <StatCard icon={Code} value="8+" label="APIs" />
-              <StatCard icon={Zap} value="15M+" label="Calls/mo" />
-              <StatCard icon={Star} value="4.7" label="Avg Rating" />
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Featured APIs */}
-      <section className="py-16 px-6 bg-zinc-900/50">
+    <div className="min-h-screen bg-[#050505] text-[#f5f5f5] selection:bg-white selection:text-black">
+      {/* Header */}
+      <section className="pt-32 pb-16 px-4 md:px-14 border-b border-[#1e1e1e]">
         <div className="max-w-7xl mx-auto">
-          <div className="flex items-center justify-between mb-8">
-            <h2 className="text-3xl font-bold flex items-center gap-3">
-              <Zap className="text-yellow-500" size={28} />
-              Featured APIs
-            </h2>
-            <button className="text-purple-400 hover:text-purple-300 flex items-center gap-2">
-              View All
-              <ArrowRight size={16} />
-            </button>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {featuredServices.map((service, index) => (
-              <ApiCard key={service.id} service={service} index={index} />
-            ))}
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
+            <div className="max-w-2xl">
+              <span className="label-whisper mb-4 block">Ecosystem Growth</span>
+              <h1 className="text-4xl md:text-6xl font-light tracking-tighter mb-6 font-display">
+                Active Bounties
+              </h1>
+              <p className="text-lg text-[#a1a1aa] font-light">
+                Complete tasks, solve problems, and earn USDC rewards while building the 
+                infrastructure for the autonomous agent economy.
+              </p>
+            </div>
+            <div className="flex flex-col md:items-end gap-2">
+               <div className="flex items-center gap-2 text-green-500">
+                  <CheckCircle2 size={16} />
+                  <span className="text-sm font-medium uppercase tracking-widest text-[10px]">Total Paid: 124,500 USDC</span>
+               </div>
+               <Button className="bg-white text-black hover:bg-zinc-200 h-10 px-6 rounded-sm text-[11px] font-bold uppercase tracking-widest">
+                  Post a Bounty
+               </Button>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Category Filter */}
-      <section className="py-8 px-6 border-b border-zinc-800 sticky top-16 z-40 bg-zinc-950">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex items-center gap-4 overflow-x-auto pb-2">
-            <Filter className="text-zinc-500" size={18} />
+      {/* Filter & Search */}
+      <section className="sticky top-16 z-40 bg-[#050505]/80 backdrop-blur-xl border-b border-[#1e1e1e] px-4 md:px-14 py-6">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-6 items-center justify-between">
+          <div className="flex items-center gap-4 overflow-x-auto pb-1 scrollbar-hide w-full md:w-auto">
+            <Filter className="text-[#71717a] shrink-0" size={16} />
             {categories.map((category) => (
               <button
                 key={category}
                 onClick={() => setSelectedCategory(category)}
-                className={`px-4 py-2 rounded-lg text-sm whitespace-nowrap transition-all ${
+                className={`px-4 py-2 rounded-sm text-[10px] uppercase tracking-widest whitespace-nowrap transition-all border ${
                   selectedCategory === category
-                    ? 'bg-purple-600 text-white'
-                    : 'bg-zinc-900 text-zinc-400 hover:bg-zinc-800'
+                    ? 'bg-white text-black border-white'
+                    : 'bg-transparent text-[#71717a] border-[#2a2a2a] hover:border-[#a1a1aa]'
                 }`}
               >
-                {category.charAt(0).toUpperCase() + category.slice(1)}
+                {category}
               </button>
             ))}
           </div>
+
+          <div className="relative w-full md:w-80">
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-[#71717a]" size={16} />
+            <input
+              type="text"
+              id="bounty-search"
+              placeholder="Filter bounties..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full pl-12 pr-4 py-3 rounded-sm bg-[#121212] border border-[#2a2a2a] text-white text-xs placeholder-[#71717a] focus:outline-none focus:border-white transition-all"
+              aria-label="Filter bounties"
+            />
+          </div>
         </div>
       </section>
 
-      {/* All APIs */}
-      <section className="py-16 px-6">
+      {/* Bounty List */}
+      <section className="py-16 px-4 md:px-14">
         <div className="max-w-7xl mx-auto">
-          <div className="flex items-center justify-between mb-8">
-            <h2 className="text-3xl font-bold">
-              {selectedCategory === 'all' ? 'All APIs' : selectedCategory}
-            </h2>
-            <span className="text-zinc-400">
-              {filteredServices.length} API{filteredServices.length !== 1 ? 's' : ''}
-            </span>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredServices.map((service, index) => (
-              <ApiCard key={service.id} service={service} index={index} />
+          <div className="grid grid-cols-1 gap-6">
+            {filteredBounties.map((bounty) => (
+              <BountyCard key={bounty.id} bounty={bounty} />
             ))}
-          </div>
 
-          {filteredServices.length === 0 && (
-            <div className="text-center py-20">
-              <Code className="text-zinc-700 mx-auto mb-4" size={48} />
-              <p className="text-zinc-500 text-lg">No APIs found matching your criteria</p>
-            </div>
-          )}
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-20 px-6 bg-gradient-to-br from-purple-900/20 to-blue-900/20">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl font-bold mb-6">
-            Build with the Best APIs
-          </h2>
-          <p className="text-xl text-zinc-400 mb-8">
-            Start building your app today. Get your free API key and integrate in minutes.
-          </p>
-          <div className="flex items-center justify-center gap-4">
-            <button className="btn-primary px-8 py-4 rounded-lg text-lg font-medium">
-              Get API Key
-            </button>
-            <a href="/docs" className="btn-secondary px-8 py-4 rounded-lg text-lg font-medium flex items-center gap-2">
-              <BookOpen size={18} />
-              Documentation
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <Footer />
-    </div>
-  );
-}
-
-// --- Sub-components ---
-
-function StatCard({ icon: Icon, value, label }: { icon: React.ElementType, value: string, label: string }) {
-  return (
-    <div className="text-center">
-      <Icon className="text-purple-500 mx-auto mb-2" size={24} />
-      <div className="text-3xl font-bold text-white mb-1">{value}</div>
-      <div className="text-zinc-500 text-sm">{label}</div>
-    </div>
-  );
-}
-
-function ApiCard({ service, index }: { service: ApiService, index: number }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4, delay: index * 0.1 }}
-      className="glass-card p-6 rounded-xl hover:border-purple-500/50 transition-all group"
-    >
-      <div className="flex items-start justify-between mb-4">
-        <div>
-          <div className="flex items-center gap-2 mb-2">
-            <h3 className="text-lg font-semibold">{service.name}</h3>
-            {service.featured && (
-              <span className="px-2 py-0.5 bg-yellow-500/20 text-yellow-500 text-xs rounded-full">
-                Featured
-              </span>
+            {filteredBounties.length === 0 && (
+              <div className="text-center py-32 border border-dashed border-[#2a2a2a] rounded-sm">
+                <AlertCircle className="text-[#2a2a2a] mx-auto mb-4" size={48} />
+                <p className="text-[#71717a] text-lg font-light">No bounties found matching your filters</p>
+              </div>
             )}
           </div>
-          <p className="text-sm text-zinc-400 line-clamp-2">
-            {service.description}
-          </p>
         </div>
-      </div>
+      </section>
+    </div>
+  );
+}
 
-      <div className="flex items-center gap-1 mb-4">
-        {[...Array(5)].map((_, i) => (
-          <Star
-            key={i}
-            size={14}
-            className={i < Math.floor(service.rating) ? 'text-yellow-500 fill-yellow-500' : 'text-zinc-700'}
-          />
-        ))}
-        <span className="text-sm text-zinc-400 ml-2">{service.rating}</span>
-      </div>
+function BountyCard({ bounty }: { bounty: Bounty }) {
+  const isExpired = new Date(bounty.expiresAt) < new Date();
+  
+  return (
+    <Card className="bg-[#121212] border-[#1e1e1e] rounded-sm hover:border-[#2a2a2a] transition-all group overflow-hidden">
+      <CardContent className="p-0">
+        <div className="flex flex-col md:flex-row">
+          {/* Main Info */}
+          <div className="flex-1 p-8">
+            <div className="flex flex-wrap items-center gap-3 mb-4">
+               <Badge variant="outline" className="rounded-sm border-[#2a2a2a] text-[#71717a] text-[9px] uppercase tracking-widest px-2">
+                  {bounty.category}
+               </Badge>
+               <span className={`text-[9px] uppercase tracking-widest px-2 py-0.5 rounded-sm border ${
+                 bounty.status === 'Open' ? 'border-green-900/30 text-green-500 bg-green-500/5' :
+                 bounty.status === 'In Progress' ? 'border-blue-900/30 text-blue-500 bg-blue-500/5' :
+                 'border-amber-900/30 text-amber-500 bg-amber-500/5'
+               }`}>
+                  {bounty.status}
+               </span>
+               <span className="text-[9px] uppercase tracking-widest text-[#71717a] flex items-center gap-1.5 ml-auto">
+                  <Timer size={10} />
+                  Ends {new Date(bounty.expiresAt).toLocaleDateString()}
+               </span>
+            </div>
 
-      <div className="flex flex-wrap gap-2 mb-4">
-        {service.tags.map((tag) => (
-          <span key={tag} className="px-2 py-1 bg-zinc-800 text-zinc-300 text-xs rounded-md">
-            {tag}
-          </span>
-        ))}
-      </div>
+            <h3 className="text-2xl font-light tracking-tight text-white mb-4 group-hover:translate-x-1 transition-transform font-display">
+               {bounty.title}
+            </h3>
 
-      <div className="flex items-center justify-between pt-4 border-t border-zinc-800">
-        <div>
-          <div className="flex items-baseline gap-1">
-            <DollarSign size={14} className="text-zinc-500" />
-            <span className="text-lg font-bold text-white">
-              {service.price.toFixed(4)}
-            </span>
-            <span className="text-sm text-zinc-500">
-              /{service.priceType === 'per_call' ? 'call' : 'mo'}
-            </span>
+            <p className="text-[#a1a1aa] font-light text-sm leading-relaxed mb-6 line-clamp-2">
+               {bounty.description}
+            </p>
+
+            <div className="flex flex-wrap gap-2">
+               {bounty.tags.map(tag => (
+                 <span key={tag} className="text-[10px] text-[#71717a] hover:text-[#f5f5f5] cursor-default transition-colors">
+                    #{tag}
+                 </span>
+               ))}
+            </div>
           </div>
-          <div className="text-xs text-zinc-500">
-            {service.calls.toLocaleString()} calls/mo
+
+          {/* Side Info / CTA */}
+          <div className="w-full md:w-64 bg-[#0a0a0a] p-8 border-t md:border-t-0 md:border-l border-[#1e1e1e] flex flex-col justify-between items-center text-center">
+             <div>
+                <span className="label-whisper mb-2 block">Reward</span>
+                <div className="hero-number text-4xl mb-1 text-white">
+                   {bounty.reward}
+                </div>
+                <span className="text-[10px] uppercase tracking-widest text-[#71717a]">{bounty.currency} on Base</span>
+             </div>
+
+             <div className="mt-8 w-full space-y-3">
+                <div className="flex justify-between text-[10px] uppercase tracking-widest text-[#71717a] mb-2 px-1">
+                   <span>{bounty.difficulty}</span>
+                   <span>{bounty.submissions} Submissions</span>
+                </div>
+                <Button className="w-full bg-white text-black hover:bg-[#e4e4e7] rounded-sm text-[10px] font-bold uppercase tracking-widest h-10">
+                   Claim Bounty
+                </Button>
+                <Button variant="outline" className="w-full border-[#2a2a2a] text-[#71717a] hover:bg-[#121212] hover:text-white rounded-sm text-[10px] font-bold uppercase tracking-widest h-10">
+                   View Details
+                </Button>
+             </div>
           </div>
         </div>
-
-        <div className="flex gap-2">
-          <button aria-label={`Try ${service.name} API`} className="p-2 rounded-lg bg-zinc-800 hover:bg-zinc-700 transition-colors group-hover:text-purple-400">
-            <Play size={16} />
-          </button>
-          <a
-            href={service.endpoint}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={`Open ${service.name} API documentation`}
-            className="p-2 rounded-lg bg-zinc-800 hover:bg-zinc-700 transition-colors group-hover:text-purple-400"
-          >
-            <ExternalLink size={16} />
-          </a>
-        </div>
-      </div>
-
-      <div className="mt-3 pt-3 border-t border-zinc-800">
-        <div className="flex items-center gap-2 text-xs text-zinc-500">
-          <Shield size={12} />
-          <span>Verified Provider</span>
-        </div>
-        <div className="text-xs text-zinc-600 mt-1">
-          by {service.provider}
-        </div>
-      </div>
-    </motion.div>
+      </CardContent>
+    </Card>
   );
 }

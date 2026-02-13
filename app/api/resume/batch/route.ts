@@ -187,6 +187,14 @@ export async function POST(request: NextRequest) {
 // GET method to retrieve batch results
 export async function GET(request: NextRequest) {
   try {
+    // Check if Supabase is configured
+    if (!supabaseAdmin) {
+      return NextResponse.json(
+        { error: 'Database not configured' },
+        { status: 500 }
+      );
+    }
+
     const { searchParams } = new URL(request.url);
     const jobId = searchParams.get('jobId');
 

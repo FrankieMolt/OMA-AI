@@ -1,0 +1,1771 @@
+(globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push([typeof document === "object" ? document.currentScript : undefined,
+"[project]/lib/memoria/tokens.ts [app-client] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+/**
+ * Memoria Design System Tokens
+ * Premium dark-themed knowledge interfaces
+ * Philosophy: "Numbers are heroes, labels are whispers"
+ */ __turbopack_context__.s([
+    "animations",
+    ()=>animations,
+    "borderRadius",
+    ()=>borderRadius,
+    "colors",
+    ()=>colors,
+    "fonts",
+    ()=>fonts,
+    "shadows",
+    ()=>shadows,
+    "spacing",
+    ()=>spacing,
+    "transitions",
+    ()=>transitions,
+    "typography",
+    ()=>typography
+]);
+const colors = {
+    // Backgrounds (darkest to lightest)
+    bg: {
+        neutral950: '#0a0a0a',
+        neutral90080: 'rgba(24, 24, 27, 0.8)',
+        neutral90060: 'rgba(24, 24, 27, 0.6)',
+        neutral90050: 'rgba(24, 24, 27, 0.5)',
+        neutral90040: 'rgba(24, 24, 27, 0.4)',
+        neutral80060: 'rgba(39, 39, 42, 0.6)',
+        neutral80050: 'rgba(39, 39, 42, 0.5)',
+        neutral80040: 'rgba(39, 39, 42, 0.4)',
+        neutral80030: 'rgba(39, 39, 42, 0.3)',
+        neutral80020: 'rgba(39, 39, 42, 0.2)',
+        neutral800: '#27272a',
+        neutral700: '#3f3f46'
+    },
+    // Borders
+    border: {
+        neutral80060: 'rgba(39, 39, 42, 0.6)',
+        neutral800: '#27272a',
+        neutral700: '#3f3f46',
+        neutral600: '#52525b'
+    },
+    // Text Hierarchy (5 opacity levels)
+    text: {
+        white: '#ffffff',
+        neutral200: '#e4e4e7',
+        neutral300: '#d4d4d8',
+        neutral400: '#a1a1aa',
+        neutral500: '#71717a',
+        neutral600: '#52525b'
+    },
+    // Destructive (delete actions only)
+    destructive: {
+        bg: 'rgba(239, 68, 68, 0.2)',
+        text: '#f87171',
+        border: 'rgba(239, 68, 68, 0.4)'
+    }
+};
+const fonts = {
+    body: 'ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+    mono: 'ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace'
+};
+const typography = {
+    // Hero stats (3xl-6xl numbers) - LIGHT weight
+    hero: {
+        fontSize: '3rem',
+        fontWeight: 300,
+        letterSpacing: '-0.02em',
+        color: colors.text.white
+    },
+    // Page titles
+    pageTitle: {
+        fontSize: '1.125rem',
+        fontWeight: 300,
+        color: colors.text.white
+    },
+    // Card counts
+    cardCount: {
+        fontSize: '1.5rem',
+        fontWeight: 300,
+        color: colors.text.white,
+        letterSpacing: '-0.01em'
+    },
+    // Section labels (uppercase whispers)
+    sectionLabel: {
+        fontSize: '0.75rem',
+        fontWeight: 500,
+        color: colors.text.neutral500,
+        letterSpacing: '0.1em',
+        textTransform: 'uppercase'
+    },
+    // Body text
+    body: {
+        fontSize: '0.875rem',
+        fontWeight: 400,
+        color: colors.text.neutral300,
+        lineHeight: 1.6
+    },
+    // Metadata
+    metadata: {
+        fontSize: '0.625rem',
+        fontWeight: 400,
+        color: colors.text.neutral500
+    }
+};
+const spacing = {
+    xs: '0.5rem',
+    sm: '0.75rem',
+    md: '1rem',
+    lg: '1.5rem',
+    xl: '2rem'
+};
+const borderRadius = {
+    sm: '0.5rem',
+    md: '0.75rem',
+    lg: '1rem',
+    xl: '1.5rem',
+    full: '9999px'
+};
+const shadows = {
+    sm: '0 2px 8px rgba(0, 0, 0, 0.3)',
+    md: '0 4px 24px rgba(0, 0, 0, 0.4)',
+    lg: '0 12px 40px rgba(0, 0, 0, 0.5)'
+};
+const transitions = {
+    fast: '150ms ease',
+    normal: '300ms ease',
+    slow: '500ms ease',
+    // Signature easing curves
+    pageTransition: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+    accordion: 'cubic-bezier(0.4, 0, 0.2, 1)',
+    spring: {
+        type: 'spring',
+        bounce: 0.2,
+        stiffness: 260,
+        damping: 15
+    }
+};
+const animations = {
+    // Page transitions (blur-to-clear)
+    pageIn: {
+        initial: {
+            opacity: 0,
+            filter: 'blur(10px)'
+        },
+        animate: {
+            opacity: 1,
+            filter: 'blur(0px)'
+        },
+        exit: {
+            opacity: 0,
+            filter: 'blur(5px)'
+        },
+        transition: {
+            duration: 0.4,
+            ease: [
+                0.25,
+                0.46,
+                0.45,
+                0.94
+            ]
+        }
+    },
+    // Card staggered entry
+    cardIn: (index)=>({
+            initial: {
+                opacity: 0,
+                y: 20
+            },
+            animate: {
+                opacity: 1,
+                y: 0
+            },
+            exit: {
+                opacity: 0,
+                y: -10
+            },
+            transition: {
+                duration: 0.3,
+                delay: index * 0.05
+            }
+        }),
+    // Modal (spring-based 3D)
+    modalIn: {
+        initial: {
+            opacity: 0,
+            scale: 0.5,
+            rotateX: 40,
+            y: 40
+        },
+        animate: {
+            opacity: 1,
+            scale: 1,
+            rotateX: 0,
+            y: 0
+        },
+        exit: {
+            opacity: 0,
+            scale: 0.8,
+            rotateX: 10
+        },
+        transition: {
+            type: 'spring',
+            stiffness: 260,
+            damping: 15
+        }
+    },
+    // Progress bar growth
+    progressBar: {
+        initial: {
+            width: 0
+        },
+        animate: (percentage)=>({
+                width: `${percentage}%`
+            }),
+        transition: {
+            duration: 0.6,
+            ease: [
+                0.25,
+                0.1,
+                0.25,
+                1
+            ]
+        }
+    }
+};
+if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
+    __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);
+}
+}),
+"[project]/lib/memoria/components.tsx [app-client] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s([
+    "Badge",
+    ()=>Badge,
+    "DarkCard",
+    ()=>DarkCard,
+    "EmptyState",
+    ()=>EmptyState,
+    "HeroStat",
+    ()=>HeroStat,
+    "IconButton",
+    ()=>IconButton,
+    "LoadingSpinner",
+    ()=>LoadingSpinner,
+    "MinimalButton",
+    ()=>MinimalButton,
+    "ProgressBar",
+    ()=>ProgressBar,
+    "SectionLabel",
+    ()=>SectionLabel,
+    "TextInput",
+    ()=>TextInput
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$styled$2d$jsx$2f$style$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/styled-jsx/style.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$tokens$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/lib/memoria/tokens.ts [app-client] (ecmascript)");
+;
+var _s = __turbopack_context__.k.signature(), _s1 = __turbopack_context__.k.signature(), _s2 = __turbopack_context__.k.signature();
+/**
+ * Memoria Design System Components
+ * Premium dark-themed knowledge interfaces
+ * 
+ * STRICT RULES:
+ * - No Emojis
+ * - No Accent Colors (monochromatic only)
+ * - No Gradients
+ * - No Bold for Emphasis (size handles hierarchy)
+ */ 'use client';
+;
+;
+;
+function DarkCard({ children, className = '', onClick, elevated = false }) {
+    _s();
+    const [isHovered, setIsHovered] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
+    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+        onClick: onClick,
+        onMouseEnter: ()=>setIsHovered(true),
+        onMouseLeave: ()=>setIsHovered(false),
+        className: className,
+        style: {
+            background: elevated ? __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$tokens$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].bg.neutral90080 : __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$tokens$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].bg.neutral90060,
+            border: `1px solid ${isHovered ? __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$tokens$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].border.neutral700 : __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$tokens$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].border.neutral80060}`,
+            borderRadius: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$tokens$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["borderRadius"].lg,
+            padding: '1rem',
+            cursor: onClick ? 'pointer' : 'default',
+            transition: 'all 0.3s ease-out',
+            ...isHovered && {
+                background: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$tokens$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].bg.neutral80060
+            }
+        },
+        children: children
+    }, void 0, false, {
+        fileName: "[project]/lib/memoria/components.tsx",
+        lineNumber: 34,
+        columnNumber: 5
+    }, this);
+}
+_s(DarkCard, "FPQn8a98tPjpohC7NUYORQR8GJE=");
+_c = DarkCard;
+function SectionLabel({ children, className = '' }) {
+    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+        className: className,
+        style: {
+            ...__TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$tokens$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["typography"].sectionLabel,
+            fontFamily: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$tokens$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["fonts"].mono
+        },
+        children: children
+    }, void 0, false, {
+        fileName: "[project]/lib/memoria/components.tsx",
+        lineNumber: 67,
+        columnNumber: 5
+    }, this);
+}
+_c1 = SectionLabel;
+function HeroStat({ value, label, className = '' }) {
+    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+        className: className,
+        style: {
+            textAlign: 'center'
+        },
+        children: [
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                style: {
+                    ...__TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$tokens$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["typography"].hero,
+                    fontSize: '2.25rem'
+                },
+                children: value
+            }, void 0, false, {
+                fileName: "[project]/lib/memoria/components.tsx",
+                lineNumber: 98,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                style: {
+                    ...__TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$tokens$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["typography"].sectionLabel,
+                    marginTop: '0.25rem'
+                },
+                children: label
+            }, void 0, false, {
+                fileName: "[project]/lib/memoria/components.tsx",
+                lineNumber: 104,
+                columnNumber: 7
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "[project]/lib/memoria/components.tsx",
+        lineNumber: 92,
+        columnNumber: 5
+    }, this);
+}
+_c2 = HeroStat;
+function Badge({ children, variant = 'default', className = '', style }) {
+    const variantStyles = {
+        default: {
+            background: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$tokens$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].bg.neutral800,
+            color: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$tokens$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].text.neutral400,
+            border: `1px solid ${__TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$tokens$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].border.neutral700}`
+        },
+        count: {
+            background: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$tokens$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].bg.neutral700,
+            color: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$tokens$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].text.neutral300
+        },
+        type: {
+            background: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$tokens$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].bg.neutral800,
+            color: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$tokens$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].text.neutral400,
+            border: `1px solid ${__TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$tokens$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].border.neutral700}`,
+            textTransform: 'uppercase',
+            fontWeight: 600,
+            letterSpacing: '0.05em'
+        }
+    };
+    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+        className: className,
+        style: {
+            ...variantStyles[variant],
+            padding: '0.25rem 0.5rem',
+            borderRadius: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$tokens$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["borderRadius"].full,
+            fontSize: '0.625rem',
+            display: 'inline-flex',
+            alignItems: 'center',
+            ...style
+        },
+        children: children
+    }, void 0, false, {
+        fileName: "[project]/lib/memoria/components.tsx",
+        lineNumber: 149,
+        columnNumber: 5
+    }, this);
+}
+_c3 = Badge;
+function MinimalButton({ children, onClick, variant = 'primary', size = 'md', className = '', style }) {
+    _s1();
+    const [isHovered, setIsHovered] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
+    const sizeMap = {
+        sm: {
+            padding: '0.5rem 1rem',
+            fontSize: '0.75rem'
+        },
+        md: {
+            padding: '0.75rem 1.5rem',
+            fontSize: '0.875rem'
+        },
+        lg: {
+            padding: '1rem 2rem',
+            fontSize: '1rem'
+        }
+    };
+    const variantStyles = {
+        primary: {
+            background: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$tokens$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].bg.neutral800,
+            border: `1px solid ${__TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$tokens$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].border.neutral700}`,
+            color: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$tokens$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].text.white,
+            ...isHovered && {
+                background: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$tokens$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].bg.neutral700,
+                borderColor: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$tokens$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].border.neutral600
+            }
+        },
+        secondary: {
+            background: 'transparent',
+            border: `1px solid ${__TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$tokens$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].border.neutral800}`,
+            color: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$tokens$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].text.neutral400,
+            ...isHovered && {
+                borderColor: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$tokens$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].border.neutral700,
+                color: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$tokens$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].text.neutral200
+            }
+        },
+        ghost: {
+            background: 'transparent',
+            border: 'none',
+            color: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$tokens$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].text.neutral500,
+            ...isHovered && {
+                color: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$tokens$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].text.neutral300
+            }
+        }
+    };
+    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+        onClick: onClick,
+        onMouseEnter: ()=>setIsHovered(true),
+        onMouseLeave: ()=>setIsHovered(false),
+        className: className,
+        style: {
+            ...sizeMap[size],
+            ...variantStyles[variant],
+            ...style,
+            borderRadius: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$tokens$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["borderRadius"].sm,
+            cursor: 'pointer',
+            transition: 'all 0.2s ease',
+            fontFamily: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$tokens$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["fonts"].body,
+            fontWeight: 500
+        },
+        children: children
+    }, void 0, false, {
+        fileName: "[project]/lib/memoria/components.tsx",
+        lineNumber: 222,
+        columnNumber: 5
+    }, this);
+}
+_s1(MinimalButton, "FPQn8a98tPjpohC7NUYORQR8GJE=");
+_c4 = MinimalButton;
+function IconButton({ icon, onClick, size = 'md', className = '' }) {
+    _s2();
+    const [isHovered, setIsHovered] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
+    const sizeMap = {
+        sm: '2rem',
+        md: '2.625rem',
+        lg: '3rem'
+    };
+    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+        onClick: onClick,
+        onMouseEnter: ()=>setIsHovered(true),
+        onMouseLeave: ()=>setIsHovered(false),
+        className: className,
+        style: {
+            width: sizeMap[size],
+            height: sizeMap[size],
+            background: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$tokens$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].bg.neutral90080,
+            border: `1px solid ${__TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$tokens$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].border.neutral80060}`,
+            borderRadius: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$tokens$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["borderRadius"].md,
+            color: isHovered ? __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$tokens$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].text.white : __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$tokens$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].text.neutral400,
+            cursor: 'pointer',
+            transition: 'all 0.2s ease',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+        },
+        children: icon
+    }, void 0, false, {
+        fileName: "[project]/lib/memoria/components.tsx",
+        lineNumber: 266,
+        columnNumber: 5
+    }, this);
+}
+_s2(IconButton, "FPQn8a98tPjpohC7NUYORQR8GJE=");
+_c5 = IconButton;
+function TextInput({ placeholder, value, onChange, icon, className = '' }) {
+    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+        className: className,
+        style: {
+            position: 'relative',
+            width: '100%'
+        },
+        children: [
+            icon && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                style: {
+                    position: 'absolute',
+                    left: '0.75rem',
+                    top: '50%',
+                    transform: 'translateY(-50%)',
+                    color: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$tokens$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].text.neutral500
+                },
+                children: icon
+            }, void 0, false, {
+                fileName: "[project]/lib/memoria/components.tsx",
+                lineNumber: 315,
+                columnNumber: 9
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                type: "text",
+                placeholder: placeholder,
+                value: value,
+                onChange: (e)=>onChange(e.target.value),
+                style: {
+                    width: '100%',
+                    padding: icon ? '0.75rem 1rem 0.75rem 2.5rem' : '0.75rem 1rem',
+                    background: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$tokens$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].bg.neutral90080,
+                    border: `1px solid ${__TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$tokens$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].border.neutral800}`,
+                    borderRadius: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$tokens$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["borderRadius"].lg,
+                    color: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$tokens$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].text.white,
+                    fontSize: '0.875rem',
+                    fontFamily: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$tokens$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["fonts"].body,
+                    outline: 'none',
+                    transition: 'border-color 0.2s ease'
+                },
+                onFocus: (e)=>{
+                    e.target.style.borderColor = __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$tokens$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].border.neutral600;
+                },
+                onBlur: (e)=>{
+                    e.target.style.borderColor = __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$tokens$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].border.neutral800;
+                }
+            }, void 0, false, {
+                fileName: "[project]/lib/memoria/components.tsx",
+                lineNumber: 325,
+                columnNumber: 7
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "[project]/lib/memoria/components.tsx",
+        lineNumber: 307,
+        columnNumber: 5
+    }, this);
+}
+_c6 = TextInput;
+function ProgressBar({ percentage, label, className = '' }) {
+    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+        className: className,
+        children: [
+            label && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                style: {
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    marginBottom: '0.5rem'
+                },
+                children: [
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                        style: {
+                            ...__TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$tokens$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["typography"].metadata
+                        },
+                        children: label
+                    }, void 0, false, {
+                        fileName: "[project]/lib/memoria/components.tsx",
+                        lineNumber: 373,
+                        columnNumber: 11
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                        style: {
+                            ...__TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$tokens$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["typography"].metadata,
+                            color: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$tokens$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].text.neutral400
+                        },
+                        children: [
+                            percentage,
+                            "%"
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/lib/memoria/components.tsx",
+                        lineNumber: 378,
+                        columnNumber: 11
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "[project]/lib/memoria/components.tsx",
+                lineNumber: 368,
+                columnNumber: 9
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                style: {
+                    height: '0.5rem',
+                    background: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$tokens$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].bg.neutral800,
+                    borderRadius: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$tokens$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["borderRadius"].full,
+                    overflow: 'hidden'
+                },
+                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                    style: {
+                        height: '100%',
+                        width: `${percentage}%`,
+                        background: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$tokens$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].bg.neutral700,
+                        borderRadius: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$tokens$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["borderRadius"].full,
+                        transition: 'width 0.6s cubic-bezier(0.25, 0.1, 0.25, 1)'
+                    }
+                }, void 0, false, {
+                    fileName: "[project]/lib/memoria/components.tsx",
+                    lineNumber: 392,
+                    columnNumber: 9
+                }, this)
+            }, void 0, false, {
+                fileName: "[project]/lib/memoria/components.tsx",
+                lineNumber: 386,
+                columnNumber: 7
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "[project]/lib/memoria/components.tsx",
+        lineNumber: 366,
+        columnNumber: 5
+    }, this);
+}
+_c7 = ProgressBar;
+function EmptyState({ icon, title, description, action, className = '' }) {
+    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+        className: className,
+        style: {
+            height: '100%',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            textAlign: 'center',
+            padding: '1rem'
+        },
+        children: [
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                style: {
+                    width: '4rem',
+                    height: '4rem',
+                    background: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$tokens$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].bg.neutral800,
+                    border: `1px solid ${__TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$tokens$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].border.neutral700}`,
+                    borderRadius: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$tokens$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["borderRadius"].lg,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    marginBottom: '1rem'
+                },
+                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                    style: {
+                        color: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$tokens$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].text.neutral600
+                    },
+                    children: icon
+                }, void 0, false, {
+                    fileName: "[project]/lib/memoria/components.tsx",
+                    lineNumber: 446,
+                    columnNumber: 9
+                }, this)
+            }, void 0, false, {
+                fileName: "[project]/lib/memoria/components.tsx",
+                lineNumber: 435,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                style: {
+                    ...__TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$tokens$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["typography"].body,
+                    color: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$tokens$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].text.neutral400,
+                    fontSize: '1.125rem',
+                    fontWeight: 500,
+                    marginBottom: '0.5rem'
+                },
+                children: title
+            }, void 0, false, {
+                fileName: "[project]/lib/memoria/components.tsx",
+                lineNumber: 450,
+                columnNumber: 7
+            }, this),
+            description && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                style: {
+                    ...__TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$tokens$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["typography"].body,
+                    color: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$tokens$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].text.neutral600,
+                    maxWidth: '24rem'
+                },
+                children: description
+            }, void 0, false, {
+                fileName: "[project]/lib/memoria/components.tsx",
+                lineNumber: 460,
+                columnNumber: 9
+            }, this),
+            action && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                style: {
+                    marginTop: '1.5rem'
+                },
+                children: action
+            }, void 0, false, {
+                fileName: "[project]/lib/memoria/components.tsx",
+                lineNumber: 469,
+                columnNumber: 9
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "[project]/lib/memoria/components.tsx",
+        lineNumber: 423,
+        columnNumber: 5
+    }, this);
+}
+_c8 = EmptyState;
+function LoadingSpinner({ size = 'md', className = '' }) {
+    const sizeMap = {
+        sm: '1rem',
+        md: '1.5rem',
+        lg: '2rem'
+    };
+    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+        style: {
+            width: sizeMap[size],
+            height: sizeMap[size],
+            border: `2px solid ${__TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$tokens$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].border.neutral800}`,
+            borderTopColor: 'transparent',
+            borderRadius: '50%',
+            animation: 'spin 0.8s linear infinite'
+        },
+        className: "jsx-4b22437fb54054bc" + " " + (className || ""),
+        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$styled$2d$jsx$2f$style$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+            id: "4b22437fb54054bc",
+            children: "@keyframes spin{to{transform:rotate(360deg)}}"
+        }, void 0, false, void 0, this)
+    }, void 0, false, {
+        fileName: "[project]/lib/memoria/components.tsx",
+        lineNumber: 494,
+        columnNumber: 5
+    }, this);
+}
+_c9 = LoadingSpinner;
+var _c, _c1, _c2, _c3, _c4, _c5, _c6, _c7, _c8, _c9;
+__turbopack_context__.k.register(_c, "DarkCard");
+__turbopack_context__.k.register(_c1, "SectionLabel");
+__turbopack_context__.k.register(_c2, "HeroStat");
+__turbopack_context__.k.register(_c3, "Badge");
+__turbopack_context__.k.register(_c4, "MinimalButton");
+__turbopack_context__.k.register(_c5, "IconButton");
+__turbopack_context__.k.register(_c6, "TextInput");
+__turbopack_context__.k.register(_c7, "ProgressBar");
+__turbopack_context__.k.register(_c8, "EmptyState");
+__turbopack_context__.k.register(_c9, "LoadingSpinner");
+if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
+    __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);
+}
+}),
+"[project]/app/page.tsx [app-client] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s([
+    "default",
+    ()=>SpendThronePage
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/framer-motion/dist/es/render/components/motion/proxy.mjs [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$components$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/lib/memoria/components.tsx [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$tokens$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/lib/memoria/tokens.ts [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$shopping$2d$bag$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__ShoppingBag$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/shopping-bag.js [app-client] (ecmascript) <export default as ShoppingBag>");
+;
+var _s = __turbopack_context__.k.signature();
+/**
+ * SpendThrone Landing Page - Memoria Dark Theme
+ */ 'use client';
+;
+;
+;
+;
+;
+function SpendThronePage() {
+    _s();
+    const [selectedCategory, setSelectedCategory] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('all');
+    const products = [
+        {
+            id: 1,
+            name: 'AI-Powered Resume Builder',
+            price: 49.99,
+            category: 'AI Tools',
+            rating: 4.8
+        },
+        {
+            id: 2,
+            name: 'Smart Calendar Assistant',
+            price: 19.99,
+            category: 'Productivity',
+            rating: 4.6
+        },
+        {
+            id: 3,
+            name: 'Email Summarizer',
+            price: 29.99,
+            category: 'Communication',
+            rating: 4.7
+        },
+        {
+            id: 4,
+            name: 'Code Review AI',
+            price: 39.99,
+            category: 'Development',
+            rating: 4.9
+        },
+        {
+            id: 5,
+            name: 'Meeting Notes AI',
+            price: 14.99,
+            category: 'Productivity',
+            rating: 4.5
+        },
+        {
+            id: 6,
+            name: 'Social Media Assistant',
+            price: 24.99,
+            category: 'Marketing',
+            rating: 4.4
+        }
+    ];
+    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+        style: {
+            minHeight: '100vh',
+            background: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$tokens$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].bg.neutral950,
+            fontFamily: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$tokens$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["fonts"].body,
+            color: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$tokens$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].text.neutral300
+        },
+        children: [
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("nav", {
+                style: {
+                    position: 'fixed',
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    zIndex: 50,
+                    padding: '1.5rem 3.5rem',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    background: 'rgba(10, 10, 10, 0.8)',
+                    backdropFilter: 'blur(12px)',
+                    borderBottom: `1px solid ${__TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$tokens$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].border.neutral80060}`
+                },
+                children: [
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        style: {
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '0.625rem'
+                        },
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                style: {
+                                    width: '2.25rem',
+                                    height: '2.25rem',
+                                    background: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$tokens$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].bg.neutral800,
+                                    border: `1px solid ${__TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$tokens$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].border.neutral700}`,
+                                    borderRadius: '0.625rem',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center'
+                                },
+                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$shopping$2d$bag$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__ShoppingBag$3e$__["ShoppingBag"], {
+                                    size: 16,
+                                    style: {
+                                        color: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$tokens$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].text.neutral400
+                                    }
+                                }, void 0, false, {
+                                    fileName: "[project]/app/page.tsx",
+                                    lineNumber: 64,
+                                    columnNumber: 13
+                                }, this)
+                            }, void 0, false, {
+                                fileName: "[project]/app/page.tsx",
+                                lineNumber: 54,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                style: {
+                                    fontSize: '1.125rem',
+                                    fontWeight: 500,
+                                    color: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$tokens$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].text.white
+                                },
+                                children: "SpendThrone"
+                            }, void 0, false, {
+                                fileName: "[project]/app/page.tsx",
+                                lineNumber: 66,
+                                columnNumber: 11
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/app/page.tsx",
+                        lineNumber: 53,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        style: {
+                            display: 'flex',
+                            gap: '1rem'
+                        },
+                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$components$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["MinimalButton"], {
+                            variant: "secondary",
+                            size: "sm",
+                            children: "Sign In"
+                        }, void 0, false, {
+                            fileName: "[project]/app/page.tsx",
+                            lineNumber: 71,
+                            columnNumber: 11
+                        }, this)
+                    }, void 0, false, {
+                        fileName: "[project]/app/page.tsx",
+                        lineNumber: 70,
+                        columnNumber: 9
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "[project]/app/page.tsx",
+                lineNumber: 39,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
+                style: {
+                    paddingTop: '10rem',
+                    paddingBottom: '6rem',
+                    padding: '0 3.5rem'
+                },
+                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                    style: {
+                        maxWidth: '87.5rem',
+                        margin: '0 auto',
+                        textAlign: 'center'
+                    },
+                    children: [
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$components$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Badge"], {
+                            variant: "type",
+                            style: {
+                                marginBottom: '2rem'
+                            },
+                            children: "The Sovereign Marketplace"
+                        }, void 0, false, {
+                            fileName: "[project]/app/page.tsx",
+                            lineNumber: 78,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
+                            style: {
+                                fontSize: '4rem',
+                                fontWeight: 300,
+                                color: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$tokens$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].text.white,
+                                lineHeight: 1.1,
+                                marginBottom: '1.5rem'
+                            },
+                            children: [
+                                "Discover ",
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                    style: {
+                                        color: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$tokens$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].text.neutral400
+                                    },
+                                    children: "Premium AI Products"
+                                }, void 0, false, {
+                                    fileName: "[project]/app/page.tsx",
+                                    lineNumber: 80,
+                                    columnNumber: 22
+                                }, this)
+                            ]
+                        }, void 0, true, {
+                            fileName: "[project]/app/page.tsx",
+                            lineNumber: 79,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                            style: {
+                                fontSize: '1.125rem',
+                                color: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$tokens$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].text.neutral500,
+                                maxWidth: '37.5rem',
+                                margin: '0 auto 3rem',
+                                lineHeight: 1.7
+                            },
+                            children: "Curated AI tools and products that actually work."
+                        }, void 0, false, {
+                            fileName: "[project]/app/page.tsx",
+                            lineNumber: 82,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            style: {
+                                display: 'flex',
+                                gap: '3rem',
+                                justifyContent: 'center',
+                                marginBottom: '3rem'
+                            },
+                            children: [
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$components$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["HeroStat"], {
+                                    value: "2,500+",
+                                    label: "Products"
+                                }, void 0, false, {
+                                    fileName: "[project]/app/page.tsx",
+                                    lineNumber: 86,
+                                    columnNumber: 13
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$components$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["HeroStat"], {
+                                    value: "15K+",
+                                    label: "Reviews"
+                                }, void 0, false, {
+                                    fileName: "[project]/app/page.tsx",
+                                    lineNumber: 87,
+                                    columnNumber: 13
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$components$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["HeroStat"], {
+                                    value: "12",
+                                    label: "Categories"
+                                }, void 0, false, {
+                                    fileName: "[project]/app/page.tsx",
+                                    lineNumber: 88,
+                                    columnNumber: 13
+                                }, this)
+                            ]
+                        }, void 0, true, {
+                            fileName: "[project]/app/page.tsx",
+                            lineNumber: 85,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$components$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["MinimalButton"], {
+                            variant: "primary",
+                            size: "lg",
+                            children: "Browse Marketplace"
+                        }, void 0, false, {
+                            fileName: "[project]/app/page.tsx",
+                            lineNumber: 90,
+                            columnNumber: 11
+                        }, this)
+                    ]
+                }, void 0, true, {
+                    fileName: "[project]/app/page.tsx",
+                    lineNumber: 77,
+                    columnNumber: 9
+                }, this)
+            }, void 0, false, {
+                fileName: "[project]/app/page.tsx",
+                lineNumber: 76,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
+                style: {
+                    padding: '6rem 3.5rem',
+                    background: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$tokens$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].bg.neutral90040
+                },
+                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                    style: {
+                        maxWidth: '87.5rem',
+                        margin: '0 auto'
+                    },
+                    children: [
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$components$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["SectionLabel"], {
+                            style: {
+                                marginBottom: '1rem'
+                            },
+                            children: "Product Catalog"
+                        }, void 0, false, {
+                            fileName: "[project]/app/page.tsx",
+                            lineNumber: 97,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
+                            style: {
+                                fontSize: '2.75rem',
+                                fontWeight: 300,
+                                color: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$tokens$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].text.white,
+                                marginBottom: '3rem'
+                            },
+                            children: "Browse AI-Powered Products"
+                        }, void 0, false, {
+                            fileName: "[project]/app/page.tsx",
+                            lineNumber: 98,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            style: {
+                                display: 'grid',
+                                gridTemplateColumns: 'repeat(3, 1fr)',
+                                gap: '1.5rem'
+                            },
+                            children: products.map((product, i)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].div, {
+                                    initial: {
+                                        opacity: 0,
+                                        y: 20
+                                    },
+                                    whileInView: {
+                                        opacity: 1,
+                                        y: 0
+                                    },
+                                    viewport: {
+                                        once: true
+                                    },
+                                    transition: {
+                                        duration: 0.3,
+                                        delay: i * 0.05
+                                    },
+                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$components$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DarkCard"], {
+                                        elevated: true,
+                                        children: [
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
+                                                style: {
+                                                    fontSize: '1.125rem',
+                                                    color: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$tokens$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].text.white,
+                                                    fontWeight: 500,
+                                                    marginBottom: '0.5rem'
+                                                },
+                                                children: product.name
+                                            }, void 0, false, {
+                                                fileName: "[project]/app/page.tsx",
+                                                lineNumber: 111,
+                                                columnNumber: 19
+                                            }, this),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$components$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Badge"], {
+                                                variant: "default",
+                                                style: {
+                                                    marginBottom: '1rem'
+                                                },
+                                                children: product.category
+                                            }, void 0, false, {
+                                                fileName: "[project]/app/page.tsx",
+                                                lineNumber: 114,
+                                                columnNumber: 19
+                                            }, this),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                style: {
+                                                    fontSize: '1.5rem',
+                                                    fontWeight: 300,
+                                                    color: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$tokens$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].text.white,
+                                                    marginBottom: '1.5rem'
+                                                },
+                                                children: [
+                                                    "$",
+                                                    product.price
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "[project]/app/page.tsx",
+                                                lineNumber: 115,
+                                                columnNumber: 19
+                                            }, this),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$memoria$2f$components$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["MinimalButton"], {
+                                                variant: "primary",
+                                                size: "sm",
+                                                style: {
+                                                    width: '100%'
+                                                },
+                                                children: "Add to Cart"
+                                            }, void 0, false, {
+                                                fileName: "[project]/app/page.tsx",
+                                                lineNumber: 118,
+                                                columnNumber: 19
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/app/page.tsx",
+                                        lineNumber: 110,
+                                        columnNumber: 17
+                                    }, this)
+                                }, product.id, false, {
+                                    fileName: "[project]/app/page.tsx",
+                                    lineNumber: 103,
+                                    columnNumber: 15
+                                }, this))
+                        }, void 0, false, {
+                            fileName: "[project]/app/page.tsx",
+                            lineNumber: 101,
+                            columnNumber: 11
+                        }, this)
+                    ]
+                }, void 0, true, {
+                    fileName: "[project]/app/page.tsx",
+                    lineNumber: 96,
+                    columnNumber: 9
+                }, this)
+            }, void 0, false, {
+                fileName: "[project]/app/page.tsx",
+                lineNumber: 95,
+                columnNumber: 7
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "[project]/app/page.tsx",
+        lineNumber: 32,
+        columnNumber: 5
+    }, this);
+}
+_s(SpendThronePage, "ka1F1ceqEXioutdx48zEaS3nBME=");
+_c = SpendThronePage;
+var _c;
+__turbopack_context__.k.register(_c, "SpendThronePage");
+if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
+    __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);
+}
+}),
+"[project]/node_modules/next/dist/compiled/client-only/index.js [app-client] (ecmascript)", ((__turbopack_context__, module, exports) => {
+
+}),
+"[project]/node_modules/styled-jsx/dist/index/index.js [app-client] (ecmascript)", ((__turbopack_context__, module, exports) => {
+
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$polyfills$2f$process$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = /*#__PURE__*/ __turbopack_context__.i("[project]/node_modules/next/dist/build/polyfills/process.js [app-client] (ecmascript)");
+__turbopack_context__.r("[project]/node_modules/next/dist/compiled/client-only/index.js [app-client] (ecmascript)");
+var React = __turbopack_context__.r("[project]/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
+function _interopDefaultLegacy(e) {
+    return e && typeof e === 'object' && 'default' in e ? e : {
+        'default': e
+    };
+}
+var React__default = /*#__PURE__*/ _interopDefaultLegacy(React);
+/*
+Based on Glamor's sheet
+https://github.com/threepointone/glamor/blob/667b480d31b3721a905021b26e1290ce92ca2879/src/sheet.js
+*/ function _defineProperties(target, props) {
+    for(var i = 0; i < props.length; i++){
+        var descriptor = props[i];
+        descriptor.enumerable = descriptor.enumerable || false;
+        descriptor.configurable = true;
+        if ("value" in descriptor) descriptor.writable = true;
+        Object.defineProperty(target, descriptor.key, descriptor);
+    }
+}
+function _createClass(Constructor, protoProps, staticProps) {
+    if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+    if (staticProps) _defineProperties(Constructor, staticProps);
+    return Constructor;
+}
+var isProd = typeof __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$polyfills$2f$process$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"] !== "undefined" && __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$polyfills$2f$process$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].env && ("TURBOPACK compile-time value", "development") === "production";
+var isString = function(o) {
+    return Object.prototype.toString.call(o) === "[object String]";
+};
+var StyleSheet = /*#__PURE__*/ function() {
+    function StyleSheet(param) {
+        var ref = param === void 0 ? {} : param, _name = ref.name, name = _name === void 0 ? "stylesheet" : _name, _optimizeForSpeed = ref.optimizeForSpeed, optimizeForSpeed = _optimizeForSpeed === void 0 ? isProd : _optimizeForSpeed;
+        invariant$1(isString(name), "`name` must be a string");
+        this._name = name;
+        this._deletedRulePlaceholder = "#" + name + "-deleted-rule____{}";
+        invariant$1(typeof optimizeForSpeed === "boolean", "`optimizeForSpeed` must be a boolean");
+        this._optimizeForSpeed = optimizeForSpeed;
+        this._serverSheet = undefined;
+        this._tags = [];
+        this._injected = false;
+        this._rulesCount = 0;
+        var node = typeof window !== "undefined" && document.querySelector('meta[property="csp-nonce"]');
+        this._nonce = node ? node.getAttribute("content") : null;
+    }
+    var _proto = StyleSheet.prototype;
+    _proto.setOptimizeForSpeed = function setOptimizeForSpeed(bool) {
+        invariant$1(typeof bool === "boolean", "`setOptimizeForSpeed` accepts a boolean");
+        invariant$1(this._rulesCount === 0, "optimizeForSpeed cannot be when rules have already been inserted");
+        this.flush();
+        this._optimizeForSpeed = bool;
+        this.inject();
+    };
+    _proto.isOptimizeForSpeed = function isOptimizeForSpeed() {
+        return this._optimizeForSpeed;
+    };
+    _proto.inject = function inject() {
+        var _this = this;
+        invariant$1(!this._injected, "sheet already injected");
+        this._injected = true;
+        if (typeof window !== "undefined" && this._optimizeForSpeed) {
+            this._tags[0] = this.makeStyleTag(this._name);
+            this._optimizeForSpeed = "insertRule" in this.getSheet();
+            if (!this._optimizeForSpeed) {
+                if ("TURBOPACK compile-time truthy", 1) {
+                    console.warn("StyleSheet: optimizeForSpeed mode not supported falling back to standard mode.");
+                }
+                this.flush();
+                this._injected = true;
+            }
+            return;
+        }
+        this._serverSheet = {
+            cssRules: [],
+            insertRule: function(rule, index) {
+                if (typeof index === "number") {
+                    _this._serverSheet.cssRules[index] = {
+                        cssText: rule
+                    };
+                } else {
+                    _this._serverSheet.cssRules.push({
+                        cssText: rule
+                    });
+                }
+                return index;
+            },
+            deleteRule: function(index) {
+                _this._serverSheet.cssRules[index] = null;
+            }
+        };
+    };
+    _proto.getSheetForTag = function getSheetForTag(tag) {
+        if (tag.sheet) {
+            return tag.sheet;
+        }
+        // this weirdness brought to you by firefox
+        for(var i = 0; i < document.styleSheets.length; i++){
+            if (document.styleSheets[i].ownerNode === tag) {
+                return document.styleSheets[i];
+            }
+        }
+    };
+    _proto.getSheet = function getSheet() {
+        return this.getSheetForTag(this._tags[this._tags.length - 1]);
+    };
+    _proto.insertRule = function insertRule(rule, index) {
+        invariant$1(isString(rule), "`insertRule` accepts only strings");
+        if (typeof window === "undefined") {
+            if (typeof index !== "number") {
+                index = this._serverSheet.cssRules.length;
+            }
+            this._serverSheet.insertRule(rule, index);
+            return this._rulesCount++;
+        }
+        if (this._optimizeForSpeed) {
+            var sheet = this.getSheet();
+            if (typeof index !== "number") {
+                index = sheet.cssRules.length;
+            }
+            // this weirdness for perf, and chrome's weird bug
+            // https://stackoverflow.com/questions/20007992/chrome-suddenly-stopped-accepting-insertrule
+            try {
+                sheet.insertRule(rule, index);
+            } catch (error) {
+                if ("TURBOPACK compile-time truthy", 1) {
+                    console.warn("StyleSheet: illegal rule: \n\n" + rule + "\n\nSee https://stackoverflow.com/q/20007992 for more info");
+                }
+                return -1;
+            }
+        } else {
+            var insertionPoint = this._tags[index];
+            this._tags.push(this.makeStyleTag(this._name, rule, insertionPoint));
+        }
+        return this._rulesCount++;
+    };
+    _proto.replaceRule = function replaceRule(index, rule) {
+        if (this._optimizeForSpeed || typeof window === "undefined") {
+            var sheet = typeof window !== "undefined" ? this.getSheet() : this._serverSheet;
+            if (!rule.trim()) {
+                rule = this._deletedRulePlaceholder;
+            }
+            if (!sheet.cssRules[index]) {
+                // @TBD Should we throw an error?
+                return index;
+            }
+            sheet.deleteRule(index);
+            try {
+                sheet.insertRule(rule, index);
+            } catch (error) {
+                if ("TURBOPACK compile-time truthy", 1) {
+                    console.warn("StyleSheet: illegal rule: \n\n" + rule + "\n\nSee https://stackoverflow.com/q/20007992 for more info");
+                }
+                // In order to preserve the indices we insert a deleteRulePlaceholder
+                sheet.insertRule(this._deletedRulePlaceholder, index);
+            }
+        } else {
+            var tag = this._tags[index];
+            invariant$1(tag, "old rule at index `" + index + "` not found");
+            tag.textContent = rule;
+        }
+        return index;
+    };
+    _proto.deleteRule = function deleteRule(index) {
+        if (typeof window === "undefined") {
+            this._serverSheet.deleteRule(index);
+            return;
+        }
+        if (this._optimizeForSpeed) {
+            this.replaceRule(index, "");
+        } else {
+            var tag = this._tags[index];
+            invariant$1(tag, "rule at index `" + index + "` not found");
+            tag.parentNode.removeChild(tag);
+            this._tags[index] = null;
+        }
+    };
+    _proto.flush = function flush() {
+        this._injected = false;
+        this._rulesCount = 0;
+        if (typeof window !== "undefined") {
+            this._tags.forEach(function(tag) {
+                return tag && tag.parentNode.removeChild(tag);
+            });
+            this._tags = [];
+        } else {
+            // simpler on server
+            this._serverSheet.cssRules = [];
+        }
+    };
+    _proto.cssRules = function cssRules() {
+        var _this = this;
+        if (typeof window === "undefined") {
+            return this._serverSheet.cssRules;
+        }
+        return this._tags.reduce(function(rules, tag) {
+            if (tag) {
+                rules = rules.concat(Array.prototype.map.call(_this.getSheetForTag(tag).cssRules, function(rule) {
+                    return rule.cssText === _this._deletedRulePlaceholder ? null : rule;
+                }));
+            } else {
+                rules.push(null);
+            }
+            return rules;
+        }, []);
+    };
+    _proto.makeStyleTag = function makeStyleTag(name, cssString, relativeToTag) {
+        if (cssString) {
+            invariant$1(isString(cssString), "makeStyleTag accepts only strings as second parameter");
+        }
+        var tag = document.createElement("style");
+        if (this._nonce) tag.setAttribute("nonce", this._nonce);
+        tag.type = "text/css";
+        tag.setAttribute("data-" + name, "");
+        if (cssString) {
+            tag.appendChild(document.createTextNode(cssString));
+        }
+        var head = document.head || document.getElementsByTagName("head")[0];
+        if (relativeToTag) {
+            head.insertBefore(tag, relativeToTag);
+        } else {
+            head.appendChild(tag);
+        }
+        return tag;
+    };
+    _createClass(StyleSheet, [
+        {
+            key: "length",
+            get: function get() {
+                return this._rulesCount;
+            }
+        }
+    ]);
+    return StyleSheet;
+}();
+function invariant$1(condition, message) {
+    if (!condition) {
+        throw new Error("StyleSheet: " + message + ".");
+    }
+}
+function hash(str) {
+    var _$hash = 5381, i = str.length;
+    while(i){
+        _$hash = _$hash * 33 ^ str.charCodeAt(--i);
+    }
+    /* JavaScript does bitwise operations (like XOR, above) on 32-bit signed
+   * integers. Since we want the results to be always positive, convert the
+   * signed int to an unsigned by doing an unsigned bitshift. */ return _$hash >>> 0;
+}
+var stringHash = hash;
+var sanitize = function(rule) {
+    return rule.replace(/\/style/gi, "\\/style");
+};
+var cache = {};
+/**
+ * computeId
+ *
+ * Compute and memoize a jsx id from a basedId and optionally props.
+ */ function computeId(baseId, props) {
+    if (!props) {
+        return "jsx-" + baseId;
+    }
+    var propsToString = String(props);
+    var key = baseId + propsToString;
+    if (!cache[key]) {
+        cache[key] = "jsx-" + stringHash(baseId + "-" + propsToString);
+    }
+    return cache[key];
+}
+/**
+ * computeSelector
+ *
+ * Compute and memoize dynamic selectors.
+ */ function computeSelector(id, css) {
+    var selectoPlaceholderRegexp = /__jsx-style-dynamic-selector/g;
+    // Sanitize SSR-ed CSS.
+    // Client side code doesn't need to be sanitized since we use
+    // document.createTextNode (dev) and the CSSOM api sheet.insertRule (prod).
+    if (typeof window === "undefined") {
+        css = sanitize(css);
+    }
+    var idcss = id + css;
+    if (!cache[idcss]) {
+        cache[idcss] = css.replace(selectoPlaceholderRegexp, id);
+    }
+    return cache[idcss];
+}
+function mapRulesToStyle(cssRules, options) {
+    if (options === void 0) options = {};
+    return cssRules.map(function(args) {
+        var id = args[0];
+        var css = args[1];
+        return /*#__PURE__*/ React__default["default"].createElement("style", {
+            id: "__" + id,
+            // Avoid warnings upon render with a key
+            key: "__" + id,
+            nonce: options.nonce ? options.nonce : undefined,
+            dangerouslySetInnerHTML: {
+                __html: css
+            }
+        });
+    });
+}
+var StyleSheetRegistry = /*#__PURE__*/ function() {
+    function StyleSheetRegistry(param) {
+        var ref = param === void 0 ? {} : param, _styleSheet = ref.styleSheet, styleSheet = _styleSheet === void 0 ? null : _styleSheet, _optimizeForSpeed = ref.optimizeForSpeed, optimizeForSpeed = _optimizeForSpeed === void 0 ? false : _optimizeForSpeed;
+        this._sheet = styleSheet || new StyleSheet({
+            name: "styled-jsx",
+            optimizeForSpeed: optimizeForSpeed
+        });
+        this._sheet.inject();
+        if (styleSheet && typeof optimizeForSpeed === "boolean") {
+            this._sheet.setOptimizeForSpeed(optimizeForSpeed);
+            this._optimizeForSpeed = this._sheet.isOptimizeForSpeed();
+        }
+        this._fromServer = undefined;
+        this._indices = {};
+        this._instancesCounts = {};
+    }
+    var _proto = StyleSheetRegistry.prototype;
+    _proto.add = function add(props) {
+        var _this = this;
+        if (undefined === this._optimizeForSpeed) {
+            this._optimizeForSpeed = Array.isArray(props.children);
+            this._sheet.setOptimizeForSpeed(this._optimizeForSpeed);
+            this._optimizeForSpeed = this._sheet.isOptimizeForSpeed();
+        }
+        if (typeof window !== "undefined" && !this._fromServer) {
+            this._fromServer = this.selectFromServer();
+            this._instancesCounts = Object.keys(this._fromServer).reduce(function(acc, tagName) {
+                acc[tagName] = 0;
+                return acc;
+            }, {});
+        }
+        var ref = this.getIdAndRules(props), styleId = ref.styleId, rules = ref.rules;
+        // Deduping: just increase the instances count.
+        if (styleId in this._instancesCounts) {
+            this._instancesCounts[styleId] += 1;
+            return;
+        }
+        var indices = rules.map(function(rule) {
+            return _this._sheet.insertRule(rule);
+        }) // Filter out invalid rules
+        .filter(function(index) {
+            return index !== -1;
+        });
+        this._indices[styleId] = indices;
+        this._instancesCounts[styleId] = 1;
+    };
+    _proto.remove = function remove(props) {
+        var _this = this;
+        var styleId = this.getIdAndRules(props).styleId;
+        invariant(styleId in this._instancesCounts, "styleId: `" + styleId + "` not found");
+        this._instancesCounts[styleId] -= 1;
+        if (this._instancesCounts[styleId] < 1) {
+            var tagFromServer = this._fromServer && this._fromServer[styleId];
+            if (tagFromServer) {
+                tagFromServer.parentNode.removeChild(tagFromServer);
+                delete this._fromServer[styleId];
+            } else {
+                this._indices[styleId].forEach(function(index) {
+                    return _this._sheet.deleteRule(index);
+                });
+                delete this._indices[styleId];
+            }
+            delete this._instancesCounts[styleId];
+        }
+    };
+    _proto.update = function update(props, nextProps) {
+        this.add(nextProps);
+        this.remove(props);
+    };
+    _proto.flush = function flush() {
+        this._sheet.flush();
+        this._sheet.inject();
+        this._fromServer = undefined;
+        this._indices = {};
+        this._instancesCounts = {};
+    };
+    _proto.cssRules = function cssRules() {
+        var _this = this;
+        var fromServer = this._fromServer ? Object.keys(this._fromServer).map(function(styleId) {
+            return [
+                styleId,
+                _this._fromServer[styleId]
+            ];
+        }) : [];
+        var cssRules = this._sheet.cssRules();
+        return fromServer.concat(Object.keys(this._indices).map(function(styleId) {
+            return [
+                styleId,
+                _this._indices[styleId].map(function(index) {
+                    return cssRules[index].cssText;
+                }).join(_this._optimizeForSpeed ? "" : "\n")
+            ];
+        }) // filter out empty rules
+        .filter(function(rule) {
+            return Boolean(rule[1]);
+        }));
+    };
+    _proto.styles = function styles(options) {
+        return mapRulesToStyle(this.cssRules(), options);
+    };
+    _proto.getIdAndRules = function getIdAndRules(props) {
+        var css = props.children, dynamic = props.dynamic, id = props.id;
+        if (dynamic) {
+            var styleId = computeId(id, dynamic);
+            return {
+                styleId: styleId,
+                rules: Array.isArray(css) ? css.map(function(rule) {
+                    return computeSelector(styleId, rule);
+                }) : [
+                    computeSelector(styleId, css)
+                ]
+            };
+        }
+        return {
+            styleId: computeId(id),
+            rules: Array.isArray(css) ? css : [
+                css
+            ]
+        };
+    };
+    /**
+   * selectFromServer
+   *
+   * Collects style tags from the document with id __jsx-XXX
+   */ _proto.selectFromServer = function selectFromServer() {
+        var elements = Array.prototype.slice.call(document.querySelectorAll('[id^="__jsx-"]'));
+        return elements.reduce(function(acc, element) {
+            var id = element.id.slice(2);
+            acc[id] = element;
+            return acc;
+        }, {});
+    };
+    return StyleSheetRegistry;
+}();
+function invariant(condition, message) {
+    if (!condition) {
+        throw new Error("StyleSheetRegistry: " + message + ".");
+    }
+}
+var StyleSheetContext = /*#__PURE__*/ React.createContext(null);
+StyleSheetContext.displayName = "StyleSheetContext";
+function createStyleRegistry() {
+    return new StyleSheetRegistry();
+}
+function StyleRegistry(param) {
+    var configuredRegistry = param.registry, children = param.children;
+    var rootRegistry = React.useContext(StyleSheetContext);
+    var ref = React.useState({
+        "StyleRegistry.useState[ref]": function() {
+            return rootRegistry || configuredRegistry || createStyleRegistry();
+        }
+    }["StyleRegistry.useState[ref]"]), registry = ref[0];
+    return /*#__PURE__*/ React__default["default"].createElement(StyleSheetContext.Provider, {
+        value: registry
+    }, children);
+}
+function useStyleRegistry() {
+    return React.useContext(StyleSheetContext);
+}
+// Opt-into the new `useInsertionEffect` API in React 18, fallback to `useLayoutEffect`.
+// https://github.com/reactwg/react-18/discussions/110
+var useInsertionEffect = React__default["default"].useInsertionEffect || React__default["default"].useLayoutEffect;
+var defaultRegistry = typeof window !== "undefined" ? createStyleRegistry() : undefined;
+function JSXStyle(props) {
+    var registry = defaultRegistry ? defaultRegistry : useStyleRegistry();
+    // If `registry` does not exist, we do nothing here.
+    if (!registry) {
+        return null;
+    }
+    if (typeof window === "undefined") {
+        registry.add(props);
+        return null;
+    }
+    useInsertionEffect({
+        "JSXStyle.useInsertionEffect": function() {
+            registry.add(props);
+            return ({
+                "JSXStyle.useInsertionEffect": function() {
+                    registry.remove(props);
+                }
+            })["JSXStyle.useInsertionEffect"];
+        // props.children can be string[], will be striped since id is identical
+        }
+    }["JSXStyle.useInsertionEffect"], [
+        props.id,
+        String(props.dynamic)
+    ]);
+    return null;
+}
+JSXStyle.dynamic = function(info) {
+    return info.map(function(tagInfo) {
+        var baseId = tagInfo[0];
+        var props = tagInfo[1];
+        return computeId(baseId, props);
+    }).join(" ");
+};
+exports.StyleRegistry = StyleRegistry;
+exports.createStyleRegistry = createStyleRegistry;
+exports.style = JSXStyle;
+exports.useStyleRegistry = useStyleRegistry;
+}),
+"[project]/node_modules/styled-jsx/style.js [app-client] (ecmascript)", ((__turbopack_context__, module, exports) => {
+
+module.exports = __turbopack_context__.r("[project]/node_modules/styled-jsx/dist/index/index.js [app-client] (ecmascript)").style;
+}),
+"[project]/node_modules/lucide-react/dist/esm/icons/shopping-bag.js [app-client] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s([
+    "default",
+    ()=>ShoppingBag
+]);
+/**
+ * @license lucide-react v0.356.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$createLucideIcon$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/createLucideIcon.js [app-client] (ecmascript)");
+;
+const ShoppingBag = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$createLucideIcon$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"])("ShoppingBag", [
+    [
+        "path",
+        {
+            d: "M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z",
+            key: "hou9p0"
+        }
+    ],
+    [
+        "path",
+        {
+            d: "M3 6h18",
+            key: "d0wm0j"
+        }
+    ],
+    [
+        "path",
+        {
+            d: "M16 10a4 4 0 0 1-8 0",
+            key: "1ltviw"
+        }
+    ]
+]);
+;
+ //# sourceMappingURL=shopping-bag.js.map
+}),
+"[project]/node_modules/lucide-react/dist/esm/icons/shopping-bag.js [app-client] (ecmascript) <export default as ShoppingBag>", ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s([
+    "ShoppingBag",
+    ()=>__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$shopping$2d$bag$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"]
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$shopping$2d$bag$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/shopping-bag.js [app-client] (ecmascript)");
+}),
+]);
+
+//# sourceMappingURL=_edf2fbb0._.js.map

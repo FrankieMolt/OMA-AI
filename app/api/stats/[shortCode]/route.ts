@@ -10,6 +10,13 @@ export async function GET(
     const { shortCode } = await params;
     const supabase = createClient();
     
+    if (!supabase) {
+      return NextResponse.json(
+        { success: false, error: 'Database not available in demo mode' },
+        { status: 503 }
+      );
+    }
+    
     // Get user session
     const { data: { user } } = await supabase.auth.getUser();
     

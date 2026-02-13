@@ -10,10 +10,10 @@ export default function SignupPage() {
       <div className="max-w-md w-full mx-4">
         <div className="text-center mb-8">
           <Link href="/" className="inline-flex items-center gap-3 mb-6">
-            <div className="w-12 h-12 bg-gradient-to-br from-purple-600 to-pink-600 rounded-xl flex items-center justify-center">
+            <div className="w-12 h-12 bg-zinc-800 border border-zinc-700 rounded-xl flex items-center justify-center">
               <span className="text-2xl">🛍️</span>
             </div>
-            <span className="text-2xl font-bold bg-gradient-to-r from-purple-400 via-pink-500 to-amber-400 bg-clip-text text-transparent">
+            <span className="text-2xl font-bold text-white tracking-tight">
               SPENDTHRONE
             </span>
           </Link>
@@ -30,7 +30,7 @@ export default function SignupPage() {
               <input
                 type="text"
                 id="name"
-                className="w-full px-4 py-3 bg-zinc-950 border border-zinc-800 rounded-xl text-white placeholder-zinc-500 focus:outline-none focus:border-purple-500 transition-colors"
+                className="w-full px-4 py-3 bg-zinc-950 border border-zinc-800 rounded-xl text-white placeholder-zinc-500 focus:outline-none focus:border-white transition-colors"
                 placeholder="Your name"
               />
             </div>
@@ -42,7 +42,7 @@ export default function SignupPage() {
               <input
                 type="email"
                 id="email"
-                className="w-full px-4 py-3 bg-zinc-950 border border-zinc-800 rounded-xl text-white placeholder-zinc-500 focus:outline-none focus:border-purple-500 transition-colors"
+                className="w-full px-4 py-3 bg-zinc-950 border border-zinc-800 rounded-xl text-white placeholder-zinc-500 focus:outline-none focus:border-white transition-colors"
                 placeholder="you@example.com"
               />
             </div>
@@ -54,33 +54,33 @@ export default function SignupPage() {
               <input
                 type="password"
                 id="password"
-                className="w-full px-4 py-3 bg-zinc-950 border border-zinc-800 rounded-xl text-white placeholder-zinc-500 focus:outline-none focus:border-purple-500 transition-colors"
+                className="w-full px-4 py-3 bg-zinc-950 border border-zinc-800 rounded-xl text-white placeholder-zinc-500 focus:outline-none focus:border-white transition-colors"
                 placeholder="••••••••"
               />
             </div>
 
             <div className="flex items-start gap-2">
-              <input type="checkbox" className="mt-1 rounded border-zinc-700 bg-zinc-950 text-purple-600" />
-              <label className="text-sm text-zinc-400">
+              <input type="checkbox" id="agree" className="mt-1 rounded border-zinc-700 bg-zinc-950 text-white" />
+              <label htmlFor="agree" className="text-sm text-zinc-400">
                 I agree to the{' '}
-                <Link href="/terms" className="text-purple-400 hover:text-purple-300">
+                <Link href="/terms" className="text-white hover:underline">
                   Terms of Service
                 </Link>{' '}
                 and{' '}
-                <Link href="/privacy" className="text-purple-400 hover:text-purple-300">
+                <Link href="/privacy" className="text-white hover:underline">
                   Privacy Policy
                 </Link>
               </label>
             </div>
 
-            <button className="w-full py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold rounded-xl hover:opacity-90 transition-opacity">
+            <button className="w-full py-3 bg-white text-black font-semibold rounded-xl hover:bg-zinc-200 transition-colors">
               Create Account
             </button>
           </div>
 
           <div className="mt-6 text-center text-sm text-zinc-400">
             Already have an account?{' '}
-            <Link href="/login" className="text-purple-400 hover:text-purple-300 font-medium">
+            <Link href="/login" className="text-white hover:underline font-medium">
               Sign in
             </Link>
           </div>

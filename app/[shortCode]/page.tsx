@@ -25,6 +25,10 @@ export default async function RedirectPage({ params }: RedirectPageProps) {
   
   const supabase = createClient();
   
+  if (!supabase) {
+    notFound();
+  }
+  
   // Fetch the link
   const { data: link, error: linkError } = await supabase
     .from('links')

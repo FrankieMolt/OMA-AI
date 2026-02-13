@@ -5,10 +5,7 @@ export { createSupabaseClient };
 export type { SupabaseClient };
 
 // Factory function that creates a client with default env vars
-export function createClient(): SupabaseClient {
-  if (!supabaseClient) {
-    throw new Error('Supabase client not initialized. Check your environment variables.');
-  }
+export function createClient(): SupabaseClient | null {
   return supabaseClient;
 }
 

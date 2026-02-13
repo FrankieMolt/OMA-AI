@@ -10,22 +10,22 @@ mkdir -p /home/nosyt/.openclaw/workspace/logs
 
 echo "[$DATE] Night Monitor Starting..." >> $LOG_FILE
 
-# Check SpendThrone (port 3000)
-echo "Checking SpendThrone (3000)..." >> $LOG_FILE
+# Check OMA-AI (port 3000)
+echo "Checking OMA-AI (3000)..." >> $LOG_FILE
 HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:3000)
-if [ "$HTTP_CODE" -eq 200 ]; then
-    echo "✅ SpendThrone OK" >> $LOG_FILE
-else
-    echo "❌ SpendThrone DOWN (HTTP $HTTP_CODE)" >> $LOG_FILE
-fi
-
-# Check OMA-AI (port 3001)
-echo "Checking OMA-AI (3001)..." >> $LOG_FILE
-HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:3001)
 if [ "$HTTP_CODE" -eq 200 ]; then
     echo "✅ OMA-AI OK" >> $LOG_FILE
 else
     echo "❌ OMA-AI DOWN (HTTP $HTTP_CODE)" >> $LOG_FILE
+fi
+
+# Check SpendThrone (port 3001)
+echo "Checking SpendThrone (3001)..." >> $LOG_FILE
+HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:3001)
+if [ "$HTTP_CODE" -eq 200 ]; then
+    echo "✅ SpendThrone OK" >> $LOG_FILE
+else
+    echo "❌ SpendThrone DOWN (HTTP $HTTP_CODE)" >> $LOG_FILE
 fi
 
 # Check Lethometry (port 3002)
@@ -34,7 +34,7 @@ HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:3002)
 if [ "$HTTP_CODE" -eq 200 ]; then
     echo "✅ Lethometry OK" >> $LOG_FILE
 else
-    echo "❌ Lethometry DOWN (HTTP $HTTP_CODE)"" >> $LOG_FILE
+    echo "❌ Lethometry DOWN (HTTP $HTTP_CODE)" >> $LOG_FILE
 fi
 
 # Check disk space

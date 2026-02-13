@@ -16,14 +16,14 @@ export default function Loading() {
         </motion.div>
 
         {/* Main Title */}
-        <motion.h1
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="text-4xl font-bold gradient-text mb-4"
+          className="text-4xl font-bold text-white mb-4 uppercase tracking-[0.2em]"
         >
           Loading OMA-AI
-        </motion.h1>
+        </motion.div>
 
         {/* Loading Spinner */}
         <motion.div

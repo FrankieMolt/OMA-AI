@@ -1,106 +1,115 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient, isSupabaseEnabled } from '@/lib/supabase';
+import { allowPublicAccess, createDemoResponse } from '@/lib/auth-public';
 import { buildShortUrl } from '@/lib/shortener';
+import { addSecurityHeaders } from '@/lib/security';
 
-// Demo data for when Supabase is not configured
+// Demo links for public API (no auth required)
 const DEMO_LINKS = [
   {
     id: 'demo-1',
-    short_code: 'demo123',
-    short_url: 'https://oma-ai.com/s/demo123',
-    original_url: 'https://example.com/very-long-url',
+    short_code: 'oma-ai',
+    short_url: 'https://oma-ai.com',
+    original_url: 'https://oma-ai.com',
     created_at: new Date().toISOString(),
-    clicks: 42,
-    title: 'Demo Link 1'
+    clicks: 1524,
+    title: 'OMA-AI GitHub Repo'
   },
   {
     id: 'demo-2',
-    short_code: 'test456',
-    short_url: 'https://oma-ai.com/s/test456',
-    original_url: 'https://another-example.com/page',
-    created_at: new Date(Date.now() - 86400000).toISOString(),
-    clicks: 128,
-    title: 'Demo Link 2'
+    short_code: 'spendthrone',
+    short_url: 'https://spendthrone.com',
+    original_url: 'https://github.com/FrankieMolt/SpendThrone',
+    created_at: new Date().toISOString(),
+    clicks: 892,
+    title: 'SpendThrone GitHub'
+  },
+  {
+    id: 'demo-3',
+    short_code: 'lethometry',
+    short_url: 'https://lethometry.com',
+    original_url: 'https://github.com/FrankieMolt/Lethometry',
+    created_at: new Date().toISOString(),
+    clicks: 423,
+    title: 'Lethometry GitHub'
   }
 ];
 
 export async function GET(request: NextRequest) {
   try {
-    // DEMO MODE: Return demo links when Supabase not configured
-    if (!isSupabaseEnabled) {
-      return NextResponse.json({
-        success: true,
-        data: {
-          links: DEMO_LINKS,
-          pagination: {
-            total: DEMO_LINKS.length,
-            limit: 50,
-            offset: 0,
-            has_more: false
-          }
-        },
-        demo: true,
-        message: 'Demo mode - configure Supabase for persistence'
-      });
-    }
-    
-    // PRODUCTION MODE: Use Supabase
-    const supabase = createClient();
-    
-    // Get user session
-    const { data: { user } } = await supabase.auth.getUser();
-    
-    if (!user) {
+    // Check if public access is allowed
+    const access = await allowPublicAccess(request, {
+      allowedRoutes: ['/api/links', '/api/health'],
+      demoMode: true
+    });
+
+    // If not allowed, return unauthorized
+    if (!access.allowed) {
       return NextResponse.json(
-        { success: false, error: 'Authentication required' },
+        {
+          success: false,
+          error: 'Authentication required',
+          demo: true,
+          hint: 'Public demo mode is available'
+        },
         { status: 401 }
       );
     }
-    
+
     // Get query parameters
     const { searchParams } = new URL(request.url);
-    const limit = parseInt(searchParams.get('limit') || '50');
+    const limit = parseInt(searchParams.get('limit') || '20');
     const offset = parseInt(searchParams.get('offset') || '0');
-    
-    // Fetch user's links with click stats
-    const { data: links, error, count } = await supabase
-      .from('links')
-      .select('*', { count: 'exact' })
-      .eq('user_id', user.id)
-      .order('created_at', { ascending: false })
-      .range(offset, offset + limit - 1);
-    
-    if (error) {
-      console.error('Failed to fetch links:', error);
-      return NextResponse.json(
-        { success: false, error: 'Failed to fetch links' },
-        { status: 500 }
+    const search = searchParams.get('search')?.toLowerCase() || '';
+
+    // Filter demo links
+    let filtered = DEMO_LINKS;
+
+    if (search) {
+      filtered = filtered.filter(link =>
+        link.title.toLowerCase().includes(search) ||
+        link.short_code.toLowerCase().includes(search)
       );
     }
-    
-    // Enhance links with short URLs
-    const enhancedLinks = links.map(link => ({
-      ...link,
-      short_url: buildShortUrl(link.short_code, link.custom_domain)
-    }));
-    
-    return NextResponse.json({
-      success: true,
-      data: {
-        links: enhancedLinks,
-        pagination: {
-          total: count || 0,
-          limit,
-          offset,
-          has_more: (count || 0) > offset + limit
-        }
+
+    // Paginate
+    const total = filtered.length;
+    const totalPages = Math.ceil(total / limit);
+    const page = Math.floor(offset / limit) + 1;
+    const paginated = filtered.slice(offset, offset + limit);
+
+    // Return demo data
+    const response = createDemoResponse({
+      links: paginated.map(link => ({
+        id: link.id,
+        short_code: link.short_code,
+        short_url: link.short_url,
+        original_url: link.original_url,
+        title: link.title,
+        created_at: link.created_at,
+        clicks: link.clicks
+      })),
+      pagination: {
+        page,
+        limit,
+        total,
+        totalPages,
+        hasMore: page < totalPages
       }
-    });
-    
+    }, '/api/links');
+
+    // Add security headers
+    addSecurityHeaders(response);
+
+    return response;
   } catch (error) {
-    console.error('Get links API error:', error);
+    console.error('Links API error:', error);
     return NextResponse.json(
-      { success: false, error: 'Internal server error' },
+      {
+        success: false,
+        error: 'Internal server error',
+        demo: true
+      },
       { status: 500 }
     );
   }

@@ -1,272 +1,190 @@
 /**
- * Main Page - SpendThrone home page with full functionality
+ * SpendThrone Landing Page - shadcn/ui + Memoria
+ * Philosophy: "Numbers are heroes, labels are whispers"
  */
 
 'use client';
 
-import { useState, useMemo } from 'react';
-import Link from 'next/link';
+import React from 'react';
 import { motion } from 'framer-motion';
-import { Zap, ShoppingBag, Sparkles } from 'lucide-react';
-import { AppProvider, useApp } from '@/components/providers/AppProvider';
-import { ToastProvider } from '@/components/providers/ToastProvider';
-import { ErrorBoundary } from '@/components/ErrorBoundary';
-import { Navbar } from '@/components/layout/Navbar';
-import { Footer } from '@/components/layout/Footer';
-import { ProductCard } from '@/components/product/ProductCard';
-import { ProductGrid } from '@/components/product/ProductGrid';
-import { ProductModal } from '@/components/product/ProductModal';
-import { CategoryFilter } from '@/components/product/CategoryFilter';
-import { SearchBar } from '@/components/search/SearchBar';
-import { CartDrawer } from '@/components/cart/CartDrawer';
-import { WishlistDrawer } from '@/components/wishlist/WishlistDrawer';
-import { CompareDrawer } from '@/components/compare/CompareDrawer';
-import { CheckoutFlow } from '@/components/checkout/CheckoutFlow';
-import { Button } from '@/components/ui/Button';
-import { Badge } from '@/components/ui/Badge';
-import { realProducts as PRODUCTS } from '@/data/real-products';
-import { giftGuides } from '@/data/gift-guides';
-import { Product, SortOption } from '@/types';
-import { useDebounce } from '@/hooks/useDebounce';
+import { ShoppingBag, Search, ArrowRight, Star, ShieldCheck, Globe } from 'lucide-react';
+import Link from 'next/link';
 
-// Inner component with access to context
-function SpendThronePage() {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('all');
-  const [sortBy, setSortBy] = useState<SortOption>('featured');
-  const [showCart, setShowCart] = useState(false);
-  const [showWishlist, setShowWishlist] = useState(false);
-  const [showCompare, setShowCompare] = useState(false);
-  const [showCheckout, setShowCheckout] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
-  const [showSearchBar, setShowSearchBar] = useState(false);
-  
-  const { cart, wishlist, compareList, cartTotal, addToRecentlyViewed } = useApp();
+// shadcn/ui components
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent } from "@/components/ui/card";
 
-  // Debounce search query
-  const debouncedSearch = useDebounce(searchQuery, 300);
+// Memoria Design Tokens (imported from parent lib or local if available)
+// Assuming local lib structure based on previous interactions
+import { colors, spacing, typography } from '../lib/memoria/tokens';
 
-  // Filter and sort products
-  const filteredProducts = useMemo(() => {
-    return PRODUCTS.filter((product) => {
-      // Search filter
-      const matchesSearch = !debouncedSearch || 
-        (product.name || '').toLowerCase().includes(debouncedSearch.toLowerCase()) ||
-        product.description.toLowerCase().includes(debouncedSearch.toLowerCase()) ||
-        product.tags.some((tag) => tag.toLowerCase().includes(debouncedSearch.toLowerCase())) ||
-        product.category.toLowerCase().includes(debouncedSearch.toLowerCase());
-
-      // Category filter
-      const matchesCategory = selectedCategory === 'all' || product.category === selectedCategory;
-
-      return matchesSearch && matchesCategory;
-    });
-  }, [debouncedSearch, selectedCategory]);
-
-  // Handle product inspection
-  const handleInspect = (product: Product) => {
-    setSelectedProduct(product);
-    addToRecentlyViewed(product.id);
-  };
-
-  // Handle checkout
-  const handleCheckout = () => {
-    setShowCart(false);
-    setShowCheckout(true);
-  };
-
-  const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+export default function HomePage() {
+  const products = [
+    { id: 1, name: 'Chronos Elite', price: '1,200', category: 'Timepieces' },
+    { id: 2, name: 'Aether Speaker', price: '850', category: 'Audio' },
+    { id: 3, name: 'Lumina Lamp', price: '450', category: 'Lighting' },
+    { id: 4, name: 'Vertex Wallet', price: '250', category: 'Accessories' },
+    { id: 5, name: 'Nova Pen', price: '180', category: 'Writing' },
+    { id: 6, name: 'Origin Desk', price: '2,400', category: 'Furniture' },
+  ];
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-zinc-100 font-sans selection:bg-purple-500 selection:text-white">
-      {/* Real Product Alert */}
-      <div className="bg-emerald-500/10 border-b border-emerald-500/30 py-3 px-4 text-center">
-        <p className="text-sm text-emerald-400">
-          <span className="font-semibold uppercase tracking-wider">Live Inventory:</span>
-          <span className="ml-2 text-zinc-400">Discover and buy the most unique real-world products. Verified affiliate links included.</span>
-        </p>
-      </div>
+    <div className="min-h-screen bg-background text-foreground selection:bg-primary selection:text-primary-foreground">
+      {/* Navbar */}
+      <nav 
+        className="fixed top-0 left-0 right-0 z-50 px-4 md:px-14 py-4 flex justify-between items-center bg-background/80 backdrop-blur-xl border-b border-memoria-border-muted"
+        role="navigation"
+        aria-label="Main Navigation"
+      >
+        <Link href="/" className="flex items-center gap-3 no-underline group" aria-label="SpendThrone Home">
+          <div className="w-8 h-8 bg-memoria-bg-surface border border-memoria-border-default rounded-sm flex items-center justify-center group-hover:border-memoria-border-active transition-colors">
+            <ShoppingBag size={14} className="text-memoria-text-hero" />
+          </div>
+          <span className="text-lg font-normal text-memoria-text-hero tracking-tight">
+            SpendThrone
+          </span>
+        </Link>
+        <div className="flex items-center gap-6">
+          <Button 
+            variant="ghost" 
+            size="sm" 
+            className="text-[11px] uppercase tracking-widest text-memoria-text-whisper hover:text-memoria-text-hero"
+            aria-label="Search"
+          >
+            <Search size={14} className="mr-2" /> Search
+          </Button>
+          <Button 
+            variant="secondary" 
+            size="sm" 
+            className="rounded-sm px-6 text-[11px] uppercase tracking-widest font-semibold border-memoria-border-default"
+            aria-label="Sign In"
+          >
+            Sign In
+          </Button>
+        </div>
+      </nav>
 
       {/* Hero Section */}
-      <section className="py-16 md:py-24 px-4 md:px-6">
-        <div className="max-w-7xl mx-auto text-center">
-          {/* Badge */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/20 text-[10px] font-bold uppercase tracking-[0.2em] mb-8"
+      <section 
+        className="pt-40 pb-20 px-4 md:px-14 text-center"
+        aria-labelledby="hero-title"
+      >
+        <div className="mx-auto max-w-4xl">
+          <Badge variant="outline" className="mb-6 rounded-sm uppercase tracking-[0.2em] text-[10px] py-1 border-memoria-border-default text-memoria-text-whisper px-4">
+            Luxury Commerce
+          </Badge>
+          <h1 
+            id="hero-title"
+            className="text-5xl md:text-8xl font-light tracking-tighter leading-[0.9] mb-10 font-display text-memoria-text-hero"
           >
-            <Zap size={10} className="fill-current" />
-            The Sovereign Marketplace
-          </motion.div>
-
-          {/* Headline */}
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="text-5xl md:text-7xl lg:text-8xl font-black mb-8 tracking-tighter leading-[0.9] uppercase italic"
-          >
-            Discover <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-500 to-amber-400">
-              Weird
-            </span> & <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-amber-400 to-purple-400">
-              Extreme
-            </span>
-          </motion.h1>
-
-          {/* Subtitle */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="text-lg md:text-xl text-zinc-500 max-w-2xl mx-auto mb-12 font-medium"
-          >
-            The curated kingdom of the weirdest, most viral products on Earth.
-            WTF-level technology for the modern age.
-          </motion.p>
-
-          {/* Search Bar */}
-          {showSearchBar && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-              className="max-w-2xl mx-auto mb-8"
+            Exceptional<br/>Products
+          </h1>
+          <p className="text-lg md:text-xl text-memoria-text-whisper max-w-lg mx-auto mb-12 font-light leading-relaxed">
+            A curated collection of premium goods for those who demand excellence in every detail.
+          </p>
+          <Link href="/category/all">
+            <Button 
+              size="lg" 
+              className="bg-memoria-text-hero text-memoria-bg-ultra-dark rounded-sm px-12 h-16 text-base font-medium hover:bg-memoria-text-secondary transition-all"
+              aria-label="View Collection"
             >
-              <SearchBar
-                value={searchQuery}
-                onChange={setSearchQuery}
-                onClear={() => setSearchQuery('')}
-              />
-            </motion.div>
-          )}
-
-          {/* Categories */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
-            className="mb-8"
-          >
-            <CategoryFilter
-              selectedCategory={selectedCategory}
-              onSelectCategory={setSelectedCategory}
-            />
-          </motion.div>
-
-          {/* Stats */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
-            className="flex flex-wrap justify-center gap-6 mb-8"
-          >
-            <div className="flex items-center gap-2 text-zinc-600">
-              <Sparkles size={16} className="text-purple-400" />
-              <span className="text-sm">{PRODUCTS.length} Products</span>
-            </div>
-            <div className="flex items-center gap-2 text-zinc-600">
-              <Badge variant="success" size="sm">{PRODUCTS.filter(p => p.verified).length} Verified</Badge>
-            </div>
-            <div className="flex items-center gap-2 text-zinc-600">
-              <ShoppingBag size={16} className="text-pink-400" />
-              <span className="text-sm">Free Shipping</span>
-            </div>
-          </motion.div>
-
-          {/* Gift Guides Button */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6 }}
-            className="flex flex-wrap justify-center gap-4"
-          >
-            <Link href="/guides">
-              <Button
-                variant="primary"
-                className="bg-zinc-900 border border-zinc-800 hover:border-purple-500 text-zinc-400 hover:text-white"
-              >
-                View Gift Guides
-              </Button>
-            </Link>
-            {!showSearchBar && (
-              <Button
-                variant="outline"
-                onClick={() => setShowSearchBar(true)}
-              >
-                Search Products
-              </Button>
-            )}
-          </motion.div>
+              View Collection <ArrowRight size={18} className="ml-2" />
+            </Button>
+          </Link>
         </div>
       </section>
 
-      {/* Gift Guides Preview */}
-      <section className="py-12 px-4 md:px-6 bg-zinc-900/20 border-y border-zinc-900">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-2xl font-bold mb-8 flex items-center gap-3">
-            <Sparkles className="text-purple-500" />
-            Curated Gift Guides
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {giftGuides.map((guide) => (
-              <Link key={guide.id} href={`/guides/${guide.slug}`} className="group relative aspect-[16/10] overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900 hover:border-purple-500/50 transition-all">
-                <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent z-10" />
-                <div className="absolute bottom-4 left-4 right-4 z-20">
-                  <h3 className="font-bold text-white group-hover:text-purple-400 transition-colors">{guide.title}</h3>
-                  <p className="text-xs text-zinc-500 line-clamp-1">{guide.description}</p>
-                </div>
+      {/* Stats Section */}
+      <section 
+        className="py-12 px-4 md:px-14 border-y border-memoria-border-muted"
+        aria-label="Quick Stats"
+      >
+        <div className="mx-auto max-w-7xl flex flex-col md:flex-row gap-12 justify-center items-center">
+          {[
+            { label: 'Products', value: '15' },
+            { label: 'Categories', value: '6' },
+            { label: 'Customers', value: '2.4K' }
+          ].map(stat => (
+            <div key={stat.label} className="text-center md:text-left">
+              <span className="label-whisper block mb-2">{stat.label}</span>
+              <div className="hero-number text-7xl md:text-8xl text-memoria-text-hero">
+                {stat.value}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Product Grid */}
+      <section 
+        className="py-32 px-4 md:px-14"
+        aria-labelledby="collection-title"
+      >
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-16">
+            <span className="label-whisper">Curated Selection</span>
+            <h2 id="collection-title" className="text-4xl md:text-6xl font-light tracking-tight mt-4 font-display">
+              Featured Goods
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {products.map((product) => (
+              <Link
+                key={product.id}
+                href={`/product/${product.slug}`}
+                className="group no-underline"
+                aria-label={`View details for ${product.name}`}
+              >
+                <Card className="bg-memoria-bg-card border-memoria-border-muted rounded-sm overflow-hidden group-hover:border-memoria-border-active transition-all">
+                  <CardContent className="p-0">
+                    <div className="aspect-square bg-memoria-bg-ultra-dark flex items-center justify-center group-hover:scale-[1.02] transition-transform duration-500">
+                      <ShoppingBag size={48} className="text-memoria-bg-surface group-hover:text-memoria-text-meta transition-colors" />
+                    </div>
+                    <div className="p-6">
+                      <div className="flex justify-between items-start mb-2">
+                        <h3 className="text-xl font-normal text-memoria-text-hero">
+                          {product.name}
+                        </h3>
+                        <span className="text-lg font-light text-memoria-text-hero font-display">
+                          ${product.price}
+                        </span>
+                      </div>
+                      <Badge variant="outline" className="rounded-sm text-[9px] uppercase tracking-widest border-memoria-border-muted text-memoria-text-meta">
+                        {product.category}
+                      </Badge>
+                    </div>
+                  </CardContent>
+                </Card>
               </Link>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Products Section */}
-      <section className="py-12 px-4 md:px-6">
-        <div className="max-w-7xl mx-auto">
-          <ProductGrid
-            products={filteredProducts}
-            sortBy={sortBy}
-            onSortChange={setSortBy}
-            onInspect={handleInspect}
-          />
+      {/* Footer */}
+      <footer 
+        className="border-t border-memoria-border-muted py-20 px-4 md:px-14 bg-memoria-bg-ultra-dark"
+        role="contentinfo"
+      >
+        <div className="mx-auto max-w-7xl flex flex-col md:flex-row justify-between items-center gap-8">
+          <div className="flex flex-col items-center md:items-start">
+            <span className="text-lg font-normal text-memoria-text-hero tracking-tight mb-2">SpendThrone</span>
+            <span className="text-[10px] uppercase tracking-widest text-memoria-text-meta">
+              © 2026 SpendThrone • Excellence in Detail
+            </span>
+          </div>
+          <div className="flex gap-8 items-center">
+            <div className="flex gap-2 items-center">
+              <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" aria-hidden="true" />
+              <span className="text-[10px] uppercase tracking-widest text-memoria-text-meta">
+                Global Network Online
+              </span>
+            </div>
+          </div>
         </div>
-      </section>
-
-      {/* Drawers & Modals */}
-      <CartDrawer
-        isOpen={showCart}
-        onClose={() => setShowCart(false)}
-        onCheckout={handleCheckout}
-      />
-      
-      <WishlistDrawer
-        isOpen={showWishlist}
-        onClose={() => setShowWishlist(false)}
-      />
-      
-      <CompareDrawer
-        isOpen={showCompare}
-        onClose={() => setShowCompare(false)}
-      />
-      
-      <CheckoutFlow
-        isOpen={showCheckout}
-        onClose={() => setShowCheckout(false)}
-      />
-      
-      <ProductModal
-        product={selectedProduct}
-        onClose={() => setSelectedProduct(null)}
-      />
+      </footer>
     </div>
-  );
-}
-
-// Page wrapper
-export default function Page() {
-  return (
-    <SpendThronePage />
   );
 }

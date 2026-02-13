@@ -1,0 +1,239 @@
+{
+  "config": {
+    "rootDir": "/home/nosyt/.openclaw/workspace",
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/home/nosyt/.openclaw/workspace/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/home/nosyt/.openclaw/workspace",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "runAgents": "none",
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.58.2",
+    "workers": 2,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "tests/comprehensive-ui-audit.spec.ts",
+      "file": "tests/comprehensive-ui-audit.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Comprehensive UI/UX Audit",
+          "file": "tests/comprehensive-ui-audit.spec.ts",
+          "line": 3,
+          "column": 6,
+          "specs": [
+            {
+              "title": "OMA-AI - Complete UI Analysis",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1273,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "OMA-AI Typography: {\n  h1Size: \u001b[32m'72px'\u001b[39m,\n  h1Weight: \u001b[32m'300'\u001b[39m,\n  fontFamily: \u001b[32m'Inter, \"Inter Fallback\", \"DM Sans\", \"DM Sans Fallback\", -apple-system, sans-serif'\u001b[39m,\n  lineHeight: \u001b[32m'24px'\u001b[39m\n}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-02-13T02:03:46.980Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "61c6098e31dc4c9bd5c9-fe8051cae3dda93dee66",
+              "file": "tests/comprehensive-ui-audit.spec.ts",
+              "line": 4,
+              "column": 7
+            },
+            {
+              "title": "SpendThrone - Complete UI Analysis",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1246,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "SpendThrone Spacing: { heroPadding: \u001b[90mundefined\u001b[39m, heroMargin: \u001b[90mundefined\u001b[39m }\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-02-13T02:03:48.364Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "61c6098e31dc4c9bd5c9-65f027f75e5dfffce971",
+              "file": "tests/comprehensive-ui-audit.spec.ts",
+              "line": 21,
+              "column": 7
+            },
+            {
+              "title": "Lethometry - Complete UI Analysis",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1225,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Lethometry Colors: { background: \u001b[32m'rgba(0, 0, 0, 0)'\u001b[39m, text: \u001b[32m'rgb(0, 0, 0)'\u001b[39m }\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-02-13T02:03:49.629Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "61c6098e31dc4c9bd5c9-7bfd377d29d70b69f36d",
+              "file": "tests/comprehensive-ui-audit.spec.ts",
+              "line": 36,
+              "column": 7
+            },
+            {
+              "title": "Typography System Consistency",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2903,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "OMA-AI Typography: {\n  fontFamily: \u001b[32m'Inter, \"Inter Fallback\", \"DM Sans\", \"DM Sans Fallback\", -apple-system, sans-serif'\u001b[39m,\n  fontSize: \u001b[32m'16px'\u001b[39m\n}\n"
+                        },
+                        {
+                          "text": "SpendThrone Typography: { fontFamily: \u001b[32m'\"Times New Roman\"'\u001b[39m, fontSize: \u001b[32m'16px'\u001b[39m }\n"
+                        },
+                        {
+                          "text": "Lethometry Typography: { fontFamily: \u001b[32m'\"Times New Roman\"'\u001b[39m, fontSize: \u001b[32m'16px'\u001b[39m }\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-02-13T02:03:50.869Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "61c6098e31dc4c9bd5c9-acbe811eeffca807b314",
+              "file": "tests/comprehensive-ui-audit.spec.ts",
+              "line": 50,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-02-13T02:03:44.500Z",
+    "duration": 9336.496,
+    "expected": 4,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

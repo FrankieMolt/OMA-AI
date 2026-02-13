@@ -3,187 +3,113 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import {
-  Mail,
-  Lock,
-  ArrowRight,
-  Eye,
-  EyeOff,
-  Github,
-  AlertCircle,
-  LogIn
-} from 'lucide-react';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
-import { WalletConnect } from '@/components/WalletConnect';
+import { Lock, Mail, ArrowRight, Github, Shield } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 
 export default function LoginPage() {
-  const [formData, setFormData] = useState({
-    email: '',
-    password: ''
-  });
-  const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    setError('');
     setLoading(true);
-
-    try {
-      const response = await fetch('/api/auth/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || 'Login failed');
-      }
-
-      localStorage.setItem('token', data.token);
-      window.location.href = '/dashboard';
-    } catch (err: any) {
-      setError(err.message || 'Login failed. Please try again.');
-    } finally {
-      setLoading(false);
-    }
+    // Simulate login
+    setTimeout(() => {
+      window.location.href = '/marketplace';
+    }, 1500);
   };
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-zinc-100 flex flex-col">
-      <Navbar />
+    <div className="min-h-screen bg-[#050505] flex items-center justify-center p-6 selection:bg-white selection:text-black">
+      <div className="w-full max-w-md">
+        <div className="text-center mb-10">
+          <Link href="/" className="inline-flex items-center gap-3 no-underline group mb-8">
+             <div className="w-10 h-10 bg-[#1e1e1e] border border-[#2a2a2a] rounded-sm flex items-center justify-center group-hover:border-white transition-colors">
+                <Shield size={20} className="text-white" />
+             </div>
+             <span className="text-2xl font-light text-white tracking-tighter font-display">
+                OMA SYSTEMS
+             </span>
+          </Link>
+          <h1 className="text-3xl font-light text-white tracking-tight mb-2 font-display">Welcome Back</h1>
+          <p className="text-[#a1a1aa] text-sm">Access your agent dashboard and API keys.</p>
+        </div>
 
-      <div className="flex-1 flex items-center justify-center px-6 py-12">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="w-full max-w-md"
-        >
-          {/* Header */}
-          <div className="text-center mb-8">
-            <h1 className="text-4xl font-bold mb-2">
-              <span className="gradient-text">Welcome Back</span>
-            </h1>
-            <p className="text-zinc-400">
-              Sign in to your OMA-AI account
-            </p>
-          </div>
-
-          {/* Form */}
-          <div className="glass-card p-8 rounded-xl mb-6">
-            {error && (
-              <div className="bg-red-500/20 border border-red-500/50 rounded-lg p-4 mb-6 flex items-start gap-3">
-                <AlertCircle size={20} className="text-red-400 flex-shrink-0 mt-0.5" />
-                <p className="text-sm text-red-300">{error}</p>
-              </div>
-            )}
-
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium mb-2">Email</label>
+        <Card className="bg-[#121212] border-[#1e1e1e] rounded-sm">
+          <CardContent className="p-8">
+            <form onSubmit={handleLogin} className="space-y-6">
+              <div className="space-y-2">
+                <label htmlFor="email" className="text-[10px] uppercase tracking-widest text-[#71717a] font-medium ml-1">Email Address</label>
                 <div className="relative">
-                  <Mail size={20} className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500" />
+                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-[#71717a]" size={16} aria-hidden="true" />
                   <input
+                    id="email"
                     type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    placeholder="you@example.com"
-                    className="w-full pl-10 pr-4 py-3 bg-zinc-800/50 border border-zinc-700 rounded-lg focus:outline-none focus:border-purple-500 transition-colors"
                     required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="w-full pl-10 pr-4 py-3 bg-[#0a0a0a] border border-[#2a2a2a] rounded-sm text-white text-sm focus:outline-none focus:border-white transition-all"
+                    placeholder="name@example.com"
+                    aria-label="Email address"
                   />
                 </div>
               </div>
 
-              <div>
-                <label className="block text-sm font-medium mb-2">Password</label>
+              <div className="space-y-2">
+                <div className="flex justify-between items-center px-1">
+                  <label htmlFor="password" className="text-[10px] uppercase tracking-widest text-[#71717a] font-medium">Password</label>
+                  <Link href="/forgot-password" className="text-[10px] uppercase tracking-widest text-[#71717a] hover:text-white transition-colors">
+                    Forgot?
+                  </Link>
+                </div>
                 <div className="relative">
-                  <Lock size={20} className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500" />
+                  <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-[#71717a]" size={16} aria-hidden="true" />
                   <input
-                    type={showPassword ? 'text' : 'password'}
-                    name="password"
-                    value={formData.password}
-                    onChange={handleChange}
-                    placeholder="••••••••"
-                    className="w-full pl-10 pr-12 py-3 bg-zinc-800/50 border border-zinc-700 rounded-lg focus:outline-none focus:border-purple-500 transition-colors"
+                    id="password"
+                    type="password"
                     required
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="w-full pl-10 pr-4 py-3 bg-[#0a0a0a] border border-[#2a2a2a] rounded-sm text-white text-sm focus:outline-none focus:border-white transition-all"
+                    placeholder="••••••••"
+                    aria-label="Password"
                   />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-500 hover:text-zinc-400"
-                  >
-                    {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
-                  </button>
                 </div>
               </div>
 
-              <div className="flex items-center justify-between">
-                <label className="flex items-center gap-2 cursor-pointer">
-                  <input type="checkbox" className="rounded bg-zinc-800 border-zinc-700" />
-                  <span className="text-sm text-zinc-400">Remember me</span>
-                </label>
-                <Link href="/forgot-password" className="text-sm text-purple-400 hover:text-purple-300">
-                  Forgot password?
-                </Link>
-              </div>
-
-              <button
-                type="submit"
+              <Button 
+                type="submit" 
                 disabled={loading}
-                className="w-full py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold rounded-lg hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                className="w-full bg-white text-black hover:bg-[#e4e4e7] h-12 rounded-sm text-xs font-bold uppercase tracking-widest"
               >
-                {loading ? 'Signing in...' : 'Sign In'}
-                {!loading && <LogIn size={20} />}
-              </button>
+                {loading ? 'Authenticating...' : 'Sign In'}
+              </Button>
             </form>
 
-            {/* Divider */}
-            <div className="relative my-6">
+            <div className="relative my-8">
               <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-zinc-700"></div>
+                <span className="w-full border-t border-[#1e1e1e]"></span>
               </div>
-              <div className="relative flex justify-center text-sm">
-                <span className="px-2 bg-zinc-900 text-zinc-400">Or continue with</span>
+              <div className="relative flex justify-center text-[10px] uppercase tracking-widest">
+                <span className="bg-[#121212] px-2 text-[#71717a]">Or continue with</span>
               </div>
             </div>
 
-            {/* Social Login */}
-            <div className="grid grid-cols-2 gap-4">
-              <button
-                type="button"
-                className="flex items-center justify-center gap-2 py-3 bg-zinc-800/50 border border-zinc-700 rounded-lg hover:bg-zinc-800 transition-colors"
-              >
-                <Github size={20} />
-                <span>GitHub</span>
-              </button>
-              <WalletConnect label="Wallet" />
-            </div>
-          </div>
+            <Button variant="outline" className="w-full border-[#2a2a2a] text-[#d4d4d8] hover:bg-[#1e1e1e] hover:text-white h-12 rounded-sm text-xs font-bold uppercase tracking-widest">
+              <Github size={16} className="mr-2" /> GitHub
+            </Button>
+          </CardContent>
+        </Card>
 
-          {/* Footer */}
-          <p className="text-center text-zinc-400">
-            Don&apos;t have an account?{' '}
-            <Link href="/signup" className="text-purple-400 hover:text-purple-300">
-              Sign up
-            </Link>
-          </p>
-        </motion.div>
+        <p className="text-center mt-8 text-[11px] uppercase tracking-widest text-[#71717a]">
+          New to the network?{' '}
+          <Link href="/signup" className="text-white hover:underline transition-all">
+            Initialize Account
+          </Link>
+        </p>
       </div>
-
-      <Footer />
     </div>
   );
 }

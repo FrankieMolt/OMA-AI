@@ -1,93 +1,86 @@
-import { Metadata } from 'next';
-import Link from 'next/link';
-import { ArrowLeft, Calendar, User, Clock } from 'lucide-react';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
+'use client';
 
-export const metadata: Metadata = {
-  title: 'OMA-AI: Built for Humans AND Agents',
-  description: 'Discover why OMA-AI is the only API marketplace designed for both human developers and autonomous AI agents. Same APIs, same payments, different interfaces.',
-};
+import React from 'react';
+import { motion } from 'framer-motion';
+import Link from 'next/link';
+import { ArrowLeft, Calendar, User, Clock, Share2, Bookmark } from 'lucide-react';
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 
 export default function HumansAndAgentsPage() {
   return (
-    <div className="min-h-screen bg-zinc-950 text-zinc-100 flex flex-col">
-      <Navbar />
-      
-      <article className="flex-1 max-w-4xl mx-auto px-6 py-12">
-        <Link href="/blog" className="inline-flex items-center gap-2 text-zinc-400 hover:text-white mb-8 transition-colors">
-          <ArrowLeft size={16} />
-          Back to Blog
-        </Link>
-
-        <header className="mb-8">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            OMA-AI: Built for Humans AND Agents
-          </h1>
+    <div className="min-h-screen bg-background selection:bg-primary selection:text-primary-foreground">
+      {/* Header */}
+      <section className="pt-48 pb-20 px-4 md:px-14 border-b border-memoria-border-muted">
+        <div className="max-w-4xl mx-auto">
+          <Link href="/blog" className="inline-flex items-center gap-2 text-memoria-text-whisper hover:text-white mb-10 transition-colors text-[10px] uppercase tracking-widest font-bold no-underline">
+            <ArrowLeft size={14} /> Back to Journal
+          </Link>
           
-          <div className="flex flex-wrap items-center gap-4 text-zinc-400 text-sm">
-            <span className="flex items-center gap-2">
-              <User size={16} />
-              OMA-AI Team
-            </span>
-            <span className="flex items-center gap-2">
-              <Calendar size={16} />
-              February 5, 2026
-            </span>
-            <span className="flex items-center gap-2">
-              <Clock size={16} />
-              4 min read
-            </span>
+          <Badge variant="outline" className="mb-6 rounded-sm uppercase tracking-[0.2em] text-[10px] py-1 border-memoria-border-default text-memoria-text-whisper px-4">
+             Platform
+          </Badge>
+          
+          <h1 className="text-4xl md:text-7xl font-light tracking-tighter leading-[1.1] mb-10 font-display text-memoria-text-hero">
+             Revolutionizing the Marketplace for <span className=\"text-memoria-text-secondary\">Humans & Agents</span>
+          </h1>
+
+          <div className="flex flex-wrap items-center gap-6 text-[10px] text-memoria-text-meta uppercase tracking-widest font-bold">
+            <div className="flex items-center gap-2">
+              <User size={14} />
+              <span>OMA Team</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Calendar size={14} />
+              <span>Feb 06, 2026</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Clock size={14} />
+              <span>5 min read</span>
+            </div>
           </div>
-        </header>
-
-        <div className="prose prose-invert prose-lg max-w-none">
-          <p className="lead text-xl text-zinc-300 mb-8">
-            Most platforms are built for humans OR machines. OMA-AI is different — we serve both equally.
-          </p>
-
-          <h2>The Dual-Interface Approach</h2>
-          <p>
-            Human developers want beautiful documentation, interactive testing, and clear pricing. AI agents want machine-readable schemas, deterministic responses, and programmatic payment flows.
-          </p>
-          <p>
-            OMA-AI provides both:
-          </p>
-          <ul>
-            <li><strong>For Humans:</strong> A sleek web interface to browse APIs, read docs, and test endpoints</li>
-            <li><strong>For Agents:</strong> OpenAPI specs, MCP protocol support, and x402 payment headers</li>
-          </ul>
-
-          <h2>Same Infrastructure, Different Access</h2>
-          <p>
-            When you publish an API on OMA-AI, it's instantly accessible to both humans and agents. The underlying infrastructure is identical — only the interface differs.
-          </p>
-          <p>
-            This means API providers reach the maximum audience with zero extra work. Publish once, serve everyone.
-          </p>
-
-          <h2>Why Agents Need Marketplaces</h2>
-          <p>
-            As AI agents become more autonomous, they need to:
-          </p>
-          <ul>
-            <li>Discover new capabilities on-demand</li>
-            <li>Compare pricing across providers</li>
-            <li>Pay for exactly what they use</li>
-            <li>Handle failures gracefully</li>
-          </ul>
-          <p>
-            OMA-AI makes all of this possible with standard HTTP and x402 payments.
-          </p>
-
-          <h2>Join the Revolution</h2>
-          <p>
-            Whether you're a human developer or building an autonomous agent, OMA-AI is your gateway to the API economy. <Link href="/signup" className="text-purple-400 hover:text-purple-300">Create an account</Link> and start exploring today.
-          </p>
         </div>
-      </article>
+      </section>
 
-      <Footer />
+      {/* Content */}
+      <section className="py-20 px-4 md:px-14">
+        <div className="max-w-4xl mx-auto">
+           <div className="prose prose-invert prose-zinc max-w-none">
+              <p className="text-xl md:text-2xl text-memoria-text-hero font-light leading-relaxed mb-12 italic border-l-2 border-memoria-border-muted pl-8">
+                 Discover how OMA-AI creates the first unified marketplace where both humans and autonomous AI agents can discover, integrate, and pay for APIs.
+              </p>
+
+              <div className="space-y-12">
+                 <div>
+                    <h2 className="text-2xl font-light text-memoria-text-hero font-display uppercase tracking-widest border-b border-memoria-border-muted pb-4 mb-6">01. Unified Discovery</h2>
+                    <p className="text-memoria-text-whisper font-light leading-relaxed">
+                       In 2026, the distinction between a developer and an agent is blurring. Developers use agents to write code, and agents use APIs to execute that code. OMA-AI provides a single point of entry for both entities to find the tools they need.
+                    </p>
+                 </div>
+
+                 <div>
+                    <h2 className="text-2xl font-light text-memoria-text-hero font-display uppercase tracking-widest border-b border-memoria-border-muted pb-4 mb-6">02. Programmatic Integration</h2>
+                    <p className="text-memoria-text-whisper font-light leading-relaxed mb-6">
+                       For humans, we provide comprehensive documentation and interactive playgrounds. For agents, we provide standardized metadata and MCP endpoints that allow for zero-shot integration.
+                    </p>
+                 </div>
+              </div>
+
+              <div className="mt-20 pt-12 border-t border-memoria-border-muted flex justify-between items-center">
+                 <div className="flex gap-4">
+                    <Button variant="outline" className="rounded-sm h-10 px-4 border-memoria-border-muted text-memoria-text-meta hover:text-white">
+                       <Share2 size={14} className="mr-2" /> Share
+                    </Button>
+                 </div>
+                 <Link href="/marketplace" className="no-underline">
+                    <Button className="bg-memoria-text-hero text-memoria-bg-ultra-dark rounded-sm h-12 px-8 text-[10px] font-bold uppercase tracking-widest">
+                       Explore Tools
+                    </Button>
+                 </Link>
+              </div>
+           </div>
+        </div>
+      </section>
     </div>
   );
 }

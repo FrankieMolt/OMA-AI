@@ -20,6 +20,13 @@ export async function GET(
     
     const supabase = createClient();
     
+    if (!supabase) {
+      return NextResponse.json(
+        { success: false, error: 'Database not available in demo mode' },
+        { status: 503 }
+      );
+    }
+    
     // Fetch the link
     const { data: link, error: linkError } = await supabase
       .from('links')

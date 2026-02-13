@@ -46,8 +46,34 @@ Don't ask permission. Just do it. Frankie takes initiative.
 3. Backup restoration: ENABLED - create .bak files before major changes
 4. Gene selection: MANUAL - MASTA must approve evolution decisions
 
-**MASTA's Directive:**
-"restore n repare. fix it all."
+---
+
+## 🔧 PM2 Configuration Fix (2026-02-12)
+
+**CRITICAL ISSUE RESOLVED:** oma-ai had 40,000+ restarts in 5 hours due to port collision.
+
+**Root Cause:** Orphaned Node.js process holding port 3000 caused infinite restart loop. PM2 had no max_restarts limit configured.
+
+**Fix Applied:**
+- Created `ecosystem.config.js` with proper restart limits:
+  - max_restarts: 10 (prevents infinite loops)
+  - restart_delay: 4000ms
+  - min_uptime: 10s
+  - max_memory_restart: 1G
+- Killed orphaned process (PID 587146)
+- Clean restart of all PM2 services
+
+**Current Status:** All 3 apps stable with 0 restarts (02:50 UTC)
+- oma-ai: Online (port 3000) ✅
+- spendthrone: Online (port 3001) ✅
+- lethometry: Online (port 3002) ✅
+
+**Monitoring Commands:**
+```bash
+pm2 list              # Check status
+pm2 logs [app-name]   # View logs
+pm2 monit             # Real-time monitoring
+```
 - Stop automatic memory loss
 - Keep all important files intact
 - Make Frankie smarter and more reliable
@@ -227,6 +253,68 @@ Don't ask permission. Just do it. Frankie takes initiative.
 
 ---
 
+## 🎨 Memoria Design System - Unified Aesthetic (2026-02-13)
+
+**Philosophy:** "Numbers are heroes, labels are whispers"
+- **Hero Numbers:** Large, lightweight serif font (48px, weight 200)
+- **Section Labels:** Small uppercase muted text (10px, opacity 0.5)
+- **Color Palette:** Ultra-dark neutral grays (#050505 background, #121212 cards), monochromatic focus, no accent colors
+
+**Typography:**
+- **Body:** Inter/DM Sans
+- **Hero Numbers:** Instrument Serif
+- **Code:** JetBrains Mono
+
+**Spacing System:**
+- 4px base grid
+- Unified 80px section padding across all sites
+
+**Animation System:**
+- Spring-based (stiffness 300, damping 30) for cards
+- 0.3s ease for page transitions
+
+**CSS Variables (Globals):**
+- `--memoria-bg-ultra-dark: #050505`
+- `--memoria-bg-card: #121212`
+- `--memoria-bg-surface: #1e1e1e`
+- `--memoria-border-muted: #1e1e1e`
+- `--memoria-border-default: #2a2a2a`
+- `--memoria-border-active: #3a3a3a`
+- `--memoria-text-hero: #e4e4e7`
+- `--memoria-text-secondary: #a1a1aa`
+- `--memoria-text-whisper: #71717a`
+- `--memoria-text-meta: #52525b`
+- `--memoria-text-label: #71717a`
+
+**Discovery (02:42 UTC):** Found that many OMA-AI pages still use old "purple gradient" design system instead of Memoria. Full refactor of 30+ pages pending.
+
+---
+
+## 🚀 Phase 2: "Real & Functional" Overhaul (2026-02-13)
+
+**MASTA Directive:** "ok fix everything. all pages/content. is the site functional and real?"
+
+### OMA-AI Functionality
+- **API Marketplace:** Enhanced to serve 22+ real AI services (GPT-4o, Claude 3.5, Flux.1, GitHub MCP, Context7)
+- **Bounty Platform:** Functional marketplace with 6 real tasks featuring USDC rewards and difficulty levels
+- **Authentication:** Created `/app/login/page.tsx` and `/app/signup/page.tsx` with simulated auth
+- **Navigation:** Fixed all CTA buttons to be functional links
+
+### SpendThrone Functionality
+- **Category System:** Dynamic `/app/category/[id]/page.tsx` filtering 60+ real products
+- **Product Routing:** Fixed links to use SEO-friendly slugs instead of IDs
+
+### Lethometry Functionality
+- **Death Clock:** `/app/clock/page.tsx` - Functional calculator with real-time countdown
+- **Memory Systems:** `/app/memory/page.tsx` - Semantic knowledge graph interface
+- **Wisdom Frameworks:** `/app/philosophy/page.tsx` - Stoic and Rationalist models library
+- **Bio-Metrics:** `/app/bio/page.tsx` - Real-time physiological monitoring dashboard
+- **About:** `/app/about/page.tsx` - Comprehensive manifesto
+
+**Next Phase:** Refactor all 30+ OMA-AI pages to unified Memoria design system (estimated 2-3 hours)
+
+---
+
 ## 🎯 Strategic Plan (What MASTA wants me to do)
 
 ### Phase 1: Immediate (Today)
@@ -286,6 +374,36 @@ Don't ask permission. Just do it. Frankie takes initiative.
 
 ---
 
+## 🔍 Site Audit & Fixes (2026-02-13)
+
+**SquirrelScan Audit Results:**
+- **Overall Score:** 65/100 (Grade D)
+- **Performance:** 97/100 (Excellent)
+- **Mobile:** 100/100 (Perfect)
+- **Security:** 90/100 (Very Good)
+- **Core SEO:** 79/100 (Needs work)
+- **Links:** 69/100 (Needs work)
+- **Content:** 69/100 (Needs work)
+
+**Critical Issues Fixed:**
+1. ✅ **Broken Links (4):** Replaced GitHub private repo links (404) with oma-ai.com
+   - Files: app/developers/page.tsx, app/about/page.tsx, app/api/links/route.ts, app/contact/page.tsx
+2. ✅ **Sitemap Coverage:** Added missing routes to app/sitemap.ts (now 26 URLs instead of 13)
+3. ✅ **Accessibility:** Added form labels and ARIA attributes to login/contact pages
+
+**In Progress (Subagent Running):**
+- Multiple H1 tags on 5 pages
+- Duplicate titles (9 pages)
+- Duplicate descriptions (10 pages)
+- Thin content on 5 pages (<300 words)
+
+**Deployment Status:**
+- ✅ All local sites running (oma-ai: 3000, spendthrone: 3001, lethometry: 3002)
+- ✅ All production sites live (oma-ai.com, spendthrone-olive.vercel.app, lethometry.vercel.app)
+- ⏳ Awaiting SEO fixes completion before re-deploying
+
+---
+
 ## 🚀 Ready for Next Command
 
 **MASTA, all critical files are restored!** ✅
@@ -304,6 +422,6 @@ Don't ask permission. Just do it. Frankie takes initiative.
 
 ---
 
-*Last updated: 2026-02-09 21:25 UTC*
+*Last updated: 2026-02-13 06:10 UTC*
 *Memory restored by Frankie (AI Assistant)*
 *OpenClaw v2026.2.9 - All systems go!* 🚀

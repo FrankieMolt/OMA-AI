@@ -3,243 +3,140 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import {
-  Mail,
-  Lock,
-  User,
-  ArrowRight,
-  Eye,
-  EyeOff,
-  Github,
-  AlertCircle
-} from 'lucide-react';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
-import { WalletConnect } from '@/components/WalletConnect';
+import { Lock, Mail, User, Shield, Github, ArrowRight } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
 
 export default function SignupPage() {
   const [formData, setFormData] = useState({
+    name: '',
     email: '',
     password: '',
-    confirmPassword: '',
-    fullName: '',
-    username: ''
+    agree: false
   });
-  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSignup = (e: React.FormEvent) => {
     e.preventDefault();
-    setError('');
-
-    if (formData.password !== formData.confirmPassword) {
-      setError('Passwords do not match');
-      return;
-    }
-
-    if (formData.password.length < 8) {
-      setError('Password must be at least 8 characters');
-      return;
-    }
-
     setLoading(true);
-
-    try {
-      const response = await fetch('/api/auth/signup', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          email: formData.email,
-          password: formData.password,
-          fullName: formData.fullName,
-          username: formData.username
-        })
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || 'Signup failed');
-      }
-
-      window.location.href = '/dashboard';
-    } catch (err: any) {
-      setError(err.message || 'Signup failed. Please try again.');
-    } finally {
-      setLoading(false);
-    }
+    // Simulate signup
+    setTimeout(() => {
+      window.location.href = '/marketplace';
+    }, 2000);
   };
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-zinc-100 flex flex-col">
-      <Navbar />
+    <div className="min-h-screen bg-[#050505] flex items-center justify-center p-6 selection:bg-white selection:text-black">
+      <div className="w-full max-w-md">
+        <div className="text-center mb-10">
+          <Link href="/" className="inline-flex items-center gap-3 no-underline group mb-8">
+             <div className="w-10 h-10 bg-[#1e1e1e] border border-[#2a2a2a] rounded-sm flex items-center justify-center group-hover:border-white transition-colors">
+                <Shield size={20} className="text-white" />
+             </div>
+             <span className="text-2xl font-light text-white tracking-tighter font-display">
+                OMA SYSTEMS
+             </span>
+          </Link>
+          <h1 className="text-3xl font-light text-white tracking-tight mb-2 font-display">Create Account</h1>
+          <p className="text-[#a1a1aa] text-sm">Join the ecosystem for autonomous agents.</p>
+        </div>
 
-      <div className="flex-1 flex items-center justify-center px-6 py-12">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="w-full max-w-md"
-        >
-          {/* Header */}
-          <div className="text-center mb-8">
-            <h1 className="text-4xl font-bold mb-2">
-              <span className="gradient-text">Create Account</span>
-            </h1>
-            <p className="text-zinc-400">
-              Join the autonomous agent economy
-            </p>
-          </div>
-
-          {/* Form */}
-          <div className="glass-card p-8 rounded-xl mb-6">
-            {error && (
-              <div className="bg-red-500/20 border border-red-500/50 rounded-lg p-4 mb-6 flex items-start gap-3">
-                <AlertCircle size={20} className="text-red-400 flex-shrink-0 mt-0.5" />
-                <p className="text-sm text-red-300">{error}</p>
-              </div>
-            )}
-
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium mb-2">Full Name</label>
+        <Card className="bg-[#121212] border-[#1e1e1e] rounded-sm">
+          <CardContent className="p-8">
+            <form onSubmit={handleSignup} className="space-y-5">
+              <div className="space-y-2">
+                <label htmlFor="signup-name" className="text-[10px] uppercase tracking-widest text-[#71717a] font-medium ml-1">Full Name</label>
                 <div className="relative">
-                  <User size={20} className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500" />
+                  <User className="absolute left-3 top-1/2 -translate-y-1/2 text-[#71717a]" size={16} />
                   <input
                     type="text"
-                    name="fullName"
-                    value={formData.fullName}
-                    onChange={handleChange}
+                    id="signup-name"
+                    required
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    className="w-full pl-10 pr-4 py-3 bg-[#0a0a0a] border border-[#2a2a2a] rounded-sm text-white text-sm focus:outline-none focus:border-white transition-all"
                     placeholder="John Doe"
-                    className="w-full pl-10 pr-4 py-3 bg-zinc-800/50 border border-zinc-700 rounded-lg focus:outline-none focus:border-purple-500 transition-colors"
-                    required
                   />
                 </div>
               </div>
 
-              <div>
-                <label className="block text-sm font-medium mb-2">Username</label>
+              <div className="space-y-2">
+                <label htmlFor="signup-email" className="text-[10px] uppercase tracking-widest text-[#71717a] font-medium ml-1">Email Address</label>
                 <div className="relative">
-                  <User size={20} className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500" />
-                  <input
-                    type="text"
-                    name="username"
-                    value={formData.username}
-                    onChange={handleChange}
-                    placeholder="johndoe"
-                    className="w-full pl-10 pr-4 py-3 bg-zinc-800/50 border border-zinc-700 rounded-lg focus:outline-none focus:border-purple-500 transition-colors"
-                    required
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium mb-2">Email</label>
-                <div className="relative">
-                  <Mail size={20} className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500" />
+                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-[#71717a]" size={16} />
                   <input
                     type="email"
-                    name="email"
+                    id="signup-email"
+                    required
                     value={formData.email}
-                    onChange={handleChange}
-                    placeholder="you@example.com"
-                    className="w-full pl-10 pr-4 py-3 bg-zinc-800/50 border border-zinc-700 rounded-lg focus:outline-none focus:border-purple-500 transition-colors"
-                    required
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    className="w-full pl-10 pr-4 py-3 bg-[#0a0a0a] border border-[#2a2a2a] rounded-sm text-white text-sm focus:outline-none focus:border-white transition-all"
+                    placeholder="name@example.com"
                   />
                 </div>
               </div>
 
-              <div>
-                <label className="block text-sm font-medium mb-2">Password</label>
+              <div className="space-y-2">
+                <label htmlFor="signup-password" className="text-[10px] uppercase tracking-widest text-[#71717a] font-medium ml-1">Password</label>
                 <div className="relative">
-                  <Lock size={20} className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500" />
+                  <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-[#71717a]" size={16} />
                   <input
-                    type={showPassword ? 'text' : 'password'}
-                    name="password"
+                    type="password"
+                    id="signup-password"
+                    required
                     value={formData.password}
-                    onChange={handleChange}
+                    onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                    className="w-full pl-10 pr-4 py-3 bg-[#0a0a0a] border border-[#2a2a2a] rounded-sm text-white text-sm focus:outline-none focus:border-white transition-all"
                     placeholder="••••••••"
-                    className="w-full pl-10 pr-12 py-3 bg-zinc-800/50 border border-zinc-700 rounded-lg focus:outline-none focus:border-purple-500 transition-colors"
-                    required
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-500 hover:text-zinc-400"
-                  >
-                    {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
-                  </button>
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium mb-2">Confirm Password</label>
-                <div className="relative">
-                  <Lock size={20} className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500" />
-                  <input
-                    type={showPassword ? 'text' : 'password'}
-                    name="confirmPassword"
-                    value={formData.confirmPassword}
-                    onChange={handleChange}
-                    placeholder="••••••••"
-                    className="w-full pl-10 pr-4 py-3 bg-zinc-800/50 border border-zinc-700 rounded-lg focus:outline-none focus:border-purple-500 transition-colors"
-                    required
                   />
                 </div>
               </div>
 
-              <button
-                type="submit"
+              <div className="flex items-start gap-3 px-1 py-2">
+                <input
+                  type="checkbox"
+                  required
+                  id="agree"
+                  className="mt-1 accent-white"
+                  checked={formData.agree}
+                  onChange={(e) => setFormData({ ...formData, agree: e.target.checked })}
+                />
+                <label htmlFor="agree" className="text-[10px] text-[#71717a] leading-relaxed">
+                  I agree to the <Link href="/terms" className="text-white hover:underline">Terms of Service</Link> and <Link href="/privacy" className="text-white hover:underline">Privacy Policy</Link>.
+                </label>
+              </div>
+
+              <Button 
+                type="submit" 
                 disabled={loading}
-                className="w-full py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold rounded-lg hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                className="w-full bg-white text-black hover:bg-[#e4e4e7] h-12 rounded-sm text-xs font-bold uppercase tracking-widest"
               >
-                {loading ? 'Creating Account...' : 'Create Account'}
-                {!loading && <ArrowRight size={20} />}
-              </button>
+                {loading ? 'Initializing Agent...' : 'Create Account'}
+              </Button>
             </form>
 
-            {/* Divider */}
-            <div className="relative my-6">
+            <div className="relative my-8">
               <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-zinc-700"></div>
+                <span className="w-full border-t border-[#1e1e1e]"></span>
               </div>
-              <div className="relative flex justify-center text-sm">
-                <span className="px-2 bg-zinc-900 text-zinc-400">Or continue with</span>
+              <div className="relative flex justify-center text-[10px] uppercase tracking-widest">
+                <span className="bg-[#121212] px-2 text-[#71717a]">Join via</span>
               </div>
             </div>
 
-            {/* Social Login */}
-            <div className="grid grid-cols-2 gap-4">
-              <button
-                type="button"
-                className="flex items-center justify-center gap-2 py-3 bg-zinc-800/50 border border-zinc-700 rounded-lg hover:bg-zinc-800 transition-colors"
-              >
-                <Github size={20} />
-                <span>GitHub</span>
-              </button>
-              <WalletConnect label="Wallet" />
-            </div>
-          </div>
+            <Button variant="outline" className="w-full border-[#2a2a2a] text-[#d4d4d8] hover:bg-[#1e1e1e] hover:text-white h-12 rounded-sm text-xs font-bold uppercase tracking-widest">
+              <Github size={16} className="mr-2" /> GitHub
+            </Button>
+          </CardContent>
+        </Card>
 
-          {/* Footer */}
-          <p className="text-center text-zinc-400">
-            Already have an account?{' '}
-            <Link href="/login" className="text-purple-400 hover:text-purple-300">
-              Sign in
-            </Link>
-          </p>
-        </motion.div>
+        <p className="text-center mt-8 text-[11px] uppercase tracking-widest text-[#71717a]">
+          Already registered?{' '}
+          <Link href="/login" className="text-white hover:underline transition-all">
+            Sign In
+          </Link>
+        </p>
       </div>
-
-      <Footer />
     </div>
   );
 }

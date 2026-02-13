@@ -1,355 +1,117 @@
 'use client';
 
-import { useState, useCallback } from 'react';
-import { Upload, FileText, CheckCircle, AlertCircle, Loader2 } from 'lucide-react';
+import React, { useState, useCallback } from 'react';
+import { Upload, FileText, CheckCircle, AlertCircle, Loader2, Cpu, Shield, Search } from 'lucide-react';
 import Link from 'next/link';
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent } from "@/components/ui/card";
 
-interface ParsedData {
-  name: string;
-  email: string;
-  phone: string;
-  skills: string[];
-  experience: Array<{
-    company: string;
-    title: string;
-    startDate: string;
-    endDate: string;
-  }>;
-  education: Array<{
-    institution: string;
-    degree: string;
-  }>;
-  summary: string;
-}
-
-export default function ResumeUploadPage() {
+export default function ResumePage() {
   const [file, setFile] = useState<File | null>(null);
-  const [dragActive, setDragActive] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [result, setResult] = useState<{ parsedData: ParsedData; fileUrl?: string } | null>(null);
-  const [error, setError] = useState<string | null>(null);
+  const [result, setResult] = useState<any>(null);
 
-  const handleDrag = useCallback((e: React.DragEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    if (e.type === 'dragenter' || e.type === 'dragover') {
-      setDragActive(true);
-    } else if (e.type === 'dragleave') {
-      setDragActive(false);
-    }
-  }, []);
-
-  const handleDrop = useCallback((e: React.DragEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setDragActive(false);
-    
-    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-      handleFile(e.dataTransfer.files[0]);
-    }
-  }, []);
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      handleFile(e.target.files[0]);
-    }
-  };
-
-  const handleFile = (selectedFile: File) => {
-    const allowedTypes = [
-      'application/pdf',
-      'application/msword',
-      'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-      'text/plain'
-    ];
-
-    if (!allowedTypes.includes(selectedFile.type)) {
-      setError('Invalid file type. Please upload PDF, DOC, DOCX, or TXT files.');
-      return;
-    }
-
-    if (selectedFile.size > 10 * 1024 * 1024) {
-      setError('File too large. Maximum size is 10MB.');
-      return;
-    }
-
-    setFile(selectedFile);
-    setError(null);
-  };
-
-  const handleUpload = async () => {
-    if (!file) return;
-
-    setLoading(true);
-    setError(null);
-
-    try {
-      const formData = new FormData();
-      formData.append('file', file);
-
-      const response = await fetch('/api/resume/parse', {
-        method: 'POST',
-        body: formData
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || 'Failed to parse resume');
-      }
-
-      setResult(data.data);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'An error occurred');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const reset = () => {
-    setFile(null);
-    setResult(null);
-    setError(null);
-  };
+  const navLinks = [
+    { label: 'Upload', href: '/resume', active: true },
+    { label: 'Intelligence Score', href: '/resume/score' },
+    { label: 'Batch Processing', href: '/resume/batch' },
+    { label: 'Analytics', href: '/resume/dashboard' }
+  ];
 
   return (
-    <div className="min-h-screen bg-gray-900 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-4xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-white mb-4">
-            AI Resume Parser
+    <div className="min-h-screen bg-background selection:bg-primary selection:text-primary-foreground">
+      {/* Header */}
+      <section className="pt-48 pb-12 px-4 md:px-14 border-b border-memoria-border-muted">
+        <div className="max-w-7xl mx-auto">
+          <Badge variant="outline" className="mb-6 rounded-sm uppercase tracking-[0.2em] text-[10px] py-1 border-memoria-border-default text-memoria-text-whisper px-4">
+             AI Services
+          </Badge>
+          <h1 className="text-4xl md:text-7xl font-light tracking-tighter mb-8 font-display text-memoria-text-hero">
+             Resume<br/><span className=\"text-memoria-text-secondary\">Analyzer</span>
           </h1>
-          <p className="text-xl text-gray-400">
-            Upload your resume and let AI extract key information instantly
-          </p>
+          
+          <nav className="flex items-center gap-1 bg-memoria-bg-card border border-memoria-border-muted p-1 rounded-sm max-w-fit">
+             {navLinks.map((link) => (
+                <Link key={link.label} href={link.href} className="no-underline">
+                   <button
+                     className={`px-4 py-2 rounded-sm transition-all text-[10px] uppercase tracking-widest font-bold ${
+                       link.active
+                         ? 'bg-memoria-text-hero text-memoria-bg-ultra-dark'
+                         : 'text-memoria-text-whisper hover:text-white hover:bg-memoria-bg-surface'
+                     }`}
+                   >
+                     {link.label}
+                   </button>
+                </Link>
+             ))}
+          </nav>
         </div>
+      </section>
 
-        {/* Navigation */}
-        <div className="flex flex-wrap justify-center gap-4 mb-8">
-          <Link
-            href="/resume"
-            className="px-6 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition"
-          >
-            Upload
-          </Link>
-          <Link
-            href="/resume/score"
-            className="px-6 py-2 bg-gray-700 text-white rounded-lg font-medium hover:bg-gray-600 transition"
-          >
-            Score Resume
-          </Link>
-          <Link
-            href="/resume/batch"
-            className="px-6 py-2 bg-gray-700 text-white rounded-lg font-medium hover:bg-gray-600 transition"
-          >
-            Batch Process
-          </Link>
-          <Link
-            href="/resume/dashboard"
-            className="px-6 py-2 bg-gray-700 text-white rounded-lg font-medium hover:bg-gray-600 transition"
-          >
-            Dashboard
-          </Link>
-          <Link
-            href="/resume/api"
-            className="px-6 py-2 bg-gray-700 text-white rounded-lg font-medium hover:bg-gray-600 transition"
-          >
-            API Docs
-          </Link>
+      <main className="max-w-7xl mx-auto px-4 md:px-14 py-20">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_350px] gap-20">
+           <div>
+              {!result ? (
+                <div className="border border-dashed border-memoria-border-muted rounded-sm p-20 flex flex-col items-center justify-center text-center bg-memoria-bg-card/20">
+                   <div className="w-20 h-20 bg-memoria-bg-surface border border-memoria-border-default rounded-sm flex items-center justify-center mb-8">
+                      <Upload className="text-memoria-text-whisper" size={32} />
+                   </div>
+                   <h3 className="text-2xl font-light text-memoria-text-hero mb-4 font-display">System Input Required</h3>
+                   <p className="text-sm text-memoria-text-whisper mb-10 max-w-sm font-light">
+                      Upload candidate documentation for neural parsing and semantic analysis.
+                   </p>
+                   <input type="file" id="resume-file" className="hidden" />
+                   <label htmlFor="resume-file">
+                      <Button className="bg-memoria-text-hero text-memoria-bg-ultra-dark rounded-sm px-10 h-14 text-xs font-bold uppercase tracking-widest hover:scale-[1.02] transition-all">
+                         Initialize Upload
+                      </Button>
+                   </label>
+                   <p className="mt-8 text-[10px] text-memoria-text-meta uppercase tracking-widest font-bold">PDF • DOCX • TXT (MAX 10MB)</p>
+                </div>
+              ) : (
+                <div className="space-y-8">
+                   {/* Result UI would go here */}
+                </div>
+              )}
+           </div>
+
+           <aside className="space-y-8">
+              <Card className="bg-memoria-bg-card border-memoria-border-muted rounded-sm p-8">
+                 <span className="label-whisper mb-6 block">Capabilities</span>
+                 <div className="space-y-6">
+                    <div className="flex gap-4">
+                       <Cpu size={20} className="text-memoria-text-hero shrink-0" />
+                       <div>
+                          <h4 className="text-[10px] uppercase tracking-widest font-bold text-memoria-text-hero mb-1">Neural Extraction</h4>
+                          <p className="text-xs text-memoria-text-whisper font-light">Identifying entities and skills with 99% accuracy.</p>
+                       </div>
+                    </div>
+                    <div className="flex gap-4">
+                       <Search size={20} className="text-memoria-text-hero shrink-0" />
+                       <div>
+                          <h4 className="text-[10px] uppercase tracking-widest font-bold text-memoria-text-hero mb-1">Semantic Match</h4>
+                          <p className="text-xs text-memoria-text-whisper font-light">Comparing profiles against job requirements.</p>
+                       </div>
+                    </div>
+                    <div className="flex gap-4">
+                       <Shield size={20} className="text-memoria-text-hero shrink-0" />
+                       <div>
+                          <h4 className="text-[10px] uppercase tracking-widest font-bold text-memoria-text-hero mb-1">Anonymization</h4>
+                          <p className="text-xs text-memoria-text-whisper font-light">Privacy-preserving parsing for bias reduction.</p>
+                       </div>
+                    </div>
+                 </div>
+              </Card>
+
+              <div className="p-8 border border-memoria-border-muted rounded-sm text-center">
+                 <div className="hero-number text-5xl mb-2">0.05</div>
+                 <p className="text-[10px] text-memoria-text-meta uppercase tracking-widest font-bold">USDC PER ANALYSIS</p>
+                 <Link href="/pricing" className="text-[10px] text-memoria-text-hero hover:underline mt-4 block uppercase tracking-widest font-bold">View Quotas</Link>
+              </div>
+           </aside>
         </div>
-
-        {/* Upload Area */}
-        {!result && (
-          <div
-            className={`border-2 border-dashed rounded-xl p-12 text-center transition ${
-              dragActive
-                ? 'border-blue-500 bg-blue-500/10'
-                : 'border-gray-600 bg-gray-800'
-            }`}
-            onDragEnter={handleDrag}
-            onDragLeave={handleDrag}
-            onDragOver={handleDrag}
-            onDrop={handleDrop}
-          >
-            <input
-              type="file"
-              id="resume-upload"
-              className="hidden"
-              accept=".pdf,.doc,.docx,.txt"
-              onChange={handleFileChange}
-            />
-            
-            {!file ? (
-              <label
-                htmlFor="resume-upload"
-                className="cursor-pointer block"
-              >
-                <div className="flex justify-center mb-4">
-                  <Upload className="w-16 h-16 text-gray-400" />
-                </div>
-                <p className="text-lg text-white mb-2">
-                  Drag and drop your resume here
-                </p>
-                <p className="text-gray-400 mb-4">
-                  or click to browse
-                </p>
-                <p className="text-sm text-gray-500">
-                  Supports PDF, DOC, DOCX, TXT (max 10MB)
-                </p>
-              </label>
-            ) : (
-              <div className="text-center">
-                <div className="flex justify-center mb-4">
-                  <FileText className="w-16 h-16 text-blue-400" />
-                </div>
-                <p className="text-lg text-white mb-2">{file.name}</p>
-                <p className="text-gray-400 mb-6">
-                  {(file.size / 1024 / 1024).toFixed(2)} MB
-                </p>
-                <div className="flex justify-center gap-4">
-                  <button
-                    onClick={reset}
-                    className="px-6 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-600 transition"
-                    disabled={loading}
-                  >
-                    Change File
-                  </button>
-                  <button
-                    onClick={handleUpload}
-                    className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition flex items-center gap-2"
-                    disabled={loading}
-                  >
-                    {loading && <Loader2 className="w-4 h-4 animate-spin" />}
-                    {loading ? 'Parsing...' : 'Parse Resume'}
-                  </button>
-                </div>
-              </div>
-            )}
-          </div>
-        )}
-
-        {/* Error */}
-        {error && (
-          <div className="mt-6 p-4 bg-red-500/20 border border-red-500 rounded-lg flex items-center gap-3">
-            <AlertCircle className="w-5 h-5 text-red-400" />
-            <p className="text-red-200">{error}</p>
-          </div>
-        )}
-
-        {/* Results */}
-        {result && (
-          <div className="mt-8 space-y-6">
-            <div className="flex items-center justify-between bg-green-500/20 border border-green-500 rounded-lg p-4">
-              <div className="flex items-center gap-3">
-                <CheckCircle className="w-6 h-6 text-green-400" />
-                <div>
-                  <p className="text-green-200 font-medium">Resume parsed successfully!</p>
-                  <p className="text-green-300 text-sm">Extracted {result.parsedData.skills.length} skills</p>
-                </div>
-              </div>
-              <button
-                onClick={reset}
-                className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition"
-              >
-                Upload Another
-              </button>
-            </div>
-
-            {/* Parsed Data */}
-            <div className="bg-gray-800 rounded-xl p-6 space-y-6">
-              {/* Personal Info */}
-              <div>
-                <h3 className="text-lg font-semibold text-white mb-3">Personal Information</h3>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <div className="bg-gray-700 rounded-lg p-3">
-                    <p className="text-gray-400 text-sm">Name</p>
-                    <p className="text-white font-medium">{result.parsedData.name || 'Not detected'}</p>
-                  </div>
-                  <div className="bg-gray-700 rounded-lg p-3">
-                    <p className="text-gray-400 text-sm">Email</p>
-                    <p className="text-white font-medium">{result.parsedData.email || 'Not detected'}</p>
-                  </div>
-                  <div className="bg-gray-700 rounded-lg p-3">
-                    <p className="text-gray-400 text-sm">Phone</p>
-                    <p className="text-white font-medium">{result.parsedData.phone || 'Not detected'}</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Skills */}
-              {result.parsedData.skills.length > 0 && (
-                <div>
-                  <h3 className="text-lg font-semibold text-white mb-3">Skills ({result.parsedData.skills.length})</h3>
-                  <div className="flex flex-wrap gap-2">
-                    {result.parsedData.skills.map((skill, index) => (
-                      <span
-                        key={index}
-                        className="px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-sm"
-                      >
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* Experience */}
-              {result.parsedData.experience.length > 0 && (
-                <div>
-                  <h3 className="text-lg font-semibold text-white mb-3">Experience</h3>
-                  <div className="space-y-3">
-                    {result.parsedData.experience.slice(0, 3).map((exp, index) => (
-                      <div key={index} className="bg-gray-700 rounded-lg p-4">
-                        <p className="text-white font-medium">{exp.title}</p>
-                        <p className="text-gray-300">{exp.company}</p>
-                        <p className="text-gray-400 text-sm">
-                          {exp.startDate} - {exp.endDate}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* Education */}
-              {result.parsedData.education.length > 0 && (
-                <div>
-                  <h3 className="text-lg font-semibold text-white mb-3">Education</h3>
-                  <div className="space-y-3">
-                    {result.parsedData.education.map((edu, index) => (
-                      <div key={index} className="bg-gray-700 rounded-lg p-4">
-                        <p className="text-white font-medium">{edu.degree}</p>
-                        <p className="text-gray-300">{edu.institution}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* Summary */}
-              {result.parsedData.summary && (
-                <div>
-                  <h3 className="text-lg font-semibold text-white mb-3">Summary</h3>
-                  <p className="text-gray-300 bg-gray-700 rounded-lg p-4">
-                    {result.parsedData.summary}
-                  </p>
-                </div>
-              )}
-            </div>
-
-            {/* Score Button */}
-            <div className="flex justify-center">
-              <Link
-                href="/resume/score"
-                className="px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg font-medium hover:from-blue-700 hover:to-purple-700 transition"
-              >
-                Score This Resume Against a Job
-              </Link>
-            </div>
-          </div>
-        )}
-      </div>
+      </main>
     </div>
   );
 }

@@ -47,6 +47,18 @@ const config: Config = {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
         },
+        memoria: {
+          'bg-ultra-dark': 'var(--memoria-bg-ultra-dark)',
+          'bg-card': 'var(--memoria-bg-card)',
+          'bg-surface': 'var(--memoria-bg-surface)',
+          'border-muted': 'var(--memoria-border-muted)',
+          'border-default': 'var(--memoria-border-default)',
+          'border-active': 'var(--memoria-border-active)',
+          'text-hero': 'var(--memoria-text-hero)',
+          'text-secondary': 'var(--memoria-text-secondary)',
+          'text-whisper': 'var(--memoria-text-whisper)',
+          'text-meta': 'var(--memoria-text-meta)',
+        },
         scientific: {
           blue: '#3b82f6',
           green: '#10b981',

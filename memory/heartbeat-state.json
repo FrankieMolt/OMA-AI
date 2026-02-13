@@ -1,21 +1,17 @@
 {
-  "lastHeartbeat": 1770488600,
-  "heartbeatCount": 0,
+  "lastHeartbeat": "2026-02-13T16:33:00Z",
+  "heartbeatCount": 2,
   "activeTask": null,
-  "idleSince": null,
+  "idleSince": "2026-02-13T16:03:00Z",
   "lastChecks": {
-    "deployment": 1770572900,
-    "github": null,
-    "system": null,
-    "build": null,
-    "errors": null
+    "deployment": "2026-02-13T16:33:00Z",
+    "pm2": "2026-02-13T16:33:00Z",
+    "production": "2026-02-13T16:33:00Z"
   },
-  "issues": [
-    {
-      "type": "warning",
-      "description": "Lint command broken (npm run lint fails)",
-      "actionRequired": "None (use editor linting)",
-      "severity": "low"
-    }
-  ]
+  "issues": [],
+  "systemStatus": {
+    "omaAi": { "local": 200, "prod": 200, "uptime": "5h" },
+    "spendthrone": { "local": 200, "prod": 200, "uptime": "10h" },
+    "lethometry": { "local": 200, "prod": 200, "uptime": "10h" }
+  }
 }

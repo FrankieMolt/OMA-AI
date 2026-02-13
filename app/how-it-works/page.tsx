@@ -3,256 +3,185 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import {
-  Code,
-  Zap,
-  Shield,
-  DollarSign,
-  ArrowRight,
-  CheckCircle,
-  Users,
   Globe,
-  Lock
+  Zap,
+  Code,
+  Users,
+  Shield,
+  CheckCircle,
+  ArrowRight,
+  Database,
+  Wallet
 } from 'lucide-react';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
+import Link from 'next/link';
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent } from "@/components/ui/card";
 
-export default function HowItWorks() {
+export default function HowItWorksPage() {
+  const steps = [
+    {
+      step: '01',
+      title: 'Discovery',
+      description: 'Explore the marketplace of APIs, MCP servers, and agent skills. Filter by performance and price.',
+      icon: <Globe size={32} />
+    },
+    {
+      step: '02',
+      title: 'Simulation',
+      description: 'Test API integrations directly in the sandbox before deploying your agent to production.',
+      icon: <Zap size={32} />
+    },
+    {
+      step: '03',
+      title: 'Deployment',
+      description: 'Generate unique API keys and deploy your autonomous agents with x402 payment support.',
+      icon: <Code size={32} />
+    }
+  ];
+
   return (
-    <div className="min-h-screen bg-zinc-950 text-zinc-100">
-      <Navbar />
-
+    <div className="min-h-screen bg-background selection:bg-primary selection:text-primary-foreground">
       {/* Hero */}
-      <section className="py-20 px-6">
-        <div className="max-w-4xl mx-auto text-center">
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-5xl font-bold mb-6"
-          >
-            How <span className="gradient-text">OMA-AI</span> Works
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="text-xl text-zinc-400"
-          >
-            The marketplace for APIs, MCP servers, and AI agent skills
-          </motion.p>
+      <section className="pt-48 pb-20 px-4 md:px-14">
+        <div className="max-w-7xl mx-auto">
+          <Badge variant="outline" className="mb-6 rounded-sm uppercase tracking-[0.2em] text-[10px] py-1 border-memoria-border-default text-memoria-text-whisper px-4">
+             Process
+          </Badge>
+          <h1 className="text-5xl md:text-8xl font-light tracking-tighter leading-[0.9] mb-8 font-display text-memoria-text-hero">
+             System<br/><span className=\"text-memoria-text-secondary\">Operation</span>
+          </h1>
+          <p className="text-xl text-memoria-text-whisper max-w-2xl font-light leading-relaxed">
+             The OMA-AI marketplace facilitates seamless commerce between human developers, API providers, and autonomous agents.
+          </p>
         </div>
       </section>
 
-      {/* How It Works */}
-      <section className="py-16 px-6">
+      {/* Steps Section */}
+      <section className="py-20 px-4 md:px-14 border-y border-memoria-border-muted">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold mb-12 text-center">
-            For <span className="gradient-text">Developers</span>
-          </h2>
-          
-          <div className="grid md:grid-cols-3 gap-8 mb-16">
-            <StepCard
-              step="1"
-              title="Browse Marketplace"
-              description="Explore hundreds of APIs, MCP servers, and AI skills. Filter by category, pricing, or rating."
-              icon={<Globe size={32} />}
-            />
-            <StepCard
-              step="2"
-              title="Test for Free"
-              description="Test APIs and MCPs directly from the browser. Try them out before integrating."
-              icon={<Zap size={32} />}
-            />
-            <StepCard
-              step="3"
-              title="Get Your API Key"
-              description="Get your unique API key and start building immediately. Pay only for what you use."
-              icon={<Code size={32} />}
-            />
-          </div>
+           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+              {steps.map((item, i) => (
+                <div key={i} className="relative">
+                   <div className="hero-number text-8xl md:text-9xl mb-8 opacity-20">
+                      {item.step}
+                   </div>
+                   <div className="absolute top-24 left-0">
+                      <div className="w-12 h-12 bg-memoria-bg-card border border-memoria-border-muted rounded-sm flex items-center justify-center mb-6">
+                         <div className="text-memoria-text-hero">{item.icon}</div>
+                      </div>
+                      <h3 className="text-2xl font-light text-memoria-text-hero mb-4 font-display">
+                         {item.title}
+                      </h3>
+                      <p className="text-sm text-memoria-text-whisper font-light leading-relaxed max-w-xs">
+                         {item.description}
+                      </p>
+                   </div>
+                </div>
+              ))}
+           </div>
         </div>
       </section>
 
-      {/* For Providers */}
-      <section className="py-16 px-6 bg-zinc-900/50">
+      {/* Roles Section */}
+      <section className="py-32 px-4 md:px-14">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold mb-12 text-center">
-            For <span className="gradient-text">Providers</span>
-          </h2>
-          
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="glass-card p-8">
-              <h3 className="text-2xl font-bold mb-4 flex items-center gap-3">
-                <Users size={28} />
-                List Your API
-              </h3>
-              <p className="text-zinc-400 mb-6">
-                Reach thousands of developers building autonomous agents. 
-                Showcase your API with pricing, documentation, and examples.
-              </p>
-              <ul className="space-y-3">
-                <li className="flex items-start gap-2">
-                  <CheckCircle size={20} className="text-green-500 mt-1" />
-                  <span>Exposure to AI agent developers</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircle size={20} className="text-green-500 mt-1" />
-                  <span>Automated billing via x402 payments</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircle size={20} className="text-green-500 mt-1" />
-                  <span>Analytics and usage tracking</span>
-                </li>
-              </ul>
+           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+              <Card className="bg-memoria-bg-card border-memoria-border-muted rounded-sm p-10 hover:border-memoria-border-active transition-all">
+                 <div className="flex items-center gap-4 mb-8">
+                    <Users size={32} className="text-memoria-text-hero" />
+                    <h3 className="text-3xl font-light font-display text-memoria-text-hero">For Providers</h3>
+                 </div>
+                 <p className="text-memoria-text-whisper font-light leading-relaxed mb-10">
+                    List your APIs and MCP servers to reach a global network of autonomous AI agents. Automated billing via x402.
+                 </p>
+                 <div className="space-y-4">
+                    <div className="flex gap-3 text-xs text-memoria-text-meta uppercase tracking-widest">
+                       <CheckCircle size={14} className="text-memoria-text-hero" /> Automated Revenue Stream
+                    </div>
+                    <div className="flex gap-3 text-xs text-memoria-text-meta uppercase tracking-widest">
+                       <CheckCircle size={14} className="text-memoria-text-hero" /> Usage Analytics Dashboard
+                    </div>
+                    <div className="flex gap-3 text-xs text-memoria-text-meta uppercase tracking-widest">
+                       <CheckCircle size={14} className="text-memoria-text-hero" /> Standardized MCP Hosting
+                    </div>
+                 </div>
+              </Card>
+
+              <Card className="bg-memoria-bg-card border-memoria-border-muted rounded-sm p-10 hover:border-memoria-border-active transition-all">
+                 <div className="flex items-center gap-4 mb-8">
+                    <Database size={32} className="text-memoria-text-hero" />
+                    <h3 className="text-3xl font-light font-display text-memoria-text-hero">For Developers</h3>
+                 </div>
+                 <p className="text-memoria-text-whisper font-light leading-relaxed mb-10">
+                    Empower your agents with specialized capabilities. Discovery and payment integration built-in.
+                 </p>
+                 <div className="space-y-4">
+                    <div className="flex gap-3 text-xs text-memoria-text-meta uppercase tracking-widest">
+                       <CheckCircle size={14} className="text-memoria-text-hero" /> Programmatic Discovery
+                    </div>
+                    <div className="flex gap-3 text-xs text-memoria-text-meta uppercase tracking-widest">
+                       <CheckCircle size={14} className="text-memoria-text-hero" /> Pay-per-Call Integration
+                    </div>
+                    <div className="flex gap-3 text-xs text-memoria-text-meta uppercase tracking-widest">
+                       <CheckCircle size={14} className="text-memoria-text-hero" /> Universal SDK Support
+                    </div>
+                 </div>
+              </Card>
+           </div>
+        </div>
+      </section>
+
+      {/* Infrastructure Section */}
+      <section className="py-32 px-4 md:px-14 bg-memoria-bg-card/30 border-t border-memoria-border-muted">
+         <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-20">
+               <span className="label-whisper">Infrastructure</span>
+               <h2 className="text-4xl md:text-6xl font-light tracking-tight mt-4 font-display text-memoria-text-hero">
+                  The Protocol Layer
+               </h2>
             </div>
             
-            <div className="glass-card p-8">
-              <h3 className="text-2xl font-bold mb-4 flex items-center gap-3">
-                <Shield size={28} />
-                MCP Server Integration
-              </h3>
-              <p className="text-zinc-400 mb-6">
-                Deploy your MCP server and list it on OMA-AI. 
-                Connect directly to agents via Model Context Protocol.
-              </p>
-              <ul className="space-y-3">
-                <li className="flex items-start gap-2">
-                  <CheckCircle size={20} className="text-green-500 mt-1" />
-                  <span>Standard MCP protocol support</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircle size={20} className="text-green-500 mt-1" />
-                  <span>Automatic discovery and connection</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircle size={20} className="text-green-500 mt-1" />
-                  <span>Local or cloud deployment</span>
-                </li>
-              </ul>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+               <div className="p-8 text-center border-r border-memoria-border-muted last:border-0">
+                  <Wallet size={48} className="text-memoria-text-hero mx-auto mb-6" />
+                  <h4 className="text-xl font-light mb-4 text-memoria-text-hero font-display">x402 Protocol</h4>
+                  <p className="text-xs text-memoria-text-whisper leading-relaxed">Decentralized payment layer for instant settlement between agents and providers.</p>
+               </div>
+               <div className="p-8 text-center border-r border-memoria-border-muted last:border-0">
+                  <Database size={48} className="text-memoria-text-hero mx-auto mb-6" />
+                  <h4 className="text-xl font-light mb-4 text-memoria-text-hero font-display">MCP Standards</h4>
+                  <p className="text-xs text-memoria-text-whisper leading-relaxed">Model Context Protocol integration for universal tool connectivity.</p>
+               </div>
+               <div className="p-8 text-center">
+                  <Shield size={48} className="text-memoria-text-hero mx-auto mb-6" />
+                  <h4 className="text-xl font-light mb-4 text-memoria-text-hero font-display">Agent Auth</h4>
+                  <p className="text-xs text-memoria-text-whisper leading-relaxed">Secure OAuth flow designed specifically for autonomous machine entities.</p>
+               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Hosting */}
-      <section className="py-16 px-6">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold mb-8 text-center">
-            Where to Host Your APIs/MCPs?
-          </h2>
-          
-          <div className="space-y-6">
-            <HostingOption
-              type="API"
-              title="REST APIs"
-              platforms={[
-                { name: 'Railway', desc: 'Easy deployment with auto-scaling' },
-                { name: 'Render', desc: 'Free tier available, Docker support' },
-                { name: 'Vercel', desc: 'Serverless functions, great for APIs' },
-                { name: 'AWS Lambda', desc: 'Enterprise-grade, pay per use' },
-                { name: 'Google Cloud Functions', desc: 'Serverless, auto-scaling' },
-              ]}
-            />
-            
-            <HostingOption
-              type="MCP"
-              title="MCP Servers"
-              platforms={[
-                { name: 'Local Machine', desc: 'Run on your own computer' },
-                { name: 'VPS (DigitalOcean, Linode)', desc: 'Full control, affordable' },
-                { name: 'Railway', desc: 'Docker-based deployment' },
-                { name: 'Fly.io', desc: 'Edge deployment, global CDN' },
-              ]}
-            />
-            
-            <HostingOption
-              type="Payment"
-              title="x402 Payments"
-              platforms={[
-                { name: 'Base Network', desc: 'L2 on Ethereum, low fees' },
-                { name: 'Ethereum', desc: 'Mainnet for production' },
-                { name: 'Solana', desc: 'Fast transactions, low cost' },
-              ]}
-            />
-          </div>
-        </div>
+         </div>
       </section>
 
       {/* CTA */}
-      <section className="py-20 px-6 bg-gradient-to-br from-purple-900/20 to-blue-900/20">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl font-bold mb-6">
-            Ready to Get Started?
+      <section className="py-40 px-4 md:px-14 text-center">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-4xl md:text-6xl font-light mb-12 font-display text-memoria-text-hero">
+            Start Your Journey.
           </h2>
-          <p className="text-xl text-zinc-400 mb-8">
-            Browse the marketplace or list your own API/MCP today.
-          </p>
-          <div className="flex items-center justify-center gap-4">
-            <a
-              href="/"
-              className="btn-primary px-8 py-4 rounded-lg text-lg font-medium flex items-center gap-2"
-            >
-              Browse Marketplace
-              <ArrowRight size={20} />
-            </a>
-            <a
-              href="/docs"
-              className="btn-secondary px-8 py-4 rounded-lg text-lg font-medium flex items-center gap-2"
-            >
-              <Code size={18} />
-              Documentation
-            </a>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+             <Link href="/marketplace" className="no-underline">
+                <Button className="bg-memoria-text-hero text-memoria-bg-ultra-dark rounded-sm px-10 h-16 text-xs font-bold uppercase tracking-widest hover:bg-memoria-text-secondary">
+                   Browse Marketplace
+                </Button>
+             </Link>
+             <Link href="/docs" className="no-underline">
+                <Button variant="outline" className="border-memoria-border-muted text-memoria-text-meta hover:text-white rounded-sm px-10 h-16 text-xs font-bold uppercase tracking-widest">
+                   Documentation
+                </Button>
+             </Link>
           </div>
         </div>
       </section>
-
-      <Footer />
-    </div>
-  );
-}
-
-function StepCard({ step, title, description, icon }: { step: string; title: string; description: string; icon: React.ReactNode }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="glass-card p-6 text-center"
-    >
-      <div className="text-4xl font-bold text-purple-500 mb-4">{step}</div>
-      <div className="flex justify-center mb-4">
-        {icon}
-      </div>
-      <h3 className="text-xl font-bold mb-2">{title}</h3>
-      <p className="text-zinc-400 text-sm">{description}</p>
-    </motion.div>
-  );
-}
-
-function HostingOption({ type, title, platforms }: { type: string; title: string; platforms: Array<{name: string, desc: string}> }) {
-  const typeColors: Record<string, string> = {
-    API: 'bg-blue-500/20 text-blue-400',
-    MCP: 'bg-purple-500/20 text-purple-400',
-    Payment: 'bg-green-500/20 text-green-400'
-  };
-
-  return (
-    <div className="glass-card p-6">
-      <div className="flex items-center gap-3 mb-6">
-        <span className={`px-3 py-1 rounded-full text-sm ${typeColors[type]}`}>
-          {type}
-        </span>
-        <h3 className="text-xl font-bold">{title}</h3>
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {platforms.map((platform: any) => (
-          <div
-            key={platform.name}
-            className="bg-zinc-900 p-4 rounded-lg border border-zinc-800 hover:border-purple-500/50 transition-all"
-          >
-            <div className="font-semibold mb-1">{platform.name}</div>
-            <div className="text-zinc-500 text-xs">{platform.desc}</div>
-          </div>
-        ))}
-      </div>
     </div>
   );
 }

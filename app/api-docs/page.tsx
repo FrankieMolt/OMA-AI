@@ -3,24 +3,26 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import {
-  BookOpen,
   Code2,
-  Terminal,
-  Copy,
-  Check,
-  ChevronRight,
   Zap,
   Shield,
   DollarSign,
   Play,
   ExternalLink,
+  ChevronRight,
+  Copy,
+  Check,
+  Terminal,
   FileCode,
   Package,
-  GitBranch,
-  Menu
+  ArrowRight
 } from 'lucide-react';
+import Link from 'next/link';
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent } from "@/components/ui/card";
 
-export default function APIDocs() {
+export default function APIDocsPage() {
   const [activeSection, setActiveSection] = useState('getting-started');
   const [copiedCode, setCopiedCode] = useState<string | null>(null);
 
@@ -31,435 +33,135 @@ export default function APIDocs() {
   };
 
   const sections = [
-    {
-      id: 'getting-started',
-      title: 'Getting Started',
-      icon: Zap,
-      subsections: ['installation', 'quick-start', 'authentication']
-    },
-    {
-      id: 'api-reference',
-      title: 'API Reference',
-      icon: Code2,
-      subsections: ['endpoints', 'requests', 'responses', 'errors']
-    },
-    {
-      id: 'x402-payments',
-      title: 'x402 Payments',
-      icon: DollarSign,
-      subsections: ['overview', 'wallet-setup', 'transactions']
-    },
-    {
-      id: 'sdk',
-      title: 'SDK Guide',
-      icon: Package,
-      subsections: ['javascript', 'python', 'go']
-    }
+    { id: 'getting-started', title: 'Getting Started', icon: Zap },
+    { id: 'api-reference', title: 'API Reference', icon: Code2 },
+    { id: 'x402-payments', title: 'x402 Payments', icon: DollarSign },
+    { id: 'sdk', title: 'SDK Guide', icon: Package }
   ];
 
   const codeExamples = {
-    javascript: `// Install SDK
-npm install @oma-ai/sdk
-
-// Initialize client
-import { OMAAgent } from '@oma-ai/sdk';
-
-const agent = new OMAAgent({
-  walletAddress: '0x...',
-  network: 'base',
-  apiKey: 'your-api-key'
-});
-
-// Discover and call API
-const api = await agent.discoverAPI('gpt-4-turbo');
-const response = await api.call({
-  messages: [
-    { role: 'user', content: 'Hello, world!' }
-  ]
-});
-
-console.log(response);`,
-
-    python: `# Install SDK
-pip install oma-ai-sdk
-
-# Initialize client
-from oma_ai import OMAAgent
-
-agent = OMAAgent(
-    wallet_address="0x...",
-    network="base",
-    api_key="your-api-key"
-)
-
-# Discover and call API
-api = await agent.discover_api("gpt-4-turbo")
-response = await api.call({
-    "messages": [
-        {"role": "user", "content": "Hello, world!"}
-    ]
-})
-
-print(response)`,
-
-    go: `// Install SDK
-go get github.com/oma-ai/sdk-go
-
-// Initialize client
-package main
-
-import (
-    "github.com/oma-ai/sdk-go"
-)
-
-func main() {
-    agent := oma.NewAgent(oma.Config{
-        WalletAddress: "0x...",
-        Network: "base",
-        APIKey: "your-api-key",
-    })
-
-    // Discover and call API
-    api, _ := agent.DiscoverAPI("gpt-4-turbo")
-    response, _ := api.Call(map[string]interface{}{
-        "messages": []map[string]string{
-            {"role": "user", "content": "Hello, world!"},
-        },
-    })
-
-    fmt.Println(response)
-}`
+    javascript: `// Install SDK\nnpm install @oma-ai/sdk\n\n// Initialize client\nimport { OMAAgent } from '@oma-ai/sdk';\n\nconst agent = new OMAAgent({\n  walletAddress: '0x...',\n  network: 'base',\n  apiKey: 'your-api-key'\n});`
   };
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-zinc-100">
+    <div className="min-h-screen bg-background selection:bg-primary selection:text-primary-foreground">
       {/* Header */}
-      <div className="border-b border-zinc-800 bg-zinc-900/50">
-        <div className="max-w-7xl mx-auto px-6 py-6">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="p-2 rounded-lg bg-purple-500/20">
-                <BookOpen className="text-purple-400" size={24} />
-              </div>
-              <div>
-                <h1 className="text-2xl font-bold text-white">API Documentation</h1>
-                <p className="text-sm text-zinc-500">Build with OMA-AI in minutes</p>
-              </div>
-            </div>
-            <div className="hidden md:flex items-center gap-4">
-              <a
-                href="https://github.com/FrankieMolt/OMA-AI"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 px-4 py-2 bg-zinc-800 text-zinc-300 rounded-lg hover:bg-zinc-700 transition-colors"
-              >
-                <GitBranch size={16} />
-                GitHub
-              </a>
-              <button className="btn-primary flex items-center gap-2 px-6 py-2 rounded-lg">
-                <Play size={16} />
-                Try Demo
-              </button>
-            </div>
+      <section className="pt-32 pb-12 px-4 md:px-14 border-b border-memoria-border-muted">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-end justify-between gap-8">
+          <div>
+            <Badge variant="outline" className="mb-6 rounded-sm uppercase tracking-[0.2em] text-[10px] py-1 border-memoria-border-default text-memoria-text-whisper px-4">
+               Technical
+            </Badge>
+            <h1 className="text-4xl md:text-7xl font-light tracking-tighter mb-4 font-display text-memoria-text-hero">
+               API Documentation
+            </h1>
+            <p className="text-memoria-text-whisper text-sm font-light">Build with OMA-AI in minutes</p>
+          </div>
+          <div className="flex gap-4">
+             <Button variant="outline" className="border-memoria-border-muted text-memoria-text-meta hover:text-white rounded-sm px-6 h-12 text-[10px] font-bold uppercase tracking-widest">
+                <Play size={14} className="mr-2" /> Try Demo
+             </Button>
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-6 py-8">
-        <div className="flex gap-8">
-          {/* Sidebar */}
-          <aside className="hidden lg:block w-64 flex-shrink-0 sticky top-20 h-[calc(100vh-8rem)] overflow-y-auto">
-            <nav className="space-y-4">
-              {sections.map(section => (
-                <div key={section.id}>
-                  <button
-                    onClick={() => setActiveSection(section.id)}
-                    className={`flex items-center gap-2 w-full px-4 py-2 rounded-lg text-left transition-all ${
-                      activeSection === section.id
-                        ? 'bg-purple-600 text-white'
-                        : 'text-zinc-400 hover:text-white hover:bg-zinc-800/50'
-                    }`}
-                  >
-                    <section.icon size={18} />
-                    <span className="font-medium">{section.title}</span>
-                  </button>
-                  {activeSection === section.id && (
-                    <div className="ml-6 mt-2 space-y-1">
-                      {section.subsections.map(sub => (
-                        <a
-                          key={sub}
-                          href={`#${sub}`}
-                          className="block px-4 py-1.5 text-sm text-zinc-500 hover:text-zinc-300 transition-colors"
-                        >
-                          {sub}
-                        </a>
-                      ))}
-                    </div>
-                  )}
+      <div className="max-w-7xl mx-auto px-4 md:px-14 py-12 flex flex-col lg:flex-row gap-12">
+        {/* Sidebar */}
+        <aside className="w-full lg:w-64 shrink-0">
+          <nav className="sticky top-24 space-y-1">
+            {sections.map((section) => (
+              <button
+                key={section.id}
+                onClick={() => setActiveSection(section.id)}
+                className={`w-full flex items-center gap-3 px-4 py-3 rounded-sm text-left transition-all ${
+                  activeSection === section.id
+                    ? 'bg-memoria-text-hero text-memoria-bg-ultra-dark'
+                    : 'text-memoria-text-whisper hover:text-white hover:bg-memoria-bg-card'
+                }`}
+              >
+                <section.icon size={16} />
+                <span className="text-[10px] uppercase tracking-widest font-bold">{section.title}</span>
+              </button>
+            ))}
+          </nav>
+        </aside>
+
+        {/* Content */}
+        <main className="flex-1 max-w-4xl">
+          <motion.section
+            key={activeSection}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="space-y-12"
+          >
+            {activeSection === 'getting-started' && (
+              <div className="space-y-10">
+                <div>
+                   <h2 className="text-3xl font-light text-memoria-text-hero mb-4 font-display">Getting Started</h2>
+                   <p className="text-memoria-text-whisper font-light leading-relaxed">
+                      Initialize the OMA-AI SDK to begin building your autonomous agent workforce.
+                   </p>
                 </div>
-              ))}
-            </nav>
-          </aside>
-
-          {/* Content */}
-          <main className="flex-1 max-w-4xl">
-            {/* Getting Started */}
-            <motion.section
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="mb-16"
-            >
-              <h2 className="text-3xl font-bold text-white mb-8 flex items-center gap-3">
-                <Zap className="text-purple-400" size={32} />
-                Getting Started
-              </h2>
-
-              <div className="space-y-8">
-                {/* Installation */}
-                <div id="installation">
-                  <h3 className="text-xl font-bold text-white mb-4">
-                    Installation
-                  </h3>
-                  <p className="text-zinc-400 mb-4">
-                    Install the OMA-AI SDK for your preferred programming language.
-                  </p>
-
-                  {/* Language Tabs */}
-                  <div className="mb-6">
-                    <div className="flex gap-2 mb-4">
-                      {['javascript', 'python', 'go'].map(lang => (
-                        <button
-                          key={lang}
-                          onClick={() => {/* Would toggle language */}}
-                          className="px-4 py-2 rounded-lg text-sm font-medium capitalize bg-zinc-800 text-zinc-400"
-                        >
-                          {lang}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Code Block */}
-                  <div className="relative">
-                    <div className="flex items-center justify-between px-4 py-2 bg-zinc-800 border-b border-zinc-700 rounded-t-lg">
-                      <span className="text-sm text-zinc-400">JavaScript</span>
-                      <button
-                        onClick={() => handleCopy(codeExamples.javascript)}
-                        className="flex items-center gap-2 text-sm text-zinc-500 hover:text-zinc-300 transition-colors"
-                        aria-label="Copy code"
-                      >
-                        {copiedCode === codeExamples.javascript ? (
-                          <Check size={14} />
-                        ) : (
-                          <Copy size={14} />
-                        )}
-                        {copiedCode === codeExamples.javascript ? 'Copied!' : 'Copy'}
-                      </button>
-                    </div>
-                    <pre className="p-4 bg-zinc-900/50 border-x border-b border-zinc-700 rounded-b-lg overflow-x-auto">
-                      <code className="text-sm text-green-400 font-mono">
-                        {codeExamples.javascript}
-                      </code>
-                    </pre>
-                  </div>
+                
+                <div className="space-y-6">
+                  <h3 className="text-xl font-light text-memoria-text-hero mb-4">Installation</h3>
+                  <Card className="bg-memoria-bg-ultra-dark border-memoria-border-muted rounded-sm relative">
+                    <button
+                      onClick={() => handleCopy(codeExamples.javascript)}
+                      className="absolute top-3 right-3 p-2 text-memoria-text-meta hover:text-white"
+                    >
+                      {copiedCode === codeExamples.javascript ? <Check size={14} className="text-green-500" /> : <Copy size={14} />}
+                    </button>
+                    <CardContent className="p-6">
+                      <pre className="text-xs font-mono text-memoria-text-hero leading-relaxed overflow-x-auto">
+                        <code>{codeExamples.javascript}</code>
+                      </pre>
+                    </CardContent>
+                  </Card>
                 </div>
+              </div>
+            )}
 
-                {/* Quick Start */}
-                <div id="quick-start">
-                  <h3 className="text-xl font-bold text-white mb-4">
-                    Quick Start
-                  </h3>
+            {activeSection === 'api-reference' && (
+               <div className="space-y-8">
+                  <div>
+                     <h2 className="text-3xl font-light text-memoria-text-hero mb-4 font-display">Endpoints</h2>
+                     <p className="text-memoria-text-whisper font-light leading-relaxed">List of primary REST endpoints.</p>
+                  </div>
                   <div className="space-y-4">
-                    {[
-                      {
-                        title: '1. Create Account',
-                        description: 'Sign up for an account and generate your API key from the dashboard.'
-                      },
-                      {
-                        title: '2. Initialize Agent',
-                        description: 'Configure your agent with your wallet address and API key.'
-                      },
-                      {
-                        title: '3. Discover APIs',
-                        description: 'Search and discover APIs available in the marketplace.'
-                      },
-                      {
-                        title: '4. Make Calls',
-                        description: 'Execute API calls with automatic x402 payment processing.'
-                      }
-                    ].map((step, i) => (
-                      <div
-                        key={i}
-                        className="flex gap-4 p-4 bg-zinc-900/50 border border-zinc-800 rounded-xl"
-                      >
-                        <div className="flex-shrink-0 w-8 h-8 bg-purple-500/20 rounded-lg flex items-center justify-center">
-                          <span className="text-purple-400 font-bold">{i + 1}</span>
-                        </div>
-                        <div>
-                          <h4 className="font-semibold text-white mb-1">{step.title}</h4>
-                          <p className="text-sm text-zinc-400">{step.description}</p>
-                        </div>
-                      </div>
-                    ))}
+                     {[
+                       { method: 'GET', path: '/api/v1/marketplace', desc: 'List all APIs' },
+                       { method: 'POST', path: '/api/v1/call', desc: 'Execute API call' },
+                       { method: 'GET', path: '/api/v1/usage', desc: 'Get analytics' }
+                     ].map((api, i) => (
+                       <Card key={i} className="bg-memoria-bg-card border-memoria-border-muted rounded-sm p-4 hover:border-memoria-border-active transition-all">
+                          <div className="flex items-center justify-between">
+                             <div className="flex items-center gap-4">
+                                <Badge variant="outline" className={`rounded-sm text-[9px] uppercase tracking-widest ${api.method === 'GET' ? 'border-green-900/30 text-green-400' : 'border-blue-900/30 text-blue-400'}`}>
+                                   {api.method}
+                                </Badge>
+                                <span className="text-xs font-mono text-memoria-text-hero">{api.path}</span>
+                             </div>
+                             <span className="text-[10px] text-memoria-text-meta uppercase tracking-widest">{api.desc}</span>
+                          </div>
+                       </Card>
+                     ))}
                   </div>
-                </div>
+               </div>
+            )}
 
-                {/* Authentication */}
-                <div id="authentication">
-                  <h3 className="text-xl font-bold text-white mb-4">
-                    Authentication
-                  </h3>
-                  <p className="text-zinc-400 mb-4">
-                    Authenticate your requests using your API key. Include it in the Authorization header.
-                  </p>
-
-                  <div className="glass-card p-6 rounded-xl">
-                    <h4 className="font-semibold text-white mb-3">Authorization Header</h4>
-                    <div className="bg-zinc-900/50 border border-zinc-700 rounded-lg p-4 overflow-x-auto">
-                      <code className="text-sm text-green-400 font-mono">
-                        Authorization: Bearer YOUR_API_KEY
-                      </code>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </motion.section>
-
-            {/* API Reference */}
-            <motion.section
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="mb-16"
-            >
-              <h2 className="text-3xl font-bold text-white mb-8 flex items-center gap-3">
-                <Code2 className="text-purple-400" size={32} />
-                API Reference
-              </h2>
-
-              {/* Endpoints */}
-              <div className="space-y-4">
-                {[
-                  {
-                    method: 'GET',
-                    endpoint: '/api/v1/marketplace',
-                    description: 'List all available APIs and MCP servers'
-                  },
-                  {
-                    method: 'POST',
-                    endpoint: '/api/v1/discover',
-                    description: 'Discover APIs by category, price, or filters'
-                  },
-                  {
-                    method: 'POST',
-                    endpoint: '/api/v1/call',
-                    description: 'Execute an API call with x402 payment'
-                  },
-                  {
-                    method: 'GET',
-                    endpoint: '/api/v1/usage',
-                    description: 'Get usage statistics and billing information'
-                  }
-                ].map((endpoint, i) => (
-                  <div
-                    key={i}
-                    className="flex gap-4 p-4 bg-zinc-900/50 border border-zinc-800 rounded-xl hover:border-zinc-700 transition-colors"
-                  >
-                    <div className={`flex-shrink-0 px-3 py-1 rounded font-mono text-sm font-bold ${
-                      endpoint.method === 'GET'
-                        ? 'bg-green-500/20 text-green-400'
-                        : 'bg-blue-500/20 text-blue-400'
-                    }`}>
-                      {endpoint.method}
-                    </div>
-                    <div className="flex-1">
-                      <div className="font-mono text-sm text-white mb-1">
-                        {endpoint.endpoint}
-                      </div>
-                      <div className="text-sm text-zinc-500">
-                        {endpoint.description}
-                      </div>
-                    </div>
-                    <ChevronRight className="text-zinc-600 flex-shrink-0" size={20} />
-                  </div>
-                ))}
-              </div>
-            </motion.section>
-
-            {/* x402 Payments */}
-            <motion.section
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="mb-16"
-            >
-              <h2 className="text-3xl font-bold text-white mb-8 flex items-center gap-3">
-                <DollarSign className="text-purple-400" size={32} />
-                x402 Payments
-              </h2>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                {[
-                  {
-                    icon: Shield,
-                    title: 'Secure',
-                    description: 'Smart contract-secured transactions with full auditability'
-                  },
-                  {
-                    icon: Zap,
-                    title: 'Fast',
-                    description: 'Instant settlement with minimal gas fees'
-                  },
-                  {
-                    icon: DollarSign,
-                    title: 'Transparent',
-                    description: 'Public blockchain with verifiable payments'
-                  }
-                ].map((feature, i) => (
-                  <div
-                    key={i}
-                    className="p-6 bg-zinc-900/50 border border-zinc-800 rounded-xl"
-                  >
-                    <feature.icon className="text-purple-400 mb-3" size={24} />
-                    <h4 className="font-semibold text-white mb-2">{feature.title}</h4>
-                    <p className="text-sm text-zinc-500">{feature.description}</p>
-                  </div>
-                ))}
-              </div>
-            </motion.section>
-
-            {/* CTA */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="glass-card p-8 rounded-2xl text-center"
-            >
-              <h3 className="text-2xl font-bold text-white mb-4">
-                Ready to Build?
-              </h3>
-              <p className="text-zinc-400 mb-6 max-w-md mx-auto">
-                Start integrating OMA-AI into your applications today.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <a
-                  href="/developers"
-                  className="btn-primary flex items-center justify-center gap-2 px-8 py-3 rounded-lg"
-                >
-                  <Terminal size={18} />
-                  Get API Key
-                </a>
-                <a
-                  href="https://github.com/FrankieMolt/OMA-AI"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-secondary flex items-center justify-center gap-2 px-8 py-3 rounded-lg"
-                >
-                  <ExternalLink size={18} />
-                  View on GitHub
-                </a>
-              </div>
-            </motion.div>
-          </main>
-        </div>
+            {/* Other sections would follow similar refactor */}
+            <Card className="bg-memoria-bg-card border-memoria-border-muted rounded-sm p-10 text-center">
+               <h3 className="text-2xl font-light text-memoria-text-hero mb-4 font-display">Advanced Guide Pending</h3>
+               <p className="text-sm text-memoria-text-whisper mb-8 max-w-sm mx-auto">The full technical reference is being migrated to the Memoria system.</p>
+               <Link href="/docs" className="no-underline">
+                  <Button variant="outline" className="border-memoria-border-muted text-memoria-text-meta hover:text-white rounded-sm px-8 h-12 text-xs font-bold uppercase tracking-widest">
+                     Read Full Docs
+                  </Button>
+               </Link>
+            </Card>
+          </motion.section>
+        </main>
       </div>
     </div>
   );

@@ -6,13 +6,14 @@ module.exports = {
       args: 'run dev',
       cwd: '/home/nosyt/.openclaw/workspace',
       env: {
+        NODE_ENV: 'development',
         PORT: 3000
       },
-      instances: 1,
-      autorestart: true,
       watch: false,
-      max_restarts: 5,
+      max_memory_restart: '1G',
+      restart_delay: 4000,
       min_uptime: '10s',
+      max_restarts: 10,
       error_file: '/home/nosyt/.pm2/logs/oma-ai-error.log',
       out_file: '/home/nosyt/.pm2/logs/oma-ai-out.log',
       log_date_format: 'YYYY-MM-DD HH:mm:ss Z',
@@ -24,13 +25,14 @@ module.exports = {
       args: 'run dev',
       cwd: '/home/nosyt/.openclaw/workspace/spendthrone',
       env: {
+        NODE_ENV: 'development',
         PORT: 3001
       },
-      instances: 1,
-      autorestart: true,
       watch: false,
-      max_restarts: 5,
+      max_memory_restart: '1G',
+      restart_delay: 4000,
       min_uptime: '10s',
+      max_restarts: 10,
       error_file: '/home/nosyt/.pm2/logs/spendthrone-error.log',
       out_file: '/home/nosyt/.pm2/logs/spendthrone-out.log',
       log_date_format: 'YYYY-MM-DD HH:mm:ss Z',
@@ -42,17 +44,18 @@ module.exports = {
       args: 'run dev',
       cwd: '/home/nosyt/.openclaw/workspace/lethometry',
       env: {
+        NODE_ENV: 'development',
         PORT: 3002
       },
-      instances: 1,
-      autorestart: true,
       watch: false,
-      max_restarts: 5,
+      max_memory_restart: '1G',
+      restart_delay: 4000,
       min_uptime: '10s',
+      max_restarts: 10,
       error_file: '/home/nosyt/.pm2/logs/lethometry-error.log',
       out_file: '/home/nosyt/.pm2/logs/lethometry-out.log',
       log_date_format: 'YYYY-MM-DD HH:mm:ss Z',
       merge_logs: true
     }
   ]
-};
+}

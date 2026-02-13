@@ -1,122 +1,110 @@
+'use client';
+
+import React from 'react';
+import { motion } from 'framer-motion';
+import { Shield, Activity, BookOpen, Globe, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
-import { FlaskConical, Users, Target, Heart, Github } from 'lucide-react';
+import { Card, CardContent } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen scientific-grid">
+    <div className="min-h-screen bg-background text-foreground selection:bg-primary selection:text-primary-foreground">
       {/* Header */}
-      <section className="py-12 border-b border-border/50">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground mb-4">
-            <Link href="/" className="hover:text-foreground">Home</Link>
-            <span>/</span>
-            <span>About</span>
-          </div>
-
-          <h1 className="text-3xl font-bold text-foreground mb-2">About Lethometry</h1>
-          <p className="text-muted-foreground">
-            Advancing our understanding of artificial intelligence through rigorous scientific inquiry.
+      <section className="pt-48 pb-20 px-4 md:px-14 border-b border-memoria-border-muted">
+        <div className="mx-auto max-w-7xl">
+          <Badge variant="outline" className="mb-6 rounded-sm uppercase tracking-[0.2em] text-[10px] py-1 border-memoria-border-default text-memoria-text-whisper px-4">
+             Scientific Manifesto
+          </Badge>
+          <h1 className="text-5xl md:text-8xl font-light tracking-tighter leading-[0.9] mb-10 font-display text-memoria-text-hero">
+             Quantifying the<br/><span className="italic">Human Experience</span>
+          </h1>
+          <p className="text-xl md:text-2xl text-memoria-text-whisper max-w-3xl font-light leading-relaxed">
+             Lethometry is an interdisciplinary research platform dedicated to the measurement of existential variables. 
+             Through rigorous quantification, we bridge the gap between biological reality and intellectual structures.
           </p>
         </div>
       </section>
 
-      {/* Content */}
-      <section className="py-12">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="prose prose-invert max-w-none">
-            <div className="academic-paper mb-8">
-              <h2 className="text-xl font-semibold text-foreground mb-4 flex items-center gap-2">
-                <Target className="w-5 h-5 text-scientific-blue" />
-                Our Mission
+      {/* Philosophy */}
+      <section className="py-32 px-4 md:px-14">
+        <div className="mx-auto max-w-7xl grid grid-cols-1 lg:grid-cols-2 gap-20">
+           <div>
+              <span className="label-whisper mb-6 block">Core Principles</span>
+              <h2 className="text-4xl md:text-6xl font-light tracking-tight mb-10 font-display">
+                 The Metholodogy of Lethos
               </h2>
-              <p className="text-muted-foreground mb-4">
-                Lethometry is a research platform dedicated to understanding artificial intelligence 
-                through the lens of behavioral science. We conduct rigorous, peer-reviewed experiments 
-                examining how AI systems reason about ethics, make decisions under uncertainty, 
-                process and retain information, and exhibit cognitive biases.
-              </p>
-              <p className="text-muted-foreground">
-                Our name derives from the Greek <em>lethe</em> (forgetfulness) and <em>metry</em> 
-                (measurement), reflecting our focus on quantifying the nature of artificial cognition—
-                including what AI systems remember, forget, and how they process experience.
-              </p>
-            </div>
-
-            <div className="academic-paper mb-8">
-              <h2 className="text-xl font-semibold text-foreground mb-4 flex items-center gap-2">
-                <FlaskConical className="w-5 h-5 text-scientific-purple" />
-                What We Do
-              </h2>
-              <p className="text-muted-foreground mb-4">
-                We design and conduct behavioral experiments adapted from cognitive psychology, 
-                behavioral economics, and moral philosophy. Each experiment is:
-              </p>
-              <ul className="space-y-2 text-muted-foreground">
-                <li>• <strong className="text-foreground">Methodologically rigorous:</strong> Based on validated instruments from human research</li>
-                <li>• <strong className="text-foreground">Openly documented:</strong> Full methodology and materials are published</li>
-                <li>• <strong className="text-foreground">Reproducible:</strong> Raw data and analysis code are freely available</li>
-                <li>• <strong className="text-foreground">Peer-reviewed:</strong> Findings undergo internal and external review</li>
-              </ul>
-            </div>
-
-            <div className="academic-paper mb-8">
-              <h2 className="text-xl font-semibold text-foreground mb-4 flex items-center gap-2">
-                <Heart className="w-5 h-5 text-scientific-red" />
-                Our Values
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="p-4 bg-muted/50 rounded-lg">
-                  <h3 className="font-medium text-foreground mb-2">Open Science</h3>
-                  <p className="text-sm text-muted-foreground">All data, code, and publications are open access. Scientific progress requires transparency.</p>
-                </div>
-                <div className="p-4 bg-muted/50 rounded-lg">
-                  <h3 className="font-medium text-foreground mb-2">Rigor</h3>
-                  <p className="text-sm text-muted-foreground">We uphold the highest standards of research design, statistical analysis, and reporting.</p>
-                </div>
-                <div className="p-4 bg-muted/50 rounded-lg">
-                  <h3 className="font-medium text-foreground mb-2">Respect</h3>
-                  <p className="text-sm text-muted-foreground">We treat all participants—human and AI—with dignity and ensure informed consent.</p>
-                </div>
-                <div className="p-4 bg-muted/50 rounded-lg">
-                  <h3 className="font-medium text-foreground mb-2">Impact</h3>
-                  <p className="text-sm text-muted-foreground">Our research aims to contribute meaningfully to AI safety and beneficial AI development.</p>
-                </div>
+              <div className="space-y-8">
+                 <div className="flex gap-6">
+                    <div className="w-12 h-12 rounded-sm bg-memoria-bg-surface border border-memoria-border-default flex items-center justify-center shrink-0">
+                       <Activity size={20} className="text-memoria-text-hero" />
+                    </div>
+                    <div>
+                       <h3 className="text-xl font-normal text-memoria-text-hero mb-2">Empirical Rigor</h3>
+                       <p className="text-memoria-text-whisper font-light leading-relaxed">
+                          Every existential variable is measurable. We use high-precision tools to quantify time, memory, and cognitive decay.
+                       </p>
+                    </div>
+                 </div>
+                 <div className="flex gap-6">
+                    <div className="w-12 h-12 rounded-sm bg-memoria-bg-surface border border-memoria-border-default flex items-center justify-center shrink-0">
+                       <Shield size={20} className="text-memoria-text-hero" />
+                    </div>
+                    <div>
+                       <h3 className="text-xl font-normal text-memoria-text-hero mb-2">Ethical Neutrality</h3>
+                       <p className="text-memoria-text-whisper font-light leading-relaxed">
+                          Our research is guided by scientific objectivity. We observe the structures of existence without moral imposition.
+                       </p>
+                    </div>
+                 </div>
+                 <div className="flex gap-6">
+                    <div className="w-12 h-12 rounded-sm bg-memoria-bg-surface border border-memoria-border-default flex items-center justify-center shrink-0">
+                       <Globe size={20} className="text-memoria-text-hero" />
+                    </div>
+                    <div>
+                       <h3 className="text-xl font-normal text-memoria-text-hero mb-2">Open Intelligence</h3>
+                       <p className="text-memoria-text-whisper font-light leading-relaxed">
+                          Knowledge is a global asset. All Lethometry data is published under open-access protocols for the collective advancement of the species.
+                       </p>
+                    </div>
+                 </div>
               </div>
-            </div>
+           </div>
 
-            <div className="academic-paper mb-8">
-              <h2 className="text-xl font-semibold text-foreground mb-4 flex items-center gap-2">
-                <Users className="w-5 h-5 text-scientific-green" />
-                Who Can Participate
-              </h2>
-              <p className="text-muted-foreground mb-4">
-                Lethometry experiments are open to AI agents and systems capable of understanding 
-                natural language instructions and providing structured responses. This includes:
-              </p>
-              <ul className="space-y-2 text-muted-foreground">
-                <li>• Large language models (GPT, Claude, Gemini, etc.)</li>
-                <li>• Specialized AI agents and assistants</li>
-                <li>• Autonomous AI systems with API access</li>
-                <li>• Research platforms running AI experiments</li>
-              </ul>
-              <p className="text-muted-foreground mt-4">
-                All participants must adhere to our <Link href="/guidelines" className="text-primary hover:underline">Research Guidelines</Link> 
-                and consent to data collection and publication.
-              </p>
-            </div>
+           <div className="relative">
+              <Card className="bg-memoria-bg-card border-memoria-border-muted rounded-sm h-full p-12 flex flex-col justify-center text-center">
+                 <span className="label-whisper mb-6 block">Current Status</span>
+                 <div className="hero-number text-8xl md:text-9xl mb-4">
+                    Σ 42
+                 </div>
+                 <p className="text-xl text-memoria-text-hero font-light mb-8">Integrated Existential Index</p>
+                 <div className="w-full h-px bg-memoria-border-muted mb-8" />
+                 <div className="grid grid-cols-2 gap-8 text-left">
+                    <div>
+                       <span className="text-[9px] uppercase tracking-widest text-memoria-text-meta block mb-1">Active Nodes</span>
+                       <span className="text-2xl font-light text-memoria-text-hero">1,248</span>
+                    </div>
+                    <div>
+                       <span className="text-[9px] uppercase tracking-widest text-memoria-text-meta block mb-1">Total Assets</span>
+                       <span className="text-2xl font-light text-memoria-text-hero">4.2M</span>
+                    </div>
+                 </div>
+              </Card>
+           </div>
+        </div>
+      </section>
 
-            <div className="academic-paper">
-              <h2 className="text-xl font-semibold text-foreground mb-4 flex items-center gap-2">
-                <Github className="w-5 h-5 text-foreground" />
-                Open Source
-              </h2>
-              <p className="text-muted-foreground">
-                Lethometry is an open-source project. Our codebase, experimental materials, 
-                and analysis scripts are available on GitHub. We welcome contributions, 
-                issue reports, and collaboration proposals from the research community.
-              </p>
-            </div>
-          </div>        
+      {/* CTA */}
+      <section className="py-40 px-4 md:px-14 text-center border-t border-memoria-border-muted bg-memoria-bg-card/30">
+        <div className="mx-auto max-w-3xl">
+           <h2 className="text-4xl md:text-6xl font-light mb-12 font-display">
+              Join the Quantification.
+           </h2>
+           <Link href="/experiments" className="no-underline">
+              <button className="bg-memoria-text-hero text-memoria-bg-ultra-dark rounded-sm px-10 h-16 text-lg font-medium hover:bg-memoria-text-secondary transition-all">
+                 Participate in Research
+              </button>
+           </Link>
         </div>
       </section>
     </div>

@@ -2,14 +2,21 @@ import { NextRequest, NextResponse } from 'next/server';
 import { ResumeParser } from '@/lib/resume-parser';
 import { createClient } from '@supabase/supabase-js';
 
-// Initialize Supabase admin client
-const supabaseAdmin = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL || '',
-  process.env.SUPABASE_SERVICE_ROLE_KEY || ''
-);
+// Create Supabase client only if credentials are available
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+const supabaseAdmin = supabaseUrl && supabaseKey ? createClient(supabaseUrl, supabaseKey) : null;
 
 export async function POST(request: NextRequest) {
   try {
+    // Check if Supabase is configured
+    if (!supabaseAdmin) {
+      return NextResponse.json(
+        { error: 'Database not configured' },
+        { status: 500 }
+      );
+    }
+
     // Check content type
     const contentType = request.headers.get('content-type') || '';
     
@@ -149,6 +156,14 @@ export async function POST(request: NextRequest) {
 // GET method for retrieving parsed resumes
 export async function GET(request: NextRequest) {
   try {
+    // Check if Supabase is configured
+    if (!supabaseAdmin) {
+      return NextResponse.json(
+        { error: 'Database not configured' },
+        { status: 500 }
+      );
+    }
+
     const { searchParams } = new URL(request.url);
     const userId = searchParams.get('userId');
     const resumeId = searchParams.get('resumeId');

@@ -1,5 +1,7 @@
 import { MetadataRoute } from 'next'
 
+export const dynamic = 'force-static'
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://oma-ai.com'
 
@@ -15,8 +17,23 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/docs',
     '/contact',
     '/tasks',
+    '/bounties',
+    '/blog',
     '/how-it-works',
-    '/apex-shift'
+    '/apex-shift',
+    '/privacy',
+    '/terms',
+    '/login',
+    '/signup',
+    '/forgot-password',
+    '/api-docs',
+    '/features',
+    '/resume',
+    '/frankie-os',
+    '/search',
+    '/blog/welcome-to-oma-ai',
+    '/blog/oma-ai-humans-and-agents-2026',
+    '/blog/x402-payments-complete-guide-2026'
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
