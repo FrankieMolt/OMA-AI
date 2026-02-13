@@ -1,64 +1,43 @@
 /**
- * Returns Policy Page
+ * Returns Policy
  */
+'use client';
+
 import Link from 'next/link';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { ArrowLeft } from 'lucide-react';
 
 export default function ReturnsPage() {
   return (
-    <div className="min-h-screen bg-zinc-950 text-zinc-50 py-20">
-      <div className="max-w-4xl mx-auto px-4">
-        <h1 className="text-4xl font-bold mb-8 bg-gradient-to-r from-purple-400 via-pink-500 to-amber-400 bg-clip-text text-transparent">
-          Returns & Refunds
+    <div className="min-h-screen bg-memoria-bg-ultra-dark text-memoria-text-hero">
+      <div className="max-w-3xl mx-auto px-4 py-20">
+        <Badge variant="outline" className="mb-6 rounded-sm uppercase tracking-[0.2em] text-[10px] py-1 border-memoria-border-default text-memoria-text-whisper px-4">
+           Policy
+        </Badge>
+        <h1 className="text-4xl md:text-6xl font-light mb-12 font-display text-memoria-text-hero tracking-tighter">
+          Returns & Exchanges
         </h1>
         
-        <div className="prose prose-invert max-w-none">
-          <p className="text-xl text-zinc-300 mb-6">
-            Return policies are set by our retail partners.
+        <div className="prose prose-invert prose-sm max-w-none text-memoria-text-secondary leading-relaxed font-light space-y-8">
+          <p>
+            At SpendThrone, we facilitate transactions between discerning collectors and authorized distributors. Due to the unique and often bespoke nature of our collection, return policies are determined by the individual creator or brand.
           </p>
-          
-          <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-8 mb-8">
-            <h2 className="text-2xl font-bold text-white mb-4">Amazon Purchases</h2>
-            <p className="text-zinc-400 mb-4">
-              Most Amazon products qualify for their 30-day return policy. Items must be in 
-              original condition with all packaging and accessories.
-            </p>
-            <a 
-              href="https://www.amazon.com/gp/help/customer/display.html?nodeId=GKM69DUUYKQWKWX7"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-purple-400 hover:text-purple-300"
-            >
-              View Amazon Return Policy →
-            </a>
-          </div>
-
-          <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-8 mb-8">
-            <h2 className="text-2xl font-bold text-white mb-4">Direct from Manufacturer</h2>
-            <p className="text-zinc-400">
-              Products purchased directly from manufacturers (like Herman Miller, Dyson, etc.) 
-              follow their individual return policies. Please check the specific retailer's 
-              website for details.
-            </p>
-          </div>
-
-          <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-8">
-            <h2 className="text-2xl font-bold text-white mb-4">How to Initiate a Return</h2>
-            <ol className="space-y-3 text-zinc-400 list-decimal list-inside">
-              <li>Visit the website where you made your purchase</li>
-              <li>Log into your account and find your order</li>
-              <li>Select the item(s) you want to return</li>
-              <li>Follow the return instructions provided</li>
-              <li>Print the return label and ship the item back</li>
-            </ol>
-          </div>
+          <h3 className="text-xl font-display font-light text-memoria-text-hero mt-8 mb-4">Damaged Items</h3>
+          <p>
+            If an item arrives damaged or materially different from its description, please contact our concierge team within 48 hours of delivery. We will facilitate a resolution with the seller.
+          </p>
+          <h3 className="text-xl font-display font-light text-memoria-text-hero mt-8 mb-4">Custom Commissions</h3>
+          <p>
+            Please note that custom commissions and personalized items are generally non-refundable unless there is a defect in craftsmanship.
+          </p>
         </div>
 
-        <div className="mt-12 pt-12 border-t border-zinc-800">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold rounded-xl hover:opacity-90 transition-opacity"
-          >
-            Back to Kingdom
+        <div className="mt-16 pt-12 border-t border-memoria-border-muted">
+          <Link href="/">
+            <Button variant="outline" className="rounded-sm uppercase tracking-widest text-[10px] border-memoria-border-muted text-memoria-text-meta hover:text-memoria-text-hero hover:border-memoria-text-hero bg-transparent px-6 h-12">
+              <ArrowLeft size={14} className="mr-2" /> Back to Collection
+            </Button>
           </Link>
         </div>
       </div>

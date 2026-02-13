@@ -57,13 +57,13 @@
     }
   },
   "last_solidify": {
-    "run_id": "run_1770657417511",
-    "at": "2026-02-09T17:17:31.533Z",
-    "event_id": "evt_1770657451533",
-    "capsule_id": null,
+    "run_id": "run_1770959843365",
+    "at": "2026-02-13T17:22:07.984Z",
+    "event_id": "evt_1771003327984",
+    "capsule_id": "capsule_1771003327984",
     "outcome": {
-      "status": "failed",
-      "score": 0.2
+      "status": "success",
+      "score": 0.85
     }
   }
 }

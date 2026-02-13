@@ -1,81 +1,44 @@
 /**
- * Terms of Service Page
+ * Terms of Service
  */
+'use client';
 
 import Link from 'next/link';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { ArrowLeft } from 'lucide-react';
 
 export default function TermsPage() {
   return (
-    <div className="min-h-screen bg-zinc-950 text-zinc-100 py-16 px-4">
-      <div className="max-w-3xl mx-auto">
-        <Link href="/" className="inline-flex items-center gap-2 text-purple-400 hover:text-purple-300 transition-colors mb-8">
-          ← Back to Marketplace
-        </Link>
-
-        <h1 className="text-4xl md:text-5xl font-black mb-8 tracking-tighter uppercase">
+    <div className="min-h-screen bg-memoria-bg-ultra-dark text-memoria-text-hero">
+      <div className="max-w-3xl mx-auto px-4 py-20">
+        <Badge variant="outline" className="mb-6 rounded-sm uppercase tracking-[0.2em] text-[10px] py-1 border-memoria-border-default text-memoria-text-whisper px-4">
+           Legal
+        </Badge>
+        <h1 className="text-4xl md:text-6xl font-light mb-12 font-display text-memoria-text-hero tracking-tighter">
           Terms of Service
         </h1>
-
-        <div className="prose prose-invert prose-lg space-y-8">
-          <p className="text-zinc-400">
-            Last updated: February 8, 2026
+        
+        <div className="prose prose-invert prose-sm max-w-none text-memoria-text-secondary leading-relaxed font-light space-y-8">
+          <p>
+            By accessing SpendThrone, you agree to be bound by these Terms of Service. Our platform connects buyers with independent sellers and authorized retailers of luxury goods.
           </p>
+          <h3 className="text-xl font-display font-light text-memoria-text-hero mt-8 mb-4">Platform Role</h3>
+          <p>
+            SpendThrone acts as a curated interface and intermediary. We are not the manufacturer of the items listed, unless explicitly stated under the SpendThrone Originals label.
+          </p>
+          <h3 className="text-xl font-display font-light text-memoria-text-hero mt-8 mb-4">User Conduct</h3>
+          <p>
+            Users agree to provide accurate information during purchase and to respect the intellectual property rights of the creators featured on our platform.
+          </p>
+        </div>
 
-          <section>
-            <h2 className="text-2xl font-bold text-white mb-4">Acceptance of Terms</h2>
-            <p className="text-zinc-400">
-              By accessing or using SpendThrone, you agree to be bound by these Terms of Service. If you disagree with any part of these terms, you may not access our service.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-bold text-white mb-4">Products and Pricing</h2>
-            <p className="text-zinc-400">
-              All products listed on SpendThrone are for entertainment purposes unless otherwise stated. Prices are in USD and are subject to change without notice. We strive for accuracy but cannot guarantee all product details are current.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-bold text-white mb-4">User Accounts</h2>
-            <p className="text-zinc-400">
-              You are responsible for maintaining the confidentiality of your account information. You agree to notify us immediately of any unauthorized use of your account.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-bold text-white mb-4">Intellectual Property</h2>
-            <p className="text-zinc-400">
-              All content on SpendThrone, including product images, descriptions, and designs, is protected by intellectual property laws. You may not use our content without express permission.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-bold text-white mb-4">Disclaimer of Warranties</h2>
-            <p className="text-zinc-400">
-              Many of our products are novelty items and come with no warranties expressed or implied. Use common sense and caution when operating levitating desks, quantum technology, or AI-powered haunted dolls.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-bold text-white mb-4">Limitation of Liability</h2>
-            <p className="text-zinc-400">
-              SpendThrone shall not be liable for any damages arising from the use of our products or services. This includes but is not limited to temporal paradoxes, gravity-related injuries, or haunting incidents.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-bold text-white mb-4">Refunds and Returns</h2>
-            <p className="text-zinc-400">
-              Refund policies vary by product. Novelty items may be non-refundable once used or unboxed. Contact customer service for specific product return policies.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-bold text-white mb-4">Governing Law</h2>
-            <p className="text-zinc-400">
-              These terms shall be governed by and construed in accordance with the laws of the jurisdiction in which SpendThrone operates. Any disputes will be resolved in our courts, preferably in a dimension where weirdness is appreciated.
-            </p>
-          </section>
+        <div className="mt-16 pt-12 border-t border-memoria-border-muted">
+          <Link href="/">
+            <Button variant="outline" className="rounded-sm uppercase tracking-widest text-[10px] border-memoria-border-muted text-memoria-text-meta hover:text-memoria-text-hero hover:border-memoria-text-hero bg-transparent px-6 h-12">
+              <ArrowLeft size={14} className="mr-2" /> Back to Collection
+            </Button>
+          </Link>
         </div>
       </div>
     </div>

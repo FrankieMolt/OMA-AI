@@ -3,17 +3,18 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Menu } from 'lucide-react';
-import { colors, fonts, typography, borderRadius, spacing } from '@/lib/memoria/tokens';
+import Link from 'next/link';
 
-interface MobileMenuProps {
-  activeTab: string;
-  setActiveTab: (tab: string) => void;
-}
-
-export default function MobileMenu({ activeTab, setActiveTab }: MobileMenuProps) {
+export default function MobileMenu() {
   const [isOpen, setIsOpen] = useState(false);
 
-  const tabs = ['dashboard', 'marketplace', 'agents', 'personas', 'skills', 'wallet', 'bounties', 'terminal'];
+  const tabs = [
+    { name: 'Marketplace', href: '/marketplace' },
+    { name: 'Agents', href: '/agents' },
+    { name: 'Docs', href: '/docs' },
+    { name: 'Bounties', href: '/tasks' },
+    { name: 'About', href: '/about' },
+  ];
 
   // Prevent scrolling when menu is open
   useEffect(() => {
@@ -27,28 +28,14 @@ export default function MobileMenu({ activeTab, setActiveTab }: MobileMenuProps)
     };
   }, [isOpen]);
 
-  const handleTabClick = (tab: string) => {
-    setActiveTab(tab);
-    setIsOpen(false);
-  };
-
   return (
     <>
       {/* Menu Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="md:hidden p-2 rounded-md hover:bg-neutral-800 transition-colors"
+        className="md:hidden fixed top-4 right-4 z-50 p-2 rounded-sm bg-memoria-bg-surface border border-memoria-border-default text-memoria-text-hero hover:bg-memoria-bg-card transition-colors"
         aria-label="Toggle menu"
         aria-expanded={isOpen}
-        style={{
-          position: 'fixed',
-          top: '1rem',
-          right: '1rem',
-          zIndex: 60,
-          background: colors.bg.neutral900,
-          border: `1px solid ${colors.border.neutral800}`,
-          color: colors.text.white,
-        }}
       >
         {isOpen ? <X size={20} /> : <Menu size={20} />}
       </button>
@@ -62,11 +49,7 @@ export default function MobileMenu({ activeTab, setActiveTab }: MobileMenuProps)
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsOpen(false)}
-              className="fixed inset-0 z-50 md:hidden"
-              style={{
-                background: 'rgba(0, 0, 0, 0.8)',
-                backdropFilter: 'blur(4px)',
-              }}
+              className="fixed inset-0 z-40 md:hidden bg-memoria-bg-ultra-dark/90 backdrop-blur-sm"
             />
 
             {/* Menu Content */}
@@ -75,78 +58,39 @@ export default function MobileMenu({ activeTab, setActiveTab }: MobileMenuProps)
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 30, stiffness: 300 }}
-              className="fixed top-0 right-0 h-full w-72 z-50 md:hidden overflow-y-auto"
-              style={{
-                background: colors.bg.neutral950,
-                borderLeft: `1px solid ${colors.border.neutral800}`,
-                padding: spacing.px(8),
-              }}
+              className="fixed top-0 right-0 h-full w-72 z-50 md:hidden overflow-y-auto bg-memoria-bg-ultra-dark border-l border-memoria-border-muted p-8"
             >
-              <div style={{ paddingTop: spacing.px(10) }}>
+              <div className="pt-12">
                 {/* Header */}
-                <div style={{ marginBottom: spacing.px(8) }}>
-                  <span style={{
-                    ...typography.label,
-                    fontFamily: fonts.mono,
-                  }}>
+                <div className="mb-8">
+                  <span className="text-[10px] uppercase tracking-widest text-memoria-text-meta font-mono">
                     Navigation
                   </span>
-                  <h2 style={{
-                    ...typography.h2,
-                    fontSize: '1.25rem',
-                    color: colors.text.white,
-                    marginTop: spacing.px(1),
-                  }}>
+                  <h2 className="text-xl font-light text-memoria-text-hero mt-2 font-display">
                     Menu
                   </h2>
                 </div>
 
                 {/* Navigation */}
-                <nav style={{ display: 'flex', flexDirection: 'column', gap: spacing.px(2) }}>
+                <nav className="flex flex-col gap-2">
                   {tabs.map(tab => (
-                    <button
-                      key={tab}
-                      onClick={() => handleTabClick(tab)}
-                      style={{
-                        width: '100%',
-                        textAlign: 'left',
-                        padding: `${spacing.px(3)} ${spacing.px(4)}`,
-                        borderRadius: borderRadius.sm,
-                        fontSize: '0.875rem',
-                        fontWeight: 400,
-                        textTransform: 'capitalize',
-                        transition: 'all 0.2s ease',
-                        background: activeTab === tab ? colors.bg.neutral800 : 'transparent',
-                        color: activeTab === tab ? colors.text.white : colors.text.neutral400,
-                        border: `1px solid ${activeTab === tab ? colors.border.neutral700 : 'transparent'}`,
-                        fontFamily: fonts.body,
-                      }}
+                    <Link
+                      key={tab.name}
+                      href={tab.href}
+                      onClick={() => setIsOpen(false)}
+                      className="block w-full text-left px-4 py-3 rounded-sm text-sm font-light uppercase tracking-widest text-memoria-text-secondary hover:text-memoria-text-hero hover:bg-memoria-bg-surface border border-transparent hover:border-memoria-border-muted transition-all"
                     >
-                      {tab}
-                    </button>
+                      {tab.name}
+                    </Link>
                   ))}
                 </nav>
 
                 {/* Footer */}
-                <div style={{
-                  marginTop: spacing.px(12),
-                  paddingTop: spacing.px(6),
-                  borderTop: `1px solid ${colors.border.neutral800}`,
-                }}>
-                  <p style={{
-                    ...typography.metadata,
-                    color: colors.text.neutral500,
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.1em',
-                  }}>
+                <div className="mt-12 pt-6 border-t border-memoria-border-muted">
+                  <p className="text-[10px] uppercase tracking-[0.2em] text-memoria-text-meta">
                     OMA-AI Systems
                   </p>
-                  <p style={{
-                    fontSize: '10px',
-                    color: colors.text.neutral600,
-                    marginTop: spacing.px(1),
-                    fontFamily: fonts.mono,
-                  }}>
+                  <p className="text-[10px] text-memoria-text-whisper mt-1 font-mono">
                     v1.0.0-Stable
                   </p>
                 </div>

@@ -2,57 +2,62 @@
  * FAQ Page
  */
 import Link from 'next/link';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { ArrowLeft } from 'lucide-react';
 
 export default function FAQPage() {
   const faqs = [
     {
-      q: "What is SpendThrone?",
-      a: "SpendThrone is a curated marketplace featuring the weirdest, most viral products on Earth. We specialize in extreme tech, bizarre innovations, and conversation-starting items."
+      q: "What defines the SpendThrone collection?",
+      a: "Our collection represents the pinnacle of craftsmanship and innovation. We curate items based on material integrity, engineering precision, and aesthetic scarcity."
     },
     {
-      q: "Are these products real?",
-      a: "Yes! All products on SpendThrone are real and available for purchase through our affiliate partners like Amazon and directly from manufacturers."
+      q: "Are these items available immediately?",
+      a: "Availability varies by piece. Limited editions and bespoke commissions may require lead times. Specific details are listed on each product page."
     },
     {
-      q: "How do I purchase a product?",
-      a: "Click the 'Buy Now' button on any product card. You'll be redirected to the retailer's website to complete your purchase securely."
+      q: "How is authenticity verified?",
+      a: "Every item in our marketplace undergoes rigorous verification. We partner directly with artisans and authorized distributors to guarantee provenance."
     },
     {
-      q: "Do you ship internationally?",
-      a: "Shipping depends on the individual retailer. Most Amazon products ship internationally, but please check the retailer's shipping policy for specific details."
+      q: "Do you facilitate international logistics?",
+      a: "Yes. Our partners offer secure global shipping for high-value items, often including white-glove delivery services."
     },
     {
-      q: "What is your return policy?",
-      a: "Returns are handled by the individual retailers. Please refer to the return policy of the store where you made your purchase."
+      q: "What is the return protocol?",
+      a: "Given the bespoke nature of many items, return policies are determined by the individual creator or brand. Please consult the specific terms on the product page."
     },
     {
-      q: "How do you choose products?",
-      a: "We curate products based on uniqueness, viral potential, quality, and the 'wow' factor. If it's weird, wonderful, and worth talking about, we want it on SpendThrone."
+      q: "How can I feature my work?",
+      a: "We accept submissions from exceptional creators. Please contact our curation team through the Contact page for consideration."
     }
   ];
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-zinc-50 py-20">
-      <div className="max-w-4xl mx-auto px-4">
-        <h1 className="text-4xl font-bold mb-8 bg-gradient-to-r from-purple-400 via-pink-500 to-amber-400 bg-clip-text text-transparent">
+    <div className="min-h-screen bg-memoria-bg-ultra-dark text-memoria-text-hero selection:bg-memoria-text-hero selection:text-memoria-bg-ultra-dark">
+      <div className="max-w-4xl mx-auto px-4 py-20">
+        <Badge variant="outline" className="mb-6 rounded-sm uppercase tracking-[0.2em] text-[10px] py-1 border-memoria-border-default text-memoria-text-whisper px-4">
+           Support
+        </Badge>
+        <h1 className="text-4xl md:text-6xl font-light mb-12 font-display text-memoria-text-hero tracking-tighter">
           Frequently Asked Questions
         </h1>
         
-        <div className="space-y-6">
+        <div className="space-y-8">
           {faqs.map((faq, index) => (
-            <div key={index} className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6">
-              <h3 className="text-xl font-bold text-white mb-3">{faq.q}</h3>
-              <p className="text-zinc-400">{faq.a}</p>
+            <div key={index} className="bg-memoria-bg-surface border border-memoria-border-muted rounded-sm p-8 hover:border-memoria-border-default transition-colors">
+              <h3 className="text-xl font-light font-display text-memoria-text-hero mb-4">{faq.q}</h3>
+              <p className="text-memoria-text-secondary leading-relaxed font-light text-sm">{faq.a}</p>
             </div>
           ))}
         </div>
 
-        <div className="mt-12 pt-12 border-t border-zinc-800">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold rounded-xl hover:opacity-90 transition-opacity"
-          >
-            Back to Kingdom
+        <div className="mt-16 pt-12 border-t border-memoria-border-muted">
+          <Link href="/">
+            <Button variant="outline" className="rounded-sm uppercase tracking-widest text-[10px] border-memoria-border-muted text-memoria-text-meta hover:text-memoria-text-hero hover:border-memoria-text-hero bg-transparent px-6 h-12">
+              <ArrowLeft size={14} className="mr-2" /> Back to Collection
+            </Button>
           </Link>
         </div>
       </div>

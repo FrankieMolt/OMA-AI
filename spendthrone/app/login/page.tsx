@@ -1,70 +1,81 @@
 /**
- * Login Page
+ * Login Page - SpendThrone
  */
 
 import Link from 'next/link';
+import { Metadata } from 'next';
+import { Button } from '@/components/ui/button';
+import { ShoppingBag } from 'lucide-react';
+
+export const metadata: Metadata = {
+  title: 'Sign In | SpendThrone',
+  description: 'Access your curated collection and manage your orders securely.',
+  alternates: {
+    canonical: '/login',
+  },
+};
 
 export default function LoginPage() {
   return (
-    <div className="min-h-screen bg-zinc-950 text-zinc-50 flex items-center justify-center py-20">
+    <div className="min-h-screen bg-memoria-bg-ultra-dark text-memoria-text-hero flex items-center justify-center py-20 selection:bg-memoria-text-hero selection:text-memoria-bg-ultra-dark">
       <div className="max-w-md w-full mx-4">
         <div className="text-center mb-8">
-          <Link href="/" className="inline-flex items-center gap-3 mb-6">
-            <div className="w-12 h-12 bg-zinc-800 border border-zinc-700 rounded-xl flex items-center justify-center">
-              <span className="text-2xl">🛍️</span>
+          <Link href="/" className="inline-flex items-center gap-3 mb-6 no-underline group">
+            <div className="w-12 h-12 bg-memoria-bg-surface border border-memoria-border-default rounded-sm flex items-center justify-center group-hover:border-memoria-text-hero transition-colors">
+              <ShoppingBag size={20} className="text-memoria-text-hero" />
             </div>
-            <span className="text-2xl font-bold text-white tracking-tight">
-              SPENDTHRONE
+            <span className="text-2xl font-light text-memoria-text-hero tracking-tight font-display">
+              SpendThrone
             </span>
           </Link>
-          <h1 className="text-3xl font-bold text-white mb-2">Welcome Back</h1>
-          <p className="text-zinc-400">Sign in to your account</p>
+          <h1 className="text-3xl font-light text-memoria-text-hero mb-2 font-display">Welcome Back</h1>
+          <p className="text-memoria-text-whisper text-sm">Sign in to your curated account</p>
         </div>
 
-        <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-8">
+        <div className="bg-memoria-bg-card border border-memoria-border-muted rounded-sm p-8">
           <div className="space-y-4">
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-zinc-300 mb-2">
+              <label htmlFor="email" className="block text-[10px] uppercase tracking-widest text-memoria-text-meta mb-2">
                 Email
               </label>
               <input
                 type="email"
                 id="email"
-                className="w-full px-4 py-3 bg-zinc-950 border border-zinc-800 rounded-xl text-white placeholder-zinc-500 focus:outline-none focus:border-white transition-colors"
+                className="w-full px-4 py-3 bg-memoria-bg-ultra-dark border border-memoria-border-default rounded-sm text-memoria-text-hero placeholder-memoria-text-whisper focus:outline-none focus:border-memoria-text-hero transition-colors text-sm font-light"
                 placeholder="you@example.com"
               />
             </div>
 
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-zinc-300 mb-2">
+              <label htmlFor="password" className="block text-[10px] uppercase tracking-widest text-memoria-text-meta mb-2">
                 Password
               </label>
               <input
                 type="password"
                 id="password"
-                className="w-full px-4 py-3 bg-zinc-950 border border-zinc-800 rounded-xl text-white placeholder-zinc-500 focus:outline-none focus:border-white transition-colors"
+                className="w-full px-4 py-3 bg-memoria-bg-ultra-dark border border-memoria-border-default rounded-sm text-memoria-text-hero placeholder-memoria-text-whisper focus:outline-none focus:border-memoria-text-hero transition-colors text-sm font-light"
                 placeholder="••••••••"
               />
             </div>
 
-            <div className="flex items-center justify-between text-sm">
-              <label className="flex items-center gap-2 text-zinc-400 cursor-pointer">
-                <input type="checkbox" className="rounded border-zinc-700 bg-zinc-950 text-white accent-white" />
+            <div className="flex items-center justify-between text-xs text-memoria-text-whisper">
+              <label className="flex items-center gap-2 cursor-pointer hover:text-memoria-text-secondary transition-colors">
+                <input type="checkbox" className="rounded-sm border-memoria-border-muted bg-memoria-bg-ultra-dark text-memoria-text-hero accent-memoria-text-hero" />
                 Remember me
               </label>
-              <a href="#" className="text-zinc-400 hover:text-white transition-colors">
+              <Link href="#" className="hover:text-memoria-text-hero transition-colors">
                 Forgot password?
-              </a>
+              </Link>
             </div>
 
-            <button className="w-full py-3 bg-white text-black font-semibold rounded-xl hover:bg-zinc-200 transition-colors">
+            <Button className="w-full py-6 bg-memoria-text-hero text-memoria-bg-ultra-dark font-medium rounded-sm hover:bg-memoria-text-secondary transition-opacity uppercase tracking-widest text-xs">
               Sign In
-            </button>
+            </Button>
           </div>
 
-          <div className="mt-6 text-center text-sm text-zinc-400">
+          <div className="mt-8 text-center text-xs text-memoria-text-meta uppercase tracking-widest">
             Don't have an account?{' '}
-            <Link href="/signup" className="text-white hover:underline font-medium">
+            <Link href="/signup" className="text-memoria-text-hero hover:underline ml-1">
               Sign up
             </Link>
           </div>
