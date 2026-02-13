@@ -143,7 +143,7 @@ export default function FrankieOSDashboard() {
                  Operating System
               </Badge>
               <h1 className="text-4xl md:text-7xl font-light tracking-tighter mb-4 font-display text-memoria-text-hero">
-                 Frankie<span className=\"text-memoria-text-secondary\">OS</span>
+                 Frankie<span className="text-memoria-text-secondary">OS</span>
               </h1>
               <p className="text-memoria-text-whisper text-sm font-light uppercase tracking-widest">Internal Intelligence Management</p>
            </div>

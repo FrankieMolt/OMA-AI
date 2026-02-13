@@ -22,7 +22,7 @@ export default function X402GuidePage() {
           </Badge>
           
           <h1 className="text-4xl md:text-7xl font-light tracking-tighter leading-[1.1] mb-10 font-display text-memoria-text-hero">
-             Complete Guide to <span className=\"text-memoria-text-secondary\">x402 Payments</span>
+             Complete Guide to <span className="text-memoria-text-secondary">x402 Payments</span>
           </h1>
 
           <div className="flex flex-wrap items-center gap-6 text-[10px] text-memoria-text-meta uppercase tracking-widest font-bold">
@@ -72,7 +72,7 @@ export default function X402GuidePage() {
               <div className="mt-20 pt-12 border-t border-memoria-border-muted flex justify-between items-center">
                  <div className="flex gap-4">
                     <Button variant="outline" className="rounded-sm h-10 px-4 border-memoria-border-muted text-memoria-text-meta hover:text-white">
-                       <Share2 size={14} className=\"mr-2\" /> Share
+                       <Share2 size={14} className="mr-2" /> Share
                     </Button>
                  </div>
                  <Link href="/docs#x402-payments" className="no-underline">

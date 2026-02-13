@@ -14,7 +14,7 @@ export default function ResumeBatchPage() {
              AI Services
           </Badge>
           <h1 className="text-4xl md:text-7xl font-light tracking-tighter mb-8 font-display text-memoria-text-hero">
-             Batch<br/><span className=\"text-memoria-text-secondary\">Processing</span>
+             Batch<br/><span className="text-memoria-text-secondary">Processing</span>
           </h1>
           <p className="text-xl text-memoria-text-whisper max-w-2xl font-light leading-relaxed">
              Scalable neural parsing for large-scale candidate datasets. Process thousands of documents in parallel.

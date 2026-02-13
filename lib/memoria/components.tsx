@@ -201,7 +201,7 @@ export function MinimalButton({
     <motion.button
       disabled={disabled}
       onClick={onClick}
-      whileHover={!disabled ? { background: variant === 'primary' ? '#e5e5e5' : colors.bg.neutral80060 } : {}}
+      whileHover={!disabled ? { background: variant === 'primary' ? '#e5e5e5' : colors.bg.neutral800 } : {}}
       whileTap={!disabled ? { scale: 0.98 } : {}}
       className={className}
       style={{

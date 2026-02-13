@@ -27,7 +27,7 @@ async function checkRateLimit(
   const supabase = createClient();
   const windowStart = new Date(Date.now() - RATE_WINDOW);
   
-  let query = supabase
+  let query = supabase!
     .from('rate_limits')
     .select('count')
     .eq('action', 'shorten')
@@ -57,7 +57,7 @@ async function checkRateLimit(
   
   // Increment or create rate limit entry
   if (userId) {
-    await supabase.rpc('increment_rate_limit', {
+    await supabase!.rpc('increment_rate_limit', {
       p_user_id: userId,
       p_action: 'shorten',
       p_window_start: windowStart.toISOString()
@@ -155,11 +155,11 @@ export async function POST(request: NextRequest) {
     const supabase = createClient();
     
     // Get user session if authenticated
-    const { data: { user } } = await supabase.auth.getUser();
+    const { data: { user } } = await supabase!.auth.getUser();
     
     // Check if custom code is available
     if (custom_code) {
-      const { data: existing } = await supabase
+      const { data: existing } = await supabase!
         .from('links')
         .select('id')
         .eq('short_code', custom_code)
@@ -178,7 +178,7 @@ export async function POST(request: NextRequest) {
       
       do {
         shortCode = generateShortCode(7);
-        const { data: existing } = await supabase
+        const { data: existing } = await supabase!
           .from('links')
           .select('id')
           .eq('short_code', shortCode)
@@ -197,7 +197,7 @@ export async function POST(request: NextRequest) {
     }
     
     // Create the link
-    const { data: link, error: insertError } = await supabase
+    const { data: link, error: insertError } = await supabase!
       .from('links')
       .insert({
         short_code: shortCode,
@@ -272,7 +272,7 @@ export async function GET(request: NextRequest) {
     const supabase = createClient();
     
     // Get user session
-    const { data: { user } } = await supabase.auth.getUser();
+    const { data: { user } } = await supabase!.auth.getUser();
     
     if (!user) {
       return NextResponse.json(
@@ -287,7 +287,7 @@ export async function GET(request: NextRequest) {
     const offset = parseInt(searchParams.get('offset') || '0');
     
     // Fetch user's links
-    const { data: links, error, count } = await supabase
+    const { data: links, error, count } = await supabase!
       .from('links')
       .select('*', { count: 'exact' })
       .eq('user_id', user.id)

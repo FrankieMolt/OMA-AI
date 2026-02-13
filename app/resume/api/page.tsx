@@ -15,7 +15,7 @@ export default function ResumeApiPage() {
              Documentation
           </Badge>
           <h1 className="text-4xl md:text-7xl font-light tracking-tighter mb-8 font-display text-memoria-text-hero">
-             Resume<br/><span className=\"text-memoria-text-secondary\">API Reference</span>
+             Resume<br/><span className="text-memoria-text-secondary">API Reference</span>
           </h1>
           <p className="text-xl text-memoria-text-whisper max-w-2xl font-light leading-relaxed">
              Programmatic access to neural parsing and semantic analysis for candidate documentation.

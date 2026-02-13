@@ -15,7 +15,7 @@ export default function ResumeScorePage() {
              AI Services
           </Badge>
           <h1 className="text-4xl md:text-7xl font-light tracking-tighter mb-8 font-display text-memoria-text-hero">
-             Intelligence<br/><span className=\"text-memoria-text-secondary\">Score</span>
+             Intelligence<br/><span className="text-memoria-text-secondary">Score</span>
           </h1>
           <p className="text-xl text-memoria-text-whisper max-w-2xl font-light leading-relaxed">
              Evaluate candidate alignment with specific job requirements using semantic similarity models.

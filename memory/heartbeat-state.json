@@ -1,17 +1,20 @@
 {
-  "lastHeartbeat": "2026-02-13T16:33:00Z",
-  "heartbeatCount": 2,
-  "activeTask": null,
-  "idleSince": "2026-02-13T16:03:00Z",
+  "lastHeartbeat": "2026-02-13T17:40:00Z",
+  "heartbeatCount": 5,
+  "activeTask": "System Repair: Reinstalling Dependencies & Fixing Build",
+  "idleSince": null,
   "lastChecks": {
-    "deployment": "2026-02-13T16:33:00Z",
-    "pm2": "2026-02-13T16:33:00Z",
-    "production": "2026-02-13T16:33:00Z"
+    "deployment": "2026-02-13T17:40:00Z",
+    "pm2": "2026-02-13T17:40:00Z",
+    "production": "2026-02-13T17:40:00Z"
   },
-  "issues": [],
+  "issues": [
+    "Build Failed: ANSI codes in source files (Fixed)",
+    "npm install Failed: ENOTEMPTY (Fixing via fresh install)"
+  ],
   "systemStatus": {
-    "omaAi": { "local": 200, "prod": 200, "uptime": "5h" },
-    "spendthrone": { "local": 200, "prod": 200, "uptime": "10h" },
-    "lethometry": { "local": 200, "prod": 200, "uptime": "10h" }
+    "omaAi": { "local": 200, "prod": 200, "deploying": false, "repairing": true },
+    "spendthrone": { "local": 200, "prod": 200, "deploying": false, "repairing": true },
+    "lethometry": { "local": 200, "prod": 200, "deploying": false, "repairing": true }
   }
 }

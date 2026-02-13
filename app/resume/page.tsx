@@ -28,7 +28,7 @@ export default function ResumePage() {
              AI Services
           </Badge>
           <h1 className="text-4xl md:text-7xl font-light tracking-tighter mb-8 font-display text-memoria-text-hero">
-             Resume<br/><span className=\"text-memoria-text-secondary\">Analyzer</span>
+             Resume<br/><span className="text-memoria-text-secondary">Analyzer</span>
           </h1>
           
           <nav className="flex items-center gap-1 bg-memoria-bg-card border border-memoria-border-muted p-1 rounded-sm max-w-fit">

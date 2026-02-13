@@ -14,7 +14,7 @@ export default function ResumeDashboardPage() {
              AI Services
           </Badge>
           <h1 className="text-4xl md:text-7xl font-light tracking-tighter mb-8 font-display text-memoria-text-hero">
-             Analytics<br/><span className=\"text-memoria-text-secondary\">Dashboard</span>
+             Analytics<br/><span className="text-memoria-text-secondary">Dashboard</span>
           </h1>
           <p className="text-xl text-memoria-text-whisper max-w-2xl font-light leading-relaxed">
              Monitoring neural parsing performance and semantic matching metrics.

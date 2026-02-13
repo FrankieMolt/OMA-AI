@@ -14,7 +14,7 @@ export default function ResumePricingPage() {
              Economics
           </Badge>
           <h1 className="text-4xl md:text-7xl font-light tracking-tighter mb-8 font-display text-memoria-text-hero">
-             Service<br/><span className=\"text-memoria-text-secondary\">Quotas</span>
+             Service<br/><span className="text-memoria-text-secondary">Quotas</span>
           </h1>
           <p className="text-xl text-memoria-text-whisper max-w-2xl mx-auto font-light leading-relaxed">
              Simple pay-per-use pricing for AI Resume Parsing. 

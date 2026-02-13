@@ -87,3 +87,20 @@ export const borderRadius = {
   lg: '8px',
   full: '9999px',
 }
+
+export const transitions = {
+  smooth: {
+    type: 'spring',
+    stiffness: 300,
+    damping: 30,
+  },
+  fast: {
+    type: 'spring',
+    stiffness: 400,
+    damping: 25,
+  },
+  default: {
+    duration: 0.3,
+    ease: [0.4, 0, 0.2, 1],
+  },
+}

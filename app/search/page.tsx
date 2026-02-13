@@ -55,7 +55,7 @@ export default function SearchPage() {
              Intelligence Index
           </Badge>
           <h1 className="text-4xl md:text-7xl font-light tracking-tighter mb-8 font-display text-memoria-text-hero">
-             Global<br/><span className=\"text-memoria-text-secondary\">Search</span>
+             Global<br/><span className="text-memoria-text-secondary">Search</span>
           </h1>
           
           <div className="relative max-w-4xl">

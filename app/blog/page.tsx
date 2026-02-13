@@ -56,7 +56,7 @@ export default function BlogListPage() {
              Journal
           </Badge>
           <h1 className="text-5xl md:text-8xl font-light tracking-tighter leading-[0.9] mb-8 font-display text-memoria-text-hero">
-             OMA-AI<br/><span className=\"text-memoria-text-secondary\">Insights</span>
+             OMA-AI<br/><span className="text-memoria-text-secondary">Insights</span>
           </h1>
           <p className="text-xl text-memoria-text-whisper max-w-2xl font-light leading-relaxed">
              The latest developments in the autonomous agent economy, protocol updates, and industry analysis.

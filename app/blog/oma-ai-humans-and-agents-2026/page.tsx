@@ -22,7 +22,7 @@ export default function HumansAndAgentsPage() {
           </Badge>
           
           <h1 className="text-4xl md:text-7xl font-light tracking-tighter leading-[1.1] mb-10 font-display text-memoria-text-hero">
-             Revolutionizing the Marketplace for <span className=\"text-memoria-text-secondary\">Humans & Agents</span>
+             Revolutionizing the Marketplace for <span className="text-memoria-text-secondary">Humans & Agents</span>
           </h1>
 
           <div className="flex flex-wrap items-center gap-6 text-[10px] text-memoria-text-meta uppercase tracking-widest font-bold">

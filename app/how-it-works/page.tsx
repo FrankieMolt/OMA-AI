@@ -49,7 +49,7 @@ export default function HowItWorksPage() {
              Process
           </Badge>
           <h1 className="text-5xl md:text-8xl font-light tracking-tighter leading-[0.9] mb-8 font-display text-memoria-text-hero">
-             System<br/><span className=\"text-memoria-text-secondary\">Operation</span>
+             System<br/><span className="text-memoria-text-secondary">Operation</span>
           </h1>
           <p className="text-xl text-memoria-text-whisper max-w-2xl font-light leading-relaxed">
              The OMA-AI marketplace facilitates seamless commerce between human developers, API providers, and autonomous agents.
