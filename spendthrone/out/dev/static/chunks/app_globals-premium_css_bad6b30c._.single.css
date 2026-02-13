@@ -1876,6 +1876,11 @@ h1, h2, h3, h4, h5, h6 {
   padding-bottom: 2rem;
 }
 
+.py-6 {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
 .pb-16 {
   padding-bottom: 4rem;
 }
@@ -2309,8 +2314,16 @@ h1, h2, h3, h4, h5, h6 {
   color: rgb(82 82 91 / var(--tw-placeholder-opacity, 1));
 }
 
+.placeholder-memoria-text-whisper::placeholder {
+  color: var(--memoria-text-whisper);
+}
+
 .accent-white {
   accent-color: #fff;
+}
+
+.accent-memoria-text-hero {
+  accent-color: var(--memoria-text-hero);
 }
 
 .opacity-0 {
@@ -2791,6 +2804,10 @@ h1, h2, h3, h4, h5, h6 {
   color: rgb(212 212 216 / var(--tw-text-opacity, 1));
 }
 
+.hover\:text-memoria-text-secondary:hover {
+  color: var(--memoria-text-secondary);
+}
+
 .hover\:underline:hover {
   text-decoration-line: underline;
 }
@@ -2866,6 +2883,10 @@ h1, h2, h3, h4, h5, h6 {
 .focus\:border-white:focus {
   --tw-border-opacity: 1;
   border-color: rgb(255 255 255 / var(--tw-border-opacity, 1));
+}
+
+.focus\:border-memoria-text-hero:focus {
+  border-color: var(--memoria-text-hero);
 }
 
 .focus\:bg-purple-600:focus {
@@ -3003,6 +3024,10 @@ h1, h2, h3, h4, h5, h6 {
 
 .group:hover .group-hover\:border-memoria-border-active {
   border-color: var(--memoria-border-active);
+}
+
+.group:hover .group-hover\:border-memoria-text-hero {
+  border-color: var(--memoria-text-hero);
 }
 
 .group:hover .group-hover\:text-\[\#71717a\] {

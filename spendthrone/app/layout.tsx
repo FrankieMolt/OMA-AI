@@ -103,10 +103,16 @@ export default function RootLayout({
         </main>
 
         <footer className="border-t border-memoria-border-muted py-10 px-4 md:px-14 bg-memoria-bg-ultra-dark mt-auto" role="contentinfo">
-          <div className="mx-auto max-w-7xl flex flex-col md:flex-row justify-between items-center gap-4">
+          <div className="mx-auto max-w-7xl flex flex-col md:flex-row justify-between items-center gap-6">
             <span className="text-[10px] uppercase tracking-widest text-memoria-text-meta">
               © 2026 SpendThrone • Excellence in Detail
             </span>
+            <nav className="flex gap-6" aria-label="Footer Navigation">
+              <Link href="/about" className="text-[10px] uppercase tracking-widest text-memoria-text-meta hover:text-memoria-text-hero transition-colors no-underline">About</Link>
+              <Link href="/contact" className="text-[10px] uppercase tracking-widest text-memoria-text-meta hover:text-memoria-text-hero transition-colors no-underline">Contact</Link>
+              <Link href="/privacy" className="text-[10px] uppercase tracking-widest text-memoria-text-meta hover:text-memoria-text-hero transition-colors no-underline">Privacy</Link>
+              <Link href="/terms" className="text-[10px] uppercase tracking-widest text-memoria-text-meta hover:text-memoria-text-hero transition-colors no-underline">Terms</Link>
+            </nav>
             <div className="flex gap-2 items-center">
               <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" aria-hidden="true" />
               <span className="text-[10px] uppercase tracking-widest text-memoria-text-meta">

@@ -58,7 +58,6 @@ export default function HomePage() {
             variant="outline" 
             size="sm" 
             className="rounded-sm px-6 text-[11px] uppercase tracking-widest font-semibold border-memoria-border-default hover:bg-memoria-bg-surface"
-            aria-label="Access the Terminal"
           >
             Access Terminal
           </Button>
@@ -109,12 +108,13 @@ export default function HomePage() {
           <div className="relative">
             <div className="absolute inset-0 bg-memoria-bg-surface blur-[120px] opacity-20 pointer-events-none" />
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 relative">
+              <h2 className="sr-only">Available Tools</h2>
               {tools.map((tool, i) => (
                 <Link key={tool.title} href={tool.link} className="no-underline group">
                   <Card className="bg-memoria-bg-card border-memoria-border-muted rounded-sm h-full hover:border-memoria-border-active transition-all">
                     <CardHeader className="p-6">
                       <tool.icon className="h-6 w-6 text-memoria-text-whisper mb-6 group-hover:text-memoria-text-hero transition-colors" />
-                      <CardTitle className="text-xl font-normal text-memoria-text-hero font-display">
+                      <CardTitle as="h2" className="text-xl font-normal text-memoria-text-hero font-display">
                         {tool.title}
                       </CardTitle>
                     </CardHeader>
@@ -168,8 +168,10 @@ export default function HomePage() {
             </span>
           </div>
           <div className="flex gap-8 items-center">
-            <Link href="#" className="text-[10px] uppercase tracking-widest text-memoria-text-meta hover:text-memoria-text-hero transition-colors no-underline">Terminal</Link>
-            <Link href="#" className="text-[10px] uppercase tracking-widest text-memoria-text-meta hover:text-memoria-text-hero transition-colors no-underline">Network</Link>
+            <Link href="/about" className="text-[10px] uppercase tracking-widest text-memoria-text-meta hover:text-memoria-text-hero transition-colors no-underline">About</Link>
+            <Link href="/contact" className="text-[10px] uppercase tracking-widest text-memoria-text-meta hover:text-memoria-text-hero transition-colors no-underline">Contact</Link>
+            <Link href="/privacy" className="text-[10px] uppercase tracking-widest text-memoria-text-meta hover:text-memoria-text-hero transition-colors no-underline">Privacy</Link>
+            <Link href="/terms" className="text-[10px] uppercase tracking-widest text-memoria-text-meta hover:text-memoria-text-hero transition-colors no-underline">Terms</Link>
             <div className="flex gap-2 items-center ml-4">
               <div className="w-1.5 h-1.5 rounded-full bg-memoria-text-whisper" aria-hidden="true" />
               <span className="text-[10px] uppercase tracking-widest text-memoria-text-meta">

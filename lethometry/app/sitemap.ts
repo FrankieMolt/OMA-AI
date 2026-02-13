@@ -13,7 +13,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/philosophy',
     '/bio',
     '/about',
+    '/contact',
     '/privacy',
+    '/terms',
     '/data',
     '/guidelines'
   ].map((route) => ({

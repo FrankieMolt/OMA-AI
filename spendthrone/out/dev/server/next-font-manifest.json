@@ -6,6 +6,42 @@
       "static/media/7ebf22b5a21034f8-s.p.d8bad3ab.woff2",
       "static/media/e41d5df559864f9e-s.p.380d09ea.woff2"
     ],
+    "[project]/app/about/page": [
+      "static/media/83afe278b6a6bb3c-s.p.3a6ba036.woff2",
+      "static/media/5c285b27cdda1fe8-s.p.a62025f2.woff2",
+      "static/media/7ebf22b5a21034f8-s.p.d8bad3ab.woff2",
+      "static/media/e41d5df559864f9e-s.p.380d09ea.woff2"
+    ],
+    "[project]/app/accessibility/page": [
+      "static/media/83afe278b6a6bb3c-s.p.3a6ba036.woff2",
+      "static/media/5c285b27cdda1fe8-s.p.a62025f2.woff2",
+      "static/media/7ebf22b5a21034f8-s.p.d8bad3ab.woff2",
+      "static/media/e41d5df559864f9e-s.p.380d09ea.woff2"
+    ],
+    "[project]/app/blog/page": [
+      "static/media/83afe278b6a6bb3c-s.p.3a6ba036.woff2",
+      "static/media/5c285b27cdda1fe8-s.p.a62025f2.woff2",
+      "static/media/7ebf22b5a21034f8-s.p.d8bad3ab.woff2",
+      "static/media/e41d5df559864f9e-s.p.380d09ea.woff2"
+    ],
+    "[project]/app/contact/page": [
+      "static/media/83afe278b6a6bb3c-s.p.3a6ba036.woff2",
+      "static/media/5c285b27cdda1fe8-s.p.a62025f2.woff2",
+      "static/media/7ebf22b5a21034f8-s.p.d8bad3ab.woff2",
+      "static/media/e41d5df559864f9e-s.p.380d09ea.woff2"
+    ],
+    "[project]/app/faq/page": [
+      "static/media/83afe278b6a6bb3c-s.p.3a6ba036.woff2",
+      "static/media/5c285b27cdda1fe8-s.p.a62025f2.woff2",
+      "static/media/7ebf22b5a21034f8-s.p.d8bad3ab.woff2",
+      "static/media/e41d5df559864f9e-s.p.380d09ea.woff2"
+    ],
+    "[project]/app/features/page": [
+      "static/media/83afe278b6a6bb3c-s.p.3a6ba036.woff2",
+      "static/media/5c285b27cdda1fe8-s.p.a62025f2.woff2",
+      "static/media/7ebf22b5a21034f8-s.p.d8bad3ab.woff2",
+      "static/media/e41d5df559864f9e-s.p.380d09ea.woff2"
+    ],
     "[project]/app/login/page": [
       "static/media/83afe278b6a6bb3c-s.p.3a6ba036.woff2",
       "static/media/5c285b27cdda1fe8-s.p.a62025f2.woff2",
@@ -24,6 +60,12 @@
       "static/media/7ebf22b5a21034f8-s.p.d8bad3ab.woff2",
       "static/media/e41d5df559864f9e-s.p.380d09ea.woff2"
     ],
+    "[project]/app/pricing/page": [
+      "static/media/83afe278b6a6bb3c-s.p.3a6ba036.woff2",
+      "static/media/5c285b27cdda1fe8-s.p.a62025f2.woff2",
+      "static/media/7ebf22b5a21034f8-s.p.d8bad3ab.woff2",
+      "static/media/e41d5df559864f9e-s.p.380d09ea.woff2"
+    ],
     "[project]/app/privacy/page": [
       "static/media/83afe278b6a6bb3c-s.p.3a6ba036.woff2",
       "static/media/5c285b27cdda1fe8-s.p.a62025f2.woff2",
@@ -31,6 +73,18 @@
       "static/media/e41d5df559864f9e-s.p.380d09ea.woff2"
     ],
     "[project]/app/product/[slug]/page": [
+      "static/media/83afe278b6a6bb3c-s.p.3a6ba036.woff2",
+      "static/media/5c285b27cdda1fe8-s.p.a62025f2.woff2",
+      "static/media/7ebf22b5a21034f8-s.p.d8bad3ab.woff2",
+      "static/media/e41d5df559864f9e-s.p.380d09ea.woff2"
+    ],
+    "[project]/app/returns/page": [
+      "static/media/83afe278b6a6bb3c-s.p.3a6ba036.woff2",
+      "static/media/5c285b27cdda1fe8-s.p.a62025f2.woff2",
+      "static/media/7ebf22b5a21034f8-s.p.d8bad3ab.woff2",
+      "static/media/e41d5df559864f9e-s.p.380d09ea.woff2"
+    ],
+    "[project]/app/shipping/page": [
       "static/media/83afe278b6a6bb3c-s.p.3a6ba036.woff2",
       "static/media/5c285b27cdda1fe8-s.p.a62025f2.woff2",
       "static/media/7ebf22b5a21034f8-s.p.d8bad3ab.woff2",

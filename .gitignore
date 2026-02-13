@@ -63,3 +63,7 @@ oma.db
 # Temporary files
 .temp/
 *.temp
+
+# Turbopack cache
+**/out/dev/cache/turbopack/
+

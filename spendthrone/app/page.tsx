@@ -42,8 +42,14 @@ export default function HomePage() {
           >
             Exceptional<br/>Products
           </h1>
-          <p className="text-lg md:text-xl text-memoria-text-whisper max-w-lg mx-auto mb-12 font-light leading-relaxed">
-            A curated collection of premium goods for those who demand excellence in every detail.
+          <p className="text-lg md:text-xl text-memoria-text-whisper max-w-2xl mx-auto mb-12 font-light leading-relaxed">
+            A curated collection of premium goods for those who demand excellence in every detail. 
+            From precision timepieces to artisan furniture, each piece in our collection represents 
+            the pinnacle of craftsmanship and design. We partner with master artisans and innovative 
+            creators worldwide to bring you products that transcend the ordinary—objects that combine 
+            functionality with timeless aesthetics. Whether you seek the perfect writing instrument, 
+            audiophile-grade sound systems, or statement lighting for your space, SpendThrone offers 
+            a carefully vetted selection that meets the highest standards of quality and provenance.
           </p>
           <Link href="/marketplace">
             <Button 
@@ -97,7 +103,7 @@ export default function HomePage() {
                 key={product.id}
                 href={`/product/${product.slug}`}
                 className="group no-underline"
-                aria-label={`View details for ${product.name}`}
+                aria-label={`View ${product.name} - $${product.price}`}
               >
                 <Card className="bg-memoria-bg-card border-memoria-border-muted rounded-sm overflow-hidden group-hover:border-memoria-border-active transition-all">
                   <CardContent className="p-0">
