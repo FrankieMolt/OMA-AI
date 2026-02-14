@@ -1,0 +1,146 @@
+'use client';
+
+import { useState, useMemo } from 'react';
+import { motion } from 'framer-motion';
+import Link from 'next/link';
+import { SearchBar } from '@/components/search/SearchBar';
+import { CategoryFilter } from '@/components/product/CategoryFilter';
+import { ProductGrid } from '@/components/product/ProductGrid';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { realProducts as PRODUCTS } from '@/data/real-products';
+import { SortOption } from '@/types';
+import { useDebounce } from '@/hooks/useDebounce';
+
+export default function MarketplaceClient() {
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('all');
+  const [sortBy, setSortBy] = useState<SortOption>('featured');
+  const [cart, wishlist, compareList] = useApp();
+  
+  const debouncedSearch = useDebounce(searchQuery, 300);
+
+  const filteredProducts = useMemo(() => {
+    return PRODUCTS.filter((product) => {
+      const matchesSearch = !debouncedSearch || 
+        product.name.toLowerCase().includes(debouncedSearch.toLowerCase()) ||
+        product.description.toLowerCase().includes(debouncedSearch.toLowerCase()) ||
+        product.tags.some((tag) => tag.toLowerCase().includes(debouncedSearch.toLowerCase()));
+      const matchesCategory = selectedCategory === 'all' || product.category === selectedCategory;
+      return matchesSearch && matchesCategory;
+    });
+  }, [debouncedSearch, selectedCategory]);
+
+  const sortedProducts = useMemo(() => {
+    let products = [...filteredProducts];
+    
+    if (sortBy === 'featured') {
+      products = products.filter(p => p.featured === true);
+    } else if (sortBy === 'price_asc') {
+      products = products.sort((a, b) => a.price - b.price);
+    } else if (sortBy === 'price_desc') {
+      products = products.sort((a, b) => b.price - a.price);
+    } else if (sortBy === 'rating') {
+      products = products.sort((a, b) => (b.rating || 0) - (a.rating || 0));
+    }
+    
+    return products.slice(0, 12);
+  }, [filteredProducts, sortBy]);
+
+  return (
+    <div className="min-h-screen bg-memoria-bg-ultra-dark text-memoria-text-hero py-12">
+      {/* Header */}
+      <div className="max-w-7xl mx-auto px-4 md:px-14">
+        <h1 className="text-5xl md:text-6xl font-light text-memoria-text-hero mb-4 font-display tracking-tight">
+          Marketplace
+        </h1>
+        <p className="text-memoria-text-whisper mb-8 max-w-2xl">
+          Browse, discover, and purchase AI services from across the universe. Every integration is verified and ready for autonomous agent deployment.
+        </p>
+        
+        {/* Search, Filter, Sort */}
+        <div className="flex flex-col md:flex-row gap-6 mb-12">
+          <SearchBar 
+            value={searchQuery} 
+            onChange={setSearchQuery}
+            placeholder="Search AI services..."
+            className="w-full md:w-96"
+          />
+          
+          <CategoryFilter 
+            selected={selectedCategory} 
+            onChange={setSelectedCategory}
+          />
+          
+          <div className="flex gap-2">
+            <Button
+              variant={sortBy === 'price_asc' ? 'primary' : 'ghost'}
+              size="sm"
+              onClick={() => setSortBy('price_asc')}
+              aria-label="Sort by price low to high"
+            >
+              Price
+            </Button>
+            <Button
+              variant={sortBy === 'price_desc' ? 'primary' : 'ghost'}
+              size="sm"
+              onClick={() => setSortBy('price_desc')}
+              aria-label="Sort by price high to low"
+            >
+              Price
+            </Button>
+            <Button
+              variant={sortBy === 'rating' ? 'primary' : 'ghost'}
+              size="sm"
+              onClick={() => setSortBy('rating')}
+              aria-label="Sort by rating"
+            >
+              Rating
+            </Button>
+          </div>
+        </div>
+      </div>
+      
+      {/* Products Grid */}
+      <ProductGrid 
+        products={sortedProducts} 
+        onInspect={(product) => console.log('Inspect:', product)}
+        addToCart={cart.addToCart}
+        toggleWishlist={cart.toggleWishlist}
+        toggleCompare={cart.toggleCompare}
+        isInWishlist={cart.isInWishlist}
+        isInCompare={cart.isInCompare}
+      />
+      
+      {/* Empty State */}
+      {filteredProducts.length === 0 && (
+        <div className="text-center py-32">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="flex flex-col items-center gap-4"
+          >
+            <div className="w-20 h-20 bg-memoria-bg-surface rounded-full flex items-center justify-center">
+              <svg 
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                className="w-10 h-10 text-memoria-text-whisper"
+              >
+                <path 
+                  d="M21 12.79a8 8.508 16.646c.625c-8.508l-6.857 10.294-8.508c-10.837 3.585 4.508c-8.085 4.508z M3 75 12.79 8.585 16.646c.625c8.508l16.646c8.508l6.857 10.294-8.508c10.837 3.585 4.508z" 
+                  fillRule="evenodd" 
+                  clipRule="evenodd"
+                />
+              </svg>
+              <div>
+                <h3 className="text-xl font-light text-memoria-text-whisper">No results found</h3>
+                <p className="text-memoria-text-meta">Try adjusting your search or category filters</p>
+              </div>
+            </motion.div>
+        </div>
+      )}
+    </div>
+  );
+}
