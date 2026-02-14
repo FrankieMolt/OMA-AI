@@ -5,8 +5,9 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy',
-  description: 'Lethometry privacy policy. How we collect, use, and protect your data.',
+  title: 'Privacy Policy - Data Protection & Anonymity | Lethometry',
+  description: 'How Lethometry collects, uses, and protects your research data. All participant data is anonymized and protected under strict privacy protocols.',
+  alternates: { canonical: '/privacy' },
 }
 
 export default function PrivacyPage() {

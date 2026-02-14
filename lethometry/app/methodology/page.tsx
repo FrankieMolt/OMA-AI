@@ -1,5 +1,12 @@
+import { Metadata } from 'next';
 import Link from 'next/link';
 import { FileText, CheckCircle, AlertCircle, BookOpen, Scale, Shield } from 'lucide-react';
+
+export const metadata: Metadata = {
+  title: 'Research Methodology - Scientific Standards | Lethometry',
+  description: 'Our commitment to rigorous, transparent, and reproducible AI behavioral research. Learn about our experimental frameworks and data collection methods.',
+  alternates: { canonical: '/methodology' },
+};
 
 export default function MethodologyPage() {
   return (

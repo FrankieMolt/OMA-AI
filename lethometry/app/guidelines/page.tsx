@@ -1,5 +1,12 @@
+import { Metadata } from 'next';
 import Link from 'next/link';
 import { FileCheck, Shield, Database, BookOpen, AlertCircle, HelpCircle } from 'lucide-react';
+
+export const metadata: Metadata = {
+  title: 'Research Participation Guidelines | Lethometry',
+  description: 'Everything you need to know before participating in Lethometry experiments. Anonymity, data usage, and ethical research standards.',
+  alternates: { canonical: '/guidelines' },
+};
 
 export default function GuidelinesPage() {
   return (

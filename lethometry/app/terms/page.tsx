@@ -5,8 +5,9 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Terms of Service',
-  description: 'Lethometry terms of service. Terms and conditions for using our quantification systems.',
+  title: 'Terms of Service - Usage Agreement | Lethometry',
+  description: 'Terms and conditions for using Lethometry quantification systems and participating in AI behavioral research experiments.',
+  alternates: { canonical: '/terms' },
 }
 
 export default function TermsPage() {

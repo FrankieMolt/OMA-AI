@@ -1,6 +1,13 @@
+import { Metadata } from 'next';
 import Link from 'next/link';
 import { BookOpen, Users, TrendingUp, ExternalLink, Download } from 'lucide-react';
 import { publications, experiments } from '@/lib/data';
+
+export const metadata: Metadata = {
+  title: 'Research Publications - Open Access Articles | Lethometry',
+  description: 'Explore peer-reviewed research publications from Lethometry experiments. Download open-access articles on AI ethics, cognitive science, and existential quantification.',
+  alternates: { canonical: '/publications' },
+};
 
 export default function PublicationsPage() {
   // Helper function to get experiment slug by ID
