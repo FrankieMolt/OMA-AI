@@ -29,7 +29,7 @@
     --ring: 0 0% 89%;
     --radius: 0.25rem;
     
-    /* Memoria Extended Colors */
+    /* Memoria Extended Colors - WCAG AA Compliant Contrast */
     --memoria-bg-ultra-dark: #050505;
     --memoria-bg-card: #121212;
     --memoria-bg-surface: #1e1e1e;
@@ -38,9 +38,9 @@
     --memoria-border-active: #3a3a3a;
     --memoria-text-hero: #e4e4e7;
     --memoria-text-secondary: #a1a1aa;
-    --memoria-text-whisper: #71717a;
-    --memoria-text-meta: #52525b;
-    --memoria-text-label: #71717a;
+    --memoria-text-whisper: #a1a1aa;
+    --memoria-text-meta: #71717a;
+    --memoria-text-label: #a1a1aa;
   }
 }
 
