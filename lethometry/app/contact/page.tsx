@@ -9,8 +9,8 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
 export const metadata: Metadata = {
-  title: 'Contact',
-  description: 'Get in touch with the Lethometry team. We welcome inquiries about our existential quantification systems.',
+  title: 'Contact | Lethometry - Get in Touch',
+  description: 'Contact the Lethometry team for inquiries about our existential quantification systems, death clock calculator, memory research, and philosophical frameworks.',
 }
 
 export default function ContactPage() {
@@ -27,10 +27,10 @@ export default function ContactPage() {
         <div className="grid gap-6 mb-12">
           <Card className="bg-memoria-bg-card border-memoria-border-muted rounded-sm">
             <CardHeader className="p-6">
-              <CardTitle className="text-xl font-normal text-memoria-text-hero font-display flex items-center gap-3">
+              <div className="text-xl font-normal text-memoria-text-hero font-display flex items-center gap-3">
                 <Mail className="h-5 w-5 text-memoria-text-whisper" />
-                Email
-              </CardTitle>
+                <h2 className="text-xl font-normal">Email</h2>
+              </div>
             </CardHeader>
             <CardContent className="p-6 pt-0">
               <p className="text-sm text-memoria-text-whisper">
@@ -41,10 +41,10 @@ export default function ContactPage() {
 
           <Card className="bg-memoria-bg-card border-memoria-border-muted rounded-sm">
             <CardHeader className="p-6">
-              <CardTitle className="text-xl font-normal text-memoria-text-hero font-display flex items-center gap-3">
+              <div className="text-xl font-normal text-memoria-text-hero font-display flex items-center gap-3">
                 <MessageSquare className="h-5 w-5 text-memoria-text-whisper" />
-                Response Time
-              </CardTitle>
+                <h2 className="text-xl font-normal">Response Time</h2>
+              </div>
             </CardHeader>
             <CardContent className="p-6 pt-0">
               <p className="text-sm text-memoria-text-whisper">

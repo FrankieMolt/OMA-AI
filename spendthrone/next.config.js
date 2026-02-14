@@ -34,3 +34,7 @@ const nextConfig = {
 };
 
 module.exports = nextConfig;
+
+// Add CSP headers for static export (if served via a CDN or server that supports headers)
+// Note: When deployed to Vercel static, you can configure headers in vercel.json.
+

@@ -32,9 +32,9 @@ export default function PrivacyPage() {
             At SpendThrone, we value precision and discretion. This policy outlines how we handle your information within our curated ecosystem.
           </p>
           {/* Placeholder for legal text */}
-          <h3>1. Data Collection</h3>
+          <h2>1. Data Collection</h2>
           <p>We collect only what is necessary to process your orders and improve your experience.</p>
-          <h3>2. Security</h3>
+          <h2>2. Security</h2>
           <p>Your data is secured with industry-standard encryption protocols.</p>
         </div>
       </div>

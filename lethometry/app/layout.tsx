@@ -90,14 +90,21 @@ export default function RootLayout({
           </Link>
           <div className="flex items-center gap-8">
             <div className="hidden md:flex items-center gap-8">
-              {['Systems', 'Data', 'About'].map(item => (
-                <Link key={item} href={`/${item.toLowerCase()}`} className="text-[10px] uppercase tracking-widest text-memoria-text-whisper hover:text-memoria-text-hero no-underline transition-colors" aria-label={`Go to ${item}`}>
-                  {item}
-                </Link>
-              ))}
+              <Link href="/clock" className="text-[10px] uppercase tracking-widest text-memoria-text-whisper hover:text-memoria-text-hero no-underline transition-colors">
+                Clock
+              </Link>
+              <Link href="/memory" className="text-[10px] uppercase tracking-widest text-memoria-text-whisper hover:text-memoria-text-hero no-underline transition-colors">
+                Memory
+              </Link>
+              <Link href="/experiments" className="text-[10px] uppercase tracking-widest text-memoria-text-whisper hover:text-memoria-text-hero no-underline transition-colors">
+                Experiments
+              </Link>
+              <Link href="/about" className="text-[10px] uppercase tracking-widest text-memoria-text-whisper hover:text-memoria-text-hero no-underline transition-colors">
+                About
+              </Link>
             </div>
-            <Link href="/terminal" className="no-underline" aria-label="Open Terminal">
-              <span className="text-[11px] uppercase tracking-widest text-memoria-text-secondary hover:text-memoria-text-hero transition-colors">Terminal</span>
+            <Link href="/data" className="no-underline" aria-label="View Data">
+              <span className="text-[11px] uppercase tracking-widest text-memoria-text-secondary hover:text-memoria-text-hero transition-colors">Data</span>
             </Link>
           </div>
         </nav>

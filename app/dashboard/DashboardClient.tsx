@@ -73,7 +73,7 @@ export default function Dashboard() {
       price: 0.01,
       priceType: 'per_call',
       calls: 1250000,
-      endpoint: '/api/v1/chat/completions',
+      endpoint: '/docs/apis/gpt-4-turbo',
       tags: ['llm', 'chat', 'code'],
       featured: true,
       provider: 'OpenAI'
@@ -87,7 +87,7 @@ export default function Dashboard() {
       price: 0.015,
       priceType: 'per_call',
       calls: 850000,
-      endpoint: '/api/v1/messages',
+      endpoint: '/docs/apis/claude-3-opus',
       tags: ['llm', 'analysis', 'writing'],
       featured: true,
       provider: 'Anthropic'
@@ -101,7 +101,7 @@ export default function Dashboard() {
       price: 0,
       priceType: 'free',
       calls: 500000,
-      endpoint: 'https://github.com/model-context-protocol/servers/tree/main/src/github',
+      endpoint: 'https://github.com/modelcontextprotocol/servers/tree/main/src/github',
       tags: ['mcp', 'github', 'dev-tools'],
       featured: true,
       provider: 'Model Context Protocol'
@@ -115,7 +115,7 @@ export default function Dashboard() {
       price: 0.001,
       priceType: 'per_call',
       calls: 200000,
-      endpoint: 'https://github.com/model-context-protocol/servers/tree/main/src/brave-search',
+      endpoint: 'https://github.com/modelcontextprotocol/servers/tree/main/src/brave-search',
       tags: ['mcp', 'search', 'web'],
       featured: false,
       provider: 'Brave Software'
@@ -129,7 +129,7 @@ export default function Dashboard() {
       price: 0.02,
       priceType: 'per_call',
       calls: 600000,
-      endpoint: '/api/v1/images/generate',
+      endpoint: '/docs/apis/image-generator',
       tags: ['image', 'generation', 'creative'],
       featured: true,
       provider: 'OMA Network'
@@ -143,7 +143,7 @@ export default function Dashboard() {
       price: 0.002,
       priceType: 'per_call',
       calls: 1800000,
-      endpoint: '/api/v1/payments/x402',
+      endpoint: '/docs/apis/x402-payments',
       tags: ['crypto', 'payments', 'base'],
       featured: true,
       provider: 'OMA Network'

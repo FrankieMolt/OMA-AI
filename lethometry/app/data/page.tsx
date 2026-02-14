@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { Database, Download, FileJson, FileSpreadsheet, Calendar, HardDrive } from 'lucide-react';
-import { researchData, participantStats } from '@/lib/data';
+import { researchData, participantStats, getExperimentById } from '@/lib/data';
 import { formatNumber, formatDate } from '@/lib/utils';
 
 export default function DataPage() {
@@ -59,12 +59,16 @@ export default function DataPage() {
                   <div>
                     <div className="flex items-center gap-2 mb-2">
                       <Database className="w-5 h-5 text-scientific-blue" />
-                      <Link 
-                        href={`/experiments/${dataset.experimentId}`}
-                        className="text-sm text-primary hover:underline"
-                      >
-                        {dataset.experimentName}
-                      </Link>
+                      {getExperimentById(dataset.experimentId) ? (
+                        <Link 
+                          href={`/experiments/${getExperimentById(dataset.experimentId)?.slug}`}
+                          className="text-sm text-primary hover:underline"
+                        >
+                          {dataset.experimentName}
+                        </Link>
+                      ) : (
+                        <span className="text-sm text-primary">{dataset.experimentName}</span>
+                      )}
                     </div>
                     <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
                       <div className="flex items-center gap-1.5">

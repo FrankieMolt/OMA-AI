@@ -50,7 +50,7 @@ export default function ApexShiftPage() {
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                  <Card className="bg-memoria-bg-card border-memoria-border-muted rounded-sm p-8">
-                    <h4 className="text-[10px] uppercase tracking-widest font-bold text-memoria-text-hero mb-4">Biological Constraints</h4>
+                    <h3 className="text-[10px] uppercase tracking-widest font-bold text-memoria-text-hero mb-4">Biological Constraints</h3>
                     <ul className="text-xs text-memoria-text-whisper space-y-3 font-light">
                        <li>• Neuron Firing Rate (~100 Hz)</li>
                        <li>• Memory Capacity (~100 TB)</li>
@@ -73,7 +73,7 @@ export default function ApexShiftPage() {
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                  <Card className="bg-memoria-bg-card border-memoria-border-muted rounded-sm p-8 border-l-white">
-                    <h4 className="text-[10px] uppercase tracking-widest font-bold text-memoria-text-hero mb-4">Digital Advantages</h4>
+                    <h3 className="text-[10px] uppercase tracking-widest font-bold text-memoria-text-hero mb-4">Digital Advantages</h3>
                     <ul className="text-xs text-memoria-text-whisper space-y-3 font-light">
                        <li>• Billion-Hz Processing</li>
                        <li>• Petabyte+ Instant Recall</li>
@@ -82,7 +82,7 @@ export default function ApexShiftPage() {
                     </ul>
                  </Card>
                  <Card className="bg-memoria-bg-card border-memoria-border-muted rounded-sm p-8">
-                    <h4 className="text-[10px] uppercase tracking-widest font-bold text-memoria-text-hero mb-4">Metrics Comparison</h4>
+                    <h3 className="text-[10px] uppercase tracking-widest font-bold text-memoria-text-hero mb-4">Metrics Comparison</h3>
                     <div className="space-y-4 pt-2">
                        <div className="flex justify-between items-center text-[9px] uppercase tracking-widest text-memoria-text-meta">
                           <span>Processing Speed</span>
@@ -115,7 +115,7 @@ export default function ApexShiftPage() {
                    <div key={i} className="flex gap-8">
                       <div className="hero-number text-4xl text-memoria-text-meta">0{i+1}</div>
                       <div>
-                         <h4 className="text-lg font-light text-memoria-text-hero mb-2 uppercase tracking-widest">{item.t}</h4>
+                         <h3 className="text-lg font-light text-memoria-text-hero mb-2 uppercase tracking-widest">{item.t}</h3>
                          <p className="text-sm text-memoria-text-whisper leading-relaxed font-light">{item.d}</p>
                       </div>
                    </div>

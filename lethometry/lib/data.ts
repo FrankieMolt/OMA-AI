@@ -473,3 +473,7 @@ export function getActiveExperiments(): Experiment[] {
 export function getExperimentsByCategory(category: Experiment['category']): Experiment[] {
   return experiments.filter(e => e.category === category);
 }
+
+export function getExperimentById(id: string): Experiment | undefined {
+  return experiments.find(e => e.id === id);
+}

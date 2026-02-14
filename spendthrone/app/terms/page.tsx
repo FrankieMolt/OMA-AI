@@ -32,9 +32,9 @@ export default function TermsPage() {
             By accessing SpendThrone, you agree to abide by these terms. We operate a curated marketplace for exceptional goods.
           </p>
           {/* Placeholder for legal text */}
-          <h3>1. Acceptance of Terms</h3>
+          <h2>1. Acceptance of Terms</h2>
           <p>Usage of our platform constitutes full acceptance of these terms.</p>
-          <h3>2. Purchases</h3>
+          <h2>2. Purchases</h2>
           <p>All sales of limited edition items are final unless otherwise stated.</p>
         </div>
       </div>

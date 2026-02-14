@@ -206,7 +206,7 @@ export default function ContactClient() {
                                    {method.icon}
                                 </div>
                                 <div>
-                                   <div className="text-xs font-bold text-memoria-text-hero uppercase tracking-widest mb-1">{method.title}</div>
+                                   <h3 className="text-xs font-bold text-memoria-text-hero uppercase tracking-widest mb-1">{method.title}</h3>
                                    <div className="text-sm text-memoria-text-whisper font-light">{method.value}</div>
                                 </div>
                              </div>
@@ -221,7 +221,7 @@ export default function ContactClient() {
                   <div className="space-y-6">
                      {faqItems.map((item, i) => (
                        <div key={i}>
-                          <h4 className="text-sm font-bold text-memoria-text-hero uppercase tracking-wider mb-2">{item.question}</h4>
+                          <h3 className="text-sm font-bold text-memoria-text-hero uppercase tracking-wider mb-2">{item.question}</h3>
                           <p className="text-sm text-memoria-text-whisper font-light leading-relaxed">{item.answer}</p>
                        </div>
                      ))}
