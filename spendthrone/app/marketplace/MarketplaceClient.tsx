@@ -129,16 +129,16 @@ export default function MarketplaceClient() {
                 className="w-10 h-10 text-memoria-text-whisper"
               >
                 <path 
-                  d="M21 12.79a8 8.508 16.646c.625c-8.508l-6.857 10.294-8.508c-10.837 3.585 4.508c-8.085 4.508z M3 75 12.79 8.585 16.646c.625c8.508l16.646c8.508l6.857 10.294-8.508c10.837 3.585 4.508z" 
-                  fillRule="evenodd" 
-                  clipRule="evenodd"
+                  d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" 
+                  fill="currentColor" 
                 />
               </svg>
-              <div>
-                <h3 className="text-xl font-light text-memoria-text-whisper">No results found</h3>
-                <p className="text-memoria-text-meta">Try adjusting your search or category filters</p>
-              </div>
-            </motion.div>
+            </div>
+            <div>
+              <h3 className="text-xl font-light text-memoria-text-whisper">No results found</h3>
+              <p className="text-memoria-text-meta">Try adjusting your search or category filters</p>
+            </div>
+          </motion.div>
         </div>
       )}
     </div>

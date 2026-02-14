@@ -39,7 +39,7 @@ export default function ReturnsClient() {
       orderId: 'ORD-7829',
       item: 'Pura Smart Diffuser',
       status: 'completed',
-      refund: 49.99
+      refund: 49.99,
       reason: 'Product upgrade'
     },
     {

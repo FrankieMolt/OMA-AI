@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { CheckCircle } from 'lucide-react';
 
 export default function ShippingClient() {
   const [selectedMethod, setSelectedMethod] = useState<'standard' | 'express' | 'overnight'>('standard');
