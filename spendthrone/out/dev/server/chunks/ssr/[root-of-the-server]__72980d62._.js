@@ -33,7 +33,7 @@ function ContactPage() {
             className: "max-w-4xl mx-auto px-4",
             children: [
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
-                    className: "text-4xl font-bold mb-8 bg-gradient-to-r from-purple-400 via-pink-500 to-amber-400 bg-clip-text text-transparent",
+                    className: "text-4xl font-bold mb-8 text-zinc-100",
                     children: "Contact Us"
                 }, void 0, false, {
                     fileName: "[project]/app/contact/page.tsx",
@@ -76,6 +76,7 @@ function ContactPage() {
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                                                    htmlFor: "contact-name",
                                                     className: "block text-sm font-medium text-zinc-300 mb-2",
                                                     children: "Name"
                                                 }, void 0, false, {
@@ -84,8 +85,10 @@ function ContactPage() {
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                                    id: "contact-name",
+                                                    name: "name",
                                                     type: "text",
-                                                    className: "w-full px-4 py-3 bg-zinc-950 border border-zinc-800 rounded-xl text-white placeholder-zinc-500 focus:outline-none focus:border-purple-500 transition-colors",
+                                                    className: "w-full px-4 py-3 bg-zinc-950 border border-zinc-800 rounded-xl text-white placeholder-zinc-500 focus:outline-none focus:border-zinc-600 transition-colors",
                                                     placeholder: "Your name"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/contact/page.tsx",
@@ -101,59 +104,66 @@ function ContactPage() {
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                                                    htmlFor: "contact-email",
                                                     className: "block text-sm font-medium text-zinc-300 mb-2",
                                                     children: "Email"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/contact/page.tsx",
-                                                    lineNumber: 41,
+                                                    lineNumber: 43,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                                    id: "contact-email",
+                                                    name: "email",
                                                     type: "email",
-                                                    className: "w-full px-4 py-3 bg-zinc-950 border border-zinc-800 rounded-xl text-white placeholder-zinc-500 focus:outline-none focus:border-purple-500 transition-colors",
+                                                    className: "w-full px-4 py-3 bg-zinc-950 border border-zinc-800 rounded-xl text-white placeholder-zinc-500 focus:outline-none focus:border-zinc-600 transition-colors",
                                                     placeholder: "you@example.com"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/contact/page.tsx",
-                                                    lineNumber: 44,
+                                                    lineNumber: 46,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/contact/page.tsx",
-                                            lineNumber: 40,
+                                            lineNumber: 42,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                                                    htmlFor: "contact-message",
                                                     className: "block text-sm font-medium text-zinc-300 mb-2",
                                                     children: "Message"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/contact/page.tsx",
-                                                    lineNumber: 52,
+                                                    lineNumber: 56,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
+                                                    id: "contact-message",
+                                                    name: "message",
                                                     rows: 5,
-                                                    className: "w-full px-4 py-3 bg-zinc-950 border border-zinc-800 rounded-xl text-white placeholder-zinc-500 focus:outline-none focus:border-purple-500 transition-colors",
+                                                    className: "w-full px-4 py-3 bg-zinc-950 border border-zinc-800 rounded-xl text-white placeholder-zinc-500 focus:outline-none focus:border-zinc-600 transition-colors",
                                                     placeholder: "Tell us about your weird product idea..."
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/contact/page.tsx",
-                                                    lineNumber: 55,
+                                                    lineNumber: 59,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/contact/page.tsx",
-                                            lineNumber: 51,
+                                            lineNumber: 55,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                            className: "w-full py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold rounded-xl hover:opacity-90 transition-opacity",
+                                            type: "submit",
+                                            className: "w-full py-3 bg-zinc-100 text-zinc-950 font-semibold rounded-xl hover:bg-zinc-200 transition-colors",
                                             children: "Send Message"
                                         }, void 0, false, {
                                             fileName: "[project]/app/contact/page.tsx",
-                                            lineNumber: 62,
+                                            lineNumber: 68,
                                             columnNumber: 15
                                         }, this)
                                     ]
@@ -182,12 +192,12 @@ function ContactPage() {
                         children: "Back to Kingdom"
                     }, void 0, false, {
                         fileName: "[project]/app/contact/page.tsx",
-                        lineNumber: 70,
+                        lineNumber: 76,
                         columnNumber: 11
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/app/contact/page.tsx",
-                    lineNumber: 69,
+                    lineNumber: 75,
                     columnNumber: 9
                 }, this)
             ]

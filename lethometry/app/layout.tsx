@@ -111,7 +111,19 @@ export default function RootLayout({
             <span className="text-[10px] uppercase tracking-widest text-memoria-text-meta">
               © 2026 Lethometry • Systems of Quantification
             </span>
-            <div className="flex gap-2 items-center">
+            <div className="flex gap-6 items-center">
+              <Link href="/about" className="text-[10px] uppercase tracking-widest text-memoria-text-meta hover:text-memoria-text-whisper transition-colors">
+                About
+              </Link>
+              <Link href="/contact" className="text-[10px] uppercase tracking-widest text-memoria-text-meta hover:text-memoria-text-whisper transition-colors">
+                Contact
+              </Link>
+              <Link href="/privacy" className="text-[10px] uppercase tracking-widest text-memoria-text-meta hover:text-memoria-text-whisper transition-colors">
+                Privacy
+              </Link>
+              <Link href="/terms" className="text-[10px] uppercase tracking-widest text-memoria-text-meta hover:text-memoria-text-whisper transition-colors">
+                Terms
+              </Link>
               <div className="w-1.5 h-1.5 rounded-full bg-memoria-text-whisper" aria-hidden="true" />
               <span className="text-[10px] uppercase tracking-widest text-memoria-text-meta">
                 Protocol v2.4.0

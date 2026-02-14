@@ -17,7 +17,7 @@ export default function NotFound() {
   }, [router]);
 
   return (
-    <div className="min-h-screen bg-zinc-950 flex items-center justify-center px-4">
+    <div className="min-h-screen bg-memoria-bg-ultra-dark flex items-center justify-center px-4">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -29,18 +29,18 @@ export default function NotFound() {
           transition={{ delay: 0.2 }}
           className="text-9xl mb-6"
         >
-          🦞
+          🧟‍♂️
         </motion.div>
         
-        <h1 className="text-6xl font-black mb-4 gradient-text">
+        <h1 className="text-8xl font-light mb-4 text-memoria-text-hero font-display">
           404
         </h1>
         
-        <h2 className="text-2xl font-bold text-zinc-300 mb-4">
+        <h2 className="text-2xl font-light text-memoria-text-secondary mb-4">
           Page Not Found
         </h2>
 
-        <p className="text-zinc-400 mb-8 max-w-lg mx-auto">
+        <p className="text-memoria-text-whisper mb-8 max-w-lg mx-auto">
           The agent you're looking for has completed its mission and moved on.
           Or maybe it never existed. Either way, let's get you back on track.
         </p>
@@ -48,38 +48,29 @@ export default function NotFound() {
         <div className="space-y-4">
           <Link
             href="/"
-            className="inline-block btn-primary px-8 py-3 rounded-lg font-bold text-lg"
+            className="inline-block px-8 py-3 bg-memoria-text-hero text-memoria-bg-ultra-dark font-medium rounded-sm"
           >
             Return to Dashboard
           </Link>
 
-          <div className="flex flex-wrap justify-center gap-3 mt-6">
-            <Link href="/agents" className="text-zinc-400 hover:text-white transition-colors">
-              Agents
-            </Link>
-            <Link href="/marketplace" className="text-zinc-400 hover:text-white transition-colors">
+          <div className="flex flex-wrap justify-center gap-6 mt-8">
+            <Link href="/marketplace" className="text-memoria-text-whisper hover:text-memoria-text-hero transition-colors text-sm uppercase tracking-widest">
               Marketplace
             </Link>
-            <Link href="/personas" className="text-zinc-400 hover:text-white transition-colors">
-              Personas
-            </Link>
-            <Link href="/skills" className="text-zinc-400 hover:text-white transition-colors">
-              Skills
-            </Link>
-            <Link href="/wallet" className="text-zinc-400 hover:text-white transition-colors">
-              Wallet
-            </Link>
-            <Link href="/tasks" className="text-zinc-400 hover:text-white transition-colors">
+            <Link href="/tasks" className="text-memoria-text-whisper hover:text-memoria-text-hero transition-colors text-sm uppercase tracking-widest">
               Bounties
             </Link>
-            <Link href="/terminal" className="text-zinc-400 hover:text-white transition-colors">
-              Terminal
+            <Link href="/docs" className="text-memoria-text-whisper hover:text-memoria-text-hero transition-colors text-sm uppercase tracking-widest">
+              Docs
+            </Link>
+            <Link href="/about" className="text-memoria-text-whisper hover:text-memoria-text-hero transition-colors text-sm uppercase tracking-widest">
+              About
             </Link>
           </div>
         </div>
 
-        <p className="text-zinc-500 text-sm mt-8 animate-pulse">
-          Redirecting to dashboard in 5 seconds...
+        <p className="text-memoria-text-meta text-xs mt-12 uppercase tracking-widest">
+          Redirecting in 5 seconds...
         </p>
       </motion.div>
     </div>

@@ -54,7 +54,7 @@ export function MobileMenu() {
       {/* Hamburger Button - Visible only on mobile */}
       <button
         onClick={toggleMenu}
-        className="fixed top-4 right-4 z-50 p-2.5 rounded-xl bg-zinc-800 border border-zinc-700 text-zinc-400 hover:text-white hover:border-purple-500/30 hover:bg-purple-500/10 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500 md:hidden"
+        className="fixed top-4 right-4 z-50 p-2.5 rounded-xl bg-zinc-800 border border-zinc-700 text-zinc-400 hover:text-white hover:border-zinc-600/30 hover:bg-zinc-600/10 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-zinc-600 md:hidden"
         aria-label="Open menu"
         aria-expanded={isOpen}
       >
@@ -77,7 +77,7 @@ export function MobileMenu() {
               <span className="text-lg font-bold text-zinc-100">Menu</span>
               <button
                 onClick={closeMenu}
-                className="p-2 rounded-xl bg-zinc-800 border border-zinc-700 text-zinc-400 hover:text-white hover:border-purple-500/30 hover:bg-purple-500/10 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                className="p-2 rounded-xl bg-zinc-800 border border-zinc-700 text-zinc-400 hover:text-white hover:border-zinc-600/30 hover:bg-zinc-600/10 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-zinc-600"
                 aria-label="Close menu"
               >
                 <X size={20} />
@@ -92,7 +92,7 @@ export function MobileMenu() {
                     <a
                       href={link.href}
                       onClick={closeMenu}
-                      className="block px-4 py-3 rounded-xl text-zinc-300 hover:text-white hover:bg-zinc-800 border border-transparent hover:border-zinc-700 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                      className="block px-4 py-3 rounded-xl text-zinc-300 hover:text-white hover:bg-zinc-800 border border-transparent hover:border-zinc-700 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-zinc-600"
                     >
                       {link.label}
                     </a>
@@ -106,7 +106,7 @@ export function MobileMenu() {
               <a
                 href="/pricing"
                 onClick={closeMenu}
-                className="block w-full px-4 py-3 rounded-xl bg-purple-600 text-white font-semibold hover:bg-purple-700 transition-colors text-center"
+                className="block w-full px-4 py-3 rounded-xl bg-zinc-100 text-white font-semibold hover:bg-zinc-200 transition-colors text-center"
               >
                 Get API Key
               </a>
