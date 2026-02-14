@@ -105,7 +105,7 @@ export default function DataPage() {
                 </div>
 
                 <div className="border-t border-border pt-6">
-                  <h3 className="text-sm font-medium text-foreground mb-4">Variables</h3>
+                  <h2 className="text-sm font-medium text-foreground mb-4">Variables</h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                     {dataset.variables.map((variable) => (
                       <div key={variable.name} className="flex items-start gap-3 p-3 bg-muted/50 rounded-lg">
@@ -123,7 +123,7 @@ export default function DataPage() {
 
                 {dataset.sampleData.length > 0 && (
                   <div className="border-t border-border pt-6 mt-6">
-                    <h3 className="text-sm font-medium text-foreground mb-4">Sample Data</h3>
+                    <h2 className="text-sm font-medium text-foreground mb-4">Sample Data</h2>
                     <div className="overflow-x-auto">
                       <table className="w-full text-sm">
                         <thead>

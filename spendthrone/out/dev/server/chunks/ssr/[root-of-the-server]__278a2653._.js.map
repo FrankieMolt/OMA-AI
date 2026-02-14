@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 18, "column": 0}, "map": {"version":3,"sources":["file:///home/nosyt/.openclaw/workspace/spendthrone/app/features/page.tsx"],"sourcesContent":["/**\n * Features Page\n */\n\nexport default function FeaturesPage() {\n  return (\n    <div className=\"min-h-screen bg-zinc-950 text-zinc-50 py-20\">\n      <div className=\"max-w-4xl mx-auto px-4\">\n        <h1 className=\"text-4xl font-bold mb-8 bg-gradient-to-r from-purple-400 via-pink-500 to-amber-400 bg-clip-text text-transparent\">\n          Features\n        </h1>\n        <p className=\"text-zinc-400 text-lg\">\n          Coming soon! We're building amazing features for SpendThrone.\n        </p>\n      </div>\n    </div>\n  );\n}\n"],"names":[],"mappings":"AAAA;;CAEC;;;;;;AAEc,SAAS;IACtB,qBACE,8OAAC;QAAI,WAAU;kBACb,cAAA,8OAAC;YAAI,WAAU;;8BACb,8OAAC;oBAAG,WAAU;8BAAmH;;;;;;8BAGjI,8OAAC;oBAAE,WAAU;8BAAwB;;;;;;;;;;;;;;;;;AAM7C"}}]
-}

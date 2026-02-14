@@ -88,12 +88,12 @@ export default function Navbar() {
              size="icon"
              onClick={() => setIsMobileMenuOpen(true)}
              className="md:hidden text-memoria-text-hero"
-             aria-label="Open mobile menu"
+             aria-label="Open mobile navigation menu"
            >
              <Menu size={20} />
            </Button>
            
-           <Link href="/login" className="hidden md:block no-underline">
+           <Link href="/login" className="hidden md:block no-underline" aria-label="Sign In to your OMA-AI account">
               <span className="text-[11px] uppercase tracking-widest text-memoria-text-label hover:text-memoria-text-hero transition-colors">
                 Sign In
               </span>
