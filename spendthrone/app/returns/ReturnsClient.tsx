@@ -48,7 +48,7 @@ export default function ReturnsClient() {
       orderId: 'ORD-9342',
       item: 'JBL Go 4 Portable Speaker',
       status: 'processing',
-      refund: 0
+      refund: 0,
       reason: 'In transit'
     },
     {
@@ -57,7 +57,7 @@ export default function ReturnsClient() {
       orderId: 'ORD-1024',
       item: 'Lumina Lamp',
       status: 'requested',
-      refund: 0
+      refund: 0,
       reason: 'Damaged in shipping'
     }
   ];
