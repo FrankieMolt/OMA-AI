@@ -49,7 +49,7 @@ export default function ResumePage() {
         </div>
       </section>
 
-      <main className="max-w-7xl mx-auto px-4 md:px-14 py-20">
+      <section className="max-w-7xl mx-auto px-4 md:px-14 py-20">
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_350px] gap-20">
            <div>
               {!result ? (
@@ -111,7 +111,7 @@ export default function ResumePage() {
               </div>
            </aside>
         </div>
-      </main>
+      </section>
     </div>
   );
 }

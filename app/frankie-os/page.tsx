@@ -173,7 +173,7 @@ export default function FrankieOSDashboard() {
       </section>
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 md:px-14 py-12">
+      <section className="max-w-7xl mx-auto px-4 md:px-14 py-12">
         {loading ? (
           <div className="flex flex-col items-center justify-center h-64 text-memoria-text-meta">
             <Cpu size={48} className="animate-pulse mb-4 opacity-20" />
@@ -233,7 +233,7 @@ export default function FrankieOSDashboard() {
             )}
           </AnimatePresence>
         )}
-      </main>
+      </section>
     </div>
   );
 }

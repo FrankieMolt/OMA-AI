@@ -103,7 +103,6 @@ export default function HomePage() {
                 key={product.id}
                 href={`/product/${product.slug}`}
                 className="group no-underline"
-                aria-label={`View ${product.name} - $${product.price}`}
               >
                 <Card className="bg-memoria-bg-card border-memoria-border-muted rounded-sm overflow-hidden group-hover:border-memoria-border-active transition-all">
                   <CardContent className="p-0">

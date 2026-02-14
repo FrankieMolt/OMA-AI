@@ -7,7 +7,7 @@ export default function ContactPage() {
   return (
     <div className="min-h-screen bg-zinc-950 text-zinc-50 py-20">
       <div className="max-w-4xl mx-auto px-4">
-        <h1 className="text-4xl font-bold mb-8 bg-gradient-to-r from-purple-400 via-pink-500 to-amber-400 bg-clip-text text-transparent">
+        <h1 className="text-4xl font-bold mb-8 text-zinc-100">
           Contact Us
         </h1>
         
@@ -27,39 +27,45 @@ export default function ContactPage() {
             
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-zinc-300 mb-2">
+                <label htmlFor="contact-name" className="block text-sm font-medium text-zinc-300 mb-2">
                   Name
                 </label>
                 <input
+                  id="contact-name"
+                  name="name"
                   type="text"
-                  className="w-full px-4 py-3 bg-zinc-950 border border-zinc-800 rounded-xl text-white placeholder-zinc-500 focus:outline-none focus:border-purple-500 transition-colors"
+                  className="w-full px-4 py-3 bg-zinc-950 border border-zinc-800 rounded-xl text-white placeholder-zinc-500 focus:outline-none focus:border-zinc-600 transition-colors"
                   placeholder="Your name"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-zinc-300 mb-2">
+                <label htmlFor="contact-email" className="block text-sm font-medium text-zinc-300 mb-2">
                   Email
                 </label>
                 <input
+                  id="contact-email"
+                  name="email"
                   type="email"
-                  className="w-full px-4 py-3 bg-zinc-950 border border-zinc-800 rounded-xl text-white placeholder-zinc-500 focus:outline-none focus:border-purple-500 transition-colors"
+                  className="w-full px-4 py-3 bg-zinc-950 border border-zinc-800 rounded-xl text-white placeholder-zinc-500 focus:outline-none focus:border-zinc-600 transition-colors"
                   placeholder="you@example.com"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-zinc-300 mb-2">
+                <label htmlFor="contact-message" className="block text-sm font-medium text-zinc-300 mb-2">
                   Message
                 </label>
                 <textarea
+                  id="contact-message"
+                  name="message"
                   rows={5}
-                  className="w-full px-4 py-3 bg-zinc-950 border border-zinc-800 rounded-xl text-white placeholder-zinc-500 focus:outline-none focus:border-purple-500 transition-colors"
+                  className="w-full px-4 py-3 bg-zinc-950 border border-zinc-800 rounded-xl text-white placeholder-zinc-500 focus:outline-none focus:border-zinc-600 transition-colors"
                   placeholder="Tell us about your weird product idea..."
                 />
               </div>
 
-              <button className="w-full py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold rounded-xl hover:opacity-90 transition-opacity">
+              <button type="submit" className="w-full py-3 bg-zinc-100 text-zinc-950 font-semibold rounded-xl hover:bg-zinc-200 transition-colors">
                 Send Message
               </button>
             </div>

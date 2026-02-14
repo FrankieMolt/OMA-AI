@@ -107,7 +107,7 @@ export default function SearchPage() {
           </aside>
 
           {/* Results */}
-          <main>
+          <section>
             <div className="flex items-center justify-between mb-10 text-[10px] text-memoria-text-meta uppercase tracking-widest font-bold">
                <span>{results.length} Entities Indexed</span>
                <div className="flex items-center gap-4">
@@ -167,7 +167,7 @@ export default function SearchPage() {
                 )}
               </div>
             )}
-          </main>
+          </section>
         </div>
       </div>
     </div>
