@@ -27,7 +27,7 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   title: {
     default: 'SpendThrone - Excellence in Detail',
-    template: '%s | SpendThrone',
+    template: '%s',
   },
   description: 'Curated premium goods for the modern connoisseur. Luxury marketplace with exceptional products.',
   keywords: ['SpendThrone', 'luxury marketplace', 'premium goods', 'curated products'],

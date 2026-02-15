@@ -27,7 +27,7 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   title: {
     default: 'Lethometry - Existential Quantification',
-    template: '%s | Lethometry',
+    template: '%s',
   },
   description: 'Scientific tools for quantifying life, death, and existence. Death clock, memory systems, and wisdom frameworks.',
   keywords: ['Lethometry', 'death clock', 'life expectancy', 'memory systems', 'stoicism', 'philosophy'],

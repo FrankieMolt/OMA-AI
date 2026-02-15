@@ -47,7 +47,7 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   title: {
     default: 'OMA-AI - Agent Commerce Platform',
-    template: '%s | OMA-AI',
+    template: '%s',
   },
   description: 'The premier API marketplace for AI agents. Discovery, access, and pay-per-use payments with x402 on Base.',
   keywords: ['OMA-AI', 'API marketplace', 'AI agents', 'x402 payments', 'autonomous agents', 'MCP servers', 'bounties'],
