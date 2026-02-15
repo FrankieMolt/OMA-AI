@@ -11,8 +11,8 @@ import { ShoppingCart, Heart, Scale, Star, ShieldCheck, Truck, RefreshCcw, Arrow
 import Link from 'next/link';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
-import { Button } from '@/components/ui/Button';
-import { Badge } from '@/components/ui/Badge';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
 import { PRODUCTS, getProductBySlug, getRelatedProducts } from '@/data/products';
 import { Product } from '@/types';
 import { useApp } from '@/components/providers/AppProvider';
@@ -38,7 +38,7 @@ export default function ProductDetailClient({ slug }: ProductDetailClientProps) 
         <h1 className="text-4xl font-bold mb-4">Product Not Found</h1>
         <p className="text-zinc-400 mb-8">The extraordinary item you're looking for doesn't exist in this timeline.</p>
         <Link href="/">
-          <Button variant="primary">Back to Marketplace</Button>
+          <Button variant="default">Back to Marketplace</Button>
         </Link>
       </div>
     );
@@ -70,7 +70,7 @@ export default function ProductDetailClient({ slug }: ProductDetailClientProps) 
               className="w-2/3 h-2/3 object-contain drop-shadow-2xl transition-transform duration-500 group-hover:scale-110"
             />
             <div className="absolute top-6 left-6">
-              <Badge variant="purple">{product.category}</Badge>
+              <Badge variant="outline">{product.category}</Badge>
             </div>
           </motion.div>
 
@@ -110,7 +110,7 @@ export default function ProductDetailClient({ slug }: ProductDetailClientProps) 
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
               <Button 
-                variant="primary" 
+                variant="default" 
                 size="lg" 
                 className="w-full h-14"
                 onClick={() => addToCart(product)}

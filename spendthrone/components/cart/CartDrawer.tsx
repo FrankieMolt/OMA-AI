@@ -10,7 +10,7 @@ import { useBodyScrollLock } from '@/hooks/useBodyScrollLock';
 import { X, ShoppingCart, Trash2, Plus, Minus, ArrowRight, ShoppingBag, Sparkles } from 'lucide-react';
 import { useApp } from '@/components/providers/AppProvider';
 import { formatPrice } from '@/lib/utils';
-import { Button } from '@/components/ui/Button';
+import { Button } from '@/components/ui/button';
 
 interface CartDrawerProps {
   isOpen: boolean;
@@ -65,7 +65,7 @@ export function CartDrawer({ isOpen, onClose, onCheckout }: CartDrawerProps) {
                   </div>
                   <h3 className="text-xl font-bold text-white mb-2">Your cart is empty</h3>
                   <p className="text-zinc-500 max-w-xs mb-6">Looks like you haven&apos;t added any weird and wonderful items yet.</p>
-                  <Button variant="primary" onClick={onClose}>Start Shopping</Button>
+                  <Button variant="default" onClick={onClose}>Start Shopping</Button>
                 </motion.div>
               ) : (
                 <div className="space-y-4">
@@ -125,7 +125,7 @@ export function CartDrawer({ isOpen, onClose, onCheckout }: CartDrawerProps) {
                     <span className="text-white font-mono">{formatPrice(cartTotal, 'unit_usd')}</span>
                   </div>
                 </div>
-                <Button variant="primary" size="lg" className="w-full" onClick={onCheckout}>
+                <Button variant="default" size="lg" className="w-full" onClick={onCheckout}>
                   <Sparkles className="mr-2" size={18} />
                   Proceed to Checkout
                   <ArrowRight className="ml-2" size={18} />

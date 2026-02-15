@@ -9,7 +9,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, CheckCircle2, ArrowRight, CreditCard, MapPin, ShoppingBag, Sparkles, Lock } from 'lucide-react';
 import { useApp } from '@/components/providers/AppProvider';
 import { formatPrice, cn } from '@/lib/utils';
-import { Button } from '@/components/ui/Button';
+import { Button } from '@/components/ui/button';
 import { Product } from '@/types';
 
 interface CheckoutFlowProps {
@@ -315,7 +315,7 @@ export function CheckoutFlow({ isOpen, onClose }: CheckoutFlowProps) {
                   Back
                 </Button>
                 <Button
-                  variant="primary"
+                  variant="default"
                   className="flex-1"
                   onClick={handleNext}
                   isLoading={isProcessing}
@@ -329,7 +329,7 @@ export function CheckoutFlow({ isOpen, onClose }: CheckoutFlowProps) {
             {step === 'complete' && (
               <div className="p-5 border-t border-zinc-800">
                 <Button
-                  variant="primary"
+                  variant="default"
                   className="w-full"
                   onClick={handleClose}
                 >

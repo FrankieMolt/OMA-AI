@@ -6,7 +6,7 @@
 
 import React, { Component, ErrorInfo, ReactNode } from 'react';
 import { AlertTriangle, RefreshCw } from 'lucide-react';
-import { Button } from '@/components/ui/Button';
+import { Button } from '@/components/ui/button';
 
 interface Props {
   children: ReactNode;
@@ -73,7 +73,7 @@ export class ErrorBoundary extends Component<Props, State> {
                 <RefreshCw className="mr-2" size={18} />
                 Try Again
               </Button>
-              <Button variant="primary" onClick={() => window.location.href = '/'}>
+              <Button variant="default" onClick={() => window.location.href = '/'}>
                 Go Home
               </Button>
             </div>

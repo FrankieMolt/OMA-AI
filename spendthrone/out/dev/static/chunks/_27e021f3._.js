@@ -5,6 +5,8 @@
 __turbopack_context__.s([
     "cn",
     ()=>cn,
+    "formatPrice",
+    ()=>formatPrice,
     "generateId",
     ()=>generateId
 ]);
@@ -17,6 +19,12 @@ function cn(...inputs) {
 }
 function generateId() {
     return Math.random().toString(36).substring(2, 9);
+}
+function formatPrice(price) {
+    return new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD'
+    }).format(price);
 }
 if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);

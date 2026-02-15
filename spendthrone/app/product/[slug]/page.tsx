@@ -1,19 +1,19 @@
 /**
- * Product Detail Page - Static Export Compatible
+ * Product Detail Page - Dynamic Rendering
  */
 
 import { PRODUCTS } from '@/data/products';
 
-// Generate static params for all products at build time
+// Generate static params for all products
 export function generateStaticParams() {
   return PRODUCTS.map((product) => ({
     slug: product.slug,
   }));
 }
 
-// Revalidate settings (not used in static export but good for future)
-export const dynamic = 'error';
-export const dynamicParams = false;
+// Force dynamic rendering to avoid context issues during build
+export const dynamic = 'force-dynamic';
+export const dynamicParams = true;
 
 // Import the client component
 import ProductDetailClient from './ProductDetailClient';

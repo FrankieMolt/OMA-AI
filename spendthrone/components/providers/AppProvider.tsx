@@ -210,6 +210,43 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
 export function useApp() {
   const context = useContext(AppContext);
+  // Provide a safe, dummy context during SSR/build to prevent errors
+  if (!context && typeof window === 'undefined') {
+    return {
+      // Cart
+      cart: [],
+      addToCart: () => console.warn('addToCart called outside AppProvider (SSR)'),
+      removeFromCart: () => console.warn('removeFromCart called outside AppProvider (SSR)'),
+      updateQuantity: () => console.warn('updateQuantity called outside AppProvider (SSR)'),
+      clearCart: () => console.warn('clearCart called outside AppProvider (SSR)'),
+      cartTotal: 0,
+      cartCount: 0,
+      isCartOpen: false,
+      toggleCart: () => console.warn('toggleCart called outside AppProvider (SSR)'),
+
+      // Products
+      PRODUCTS: [],
+
+      // Wishlist
+      wishlist: [],
+      addToWishlist: () => console.warn('addToWishlist called outside AppProvider (SSR)'),
+      removeFromWishlist: () => console.warn('removeFromWishlist called outside AppProvider (SSR)'),
+      toggleWishlist: () => console.warn('toggleWishlist called outside AppProvider (SSR)'),
+      isInWishlist: () => false,
+
+      // Compare
+      compareList: [],
+      addToCompare: () => console.warn('addToCompare called outside AppProvider (SSR)'),
+      removeFromCompare: () => console.warn('removeFromCompare called outside AppProvider (SSR)'),
+      toggleCompare: () => console.warn('toggleCompare called outside AppProvider (SSR)'),
+      isInCompare: () => false,
+
+      // Recently Viewed
+      recentlyViewed: [],
+      addToRecentlyViewed: () => console.warn('addToRecentlyViewed called outside AppProvider (SSR)'),
+      clearRecentlyViewed: () => console.warn('clearRecentlyViewed called outside AppProvider (SSR)'),
+    };
+  }
   if (!context) {
     throw new Error('useApp must be used within AppProvider');
   }

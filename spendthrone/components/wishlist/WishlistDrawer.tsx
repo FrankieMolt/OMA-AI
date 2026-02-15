@@ -10,7 +10,7 @@ import { X, Heart, ShoppingCart, Trash2, ShoppingBag, Sparkles } from 'lucide-re
 import { useApp } from '@/components/providers/AppProvider';
 import { PRODUCTS } from '@/data/products';
 import { formatPrice } from '@/lib/utils';
-import { Button } from '@/components/ui/Button';
+import { Button } from '@/components/ui/button';
 import { useBodyScrollLock } from '@/hooks/useBodyScrollLock';
 
 interface WishlistDrawerProps {
@@ -77,7 +77,7 @@ export function WishlistDrawer({ isOpen, onClose }: WishlistDrawerProps) {
                   </div>
                   <h3 className="text-xl font-bold text-white mb-2">Your wishlist is empty</h3>
                   <p className="text-zinc-500 max-w-xs mb-6">Save items you love to your wishlist and they&apos;ll be waiting for you.</p>
-                  <Button variant="primary" onClick={onClose}>Explore Products</Button>
+                  <Button variant="default" onClick={onClose}>Explore Products</Button>
                 </motion.div>
               ) : (
                 <div className="space-y-4">
@@ -118,7 +118,7 @@ export function WishlistDrawer({ isOpen, onClose }: WishlistDrawerProps) {
 
             {wishlistProducts.length > 0 && (
               <div className="p-5 border-t border-zinc-800 bg-zinc-950/95 backdrop-blur-md">
-                <Button variant="primary" size="lg" className="w-full" onClick={handleAddAllToCart}>
+                <Button variant="default" size="lg" className="w-full" onClick={handleAddAllToCart}>
                   <Sparkles className="mr-2" size={18} />
                   Add All to Cart
                 </Button>

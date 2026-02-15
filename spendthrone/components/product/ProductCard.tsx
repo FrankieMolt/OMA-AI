@@ -11,9 +11,9 @@ import Image from 'next/image';
 import { Product } from '@/types';
 import { useApp } from '@/components/providers/AppProvider';
 import { formatPrice } from '@/lib/utils';
-import { Badge } from '@/components/ui/Badge';
-import { StarRating } from '@/components/ui/StarRating';
-import { Button } from '@/components/ui/Button';
+import { Badge } from '@/components/ui/badge';
+import { StarRating } from '@/components/ui/star-rating';
+import { Button } from '@/components/ui/button';
 
 interface ProductCardProps {
   product: Product;
@@ -121,7 +121,7 @@ export function ProductCard({ product, onInspect, index = 0 }: ProductCardProps)
 
         {/* Category Badge */}
         <div className="absolute bottom-3 left-3">
-          <Badge variant="default" size="sm">
+          <Badge variant="default">
             {product.category}
           </Badge>
         </div>
@@ -129,7 +129,7 @@ export function ProductCard({ product, onInspect, index = 0 }: ProductCardProps)
         {/* Stock Status */}
         {!product.inStock && (
           <div className="absolute inset-0 bg-zinc-950/70 flex items-center justify-center backdrop-blur-sm">
-            <Badge variant="error" size="md">Out of Stock</Badge>
+            <Badge variant="destructive">Out of Stock</Badge>
           </div>
         )}
       </div>
@@ -161,7 +161,7 @@ export function ProductCard({ product, onInspect, index = 0 }: ProductCardProps)
             <StarRating 
               rating={product.rating} 
               reviewCount={product.reviewCount || 0}
-              size="sm"
+              
             />
           </div>
         )}
@@ -205,8 +205,8 @@ export function ProductCard({ product, onInspect, index = 0 }: ProductCardProps)
               className="flex-1"
             >
               <Button
-                variant="primary"
-                size="md"
+                variant="default"
+                size="default"
                 className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-bold"
               >
                 Buy Now
@@ -215,7 +215,7 @@ export function ProductCard({ product, onInspect, index = 0 }: ProductCardProps)
           ) : (
             <Button
               variant="outline"
-              size="md"
+              size="default"
               className="flex-1"
               onClick={() => onInspect(product)}
             >
@@ -224,8 +224,8 @@ export function ProductCard({ product, onInspect, index = 0 }: ProductCardProps)
           )}
           
           <Button
-            variant={inCompare ? 'primary' : 'secondary'}
-            size="md"
+            variant={inCompare ? 'default' : 'secondary'}
+            size="default"
             className="px-3"
             onClick={() => addToCart(product)}
             disabled={!product.inStock}

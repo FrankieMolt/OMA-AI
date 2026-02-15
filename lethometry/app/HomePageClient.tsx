@@ -105,7 +105,7 @@ export default function HomePageClient() {
                   <Card className="bg-memoria-bg-card border-memoria-border-muted rounded-sm h-full hover:border-memoria-border-active transition-all">
                     <CardHeader className="p-6">
                       <tool.icon className="h-6 w-6 text-memoria-text-whisper mb-6 group-hover:text-memoria-text-hero transition-colors" />
-                      <CardTitle as="h2" className="text-xl font-normal text-memoria-text-hero font-display">
+                      <CardTitle className="text-xl font-normal text-memoria-text-hero font-display">
                         {tool.title}
                       </CardTitle>
                     </CardHeader>

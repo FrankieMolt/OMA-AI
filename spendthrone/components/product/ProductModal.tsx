@@ -10,9 +10,9 @@ import { X, ShoppingCart, Heart, Share2, CheckCircle2, ShoppingBag, Package, Mes
 import { Product } from '@/types';
 import { useApp } from '@/components/providers/AppProvider';
 import { formatPrice } from '@/lib/utils';
-import { Badge } from '@/components/ui/Badge';
-import { StarRating } from '@/components/ui/StarRating';
-import { Button } from '@/components/ui/Button';
+import { Badge } from '@/components/ui/badge';
+import { StarRating } from '@/components/ui/star-rating';
+import { Button } from '@/components/ui/button';
 import { getRelatedProducts } from '@/data/products';
 
 interface ProductModalProps {
@@ -100,7 +100,7 @@ export function ProductModal({ product, onClose }: ProductModalProps) {
                   {product.id}
                 </span>
                 {product.verified && (
-                  <Badge variant="success" size="sm">
+                  <Badge variant="default">
                     <CheckCircle2 size={10} className="mr-1" />
                     Verified
                   </Badge>
@@ -137,7 +137,7 @@ export function ProductModal({ product, onClose }: ProductModalProps) {
                 {/* Info Section */}
                 <div className="p-6 md:p-8 space-y-6">
                   <div>
-                    <Badge variant="purple" className="mb-3">
+                    <Badge variant="default" className="mb-3">
                       {product.category}
                     </Badge>
                     <h2 className="text-2xl md:text-3xl font-bold text-white mb-2">
@@ -148,7 +148,7 @@ export function ProductModal({ product, onClose }: ProductModalProps) {
                       <StarRating 
                         rating={product.rating} 
                         reviewCount={product.reviewCount || 0}
-                        size="md"
+                        
                       />
                     )}
                   </div>
@@ -175,17 +175,17 @@ export function ProductModal({ product, onClose }: ProductModalProps) {
                       {formatPrice(product.price, product.priceType || 'unit_usd')}
                     </span>
                     {product.inStock ? (
-                      <Badge variant="success">In Stock</Badge>
+                      <Badge variant="default">In Stock</Badge>
                     ) : (
-                      <Badge variant="error">Out of Stock</Badge>
+                      <Badge variant="destructive">Out of Stock</Badge>
                     )}
                   </div>
 
                   {/* Actions */}
                   <div className="flex gap-3">
                     <Button
-                      variant="primary"
-                      size="lg"
+                      variant="default"
+                      
                       className="flex-1"
                       onClick={() => {
                         addToCart(product);
@@ -198,8 +198,8 @@ export function ProductModal({ product, onClose }: ProductModalProps) {
                     </Button>
                     
                     <Button
-                      variant={inWishlist ? 'danger' : 'secondary'}
-                      size="lg"
+                      variant={inWishlist ? 'destructive' : 'secondary'}
+                      
                       className="px-4"
                       onClick={() => toggleWishlist(product.id)}
                     >
@@ -231,7 +231,7 @@ export function ProductModal({ product, onClose }: ProductModalProps) {
                     <MessageSquare size={20} className="text-indigo-400" />
                     Agent Consensus
                   </h3>
-                  <Badge variant="purple">98% Human Similarity</Badge>
+                  <Badge variant="default">98% Human Similarity</Badge>
                 </div>
                 
                 <div className="grid md:grid-cols-2 gap-4">

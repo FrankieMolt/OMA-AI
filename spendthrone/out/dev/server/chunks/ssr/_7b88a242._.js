@@ -5,6 +5,8 @@ module.exports = [
 __turbopack_context__.s([
     "cn",
     ()=>cn,
+    "formatPrice",
+    ()=>formatPrice,
     "generateId",
     ()=>generateId
 ]);
@@ -17,6 +19,12 @@ function cn(...inputs) {
 }
 function generateId() {
     return Math.random().toString(36).substring(2, 9);
+}
+function formatPrice(price) {
+    return new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD'
+    }).format(price);
 }
 }),
 "[project]/components/ui/button.tsx [app-ssr] (ecmascript)", ((__turbopack_context__) => {

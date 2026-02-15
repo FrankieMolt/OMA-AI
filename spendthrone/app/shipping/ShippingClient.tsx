@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button';
 import { CheckCircle } from 'lucide-react';
 
 export default function ShippingClient() {
-  const [selectedMethod, setSelectedMethod] = useState<'standard' | 'express' | 'overnight'>('standard');
+  const [selectedMethod, setSelectedMethod] = useState<string>('standard');
 
   const shippingMethods = [
     {
@@ -77,7 +77,6 @@ export default function ShippingClient() {
               whileTap={{ scale: 1.02 }}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: method.id * 0.1 }}
               className={`
                 bg-memoria-bg-card 
                 border ${selectedMethod === method.id ? 'border-memoria-border-active' : 'border-memoria-border-muted'} 
@@ -117,7 +116,7 @@ export default function ShippingClient() {
               
               <div className="mt-6 pt-4 border-t border-memoria-border-muted">
                 <Link href="/pricing" className="no-underline">
-                  <Button variant={selectedMethod === 'standard' ? 'primary' : 'outline'} size="lg" className="w-full">
+                  <Button variant={selectedMethod === 'standard' ? 'default' : 'outline'} size="lg" className="w-full">
                     {selectedMethod === 'standard' ? 'Continue with Standard' : `Upgrade to ${method.name}`}
                   </Button>
                 </Link>
@@ -142,7 +141,6 @@ export default function ShippingClient() {
                 whileHover={{ scale: 1.02 }}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: carrier.id * 0.1 }}
                 className="bg-memoria-bg-card border border-memoria-border-muted rounded-xl p-6 hover:border-memoria-border-active"
               >
                 <div className="flex items-center gap-3 mb-3">
@@ -159,8 +157,7 @@ export default function ShippingClient() {
                 <div className="text-sm text-memoria-text-secondary font-mono">
                   Base: ${carrier.basePrice}
                 </div>
-              </div>
-            </motion.div>
+              </motion.div>
             ))}
           </div>
         </div>

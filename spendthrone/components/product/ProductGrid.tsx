@@ -9,21 +9,21 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { SlidersHorizontal, Grid3X3, LayoutList } from 'lucide-react';
 import { Product, SortOption } from '@/types';
 import { ProductCard } from './ProductCard';
-import { Button } from '@/components/ui/Button';
+import { Button } from '@/components/ui/button';
 import { SORT_OPTIONS } from '@/lib/constants';
 
 interface ProductGridProps {
   products: Product[];
-  sortBy: SortOption;
-  onSortChange: (sort: SortOption) => void;
+  sortBy?: SortOption;
+  onSortChange?: (sort: SortOption) => void;
   onInspect: (product: Product) => void;
   isLoading?: boolean;
 }
 
 export function ProductGrid({ 
   products, 
-  sortBy, 
-  onSortChange, 
+  sortBy = 'featured',
+  onSortChange,
   onInspect,
   isLoading 
 }: ProductGridProps) {
@@ -77,7 +77,7 @@ export function ProductGrid({
           <span className="text-sm text-zinc-500 hidden sm:inline">Sort by:</span>
           <select
             value={sortBy}
-            onChange={(e) => onSortChange(e.target.value as SortOption)}
+            onChange={(e) => onSortChange?.(e.target.value as SortOption)}
             className="bg-zinc-900 border border-zinc-800 text-white text-sm rounded-xl px-4 py-2 focus:outline-none focus:border-purple-500 transition-colors"
           >
             {SORT_OPTIONS.map((option) => (

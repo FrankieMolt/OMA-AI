@@ -8,7 +8,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 
 export default function PricingClient() {
-  const [selectedPlan, setSelectedPlan] = useState<'enterprise' | 'startup'>('startup');
+  const [selectedPlan, setSelectedPlan] = useState<string>('startup');
 
   const plans = [
     {
@@ -45,14 +45,14 @@ export default function PricingClient() {
         </p>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12 mb-16">
-          {plans.map((plan) => (
+          {plans.map((plan, index) => (
             <motion.div
               key={plan.id}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 1.02 }}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: plan.id * 0.1 }}
+              transition={{ delay: index * 0.1 }}
               className={`
                 bg-memoria-bg-card 
                 border ${plan.recommended ? 'border-memoria-border-active' : 'border-memoria-border-muted'} 
@@ -92,7 +92,7 @@ export default function PricingClient() {
                 
                 <div className="mt-8 pt-6 border-t border-memoria-border-muted">
                   <Button
-                    variant={selectedPlan === plan.id ? 'primary' : 'outline'}
+                    variant={selectedPlan === plan.id ? 'default' : 'outline'}
                     size="lg"
                     className="w-full"
                     onClick={() => setSelectedPlan(plan.id)}

@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Link } from 'next/link';
+import Link from 'next/link';
 import { Shield, Package, Truck, Clock } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -103,12 +103,12 @@ export default function ReturnsClient() {
               Return Policies
             </h2>
             
-            {policies.map((policy) => (
+            {policies.map((policy, index) => (
               <motion.div
                 key={policy.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: policy.id * 0.1 }}
+                transition={{ delay: index * 0.1 }}
                 className="bg-memoria-bg-card border border-memoria-border-muted rounded-2xl p-6 hover:border-memoria-border-active hover:shadow-lg"
               >
                 <div className="flex items-start justify-between mb-4">

@@ -12,11 +12,21 @@ import { realProducts as PRODUCTS } from '@/data/real-products';
 import { SortOption } from '@/types';
 import { useDebounce } from '@/hooks/useDebounce';
 
+// Simple stub for cart/wishlist - in production this would be a context
+const useApp = () => {
+  return [
+    { addToCart: () => {}, toggleWishlist: () => {}, toggleCompare: () => {}, isInWishlist: () => false, isInCompare: () => false },
+    {},
+    []
+  ];
+};
+
 export default function MarketplaceClient() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [sortBy, setSortBy] = useState<SortOption>('featured');
-  const [cart, wishlist, compareList] = useApp();
+  // Cart functionality disabled for static build
+  // const [cart, wishlist, compareList] = useApp();
   
   const debouncedSearch = useDebounce(searchQuery, 300);
 
@@ -35,13 +45,17 @@ export default function MarketplaceClient() {
     let products = [...filteredProducts];
     
     if (sortBy === 'featured') {
-      products = products.filter(p => p.featured === true);
-    } else if (sortBy === 'price_asc') {
+      products = products.filter(p => p.isNew === true || p.verified === true);
+    } else if (sortBy === 'price-low') {
       products = products.sort((a, b) => a.price - b.price);
-    } else if (sortBy === 'price_desc') {
+    } else if (sortBy === 'price-high') {
       products = products.sort((a, b) => b.price - a.price);
-    } else if (sortBy === 'rating') {
+    } else if (sortBy === 'popularity') {
       products = products.sort((a, b) => (b.rating || 0) - (a.rating || 0));
+    } else if (sortBy === 'newest') {
+      products = products.sort((a, b) => (a.isNew ? -1 : 1));
+    } else if (sortBy === 'name') {
+      products = products.sort((a, b) => (a.name || '').localeCompare(b.name || ''));
     }
     
     return products.slice(0, 12);
@@ -60,42 +74,44 @@ export default function MarketplaceClient() {
         
         {/* Search, Filter, Sort */}
         <div className="flex flex-col md:flex-row gap-6 mb-12">
-          <SearchBar 
-            value={searchQuery} 
-            onChange={setSearchQuery}
-            placeholder="Search AI services..."
-            className="w-full md:w-96"
-          />
+          <div className="w-full md:w-96">
+            <SearchBar 
+              value={searchQuery} 
+              onChange={setSearchQuery}
+              onClear={() => setSearchQuery('')}
+              placeholder="Search AI services..."
+            />
+          </div>
           
           <CategoryFilter 
-            selected={selectedCategory} 
-            onChange={setSelectedCategory}
+            selectedCategory={selectedCategory} 
+            onSelectCategory={setSelectedCategory}
           />
           
           <div className="flex gap-2">
             <Button
-              variant={sortBy === 'price_asc' ? 'primary' : 'ghost'}
+              variant={sortBy === 'price-low' ? 'default' : 'ghost'}
               size="sm"
-              onClick={() => setSortBy('price_asc')}
+              onClick={() => setSortBy('price-low')}
               aria-label="Sort by price low to high"
             >
-              Price
+              Price ↑
             </Button>
             <Button
-              variant={sortBy === 'price_desc' ? 'primary' : 'ghost'}
+              variant={sortBy === 'price-high' ? 'default' : 'ghost'}
               size="sm"
-              onClick={() => setSortBy('price_desc')}
+              onClick={() => setSortBy('price-high')}
               aria-label="Sort by price high to low"
             >
-              Price
+              Price ↓
             </Button>
             <Button
-              variant={sortBy === 'rating' ? 'primary' : 'ghost'}
+              variant={sortBy === 'newest' ? 'default' : 'ghost'}
               size="sm"
-              onClick={() => setSortBy('rating')}
-              aria-label="Sort by rating"
+              onClick={() => setSortBy('newest')}
+              aria-label="Sort by newest"
             >
-              Rating
+              Newest
             </Button>
           </div>
         </div>
@@ -105,11 +121,6 @@ export default function MarketplaceClient() {
       <ProductGrid 
         products={sortedProducts} 
         onInspect={(product) => console.log('Inspect:', product)}
-        addToCart={cart.addToCart}
-        toggleWishlist={cart.toggleWishlist}
-        toggleCompare={cart.toggleCompare}
-        isInWishlist={cart.isInWishlist}
-        isInCompare={cart.isInCompare}
       />
       
       {/* Empty State */}

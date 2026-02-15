@@ -9,9 +9,14 @@ export function generateId() {
   return Math.random().toString(36).substring(2, 9);
 }
 
-export function formatPrice(price: number): string {
-  return new Intl.NumberFormat('en-US', {
+export function formatPrice(price: number, priceType?: string): string {
+  const formatted = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
   }).format(price);
+  
+  if (priceType === 'monthly_usd') return `${formatted}/mo`;
+  if (priceType === 'yearly_usd') return `${formatted}/yr`;
+  if (priceType === 'subscription_monthly_usd') return `${formatted}/mo`;
+  return formatted;
 }
