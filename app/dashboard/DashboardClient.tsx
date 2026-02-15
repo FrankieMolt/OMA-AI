@@ -73,7 +73,7 @@ export default function Dashboard() {
       price: 0.01,
       priceType: 'per_call',
       calls: 1250000,
-      endpoint: '/docs/apis/gpt-4-turbo',
+      endpoint: 'https://platform.openai.com/docs/models/gpt-4-turbo',
       tags: ['llm', 'chat', 'code'],
       featured: true,
       provider: 'OpenAI'
@@ -87,7 +87,7 @@ export default function Dashboard() {
       price: 0.015,
       priceType: 'per_call',
       calls: 850000,
-      endpoint: '/docs/apis/claude-3-opus',
+      endpoint: 'https://docs.anthropic.com/en/docs/models-overview',
       tags: ['llm', 'analysis', 'writing'],
       featured: true,
       provider: 'Anthropic'
@@ -101,7 +101,7 @@ export default function Dashboard() {
       price: 0,
       priceType: 'free',
       calls: 500000,
-      endpoint: 'https://github.com/modelcontextprotocol/servers/tree/main/src/github',
+      endpoint: 'https://github.com/modelcontextprotocol/servers',
       tags: ['mcp', 'github', 'dev-tools'],
       featured: true,
       provider: 'Model Context Protocol'
@@ -115,7 +115,7 @@ export default function Dashboard() {
       price: 0.001,
       priceType: 'per_call',
       calls: 200000,
-      endpoint: 'https://github.com/modelcontextprotocol/servers/tree/main/src/brave-search',
+      endpoint: 'https://github.com/modelcontextprotocol/servers',
       tags: ['mcp', 'search', 'web'],
       featured: false,
       provider: 'Brave Software'
@@ -129,7 +129,7 @@ export default function Dashboard() {
       price: 0.02,
       priceType: 'per_call',
       calls: 600000,
-      endpoint: '/docs/apis/image-generator',
+      endpoint: '/marketplace',
       tags: ['image', 'generation', 'creative'],
       featured: true,
       provider: 'OMA Network'
@@ -143,7 +143,7 @@ export default function Dashboard() {
       price: 0.002,
       priceType: 'per_call',
       calls: 1800000,
-      endpoint: '/docs/apis/x402-payments',
+      endpoint: '/marketplace',
       tags: ['crypto', 'payments', 'base'],
       featured: true,
       provider: 'OMA Network'
