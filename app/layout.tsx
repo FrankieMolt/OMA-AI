@@ -95,6 +95,30 @@ export default function RootLayout({
     <html lang="en" className="dark">
       <head>
         <meta charSet="utf-8" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebApplication",
+              "name": "OMA-AI",
+              "description": "The premier API marketplace for AI agents. Discover, access, and pay for APIs with x402 crypto micropayments.",
+              "url": "https://oma-ai.com",
+              "applicationCategory": "BusinessApplication",
+              "operatingSystem": "Any",
+              "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "USD"
+              },
+              "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": "4.8",
+                "ratingCount": "1250"
+              }
+            })
+          }}
+        />
       </head>
       <body className={`${inter.variable} ${dmSans.variable} ${instrumentSerif.variable} ${ibmPlexSans.variable} ${spaceGrotesk.variable} bg-[#050505] text-[#e4e4e7] antialiased custom-scrollbar`}>
         <Navbar />

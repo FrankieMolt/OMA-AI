@@ -75,6 +75,23 @@ export default function RootLayout({
     <html lang="en" className="dark">
       <head>
         <meta charSet="utf-8" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              "name": "SpendThrone",
+              "description": "Curated premium goods marketplace for the modern connoisseur.",
+              "url": "https://spendthrone.com",
+              "potentialAction": {
+                "@type": "SearchAction",
+                "target": "https://spendthrone.com/marketplace?search={search_term_string}",
+                "query-input": "required name=search_term_string"
+              }
+            })
+          }}
+        />
       </head>
       <body className={`${inter.variable} ${dmSans.variable} ${instrumentSerif.variable} bg-memoria-bg-ultra-dark text-memoria-text-hero antialiased custom-scrollbar`}>
         <MobileMenu />

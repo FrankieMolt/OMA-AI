@@ -1,4 +1,4 @@
-import { createClient } from '@supabase/supabase-js'
+export { createClient } from '@supabase/supabase-js'
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
@@ -13,6 +13,12 @@ export const supabase = isSupabaseEnabled
       },
     })
   : null
+
+// Error handler
+export function handleSupabaseError(error: any): never {
+  console.error('Supabase error:', error)
+  throw new Error(error?.message || 'Database error')
+}
 
 // Types
 export interface Service {

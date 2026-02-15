@@ -79,6 +79,19 @@ export default function RootLayout({
       <body className={`${inter.variable} ${dmSans.variable} ${instrumentSerif.variable} bg-memoria-bg-ultra-dark text-memoria-text-hero antialiased custom-scrollbar`}>
         <MobileMenu />
         
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              "name": "Lethometry",
+              "description": "Scientific tools for quantifying life, death, and existence.",
+              "url": "https://lethometry.com"
+            })
+          }}
+        />
+        
         <nav className="fixed top-0 left-0 right-0 z-50 px-4 md:px-14 py-4 flex justify-between items-center bg-memoria-bg-ultra-dark/80 backdrop-blur-xl border-b border-memoria-border-muted" role="navigation" aria-label="Main Navigation">
           <Link href="/" className="flex items-center gap-3 no-underline group" aria-label="Lethometry Home">
             <div className="w-8 h-8 bg-memoria-bg-surface border border-memoria-border-default rounded-sm flex items-center justify-center group-hover:border-memoria-border-active transition-colors">
