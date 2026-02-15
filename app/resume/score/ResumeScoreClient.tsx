@@ -28,6 +28,7 @@ export default function ResumeScoreClient() {
             <Card className="bg-memoria-bg-card border-memoria-border-muted rounded-sm p-10">
                <span className="label-whisper mb-6 block">Target Parameters</span>
                <textarea 
+                  aria-label="Job description or requirements for matching"
                   className="w-full h-64 bg-memoria-bg-ultra-dark border border-memoria-border-default rounded-sm p-6 text-white text-sm focus:outline-none focus:border-white transition-all font-light resize-none"
                   placeholder="Paste job description or requirements here..."
                />

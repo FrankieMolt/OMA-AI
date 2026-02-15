@@ -135,6 +135,7 @@ export default function BlogListPage() {
               <input 
                  type="email" 
                  placeholder="your@email.com"
+                 aria-label="Email address for newsletter"
                  className="flex-1 px-4 py-3 bg-memoria-bg-ultra-dark border border-memoria-border-default rounded-sm text-white text-sm focus:outline-none focus:border-white transition-all"
               />
               <Button className="bg-memoria-text-hero text-memoria-bg-ultra-dark rounded-sm px-6 h-12 text-[10px] font-bold uppercase tracking-widest">

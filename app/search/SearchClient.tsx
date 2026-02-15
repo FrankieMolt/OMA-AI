@@ -83,6 +83,7 @@ export default function SearchPage() {
                <div className="space-y-2">
                   <button 
                     onClick={() => setFilters({...filters, category: 'all'})}
+                    aria-label="Show all systems"
                     className={`w-full text-left px-4 py-2 rounded-sm text-[10px] uppercase tracking-widest font-bold transition-all ${filters.category === 'all' ? 'bg-memoria-text-hero text-memoria-bg-ultra-dark' : 'text-memoria-text-whisper hover:text-white'}`}
                   >
                     All Systems
@@ -91,6 +92,7 @@ export default function SearchPage() {
                     <button 
                       key={c}
                       onClick={() => setFilters({...filters, category: c})}
+                      aria-label={`Filter by ${c}`}
                       className={`w-full text-left px-4 py-2 rounded-sm text-[10px] uppercase tracking-widest font-bold transition-all ${filters.category === c ? 'bg-memoria-text-hero text-memoria-bg-ultra-dark' : 'text-memoria-text-whisper hover:text-white'}`}
                     >
                       {c}
