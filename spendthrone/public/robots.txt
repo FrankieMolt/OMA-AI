@@ -1,9 +1,26 @@
-# SpendThrone Robots.txt
+# AI Agent Access Rules for SpendThrone
+# https://spendthrone.com
+
 User-agent: *
 Allow: /
 
-Sitemap: https://spendthrone-olive.vercel.app/sitemap.xml
+# AI Agents welcome for product discovery
+User-agent: GPTBot
+Allow: /
 
-# Disallow admin/private areas
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: *
+Allow: /marketplace/
+Allow: /products/
+Allow: /category/
+
+# Block admin areas
 Disallow: /api/
-Disallow: /_next/
+Disallow: /admin/
+
+Sitemap: https://spendthrone.com/sitemap.xml

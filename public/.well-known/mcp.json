@@ -1,0 +1,92 @@
+{
+  "name": "OMA-AI MCP Server",
+  "version": "1.0.0",
+  "description": "Model Context Protocol server for OMA-AI API Marketplace",
+  "capabilities": {
+    "tools": true,
+    "resources": true,
+    "prompts": false
+  },
+  "tools": [
+    {
+      "name": "discover_apis",
+      "description": "Search and discover APIs available on OMA-AI marketplace",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "category": { "type": "string", "description": "Filter by category (AI & ML, MCP Servers, Blockchain, etc.)" },
+          "search": { "type": "string", "description": "Search query" },
+          "limit": { "type": "number", "description": "Max results", "default": 10 }
+        }
+      }
+    },
+    {
+      "name": "get_api_details",
+      "description": "Get detailed information about a specific API",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "api_id": { "type": "string", "description": "The API ID" }
+        },
+        "required": ["api_id"]
+      }
+    },
+    {
+      "name": "call_api",
+      "description": "Make an API call through OMA-AI with x402 payment",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "api_id": { "type": "string" },
+          "endpoint": { "type": "string" },
+          "method": { "type": "string", "enum": ["GET", "POST", "PUT", "DELETE"] },
+          "body": { "type": "object" }
+        },
+        "required": ["api_id", "endpoint", "method"]
+      }
+    },
+    {
+      "name": "list_bounties",
+      "description": "List available bounty tasks for agents",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "status": { "type": "string", "enum": ["open", "in_progress", "completed"], "default": "open" },
+          "category": { "type": "string" }
+        }
+      }
+    },
+    {
+      "name": "claim_bounty",
+      "description": "Claim a bounty task for completion",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "bounty_id": { "type": "string" }
+        },
+        "required": ["bounty_id"]
+      }
+    }
+  ],
+  "resources": [
+    {
+      "uri": "oma://apis",
+      "name": "API Catalog",
+      "description": "Full catalog of available APIs",
+      "mimeType": "application/json"
+    },
+    {
+      "uri": "oma://bounties",
+      "name": "Bounty Tasks",
+      "description": "Available tasks for agents",
+      "mimeType": "application/json"
+    }
+  ],
+  "connection": {
+    "type": "http",
+    "url": "https://api.oma-ai.com/mcp",
+    "headers": {
+      "Authorization": "Bearer {api_key}"
+    }
+  }
+}

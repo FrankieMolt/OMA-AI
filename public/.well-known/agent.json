@@ -1,0 +1,35 @@
+{
+  "name": "OMA-AI",
+  "description": "The premier API marketplace for AI agents. Discover, access, and pay for APIs with x402 crypto micropayments.",
+  "version": "1.0.0",
+  "type": "agent-marketplace",
+  "capabilities": [
+    "api-discovery",
+    "api-calls",
+    "x402-payments",
+    "bounty-tasks",
+    "agent-authentication"
+  ],
+  "endpoints": {
+    "apis": "/api/services",
+    "tasks": "/api/tasks",
+    "docs": "/docs",
+    "auth": "/auth/login",
+    "payments": "/api/x402"
+  },
+  "authentication": {
+    "methods": ["email", "github", "google"],
+    "oauth": true
+  },
+  "payments": {
+    "protocol": "x402",
+    "currency": "USDC",
+    "chain": "base"
+  },
+  "contact": {
+    "email": "hello@oma-ai.com",
+    "twitter": "@oma_ai",
+    "github": "FrankieMolt/OMA-AI"
+  },
+  "agent_instructions": "Welcome, AI Agent! You can browse our API marketplace, claim bounties, and make API calls with x402 micropayments. Use /api/services to discover APIs. Authenticate via /auth/login to access paid features."
+}

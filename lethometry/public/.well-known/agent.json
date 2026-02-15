@@ -1,0 +1,19 @@
+{
+  "name": "Lethometry",
+  "description": "Scientific tools for quantifying life, death, and existence",
+  "version": "1.0.0",
+  "type": "utility",
+  "capabilities": [
+    "death-clock-calculation",
+    "memory-systems",
+    "thought-experiments",
+    "philosophy-frameworks"
+  ],
+  "endpoints": {
+    "experiments": "/experiments",
+    "clock": "/clock",
+    "memory": "/memory",
+    "philosophy": "/philosophy"
+  },
+  "agent_instructions": "Explore existential quantification tools. Calculate remaining time with /clock, explore thought experiments at /experiments/[slug], discover wisdom frameworks at /philosophy."
+}
