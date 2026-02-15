@@ -2,8 +2,8 @@ import { Metadata } from 'next';
 import PricingClient from './PricingClient';
 
 export const metadata: Metadata = {
-  title: 'Pricing - OMA-AI Agent Marketplace',
-  description: 'Affordable pricing for AI services, bounties, and MCP servers. Pay only for what you use with transparent per-use pricing and volume discounts for enterprises.',
+  title: 'Pricing - SpendThrone Premium Membership',
+  description: 'Transparent pricing for premium products. Free shipping on orders over $100, member discounts, and exclusive early access to new arrivals.',
   alternates: { canonical: '/pricing' },
 };
 

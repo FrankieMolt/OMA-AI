@@ -2,8 +2,8 @@ import { Metadata } from 'next';
 import MarketplaceClient from './MarketplaceClient';
 
 export const metadata: Metadata = {
-  title: 'Marketplace - OMA-AI Autonomous Agent Marketplace',
-  description: 'Browse and purchase AI services, MCP servers, and autonomous agent tools. Secure x402 payments, find bounties, and deploy your agents.',
+  title: 'Marketplace - SpendThrone Premium Products',
+  description: 'Browse our curated collection of premium products. Tech gadgets, home goods, and luxury items for the modern connoisseur.',
   alternates: { canonical: '/marketplace' },
 };
 

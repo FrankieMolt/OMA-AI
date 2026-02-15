@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createClient, isSupabaseEnabled } from '@/lib/supabase';
+import { supabase, isSupabaseEnabled } from '@/lib/supabase';
 import { allowPublicAccess, createDemoResponse } from '@/lib/auth-public';
 import { buildShortUrl } from '@/lib/shortener';
 import { addSecurityHeaders } from '@/lib/security';

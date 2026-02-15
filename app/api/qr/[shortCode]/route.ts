@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import QRCode from 'qrcode';
-import { createClient } from '@/lib/supabase';
+import { supabase } from '@/lib/supabase';
 import { buildShortUrl } from '@/lib/shortener';
 
 export async function GET(

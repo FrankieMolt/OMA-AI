@@ -1,5 +1,5 @@
 import { redirect, notFound } from 'next/navigation';
-import { createClient } from '@/lib/supabase';
+import { supabase } from '@/lib/supabase';
 import { parseUserAgent } from '@/lib/shortener';
 import { headers } from 'next/headers';
 
@@ -23,7 +23,7 @@ export default async function RedirectPage({ params }: RedirectPageProps) {
   const { shortCode } = await params;
   const headersList = await headers();
   
-  const supabase = createClient();
+  const supabaseClient = supabase;
   
   if (!supabase) {
     notFound();
