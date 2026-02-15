@@ -73,6 +73,7 @@ export default function APIDocsPage() {
               <button
                 key={section.id}
                 onClick={() => setActiveSection(section.id)}
+                aria-label={`View ${section.title} documentation`}
                 className={`w-full flex items-center gap-3 px-4 py-3 rounded-sm text-left transition-all ${
                   activeSection === section.id
                     ? 'bg-memoria-text-hero text-memoria-bg-ultra-dark'
@@ -108,6 +109,7 @@ export default function APIDocsPage() {
                   <Card className="bg-memoria-bg-ultra-dark border-memoria-border-muted rounded-sm relative">
                     <button
                       onClick={() => handleCopy(codeExamples.javascript)}
+                      aria-label="Copy code to clipboard"
                       className="absolute top-3 right-3 p-2 text-memoria-text-meta hover:text-white"
                     >
                       {copiedCode === codeExamples.javascript ? <Check size={14} className="text-green-500" /> : <Copy size={14} />}
