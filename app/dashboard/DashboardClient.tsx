@@ -227,6 +227,7 @@ export default function Dashboard() {
                 <button
                   key={term}
                   onClick={() => setSearchQuery(term)}
+                  aria-label={`Search for ${term}`}
                   className="hover:text-white transition-colors"
                 >
                   {term}
@@ -283,6 +284,7 @@ export default function Dashboard() {
               <button
                 key={category}
                 onClick={() => setSelectedCategory(category)}
+                aria-label={`Filter by ${category}`}
                 className={`px-5 py-2 rounded-sm text-[10px] uppercase tracking-widest whitespace-nowrap transition-all ${
                   selectedCategory === category
                     ? 'bg-memoria-text-hero text-memoria-bg-ultra-dark'
@@ -320,6 +322,7 @@ export default function Dashboard() {
               <p className="text-memoria-text-whisper text-lg">No APIs found matching your criteria</p>
               <button
                 onClick={() => { setSearchQuery(''); setSelectedCategory('all'); }}
+                aria-label="Clear all filters"
                 className="mt-6 text-xs uppercase tracking-widest text-memoria-text-whisper hover:text-white"
               >
                 Clear Filters

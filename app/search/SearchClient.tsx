@@ -115,6 +115,7 @@ export default function SearchPage() {
                <div className="flex items-center gap-4">
                   <span>Sort Order</span>
                   <select 
+                     aria-label="Sort results by"
                      className="bg-transparent border-none text-memoria-text-hero focus:outline-none cursor-pointer"
                      value={filters.sortBy}
                      onChange={(e) => setFilters({...filters, sortBy: e.target.value as any})}
