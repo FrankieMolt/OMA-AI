@@ -35,7 +35,7 @@ export default function PricingClient() {
   ];
 
   return (
-    <div className="min-h-screen bg-memoria-bg-ultra-dark text-memoria-text-hero py-12">
+    <div role="main" className="min-h-screen bg-memoria-bg-ultra-dark text-memoria-text-hero py-12">
       <div className="max-w-7xl mx-auto px-4 md:px-14">
         <h1 className="text-5xl md:text-6xl font-light text-memoria-text-hero mb-4 font-display tracking-tight">
           Simple Pricing

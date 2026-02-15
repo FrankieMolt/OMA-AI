@@ -8,7 +8,7 @@ import { Card, CardContent } from "@/components/ui/card";
 
 export default function ApexShiftPage() {
   return (
-    <div className="min-h-screen bg-background selection:bg-primary selection:text-primary-foreground font-light">
+    <div role="main" className="min-h-screen bg-background selection:bg-primary selection:text-primary-foreground font-light">
       {/* Header */}
       <section className="pt-48 pb-20 px-4 md:px-14 border-b border-memoria-border-muted">
         <div className="max-w-4xl mx-auto text-center">

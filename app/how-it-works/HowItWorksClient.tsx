@@ -43,7 +43,7 @@ export default function HowItWorksPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-background selection:bg-primary selection:text-primary-foreground">
+    <div role="main" className="min-h-screen bg-background selection:bg-primary selection:text-primary-foreground">
       {/* Hero */}
       <section className="pt-48 pb-20 px-4 md:px-14">
         <div className="max-w-7xl mx-auto">

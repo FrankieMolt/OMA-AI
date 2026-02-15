@@ -79,7 +79,7 @@ export default function ContactClient() {
   ];
 
   return (
-    <div className="min-h-screen bg-background selection:bg-primary selection:text-primary-foreground">
+    <div role="main" className="min-h-screen bg-background selection:bg-primary selection:text-primary-foreground">
       {/* Header */}
       <section className="pt-48 pb-20 px-4 md:px-14">
         <div className="max-w-7xl mx-auto">
@@ -117,7 +117,7 @@ export default function ContactClient() {
                     <p className="text-memoria-text-whisper">We'll get back to you shortly.</p>
                   </div>
                 ) : (
-                  <form onSubmit={handleSubmit} className="space-y-8">
+                  <form onSubmit={handleSubmit} className="space-y-8" aria-label="Contact form">
                     <div>
                       <label htmlFor="contact-name" className="block text-[10px] uppercase tracking-widest text-memoria-text-meta mb-2">Full Name</label>
                       <input

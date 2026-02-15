@@ -90,7 +90,7 @@ export default function LoginPage() {
 
         <Card className="bg-memoria-bg-card border-memoria-border-muted rounded-sm">
           <CardContent className="p-8">
-            <form onSubmit={handleAuth} className="space-y-6">
+            <form onSubmit={handleAuth} className="space-y-6" aria-label="Authentication form">
               {error && (
                 <div className={`p-3 rounded-sm text-sm ${error.includes('Check') ? 'bg-green-900/20 text-green-400' : 'bg-red-900/20 text-red-400'}`}>
                   {error}

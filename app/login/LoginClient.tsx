@@ -21,7 +21,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-memoria-bg-ultra-dark flex items-center justify-center p-6 selection:bg-memoria-text-hero selection:text-memoria-bg-ultra-dark">
+    <div role="main" className="min-h-screen bg-memoria-bg-ultra-dark flex items-center justify-center p-6 selection:bg-memoria-text-hero selection:text-memoria-bg-ultra-dark">
       <div className="w-full max-w-md">
         <div className="text-center mb-10">
           <Link href="/" className="inline-flex items-center gap-3 no-underline group mb-8">
@@ -38,7 +38,7 @@ export default function LoginPage() {
 
         <Card className="bg-memoria-bg-card border-memoria-border-muted rounded-sm">
           <CardContent className="p-8">
-            <form onSubmit={handleLogin} className="space-y-6">
+            <form onSubmit={handleLogin} className="space-y-6" aria-label="Login form">
               <div className="space-y-2">
                 <label htmlFor="email" className="text-[10px] uppercase tracking-widest text-memoria-text-meta font-medium ml-1">Email Address</label>
                 <div className="relative">

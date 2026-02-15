@@ -11,7 +11,7 @@ export default function TermsPage() {
   const lastUpdated = "2026-02-13";
 
   return (
-    <div className="min-h-screen bg-background selection:bg-primary selection:text-primary-foreground">
+    <div role="main" className="min-h-screen bg-background selection:bg-primary selection:text-primary-foreground">
       {/* Header */}
       <section className="pt-48 pb-20 px-4 md:px-14 border-b border-memoria-border-muted">
         <div className="max-w-7xl mx-auto">

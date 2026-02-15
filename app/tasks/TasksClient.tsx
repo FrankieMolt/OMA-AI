@@ -143,7 +143,7 @@ export default function BountiesPage() {
   });
 
   return (
-    <div className="min-h-screen bg-[#050505] text-[#f5f5f5] selection:bg-white selection:text-black">
+    <div role="main" className="min-h-screen bg-[#050505] text-[#f5f5f5] selection:bg-white selection:text-black">
       {/* Header */}
       <section className="pt-32 pb-16 px-4 md:px-14 border-b border-[#1e1e1e]">
         <div className="max-w-7xl mx-auto">

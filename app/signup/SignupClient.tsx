@@ -25,7 +25,7 @@ export default function SignupPage() {
   };
 
   return (
-    <div className="min-h-screen bg-memoria-bg-ultra-dark flex items-center justify-center p-6 selection:bg-memoria-text-hero selection:text-memoria-bg-ultra-dark">
+    <div role="main" className="min-h-screen bg-memoria-bg-ultra-dark flex items-center justify-center p-6 selection:bg-memoria-text-hero selection:text-memoria-bg-ultra-dark">
       <div className="w-full max-w-md">
         <div className="text-center mb-10">
           <Link href="/" className="inline-flex items-center gap-3 no-underline group mb-8">
@@ -42,7 +42,7 @@ export default function SignupPage() {
 
         <Card className="bg-memoria-bg-card border-memoria-border-muted rounded-sm">
           <CardContent className="p-8">
-            <form onSubmit={handleSignup} className="space-y-5">
+            <form onSubmit={handleSignup} className="space-y-5" aria-label="Signup form">
               <div className="space-y-2">
                 <label htmlFor="signup-name" className="text-[10px] uppercase tracking-widest text-memoria-text-meta font-medium ml-1">Full Name</label>
                 <div className="relative">

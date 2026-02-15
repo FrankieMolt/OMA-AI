@@ -165,7 +165,7 @@ export default function Dashboard() {
   const featuredServices = apiServices.filter(s => s.featured);
 
   return (
-    <div className="min-h-screen bg-background selection:bg-primary selection:text-primary-foreground">
+    <div role="main" className="min-h-screen bg-background selection:bg-primary selection:text-primary-foreground">
       {/* Navigation */}
       <nav className="sticky top-0 z-50 bg-background/80 backdrop-blur-xl border-b border-memoria-border-muted">
         <div className="max-w-7xl mx-auto px-4 md:px-14">

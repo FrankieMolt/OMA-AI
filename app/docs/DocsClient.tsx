@@ -150,7 +150,7 @@ export default function DocsClient() {
   })).filter(section => section.subsections.length > 0);
 
   return (
-    <div className="min-h-screen bg-background selection:bg-primary selection:text-primary-foreground">
+    <div role="main" className="min-h-screen bg-background selection:bg-primary selection:text-primary-foreground">
       {/* Search Header */}
       <section className="pt-32 pb-12 px-4 md:px-14 border-b border-memoria-border-muted">
         <div className="max-w-7xl mx-auto">
