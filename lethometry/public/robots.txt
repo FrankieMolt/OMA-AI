@@ -1,3 +1,9 @@
+# Lethometry Robots.txt
 User-agent: *
 Allow: /
+
 Sitemap: https://lethometry.vercel.app/sitemap.xml
+
+# Disallow admin/private areas
+Disallow: /api/
+Disallow: /_next/

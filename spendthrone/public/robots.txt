@@ -1,3 +1,9 @@
+# SpendThrone Robots.txt
 User-agent: *
 Allow: /
+
 Sitemap: https://spendthrone-olive.vercel.app/sitemap.xml
+
+# Disallow admin/private areas
+Disallow: /api/
+Disallow: /_next/

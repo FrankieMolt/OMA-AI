@@ -12,3 +12,343 @@ Coverage: surface (max 100 pages)
 Database: /home/nosyt/.squirrel/projects/oma-ai-audit/project.db
 New crawl: http://localhost:3001
 Found 75 URLs in sitemap
+✓ Audited 82 pages in 46.0s
+
+Audit stored in database. Use 'squirrel report' to view latest audit.
+Use 'squirrel report --list' to see all stored audits.
+
+<?xml version="1.0" encoding="UTF-8"?>
+<audit version="0.0.38">
+<site url="http://localhost:3001" crawled="82" date="2026-02-15T03:58:36.762Z"/>
+<score overall="65" grade="D">
+ <cat name="Security" score="57"/>
+ <cat name="Accessibility" score="93"/>
+ <cat name="Crawlability" score="86"/>
+ <cat name="Performance" score="79"/>
+ <cat name="Content" score="74"/>
+ <cat name="Core SEO" score="89"/>
+ <cat name="Social Media" score="97"/>
+ <cat name="Links" score="90"/>
+ <cat name="E-E-A-T" score="89"/>
+ <cat name="Images" score="100"/>
+ <cat name="Internationalization" score="100"/>
+ <cat name="Legal Compliance" score="100"/>
+ <cat name="Mobile" score="100"/>
+ <cat name="URL Structure" score="100"/>
+</score>
+<summary passed="6593" warnings="774" failed="90"/>
+<issues>
+ <category name="Crawlability" errors="1" warnings="3">
+  <rule id="crawl/sitemap-domain" severity="error" status="fail" docs="https://docs.squirrelscan.com/rules/crawl/sitemap-domain">
+   6 URL(s) point to different domain(s)
+   Items (5/6):
+    - https://spendthrone.com [host: spendthrone.com]
+    - https://spendthrone.com/blog [host: spendthrone.com]
+    - https://spendthrone.com/about [host: spendthrone.com]
+    - https://spendthrone.com/privacy [host: spendthrone.com]
+    - https://spendthrone.com/terms [host: spendthrone.com]
+  </rule>
+  <rule id="crawl/canonical-chain" severity="warning" status="warn" docs="https://docs.squirrelscan.com/rules/crawl/canonical-chain">
+   Page redirects before content is served
+   Pages (1): /
+   Items (1):
+    - / (http://localhost:3001 → http://localhost:3001/) [finalUrl: http://localhost:3001/, chain: {&quot;sourceUrl&quot;:&quot;http://localhost:3001/&quot;,&quot;finalUrl&quot;:&quot;http://localhost:3001/&quot;,&quot;hops&quot;:[{&quot;url&quot;:&quot;http://localhost:3001/&quot;,&quot;statusCode&quot;:200,&quot;type&quot;:&quot;http&quot;}],&quot;chainLength&quot;:0,&quot;isLoop&quot;:false,&quot;endsInError&quot;:false,&quot;…]
+  </rule>
+  <rule id="crawl/sitemap-coverage" severity="warning" status="warn" docs="https://docs.squirrelscan.com/rules/crawl/sitemap-coverage">
+   7 indexable page(s) not in sitemap (9%); 6 sitemap URL(s) were not crawled
+   Items (5/13):
+    - /product/chronos-elite
+    - /product/aether-speaker
+    - /product/lumina-lamp
+    - /affiliate-disclosure
+    - /product/vertex-wallet
+  </rule>
+ </category>
+ <category name="Core SEO" errors="0" warnings="78">
+  <rule id="core/meta-title" severity="error" status="warn" docs="https://docs.squirrelscan.com/rules/core/meta-title">
+   Title too long
+   Pages (1): /marketplace
+   Items (1):
+    - /marketplace (Marketplace - OMA-AI Autonomous Agent Marketplace  (63 chars))
+  </rule>
+  <rule id="core/meta-description" severity="error" status="warn" docs="https://docs.squirrelscan.com/rules/core/meta-description">
+   Description too short
+   Pages (5/76): /, /accessibility, /affiliate-disclosure, /blog, /contact
+   Items (5/76):
+    - / (Curated premium goods for the modern connoisseur.  (95 chars))
+    - /login (Access your curated collection and manage your ord (63 chars))
+    - /signup (Join the curated community of SpendThrone. Access  (87 chars))
+    - /contact (Have a question about our curated products or want (103 chars))
+    - /faq (Find answers to common questions about SpendThrone (111 chars))
+  </rule>
+  <rule id="core/title-unique" severity="warning" status="warn" docs="https://docs.squirrelscan.com/rules/core/title-unique">
+   1 duplicate title(s) affecting 69 pages
+   Items (1):
+    - spendthrone - excellence in detail (&quot;spendthrone - excellence in detail...&quot; (69 pages)) [pageCount: 69] (from: /, /blog, /product/pura-smart-scent-diffuser, /product/jbl-go-4-portable-speaker, /product/tamagotchi-paradise; +64 more)
+  </rule>
+ </category>
+ <category name="Security" errors="82" warnings="2">
+  <rule id="security/https" severity="error" status="fail" docs="https://docs.squirrelscan.com/rules/security/https">
+   Page not served over HTTPS
+   Pages (5/82): /, /about, /accessibility, /affiliate-disclosure, /blog
+  </rule>
+  <rule id="security/csp" severity="warning" status="warn" docs="https://docs.squirrelscan.com/rules/security/csp">
+   No Content-Security-Policy header
+  </rule>
+  <rule id="security/x-frame-options" severity="warning" status="warn" docs="https://docs.squirrelscan.com/rules/security/x-frame-options">
+   No clickjacking protection
+  </rule>
+ </category>
+ <category name="Links" errors="0" warnings="2">
+  <rule id="links/orphan-pages" severity="warning" status="warn" docs="https://docs.squirrelscan.com/rules/links/orphan-pages">
+   74 orphan page(s) with &lt;2 incoming links
+   Items (5/74):
+    - /signup
+    - /features
+    - /faq
+    - /blog
+    - /product/pura-smart-scent-diffuser
+  </rule>
+  <rule id="links/weak-internal-links" severity="warning" status="warn" docs="https://docs.squirrelscan.com/rules/links/weak-internal-links">
+   8 page(s) have only 1 internal link
+   Items (5/8):
+    - /signup
+    - /marketplace
+    - /product/chronos-elite
+    - /product/aether-speaker
+    - /product/lumina-lamp
+  </rule>
+ </category>
+ <category name="Content" errors="0" warnings="87">
+  <rule id="content/duplicate-title" severity="warning" status="warn" docs="https://docs.squirrelscan.com/rules/content/duplicate-title">
+   1 duplicate title(s) found across 69 pages
+   Items (1):
+    - spendthrone - excellence in detail (&quot;spendthrone - excellence in detail...&quot; (69 pages)) [pageCount: 69] (from: /, /blog, /product/pura-smart-scent-diffuser, /product/jbl-go-4-portable-speaker, /product/tamagotchi-paradise; +64 more)
+  </rule>
+  <rule id="content/duplicate-description" severity="warning" status="warn" docs="https://docs.squirrelscan.com/rules/content/duplicate-description">
+   1 duplicate description(s) found across 69 pages
+   Items (1):
+    - curated premium goods for the modern connoisseur. luxury mar (&quot;curated premium goods for the modern con...&quot; (69 pages)) [pageCount: 69] (from: /, /blog, /product/pura-smart-scent-diffuser, /product/jbl-go-4-portable-speaker, /product/tamagotchi-paradise; +64 more)
+  </rule>
+  <rule id="content/heading-hierarchy" severity="warning" status="warn" docs="https://docs.squirrelscan.com/rules/content/heading-hierarchy">
+   Skipped heading levels detected
+   Pages (3): /faq, /marketplace, /pricing
+   Items (1):
+    - H1 -&gt; H3
+  </rule>
+  <rule id="content/keyword-stuffing" severity="warning" status="warn" docs="https://docs.squirrelscan.com/rules/content/keyword-stuffing">
+   2 word(s) may be overused
+   Pages (1): /affiliate-disclosure
+   Items (2):
+    - affiliate (&quot;affiliate&quot; (3.6%)) [count: 7, density: 3.608247422680412]
+    - our (&quot;our&quot; (3.6%)) [count: 7, density: 3.608247422680412]
+  </rule>
+  <rule id="content/word-count" severity="warning" status="warn" docs="https://docs.squirrelscan.com/rules/content/word-count">
+   Thin content: N words (min N)
+   Pages (5/81): /, /about, /accessibility, /affiliate-disclosure, /blog
+   Items (5/81):
+    - / (Thin content: 107 words (min 300))
+    - /login (Thin content: 25 words (min 300))
+    - /about (Thin content: 98 words (min 300))
+    - /signup (Thin content: 31 words (min 300))
+    - /contact (Thin content: 37 words (min 300))
+  </rule>
+ </category>
+ <category name="Images" errors="0" warnings="1">
+  <rule id="images/dimensions" severity="warning" status="warn" docs="https://docs.squirrelscan.com/rules/images/dimensions">
+   6 image(s) missing width/height (causes CLS)
+   Pages (1): /marketplace
+   Items (5/6):
+    - /images/products/tamagotchi-paradise.svg | &lt;img src=&quot;http://localhost:3001/images/products/tamagotchi-paradise.svg&quot; alt=&quot;Tamagotchi Paradise&quot;&gt;
+    - /images/products/aura-ink-frame.svg | &lt;img src=&quot;http://localhost:3001/images/products/aura-ink-frame.svg&quot; alt=&quot;Aura Ink Frame 13-inch&quot;&gt;
+    - /images/products/dji-neo-drone.svg | &lt;img src=&quot;http://localhost:3001/images/products/dji-neo-drone.svg&quot; alt=&quot;DJI Neo Drone&quot;&gt;
+    - /images/products/screenbar-halo.svg | &lt;img src=&quot;http://localhost:3001/images/products/screenbar-halo.svg&quot; alt=&quot;ScreenBar Halo Monitor Light&quot;&gt;
+    - /images/products/lomi-composter.svg | &lt;img src=&quot;http://localhost:3001/images/products/lomi-composter.svg&quot; alt=&quot;Lomi Smart Kitchen Composter&quot;&gt;
+  </rule>
+ </category>
+ <category name="Performance" errors="0" warnings="497">
+  <rule id="perf/js-file-size" severity="error" status="warn" docs="https://docs.squirrelscan.com/rules/perf/js-file-size">
+   3 JS file(s) exceed 250.0 KB
+   Items (3):
+    - /_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js [sizeBytes: 1047866, size: 1023.3 KB, status: 200, contentType: application/javascript; charset=UTF-8] (from: /, /login, /about, /signup, /contact; +77 more)
+    - /_next/static/chunks/node_modules_next_dist_compiled_next-devtools_index_1dd7fb59.js [sizeBytes: 816052, size: 796.9 KB, status: 200, contentType: application/javascript; charset=UTF-8] (from: /, /login, /about, /signup, /contact; +77 more)
+    - /_next/static/chunks/node_modules_next_dist_client_17643121._.js [sizeBytes: 621043, size: 606.5 KB, status: 200, contentType: application/javascript; charset=UTF-8] (from: /, /login, /about, /signup, /contact; +77 more)
+  </rule>
+  <rule id="perf/ttfb" severity="warning" status="warn" docs="https://docs.squirrelscan.com/rules/perf/ttfb">
+   Slow server response (Nms)
+   Pages (2): /affiliate-disclosure, /product/pura-smart-scent-diffuser
+   Items (2):
+    - /product/pura-smart-scent-diffuser (Slow server response (773ms))
+    - /affiliate-disclosure (Slow server response (999ms))
+  </rule>
+  <rule id="perf/total-byte-weight" severity="warning" status="warn" docs="https://docs.squirrelscan.com/rules/perf/total-byte-weight">
+   Total tracked resources: 3198KB (heavy page)
+  </rule>
+  <rule id="perf/critical-request-chains" severity="warning" status="warn" docs="https://docs.squirrelscan.com/rules/perf/critical-request-chains">
+   2 critical request chain(s) found
+   Pages (5/82): /, /about, /accessibility, /affiliate-disclosure, /blog
+   Items (2):
+    - CSS: /_next/static/chunks/%5Broot-of-the-server%5D__cf29f21e._.css
+    - JS: /_next/static/chunks/node_modules_next_dist_build_polyfills_polyfill-nomodule.js
+  </rule>
+  <rule id="perf/duplicate-js" severity="warning" status="warn" docs="https://docs.squirrelscan.com/rules/perf/duplicate-js">
+   2 library(s) loaded multiple times
+   Pages (5/82): /, /about, /accessibility, /affiliate-disclosure, /blog
+   Items (5):
+    - node (12x)
+    - app (4x)
+    - node (11x)
+    - app (3x)
+    - app (5x)
+  </rule>
+  <rule id="perf/lazy-above-fold" severity="warning" status="warn" docs="https://docs.squirrelscan.com/rules/perf/lazy-above-fold">
+   3 above-fold image(s) with lazy loading
+   Pages (1): /marketplace
+   Items (3):
+    - /images/products/tamagotchi-paradise.svg
+    - /images/products/aura-ink-frame.svg
+    - /images/products/dji-neo-drone.svg
+  </rule>
+  <rule id="perf/unminified-js" severity="warning" status="warn" docs="https://docs.squirrelscan.com/rules/perf/unminified-js">
+   8 JavaScript file(s) appear unminified
+   Pages (5/82): /, /about, /accessibility, /affiliate-disclosure, /blog
+   Items (5):
+    - node_modules_next_dist_compiled_react-dom_1e674e59._.js (1023.3KB, ~260.0KB savings) [reason: high newlines (1.58%), 80 comments, long function names, formatted code, excessive whitespace]
+    - node_modules_next_dist_compiled_react-server-dom-turbopack_9212ccad._.js (167.0KB, ~53.6KB savings) [reason: high newlines (1.66%), 17 comments, long function names, formatted code, excessive whitespace]
+    - node_modules_next_dist_compiled_next-devtools_index_1dd7fb59.js (796.9KB, ~722.7KB savings) [reason: 80 comments]
+    - node_modules_next_dist_compiled_a0e4c7b4._.js (141.0KB, ~60.3KB savings) [reason: high newlines (2.02%), 171 comments, long function names, formatted code, excessive whitespace]
+    - node_modules_next_dist_client_17643121._.js (606.5KB, ~292.5KB savings) [reason: high newlines (2.05%), 2715 comments, long variable names, long function names, formatted code, excessive whitespace]
+  </rule>
+  <rule id="perf/http2" severity="info" status="warn" docs="https://docs.squirrelscan.com/rules/perf/http2">
+   HTTP/2 requires HTTPS
+   Pages (5/82): /, /about, /accessibility, /affiliate-disclosure, /blog
+   Items (5/82):
+    - / (HTTP/2 requires HTTPS)
+    - /login (HTTP/2 requires HTTPS)
+    - /about (HTTP/2 requires HTTPS)
+    - /signup (HTTP/2 requires HTTPS)
+    - /contact (HTTP/2 requires HTTPS)
+  </rule>
+  <rule id="perf/source-maps" severity="info" status="warn" docs="https://docs.squirrelscan.com/rules/perf/source-maps">
+   188 potential source map(s) detected; 1 inline source map(s) found
+   Pages (5/82): /, /about, /accessibility, /affiliate-disclosure, /blog
+   Items (5/11):
+    - /_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js.map (from /_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js)
+    - /_next/static/chunks/%22 (from /_next/static/chunks/node_modules_next_dist_compiled_react-server-dom-turbopack_9212ccad._.js)
+    - /_next/static/chunks/node_modules_next_dist_compiled_react-server-dom-turbopack_9212ccad._.js.map (from /_next/static/chunks/node_modules_next_dist_compiled_react-server-dom-turbopack_9212ccad._.js)
+    - /_next/static/chunks/index.js.map (from /_next/static/chunks/node_modules_next_dist_f3530cac._.js)
+    - /_next/static/chunks/node_modules_next_dist_compiled_next-devtools_index_1dd7fb59.js.map (from /_next/static/chunks/node_modules_next_dist_compiled_next-devtools_index_1dd7fb59.js)
+  </rule>
+ </category>
+ <category name="Social Media" errors="0" warnings="12">
+  <rule id="social/og-url-match" severity="warning" status="warn" docs="https://docs.squirrelscan.com/rules/social/og-url-match">
+   og:url does not match canonical URL
+   Pages (5/12): /about, /contact, /faq, /features, /login
+  </rule>
+ </category>
+ <category name="Accessibility" errors="7" warnings="91">
+  <rule id="a11y/button-name" severity="error" status="fail" docs="https://docs.squirrelscan.com/rules/a11y/button-name">
+   Buttons without accessible names
+   Pages (1): /marketplace
+   Items (5/6):
+    - button.inline-flex
+    - button.inline-flex
+    - button.inline-flex
+    - button.inline-flex
+    - button.inline-flex
+  </rule>
+  <rule id="a11y/select-name" severity="error" status="fail" docs="https://docs.squirrelscan.com/rules/a11y/select-name">
+   1 select element(s) without accessible names
+   Pages (1): /marketplace
+   Items (1):
+    - select
+  </rule>
+  <rule id="a11y/aria-command-name" severity="error" status="fail" docs="https://docs.squirrelscan.com/rules/a11y/aria-command-name">
+   6 command element(s) without accessible names
+   Pages (1): /marketplace
+   Items (5/6):
+    - button[type=&quot;submit&quot;]
+    - button[type=&quot;submit&quot;]
+    - button[type=&quot;submit&quot;]
+    - button[type=&quot;submit&quot;]
+    - button[type=&quot;submit&quot;]
+  </rule>
+  <rule id="a11y/aria-input-field-name" severity="error" status="fail" docs="https://docs.squirrelscan.com/rules/a11y/aria-input-field-name">
+   1 input field(s) without accessible names
+   Pages (1): /marketplace
+   Items (1):
+    - select
+  </rule>
+  <rule id="a11y/label-content-name-mismatch" severity="error" status="fail" docs="https://docs.squirrelscan.com/rules/a11y/label-content-name-mismatch">
+   2 element(s) where visible text doesn&apos;t match accessible name
+   Pages (1): /marketplace
+   Items (2):
+    - button: visible=&quot;price ↑&quot; vs aria-label=&quot;sort by price low to&quot;
+    - button: visible=&quot;price ↓&quot; vs aria-label=&quot;sort by price high t&quot;
+  </rule>
+  <rule id="a11y/aria-labels" severity="error" status="fail" docs="https://docs.squirrelscan.com/rules/a11y/aria-labels">
+   6 button(s) without accessible names
+   Pages (1): /marketplace
+   Items (5/6):
+    - inline-flex items-center justi
+    - inline-flex items-center justi
+    - inline-flex items-center justi
+    - inline-flex items-center justi
+    - inline-flex items-center justi
+  </rule>
+  <rule id="a11y/form-labels" severity="error" status="fail" docs="https://docs.squirrelscan.com/rules/a11y/form-labels">
+   2 form input(s) without labels
+   Pages (1): /marketplace
+   Items (2):
+    - text
+    - select
+  </rule>
+  <rule id="a11y/color-contrast" severity="warning" status="warn" docs="https://docs.squirrelscan.com/rules/a11y/color-contrast">
+   N potential color contrast issue(s)
+   Pages (5/82): /, /about, /accessibility, /affiliate-disclosure, /blog
+   Items (5/20):
+    - span with class &quot;text-[11px] uppercase tracking...&quot; may have low contrast
+    - button with class &quot;inline-flex items-center justi...&quot; may have low contrast
+    - svg with class &quot;lucide lucide-shopping-bag tex...&quot; may have low contrast
+    - label with class &quot;flex items-center gap-2 cursor...&quot; may have low contrast
+    - p with class &quot;text-xl text-zinc-300 mb-6...&quot; may have low contrast
+  </rule>
+  <rule id="a11y/heading-order" severity="warning" status="warn" docs="https://docs.squirrelscan.com/rules/a11y/heading-order">
+   1 heading level skip(s) detected
+   Pages (4): /faq, /marketplace, /pricing, /shipping
+   Items (1):
+    - H3 after H1
+  </rule>
+  <rule id="a11y/identical-links-same-purpose" severity="warning" status="warn" docs="https://docs.squirrelscan.com/rules/a11y/identical-links-same-purpose">
+   1 link text(s) lead to different destinations
+   Pages (1): /marketplace
+   Items (1):
+    - &quot;buy now&quot; → 2 different URLs
+  </rule>
+  <rule id="a11y/image-redundant-alt" severity="warning" status="warn" docs="https://docs.squirrelscan.com/rules/a11y/image-redundant-alt">
+   2 image(s) with redundant alt text
+   Pages (1): /marketplace
+   Items (2):
+    - alt=&quot;Tamagotchi Paradise&quot; matches filename
+    - alt=&quot;DJI Neo Drone&quot; matches filename
+  </rule>
+  <rule id="a11y/link-text" severity="warning" status="warn" docs="https://docs.squirrelscan.com/rules/a11y/link-text">
+   N link(s) with generic text
+   Pages (3): /login, /marketplace, /signup
+   Items (3):
+    - sign up
+    - sign in
+    - buy now
+  </rule>
+ </category>
+ <category name="E-E-A-T" errors="0" warnings="1">
+  <rule id="eeat/author-byline" severity="warning" status="warn" docs="https://docs.squirrelscan.com/rules/eeat/author-byline">
+   No content pages have author attribution
+  </rule>
+ </category>
+</issues>
+</audit>
+
+────────────────────────────────────────────────────────────
+File issues: https://github.com/squirrelscan/squirrelscan/issues  •  Send feedback: squirrel feedback
+
