@@ -27,7 +27,7 @@ export default function NotFound() {
 
         <div className="flex flex-col gap-4">
           <Link href="/">
-            <button className="w-full flex items-center justify-center gap-3 px-8 py-4 bg-white text-black hover:bg-zinc-200 rounded-2xl font-bold transition-all transform hover:scale-[1.02] active:scale-[0.98]">
+            <button aria-label="Return to marketplace" className="w-full flex items-center justify-center gap-3 px-8 py-4 bg-white text-black hover:bg-zinc-200 rounded-2xl font-bold transition-all transform hover:scale-[1.02] active:scale-[0.98]">
               <ShoppingBag size={20} />
               Browse Marketplace
             </button>

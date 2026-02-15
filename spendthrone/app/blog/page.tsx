@@ -53,7 +53,7 @@ export default function BlogPage() {
                 <p className="text-zinc-400">
                   {post.excerpt}
                 </p>
-                <button className="mt-4 px-4 py-2 bg-zinc-800 hover:bg-purple-600 text-white font-semibold rounded-lg transition-colors">
+                <button aria-label="Read article" className="mt-4 px-4 py-2 bg-zinc-800 hover:bg-purple-600 text-white font-semibold rounded-lg transition-colors">
                   Read More
                 </button>
               </div>

@@ -31,6 +31,8 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <>
+      {/* Server-rendered H1 for SEO */}
+      <h1 className="sr-only">OMA-AI - API Marketplace for Autonomous AI Agents</h1>
       <HomeClient />
       
       {/* Visually hidden but SEO-friendly descriptive content */}
