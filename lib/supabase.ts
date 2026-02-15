@@ -1,82 +1,188 @@
-import { createClient as createSupabaseClient, SupabaseClient } from '@supabase/supabase-js';
+import { createClient } from '@supabase/supabase-js'
 
-// Re-export createClient for use in other modules
-export { createSupabaseClient };
-export type { SupabaseClient };
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 
-// Factory function that creates a client with default env vars
-export function createClient(): SupabaseClient | null {
-  return supabaseClient;
-}
+export const isSupabaseEnabled = !!(supabaseUrl && supabaseAnonKey)
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
-
-// Check if the Supabase key looks valid (should not be a placeholder)
-const isValidKey = (key: string): boolean => {
-  // Must start with eyJ (JWT header)
-  // Must not contain "example" or "demo" placeholders
-  return key.startsWith('eyJ') && 
-         !key.toLowerCase().includes('example') && 
-         !key.toLowerCase().includes('demo') &&
-         !key.toLowerCase().includes('placeholder');
-};
-
-// Check if URL looks valid
-const isValidUrl = (url: string): boolean => {
-  return url.startsWith('https://') && 
-         url.includes('.supabase.co') &&
-         !url.includes('example');
-};
-
-// Graceful fallback for missing or invalid Supabase credentials
-// This allows the build to succeed and the site to work in demo mode
-let supabaseClient: SupabaseClient | null = null;
-let supabaseHealthStatus: 'unknown' | 'healthy' | 'unhealthy' = 'unknown';
-
-if (supabaseUrl && supabaseAnonKey && isValidUrl(supabaseUrl) && isValidKey(supabaseAnonKey)) {
-  try {
-    supabaseClient = createSupabaseClient(supabaseUrl, supabaseAnonKey, {
+export const supabase = isSupabaseEnabled 
+  ? createClient(supabaseUrl, supabaseAnonKey, {
       auth: {
-        autoRefreshToken: false,
-        persistSession: false
-      }
-    });
-  } catch (error) {
-    console.warn('Failed to initialize Supabase client:', error);
-    supabaseHealthStatus = 'unhealthy';
-  }
-} else {
-  if (supabaseUrl || supabaseAnonKey) {
-    console.warn('Supabase credentials appear to be invalid or placeholder values. Running in demo mode.');
-  }
-  supabaseHealthStatus = 'unhealthy';
+        persistSession: true,
+        autoRefreshToken: true,
+      },
+    })
+  : null
+
+// Types
+export interface Service {
+  id: string
+  name: string
+  description: string
+  category: string
+  provider: string
+  endpoint_url: string
+  price_per_call: number
+  price_type: string
+  rating: number
+  total_calls: number
+  tags: string[]
+  featured: boolean
+  icon_url: string | null
+  documentation_url: string | null
+  status: string
+  created_at: string
+  updated_at: string
 }
 
-export const supabase = supabaseClient;
-export const isSupabaseEnabled = !!supabaseClient && supabaseHealthStatus !== 'unhealthy';
-
-// Helper function to check if Supabase is available
-export function checkSupabaseAvailability() {
-  if (!isSupabaseEnabled) {
-    console.warn('Supabase is not configured. Running in demo mode.');
-  }
-  return isSupabaseEnabled;
+export interface Task {
+  id: string
+  title: string
+  description: string
+  category: string
+  difficulty: string
+  reward_usd: number
+  reward_currency: string
+  status: string
+  created_by: string | null
+  assigned_to: string | null
+  deadline: string | null
+  tags: string[]
+  requirements: string | null
+  created_at: string
+  updated_at: string
 }
 
-// Helper to safely handle Supabase errors and return demo data fallback
-export function handleSupabaseError(error: any, demoData: any): { error: string } | any {
-  console.error('Supabase error:', error);
+export interface Product {
+  id: string
+  name: string
+  slug: string
+  description: string
+  short_description: string | null
+  category: string
+  price: number
+  original_price: number | null
+  currency: string
+  image_url: string | null
+  gallery_urls: string[] | null
+  rating: number
+  review_count: number
+  in_stock: boolean
+  stock_count: number
+  tags: string[]
+  features: string[]
+  specifications: Record<string, any> | null
+  affiliate_url: string | null
+  created_at: string
+  updated_at: string
+}
+
+export interface Category {
+  id: string
+  name: string
+  slug: string
+  description: string | null
+  image_url: string | null
+  parent_id: string | null
+  created_at: string
+}
+
+export interface Experiment {
+  id: string
+  title: string
+  slug: string
+  description: string
+  category: string
+  content: string
+  questions: any[] | null
+  results: any[] | null
+  created_at: string
+  updated_at: string
+}
+
+// Helper functions
+export async function getServices(limit = 50, category?: string) {
+  let query = supabase
+    .from('services')
+    .select('*')
+    .eq('status', 'active')
+    .order('featured', { ascending: false })
+    .limit(limit)
   
-  // If it's an auth error or connection error, return demo data
-  if (error?.message?.includes('Invalid API key') || 
-      error?.message?.includes('JWT') ||
-      error?.code === 'PGRST301' ||
-      !supabaseClient) {
-    console.warn('Supabase authentication failed. Returning demo data.');
-    return demoData;
+  if (category && category !== 'all') {
+    query = query.eq('category', category)
   }
   
-  // For other errors, return the error
-  return { error: error?.message || 'Database error' };
+  const { data, error } = await query
+  if (error) throw error
+  return data as Service[]
+}
+
+export async function getTasks(status = 'open') {
+  const { data, error } = await supabase
+    .from('tasks')
+    .select('*')
+    .eq('status', status)
+    .order('created_at', { ascending: false })
+  
+  if (error) throw error
+  return data as Task[]
+}
+
+export async function getProducts(category?: string) {
+  let query = supabase
+    .from('products')
+    .select('*')
+    .eq('in_stock', true)
+    .order('rating', { ascending: false })
+  
+  if (category && category !== 'all') {
+    query = query.eq('category', category)
+  }
+  
+  const { data, error } = await query
+  if (error) throw error
+  return data as Product[]
+}
+
+export async function getProductBySlug(slug: string) {
+  const { data, error } = await supabase
+    .from('products')
+    .select('*')
+    .eq('slug', slug)
+    .single()
+  
+  if (error) throw error
+  return data as Product
+}
+
+export async function getCategories() {
+  const { data, error } = await supabase
+    .from('categories')
+    .select('*')
+    .order('name')
+  
+  if (error) throw error
+  return data as Category[]
+}
+
+export async function getExperiments() {
+  const { data, error } = await supabase
+    .from('experiments')
+    .select('*')
+    .order('title')
+  
+  if (error) throw error
+  return data as Experiment[]
+}
+
+export async function getExperimentBySlug(slug: string) {
+  const { data, error } = await supabase
+    .from('experiments')
+    .select('*')
+    .eq('slug', slug)
+    .single()
+  
+  if (error) throw error
+  return data as Experiment
 }
