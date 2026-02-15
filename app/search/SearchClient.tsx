@@ -66,6 +66,7 @@ export default function SearchPage() {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Query APIs, models, or agents..."
+              aria-label="Search APIs, models, or agents"
               className="w-full pl-14 pr-4 py-5 bg-memoria-bg-card border border-memoria-border-default rounded-sm text-white text-lg focus:outline-none focus:border-white transition-all font-light"
             />
           </div>

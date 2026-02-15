@@ -53,20 +53,24 @@ export default function DeathClockClient() {
             <Card className="bg-memoria-bg-card border-memoria-border-muted rounded-sm p-10 max-w-xl">
               <div className="space-y-8">
                 <div>
-                  <label className="text-[10px] uppercase tracking-widest text-memoria-text-meta block mb-3">Current Age</label>
-                  <input 
-                    type="number" 
+                  <label htmlFor="current-age" className="text-[10px] uppercase tracking-widest text-memoria-text-meta block mb-3">Current Age</label>
+                  <input
+                    id="current-age"
+                    type="number"
                     value={age}
                     onChange={(e) => setAge(Number(e.target.value))}
+                    aria-label="Enter your current age"
                     className="w-full bg-memoria-bg-ultra-dark border border-memoria-border-default rounded-sm px-4 py-3 text-2xl font-light text-memoria-text-hero focus:outline-none focus:border-memoria-border-active"
                   />
                 </div>
                 <div>
-                  <label className="text-[10px] uppercase tracking-widest text-memoria-text-meta block mb-3">Life Expectancy</label>
-                  <input 
-                    type="number" 
+                  <label htmlFor="life-expectancy" className="text-[10px] uppercase tracking-widest text-memoria-text-meta block mb-3">Life Expectancy</label>
+                  <input
+                    id="life-expectancy"
+                    type="number"
                     value={expectancy}
                     onChange={(e) => setExpectancy(Number(e.target.value))}
+                    aria-label="Enter your expected life expectancy in years"
                     className="w-full bg-memoria-bg-ultra-dark border border-memoria-border-default rounded-sm px-4 py-3 text-2xl font-light text-memoria-text-hero focus:outline-none focus:border-memoria-border-active"
                   />
                 </div>

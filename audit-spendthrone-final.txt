@@ -1,0 +1,14 @@
+
+ ▄█▀ ▄▀█ █ █ █ █▀▄ █▀▄ █▀▀ █   ▄█▀ ▄▀▀ ▄▀█ █▄ █
+ ▀▄  █ █ █ █ █ ██▀ ██▀ █▀  █   ▀▄  █   █▀█ █ ▀█
+ █▄▀ ▀▀█ ▀▄▀ █ █ █ █ █ █▄▄ █▄▄ █▄▀ ▀▄▄ █ █ █  █
+
+  v0.0.38  •  https://squirrelscan.com
+────────────────────────────────────────────
+Config: /home/nosyt/.openclaw/workspace/squirrel.toml
+Auditing: http://localhost:3001
+Coverage: surface (max 100 pages)
+
+Database: /home/nosyt/.squirrel/projects/oma-ai-audit/project.db
+New crawl: http://localhost:3001
+Found 75 URLs in sitemap

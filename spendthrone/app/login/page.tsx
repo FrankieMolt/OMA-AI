@@ -60,7 +60,7 @@ export default function LoginPage() {
 
             <div className="flex items-center justify-between text-xs text-memoria-text-whisper">
               <label className="flex items-center gap-2 cursor-pointer hover:text-memoria-text-secondary transition-colors">
-                <input type="checkbox" className="rounded-sm border-memoria-border-muted bg-memoria-bg-ultra-dark text-memoria-text-hero accent-memoria-text-hero" />
+                <input type="checkbox" id="remember" aria-label="Remember me" className="rounded-sm border-memoria-border-muted bg-memoria-bg-ultra-dark text-memoria-text-hero accent-memoria-text-hero" />
                 Remember me
               </label>
               <Link href="#" className="hover:text-memoria-text-hero transition-colors">

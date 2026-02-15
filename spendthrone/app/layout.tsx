@@ -107,11 +107,12 @@ export default function RootLayout({
             <span className="text-[10px] uppercase tracking-widest text-memoria-text-meta">
               © 2026 SpendThrone • Excellence in Detail
             </span>
-            <nav className="flex gap-6" aria-label="Footer Navigation">
+            <nav className="flex gap-6 flex-wrap justify-center" aria-label="Footer Navigation">
               <Link href="/about" className="text-[10px] uppercase tracking-widest text-memoria-text-meta hover:text-memoria-text-hero transition-colors no-underline">About</Link>
               <Link href="/contact" className="text-[10px] uppercase tracking-widest text-memoria-text-meta hover:text-memoria-text-hero transition-colors no-underline">Contact</Link>
               <Link href="/privacy" className="text-[10px] uppercase tracking-widest text-memoria-text-meta hover:text-memoria-text-hero transition-colors no-underline">Privacy</Link>
               <Link href="/terms" className="text-[10px] uppercase tracking-widest text-memoria-text-meta hover:text-memoria-text-hero transition-colors no-underline">Terms</Link>
+              <Link href="/affiliate-disclosure" className="text-[10px] uppercase tracking-widest text-memoria-text-meta hover:text-memoria-text-hero transition-colors no-underline">Affiliate Disclosure</Link>
             </nav>
             <div className="flex gap-2 items-center">
               <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" aria-hidden="true" />

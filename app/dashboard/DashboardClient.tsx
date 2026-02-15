@@ -215,6 +215,7 @@ export default function Dashboard() {
                 placeholder="Search APIs..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
+                aria-label="Search APIs"
                 className="w-full pl-12 pr-4 py-4 bg-memoria-bg-card border border-memoria-border-default rounded-sm text-white text-sm focus:outline-none focus:border-white transition-all"
               />
             </div>
