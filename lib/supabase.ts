@@ -15,9 +15,12 @@ export const supabase = isSupabaseEnabled
   : null
 
 // Error handler
-export function handleSupabaseError(error: any): never {
+export function handleSupabaseError(error: any, fallbackData?: any): { error: string | null, data?: any } {
   console.error('Supabase error:', error)
-  throw new Error(error?.message || 'Database error')
+  if (fallbackData) {
+    return { error: null, data: fallbackData }
+  }
+  return { error: error?.message || 'Database error' }
 }
 
 // Types

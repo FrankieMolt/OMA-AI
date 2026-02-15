@@ -281,12 +281,12 @@ export async function GET(request: NextRequest) {
   // Client-side filtering for demo/fallback data
   let filteredServices = services;
   if (category && category !== 'all') {
-    filteredServices = filteredServices.filter(s => 
+    filteredServices = filteredServices.filter((s: any) => 
       s.categories?.name === category || s.category === category
     );
   }
   if (search) {
-    filteredServices = filteredServices.filter(s => 
+    filteredServices = filteredServices.filter((s: any) => 
       s.name.toLowerCase().includes(search) || 
       s.description.toLowerCase().includes(search) ||
       s.tags.some((t: string) => t.toLowerCase().includes(search))

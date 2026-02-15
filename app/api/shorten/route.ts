@@ -24,7 +24,7 @@ async function checkRateLimit(
     return { allowed: true, remaining: RATE_LIMIT, resetAt: new Date(Date.now() + RATE_WINDOW) };
   }
   
-  const supabase = createClient();
+  
   const windowStart = new Date(Date.now() - RATE_WINDOW);
   
   let query = supabase!
@@ -152,7 +152,7 @@ export async function POST(request: NextRequest) {
     }
     
     // PRODUCTION MODE: Use Supabase
-    const supabase = createClient();
+    
     
     // Get user session if authenticated
     const { data: { user } } = await supabase!.auth.getUser();
@@ -269,7 +269,7 @@ export async function GET(request: NextRequest) {
     }
     
     // PRODUCTION MODE: Use Supabase
-    const supabase = createClient();
+    
     
     // Get user session
     const { data: { user } } = await supabase!.auth.getUser();
@@ -305,7 +305,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({
       success: true,
       data: {
-        links: links.map(link => ({
+        links: links.map((link: any) => ({
           ...link,
           short_url: buildShortUrl(link.short_code, link.custom_domain)
         })),

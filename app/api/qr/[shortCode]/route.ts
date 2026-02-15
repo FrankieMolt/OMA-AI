@@ -18,7 +18,7 @@ export async function GET(
     const bgColor = searchParams.get('bg') || '#FFFFFF';
     const errorCorrection = searchParams.get('errorCorrection') || 'M'; // L, M, Q, H
     
-    const supabase = createClient();
+    
     
     if (!supabase) {
       return NextResponse.json(

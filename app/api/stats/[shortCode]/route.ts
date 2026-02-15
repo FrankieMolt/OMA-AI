@@ -8,7 +8,7 @@ export async function GET(
 ) {
   try {
     const { shortCode } = await params;
-    const supabase = createClient();
+    
     
     if (!supabase) {
       return NextResponse.json(
