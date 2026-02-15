@@ -61,7 +61,7 @@ export async function GET(
       .select('ip_address')
       .eq('link_id', link.id);
     
-    const uniqueVisitors = new Set(uniqueVisitorsData?.map(c => c.ip_address) || []).size;
+    const uniqueVisitors = new Set(uniqueVisitorsData?.map((c: any) => c.ip_address) || []).size;
     
     // Fetch clicks by day (last 30 days)
     const thirtyDaysAgo = new Date();
@@ -76,7 +76,7 @@ export async function GET(
     
     // Aggregate clicks by day
     const clicksByDayMap = new Map<string, number>();
-    clicksByDay?.forEach(click => {
+    clicksByDay?.forEach((click: any) => {
       const date = new Date(click.clicked_at).toISOString().split('T')[0];
       clicksByDayMap.set(date, (clicksByDayMap.get(date) || 0) + 1);
     });
@@ -94,7 +94,7 @@ export async function GET(
       .not('country', 'is', null);
     
     const countryMap = new Map<string, number>();
-    clicksByCountry?.forEach(click => {
+    clicksByCountry?.forEach((click: any) => {
       if (click.country) {
         countryMap.set(click.country, (countryMap.get(click.country) || 0) + 1);
       }
@@ -113,7 +113,7 @@ export async function GET(
       .not('device_type', 'is', null);
     
     const deviceMap = new Map<string, number>();
-    clicksByDevice?.forEach(click => {
+    clicksByDevice?.forEach((click: any) => {
       if (click.device_type) {
         deviceMap.set(click.device_type, (deviceMap.get(click.device_type) || 0) + 1);
       }
@@ -130,7 +130,7 @@ export async function GET(
       .not('browser', 'is', null);
     
     const browserMap = new Map<string, number>();
-    clicksByBrowser?.forEach(click => {
+    clicksByBrowser?.forEach((click: any) => {
       if (click.browser) {
         browserMap.set(click.browser, (browserMap.get(click.browser) || 0) + 1);
       }

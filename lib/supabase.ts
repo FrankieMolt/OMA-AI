@@ -1,4 +1,6 @@
-export { createClient } from '@supabase/supabase-js'
+import { createClient } from '@supabase/supabase-js'
+
+export { createClient }
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
@@ -6,7 +8,7 @@ const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 export const isSupabaseEnabled = !!(supabaseUrl && supabaseAnonKey)
 
 export const supabase = isSupabaseEnabled 
-  ? createClient(supabaseUrl, supabaseAnonKey, {
+  ? createClient(supabaseUrl!, supabaseAnonKey!, {
       auth: {
         persistSession: true,
         autoRefreshToken: true,
@@ -111,6 +113,7 @@ export interface Experiment {
 
 // Helper functions
 export async function getServices(limit = 50, category?: string) {
+  if (!supabase) return []
   let query = supabase
     .from('services')
     .select('*')
@@ -128,6 +131,7 @@ export async function getServices(limit = 50, category?: string) {
 }
 
 export async function getTasks(status = 'open') {
+  if (!supabase) return []
   const { data, error } = await supabase
     .from('tasks')
     .select('*')
@@ -139,6 +143,7 @@ export async function getTasks(status = 'open') {
 }
 
 export async function getProducts(category?: string) {
+  if (!supabase) return []
   let query = supabase
     .from('products')
     .select('*')
@@ -155,6 +160,7 @@ export async function getProducts(category?: string) {
 }
 
 export async function getProductBySlug(slug: string) {
+  if (!supabase) return null
   const { data, error } = await supabase
     .from('products')
     .select('*')
@@ -166,6 +172,7 @@ export async function getProductBySlug(slug: string) {
 }
 
 export async function getCategories() {
+  if (!supabase) return []
   const { data, error } = await supabase
     .from('categories')
     .select('*')
@@ -176,6 +183,7 @@ export async function getCategories() {
 }
 
 export async function getExperiments() {
+  if (!supabase) return []
   const { data, error } = await supabase
     .from('experiments')
     .select('*')
@@ -186,6 +194,7 @@ export async function getExperiments() {
 }
 
 export async function getExperimentBySlug(slug: string) {
+  if (!supabase) return null
   const { data, error } = await supabase
     .from('experiments')
     .select('*')

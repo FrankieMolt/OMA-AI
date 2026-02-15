@@ -13,7 +13,7 @@ const USDC_ADDRESS = '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913' as const;
 
 // x402 Payment Handler
 export class X402PaymentHandler {
-  private client: ReturnType<typeof createPublicClient>;
+  private client: any;
   private chain = base;
 
   constructor(rpcUrl?: string) {
