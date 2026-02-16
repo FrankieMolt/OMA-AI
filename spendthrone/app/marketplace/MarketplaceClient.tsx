@@ -120,7 +120,6 @@ export default function MarketplaceClient() {
       {/* Products Grid */}
       <ProductGrid 
         products={sortedProducts} 
-        onInspect={(product) => console.log('Inspect:', product)}
       />
       
       {/* Empty State */}

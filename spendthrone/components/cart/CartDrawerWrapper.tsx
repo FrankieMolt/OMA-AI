@@ -11,7 +11,6 @@ export function CartDrawerWrapper() {
   const { isCartOpen, toggleCart, cartTotal, cartCount } = useApp();
 
   const handleCheckout = () => {
-    console.log('Checkout clicked', { cartTotal, cartCount });
     toggleCart();
   };
 
