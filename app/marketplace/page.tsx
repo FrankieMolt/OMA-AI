@@ -8,7 +8,7 @@ import MarketplacePage from './MarketplaceClient';
 
 export const metadata: Metadata = {
   title: 'API Marketplace - Discover 450+ APIs & MCP Servers',
-  description: 'The definitive marketplace for autonomous AI agents. Browse 450+ verified APIs, MCP servers, and blockchain services. Pay with x402 protocol for seamless crypto transactions.'
+  description: 'The definitive marketplace for autonomous AI agents. Browse, test, and integrate hundreds of verified APIs and Model Context Protocol (MCP) servers with instant x402 payments.',
   keywords: ['API marketplace', 'MCP servers', 'AI tools', 'blockchain APIs', 'autonomous discovery', 'agent tools'],
 }
 

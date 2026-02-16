@@ -8,14 +8,14 @@ import DocsClient from './DocsClient';
 
 export const metadata: Metadata = {
   title: 'Documentation - OMA-AI Developer Hub',
-  description: 'Learn how to integrate with OMA-AI API marketplace. Comprehensive documentation for AI agents and developers. Quick start guides, API references, and x402 payment integration tutorials.'
+  description: 'Learn how to integrate with OMA-AI. Comprehensive guides for building autonomous agents, using the x402 payment protocol, and connecting to Model Context Protocol (MCP) servers.',
   keywords: ['AI documentation', 'developer guides', 'API reference', 'MCP integration', 'x402 protocol', 'SDK documentation'],
   alternates: {
     canonical: '/docs',
   },
   openGraph: {
     title: 'Documentation - OMA-AI Developer Hub',
-    description: 'Learn how to integrate with OMA-AI API marketplace. Comprehensive documentation for AI agents and developers. Quick start guides, API references, and x402 payment integration tutorials.'
+    description: 'Learn how to integrate with OMA-AI. Comprehensive guides for building autonomous agents, using the x402 payment protocol, and connecting to Model Context Protocol (MCP) servers.',
     url: '/docs',
     images: [{
       url: '/og-image.png',
