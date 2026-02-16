@@ -1,5 +1,5 @@
-/* Memoria Design System - Ultra-Dark Monochromatic */
-/* Lethometry Edition - Scientific Precision */
+/* Lethometry 2.0 - Ethereal Existentialism */
+/* Complete visual redesign - 2026 */
 
 @tailwind base;
 @tailwind components;
@@ -7,231 +7,212 @@
 
 @layer base {
   :root {
-    /* Ultra-Dark Monochromatic Palette */
-    --background: 240 10% 2%;              /* #050505 */
-    --foreground: 240 5% 89%;              /* #e4e4e7 */
-    --card: 240 5% 7%;                     /* #121212 */
-    --card-foreground: 240 5% 89%;
-    --popover: 240 5% 2%;
-    --popover-foreground: 240 5% 89%;
-    --primary: 0 0% 89%;                   /* #e4e4e7 */
-    --primary-foreground: 240 10% 2%;
-    --secondary: 240 5% 12%;               /* #1e1e1e */
-    --secondary-foreground: 240 5% 89%;
-    --muted: 240 5% 12%;                   /* #1e1e1e */
-    --muted-foreground: 240 5% 45%;        /* #71717a */
-    --accent: 240 5% 12%;                  /* #1e1e1e */
-    --accent-foreground: 240 5% 89%;
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 240 5% 12%;                  /* #1e1e1e */
-    --input: 240 5% 7%;                    /* #121212 */
-    --ring: 0 0% 89%;
-    --radius: 0.25rem;
+    /* Ethereal Gradient Base */
+    --background: 220 30% 5%;           /* Deep cosmic blue */
+    --foreground: 200 20% 95%;          /* Soft white */
     
-    /* Memoria Extended Colors - WCAG AA Compliant Contrast */
-    --memoria-bg-ultra-dark: #050505;
-    --memoria-bg-card: #121212;
-    --memoria-bg-surface: #1e1e1e;
-    --memoria-border-muted: #1e1e1e;
-    --memoria-border-default: #2a2a2a;
-    --memoria-border-active: #3a3a3a;
-    --memoria-text-hero: #e4e4e7;
-    --memoria-text-secondary: #a1a1aa;
-    --memoria-text-whisper: #a1a1aa;
-    --memoria-text-meta: #71717a;
-    --memoria-text-label: #a1a1aa;
+    /* Accent Colors - Teal/Cyan existential */
+    --accent: 175 70% 45%;              /* Teal #2dd4bf */
+    --accent-foreground: 220 30% 5%;
+    
+    /* Secondary - Amber warmth */
+    --secondary: 40 90% 55%;            /* Amber #f59e0b */
+    --secondary-foreground: 220 30% 5%;
+    
+    /* Cards & Surfaces */
+    --card: 220 25% 8%;                 /* Darker blue */
+    --card-foreground: 200 20% 95%;
+    
+    /* Borders */
+    --border: 175 30% 25%;              /* Teal-muted */
+    
+    /* Lethometry Custom Colors */
+    --letho-gradient-start: #0f172a;    /* Slate 900 */
+    --letho-gradient-mid: #134e4a;      /* Teal 900 */
+    --letho-gradient-end: #0c0a09;      /* Stone 950 */
+    
+    --letho-accent: #2dd4bf;            /* Teal 400 */
+    --letho-accent-dim: #14b8a6;        /* Teal 500 */
+    --letho-warm: #fbbf24;              /* Amber 400 */
+    --letho-text-hero: #f1f5f9;         /* Slate 100 */
+    --letho-text-body: #94a3b8;         /* Slate 400 */
+    --letho-text-muted: #64748b;        /* Slate 500 */
+    
+    /* Typography */
+    --font-display: 'Space Grotesk', system-ui, sans-serif;
+    --font-body: 'Inter', system-ui, sans-serif;
+    
+    /* Radius - More rounded for softer feel */
+    --radius: 0.5rem;
   }
-}
-
-@layer base {
+  
   * {
-    @apply border-memoria-border-muted;
+    @apply border-[var(--border)];
   }
-
+  
   body {
-    @apply bg-background text-foreground antialiased;
-    font-feature-settings: "rlig" 1, "calt" 1;
+    background: linear-gradient(135deg, var(--letho-gradient-start) 0%, var(--letho-gradient-mid) 50%, var(--letho-gradient-end) 100%);
+    background-attachment: fixed;
+    color: var(--letho-text-body);
+    font-family: var(--font-body);
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-
-  /* Typography System */
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-display;
-  }
-
-  h1 {
-    @apply text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light tracking-tight;
-  }
-
-  h2 {
-    @apply text-3xl sm:text-4xl md:text-5xl font-light tracking-tight;
-  }
-
-  h3 {
-    @apply text-2xl sm:text-3xl font-light tracking-tight;
-  }
-
-  /* Scientific Grid - Monochromatic */
-  .scientific-grid {
-    background-image: 
-      linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-    background-size: 40px 40px;
-  }
-
-  /* Custom Scrollbar - Monochromatic */
-  ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-  }
-
-  ::-webkit-scrollbar-track {
-    background: var(--memoria-bg-ultra-dark);
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: var(--memoria-border-default);
-    border-radius: 4px;
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background: var(--memoria-border-active);
-  }
-
-  /* Focus Styles - No Blue/Purple */
-  *:focus-visible {
-    @apply outline-2 outline-white outline-offset-2;
-  }
-
-  /* Link Styles - Monochromatic */
-  a {
-    @apply text-memoria-text-secondary transition-colors duration-200 hover:text-white;
   }
 }
 
 @layer components {
-  /* Memoria Card - Ultra-Dark */
-  .memoria-card {
-    @apply bg-memoria-bg-card border-memoria-border-muted rounded-sm p-8;
-    transition: all 0.3s ease;
-  }
-
-  .memoria-card:hover {
-    @apply border-memoria-border-default;
-  }
-
-  /* Hero Typography */
-  .hero-number {
-    @apply font-display font-light text-memoria-text-hero;
-    line-height: 1;
-  }
-
-  .label-whisper {
-    @apply text-[10px] uppercase tracking-widest text-memoria-text-whisper font-bold;
-  }
-
-  /* Memoria Button - Monochromatic */
-  .btn-memoria {
-    @apply bg-memoria-text-hero text-memoria-bg-ultra-dark px-6 py-3 rounded-sm font-light
-           hover:bg-white transition-all duration-200;
-  }
-
-  .btn-memoria-outline {
-    @apply bg-transparent border-memoria-border-default text-memoria-text-secondary px-6 py-3 rounded-sm font-light
-           hover:border-white hover:text-white transition-all duration-200;
-  }
-
-  /* Memoria Badge - Monochromatic */
-  .badge-memoria {
-    @apply px-3 py-1 rounded-sm text-[9px] uppercase tracking-widest border-memoria-border-muted text-memoria-text-meta;
-  }
-
-  /* Memoria Input - Ultra-Dark */
-  .input-memoria {
-    @apply w-full px-4 py-3 bg-memoria-bg-ultra-dark border-memoria-border-default rounded-sm
-           text-memoria-text-hero placeholder-memoria-text-whisper
-           focus:outline-none focus:border-white transition-all duration-200 font-light;
-  }
-
-  /* Section Spacing - Unified 80px */
-  .section-memoria {
-    @apply py-20 px-4 md:px-14;
-  }
-}
-
-@layer utilities {
-  /* Text Gradients - Monochromatic Only */
-  .text-gradient-gray {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-zinc-300 via-zinc-400 to-zinc-300;
-  }
-
-  /* Glow Effects - White Only */
-  .glow-white {
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
-  }
-
-  /* Accessibility */
-  .visually-hidden {
-    @apply absolute w-px h-px p-0 -m-px overflow-hidden whitespace-nowrap border-0;
-  }
-
-  .skip-link {
-    @apply absolute top-4 left-4 z-50 px-4 py-2 bg-white text-black rounded-sm
-           font-light focus:outline-none focus:ring-2 focus:ring-white
-           opacity-0 transition-opacity duration-200;
-  }
-
-  .skip-link:focus {
-    @apply opacity-100;
-  }
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  h1 {
-    @apply text-4xl;
+  /* Ethereal Glow Effects */
+  .letho-glow {
+    box-shadow: 0 0 40px rgba(45, 212, 191, 0.15);
   }
   
-  h2 {
-    @apply text-3xl;
+  .letho-glow-text {
+    text-shadow: 0 0 20px rgba(45, 212, 191, 0.3);
+  }
+  
+  /* Gradient Text */
+  .letho-gradient-text {
+    background: linear-gradient(135deg, var(--letho-accent) 0%, var(--letho-warm) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  /* Cards with ethereal border */
+  .letho-card {
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(45, 212, 191, 0.2);
+    border-radius: var(--radius);
+  }
+  
+  .letho-card:hover {
+    border-color: rgba(45, 212, 191, 0.4);
+    box-shadow: 0 0 30px rgba(45, 212, 191, 0.1);
+  }
+  
+  /* Buttons */
+  .btn-primary {
+    background: linear-gradient(135deg, var(--letho-accent) 0%, var(--letho-accent-dim) 100%);
+    color: var(--letho-gradient-start);
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius);
+    transition: all 0.3s ease;
+  }
+  
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(45, 212, 191, 0.3);
+  }
+  
+  .btn-secondary {
+    background: transparent;
+    border: 1px solid var(--letho-accent);
+    color: var(--letho-accent);
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius);
+    transition: all 0.3s ease;
+  }
+  
+  .btn-secondary:hover {
+    background: rgba(45, 212, 191, 0.1);
+  }
+  
+  /* Navigation */
+  .nav-link {
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--letho-text-muted);
+    transition: color 0.3s ease;
+  }
+  
+  .nav-link:hover {
+    color: var(--letho-accent);
+  }
+  
+  /* Hero Section */
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 10vw, 7rem);
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--letho-text-hero);
+  }
+  
+  .hero-accent {
+    color: var(--letho-accent);
+    font-style: italic;
+  }
+  
+  /* Tool Cards */
+  .tool-card {
+    background: rgba(15, 23, 42, 0.4);
+    border: 1px solid rgba(45, 212, 191, 0.15);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+  }
+  
+  .tool-card:hover {
+    background: rgba(15, 23, 42, 0.6);
+    border-color: rgba(45, 212, 191, 0.3);
+    transform: translateY(-4px);
+  }
+  
+  .tool-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(45, 212, 191, 0.2) 0%, rgba(251, 191, 36, 0.1) 100%);
+    border-radius: 0.5rem;
+    color: var(--letho-accent);
+  }
+  
+  /* Floating elements */
+  .float {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+  
+  /* Pulse glow */
+  .pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+  
+  @keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 20px rgba(45, 212, 191, 0.2); }
+    50% { box-shadow: 0 0 40px rgba(45, 212, 191, 0.4); }
   }
 }
 
-/* Reduced Motion */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
 }
 
-/* Scrollbar Hide */
-.scrollbar-hide {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+::-webkit-scrollbar-track {
+  background: var(--letho-gradient-start);
 }
 
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
+::-webkit-scrollbar-thumb {
+  background: var(--letho-accent-dim);
+  border-radius: 4px;
 }
 
-/* Line Clamp */
-.line-clamp-2 {
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+::-webkit-scrollbar-thumb:hover {
+  background: var(--letho-accent);
 }
 
-.line-clamp-3 {
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+/* Selection */
+::selection {
+  background: rgba(45, 212, 191, 0.3);
+  color: var(--letho-text-hero);
 }
