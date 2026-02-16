@@ -103,7 +103,7 @@ export default function LoginPage() {
                 </label>
                 <div className="relative">
                   <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-memoria-text-meta" size={16} aria-hidden="true" />
-                  <input
+                  <input aria-label="Email address"
                     id="email"
                     type="email"
                     required
@@ -129,9 +129,9 @@ export default function LoginPage() {
                 </div>
                 <div className="relative">
                   <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-memoria-text-meta" size={16} aria-hidden="true" />
-                  <input
+                  <input aria-label="Email address"
                     id="password"
-                    type="password"
+                    type="password" aria-label="Password"
                     required
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
@@ -201,7 +201,7 @@ export default function LoginPage() {
         </Card>
 
         <div className="mt-8 text-center">
-          <button
+          <button aria-label="Toggle password visibility"
             onClick={() => setIsSignUp(!isSignUp)}
             className="text-[11px] uppercase tracking-widest text-memoria-text-meta hover:text-memoria-text-hero transition-colors"
           >

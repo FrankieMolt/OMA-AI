@@ -122,7 +122,7 @@ export default function ProductDetailClient({ product, relatedProducts }: Produc
                 </div>
                 <div>
                   <p className="text-xs font-semibold text-zinc-300">Paradox Safe</p>
-                  <p className="text-[10px] text-zinc-500">Timeline Protected</p>
+                  <p className="text-[10px] text-zinc-400">Timeline Protected</p>
                 </div>
               </div>
               <div className="flex items-center gap-3">
@@ -131,7 +131,7 @@ export default function ProductDetailClient({ product, relatedProducts }: Produc
                 </div>
                 <div>
                   <p className="text-xs font-semibold text-zinc-300">Instant Teleport</p>
-                  <p className="text-[10px] text-zinc-500">Standard Delivery</p>
+                  <p className="text-[10px] text-zinc-400">Standard Delivery</p>
                 </div>
               </div>
               <div className="flex items-center gap-3">
@@ -140,7 +140,7 @@ export default function ProductDetailClient({ product, relatedProducts }: Produc
                 </div>
                 <div>
                   <p className="text-xs font-semibold text-zinc-300">Reality Sync</p>
-                  <p className="text-[10px] text-zinc-500">10-Day Policy</p>
+                  <p className="text-[10px] text-zinc-400">10-Day Policy</p>
                 </div>
               </div>
             </div>

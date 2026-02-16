@@ -177,7 +177,7 @@ export default function BountiesPage() {
           <div className="flex items-center gap-4 overflow-x-auto pb-1 scrollbar-hide w-full md:w-auto">
             <Filter className="text-[#71717a] shrink-0" size={16} />
             {categories.map((category) => (
-              <button
+              <button aria-label="Task action"
                 key={category}
                 onClick={() => setSelectedCategory(category)}
                 className={`px-4 py-2 rounded-sm text-[10px] uppercase tracking-widest whitespace-nowrap transition-all border ${
@@ -193,7 +193,7 @@ export default function BountiesPage() {
 
           <div className="relative w-full md:w-80">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-[#71717a]" size={16} />
-            <input
+            <input aria-label="Search tasks"
               type="text"
               id="bounty-search"
               placeholder="Filter bounties..."

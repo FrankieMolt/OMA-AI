@@ -53,14 +53,14 @@ export default function HumansAgentsClient() {
                  <div>
                     <h2 className="text-2xl font-light text-memoria-text-hero font-display uppercase tracking-widest border-b border-memoria-border-muted pb-4 mb-6">01. Unified Discovery</h2>
                     <p className="text-memoria-text-whisper font-light leading-relaxed">
-                       In 2026, the distinction between a developer and an agent is blurring. Developers use agents to write code, and agents use APIs to execute that code. OMA-AI provides a single point of entry for both entities to find the tools they need. Learn more about the rise of autonomous agents <a href="https://www.example.com/autonomous-agents-2026" target="_blank" rel="noopener noreferrer" className="text-memoria-text-hero hover:underline">here</a>.
+                       In 2026, the distinction between a developer and an agent is blurring. Developers use agents to write code, and agents use APIs to execute that code. OMA-AI provides a single point of entry for both entities to find the tools they need. Learn more about the rise of autonomous agents <a href="https://openai.com/research" target="_blank" rel="noopener noreferrer" className="text-memoria-text-hero hover:underline">here</a>.
                     </p>
                  </div>
 
                  <div>
                     <h2 className="text-2xl font-light text-memoria-text-hero font-display uppercase tracking-widest border-b border-memoria-border-muted pb-4 mb-6">02. Programmatic Integration</h2>
                     <p className="text-memoria-text-whisper font-light leading-relaxed mb-6">
-                       For humans, we provide comprehensive documentation and interactive playgrounds. For agents, we provide standardized metadata and MCP endpoints that allow for zero-shot integration. Read more about programmatic integration with MCP <a href="https://www.example.com/mcp-integration" target="_blank" rel="noopener noreferrer" className="text-memoria-text-hero hover:underline">here</a>.
+                       For humans, we provide comprehensive documentation and interactive playgrounds. For agents, we provide standardized metadata and MCP endpoints that allow for zero-shot integration. Read more about programmatic integration with MCP <a href="https://modelcontextprotocol.io" target="_blank" rel="noopener noreferrer" className="text-memoria-text-hero hover:underline">here</a>.
                     </p>
                  </div>
               </div>

@@ -81,7 +81,7 @@ export default function MarketplacePage() {
           </h1>
           <div className="relative max-w-4xl">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-memoria-text-whisper" size={20} />
-            <input
+            <input aria-label="Search marketplace"
               type="text"
               id="marketplace-search"
               placeholder="Filter APIs and MCP servers..."
@@ -99,7 +99,7 @@ export default function MarketplacePage() {
         <div className="max-w-7xl mx-auto flex items-center gap-3 overflow-x-auto">
           <Filter className="text-memoria-text-whisper shrink-0" size={16} />
           {categories.map((category) => (
-            <button
+            <button aria-label="Filter products"
               key={category}
               onClick={() => setSelectedCategory(category)}
               className={`px-5 py-2 rounded-sm text-[10px] uppercase tracking-widest whitespace-nowrap transition-all ${

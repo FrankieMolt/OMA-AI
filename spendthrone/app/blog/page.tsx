@@ -44,7 +44,7 @@ export default function BlogPage() {
           ].map((post, index) => (
             <article key={index} className="bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden hover:border-purple-500/30 transition-all">
               <div className="p-6">
-                <div className="text-xs text-zinc-500 mb-2">
+                <div className="text-xs text-zinc-400 mb-2">
                   {post.date}
                 </div>
                 <h2 className="text-xl font-bold text-white mb-2">

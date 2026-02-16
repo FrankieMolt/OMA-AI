@@ -53,10 +53,10 @@ export default function X402GuideClient() {
                  <div>
                     <h2 className="text-2xl font-light text-memoria-text-hero font-display uppercase tracking-widest border-b border-memoria-border-muted pb-4 mb-6">01. Protocol Overview</h2>
                     <p className="text-memoria-text-whisper font-light leading-relaxed mb-6">
-                       x402 extends the standard HTTP 402 "Payment Required" status code into a full protocol for negotiation and settlement of digital resources. Learn more about HTTP 402 <a href="https://www.example.com/http-402" target="_blank" rel="noopener noreferrer" className="text-memoria-text-hero hover:underline">here</a>.
+                       x402 extends the standard HTTP 402 "Payment Required" status code into a full protocol for negotiation and settlement of digital resources. Learn more about HTTP 402 <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/402" target="_blank" rel="noopener noreferrer" className="text-memoria-text-hero hover:underline">here</a>.
                     </p>
                     <p className="text-memoria-text-whisper font-light leading-relaxed">
-                       Unlike traditional billing systems that rely on identity and credit, x402 relies on immediate cryptographic proof of payment via stablecoins like USDC. Discover more about USDC <a href="https://www.example.com/usdc-info" target="_blank" rel="noopener noreferrer" className="text-memoria-text-hero hover:underline">here</a>.
+                       Unlike traditional billing systems that rely on identity and credit, x402 relies on immediate cryptographic proof of payment via stablecoins like USDC. Discover more about USDC <a href="https://www.circle.com/en/usdc" target="_blank" rel="noopener noreferrer" className="text-memoria-text-hero hover:underline">here</a>.
                     </p>
                  </div>
 

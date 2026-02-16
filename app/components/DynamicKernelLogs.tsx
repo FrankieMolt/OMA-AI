@@ -59,7 +59,7 @@ export default function DynamicKernelLogs() {
       <div className="flex items-center justify-between px-6 py-4 bg-zinc-950 border-b border-zinc-800">
         <div className="flex items-center gap-2">
           <Terminal size={18} className="text-purple-400" />
-          <span className="text-xs font-bold uppercase tracking-widest text-zinc-500">Frankie_OS_Kernel_Logs</span>
+          <span className="text-xs font-bold uppercase tracking-widest text-zinc-400">Frankie_OS_Kernel_Logs</span>
         </div>
         <div className="flex items-center gap-2">
           <button
@@ -78,7 +78,7 @@ export default function DynamicKernelLogs() {
       {/* Log Output */}
       <div className="p-6 font-mono text-sm min-h-[200px] max-h-[300px] overflow-y-auto custom-scrollbar">
         {logs.length === 0 ? (
-          <div className="flex items-center justify-center h-full text-zinc-500">
+          <div className="flex items-center justify-center h-full text-zinc-400">
             System idle. Waiting for user initiation...
           </div>
         ) : (
@@ -90,7 +90,7 @@ export default function DynamicKernelLogs() {
                 animate={{ opacity: 1, x: 0 }}
                 className="flex items-start gap-3 mb-3 pb-3 border-b border-zinc-800/50"
               >
-                <div className="text-zinc-500 text-[10px] w-16 shrink-0">
+                <div className="text-zinc-400 text-[10px] w-16 shrink-0">
                   {log.timestamp ? new Date(log.timestamp).toLocaleTimeString() : '--:--:--'}
                 </div>
                 <div className="flex-1">
