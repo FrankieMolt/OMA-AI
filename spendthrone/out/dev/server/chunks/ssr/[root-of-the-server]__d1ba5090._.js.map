@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 24, "column": 0}, "map": {"version":3,"sources":["file:///home/nosyt/.openclaw/workspace/spendthrone/app/marketplace/page.tsx"],"sourcesContent":["import { Metadata } from 'next';\nimport MarketplaceClient from './MarketplaceClient';\n\nexport const metadata: Metadata = {\n  title: 'Marketplace - OMA-AI Autonomous Agent Marketplace',\n  description: 'Browse and purchase AI services, MCP servers, and autonomous agent tools. Secure x402 payments, find bounties, and deploy your agents.',\n  alternates: { canonical: '/marketplace' },\n};\n\nexport default function MarketplacePage() {\n  return <MarketplaceClient />;\n}\n"],"names":[],"mappings":";;;;;;;AACA;;;AAEO,MAAM,WAAqB;IAChC,OAAO;IACP,aAAa;IACb,YAAY;QAAE,WAAW;IAAe;AAC1C;AAEe,SAAS;IACtB,qBAAO,8OAAC,mJAAiB;;;;;AAC3B"}}]
-}

@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 24, "column": 0}, "map": {"version":3,"sources":["file:///home/nosyt/.openclaw/workspace/spendthrone/app/shipping/page.tsx"],"sourcesContent":["import { Metadata } from 'next';\nimport ShippingClient from './ShippingClient';\n\nexport const metadata: Metadata = {\n  title: 'Shipping Information - OMA-AI',\n  description: 'Reliable worldwide shipping for all your AI and tech purchases. Free shipping on qualified orders over $100. Real-time tracking for all shipments.',\n  alternates: { canonical: '/shipping' },\n};\n\nexport default function ShippingPage() {\n  return <ShippingClient />;\n}\n"],"names":[],"mappings":";;;;;;;AACA;;;AAEO,MAAM,WAAqB;IAChC,OAAO;IACP,aAAa;IACb,YAAY;QAAE,WAAW;IAAY;AACvC;AAEe,SAAS;IACtB,qBAAO,8OAAC,6IAAc;;;;;AACxB"}}]
-}

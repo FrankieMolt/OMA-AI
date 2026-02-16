@@ -1,5 +1,5 @@
 /**
- * Product Detail Page - Dynamic Rendering
+ * Product Detail Page - Static Export
  */
 
 import { PRODUCTS } from '@/data/products';
@@ -11,9 +11,8 @@ export function generateStaticParams() {
   }));
 }
 
-// Force dynamic rendering to avoid context issues during build
-export const dynamic = 'force-dynamic';
-export const dynamicParams = true;
+// Static export - no dynamic params
+export const dynamicParams = false;
 
 // Import the client component
 import ProductDetailClient from './ProductDetailClient';

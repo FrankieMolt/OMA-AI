@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 24, "column": 0}, "map": {"version":3,"sources":["file:///home/nosyt/.openclaw/workspace/spendthrone/app/returns/page.tsx"],"sourcesContent":["import { Metadata } from 'next';\nimport ReturnsClient from './ReturnsClient';\n\nexport const metadata: Metadata = {\n  title: 'Returns & Refunds - OMA-AI',\n  description: 'Hassle-free return policy for all purchases. 30-day window for refunds, instant credit for exchanges, and clear guidelines for damaged or incorrect items.',\n  alternates: { canonical: '/returns' },\n};\n\nexport default function ReturnsPage() {\n  return <ReturnsClient />;\n}\n"],"names":[],"mappings":";;;;;;;AACA;;;AAEO,MAAM,WAAqB;IAChC,OAAO;IACP,aAAa;IACb,YAAY;QAAE,WAAW;IAAW;AACtC;AAEe,SAAS;IACtB,qBAAO,8OAAC,2IAAa;;;;;AACvB"}}]
-}
