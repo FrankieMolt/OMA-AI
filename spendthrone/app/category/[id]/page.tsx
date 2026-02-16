@@ -17,6 +17,7 @@ export function generateStaticParams() {
   return categories.map((id) => ({ id }));
 }
 
-export default function CategoryPage({ params }: { params: { id: string } }) {
-  return <CategoryPageClient categoryId={params.id} />;
+export default async function CategoryPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  return <CategoryPageClient categoryId={id} />;
 }

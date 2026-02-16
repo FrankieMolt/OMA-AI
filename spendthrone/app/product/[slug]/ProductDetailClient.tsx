@@ -4,8 +4,6 @@
 
 'use client';
 
-import { useParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { ShoppingCart, Heart, Scale, Star, ShieldCheck, Truck, RefreshCcw, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
@@ -13,39 +11,18 @@ import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { PRODUCTS, getProductBySlug, getRelatedProducts } from '@/data/products';
 import { Product } from '@/types';
 import { useApp } from '@/components/providers/AppProvider';
 
 interface ProductDetailClientProps {
-  slug: string;
+  product: Product;
+  relatedProducts: Product[];
 }
 
-export default function ProductDetailClient({ slug }: ProductDetailClientProps) {
-  const [product, setProduct] = useState<Product | null>(null);
+export default function ProductDetailClient({ product, relatedProducts }: ProductDetailClientProps) {
   const { cart, wishlist, compareList, addToCart, toggleWishlist, toggleCompare } = useApp();
 
-  useEffect(() => {
-    if (slug) {
-      const foundProduct = getProductBySlug(slug as string);
-      setProduct(foundProduct || null);
-    }
-  }, [slug]);
-
-  if (!product) {
-    return (
-      <div className="min-h-screen bg-zinc-950 flex flex-col items-center justify-center text-white p-4">
-        <h1 className="text-4xl font-bold mb-4">Product Not Found</h1>
-        <p className="text-zinc-400 mb-8">The extraordinary item you're looking for doesn't exist in this timeline.</p>
-        <Link href="/">
-          <Button variant="default">Back to Marketplace</Button>
-        </Link>
-      </div>
-    );
-  }
-
   const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
-  const relatedProducts = getRelatedProducts(product.id, 4);
 
   return (
     <div className="min-h-screen bg-zinc-950 text-zinc-100 font-sans">
