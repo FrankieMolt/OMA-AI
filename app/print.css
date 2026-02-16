@@ -1,0 +1,26 @@
+@media print {
+  /* Hide navigation and footer */
+  nav, footer, header, aside {
+    display: none !important;
+  }
+
+  /* Optimize for print */
+  body {
+    font-size: 12pt;
+    line-height: 1.5;
+    color: black;
+    background: white;
+  }
+
+  /* Show links */
+  a[href]:after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+    color: #666;
+  }
+
+  /* Avoid page breaks inside elements */
+  h1, h2, h3, h4, h5, h6, img, table, figure {
+    page-break-inside: avoid;
+  }
+}
