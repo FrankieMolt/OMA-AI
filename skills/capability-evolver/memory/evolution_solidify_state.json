@@ -1,41 +1,37 @@
 {
   "last_run": {
-    "run_id": "run_1771175803596",
-    "created_at": "2026-02-15T17:16:43.611Z",
+    "run_id": "run_1771219007002",
+    "created_at": "2026-02-16T05:16:47.012Z",
     "parent_event_id": "evt_1771003327984",
-    "selected_gene_id": "gene_gep_repair_from_errors",
+    "selected_gene_id": "gene_auto_4441d943",
     "selected_capsule_id": "capsule_1771003327984",
     "selector": {
-      "selected": "gene_gep_repair_from_errors",
+      "selected": "gene_auto_4441d943",
       "reason": [
         "signals match gene.signals_match",
         "capsule trigger matches signals",
-        "signals: log_error, memory_missing, user_missing",
-        "memory_graph: memory_prefer:gene_gep_repair_from_errors | gene_prior:0.770"
+        "signals: memory_missing, user_missing",
+        "memory_graph: memory_prefer:gene_gep_repair_from_errors | gene_prior:0.833"
       ],
-      "alternatives": [
-        "gene_auto_4441d943"
-      ]
+      "alternatives": []
     },
     "signals": [
-      "log_error",
       "memory_missing",
       "user_missing"
     ],
     "mutation": {
       "type": "Mutation",
-      "id": "mut_1771175803595",
-      "category": "repair",
+      "id": "mut_1771219007000",
+      "category": "optimize",
       "trigger_signals": [
-        "log_error",
         "memory_missing",
         "user_missing"
       ],
-      "target": "gene:gene_gep_repair_from_errors",
-      "expected_effect": "reduce runtime errors, increase stability, and lower failure rate",
+      "target": "gene:gene_auto_4441d943",
+      "expected_effect": "improve success rate and reduce repeated operational cost",
       "risk_level": "low"
     },
-    "mutation_id": "mut_1771175803595",
+    "mutation_id": "mut_1771219007000",
     "personality_state": {
       "type": "PersonalityState",
       "rigor": 0.7,
@@ -50,7 +46,7 @@
     "drift": false,
     "selected_by": "memory_graph+selector",
     "baseline_untracked": [],
-    "baseline_git_head": "f66b6517693368992694578cc2b5342b791e4f1b",
+    "baseline_git_head": "ade71b9dd7cc00629fbf5e48cd57565b275b3c09",
     "blast_radius_estimate": {
       "files": 12,
       "lines": 960
