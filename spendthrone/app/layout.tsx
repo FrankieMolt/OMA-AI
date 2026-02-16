@@ -5,7 +5,7 @@
 
 import type { Metadata, Viewport } from 'next'
 import { Inter, Instrument_Serif, DM_Sans } from 'next/font/google'
-import './globals-premium.css'
+import './globals.css'
 import { MobileMenu } from './components/mobile-menu'
 import { ShoppingBag, Search } from 'lucide-react'
 import Link from 'next/link'
@@ -26,11 +26,11 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: {
-    default: 'SpendThrone - Excellence in Detail',
-    template: '%s',
+    default: 'SpendThrone - The Kingdom of Weird Stuff',
+    template: '%s | SpendThrone',
   },
-  description: 'Curated premium goods for the modern connoisseur. Luxury marketplace with exceptional products.',
-  keywords: ['SpendThrone', 'luxury marketplace', 'premium goods', 'curated products'],
+  description: 'Discover weird, extreme, and viral products worth buying. The curated kingdom of the strangest products on Earth.',
+  keywords: ['SpendThrone', 'weird products', 'viral products', 'unique gifts', 'strange products', 'affiliate marketplace'],
   icons: {
     icon: '/favicon.svg',
   },
@@ -52,9 +52,8 @@ export const metadata: Metadata = {
     ],
   },
   twitter: {
-    card: 'summary_large_image',
-    title: 'SpendThrone - Excellence in Detail',
-    description: 'Curated premium goods for the modern connoisseur.',
+    title: 'SpendThrone - The Kingdom of Weird Stuff',
+    description: 'Discover weird, extreme, and viral products worth buying.',
     images: ['/og-image.png'],
   },
   robots: {
