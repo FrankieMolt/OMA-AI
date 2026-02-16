@@ -3,6 +3,7 @@
  */
 
 const nextConfig = {
+  output: 'export',
   reactStrictMode: true,
 
   // Turbopack configuration - explicitly set to this project
@@ -19,15 +20,9 @@ const nextConfig = {
     optimizePackageImports: ['lucide-react', 'framer-motion'],
   },
 
-  // Image optimization
+  // Image optimization - disable for static export
   images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: '**',
-      },
-    ],
-    formats: ['image/avif', 'image/webp'],
+    unoptimized: true,
   },
 
   // Security Headers

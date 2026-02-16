@@ -1,7 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Remove output: 'export' for development to allow dynamic routes
-  // Uncomment this for production build: output: 'export',
+  output: 'export',
   distDir: 'dist',
   images: {
     unoptimized: true,

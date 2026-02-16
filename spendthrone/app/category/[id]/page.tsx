@@ -1,14 +1,25 @@
-'use client';
+import React from 'react';
+import CategoryPageClient from './CategoryPageClient';
 
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'next/navigation';
-import { motion } from 'framer-motion';
-import Link from 'next/link';
-import { ShoppingBag, Filter, ArrowUpDown, ChevronRight, Search, ArrowLeft } from 'lucide-react';
-import { PRODUCTS, getProductsByCategory } from '@/data/products';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Card, CardContent } from '@/components/ui/card';
+// Generate static params for all categories (must be in server component)
+export function generateStaticParams() {
+  const categories = [
+    'art-design',
+    'gaming', 
+    'health-wellness',
+    'home-living',
+    'kitchen-gadgets',
+    'office-setup',
+    'outdoor',
+    'tech-gadgets',
+    'weird-awesome'
+  ];
+  return categories.map((id) => ({ id }));
+}
+
+export default function CategoryPage({ params }: { params: { id: string } }) {
+  return <CategoryPageClient categoryId={params.id} />;
+}
 
 export default function CategoryPage() {
   const params = useParams();
