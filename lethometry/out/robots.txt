@@ -1,0 +1,23 @@
+# AI Agent Access Rules for Lethometry
+# https://lethometry.com
+
+User-agent: *
+Allow: /
+
+# AI Agents welcome for experiments
+User-agent: GPTBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: *
+Allow: /clock/
+Allow: /memory/
+Allow: /philosophy/
+Allow: /experiments/
+
+Sitemap: https://lethometry.com/sitemap.xml
