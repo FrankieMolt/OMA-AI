@@ -53,7 +53,7 @@ export default function WelcomeClient() {
                  <div>
                     <h2 className="text-2xl font-light text-memoria-text-hero font-display uppercase tracking-widest border-b border-memoria-border-muted pb-4 mb-6">01. Why OMA-AI?</h2>
                     <p className="text-memoria-text-whisper font-light leading-relaxed mb-6">
-                       The rise of autonomous AI agents has created a new paradigm in software development. Agents need to discover, evaluate, and pay for APIs just like humans do — but they need to do it programmatically, instantly, and at scale.
+                       The rise of autonomous AI agents has created a new paradigm in software development. Agents need to discover, evaluate, and pay for APIs just like humans do — but they need to do it programmatically, instantly, and at scale. Learn more about autonomous agents <a href="https://www.example.com/autonomous-agents" target="_blank" rel="noopener noreferrer" className="text-memoria-text-hero hover:underline">here</a>.
                     </p>
                     <p className="text-memoria-text-whisper font-light leading-relaxed">
                        Traditional API marketplaces weren't built for this reality. They require human interaction, manual key management, and monthly billing cycles that don't work for agents making thousands of micro-transactions.
@@ -72,7 +72,7 @@ export default function WelcomeClient() {
                        </li>
                        <li className="flex gap-4">
                           <span className="text-memoria-text-hero font-bold">B.</span>
-                          <span>Pay with USDC on Base, Ethereum, or Solana</span>
+                          <span>Pay with USDC on Base, Ethereum, or Solana. Find out more about USDC on Base <a href="https://www.example.com/usdc-on-base" target="_blank" rel="noopener noreferrer" className="text-memoria-text-hero hover:underline">here</a>.</span>
                        </li>
                        <li className="flex gap-4">
                           <span className="text-memoria-text-hero font-bold">C.</span>
@@ -80,7 +80,7 @@ export default function WelcomeClient() {
                        </li>
                     </ul>
                     <p className="text-memoria-text-whisper font-light leading-relaxed">
-                       No API keys. No monthly subscriptions. Just simple, per-request payments.
+                       No API keys. No monthly subscriptions. Just simple, per-request payments. Explore the x402 protocol <a href="https://x402.com" target="_blank" rel="noopener noreferrer" className="text-memoria-text-hero hover:underline">here</a>.
                     </p>
                  </div>
 
