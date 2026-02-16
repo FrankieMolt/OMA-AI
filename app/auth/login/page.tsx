@@ -103,15 +103,15 @@ export default function LoginPage() {
                 </label>
                 <div className="relative">
                   <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-memoria-text-meta" size={16} aria-hidden="true" />
-                  <input aria-label="Email address"
+                  <input
                     id="email"
                     type="email"
+                    aria-label="Email address"
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     className="w-full pl-10 pr-4 py-3 bg-memoria-bg-ultra-dark border border-memoria-border-default rounded-sm text-memoria-text-hero text-sm focus:outline-none focus:border-memoria-text-hero transition-all placeholder-memoria-text-whisper"
                     placeholder="name@example.com"
-                    aria-label="Email address"
                   />
                 </div>
               </div>
@@ -129,15 +129,15 @@ export default function LoginPage() {
                 </div>
                 <div className="relative">
                   <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-memoria-text-meta" size={16} aria-hidden="true" />
-                  <input aria-label="Email address"
+                  <input
                     id="password"
-                    type="password" aria-label="Password"
+                    type="password"
+                    aria-label="Password"
                     required
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     className="w-full pl-10 pr-4 py-3 bg-memoria-bg-ultra-dark border border-memoria-border-default rounded-sm text-memoria-text-hero text-sm focus:outline-none focus:border-memoria-text-hero transition-all placeholder-memoria-text-whisper"
                     placeholder="••••••••"
-                    aria-label="Password"
                   />
                 </div>
               </div>

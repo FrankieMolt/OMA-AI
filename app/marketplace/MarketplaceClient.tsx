@@ -81,14 +81,14 @@ export default function MarketplacePage() {
           </h1>
           <div className="relative max-w-4xl">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-memoria-text-whisper" size={20} />
-            <input aria-label="Search marketplace"
+            <input
               type="text"
               id="marketplace-search"
+              aria-label="Search APIs and MCP servers"
               placeholder="Filter APIs and MCP servers..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full pl-14 pr-4 py-5 bg-memoria-bg-card border border-memoria-border-default rounded-sm text-white text-lg focus:outline-none focus:border-white transition-all font-light"
-              aria-label="Search APIs and MCP servers"
             />
           </div>
         </div>

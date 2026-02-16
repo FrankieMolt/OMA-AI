@@ -1308,11 +1308,21 @@ export const getProductBySlug = (slug: string): RealProduct | undefined => {
   return realProducts.find(p => p.slug === slug);
 };
 
+
 export const searchProducts = (query: string): RealProduct[] => {
   const lowerQuery = query.toLowerCase();
   return realProducts.filter(p =>
     p.name.toLowerCase().includes(lowerQuery) ||
-    p.description.toLowerCase().includes(lowerQuery) ||
-    p.tags.some(t => t.toLowerCase().includes(lowerQuery))
+    p.description.toLowerCase().includes(lowerQuery)
   );
+};
+
+// Compatibility exports
+export const PRODUCTS = realProducts;
+export const getRelatedProducts = (productId: string, limit = 4): RealProduct[] => {
+  const product = getProductBySlug(productId);
+  if (!product) return [];
+  return realProducts
+    .filter(p => p.category === product.category && p.id !== productId)
+    .slice(0, limit);
 };

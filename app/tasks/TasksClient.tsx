@@ -193,14 +193,14 @@ export default function BountiesPage() {
 
           <div className="relative w-full md:w-80">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-[#71717a]" size={16} />
-            <input aria-label="Search tasks"
+            <input
               type="text"
               id="bounty-search"
+              aria-label="Filter bounties"
               placeholder="Filter bounties..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full pl-12 pr-4 py-3 rounded-sm bg-[#121212] border border-[#2a2a2a] text-white text-xs placeholder-[#71717a] focus:outline-none focus:border-white transition-all"
-              aria-label="Filter bounties"
             />
           </div>
         </div>

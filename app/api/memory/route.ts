@@ -46,8 +46,8 @@ export async function GET(request: Request) {
     return NextResponse.json({ files, count: files.length }, {
       headers: { 'Access-Control-Allow-Origin': '*' }
     })
-  } catch (e) {
-    return NextResponse.json({ error: e.message }, { 
+  } catch (e: unknown) {
+    return NextResponse.json({ error: (e as Error).message }, { 
       status: 500,
       headers: { 'Access-Control-Allow-Origin': '*' }
     })

@@ -17,63 +17,52 @@ export type Category =
   | 'Real Estate'
   | 'Travel'
   | 'Medical'
-  | 'Transportation';
+  | 'Inventory';
 
 export interface Product {
   id: string;
-  name?: string; // For real products
-  title?: string; // For mock products
-  category: string;
-  price: number;
-  priceType?: PriceType;
-  image: string;
+  name: string;
+  title?: string;
+  slug: string;
   description: string;
-  verified?: boolean;
+  shortDescription: string;
+  price: number;
+  originalPrice?: number;
+  priceType?: PriceType;
+  category: Category | string;
+  image: string;
   tags: string[];
-  rating?: number;
-  reviewCount?: number;
-  inStock?: boolean;
-  popularity?: number; // 0-100 score
-  addedAt?: string; // ISO date
-  affiliateLink?: string; // For real products
-  brand?: string;
-  features?: string[];
+  inStock: boolean;
+  features: string[];
+  rating: number;
+  reviewCount: number;
+  brand: string;
   isNew?: boolean;
   isOnSale?: boolean;
+  verified?: boolean;
+  affiliateLink?: string;
+  popularity?: number;
+  addedAt?: string;
 }
 
-export interface CartItem {
-  id: string;
-  title: string;
-  price: number;
-  priceType: PriceType;
+export interface CartItem extends Product {
   quantity: number;
-  image?: string;
 }
 
-export interface WishlistItem {
+export interface CategoryInfo {
   id: string;
-  addedAt: string;
+  name: string;
+  description: string;
+  icon: string;
+  productCount: number;
 }
 
-export type SortOption = 'featured' | 'price-low' | 'price-high' | 'popularity' | 'newest' | 'name';
-
-export interface SearchFilters {
-  query: string;
-  category: string;
-  sortBy: SortOption;
-}
+export type SortOption = 'featured' | 'price_asc' | 'price_desc' | 'price-low' | 'price-high' | 'rating' | 'newest' | 'popularity' | 'name' | 'relevance';
+export type ViewMode = 'grid' | 'list';
 
 export interface Toast {
+  duration?: number;
   id: string;
   message: string;
-  type: 'success' | 'error' | 'info';
-  duration?: number;
-}
-
-export interface AppState {
-  cart: CartItem[];
-  wishlist: string[];
-  compareList: string[];
-  recentlyViewed: string[];
+  type: 'success' | 'error' | 'info' | 'warning';
 }

@@ -45,9 +45,11 @@ export function ToastProvider({ children }: { children: ReactNode }) {
     success: <CheckCircle className="w-5 h-5 text-emerald-400" />,
     error: <XCircle className="w-5 h-5 text-red-400" />,
     info: <Info className="w-5 h-5 text-blue-400" />,
+    warning: <Info className="w-5 h-5 text-yellow-400" />,
   };
 
   const bgMap = {
+    warning: 'bg-yellow-600/90 border-yellow-500',
     success: 'bg-emerald-500/10 border-emerald-500/20',
     error: 'bg-red-500/10 border-red-500/20',
     info: 'bg-blue-500/10 border-blue-500/20',

@@ -210,7 +210,7 @@ export default function Dashboard() {
             {/* Search Bar */}
             <div className="relative max-w-2xl mb-8">
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-memoria-text-whisper" size={18} />
-              <input aria-label="Search"
+              <input
                 type="text"
                 placeholder="Search APIs..."
                 value={searchQuery}
@@ -224,7 +224,7 @@ export default function Dashboard() {
             <div className="flex flex-wrap items-center gap-3 text-xs text-memoria-text-meta uppercase tracking-widest mb-12">
               <span>Popular:</span>
               {['MCP Servers', 'GPT-4', 'Solana'].map((term) => (
-                <button aria-label="Action button"
+                <button
                   key={term}
                   onClick={() => setSearchQuery(term)}
                   aria-label={`Search for ${term}`}
@@ -281,7 +281,7 @@ export default function Dashboard() {
           <div className="flex items-center gap-3 overflow-x-auto">
             <Filter className="text-memoria-text-whisper shrink-0" size={16} />
             {categories.map((category) => (
-              <button aria-label="Action button"
+              <button
                 key={category}
                 onClick={() => setSelectedCategory(category)}
                 aria-label={`Filter by ${category}`}
@@ -320,7 +320,7 @@ export default function Dashboard() {
             <div className="text-center py-32 border border-memoria-border-muted rounded-sm">
               <Code className="text-memoria-border-muted mx-auto mb-6" size={48} />
               <p className="text-memoria-text-whisper text-lg">No APIs found matching your criteria</p>
-              <button aria-label="Action button"
+              <button
                 onClick={() => { setSearchQuery(''); setSelectedCategory('all'); }}
                 aria-label="Clear all filters"
                 className="mt-6 text-xs uppercase tracking-widest text-memoria-text-whisper hover:text-white"

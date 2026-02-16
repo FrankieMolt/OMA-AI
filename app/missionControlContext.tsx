@@ -24,18 +24,15 @@ export default function MissionControlProvider({ children }: { children: React.R
     setActiveTask(task);
     setMode('DO_EVERYTHING');
     // Simulate adding the task
-    console.log(`[MASTA-CONTROL] Added task: ${task} at ${new Date().toISOString()}`);
   };
 
   const handleRemoveTask = (id: string) => {
     setActiveTask(null);
-    console.log(`[MASTA-CONTROL] Removed task: ${id}`);
   };
 
   const toggleMode = () => {
     const newMode = mode === 'ACTIVE' ? 'DO_EVERYTHING' : 'PAUSED';
     setMode(newMode);
-    console.log(`[MASTA-CONTROL] Switched mode to ${newMode}`);
   };
 
   return (

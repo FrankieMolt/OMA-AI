@@ -9,6 +9,9 @@ import { QueryProvider } from '@/lib/query-client'
 import { ErrorBoundary } from '../components/ErrorBoundary'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+import { ThemeProvider } from '@/components/ThemeProvider'
+import { ToastProvider } from '@/components/ToastProvider'
+import { APISelectionProvider } from '@/components/APISelectionContext'
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -123,14 +126,21 @@ export default function RootLayout({
       
         <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:rounded">Skip to main content</a>
       <body className={`${inter.variable} ${dmSans.variable} ${instrumentSerif.variable} ${ibmPlexSans.variable} ${spaceGrotesk.variable} bg-[#050505] text-[#e4e4e7] antialiased custom-scrollbar`}>
-        <Navbar />
-        <ErrorBoundary>
-          <QueryProvider>
-            <main id="main-content" style={{ minHeight: '100vh' }}>
-              {children}
-            </main>
-          </QueryProvider>
-        </ErrorBoundary>
+        <ThemeProvider>
+          <ToastProvider>
+            <APISelectionProvider>
+              <Navbar />
+              <ErrorBoundary>
+                <QueryProvider>
+                  <main id="main-content" style={{ minHeight: '100vh' }}>
+                    {children}
+                  </main>
+                </QueryProvider>
+              </ErrorBoundary>
+              <Footer />
+            </APISelectionProvider>
+          </ToastProvider>
+        </ThemeProvider>
         <Footer />
       </body>
     </html>
