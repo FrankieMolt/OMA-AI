@@ -35,7 +35,7 @@ export default function DeathClockClient() {
   };
 
   return (
-    <div role="main" className="min-h-screen bg-memoria-bg-ultra-dark text-memoria-text-hero selection:bg-memoria-text-hero selection:text-memoria-bg-ultra-dark">
+    <div className="min-h-screen bg-memoria-bg-ultra-dark text-memoria-text-hero selection:bg-memoria-text-hero selection:text-memoria-bg-ultra-dark">
       <section className="pt-48 pb-20 px-4 md:px-14">
         <div className="mx-auto max-w-7xl">
           <Badge variant="outline" className="mb-6 rounded-sm uppercase tracking-[0.2em] text-[10px] py-1 border-memoria-border-default text-memoria-text-whisper px-4">

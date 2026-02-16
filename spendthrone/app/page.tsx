@@ -59,10 +59,10 @@ export default function HomePage() {
             </nav>
             
             <div className="flex items-center gap-3">
-              <button className="p-2 text-zinc-400 hover:text-pink-400 hover:bg-zinc-900 rounded-lg transition-all">
+              <button aria-label="Favorites" className="p-2 text-zinc-400 hover:text-pink-400 hover:bg-zinc-900 rounded-lg transition-all">
                 <Heart className="w-5 h-5" />
               </button>
-              <button className="p-2 text-zinc-400 hover:text-purple-400 hover:bg-zinc-900 rounded-lg transition-all">
+              <button aria-label="Shopping cart" className="p-2 text-zinc-400 hover:text-purple-400 hover:bg-zinc-900 rounded-lg transition-all">
                 <ShoppingBag className="w-5 h-5" />
               </button>
             </div>
@@ -136,6 +136,7 @@ export default function HomePage() {
               <button
                 key={category}
                 onClick={() => setSelectedCategory(category)}
+                aria-label={`Filter by ${category === 'all' ? 'all categories' : category}`}
                 className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
                   selectedCategory === category
                     ? 'bg-white text-black'

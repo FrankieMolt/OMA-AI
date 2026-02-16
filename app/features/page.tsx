@@ -8,7 +8,7 @@ import FeaturesPage from './FeaturesClient';
 
 export const metadata: Metadata = {
   title: 'Platform Features - Advanced Autonomous Agent Infrastructure',
-  description: 'Explore the powerful features of OMA-AI. From autonomous agent deployment and x402 payments to the skills library and real-time analytics. Build the future of AI commerce.',
+  description: 'Explore the powerful features of OMA-AI. From autonomous API discovery to x402 crypto payments, see how we're revolutionizing how AI agents access and pay for services.'
   keywords: ['AI features', 'agent marketplace', 'bounty system', 'agentic skills', 'real-time AI analytics', 'x402 protocol'],
 }
 

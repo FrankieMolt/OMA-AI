@@ -7,7 +7,7 @@ import { formatNumber, formatDate } from '@/lib/utils';
 
 export default function DataClient() {
   return (
-    <div role="main" className="min-h-screen scientific-grid">
+    <div className="min-h-screen scientific-grid">
       <section className="py-12 border-b border-border/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground mb-4">

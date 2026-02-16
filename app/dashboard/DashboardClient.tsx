@@ -165,7 +165,7 @@ export default function Dashboard() {
   const featuredServices = apiServices.filter(s => s.featured);
 
   return (
-    <div role="main" className="min-h-screen bg-background selection:bg-primary selection:text-primary-foreground">
+    <div className="min-h-screen bg-background selection:bg-primary selection:text-primary-foreground">
       {/* Navigation */}
       <nav className="sticky top-0 z-50 bg-background/80 backdrop-blur-xl border-b border-memoria-border-muted">
         <div className="max-w-7xl mx-auto px-4 md:px-14">
@@ -418,11 +418,11 @@ function ApiCard({ service, index }: { service: ApiService, index: number }) {
             </div>
 
             <div className="flex gap-2">
-              <Button variant="ghost" size="sm" className="h-8 w-8 p-0 rounded-sm hover:bg-memoria-bg-surface">
+              <Button variant="ghost" size="sm" aria-label={`Play ${service.name}`} className="h-8 w-8 p-0 rounded-sm hover:bg-memoria-bg-surface">
                 <Play size={14} />
               </Button>
               <a href={service.endpoint} target="_blank" rel="noopener noreferrer" className="no-underline">
-                <Button variant="ghost" size="sm" className="h-8 w-8 p-0 rounded-sm hover:bg-memoria-bg-surface">
+                <Button variant="ghost" size="sm" aria-label={`View ${service.name} documentation`} className="h-8 w-8 p-0 rounded-sm hover:bg-memoria-bg-surface">
                   <ExternalLink size={14} />
                 </Button>
               </a>

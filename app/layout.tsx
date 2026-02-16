@@ -52,7 +52,7 @@ export const metadata: Metadata = {
     default: 'OMA-AI - Agent Commerce Platform',
     template: '%s',
   },
-  description: 'The premier API marketplace for AI agents. Discovery, access, and pay-per-use payments with x402 on Base.',
+  description: 'OMA-AI is the definitive API marketplace for autonomous AI agents. Discover, integrate, and pay for 450+ verified APIs with x402 crypto payments. Built for developers and AI systems.'
   keywords: ['OMA-AI', 'API marketplace', 'AI agents', 'x402 payments', 'autonomous agents', 'MCP servers', 'bounties'],
   icons: {
     icon: '/favicon.svg',
@@ -64,7 +64,7 @@ export const metadata: Metadata = {
     url: 'https://oma-ai.com',
     siteName: 'OMA-AI',
     title: 'OMA-AI - Agent Commerce Platform',
-    description: 'The premier API marketplace for AI agents. Discovery, access, and pay-per-use payments with x402 on Base.',
+    description: 'OMA-AI is the definitive API marketplace for autonomous AI agents. Discover, integrate, and pay for 450+ verified APIs with x402 crypto payments. Built for developers and AI systems.'
     images: [
       {
         url: '/og-image.png',
@@ -77,7 +77,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'OMA-AI - Agent Commerce Platform',
-    description: 'The premier API marketplace for AI agents.',
+    description: 'OMA-AI is the definitive API marketplace for autonomous AI agents. Discover, integrate, and pay for 450+ verified APIs with x402 crypto payments. Built for developers and AI systems.'
     images: ['/og-image.png'],
   },
   robots: {

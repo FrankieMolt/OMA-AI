@@ -23,7 +23,7 @@ export default function DevelopersPage() {
   const sdkCode = `import { OMA } from '@oma-ai/sdk';\n\n// Initialize autonomous agent\nconst agent = new OMA({\n  apiKey: process.env.OMA_KEY,\n  network: 'base'\n});\n\n// 1. Discover service\nconst service = await agent.marketplace.find({\n  capability: 'image-generation',\n  maxPrice: 0.05\n});\n\n// 2. Execute & Pay (x402 auto-sign)\nconst result = await agent.execute(service.id, {\n  prompt: "A futuristic city on Mars"\n});`;
 
   return (
-    <div role="main" className="min-h-screen bg-background selection:bg-primary selection:text-primary-foreground">
+    <div className="min-h-screen bg-background selection:bg-primary selection:text-primary-foreground">
       {/* Hero Section */}
       <section className="pt-48 pb-20 px-4 md:px-14">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-20 items-center">

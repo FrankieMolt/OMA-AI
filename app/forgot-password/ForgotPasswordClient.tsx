@@ -7,7 +7,7 @@ import { Shield } from 'lucide-react';
 
 export default function ForgotPasswordClient() {
   return (
-    <div role="main" className="min-h-screen bg-memoria-bg-ultra-dark text-memoria-text-hero flex items-center justify-center p-4">
+    <div className="min-h-screen bg-memoria-bg-ultra-dark text-memoria-text-hero flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-10">
           <Link href="/" className="inline-flex items-center gap-3 no-underline group mb-8">

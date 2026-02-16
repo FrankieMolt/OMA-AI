@@ -135,7 +135,7 @@ export default function FrankieOSDashboard() {
   ];
 
   return (
-    <div role="main" className="min-h-screen bg-background selection:bg-primary selection:text-primary-foreground">
+    <div className="min-h-screen bg-background selection:bg-primary selection:text-primary-foreground">
       {/* Header */}
       <section className="pt-32 pb-12 px-4 md:px-14 border-b border-memoria-border-muted">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-end justify-between gap-8">

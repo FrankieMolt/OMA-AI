@@ -9,7 +9,7 @@ import { Badge } from '@/components/ui/badge';
 
 export default function AboutPageClient() {
   return (
-    <div role="main" className="min-h-screen bg-background text-foreground selection:bg-primary selection:text-primary-foreground">
+    <div className="min-h-screen bg-background text-foreground selection:bg-primary selection:text-primary-foreground">
       {/* Header */}
       <section className="pt-48 pb-20 px-4 md:px-14 border-b border-memoria-border-muted">
         <div className="mx-auto max-w-7xl">

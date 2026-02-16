@@ -21,7 +21,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div role="main" className="min-h-screen bg-memoria-bg-ultra-dark flex items-center justify-center p-6 selection:bg-memoria-text-hero selection:text-memoria-bg-ultra-dark">
+    <div className="min-h-screen bg-memoria-bg-ultra-dark flex items-center justify-center p-6 selection:bg-memoria-text-hero selection:text-memoria-bg-ultra-dark">
       <div className="w-full max-w-md">
         <div className="text-center mb-10">
           <Link href="/" className="inline-flex items-center gap-3 no-underline group mb-8">
