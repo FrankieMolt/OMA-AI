@@ -1,6 +1,18 @@
 import { NextResponse } from 'next/server'
 import { execSync } from 'child_process'
 
+// Handle OPTIONS for CORS preflight
+export async function OPTIONS() {
+  return new NextResponse(null, {
+    status: 200,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type',
+    },
+  })
+}
+
 export async function POST() {
   const results: any = {
     timestamp: new Date().toISOString(),
@@ -34,20 +46,19 @@ export async function POST() {
   }
   
   // System stats
-  results.system = {
-    hostname: execSync('hostname').toString().trim(),
-    uptime: execSync('uptime -p').toString().trim(),
-    memory: execSync("free -h | grep Mem | awk '{print $3\"/\"$2}'").toString().trim(),
-    disk: execSync("df -h / | tail -1 | awk '{print $3\"/\"$2\" (\"$5\")\"}'").toString().trim(),
-    load: execSync("cat /proc/loadavg | awk '{print $1,$2,$3}'").toString().trim()
-  }
+  try {
+    results.system = {
+      hostname: execSync('hostname').toString().trim(),
+      uptime: execSync('uptime -p').toString().trim(),
+      memory: execSync("free -h | grep Mem | awk '{print $3\"/\"$2}'").toString().trim(),
+      disk: execSync("df -h / | tail -1 | awk '{print $3\"/\"$2\" (\"$5\")\"}'").toString().trim()
+    }
+  } catch (e) {}
   
-  // Log action
-  results.actions.push({
-    type: 'scan',
-    status: 'completed',
-    timestamp: new Date().toISOString()
+  return NextResponse.json({ success: true, results }, {
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+    }
   })
-  
-  return NextResponse.json({ success: true, results })
 }

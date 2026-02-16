@@ -1,3 +1,9 @@
+// CORS headers for cross-origin requests
+const corsHeaders = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+  "Access-Control-Allow-Headers": "Content-Type"
+};
 import { NextResponse } from 'next/server'
 import fs from 'fs'
 import path from 'path'
