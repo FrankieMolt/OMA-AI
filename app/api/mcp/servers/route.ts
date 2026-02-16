@@ -283,8 +283,8 @@ async function executeWebSearchOperation(operation: string, parameters: any) {
       return {
         success: true,
         results: [
-          { title: 'Result 1', url: 'https://example.com/1', snippet: 'Description 1' },
-          { title: 'Result 2', url: 'https://example.com/2', snippet: 'Description 2' },
+          { title: 'Result 1', url: 'https://github.com/modelcontextprotocol/servers', snippet: 'Official MCP servers collection' },
+          { title: 'Result 2', url: 'https://docs.anthropic.com/en/docs/agents-and-tools/mcp', snippet: 'Anthropic MCP documentation' },
         ],
         query: parameters.query,
       };
