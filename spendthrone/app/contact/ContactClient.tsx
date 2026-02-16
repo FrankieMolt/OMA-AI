@@ -66,7 +66,7 @@ export default function ContactPage() {
                 />
               </div>
 
-              <button type="submit" className="w-full py-3 bg-zinc-100 text-zinc-950 font-semibold rounded-xl hover:bg-zinc-200 transition-colors">
+              <button type="submit" aria-label="Send message" className="w-full py-3 bg-zinc-100 text-zinc-950 font-semibold rounded-xl hover:bg-zinc-200 transition-colors">
                 Send Message
               </button>
             </div>
