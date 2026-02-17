@@ -88,7 +88,7 @@ export const apiServices: ApiService[] = [
     price: 0,
     priceType: 'free',
     calls: 500000,
-    endpoint: 'https://github.com/model-context-protocol/servers/tree/main/src/github',
+    endpoint: 'https://github.com/modelcontextprotocol/servers/tree/main/src/github',
     tags: ['mcp', 'github', 'dev-tools'],
     featured: true,
     provider: 'Model Context Protocol'
@@ -102,7 +102,7 @@ export const apiServices: ApiService[] = [
     price: 0.001,
     priceType: 'per_call',
     calls: 200000,
-    endpoint: 'https://github.com/model-context-protocol/servers/tree/main/src/brave-search',
+    endpoint: 'https://github.com/modelcontextprotocol/servers/tree/main/src/brave-search',
     tags: ['mcp', 'search', 'web'],
     featured: false,
     provider: 'Brave Software'
@@ -116,7 +116,7 @@ export const apiServices: ApiService[] = [
     price: 0,
     priceType: 'free',
     calls: 100000,
-    endpoint: 'https://github.com/model-context-protocol/servers/tree/main/src/filesystem',
+    endpoint: 'https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem',
     tags: ['mcp', 'system', 'files'],
     featured: false,
     provider: 'Community'
@@ -130,7 +130,7 @@ export const apiServices: ApiService[] = [
     price: 0,
     priceType: 'free',
     calls: 80000,
-    endpoint: 'https://github.com/model-context-protocol/servers/tree/main/src/postgres',
+    endpoint: 'https://github.com/modelcontextprotocol/servers/tree/main/src/postgres',
     tags: ['mcp', 'database', 'sql'],
     featured: true,
     provider: 'Community'

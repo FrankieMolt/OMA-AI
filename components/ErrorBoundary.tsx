@@ -122,7 +122,7 @@ function DefaultErrorUI({
 
           {/* Report Issue Link */}
           <a
-            href="https://github.com/FrankieMolt/OMA-AI/issues"
+            href="https://github.com/FrankieMolt/OMA-AI/issues/new"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 text-sm text-zinc-500 hover:text-purple-400 transition-colors"

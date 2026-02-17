@@ -9,7 +9,7 @@ import HomeClient from './HomeClient';
 
 export const metadata: Metadata = {
   title: 'OMA-AI - API Marketplace for Autonomous AI Agents',
-  description: 'Discover, access, and pay for 450+ verified APIs and MCP servers. OMA-AI provides the decentralized infrastructure for autonomous agent commerce using x402 payments on Base network.',
+  description: 'Discover and integrate 450+ verified APIs and MCP servers. OMA-AI enables autonomous agent commerce with x402 crypto payments on Base network.',
   keywords: ['AI agents', 'API marketplace', 'MCP servers', 'x402 payments', 'autonomous economy', 'blockchain AI', 'Base network', 'decentralized intelligence'],
   alternates: {
     canonical: '/',
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'OMA-AI - API Marketplace for AI Agents',
     description: 'Autonomous infrastructure for the agent economy. Discover and integrate 450+ APIs with instant crypto payments.',
-    url: '/',
+    url: 'https://oma-ai.com',
     images: [{
       url: '/og-image.png',
       width: 1200,

@@ -1,5 +1,4 @@
 'use client';
-'use client';
 
 import React from 'react';
 import { motion } from 'framer-motion';
@@ -8,7 +7,10 @@ import {
   Calendar,
   ArrowRight,
   Clock,
-  Tag
+  Tag,
+  Shield,
+  Zap,
+  Users
 } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -49,7 +51,7 @@ export default function BlogListPage() {
   ];
 
   return (
-    <div  className="min-h-screen bg-background selection:bg-primary selection:text-primary-foreground">
+    <div className="min-h-screen bg-background selection:bg-primary selection:text-primary-foreground">
       {/* Hero */}
       <section className="pt-48 pb-20 px-4 md:px-14">
         <div className="max-w-7xl mx-auto">
@@ -59,9 +61,50 @@ export default function BlogListPage() {
           <h1 className="text-5xl md:text-8xl font-light tracking-tighter leading-[0.9] mb-8 font-display text-memoria-text-hero">
              OMA-AI<br/><span className="text-memoria-text-secondary">Insights</span>
           </h1>
-          <p className="text-xl text-memoria-text-whisper max-w-2xl font-light leading-relaxed">
-             The latest developments in the autonomous agent economy, protocol updates, and industry analysis.
+          <p className="text-xl text-memoria-text-whisper max-w-2xl font-light leading-relaxed mb-8">
+             The latest developments in autonomous agent economy, protocol updates, and industry analysis.
+             Stay informed about the future of machine-to-machine commerce.
           </p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+             <div className="bg-memoria-bg-card border border-memoria-border-default p-6 rounded-sm">
+                <Zap className="text-memoria-text-hero mb-3" size={20} />
+                <h3 className="text-sm font-bold text-memoria-text-hero uppercase tracking-widest mb-2">Deep Technical Dives</h3>
+                <p className="text-sm text-memoria-text-whisper font-light">
+                   In-depth articles on x402 protocol, MCP server development, and 
+                   agent architecture patterns for engineers and researchers.
+                </p>
+             </div>
+             <div className="bg-memoria-bg-card border border-memoria-border-default p-6 rounded-sm">
+                <Shield className="text-memoria-text-hero mb-3" size={20} />
+                <h3 className="text-sm font-bold text-memoria-text-hero uppercase tracking-widest mb-2">Product Updates</h3>
+                <p className="text-sm text-memoria-text-whisper font-light">
+                   Announcements about new features, API additions, and platform improvements 
+                   directly from the OMA-AI engineering team.
+                </p>
+             </div>
+             <div className="bg-memoria-bg-card border border-memoria-border-default p-6 rounded-sm">
+                <Users className="text-memoria-text-hero mb-3" size={20} />
+                <h3 className="text-sm font-bold text-memoria-text-hero uppercase tracking-widest mb-2">Agent Economy</h3>
+                <p className="text-sm text-memoria-text-whisper font-light">
+                   Analysis of emerging trends in autonomous AI, decentralized infrastructure, 
+                   and the future of machine commerce and digital labor.
+                </p>
+             </div>
+          </div>
+          <div className="flex gap-4 max-w-md mx-auto mb-4">
+             <input 
+                type="email" 
+                placeholder="your@email.com"
+                aria-label="Email address for newsletter"
+                className="flex-1 px-4 py-3 bg-memoria-bg-ultra-dark border border-memoria-border-default rounded-sm text-white text-sm focus:outline-none focus:border-white transition-all"
+             />
+             <Button className="bg-memoria-text-hero text-memoria-bg-ultra-dark rounded-sm px-6 h-12 text-[10px] font-bold uppercase tracking-widest">
+                 Subscribe
+              </Button>
+           </div>
+           <p className="text-xs text-memoria-text-meta max-w-sm mx-auto font-light">
+              Get weekly updates on OMA protocol and agent economy insights. No spam, just engineering.
+           </p>
         </div>
       </section>
 
@@ -121,26 +164,36 @@ export default function BlogListPage() {
         </div>
       </section>
 
-      {/* Subscription */}
+      {/* Community Section */}
       <section className="py-40 px-4 md:px-14 text-center border-t border-memoria-border-muted bg-memoria-bg-card/30">
         <div className="max-w-2xl mx-auto">
            <span className="label-whisper mb-6 block">Stay Updated</span>
            <h2 className="text-3xl md:text-5xl font-light mb-8 font-display text-memoria-text-hero">
-              The Agent Intelligence Report
+              Join Our Community
            </h2>
-           <p className="text-sm text-memoria-text-whisper mb-10 font-light max-w-sm mx-auto">
-              Get weekly updates on the OMA protocol and the state of autonomous AI. No noise, just engineering.
+           <p className="text-sm text-memoria-text-whisper mb-10 font-light max-w-md mx-auto">
+              Connect with developers building the future of autonomous agents. Get access to 
+              private Discord, GitHub discussions, and exclusive content.
            </p>
-           <div className="flex gap-2 max-w-md mx-auto">
-              <input 
-                 type="email" 
-                 placeholder="your@email.com"
-                 aria-label="Email address for newsletter"
-                 className="flex-1 px-4 py-3 bg-memoria-bg-ultra-dark border border-memoria-border-default rounded-sm text-white text-sm focus:outline-none focus:border-white transition-all"
-              />
-              <Button className="bg-memoria-text-hero text-memoria-bg-ultra-dark rounded-sm px-6 h-12 text-[10px] font-bold uppercase tracking-widest">
-                 Subscribe
+           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+              <Button className="bg-memoria-text-hero text-memoria-bg-ultra-dark rounded-sm px-8 h-14 text-xs font-bold uppercase tracking-widest hover:bg-memoria-text-secondary transition-all">
+                 Join Discord
               </Button>
+              <Button variant="outline" className="border-memoria-border-muted text-memoria-text-whisper hover:bg-memoria-bg-surface hover:text-memoria-text-hero rounded-sm px-8 h-14 text-xs font-bold uppercase tracking-widest transition-all">
+                 Follow on GitHub
+              </Button>
+           </div>
+           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+              {[
+                 { label: 'Newsletter Subscribers', value: '12K+' },
+                 { label: 'GitHub Stars', value: '4.2K' },
+                 { label: 'Published Articles', value: '48' }
+              ].map((stat, i) => (
+                 <div key={i}>
+                    <div className="text-3xl font-black text-memoria-text-hero mb-1 font-display">{stat.value}</div>
+                    <div className="text-[10px] text-memoria-text-meta uppercase tracking-widest">{stat.label}</div>
+                 </div>
+              ))}
            </div>
         </div>
       </section>
