@@ -88,7 +88,7 @@ export default function APIDocsPage() {
         </aside>
 
         {/* Content */}
-        <main className="flex-1 max-w-4xl">
+        <div className="flex-1 max-w-4xl">
           <motion.section
             key={activeSection}
             initial={{ opacity: 0, y: 10 }}
@@ -163,7 +163,7 @@ export default function APIDocsPage() {
                </Link>
             </Card>
           </motion.section>
-        </main>
+        </div>
       </div>
     </div>
   );

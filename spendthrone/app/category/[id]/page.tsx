@@ -1,7 +1,7 @@
 import React from 'react';
 import CategoryPageClient from './CategoryPageClient';
 
-// Generate static params for all categories (must be in server component)
+// Generate static params for all categories
 export function generateStaticParams() {
   const categories = [
     'art-design',

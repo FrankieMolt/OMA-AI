@@ -4,9 +4,9 @@
 
 import type { Metadata, Viewport } from 'next'
 import { Inter, IBM_Plex_Sans, Space_Grotesk, Instrument_Serif, DM_Sans } from 'next/font/google'
-import './globals-improved.css'
+import './globals-unified.css'
 import { QueryProvider } from '@/lib/query-client'
-import { ErrorBoundary } from '../components/ErrorBoundary'
+import { ErrorBoundary } from '@/components/ErrorBoundary'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import { ThemeProvider } from '@/components/ThemeProvider'

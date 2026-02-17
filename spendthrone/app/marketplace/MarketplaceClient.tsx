@@ -6,10 +6,11 @@ import Link from 'next/link';
 import { SearchBar } from '@/components/search/SearchBar';
 import { CategoryFilter } from '@/components/product/CategoryFilter';
 import { ProductGrid } from '@/components/product/ProductGrid';
+import { ProductModal } from '@/components/product/ProductModal';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { realProducts as PRODUCTS } from '@/data/real-products';
-import { SortOption } from '@/types';
+import { SortOption, Product } from '@/types';
 import { useDebounce } from '@/hooks/useDebounce';
 
 // Simple stub for cart/wishlist - in production this would be a context
@@ -25,6 +26,7 @@ export default function MarketplaceClient() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [sortBy, setSortBy] = useState<SortOption>('featured');
+  const [inspectedProduct, setInspectedProduct] = useState<Product | null>(null);
   // Cart functionality disabled for static build
   // const [cart, wishlist, compareList] = useApp();
   
@@ -62,7 +64,7 @@ export default function MarketplaceClient() {
   }, [filteredProducts, sortBy]);
 
   return (
-    <div role="main" className="min-h-screen bg-memoria-bg-ultra-dark text-memoria-text-hero py-12">
+    <div  className="min-h-screen bg-memoria-bg-ultra-dark text-memoria-text-hero py-12">
       {/* Header */}
       <div className="max-w-7xl mx-auto px-4 md:px-14">
         <h1 className="text-5xl md:text-6xl font-light text-memoria-text-hero mb-4 font-display tracking-tight">
@@ -119,7 +121,14 @@ export default function MarketplaceClient() {
       
       {/* Products Grid */}
       <ProductGrid 
-        products={sortedProducts} 
+        products={sortedProducts}
+        onInspect={setInspectedProduct}
+      />
+      
+      {/* Product Modal */}
+      <ProductModal
+        product={inspectedProduct}
+        onClose={() => setInspectedProduct(null)}
       />
       
       {/* Empty State */}
