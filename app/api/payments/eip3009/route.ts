@@ -119,7 +119,7 @@ export async function POST(request: NextRequest) {
           },
         });
     } catch (logError: any) {
-      console.log('Audit logging error:', logError?.message);
+// console.log('Audit logging error:', logError?.message);
     }
 
     // Update service usage count

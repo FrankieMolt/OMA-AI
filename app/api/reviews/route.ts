@@ -119,7 +119,7 @@ export async function POST(request: NextRequest) {
         updated_at: new Date().toISOString()
       };
 
-      console.log('Demo mode: Review created but not persisted:', newReview);
+// console.log('Demo mode: Review created but not persisted:', newReview);
       return NextResponse.json(newReview, { status: 201 });
     }
 

@@ -55,7 +55,7 @@ export async function POST(request: NextRequest) {
 
     // Demo Mode
     if (!isSupabaseEnabled) {
-      console.log('Demo Contact Submission:', body);
+// console.log('Demo Contact Submission:', body);
       const response = NextResponse.json({ success: true, message: 'Message sent (demo)' });
       return addSecurityHeaders(response);
     }

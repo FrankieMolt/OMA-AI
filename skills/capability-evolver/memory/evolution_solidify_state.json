@@ -1,37 +1,41 @@
 {
   "last_run": {
-    "run_id": "run_1771219007002",
-    "created_at": "2026-02-16T05:16:47.012Z",
+    "run_id": "run_1771262213170",
+    "created_at": "2026-02-16T17:16:53.181Z",
     "parent_event_id": "evt_1771003327984",
-    "selected_gene_id": "gene_auto_4441d943",
+    "selected_gene_id": "gene_gep_repair_from_errors",
     "selected_capsule_id": "capsule_1771003327984",
     "selector": {
-      "selected": "gene_auto_4441d943",
+      "selected": "gene_gep_repair_from_errors",
       "reason": [
         "signals match gene.signals_match",
         "capsule trigger matches signals",
-        "signals: memory_missing, user_missing",
-        "memory_graph: memory_prefer:gene_gep_repair_from_errors | gene_prior:0.833"
+        "signals: log_error, errsig:**TOOLRESULT**: 5️⃣ Testing CLI commands... Testing: canclaw sovereign 🛡️ Sovereignty Check LLM Provider: ollama Block Foreign APIs: true Data Residency: CA Telemetry: Disabled ✅ Fully sovereign - data stays in Canada Testing: canclaw test Testing Ollama conn, memory_missing, user_missing",
+        "memory_graph: memory_prefer:gene_gep_repair_from_errors | memory_ban:gene_auto_4441d943 | gene_prior:0.827"
       ],
       "alternatives": []
     },
     "signals": [
+      "log_error",
+      "errsig:**TOOLRESULT**: 5️⃣ Testing CLI commands... Testing: canclaw sovereign 🛡️ Sovereignty Check LLM Provider: ollama Block Foreign APIs: true Data Residency: CA Telemetry: Disabled ✅ Fully sovereign - data stays in Canada Testing: canclaw test Testing Ollama conn",
       "memory_missing",
       "user_missing"
     ],
     "mutation": {
       "type": "Mutation",
-      "id": "mut_1771219007000",
-      "category": "optimize",
+      "id": "mut_1771262213168",
+      "category": "repair",
       "trigger_signals": [
+        "log_error",
+        "errsig:**TOOLRESULT**: 5️⃣ Testing CLI commands... Testing: canclaw sovereign 🛡️ Sovereignty Check LLM Provider: ollama Block Foreign APIs: true Data Residency: CA Telemetry: Disabled ✅ Fully sovereign - data stays in Canada Testing: canclaw test Testing Ollama conn",
         "memory_missing",
         "user_missing"
       ],
-      "target": "gene:gene_auto_4441d943",
-      "expected_effect": "improve success rate and reduce repeated operational cost",
+      "target": "gene:gene_gep_repair_from_errors",
+      "expected_effect": "reduce runtime errors, increase stability, and lower failure rate",
       "risk_level": "low"
     },
-    "mutation_id": "mut_1771219007000",
+    "mutation_id": "mut_1771262213168",
     "personality_state": {
       "type": "PersonalityState",
       "rigor": 0.7,
@@ -46,7 +50,7 @@
     "drift": false,
     "selected_by": "memory_graph+selector",
     "baseline_untracked": [],
-    "baseline_git_head": "ade71b9dd7cc00629fbf5e48cd57565b275b3c09",
+    "baseline_git_head": "6bcaa742a08666b0af803dd0fd3cd8e8c390b94f",
     "blast_radius_estimate": {
       "files": 12,
       "lines": 960
