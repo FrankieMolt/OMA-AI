@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Site Dashboard</title>
+  <meta http-equiv="refresh" content="300">
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 1200px; margin: 0 auto; padding: 20px; }
+    .status { padding: 10px; border-radius: 5px; margin: 10px 0; }
+    .ok { background: #d4edda; color: #155724; }
+    .warning { background: #fff3cd; color: #856404; }
+    .error { background: #f8d7da; color: #721c24; }
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .card { border: 1px solid #ddd; padding: 15px; border-radius: 8px; }
+    h1 { color: #333; }
+    h2 { color: #666; }
+    .metric { font-size: 2em; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h1>🤖 Autonomous Agent Dashboard</h1>
+  <p>Last updated: <span id="timestamp">Loading...</span></p>
+  
+  <div class="grid">
+    <div class="card">
+      <h2>Test Status</h2>
+      <div class="metric" id="test-status">12/14</div>
+      <p>Tests passing</p>
+    </div>
+    
+    <div class="card">
+      <h2>Site Health</h2>
+      <div class="metric" id="health-status">3/3</div>
+      <p>Sites online</p>
+    </div>
+    
+    <div class="card">
+      <h2>Last Deploy</h2>
+      <div class="metric" id="deploy-status">Pending</div>
+      <p>Awaiting auth</p>
+    </div>
+  </div>
+  
+  <h2>Site Status</h2>
+  <div id="sites">
+    <div class="status ok">✅ OMA-AI - Operational</div>
+    <div class="status warning">⚠️ SpendThrone - Needs Deploy</div>
+    <div class="status warning">⚠️ Lethometry - Needs Deploy</div>
+  </div>
+  
+  <h2>Recent Activity</h2>
+  <ul id="activity">
+    <li>Autonomous agent started</li>
+    <li>All sites built successfully</li>
+    <li>Tests running every 30 minutes</li>
+  </ul>
+  
+  <script>
+    document.getElementById('timestamp').textContent = new Date().toLocaleString();
+  </script>
+</body>
+</html>

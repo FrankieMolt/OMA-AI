@@ -1,0 +1,704 @@
+{
+  "config": {
+    "rootDir": "/home/nosyt/.openclaw/workspace",
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/home/nosyt/.openclaw/workspace/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/home/nosyt/.openclaw/workspace",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "runAgents": "none",
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.58.2",
+    "workers": 2,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "tests/user-flows-all-sites.spec.ts",
+      "file": "tests/user-flows-all-sites.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "OMA-AI User Flows",
+          "file": "tests/user-flows-all-sites.spec.ts",
+          "line": 10,
+          "column": 6,
+          "specs": [
+            {
+              "title": "Homepage loads and displays correctly",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1289,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-02-17T05:10:03.518Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "06341416f146395d8582-26cc15dccc015227a9da",
+              "file": "tests/user-flows-all-sites.spec.ts",
+              "line": 12,
+              "column": 7
+            },
+            {
+              "title": "Marketplace displays API cards",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 514,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Found 5 API cards\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-02-17T05:10:04.914Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "06341416f146395d8582-8625e1469f87ad56f361",
+              "file": "tests/user-flows-all-sites.spec.ts",
+              "line": 30,
+              "column": 7
+            },
+            {
+              "title": "Login page is accessible",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 384,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-02-17T05:10:05.443Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "06341416f146395d8582-1976f54d3f49589c124c",
+              "file": "tests/user-flows-all-sites.spec.ts",
+              "line": 43,
+              "column": 7
+            },
+            {
+              "title": "API endpoints respond correctly",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2242,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-02-17T05:10:05.845Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "06341416f146395d8582-878858567834d00e03cd",
+              "file": "tests/user-flows-all-sites.spec.ts",
+              "line": 52,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "SpendThrone User Flows",
+          "file": "tests/user-flows-all-sites.spec.ts",
+          "line": 66,
+          "column": 6,
+          "specs": [
+            {
+              "title": "Homepage loads with products",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1026,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Console errors: 0\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-02-17T05:10:08.098Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "06341416f146395d8582-c326e080732e384ac86d",
+              "file": "tests/user-flows-all-sites.spec.ts",
+              "line": 68,
+              "column": 7
+            },
+            {
+              "title": "Marketplace displays products",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 737,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Found: 0 buttons, 1 links, 2 headings\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-02-17T05:10:09.137Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "06341416f146395d8582-3d2abbaada285940487e",
+              "file": "tests/user-flows-all-sites.spec.ts",
+              "line": 88,
+              "column": 7
+            },
+            {
+              "title": "Category pages work",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 319,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Category tech-gadgets loads: 404: This page could not be found.\n"
+                        },
+                        {
+                          "text": "Category weird-awesome loads: 404: This page could not be found.\n"
+                        },
+                        {
+                          "text": "Category gaming loads: 404: This page could not be found.\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-02-17T05:10:09.887Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "06341416f146395d8582-11fb79b68feab889002e",
+              "file": "tests/user-flows-all-sites.spec.ts",
+              "line": 106,
+              "column": 7
+            },
+            {
+              "title": "Product detail pages work",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 257,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mfalse\u001b[39m\nReceived: \u001b[31mtrue\u001b[39m",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mfalse\u001b[39m\nReceived: \u001b[31mtrue\u001b[39m\n    at /home/nosyt/.openclaw/workspace/tests/user-flows-all-sites.spec.ts:131:19",
+                        "location": {
+                          "file": "/home/nosyt/.openclaw/workspace/tests/user-flows-all-sites.spec.ts",
+                          "column": 19,
+                          "line": 131
+                        },
+                        "snippet": "  129 |     \n  130 |     // With vercel.json rewrites, this should now work\n> 131 |     expect(is404).toBe(false);\n      |                   ^\n  132 |     \n  133 |     console.log(`✅ Product page loads: ${title}`);\n  134 |     // Check product elements"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/nosyt/.openclaw/workspace/tests/user-flows-all-sites.spec.ts",
+                            "column": 19,
+                            "line": 131
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mfalse\u001b[39m\nReceived: \u001b[31mtrue\u001b[39m\n\n  129 |     \n  130 |     // With vercel.json rewrites, this should now work\n> 131 |     expect(is404).toBe(false);\n      |                   ^\n  132 |     \n  133 |     console.log(`✅ Product page loads: ${title}`);\n  134 |     // Check product elements\n    at /home/nosyt/.openclaw/workspace/tests/user-flows-all-sites.spec.ts:131:19"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-02-17T05:10:10.218Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/nosyt/.openclaw/workspace/test-results/tests-user-flows-all-sites-db939-s-Product-detail-pages-work/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/nosyt/.openclaw/workspace/tests/user-flows-all-sites.spec.ts",
+                        "column": 19,
+                        "line": 131
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "06341416f146395d8582-86e282ad3657d24620ff",
+              "file": "tests/user-flows-all-sites.spec.ts",
+              "line": 124,
+              "column": 7
+            },
+            {
+              "title": "Search functionality exists",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 278,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Search input not found\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-02-17T05:10:11.772Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "06341416f146395d8582-1c29318023ba09db4fe5",
+              "file": "tests/user-flows-all-sites.spec.ts",
+              "line": 139,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "Lethometry User Flows",
+          "file": "tests/user-flows-all-sites.spec.ts",
+          "line": 157,
+          "column": 6,
+          "specs": [
+            {
+              "title": "Homepage loads",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 307,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-02-17T05:10:12.154Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "06341416f146395d8582-c3eb8518691f9aa898a6",
+              "file": "tests/user-flows-all-sites.spec.ts",
+              "line": 159,
+              "column": 7
+            },
+            {
+              "title": "Death Clock is interactive",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 267,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Found 2 input fields\n"
+                        },
+                        {
+                          "text": "Found 2 buttons\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-02-17T05:10:12.476Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "06341416f146395d8582-96b7a210ddd83c230b61",
+              "file": "tests/user-flows-all-sites.spec.ts",
+              "line": 167,
+              "column": 7
+            },
+            {
+              "title": "All main pages load",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 606,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "/about loads: About Lethometry - Our Mission to Quantify Existence\n"
+                        },
+                        {
+                          "text": "/philosophy loads: Philosophy - Stoic & Existential Frameworks | Lethometry\n"
+                        },
+                        {
+                          "text": "/data loads: Research Data Repository - Open Access Datasets | Lethometry\n"
+                        },
+                        {
+                          "text": "/contact loads: Contact | Lethometry - Get in Touch\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-02-17T05:10:12.761Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "06341416f146395d8582-85a7731ede924d590e34",
+              "file": "tests/user-flows-all-sites.spec.ts",
+              "line": 181,
+              "column": 7
+            },
+            {
+              "title": "Check for CSP errors",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 751,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoHaveLength\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected length: \u001b[32m0\u001b[39m\nReceived length: \u001b[31m9\u001b[39m\nReceived array:  \u001b[31m[\"Executing inline script violates the following Content Security Policy directive 'script-src 'self''. Either the 'unsafe-inline' keyword, a hash ('sha256-OBTN3RiyCV4Bq7dFqZ5a2pAXjnCcCYeTJMO2I/LYKeo='), or a nonce ('nonce-...') is required to enable inline execution. The action has been blocked.\", \"Executing inline script violates the following Content Security Policy directive 'script-src 'self''. Either the 'unsafe-inline' keyword, a hash ('sha256-5r0UgxwA/xq78FmhZsa2bydCRvsdz+FFeSpO9mtj7yQ='), or a nonce ('nonce-...') is required to enable inline execution. The action has been blocked.\", \"Executing inline script violates the following Content Security Policy directive 'script-src 'self''. Either the 'unsafe-inline' keyword, a hash ('sha256-BFEjGpgP8rkDzqJRCod4ZKzFma962s53zRy8EMhMJ2o='), or a nonce ('nonce-...') is required to enable inline execution. The action has been blocked.\", \"Executing inline script violates the following Content Security Policy directive 'script-src 'self''. Either the 'unsafe-inline' keyword, a hash ('sha256-ypBXKiWNmciW3t09qhMS2dOu9O+fIUegkWBrk+gfFj4='), or a nonce ('nonce-...') is required to enable inline execution. The action has been blocked.\", \"Executing inline script violates the following Content Security Policy directive 'script-src 'self''. Either the 'unsafe-inline' keyword, a hash ('sha256-PdsqDVxM1oX9+reZnUaNjiwLDgQtmvztigoFkQKL3Eo='), or a nonce ('nonce-...') is required to enable inline execution. The action has been blocked.\", \"Executing inline script violates the following Content Security Policy directive 'script-src 'self''. Either the 'unsafe-inline' keyword, a hash ('sha256-6u1jybbx1z+9/zIbpTOcdiiMT/Kl1Jx1Gksqwj0PrX0='), or a nonce ('nonce-...') is required to enable inline execution. The action has been blocked.\", \"Executing inline script violates the following Content Security Policy directive 'script-src 'self''. Either the 'unsafe-inline' keyword, a hash ('sha256-vrEdOrej+cgCK/MiIEgvZOZLyi/hpd6KF7CY5Mi/2nM='), or a nonce ('nonce-...') is required to enable inline execution. The action has been blocked.\", \"Executing inline script violates the following Content Security Policy directive 'script-src 'self''. Either the 'unsafe-inline' keyword, a hash ('sha256-tBUNCIq4HxgrMH3QsJQgVzVRgzbX0+UUmLuCkd0Ezdg='), or a nonce ('nonce-...') is required to enable inline execution. The action has been blocked.\", \"Executing inline script violates the following Content Security Policy directive 'script-src 'self''. Either the 'unsafe-inline' keyword, a hash ('sha256-bBxKHvWFsPNAJ1/TxdbjiJJujRWJDasbUbMGnpe/WkY='), or a nonce ('nonce-...') is required to enable inline execution. The action has been blocked.\"]\u001b[39m",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoHaveLength\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected length: \u001b[32m0\u001b[39m\nReceived length: \u001b[31m9\u001b[39m\nReceived array:  \u001b[31m[\"Executing inline script violates the following Content Security Policy directive 'script-src 'self''. Either the 'unsafe-inline' keyword, a hash ('sha256-OBTN3RiyCV4Bq7dFqZ5a2pAXjnCcCYeTJMO2I/LYKeo='), or a nonce ('nonce-...') is required to enable inline execution. The action has been blocked.\", \"Executing inline script violates the following Content Security Policy directive 'script-src 'self''. Either the 'unsafe-inline' keyword, a hash ('sha256-5r0UgxwA/xq78FmhZsa2bydCRvsdz+FFeSpO9mtj7yQ='), or a nonce ('nonce-...') is required to enable inline execution. The action has been blocked.\", \"Executing inline script violates the following Content Security Policy directive 'script-src 'self''. Either the 'unsafe-inline' keyword, a hash ('sha256-BFEjGpgP8rkDzqJRCod4ZKzFma962s53zRy8EMhMJ2o='), or a nonce ('nonce-...') is required to enable inline execution. The action has been blocked.\", \"Executing inline script violates the following Content Security Policy directive 'script-src 'self''. Either the 'unsafe-inline' keyword, a hash ('sha256-ypBXKiWNmciW3t09qhMS2dOu9O+fIUegkWBrk+gfFj4='), or a nonce ('nonce-...') is required to enable inline execution. The action has been blocked.\", \"Executing inline script violates the following Content Security Policy directive 'script-src 'self''. Either the 'unsafe-inline' keyword, a hash ('sha256-PdsqDVxM1oX9+reZnUaNjiwLDgQtmvztigoFkQKL3Eo='), or a nonce ('nonce-...') is required to enable inline execution. The action has been blocked.\", \"Executing inline script violates the following Content Security Policy directive 'script-src 'self''. Either the 'unsafe-inline' keyword, a hash ('sha256-6u1jybbx1z+9/zIbpTOcdiiMT/Kl1Jx1Gksqwj0PrX0='), or a nonce ('nonce-...') is required to enable inline execution. The action has been blocked.\", \"Executing inline script violates the following Content Security Policy directive 'script-src 'self''. Either the 'unsafe-inline' keyword, a hash ('sha256-vrEdOrej+cgCK/MiIEgvZOZLyi/hpd6KF7CY5Mi/2nM='), or a nonce ('nonce-...') is required to enable inline execution. The action has been blocked.\", \"Executing inline script violates the following Content Security Policy directive 'script-src 'self''. Either the 'unsafe-inline' keyword, a hash ('sha256-tBUNCIq4HxgrMH3QsJQgVzVRgzbX0+UUmLuCkd0Ezdg='), or a nonce ('nonce-...') is required to enable inline execution. The action has been blocked.\", \"Executing inline script violates the following Content Security Policy directive 'script-src 'self''. Either the 'unsafe-inline' keyword, a hash ('sha256-bBxKHvWFsPNAJ1/TxdbjiJJujRWJDasbUbMGnpe/WkY='), or a nonce ('nonce-...') is required to enable inline execution. The action has been blocked.\"]\u001b[39m\n    at /home/nosyt/.openclaw/workspace/tests/user-flows-all-sites.spec.ts:233:23",
+                        "location": {
+                          "file": "/home/nosyt/.openclaw/workspace/tests/user-flows-all-sites.spec.ts",
+                          "column": 23,
+                          "line": 233
+                        },
+                        "snippet": "  231 |       console.log(`❌ Found ${cspErrors.length} CSP errors - vercel.json fix not deployed yet`);\n  232 |     }\n> 233 |     expect(cspErrors).toHaveLength(0); // CSP should be fixed with vercel.json\n      |                       ^\n  234 |     expect(otherErrors).toHaveLength(0);\n  235 |   });\n  236 | });"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/nosyt/.openclaw/workspace/tests/user-flows-all-sites.spec.ts",
+                            "column": 23,
+                            "line": 233
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoHaveLength\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected length: \u001b[32m0\u001b[39m\nReceived length: \u001b[31m9\u001b[39m\nReceived array:  \u001b[31m[\"Executing inline script violates the following Content Security Policy directive 'script-src 'self''. Either the 'unsafe-inline' keyword, a hash ('sha256-OBTN3RiyCV4Bq7dFqZ5a2pAXjnCcCYeTJMO2I/LYKeo='), or a nonce ('nonce-...') is required to enable inline execution. The action has been blocked.\", \"Executing inline script violates the following Content Security Policy directive 'script-src 'self''. Either the 'unsafe-inline' keyword, a hash ('sha256-5r0UgxwA/xq78FmhZsa2bydCRvsdz+FFeSpO9mtj7yQ='), or a nonce ('nonce-...') is required to enable inline execution. The action has been blocked.\", \"Executing inline script violates the following Content Security Policy directive 'script-src 'self''. Either the 'unsafe-inline' keyword, a hash ('sha256-BFEjGpgP8rkDzqJRCod4ZKzFma962s53zRy8EMhMJ2o='), or a nonce ('nonce-...') is required to enable inline execution. The action has been blocked.\", \"Executing inline script violates the following Content Security Policy directive 'script-src 'self''. Either the 'unsafe-inline' keyword, a hash ('sha256-ypBXKiWNmciW3t09qhMS2dOu9O+fIUegkWBrk+gfFj4='), or a nonce ('nonce-...') is required to enable inline execution. The action has been blocked.\", \"Executing inline script violates the following Content Security Policy directive 'script-src 'self''. Either the 'unsafe-inline' keyword, a hash ('sha256-PdsqDVxM1oX9+reZnUaNjiwLDgQtmvztigoFkQKL3Eo='), or a nonce ('nonce-...') is required to enable inline execution. The action has been blocked.\", \"Executing inline script violates the following Content Security Policy directive 'script-src 'self''. Either the 'unsafe-inline' keyword, a hash ('sha256-6u1jybbx1z+9/zIbpTOcdiiMT/Kl1Jx1Gksqwj0PrX0='), or a nonce ('nonce-...') is required to enable inline execution. The action has been blocked.\", \"Executing inline script violates the following Content Security Policy directive 'script-src 'self''. Either the 'unsafe-inline' keyword, a hash ('sha256-vrEdOrej+cgCK/MiIEgvZOZLyi/hpd6KF7CY5Mi/2nM='), or a nonce ('nonce-...') is required to enable inline execution. The action has been blocked.\", \"Executing inline script violates the following Content Security Policy directive 'script-src 'self''. Either the 'unsafe-inline' keyword, a hash ('sha256-tBUNCIq4HxgrMH3QsJQgVzVRgzbX0+UUmLuCkd0Ezdg='), or a nonce ('nonce-...') is required to enable inline execution. The action has been blocked.\", \"Executing inline script violates the following Content Security Policy directive 'script-src 'self''. Either the 'unsafe-inline' keyword, a hash ('sha256-bBxKHvWFsPNAJ1/TxdbjiJJujRWJDasbUbMGnpe/WkY='), or a nonce ('nonce-...') is required to enable inline execution. The action has been blocked.\"]\u001b[39m\n\n  231 |       console.log(`❌ Found ${cspErrors.length} CSP errors - vercel.json fix not deployed yet`);\n  232 |     }\n> 233 |     expect(cspErrors).toHaveLength(0); // CSP should be fixed with vercel.json\n      |                       ^\n  234 |     expect(otherErrors).toHaveLength(0);\n  235 |   });\n  236 | });\n    at /home/nosyt/.openclaw/workspace/tests/user-flows-all-sites.spec.ts:233:23"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "⚠️  Found 9 CSP errors (fixed locally, needs deployment)\n"
+                        },
+                        {
+                          "text": "❌ Found 9 CSP errors - vercel.json fix not deployed yet\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-02-17T05:10:13.379Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/nosyt/.openclaw/workspace/test-results/tests-user-flows-all-sites-7f6fe--Flows-Check-for-CSP-errors/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/nosyt/.openclaw/workspace/tests/user-flows-all-sites.spec.ts",
+                        "column": 23,
+                        "line": 233
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "06341416f146395d8582-f803fd90ef6188f14b41",
+              "file": "tests/user-flows-all-sites.spec.ts",
+              "line": 202,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "Performance Tests",
+          "file": "tests/user-flows-all-sites.spec.ts",
+          "line": 240,
+          "column": 6,
+          "specs": [
+            {
+              "title": "All sites load within 5 seconds",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2699,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "OMA-AI: 1100ms\n"
+                        },
+                        {
+                          "text": "SpendThrone: 842ms\n"
+                        },
+                        {
+                          "text": "Lethometry: 674ms\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-02-17T05:10:15.399Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "06341416f146395d8582-4b86a4855d4c09479b77",
+              "file": "tests/user-flows-all-sites.spec.ts",
+              "line": 242,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-02-17T05:10:00.545Z",
+    "duration": 17708.940000000002,
+    "expected": 12,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  }
+}
