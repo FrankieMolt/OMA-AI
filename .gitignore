@@ -3,68 +3,55 @@ node_modules/
 .pnp
 .pnp.js
 
-# Testing
-coverage
-.nyc_output
-
-# Production
-build/
+# Build outputs
 dist/
-.vercel
+build/
 .next/
+out/
 
-# Misc
-.DS_Store
+# Environment files
 .env
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
-.env*.local
 
 # Logs
+logs/
+*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-*.log
 
-# Python
-__pycache__/
-*.py[cod]
-*$py.class
-venv/
-.venv/
-env/
-.env
+# OS files
+.DS_Store
+Thumbs.db
 
-# Secrets
-FRANKIE_*.json
-*.pem
-*.key
-id_rsa
-id_rsa.pub
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
 
-# Archive
-archive/
-*.node
-
-# Database files
+# Database (keep schema, ignore data)
 *.db
 *.sqlite
-*.sqlite3
-db.json
-sessions.json
-state.json
-tasks.json
-starter.json
-pro.json
-oma.db
+*.duckdb
 
-# Temporary files
+# Secrets
+secrets/
+*.pem
+*.key
+
+# Cache
+.cache/
 .temp/
-*.temp
+.tmp/
 
-# Turbopack cache
-**/out/dev/cache/turbopack/
+# Backup files
+*.backup
+*.bak
+*~
 
-Clawpod
+# Conway sandbox files (regenerated)
+.sandbox/
