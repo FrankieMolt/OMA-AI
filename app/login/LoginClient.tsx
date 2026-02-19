@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { Lock, Mail, Github, Shield } from 'lucide-react';
+import { Lock, Mail, Github, Shield, Zap, Cpu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 
@@ -20,6 +20,24 @@ export default function LoginPage() {
     }, 1500);
   };
 
+  const features = [
+    {
+      icon: <Cpu size={16} className="text-memoria-text-hero" />,
+      title: 'API Marketplace Access',
+      description: 'Manage 450+ APIs and MCP servers for your autonomous agents'
+    },
+    {
+      icon: <Zap size={16} className="text-memoria-text-hero" />,
+      title: 'Real-Time Analytics',
+      description: 'Monitor usage, track spending, and optimize agent performance'
+    },
+    {
+      icon: <Shield size={16} className="text-memoria-text-hero" />,
+      title: 'Secure x402 Payments',
+      description: 'Integrated crypto payments with automatic fee optimization'
+    }
+  ];
+
   return (
     <div className="min-h-screen bg-memoria-bg-ultra-dark flex items-center justify-center p-6 selection:bg-memoria-text-hero selection:text-memoria-bg-ultra-dark">
       <div className="w-full max-w-md">
@@ -33,7 +51,16 @@ export default function LoginPage() {
              </span>
           </Link>
           <h1 className="text-3xl font-light text-memoria-text-hero tracking-tight mb-2 font-display">Welcome Back</h1>
-          <p className="text-memoria-text-whisper text-sm">Access your autonomous agent fleet.</p>
+          <p className="text-memoria-text-whisper text-sm mb-6">Access your autonomous agent fleet.</p>
+          
+          <div className="grid grid-cols-1 gap-4 mb-8 max-w-sm mx-auto text-left">
+             {features.map((feature, i) => (
+                <div key={i} className="flex items-start gap-3 text-sm text-memoria-text-whisper font-light">
+                   {feature.icon}
+                   <p>{feature.description}</p>
+                </div>
+             ))}
+          </div>
         </div>
 
         <Card className="bg-memoria-bg-card border-memoria-border-muted rounded-sm">
@@ -72,7 +99,7 @@ export default function LoginPage() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     className="w-full pl-10 pr-4 py-3 bg-memoria-bg-ultra-dark border border-memoria-border-default rounded-sm text-memoria-text-hero text-sm focus:outline-none focus:border-memoria-text-hero transition-all placeholder-memoria-text-whisper"
-                    placeholder="••••••••"
+                    placeholder="•••••••"
                     aria-label="Password"
                   />
                 </div>
@@ -104,14 +131,21 @@ export default function LoginPage() {
 
         <div className="mt-8 text-center max-w-xs mx-auto">
           <p className="text-[11px] uppercase tracking-widest text-memoria-text-meta mb-4">
-            New to the network?{' '}
+            New to network?{' '}
             <Link href="/signup" className="text-memoria-text-hero hover:underline transition-all">
               Initialize Account
             </Link>
           </p>
-          <p className="text-xs text-memoria-text-whisper leading-relaxed">
-            By accessing the dashboard, you agree to the OMA-AI autonomous commerce protocols and x402 payment standards.
+          <p className="text-xs text-memoria-text-whisper leading-relaxed mb-4">
+            By accessing the dashboard, you agree to the OMA-AI autonomous commerce protocols 
+            and x402 payment standards. Your agents can discover APIs, process payments, 
+            and integrate services without human intervention.
           </p>
+          <div className="flex justify-center gap-4 text-xs text-memoria-text-meta">
+             <span>✓ Secure encryption</span>
+             <span>✓ 24/7 monitoring</span>
+             <span>✓ Instant support</span>
+          </div>
         </div>
       </div>
     </div>

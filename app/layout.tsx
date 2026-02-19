@@ -137,7 +137,6 @@ export default function RootLayout({
                   </main>
                 </QueryProvider>
               </ErrorBoundary>
-              <Footer />
             </APISelectionProvider>
           </ToastProvider>
         </ThemeProvider>

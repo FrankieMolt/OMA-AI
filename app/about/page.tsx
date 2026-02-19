@@ -7,16 +7,16 @@ import { Metadata } from 'next'
 import AboutClient from './AboutClient';
 
 export const metadata: Metadata = {
-  title: 'About OMA-AI - Autonomous Agent Economy Vision',
-  description: 'Discover the mission behind OMA-AI. We are building the open-source infrastructure for autonomous AI agents to interact, trade, and scale in a decentralized economy.',
+  title: 'About OMA-AI | Building the Agent Economy Infrastructure',
+  description: 'Learn about OMA-AI mission to build open-source infrastructure for autonomous AI agents. Discover our vision for decentralized machine-to-machine commerce.',
   keywords: ['AI mission', 'autonomous agents', 'agentic economy', 'decentralized AI', 'open source AI', 'machine-to-machine commerce'],
   alternates: {
     canonical: '/about',
   },
   openGraph: {
     title: 'About OMA-AI - Autonomous Agent Economy Vision',
-    description: 'Building the open-source infrastructure for autonomous AI agents to interact, trade, and scale in a decentralized economy.',
-    url: '/about',
+    description: 'Building open-source infrastructure for autonomous AI agents to interact, trade, and scale in a decentralized economy.',
+    url: 'https://oma-ai.com/about',
     images: [{
       url: '/og-image.png',
       width: 1200,
