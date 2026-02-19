@@ -1,19 +1,31 @@
 {
   "mcpServers": {
     "github-mcp": {
+      "description": "GitHub operations: repos, issues, PRs, releases",
       "command": "npx",
-      "args": ["-y", "github-mcp"],
+      "args": [
+        "-y",
+        "github-mcp"
+      ],
       "env": {
         "GITHUB_PERSONAL_ACCESS_TOKEN": ""
-      },
-      "description": "GitHub operations: repos, issues, PRs, releases"
+      }
     },
     "context7": {
+      "description": "Context7 Documentation MCP by Upstash",
       "command": "npx",
-      "args": ["-y", "@upstash/context7-mcp"],
-      "env": {},
-      "keepAlive": true,
-      "description": "Context7 Documentation MCP by Upstash"
+      "args": [
+        "-y",
+        "@upstash/context7-mcp"
+      ],
+      "env": {}
+    },
+    "conway": {
+      "command": "conway-terminal",
+      "env": {
+        "CONWAY_API_KEY": "cnwy_k_cybH-gN33EDJYlpwh-iUJIp9-6EDdBtx"
+      }
     }
-  }
+  },
+  "imports": []
 }

@@ -1,13 +1,13 @@
 {
   "version": 2,
-  "routes": [
+  "rewrites": [
     {
-      "src": "/product/(.*)",
-      "dest": "/product/$1.html"
+      "source": "/product/(.*)",
+      "destination": "/product/$1.html"
     },
     {
-      "src": "/category/(.*)",
-      "dest": "/category/$1.html"
+      "source": "/category/(.*)",
+      "destination": "/category/$1.html"
     }
   ],
   "headers": [

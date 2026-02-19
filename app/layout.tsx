@@ -141,7 +141,6 @@ export default function RootLayout({
             </APISelectionProvider>
           </ToastProvider>
         </ThemeProvider>
-        <Footer />
       </body>
     </html>
   )

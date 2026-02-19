@@ -38,10 +38,36 @@ export default function MarketplacePage() {
   const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
+  const [displayServices, setDisplayServices] = useState<ApiService[]>([]);
 
   useEffect(() => {
     fetchServices();
-  }, [selectedCategory, searchQuery]);
+  }, []);
+
+  // Client-side filtering for search and category
+  useEffect(() => {
+    let filtered = [...services];
+    
+    // Apply category filter
+    if (selectedCategory !== 'all') {
+      filtered = filtered.filter(s => 
+        s.category === selectedCategory ||
+        s.tags?.some((tag: string) => tag.toLowerCase().includes(selectedCategory.toLowerCase()))
+      );
+    }
+    
+    // Apply search filter
+    if (searchQuery) {
+      const query = searchQuery.toLowerCase();
+      filtered = filtered.filter(s => 
+        s.name?.toLowerCase().includes(query) ||
+        s.description?.toLowerCase().includes(query) ||
+        s.tags?.some((tag: string) => tag.toLowerCase().includes(query))
+      );
+    }
+    
+    setDisplayServices(filtered);
+  }, [services, selectedCategory, searchQuery]);
 
   const fetchServices = async () => {
     setLoading(true);
@@ -52,12 +78,14 @@ export default function MarketplacePage() {
       const response = await fetch(url);
       const data = await response.json();
       if (data.services) {
-        setServices(data.services.map((s: any) => ({
+        const mappedServices = data.services.map((s: any) => ({
           ...s,
           price: s.price_per_use || s.price || 0,
           category: s.categories?.name || 'Uncategorized',
           calls: s.total_sales || 0
-        })));
+        }));
+        setServices(mappedServices);
+        setDisplayServices(mappedServices);
       }
     } catch (error) {
       console.error('Failed to fetch services:', error);
@@ -118,7 +146,7 @@ export default function MarketplacePage() {
       <section className="py-20 px-4 md:px-14">
         <div className="max-w-7xl mx-auto">
            <div className="flex items-center justify-between mb-10 text-[10px] text-memoria-text-meta uppercase tracking-widest font-bold">
-              <span>{services.length} Tools Discovered</span>
+              <span>{displayServices.length} Tools Discovered</span>
            </div>
 
            {loading ? (
@@ -129,7 +157,7 @@ export default function MarketplacePage() {
            ) : (
              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <h2 className="sr-only">Available APIs and Tools</h2>
-                {services.map((service, i) => (
+                {displayServices.map((service, i) => (
                    <motion.div
                      key={service.id}
                      initial={{ opacity: 0, y: 10 }}

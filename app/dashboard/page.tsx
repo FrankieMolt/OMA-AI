@@ -1,9 +1,12 @@
 /**
  * OMA-AI Dashboard
  * SEO: Unique metadata, single H1
+ * PROTECTED: Requires authentication
  */
 
 import { Metadata } from 'next'
+import { redirect } from 'next/navigation'
+import { cookies } from 'next/headers'
 import Dashboard from './DashboardClient';
 
 export const metadata: Metadata = {
@@ -27,6 +30,15 @@ export const metadata: Metadata = {
   }
 }
 
-export default function Page() {
+export default async function Page() {
+  // Check if user is authenticated
+  const cookieStore = await cookies()
+  const authToken = cookieStore.get('sb-access-token') || cookieStore.get('session')
+  
+  // If not authenticated, redirect to login
+  if (!authToken) {
+    redirect('/login?redirect=/dashboard')
+  }
+  
   return <Dashboard />;
 }

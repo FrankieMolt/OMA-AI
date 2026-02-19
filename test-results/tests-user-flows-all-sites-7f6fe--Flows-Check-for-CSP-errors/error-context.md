@@ -1,0 +1,133 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - link "Skip to main content" [ref=e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - navigation "Main Navigation" [ref=e3]:
+    - link "Lethometry Home" [ref=e4] [cursor=pointer]:
+      - /url: /
+      - img [ref=e6]
+      - generic [ref=e8]: Lethometry
+    - generic [ref=e9]:
+      - generic [ref=e10]:
+        - link "Clock" [ref=e11] [cursor=pointer]:
+          - /url: /clock/
+        - link "Memory" [ref=e12] [cursor=pointer]:
+          - /url: /memory/
+        - link "Experiments" [ref=e13] [cursor=pointer]:
+          - /url: /experiments/
+        - link "About" [ref=e14] [cursor=pointer]:
+          - /url: /about/
+      - link "View Data" [ref=e15] [cursor=pointer]:
+        - /url: /data/
+        - text: Data
+  - main [ref=e16]:
+    - generic [ref=e17]:
+      - navigation [ref=e18]:
+        - generic [ref=e19]:
+          - link "Lethometry" [ref=e20] [cursor=pointer]:
+            - /url: /
+            - img [ref=e22]
+            - generic [ref=e24]: Lethometry
+          - generic [ref=e25]:
+            - link "Clock" [ref=e26] [cursor=pointer]:
+              - /url: /clock/
+            - link "Memory" [ref=e27] [cursor=pointer]:
+              - /url: /memory/
+            - link "Experiments" [ref=e28] [cursor=pointer]:
+              - /url: /experiments/
+            - link "Philosophy" [ref=e29] [cursor=pointer]:
+              - /url: /philosophy/
+          - link "View Data" [ref=e30] [cursor=pointer]:
+            - /url: /data/
+      - generic [ref=e33]:
+        - generic [ref=e34]:
+          - img [ref=e35]
+          - generic [ref=e37]: Existential Quantification
+        - heading "Measure Your Existence" [level=1] [ref=e38]:
+          - text: Measure Your
+          - text: Existence
+        - paragraph [ref=e39]: Scientific tools for quantifying life, death, and the intellectual structures that connect them.
+        - generic [ref=e40]:
+          - link "Start Death Clock" [ref=e41] [cursor=pointer]:
+            - /url: /clock/
+            - img [ref=e42]
+            - text: Start Death Clock
+          - link "Explore Experiments" [ref=e45] [cursor=pointer]:
+            - /url: /experiments/
+            - text: Explore Experiments
+            - img [ref=e46]
+        - generic [ref=e48]:
+          - generic [ref=e49]:
+            - generic [ref=e50]: ∞
+            - generic [ref=e51]: Years Quantified
+          - generic [ref=e52]:
+            - generic [ref=e53]: "5"
+            - generic [ref=e54]: Experiments
+          - generic [ref=e55]:
+            - generic [ref=e56]: 1.2M
+            - generic [ref=e57]: Data Points
+      - generic [ref=e60]:
+        - heading "Tools for the Examined Life" [level=2] [ref=e61]
+        - paragraph [ref=e62]: Quantified approaches to mortality, memory, and meaning.
+        - generic [ref=e63]:
+          - link "Death Clock Calculate your remaining temporal assets based on actuarial data." [ref=e64] [cursor=pointer]:
+            - /url: /clock/
+            - generic [ref=e65]:
+              - img [ref=e67]
+              - generic [ref=e70]:
+                - heading "Death Clock" [level=3] [ref=e71]
+                - paragraph [ref=e72]: Calculate your remaining temporal assets based on actuarial data.
+              - img [ref=e73]
+          - link "Memory Lab Scientific systems for long-term knowledge retention." [ref=e75] [cursor=pointer]:
+            - /url: /memory/
+            - generic [ref=e76]:
+              - img [ref=e78]
+              - generic [ref=e88]:
+                - heading "Memory Lab" [level=3] [ref=e89]
+                - paragraph [ref=e90]: Scientific systems for long-term knowledge retention.
+              - img [ref=e91]
+          - link "Philosophy Stoic, Buddhist, and existential models of being." [ref=e93] [cursor=pointer]:
+            - /url: /philosophy/
+            - generic [ref=e94]:
+              - img [ref=e96]
+              - generic [ref=e100]:
+                - heading "Philosophy" [level=3] [ref=e101]
+                - paragraph [ref=e102]: Stoic, Buddhist, and existential models of being.
+              - img [ref=e103]
+          - link "Experiments Cognitive and moral reasoning experiments." [ref=e105] [cursor=pointer]:
+            - /url: /experiments/
+            - generic [ref=e106]:
+              - img [ref=e108]
+              - generic [ref=e110]:
+                - heading "Experiments" [level=3] [ref=e111]
+                - paragraph [ref=e112]: Cognitive and moral reasoning experiments.
+              - img [ref=e113]
+      - generic [ref=e116]:
+        - generic [ref=e117]:
+          - img [ref=e119]
+          - generic [ref=e121]: © 2026 Lethometry • Quantify Your Existence
+        - generic [ref=e122]:
+          - link "About" [ref=e123] [cursor=pointer]:
+            - /url: /about/
+          - link "Contact" [ref=e124] [cursor=pointer]:
+            - /url: /contact/
+          - link "Privacy" [ref=e125] [cursor=pointer]:
+            - /url: /privacy/
+        - generic [ref=e128]: All Systems Online
+  - contentinfo [ref=e129]:
+    - generic [ref=e130]:
+      - generic [ref=e131]: © 2026 Lethometry • Systems of Quantification
+      - generic [ref=e132]:
+        - link "About" [ref=e133] [cursor=pointer]:
+          - /url: /about/
+        - link "Contact" [ref=e134] [cursor=pointer]:
+          - /url: /contact/
+        - link "Privacy" [ref=e135] [cursor=pointer]:
+          - /url: /privacy/
+        - link "Terms" [ref=e136] [cursor=pointer]:
+          - /url: /terms/
+        - generic [ref=e138]: Protocol v2.4.0
+  - alert [ref=e139]
+```

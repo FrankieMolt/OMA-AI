@@ -38,3 +38,9 @@ Skills are shared. Your setup is yours. Keeping them apart means you can update 
 ---
 
 Add whatever helps you do your job. This is your cheat sheet.
+
+### Wallet (NOSYT)
+- **Private key:** `0x98275b9383fb61c60c1ba04576bfe3d71e57e7310a6370a4bddd773f77f08daa`
+- **Base address:** `0x40AE4455055feeCac30e1EEEcbFE8dBEd77e4eC6`
+
+*Stored here per user request. Keep this file safe.*

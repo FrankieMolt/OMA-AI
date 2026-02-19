@@ -1,0 +1,14 @@
+{
+  "tasks": [
+    {
+      "id": "hackathon_001",
+      "title": "Fix OMA-AI RainbowKit/wagmi dependency conflict",
+      "description": "Resolve wagmi version mismatch with @rainbow-me/rainbowkit@^2.2.10",
+      "status": "in_progress",
+      "priority": "critical",
+      "subtasks": [
+        { "id": "sub_001", "title": "Updated package.json to use wagmi@^3.4.2 (compatible with RainbowKit)", "done": true }
+      ]
+    }
+  ]
+}
