@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 export default function LandingPage() {
   return (
-    <main className="min-h-screen bg-[#050510] text-white font-['Exo_2',sans-serif]">
+    <main className="min-h-screen bg-[#050510] text-white font-exo2">
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-[#050510]/90 backdrop-blur-xl border-b border-white/5">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
@@ -18,7 +18,7 @@ export default function LandingPage() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
               </svg>
             </div>
-            <span className="font-bold text-lg tracking-tight" style={{fontFamily: 'Orbitron, sans-serif'}}>OMA-AI</span>
+            <span className="font-bold text-lg tracking-tight" className='font-orbitron'>OMA-AI</span>
           </a>
           
           <div className="hidden md:flex items-center gap-8">
@@ -47,7 +47,7 @@ export default function LandingPage() {
               Instant Micropayments
             </div>
             
-            <h1 className="text-6xl md:text-7xl font-bold mb-6 tracking-tight" style={{fontFamily: 'Orbitron, sans-serif'}}>
+            <h1 className="text-6xl md:text-7xl font-bold mb-6 tracking-tight" className='font-orbitron'>
               Open Market Access
               <br />
               <span className="bg-gradient-to-r from-[#3B82F6] via-[#8B5CF6] to-[#EC4899] bg-clip-text text-transparent" style={{textShadow: '0 0 30px rgba(59, 130, 246, 0.3)'}}>
@@ -83,7 +83,7 @@ export default function LandingPage() {
             ].map((stat, i) => (
               <div key={i} className="p-6 rounded-xl bg-[#0a0a15] border border-white/5 hover:border-blue-500/30 transition-all cursor-pointer">
                 <div className="text-3xl mb-2">{stat.icon}</div>
-                <div className="text-3xl font-bold text-white mb-1" style={{fontFamily: 'Orbitron, sans-serif'}}>{stat.value}</div>
+                <div className="text-3xl font-bold text-white mb-1" className='font-orbitron'>{stat.value}</div>
                 <div className="text-gray-400">{stat.label}</div>
               </div>
             ))}
@@ -94,7 +94,7 @@ export default function LandingPage() {
       {/* Features */}
       <section className="py-20 px-6 bg-[#0a0a15]/50">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-4" style={{fontFamily: 'Orbitron, sans-serif'}}>
+          <h2 className="text-4xl font-bold text-center mb-4" className='font-orbitron'>
             Built for Autonomous Agents
           </h2>
           <p className="text-gray-400 text-center mb-16 max-w-2xl mx-auto">
@@ -146,7 +146,7 @@ export default function LandingPage() {
       {/* API Showcase */}
       <section className="py-20 px-6">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-4" style={{fontFamily: 'Orbitron, sans-serif'}}>
+          <h2 className="text-4xl font-bold text-center mb-4" className='font-orbitron'>
             Live APIs
           </h2>
           <p className="text-gray-400 text-center mb-16">
@@ -189,7 +189,7 @@ export default function LandingPage() {
                   <span className="px-3 py-1 rounded-full bg-green-500/10 border border-green-500/20 text-green-400 text-sm font-medium">
                     {api.status}
                   </span>
-                  <span className="text-2xl font-bold text-white" style={{fontFamily: 'Orbitron, sans-serif'}}>{api.cost}</span>
+                  <span className="text-2xl font-bold text-white" className='font-orbitron'>{api.cost}</span>
                 </div>
               </a>
             ))}
@@ -200,7 +200,7 @@ export default function LandingPage() {
       {/* CTA */}
       <section className="py-20 px-6 bg-gradient-to-br from-blue-500/10 to-purple-500/10">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-5xl font-bold mb-6" style={{fontFamily: 'Orbitron, sans-serif'}}>
+          <h2 className="text-5xl font-bold mb-6" className='font-orbitron'>
             Ready to Build?
           </h2>
           <p className="text-xl text-gray-300 mb-10">
@@ -227,7 +227,7 @@ export default function LandingPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
               </div>
-              <span className="font-bold text-lg" style={{fontFamily: 'Orbitron, sans-serif'}}>OMA-AI</span>
+              <span className="font-bold text-lg" className='font-orbitron'>OMA-AI</span>
             </div>
             <div className="flex items-center gap-6 text-gray-400">
               <a href="https://github.com/FrankieMolt" target="_blank" className="hover:text-white transition-colors cursor-pointer">GitHub</a>

@@ -28,7 +28,7 @@ export default async function DashboardPage() {
   const ethPrice = price.data?.eth?.price || 0
 
   return (
-    <main className="min-h-screen bg-[#050510] text-white font-['Exo_2',sans-serif]">
+    <main className="min-h-screen bg-[#050510] text-white font-exo2">
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-[#050510]/90 backdrop-blur-xl border-b border-white/5">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
@@ -38,7 +38,7 @@ export default async function DashboardPage() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
               </svg>
             </div>
-            <span className="font-bold text-lg tracking-tight" style={{fontFamily: 'Orbitron, sans-serif'}}>Dashboard</span>
+            <span className="font-bold text-lg tracking-tight" className='font-orbitron'>Dashboard</span>
           </a>
           <div className="flex items-center gap-2">
             <div className={`w-2 h-2 rounded-full ${health.status === 'ok' ? 'bg-green-500 animate-pulse' : 'bg-red-500'} shadow-lg ${health.status === 'ok' ? 'shadow-green-500/50' : ''}`} />
@@ -50,7 +50,7 @@ export default async function DashboardPage() {
       <div className="pt-24 pb-16 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="mb-12">
-            <h1 className="text-5xl font-bold mb-4" style={{fontFamily: 'Orbitron, sans-serif'}}>
+            <h1 className="text-5xl font-bold mb-4" className='font-orbitron'>
               Live Dashboard
             </h1>
             <p className="text-xl text-gray-300">
@@ -94,7 +94,7 @@ export default async function DashboardPage() {
                   metric.color === 'yellow' ? 'text-yellow-400' :
                   metric.color === 'red' ? 'text-red-400' :
                   'text-white'
-                }`} style={{fontFamily: 'Orbitron, sans-serif'}}>
+                }`} className='font-orbitron'>
                   {metric.value}
                 </div>
                 <div className="text-xs text-gray-500">{metric.subtext}</div>
@@ -106,7 +106,7 @@ export default async function DashboardPage() {
           <div className="p-8 rounded-2xl bg-gradient-to-br from-[#0a0a15] to-[#050510] border border-white/5 mb-8">
             <div className="flex items-center gap-2 mb-6">
               <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse shadow-lg shadow-green-500/50" />
-              <h2 className="text-2xl font-bold" style={{fontFamily: 'Orbitron, sans-serif'}}>
+              <h2 className="text-2xl font-bold" className='font-orbitron'>
                 Live Crypto Prices
               </h2>
               <span className="text-sm text-gray-500 ml-auto">Coinbase</span>
@@ -126,7 +126,7 @@ export default async function DashboardPage() {
                     crypto.color === 'blue' ? 'text-blue-400' :
                     crypto.color === 'orange' ? 'text-orange-400' :
                     'text-purple-400'
-                  }`} style={{fontFamily: 'Orbitron, sans-serif'}}>
+                  }`} className='font-orbitron'>
                     ${crypto.price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                   </div>
                   <div className="text-xs text-gray-500">24h Volume</div>
@@ -137,7 +137,7 @@ export default async function DashboardPage() {
 
           {/* Endpoints */}
           <div className="p-8 rounded-2xl bg-gradient-to-br from-[#0a0a15] to-[#050510] border border-white/5">
-            <h2 className="text-2xl font-bold mb-6" style={{fontFamily: 'Orbitron, sans-serif'}}>
+            <h2 className="text-2xl font-bold mb-6" className='font-orbitron'>
               API Endpoints
             </h2>
             <div className="space-y-3">

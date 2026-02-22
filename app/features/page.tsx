@@ -79,7 +79,7 @@ export default function FeaturesPage() {
   }
 
   return (
-    <main className="min-h-screen bg-[#050510] text-white font-['Exo_2',sans-serif]">
+    <main className="min-h-screen bg-[#050510] text-white font-exo2">
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-[#050510]/90 backdrop-blur-xl border-b border-white/5">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
@@ -89,7 +89,7 @@ export default function FeaturesPage() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
               </svg>
             </div>
-            <span className="font-bold text-lg tracking-tight" style={{fontFamily: 'Orbitron, sans-serif'}}>Features</span>
+            <span className="font-bold text-lg tracking-tight" className='font-orbitron'>Features</span>
           </a>
           <a href="/api" className="px-6 py-2.5 bg-[#22C55E] hover:bg-[#16A34A] rounded-lg text-white font-semibold transition-all cursor-pointer">
             Get Started
@@ -101,7 +101,7 @@ export default function FeaturesPage() {
         <div className="max-w-7xl mx-auto">
           {/* Hero */}
           <div className="text-center mb-16">
-            <h1 className="text-5xl font-bold mb-6" style={{fontFamily: 'Orbitron, sans-serif'}}>
+            <h1 className="text-5xl font-bold mb-6" className='font-orbitron'>
               Powerful Features for
               <br />
               <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
@@ -128,7 +128,7 @@ export default function FeaturesPage() {
 
           {/* CTA */}
           <div className="mt-16 p-8 rounded-2xl bg-gradient-to-br from-blue-500/10 to-purple-500/10 border border-blue-500/20 text-center">
-            <h2 className="text-3xl font-bold mb-4" style={{fontFamily: 'Orbitron, sans-serif'}}>
+            <h2 className="text-3xl font-bold mb-4" className='font-orbitron'>
               Ready to Build?
             </h2>
             <p className="text-gray-300 mb-8 max-w-2xl mx-auto">

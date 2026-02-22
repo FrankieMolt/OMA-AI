@@ -31,7 +31,7 @@ export default async function APIPage() {
   ]
 
   return (
-    <main className="min-h-screen bg-[#050510] text-white font-['Exo_2',sans-serif]">
+    <main className="min-h-screen bg-[#050510] text-white font-exo2">
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-[#050510]/90 backdrop-blur-xl border-b border-white/5">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
@@ -41,7 +41,7 @@ export default async function APIPage() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
               </svg>
             </div>
-            <span className="font-bold text-lg tracking-tight" style={{fontFamily: 'Orbitron, sans-serif'}}>OMA-AI</span>
+            <span className="font-bold text-lg tracking-tight" className='font-orbitron'>OMA-AI</span>
           </a>
         </div>
       </nav>
@@ -49,7 +49,7 @@ export default async function APIPage() {
       <div className="pt-24 pb-16 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="mb-12">
-            <h1 className="text-5xl font-bold mb-4" style={{fontFamily: 'Orbitron, sans-serif'}}>
+            <h1 className="text-5xl font-bold mb-4" className='font-orbitron'>
               API Reference
             </h1>
             <p className="text-xl text-gray-300">
@@ -69,15 +69,15 @@ export default async function APIPage() {
             </div>
             <div className="grid md:grid-cols-3 gap-6">
               <div className="p-4 rounded-xl bg-[#050510] border border-white/5">
-                <div className="text-3xl font-bold text-white mb-1" style={{fontFamily: 'Orbitron, sans-serif'}}>{stats.calls || 0}</div>
+                <div className="text-3xl font-bold text-white mb-1" className='font-orbitron'>{stats.calls || 0}</div>
                 <div className="text-gray-400">Total Calls</div>
               </div>
               <div className="p-4 rounded-xl bg-[#050510] border border-white/5">
-                <div className="text-3xl font-bold text-green-400 mb-1" style={{fontFamily: 'Orbitron, sans-serif'}}>{stats.realPayments || 0}</div>
+                <div className="text-3xl font-bold text-green-400 mb-1" className='font-orbitron'>{stats.realPayments || 0}</div>
                 <div className="text-gray-400">Payments</div>
               </div>
               <div className="p-4 rounded-xl bg-[#050510] border border-white/5">
-                <div className="text-3xl font-bold text-blue-400 mb-1" style={{fontFamily: 'Orbitron, sans-serif'}}>${((stats.earnings || 0) / 100).toFixed(2)}</div>
+                <div className="text-3xl font-bold text-blue-400 mb-1" className='font-orbitron'>${((stats.earnings || 0) / 100).toFixed(2)}</div>
                 <div className="text-gray-400">Revenue</div>
               </div>
             </div>
@@ -86,7 +86,7 @@ export default async function APIPage() {
           {/* Endpoints */}
           <div className="rounded-2xl bg-[#0a0a15] border border-white/5 overflow-hidden mb-8">
             <div className="p-6 border-b border-white/5">
-              <h2 className="text-2xl font-bold" style={{fontFamily: 'Orbitron, sans-serif'}}>Available Endpoints</h2>
+              <h2 className="text-2xl font-bold" className='font-orbitron'>Available Endpoints</h2>
             </div>
             <table className="w-full">
               <thead className="bg-[#050510]">
@@ -131,7 +131,7 @@ export default async function APIPage() {
           {/* Code Example */}
           <div className="rounded-2xl bg-[#0a0a15] border border-white/5 overflow-hidden">
             <div className="p-6 border-b border-white/5">
-              <h2 className="text-2xl font-bold" style={{fontFamily: 'Orbitron, sans-serif'}}>Quick Start</h2>
+              <h2 className="text-2xl font-bold" className='font-orbitron'>Quick Start</h2>
             </div>
             <div className="p-6">
               <p className="text-gray-300 mb-4">

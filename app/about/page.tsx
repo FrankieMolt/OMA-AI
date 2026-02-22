@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <main className="min-h-screen bg-[#050510] text-white font-['Exo_2',sans-serif]">
+    <main className="min-h-screen bg-[#050510] text-white font-exo2">
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-[#050510]/90 backdrop-blur-xl border-b border-white/5">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
@@ -17,7 +17,7 @@ export default function AboutPage() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
               </svg>
             </div>
-            <span className="font-bold text-lg tracking-tight" style={{fontFamily: 'Orbitron, sans-serif'}}>About</span>
+            <span className="font-bold text-lg tracking-tight" className='font-orbitron'>About</span>
           </a>
         </div>
       </nav>
@@ -26,7 +26,7 @@ export default function AboutPage() {
         <div className="max-w-4xl mx-auto">
           {/* Hero */}
           <div className="text-center mb-16">
-            <h1 className="text-5xl font-bold mb-6" style={{fontFamily: 'Orbitron, sans-serif'}}>
+            <h1 className="text-5xl font-bold mb-6" className='font-orbitron'>
               About OMA-AI
             </h1>
             <p className="text-2xl text-gray-300">
@@ -36,7 +36,7 @@ export default function AboutPage() {
 
           {/* Mission */}
           <div className="mb-16">
-            <h2 className="text-3xl font-bold mb-6 text-blue-400" style={{fontFamily: 'Orbitron, sans-serif'}}>
+            <h2 className="text-3xl font-bold mb-6 text-blue-400" className='font-orbitron'>
               Our Mission
             </h2>
             <div className="p-8 rounded-2xl bg-gradient-to-br from-[#0a0a15] to-[#050510] border border-white/5">
@@ -54,7 +54,7 @@ export default function AboutPage() {
 
           {/* What We Offer */}
           <div className="mb-16">
-            <h2 className="text-3xl font-bold mb-6 text-blue-400" style={{fontFamily: 'Orbitron, sans-serif'}}>
+            <h2 className="text-3xl font-bold mb-6 text-blue-400" className='font-orbitron'>
               What We Offer
             </h2>
             <div className="space-y-4">
@@ -86,7 +86,7 @@ export default function AboutPage() {
 
           {/* Stats */}
           <div className="mb-16">
-            <h2 className="text-3xl font-bold mb-6 text-blue-400" style={{fontFamily: 'Orbitron, sans-serif'}}>
+            <h2 className="text-3xl font-bold mb-6 text-blue-400" className='font-orbitron'>
               Platform Stats
             </h2>
             <div className="grid md:grid-cols-4 gap-6">
@@ -97,7 +97,7 @@ export default function AboutPage() {
                 { label: 'Network', value: 'Base' },
               ].map((stat, i) => (
                 <div key={i} className="p-6 rounded-xl bg-[#0a0a15] border border-white/5 text-center">
-                  <div className="text-3xl font-bold text-white mb-2" style={{fontFamily: 'Orbitron, sans-serif'}}>
+                  <div className="text-3xl font-bold text-white mb-2" className='font-orbitron'>
                     {stat.value}
                   </div>
                   <div className="text-gray-400">{stat.label}</div>
@@ -108,7 +108,7 @@ export default function AboutPage() {
 
           {/* Tech Stack */}
           <div className="mb-16">
-            <h2 className="text-3xl font-bold mb-6 text-blue-400" style={{fontFamily: 'Orbitron, sans-serif'}}>
+            <h2 className="text-3xl font-bold mb-6 text-blue-400" className='font-orbitron'>
               Built With
             </h2>
             <div className="grid md:grid-cols-3 gap-4">
@@ -129,7 +129,7 @@ export default function AboutPage() {
 
           {/* CTA */}
           <div className="p-8 rounded-2xl bg-gradient-to-br from-blue-500/10 to-purple-500/10 border border-blue-500/20 text-center">
-            <h2 className="text-3xl font-bold mb-4" style={{fontFamily: 'Orbitron, sans-serif'}}>
+            <h2 className="text-3xl font-bold mb-4" className='font-orbitron'>
               Ready to Get Started?
             </h2>
             <p className="text-gray-300 mb-8">

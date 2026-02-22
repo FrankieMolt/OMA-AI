@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 
 export default function DocsPage() {
   return (
-    <main className="min-h-screen bg-[#050510] text-white font-['Exo_2',sans-serif]">
+    <main className="min-h-screen bg-[#050510] text-white font-exo2">
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-[#050510]/90 backdrop-blur-xl border-b border-white/5">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
@@ -17,14 +17,14 @@ export default function DocsPage() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
               </svg>
             </div>
-            <span className="font-bold text-lg tracking-tight" style={{fontFamily: 'Orbitron, sans-serif'}}>Documentation</span>
+            <span className="font-bold text-lg tracking-tight" className='font-orbitron'>Documentation</span>
           </a>
         </div>
       </nav>
 
       <div className="pt-24 pb-16 px-6">
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-5xl font-bold mb-4" style={{fontFamily: 'Orbitron, sans-serif'}}>
+          <h1 className="text-5xl font-bold mb-4" className='font-orbitron'>
             Documentation
           </h1>
           <p className="text-xl text-gray-300 mb-12">
@@ -33,7 +33,7 @@ export default function DocsPage() {
 
           {/* Quick Start */}
           <section className="mb-12">
-            <h2 className="text-3xl font-bold mb-6 text-blue-400" style={{fontFamily: 'Orbitron, sans-serif'}}>
+            <h2 className="text-3xl font-bold mb-6 text-blue-400" className='font-orbitron'>
               Quick Start
             </h2>
             <div className="p-8 rounded-2xl bg-gradient-to-br from-[#0a0a15] to-[#050510] border border-white/5">
@@ -62,7 +62,7 @@ curl https://frankie-prod.life.conway.tech/price
 
           {/* x402 Payments */}
           <section className="mb-12">
-            <h2 className="text-3xl font-bold mb-6 text-blue-400" style={{fontFamily: 'Orbitron, sans-serif'}}>
+            <h2 className="text-3xl font-bold mb-6 text-blue-400" className='font-orbitron'>
               x402 Payments
             </h2>
             <div className="p-8 rounded-2xl bg-gradient-to-br from-[#0a0a15] to-[#050510] border border-white/5">
@@ -89,7 +89,7 @@ curl -H "X-Payment: <proof>" \\
 
           {/* Endpoints */}
           <section>
-            <h2 className="text-3xl font-bold mb-6 text-blue-400" style={{fontFamily: 'Orbitron, sans-serif'}}>
+            <h2 className="text-3xl font-bold mb-6 text-blue-400" className='font-orbitron'>
               Available Endpoints
             </h2>
             <div className="space-y-4">
@@ -104,7 +104,7 @@ curl -H "X-Payment: <proof>" \\
                     <code className="text-blue-400 font-mono text-lg mb-2 block">{ep.path}</code>
                     <p className="text-gray-400">{ep.desc}</p>
                   </div>
-                  <span className="text-2xl font-bold text-green-400" style={{fontFamily: 'Orbitron, sans-serif'}}>{ep.cost}</span>
+                  <span className="text-2xl font-bold text-green-400" className='font-orbitron'>{ep.cost}</span>
                 </div>
               ))}
             </div>
