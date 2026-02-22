@@ -4,139 +4,33 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap');
 
+:root {
+  --color-primary: #3b82f6;
+  --color-primary-dark: #2563eb;
+  --color-accent: #22c55e;
+  --bg-dark: #050510;
+  --bg-card: #0a0a15;
+  --text-primary: #f0f0f5;
+  --text-secondary: #8b8b9a;
+  --border: rgba(255, 255, 255, 0.08);
+}
+
 @layer base {
-  :root {
-    /* Colors */
-    --color-primary: #3b82f6;
-    --color-primary-dark: #2563eb;
-    --color-primary-light: #60a5fa;
-    --color-accent: #22c55e;
-    --color-warning: #eab308;
-    --color-error: #ef4444;
-    
-    /* Backgrounds */
-    --bg-ultra-dark: #050510;
-    --bg-dark: #0a0a15;
-    --bg-surface: #0f0f1a;
-    --bg-elevated: #15151f;
-    
-    /* Text */
-    --text-primary: #f0f0f5;
-    --text-secondary: #8b8b9a;
-    --text-muted: #6b6b7a;
-    
-    /* Borders */
-    --border-default: rgba(255, 255, 255, 0.08);
-    --border-active: rgba(255, 255, 255, 0.15);
-    --border-primary: rgba(59, 130, 246, 0.3);
-    
-    /* Glass */
-    --glass-bg: rgba(10, 10, 21, 0.8);
-    --glass-border: rgba(255, 255, 255, 0.08);
-    
-    /* Radius */
-    --radius: 0.5rem;
-  }
-
-  * {
-    @apply border-border;
-  }
-
-  body {
-    @apply bg-background text-foreground;
+  * { @apply border-[var(--border)]; }
+  body { 
+    @apply bg-[var(--bg-dark)] text-[var(--text-primary)];
     font-family: 'Inter', sans-serif;
-    background: var(--bg-ultra-dark);
-    color: var(--text-primary);
   }
 }
 
 @layer components {
-  .glass-card {
-    @apply rounded-xl p-6 transition-all duration-200;
-    background: var(--glass-bg);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid var(--glass-border);
+  .card {
+    @apply p-6 rounded-xl bg-[var(--bg-card)] border border-[var(--border)];
   }
-
-  .glass-card:hover {
-    border-color: var(--border-active);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
-  }
-
-  .btn {
-    @apply inline-flex items-center justify-center gap-2 rounded-lg font-medium text-sm cursor-pointer transition-all duration-200 border-none no-underline;
-    padding: 0.5rem 1.5rem;
-  }
-
   .btn-primary {
-    @apply text-white shadow-sm;
-    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+    @apply px-4 py-2 bg-blue-500 hover:bg-blue-600 rounded-lg text-white font-medium transition-colors;
   }
-
-  .btn-primary:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
-  }
-
   .btn-secondary {
-    @apply text-gray-100 bg-transparent;
-    border: 1px solid var(--border-default);
-  }
-
-  .btn-secondary:hover {
-    border-color: var(--color-primary);
-    background: rgba(59, 130, 246, 0.1);
-  }
-
-  .btn-ghost {
-    @apply bg-transparent text-gray-400 bg-transparent;
-  }
-
-  .btn-ghost:hover {
-    @apply text-gray-100;
-    background: rgba(255, 255, 255, 0.05);
-  }
-
-  .badge {
-    @apply inline-flex items-center text-xs font-medium rounded-md;
-    padding: 0.25rem 0.5rem;
-    background: rgba(59, 130, 246, 0.2);
-    color: var(--color-primary-light);
-    border: 1px solid var(--border-primary);
-  }
-
-  .badge-success {
-    background: rgba(34, 197, 94, 0.2);
-    color: var(--color-accent);
-    border-color: rgba(34, 197, 94, 0.3);
-  }
-
-  .code-block {
-    @apply rounded-lg p-4 overflow-x-auto text-sm;
-    background: var(--bg-dark);
-    border: 1px solid var(--border-default);
-    font-family: 'Fira Code', monospace;
-  }
-}
-
-@layer utilities {
-  .animate-pulse {
-    animation: pulse 1.5s ease-in-out infinite;
-  }
-
-  .animate-glow {
-    animation: glow 2s ease-in-out infinite;
-  }
-
-  @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.5; }
-  }
-
-  @keyframes glow {
-    0%, 100% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.3); }
-    50% { box-shadow: 0 0 30px rgba(59, 130, 246, 0.5); }
+    @apply px-4 py-2 border border-gray-600 hover:border-blue-400 rounded-lg text-white transition-colors;
   }
 }
