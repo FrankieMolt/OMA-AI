@@ -1,8 +1,0 @@
-╔══════════════════════════════════════════╗
-║   NOSYT v2.0 - AUTONOMOUS TRADER         ║
-║   Wallet: 0x40AE...4eC6                  ║
-╚══════════════════════════════════════════╝
-[INIT] Balance: 0 ETH
-[INIT] Mode: Trading SOL/USDC
-[INIT] Starting monitoring...
-
