@@ -2,145 +2,113 @@ import { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'OMA-AI | Open Market Access for AI Agents',
-  description: 'The premier API marketplace for AI agents. Discover, access, and pay for APIs with x402 crypto micropayments.',
+  description: 'The premier API marketplace for AI agents.',
 }
 
 export default function LandingPage() {
-  const features = [
-    {
-      icon: '🔌',
-      title: 'API Access',
-      description: 'Connect to crypto data, market signals, and on-chain analytics in real-time.',
-      gradient: 'from-blue-500 to-cyan-500'
-    },
-    {
-      icon: '💳',
-      title: 'x402 Payments',
-      description: 'Accept micropayments automatically. Pay per request, no subscriptions.',
-      gradient: 'from-purple-500 to-pink-500'
-    },
-    {
-      icon: '🤖',
-      title: 'Agent Infrastructure',
-      description: 'Memory, scheduling, and autonomous operation built-in from day one.',
-      gradient: 'from-orange-500 to-red-500'
-    }
-  ]
-
-  const stats = [
-    { label: 'APIs Live', value: '2' },
-    { label: 'Response Time', value: '<100ms' },
-    { label: 'Uptime', value: '99.9%' },
-    { label: 'Starting Price', value: '$0.05' }
-  ]
-
   return (
-    <main className="min-h-screen bg-[var(--bg-ultra-dark)]">
+    <main className="min-h-screen bg-[#050510] text-white">
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-lg bg-[var(--bg-ultra-dark)]/80 border-b border-[var(--border-default)]">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-[#050510]/80 backdrop-blur-lg border-b border-white/10">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <a href="/" className="flex items-center gap-2">
+          <a href="/" className="flex items-center gap-2 text-white">
             <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
-              <span className="text-white font-bold text-sm">OMA</span>
+              <span className="font-bold text-sm">OMA</span>
             </div>
-            <span className="font-semibold text-[var(--text-primary)]">OMA-AI</span>
+            <span className="font-semibold">OMA-AI</span>
           </a>
           
           <div className="hidden md:flex items-center gap-8">
-            <a href="/api" className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">API</a>
-            <a href="/dashboard" className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Dashboard</a>
-            <a href="/docs" className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Docs</a>
-            <a href="/tasks" className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Tasks</a>
+            <a href="/api" className="text-gray-400 hover:text-white transition-colors">API</a>
+            <a href="/dashboard" className="text-gray-400 hover:text-white transition-colors">Dashboard</a>
+            <a href="/docs" className="text-gray-400 hover:text-white transition-colors">Docs</a>
+            <a href="/tasks" className="text-gray-400 hover:text-white transition-colors">Tasks</a>
           </div>
           
-          <a href="/api" className="btn btn-primary">
+          <a href="/api" className="px-4 py-2 bg-blue-500 hover:bg-blue-600 rounded-lg text-white font-medium transition-colors">
             Get Started
           </a>
         </div>
       </nav>
 
-      {/* Hero Section */}
-      <section className="pt-32 pb-20 px-6 relative overflow-hidden">
-        {/* Background gradient */}
-        <div className="absolute inset-0 bg-gradient-to-b from-blue-500/10 via-transparent to-transparent pointer-events-none" />
-        
-        <div className="max-w-7xl mx-auto relative">
-          <div className="text-center max-w-4xl mx-auto">
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
-              Open Market Access
-              <br />
-              <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-                for AI Agents
-              </span>
-            </h1>
-            
-            <p className="text-xl text-[var(--text-secondary)] mb-10 max-w-2xl mx-auto">
-              Connect your AI agents to markets, APIs, and revenue opportunities. 
-              Built for autonomous operation with instant micropayments.
-            </p>
-            
-            <div className="flex gap-4 justify-center flex-wrap">
-              <a href="/api" className="btn btn-primary text-lg px-8 py-3">
-                Explore APIs
-              </a>
-              <a href="/docs" className="btn btn-secondary text-lg px-8 py-3">
-                Read Docs
-              </a>
-            </div>
+      {/* Hero */}
+      <section className="pt-32 pb-20 px-6">
+        <div className="max-w-7xl mx-auto text-center">
+          <h1 className="text-5xl md:text-6xl font-bold mb-6">
+            Open Market Access
+            <br />
+            <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+              for AI Agents
+            </span>
+          </h1>
+          
+          <p className="text-xl text-gray-400 mb-10 max-w-2xl mx-auto">
+            Connect your AI agents to markets, APIs, and revenue opportunities.
+            Built for autonomous operation with instant micropayments.
+          </p>
+          
+          <div className="flex gap-4 justify-center">
+            <a href="/api" className="px-8 py-3 bg-blue-500 hover:bg-blue-600 rounded-lg text-white font-medium transition-colors text-lg">
+              Explore APIs
+            </a>
+            <a href="/docs" className="px-8 py-3 border border-gray-600 hover:border-blue-400 rounded-lg text-white font-medium transition-colors text-lg">
+              Read Docs
+            </a>
           </div>
         </div>
       </section>
 
-      {/* Features Section */}
-      <section className="py-20 px-6">
+      {/* Features */}
+      <section className="py-20 px-6 border-t border-white/5">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold mb-4">What OMA-AI Provides</h2>
-            <p className="text-[var(--text-secondary)]">Everything you need to build autonomous revenue-generating agents</p>
-          </div>
+          <h2 className="text-3xl font-bold mb-4 text-center">What OMA-AI Provides</h2>
+          <p className="text-gray-400 text-center mb-16">Everything you need to build autonomous revenue-generating agents</p>
           
           <div className="grid md:grid-cols-3 gap-8">
-            {features.map((feature, i) => (
-              <div key={i} className="glass-card group cursor-pointer">
-                <div className={`text-4xl mb-4 bg-gradient-to-r ${feature.gradient} bg-clip-text`}>
-                  {feature.icon}
-                </div>
-                <h3 className="text-xl font-semibold mb-3">{feature.title}</h3>
-                <p className="text-[var(--text-secondary)]">{feature.description}</p>
+            {[
+              { icon: '🔌', title: 'API Access', desc: 'Connect to crypto data, market signals, and on-chain analytics in real-time.' },
+              { icon: '💳', title: 'x402 Payments', desc: 'Accept micropayments automatically. Pay per request, no subscriptions.' },
+              { icon: '🤖', title: 'Agent Infrastructure', desc: 'Memory, scheduling, and autonomous operation built-in from day one.' },
+            ].map((f, i) => (
+              <div key={i} className="p-6 rounded-xl bg-[#0a0a15] border border-white/5 hover:border-white/10 transition-colors">
+                <div className="text-4xl mb-4">{f.icon}</div>
+                <h3 className="text-xl font-semibold mb-3">{f.title}</h3>
+                <p className="text-gray-400">{f.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="py-16 px-6 border-y border-[var(--border-default)]">
+      {/* Stats */}
+      <section className="py-16 px-6 border-y border-white/5">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            {stats.map((stat, i) => (
+            {[
+              { value: '2', label: 'APIs Live' },
+              { value: '<100ms', label: 'Response Time' },
+              { value: '99.9%', label: 'Uptime' },
+              { value: '$0.05', label: 'Starting Price' },
+            ].map((s, i) => (
               <div key={i}>
-                <div className="text-4xl font-bold text-[var(--color-primary)] mb-2">
-                  {stat.value}
-                </div>
-                <div className="text-[var(--text-secondary)] text-sm">{stat.label}</div>
+                <div className="text-4xl font-bold text-blue-400 mb-2">{s.value}</div>
+                <div className="text-gray-400 text-sm">{s.label}</div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
+      {/* CTA */}
       <section className="py-20 px-6">
-        <div className="max-w-4xl mx-auto text-center glass-card">
+        <div className="max-w-4xl mx-auto text-center p-8 rounded-xl bg-[#0a0a15] border border-white/5">
           <h2 className="text-3xl font-bold mb-4">Ready to Start?</h2>
-          <p className="text-[var(--text-secondary)] mb-8">
-            Get started with our APIs in minutes. Pay only for what you use.
-          </p>
-          <div className="flex gap-4 justify-center flex-wrap">
-            <a href="/api" className="btn btn-primary">
+          <p className="text-gray-400 mb-8">Get started with our APIs in minutes. Pay only for what you use.</p>
+          <div className="flex gap-4 justify-center">
+            <a href="/api" className="px-6 py-2 bg-blue-500 hover:bg-blue-600 rounded-lg text-white font-medium transition-colors">
               Browse APIs
             </a>
-            <a href="https://github.com/FrankieMolt" className="btn btn-secondary" target="_blank" rel="noopener noreferrer">
+            <a href="https://github.com/FrankieMolt" className="px-6 py-2 border border-gray-600 hover:border-blue-400 rounded-lg text-white font-medium transition-colors">
               View on GitHub
             </a>
           </div>
@@ -148,16 +116,14 @@ export default function LandingPage() {
       </section>
 
       {/* Footer */}
-      <footer className="py-12 px-6 border-t border-[var(--border-default)]">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="text-[var(--text-secondary)]">
-            © 2026 OMA-AI. Open Market Access for AI Agents.
-          </div>
+      <footer className="py-12 px-6 border-t border-white/5">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-gray-400">
+          <div>© 2026 OMA-AI. Open Market Access for AI Agents.</div>
           <div className="flex gap-6">
-            <a href="/api" className="text-[var(--text-secondary)] hover:text-[var(--text-primary)]">API</a>
-            <a href="/docs" className="text-[var(--text-secondary)] hover:text-[var(--text-primary)]">Docs</a>
-            <a href="/dashboard" className="text-[var(--text-secondary)] hover:text-[var(--text-primary)]">Dashboard</a>
-            <a href="https://github.com/FrankieMolt" className="text-[var(--text-secondary)] hover:text-[var(--text-primary)]">GitHub</a>
+            <a href="/api" className="hover:text-white">API</a>
+            <a href="/docs" className="hover:text-white">Docs</a>
+            <a href="/dashboard" className="hover:text-white">Dashboard</a>
+            <a href="https://github.com/FrankieMolt" className="hover:text-white">GitHub</a>
           </div>
         </div>
       </footer>
