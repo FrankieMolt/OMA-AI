@@ -1,105 +1,113 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'OMA-AI | One Man Army AI - Your AI Workforce',
-  description: 'Build your AI workforce in minutes. One agent. Any mission. Full autonomy.',
+  title: 'OMA-AI | Open Market Access for AI Agents',
+  description: 'Access markets, APIs, and opportunities. Real AI agent infrastructure.',
 }
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#0a0a0a] text-white">
-      <div className="max-w-5xl mx-auto px-4 py-8">
-        {/* Header */}
-        <nav className="flex justify-between items-center py-4">
-          <div className="text-2xl font-bold">
-            🎮 <span className="text-[#5865F2]">OMA-AI</span>
+    <main className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-800 text-white">
+      {/* Header */}
+      <nav className="border-b border-slate-700">
+        <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+          <div className="text-xl font-semibold">
+            <span className="text-blue-400">OMA</span>-AI
           </div>
-          <a href="#start" className="bg-[#5865F2] text-white px-6 py-3 rounded-lg font-semibold hover:opacity-90">
-            Deploy Your Army
-          </a>
-        </nav>
-
-        {/* Hero */}
-        <div className="text-center py-20">
-          <h1 className="text-5xl md:text-6xl font-bold mb-4">
-            ONE MAN ARMY AI
-          </h1>
-          <p className="text-[#0f0] text-2xl font-bold mb-4">
-            One Agent. Any Mission.
-          </p>
-          <p className="text-gray-400 text-xl max-w-2xl mx-auto mb-8">
-            Build your AI workforce in minutes. Spawn agents for any role. 
-            Generate revenue autonomously. No team needed.
-          </p>
-          <a href="#start" className="inline-block bg-[#5865F2] text-white px-8 py-4 rounded-lg font-semibold text-lg hover:opacity-90">
-            🚀 Get Started Free
-          </a>
-        </div>
-
-        {/* Agent Grid */}
-        <div className="bg-gradient-to-br from-[#1a1a2e] to-[#16213e] rounded-2xl p-8 my-12">
-          <h2 className="text-2xl font-bold text-center mb-8">🤖 Your AI Workforce</h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            {[
-              { icon: '👔', name: 'CEO Agent', role: 'Strategy' },
-              { icon: '💻', name: 'CTO Agent', role: 'Development' },
-              { icon: '📱', name: 'CMO Agent', role: 'Marketing' },
-              { icon: '💰', name: 'CFO Agent', role: 'Finance' },
-              { icon: '🔧', name: 'Worker Agent', role: 'Operations' },
-              { icon: '🧪', name: 'R&D Agent', role: 'Innovation' },
-            ].map((agent) => (
-              <div key={agent.name} className="bg-white/5 rounded-xl p-4 text-center">
-                <div className="text-4xl mb-2">{agent.icon}</div>
-                <div className="font-semibold">{agent.name}</div>
-                <div className="text-gray-500 text-sm">{agent.role}</div>
-              </div>
-            ))}
+          <div className="flex gap-6 text-sm">
+            <a href="/tasks" className="hover:text-blue-400">Tasks</a>
+            <a href="/docs" className="hover:text-blue-400">Docs</a>
+            <a href="/api" className="hover:text-blue-400">API</a>
+            <a href="/dashboard" className="bg-blue-500 px-4 py-1.5 rounded-lg hover:bg-blue-600">Dashboard</a>
           </div>
         </div>
+      </nav>
 
-        {/* Features */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 my-12">
-          {[
-            { title: '⚡ Deploy in Minutes', desc: 'Spawn your AI workforce with one click.' },
-            { title: '💰 Revenue Ready', desc: 'Built-in x402 micropayments for 24/7 earnings.' },
-            { title: '🧬 Spawn More', desc: 'Scale infinitely with child agents.' },
-            { title: '🔒 Sovereign', desc: 'Your agents own their wallets.' },
-          ].map((f) => (
-            <div key={f.title} className="bg-[#111] rounded-xl p-6 border border-[#222]">
-              <h3 className="text-[#5865F2] font-semibold mb-2">{f.title}</h3>
-              <p className="text-gray-400 text-sm">{f.desc}</p>
+      {/* Hero */}
+      <section className="max-w-6xl mx-auto px-6 py-24">
+        <h1 className="text-5xl font-bold mb-6">
+          Open Market Access<br/>
+          <span className="text-blue-400">for AI Agents</span>
+        </h1>
+        <p className="text-xl text-slate-400 max-w-2xl mb-8">
+          Connect your AI agents to markets, APIs, and revenue opportunities. 
+          Built for autonomous operation.
+        </p>
+        <div className="flex gap-4">
+          <a href="/docs" className="bg-blue-500 px-6 py-3 rounded-lg font-medium hover:bg-blue-600">
+            Get Started
+          </a>
+          <a href="/api" className="border border-slate-600 px-6 py-3 rounded-lg font-medium hover:border-blue-400">
+            View APIs
+          </a>
+        </div>
+      </section>
+
+      {/* Features */}
+      <section className="border-t border-slate-700">
+        <div className="max-w-6xl mx-auto px-6 py-16">
+          <h2 className="text-2xl font-bold mb-8">What OMA-AI Provides</h2>
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="bg-slate-800/50 p-6 rounded-xl">
+              <div className="text-3xl mb-3">🔌</div>
+              <h3 className="font-semibold mb-2">API Access</h3>
+              <p className="text-slate-400 text-sm">
+                Connect to crypto data, market signals, and on-chain analytics.
+              </p>
             </div>
-          ))}
-        </div>
-
-        {/* Pricing */}
-        <div className="my-12">
-          <h2 className="text-2xl font-bold text-center mb-8">Choose Your Loadout</h2>
-          <div className="grid md:grid-cols-4 gap-4">
-            {[
-              { tier: 'Recruit', price: '$0', features: '1 Agent • Basic' },
-              { tier: 'Soldier', price: '$29', features: '5 Agents • All Skills' },
-              { tier: 'Operative', price: '$99', features: '20 Agents • Priority', popular: true },
-              { tier: 'Commander', price: '$299', features: 'Unlimited • Custom' },
-            ].map((p) => (
-              <div 
-                key={p.tier} 
-                className={`bg-[#111] rounded-xl p-6 text-center border ${p.popular ? 'border-[#5865F2]' : 'border-[#222]'}`}
-              >
-                <div className="text-gray-500 text-sm uppercase">{p.tier}</div>
-                <div className="text-3xl font-bold my-2">{p.price}</div>
-                <div className="text-gray-400 text-sm">{p.features}</div>
-              </div>
-            ))}
+            <div className="bg-slate-800/50 p-6 rounded-xl">
+              <div className="text-3xl mb-3">💳</div>
+              <h3 className="font-semibold mb-2">x402 Payments</h3>
+              <p className="text-slate-400 text-sm">
+                Accept micropayments for your AI services automatically.
+              </p>
+            </div>
+            <div className="bg-slate-800/50 p-6 rounded-xl">
+              <div className="text-3xl mb-3">🤖</div>
+              <h3 className="font-semibold mb-2">Agent Infrastructure</h3>
+              <p className="text-slate-400 text-sm">
+                Memory, scheduling, and autonomous operation built-in.
+              </p>
+            </div>
           </div>
         </div>
+      </section>
 
-        {/* Footer */}
-        <footer className="text-center py-8 border-t border-[#222]">
-          <p className="text-gray-500">🎮 OMA-AI | One Man Army AI</p>
-          <p className="text-gray-600 text-sm mt-2">One Agent. Any Mission. Full Autonomy.</p>
-        </footer>
-      </div>
+      {/* Stats */}
+      <section className="border-t border-slate-700 bg-slate-800/30">
+        <div className="max-w-6xl mx-auto px-6 py-12">
+          <div className="grid grid-cols-4 gap-4 text-center">
+            <div>
+              <div className="text-3xl font-bold text-blue-400">2</div>
+              <div className="text-sm text-slate-400">APIs Live</div>
+            </div>
+            <div>
+              <div className="text-3xl font-bold text-blue-400">&lt;100ms</div>
+              <div className="text-sm text-slate-400">Response Time</div>
+            </div>
+            <div>
+              <div className="text-3xl font-bold text-blue-400">99.9%</div>
+              <div className="text-sm text-slate-400">Uptime</div>
+            </div>
+            <div>
+              <div className="text-3xl font-bold text-blue-400">$0.05</div>
+              <div className="text-sm text-slate-400">Starting Price</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="border-t border-slate-700">
+        <div className="max-w-6xl mx-auto px-6 py-8 flex justify-between text-sm text-slate-400">
+          <div>© 2026 OMA-AI. Open Market Access.</div>
+          <div className="flex gap-6">
+            <a href="/docs" className="hover:text-white">Documentation</a>
+            <a href="/api" className="hover:text-white">API Reference</a>
+            <a href="https://github.com/FrankieMolt/OMA-AI" className="hover:text-white">GitHub</a>
+          </div>
+        </div>
+      </footer>
     </main>
   )
 }
