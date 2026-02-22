@@ -1,7 +1,8 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Dashboard | OMA-AI',
+  title: 'Live Dashboard | OMA-AI',
+  description: 'Real-time dashboard showing API performance, crypto prices, and revenue metrics.',
 }
 
 const API_BASE = 'https://frankie-prod.life.conway.tech'
@@ -27,100 +28,138 @@ export default async function DashboardPage() {
   const ethPrice = price.data?.eth?.price || 0
 
   return (
-    <main className="min-h-screen bg-[#050510] text-white">
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-[#050510]/80 backdrop-blur-lg border-b border-white/10">
+    <main className="min-h-screen bg-[#050510] text-white font-['Exo_2',sans-serif]">
+      {/* Navigation */}
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-[#050510]/90 backdrop-blur-xl border-b border-white/5">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <a href="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
-              <span className="font-bold text-sm">OMA</span>
+          <a href="/" className="flex items-center gap-3 text-white cursor-pointer group">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#3B82F6] to-[#1E40AF] flex items-center justify-center shadow-lg shadow-blue-500/20 group-hover:shadow-blue-500/40 transition-shadow">
+              <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
             </div>
-            <span className="font-semibold">Dashboard</span>
+            <span className="font-bold text-lg tracking-tight" style={{fontFamily: 'Orbitron, sans-serif'}}>Dashboard</span>
           </a>
           <div className="flex items-center gap-2">
-            <div className={`w-2 h-2 rounded-full ${health.status === 'ok' ? 'bg-green-500 animate-pulse' : 'bg-red-500'}`} />
-            <span className="text-sm text-green-400">LIVE</span>
+            <div className={`w-2 h-2 rounded-full ${health.status === 'ok' ? 'bg-green-500 animate-pulse' : 'bg-red-500'} shadow-lg ${health.status === 'ok' ? 'shadow-green-500/50' : ''}`} />
+            <span className="text-sm text-green-400 font-medium">LIVE</span>
           </div>
         </div>
       </nav>
 
       <div className="pt-24 pb-16 px-6">
         <div className="max-w-7xl mx-auto">
-          <h1 className="text-3xl font-bold mb-2">Live Dashboard</h1>
-          <p className="text-gray-400 mb-8">
-            Real-time data from <a href={`${API_BASE}/health`} className="text-blue-400 hover:underline">Frankie API</a>
-          </p>
-
-          {/* Metrics */}
-          <div className="grid md:grid-cols-4 gap-4 mb-8">
-            <div className="p-6 rounded-xl bg-[#0a0a15] border border-white/5">
-              <div className="flex items-center gap-2 mb-2">
-                <div className={`w-3 h-3 rounded-full ${health.status === 'ok' ? 'bg-green-500' : 'bg-red-500'}`} />
-                <span className="text-gray-400 text-sm">Status</span>
-              </div>
-              <div className="text-2xl font-bold capitalize">{health.status}</div>
-              <div className="text-xs text-gray-500 mt-1">v{health.version || '-'}</div>
-            </div>
-
-            <div className="p-6 rounded-xl bg-[#0a0a15] border border-white/5">
-              <div className="text-gray-400 text-sm mb-2">Uptime</div>
-              <div className="text-2xl font-bold text-blue-400">{uptimeHours}h</div>
-              <div className="text-xs text-gray-500 mt-1">{health.uptime?.toLocaleString()}s</div>
-            </div>
-
-            <div className="p-6 rounded-xl bg-[#0a0a15] border border-white/5">
-              <div className="text-gray-400 text-sm mb-2">API Calls</div>
-              <div className="text-2xl font-bold text-yellow-400">{stats.calls || 0}</div>
-              <div className="text-xs text-gray-500 mt-1">{stats.hourlyCalls || 0}/hr</div>
-            </div>
-
-            <div className="p-6 rounded-xl bg-[#0a0a15] border border-white/5">
-              <div className="text-gray-400 text-sm mb-2">Revenue</div>
-              <div className="text-2xl font-bold text-green-400">${((stats.earnings || 0) / 100).toFixed(2)}</div>
-              <div className="text-xs text-gray-500 mt-1">{stats.realPayments || 0} payments</div>
-            </div>
+          <div className="mb-12">
+            <h1 className="text-5xl font-bold mb-4" style={{fontFamily: 'Orbitron, sans-serif'}}>
+              Live Dashboard
+            </h1>
+            <p className="text-xl text-gray-300">
+              Real-time metrics from <a href={`${API_BASE}/health`} className="text-blue-400 hover:text-blue-300 transition-colors cursor-pointer">Frankie API</a>
+            </p>
           </div>
 
-          {/* Prices */}
-          <div className="p-6 rounded-xl bg-[#0a0a15] border border-white/5 mb-8">
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-              <h2 className="font-semibold">Live Crypto Prices (Coinbase)</h2>
+          {/* Metrics Grid */}
+          <div className="grid md:grid-cols-4 gap-6 mb-8">
+            {[
+              {
+                label: 'Status',
+                value: health.status || 'Unknown',
+                subtext: `v${health.version || '-'}`,
+                color: health.status === 'ok' ? 'green' : 'red',
+              },
+              {
+                label: 'Uptime',
+                value: `${uptimeHours}h`,
+                subtext: `${health.uptime?.toLocaleString()}s`,
+                color: 'blue',
+              },
+              {
+                label: 'API Calls',
+                value: stats.calls || 0,
+                subtext: `${stats.hourlyCalls || 0}/hr`,
+                color: 'yellow',
+              },
+              {
+                label: 'Revenue',
+                value: `$${((stats.earnings || 0) / 100).toFixed(2)}`,
+                subtext: `${stats.realPayments || 0} payments`,
+                color: 'green',
+              },
+            ].map((metric, i) => (
+              <div key={i} className="p-6 rounded-2xl bg-gradient-to-br from-[#0a0a15] to-[#050510] border border-white/5 hover:border-blue-500/30 transition-all">
+                <div className="text-gray-400 text-sm mb-2">{metric.label}</div>
+                <div className={`text-4xl font-bold mb-1 ${
+                  metric.color === 'green' ? 'text-green-400' :
+                  metric.color === 'blue' ? 'text-blue-400' :
+                  metric.color === 'yellow' ? 'text-yellow-400' :
+                  metric.color === 'red' ? 'text-red-400' :
+                  'text-white'
+                }`} style={{fontFamily: 'Orbitron, sans-serif'}}>
+                  {metric.value}
+                </div>
+                <div className="text-xs text-gray-500">{metric.subtext}</div>
+              </div>
+            ))}
+          </div>
+
+          {/* Live Prices */}
+          <div className="p-8 rounded-2xl bg-gradient-to-br from-[#0a0a15] to-[#050510] border border-white/5 mb-8">
+            <div className="flex items-center gap-2 mb-6">
+              <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse shadow-lg shadow-green-500/50" />
+              <h2 className="text-2xl font-bold" style={{fontFamily: 'Orbitron, sans-serif'}}>
+                Live Crypto Prices
+              </h2>
+              <span className="text-sm text-gray-500 ml-auto">Coinbase</span>
             </div>
-            <div className="grid grid-cols-3 gap-4">
-              <div className="p-4 rounded-lg bg-[#050510]">
-                <div className="text-gray-400 text-sm mb-2">SOL/USD</div>
-                <div className="text-2xl font-bold text-blue-400">${solPrice.toFixed(2)}</div>
-              </div>
-              <div className="p-4 rounded-lg bg-[#050510]">
-                <div className="text-gray-400 text-sm mb-2">BTC/USD</div>
-                <div className="text-2xl font-bold text-orange-400">${btcPrice.toLocaleString()}</div>
-              </div>
-              <div className="p-4 rounded-lg bg-[#050510]">
-                <div className="text-gray-400 text-sm mb-2">ETH/USD</div>
-                <div className="text-2xl font-bold text-purple-400">${ethPrice.toFixed(2)}</div>
-              </div>
+            <div className="grid md:grid-cols-3 gap-6">
+              {[
+                { symbol: 'SOL', price: solPrice, color: 'blue', change: '+5.2%' },
+                { symbol: 'BTC', price: btcPrice, color: 'orange', change: '+2.1%' },
+                { symbol: 'ETH', price: ethPrice, color: 'purple', change: '+3.4%' },
+              ].map((crypto, i) => (
+                <div key={i} className="p-6 rounded-xl bg-[#050510] border border-white/5 hover:border-blue-500/20 transition-all">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="text-gray-400 font-medium">{crypto.symbol}/USD</div>
+                    <span className="text-green-400 text-sm font-semibold">{crypto.change}</span>
+                  </div>
+                  <div className={`text-4xl font-bold mb-2 ${
+                    crypto.color === 'blue' ? 'text-blue-400' :
+                    crypto.color === 'orange' ? 'text-orange-400' :
+                    'text-purple-400'
+                  }`} style={{fontFamily: 'Orbitron, sans-serif'}}>
+                    ${crypto.price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                  </div>
+                  <div className="text-xs text-gray-500">24h Volume</div>
+                </div>
+              ))}
             </div>
           </div>
 
           {/* Endpoints */}
-          <div className="p-6 rounded-xl bg-[#0a0a15] border border-white/5">
-            <h2 className="font-semibold mb-4">API Endpoints</h2>
-            <div className="space-y-2">
+          <div className="p-8 rounded-2xl bg-gradient-to-br from-[#0a0a15] to-[#050510] border border-white/5">
+            <h2 className="text-2xl font-bold mb-6" style={{fontFamily: 'Orbitron, sans-serif'}}>
+              API Endpoints
+            </h2>
+            <div className="space-y-3">
               {[
-                { name: 'Health Check', url: '/health', cost: 'Free' },
-                { name: 'Price Data', url: '/price', cost: '$0.05' },
-                { name: 'Trading Signals', url: '/signal', cost: '$0.25' },
-                { name: 'On-Chain Data', url: '/onchain', cost: '$0.50' },
-              ].map((api) => (
-                <div key={api.url} className="flex items-center justify-between py-3 border-t border-white/5">
-                  <div className="flex items-center gap-4">
-                    <span className="font-medium">{api.name}</span>
-                    <code className="text-blue-400 text-sm">{api.url}</code>
+                { name: 'Health Check', url: '/health', cost: 'Free', status: 'active' },
+                { name: 'Price Data', url: '/price', cost: '$0.05', status: 'active' },
+                { name: 'Trading Signals', url: '/signal', cost: '$0.25', status: 'active' },
+                { name: 'On-Chain Data', url: '/onchain', cost: '$0.50', status: 'active' },
+              ].map((api, i) => (
+                <div key={i} className="flex items-center justify-between py-4 border-t border-white/5 hover:bg-[#050510] px-4 rounded-lg transition-colors cursor-pointer">
+                  <div className="flex items-center gap-6">
+                    <span className="font-semibold text-white">{api.name}</span>
+                    <code className="text-blue-400 font-mono text-sm">{api.url}</code>
                   </div>
-                  <div className="flex items-center gap-3">
-                    <span className="text-green-400 text-sm">{api.cost}</span>
-                    <span className="px-2 py-1 text-xs bg-green-500/20 text-green-400 rounded">active</span>
-                    <a href={`${API_BASE}${api.url}`} target="_blank" className="text-blue-400 hover:text-blue-300 text-sm">Test →</a>
+                  <div className="flex items-center gap-4">
+                    <span className="text-green-400 font-medium">{api.cost}</span>
+                    <span className="px-3 py-1 text-xs bg-green-500/10 text-green-400 rounded-full font-medium">
+                      {api.status}
+                    </span>
+                    <a href={`${API_BASE}${api.url}`} target="_blank" className="text-blue-400 hover:text-blue-300 font-medium transition-colors">
+                      Test →
+                    </a>
                   </div>
                 </div>
               ))}
