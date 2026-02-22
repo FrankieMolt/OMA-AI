@@ -27,64 +27,76 @@ export default async function TasksPage() {
   ]
 
   return (
-    <main className="min-h-screen bg-slate-900 text-white">
-      <nav className="border-b border-slate-700">
-        <div className="max-w-6xl mx-auto px-6 py-4">
-          <a href="/" className="text-xl font-semibold"><span className="text-blue-400">OMA</span>-AI</a>
-          <span className="ml-8 text-sm text-slate-400">Tasks</span>
+    <main className="min-h-screen bg-[var(--bg-ultra-dark)]">
+      {/* Navigation */}
+      <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-lg bg-[var(--bg-ultra-dark)]/80 border-b border-[var(--border-default)]">
+        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+          <a href="/" className="flex items-center gap-2">
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+              <span className="text-white font-bold text-sm">OMA</span>
+            </div>
+            <span className="font-semibold text-[var(--text-primary)]">OMA-AI</span>
+          </a>
         </div>
       </nav>
-      
-      <div className="max-w-6xl mx-auto px-6 py-12">
-        <h1 className="text-3xl font-bold mb-2">API Tasks</h1>
-        <p className="text-slate-400 mb-8">Execute API tasks and get real data.</p>
 
-        {/* Stats */}
-        <div className="grid grid-cols-3 gap-4 mb-8">
-          <div className="bg-slate-800 rounded-xl p-4">
-            <div className="text-2xl font-bold text-blue-400">{stats.calls || 0}</div>
-            <div className="text-sm text-slate-400">Total Calls</div>
+      <div className="pt-24 pb-16 px-6">
+        <div className="max-w-7xl mx-auto">
+          <h1 className="text-4xl font-bold mb-2">API Tasks</h1>
+          <p className="text-[var(--text-secondary)] mb-8">Execute API tasks and get real data.</p>
+
+          {/* Stats */}
+          <div className="grid grid-cols-3 gap-4 mb-8">
+            <div className="glass-card">
+              <div className="text-2xl font-bold text-[var(--color-primary)]">{stats.calls || 0}</div>
+              <div className="text-sm text-[var(--text-secondary)]">Total Calls</div>
+            </div>
+            <div className="glass-card">
+              <div className="text-2xl font-bold text-[var(--color-accent)]">{stats.realPayments || 0}</div>
+              <div className="text-sm text-[var(--text-secondary)]">Payments</div>
+            </div>
+            <div className="glass-card">
+              <div className="text-2xl font-bold text-yellow-400">${((stats.earnings || 0) / 100).toFixed(2)}</div>
+              <div className="text-sm text-[var(--text-secondary)]">Earnings</div>
+            </div>
           </div>
-          <div className="bg-slate-800 rounded-xl p-4">
-            <div className="text-2xl font-bold text-green-400">{stats.realPayments || 0}</div>
-            <div className="text-sm text-slate-400">Payments</div>
-          </div>
-          <div className="bg-slate-800 rounded-xl p-4">
-            <div className="text-2xl font-bold text-yellow-400">${((stats.earnings || 0) / 100).toFixed(2)}</div>
-            <div className="text-sm text-slate-400">Earnings</div>
-          </div>
-        </div>
-        
-        {/* Tasks */}
-        <div className="bg-slate-800 rounded-xl overflow-hidden">
-          <table className="w-full">
-            <thead className="bg-slate-700">
-              <tr>
-                <th className="text-left px-6 py-3 text-sm">Task</th>
-                <th className="text-left px-6 py-3 text-sm">Endpoint</th>
-                <th className="text-left px-6 py-3 text-sm">Cost</th>
-                <th className="text-left px-6 py-3 text-sm">Action</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-slate-700">
-              {tasks.map((task) => (
-                <tr key={task.id} className="hover:bg-slate-700/50">
-                  <td className="px-6 py-4">{task.name}</td>
-                  <td className="px-6 py-4 font-mono text-sm text-blue-400">{task.endpoint}</td>
-                  <td className="px-6 py-4 text-green-400">{task.cost}</td>
-                  <td className="px-6 py-4">
-                    <a 
-                      href={`${API_BASE}${task.endpoint}`}
-                      target="_blank"
-                      className="bg-blue-500 hover:bg-blue-600 px-3 py-1 rounded text-sm"
-                    >
-                      Execute
-                    </a>
-                  </td>
+
+          {/* Tasks */}
+          <div className="glass-card overflow-hidden p-0">
+            <table className="w-full">
+              <thead className="bg-[var(--bg-elevated)]">
+                <tr>
+                  <th className="text-left px-6 py-4 text-sm font-semibold">Task</th>
+                  <th className="text-left px-6 py-4 text-sm font-semibold">Endpoint</th>
+                  <th className="text-left px-6 py-4 text-sm font-semibold">Cost</th>
+                  <th className="text-left px-6 py-4 text-sm font-semibold">Action</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {tasks.map((task) => (
+                  <tr key={task.id} className="border-t border-[var(--border-default)] hover:bg-[var(--bg-elevated)]/50 transition-colors">
+                    <td className="px-6 py-4">{task.name}</td>
+                    <td className="px-6 py-4">
+                      <code className="text-[var(--color-primary-light)]">{task.endpoint}</code>
+                    </td>
+                    <td className="px-6 py-4">
+                      <span className="text-[var(--color-accent)] font-semibold">{task.cost}</span>
+                    </td>
+                    <td className="px-6 py-4">
+                      <a
+                        href={`${API_BASE}${task.endpoint}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="btn btn-primary text-sm"
+                      >
+                        Execute
+                      </a>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </main>
