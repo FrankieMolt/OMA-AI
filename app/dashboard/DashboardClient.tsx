@@ -53,7 +53,6 @@ export default function Dashboard() {
         
         setServices(data.services || []);
       } catch (err: any) {
-        console.error('Error fetching services:', err);
         setServices(fallbackServices);
       } finally {
         setTimeout(() => setLoading(false), 500);

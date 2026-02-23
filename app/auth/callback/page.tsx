@@ -28,7 +28,6 @@ export default function AuthCallbackPage() {
           router.push('/auth/login');
         }
       } catch (error) {
-        console.error('Auth callback error:', error);
         router.push('/auth/login');
       }
     };

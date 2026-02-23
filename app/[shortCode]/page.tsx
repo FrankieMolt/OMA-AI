@@ -83,7 +83,6 @@ export default async function RedirectPage({ params }: RedirectPageProps) {
       // Also increment the click count
       await supabase.rpc('increment_link_clicks', { link_uuid: link.id });
     } catch (err) {
-      console.error('Failed to record click:', err);
     }
   })();
   

@@ -89,7 +89,6 @@ export default function MarketplacePage() {
         setDisplayServices(mappedServices);
       }
     } catch (error) {
-      console.error('Failed to fetch services:', error);
     } finally {
       setLoading(false);
     }

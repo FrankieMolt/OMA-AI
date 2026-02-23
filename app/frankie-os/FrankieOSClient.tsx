@@ -111,7 +111,6 @@ export default function FrankieOSDashboard() {
       setTasks([]);
       setEvents([]);
     } catch (error) {
-      console.error('Error loading data:', error);
     } finally {
       setLoading(false);
     }

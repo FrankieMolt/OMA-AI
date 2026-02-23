@@ -41,7 +41,6 @@ export default function SearchPage() {
       const data = await res.json();
       setResults(data.services || []);
     } catch (error) {
-      console.error('Search failed:', error);
     } finally {
       setLoading(false);
     }
