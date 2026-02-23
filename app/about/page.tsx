@@ -17,7 +17,7 @@ export default function AboutPage() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
               </svg>
             </div>
-            <span className="font-bold text-lg tracking-tight" className='font-orbitron'>About</span>
+            <span className="font-orbitron font-bold text-lg tracking-tight">About</span>
           </a>
         </div>
       </nav>
@@ -26,7 +26,7 @@ export default function AboutPage() {
         <div className="max-w-4xl mx-auto">
           {/* Hero */}
           <div className="text-center mb-16">
-            <h1 className="text-5xl font-bold mb-6" className='font-orbitron'>
+            <h1 className="font-orbitron text-5xl font-bold mb-6">
               About OMA-AI
             </h1>
             <p className="text-2xl text-gray-300">
@@ -36,7 +36,7 @@ export default function AboutPage() {
 
           {/* Mission */}
           <div className="mb-16">
-            <h2 className="text-3xl font-bold mb-6 text-blue-400" className='font-orbitron'>
+            <h2 className="font-orbitron text-3xl font-bold mb-6 text-blue-400">
               Our Mission
             </h2>
             <div className="p-8 rounded-2xl bg-gradient-to-br from-[#0a0a15] to-[#050510] border border-white/5">
@@ -54,7 +54,7 @@ export default function AboutPage() {
 
           {/* What We Offer */}
           <div className="mb-16">
-            <h2 className="text-3xl font-bold mb-6 text-blue-400" className='font-orbitron'>
+            <h2 className="font-orbitron text-3xl font-bold mb-6 text-blue-400">
               What We Offer
             </h2>
             <div className="space-y-4">
@@ -86,7 +86,7 @@ export default function AboutPage() {
 
           {/* Stats */}
           <div className="mb-16">
-            <h2 className="text-3xl font-bold mb-6 text-blue-400" className='font-orbitron'>
+            <h2 className="font-orbitron text-3xl font-bold mb-6 text-blue-400">
               Platform Stats
             </h2>
             <div className="grid md:grid-cols-4 gap-6">
@@ -97,7 +97,7 @@ export default function AboutPage() {
                 { label: 'Network', value: 'Base' },
               ].map((stat, i) => (
                 <div key={i} className="p-6 rounded-xl bg-[#0a0a15] border border-white/5 text-center">
-                  <div className="text-3xl font-bold text-white mb-2" className='font-orbitron'>
+                  <div className="font-orbitron text-3xl font-bold text-white mb-2">
                     {stat.value}
                   </div>
                   <div className="text-gray-400">{stat.label}</div>
@@ -108,7 +108,7 @@ export default function AboutPage() {
 
           {/* Tech Stack */}
           <div className="mb-16">
-            <h2 className="text-3xl font-bold mb-6 text-blue-400" className='font-orbitron'>
+            <h2 className="font-orbitron text-3xl font-bold mb-6 text-blue-400">
               Built With
             </h2>
             <div className="grid md:grid-cols-3 gap-4">
@@ -129,7 +129,7 @@ export default function AboutPage() {
 
           {/* CTA */}
           <div className="p-8 rounded-2xl bg-gradient-to-br from-blue-500/10 to-purple-500/10 border border-blue-500/20 text-center">
-            <h2 className="text-3xl font-bold mb-4" className='font-orbitron'>
+            <h2 className="font-orbitron text-3xl font-bold mb-4">
               Ready to Get Started?
             </h2>
             <p className="text-gray-300 mb-8">

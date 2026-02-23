@@ -80,7 +80,7 @@ export default function PricingPage() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
               </svg>
             </div>
-            <span className="font-bold text-lg tracking-tight" className='font-orbitron'>Pricing</span>
+            <span className="font-bold text-lg tracking-tight font-orbitron">Pricing</span>
           </a>
         </div>
       </nav>
@@ -89,7 +89,7 @@ export default function PricingPage() {
         <div className="max-w-7xl mx-auto">
           {/* Hero */}
           <div className="text-center mb-16">
-            <h1 className="text-5xl font-bold mb-6" className='font-orbitron'>
+            <h1 className="text-5xl font-bold mb-6 font-orbitron">
               Simple, Transparent Pricing
             </h1>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
@@ -112,7 +112,7 @@ export default function PricingPage() {
                 )}
                 <h3 className="text-2xl font-bold mb-2">{plan.name}</h3>
                 <div className="mb-4">
-                  <span className="text-5xl font-bold" className='font-orbitron'>{plan.price}</span>
+                  <span className="text-5xl font-bold font-orbitron">{plan.price}</span>
                   <span className="text-gray-400 ml-2">/{plan.period}</span>
                 </div>
                 <p className="text-gray-400 mb-6">{plan.desc}</p>
@@ -140,7 +140,7 @@ export default function PricingPage() {
           {/* API Pricing Table */}
           <div className="rounded-2xl bg-[#0a0a15] border border-white/5 overflow-hidden mb-16">
             <div className="p-6 border-b border-white/5">
-              <h2 className="text-3xl font-bold" className='font-orbitron'>API Pricing</h2>
+              <h2 className="text-3xl font-bold font-orbitron">API Pricing</h2>
               <p className="text-gray-400 mt-2">Pay per request with instant settlement</p>
             </div>
             <table className="w-full">

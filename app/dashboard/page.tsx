@@ -38,7 +38,7 @@ export default async function DashboardPage() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
               </svg>
             </div>
-            <span className="font-bold text-lg tracking-tight" className='font-orbitron'>Dashboard</span>
+            <span className="font-orbitron font-bold text-lg tracking-tight">Dashboard</span>
           </a>
           <div className="flex items-center gap-2">
             <div className={`w-2 h-2 rounded-full ${health.status === 'ok' ? 'bg-green-500 animate-pulse' : 'bg-red-500'} shadow-lg ${health.status === 'ok' ? 'shadow-green-500/50' : ''}`} />
@@ -50,7 +50,7 @@ export default async function DashboardPage() {
       <div className="pt-24 pb-16 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="mb-12">
-            <h1 className="text-5xl font-bold mb-4" className='font-orbitron'>
+            <h1 className="font-orbitron text-5xl font-bold mb-4">
               Live Dashboard
             </h1>
             <p className="text-xl text-gray-300">
@@ -88,13 +88,12 @@ export default async function DashboardPage() {
             ].map((metric, i) => (
               <div key={i} className="p-6 rounded-2xl bg-gradient-to-br from-[#0a0a15] to-[#050510] border border-white/5 hover:border-blue-500/30 transition-all">
                 <div className="text-gray-400 text-sm mb-2">{metric.label}</div>
-                <div className={`text-4xl font-bold mb-1 ${
+                <div className={`font-orbitron text-4xl font-bold mb-1 ${
                   metric.color === 'green' ? 'text-green-400' :
                   metric.color === 'blue' ? 'text-blue-400' :
                   metric.color === 'yellow' ? 'text-yellow-400' :
-                  metric.color === 'red' ? 'text-red-400' :
-                  'text-white'
-                }`} className='font-orbitron'>
+                  'text-red-400'
+                }`}>
                   {metric.value}
                 </div>
                 <div className="text-xs text-gray-500">{metric.subtext}</div>
@@ -106,7 +105,7 @@ export default async function DashboardPage() {
           <div className="p-8 rounded-2xl bg-gradient-to-br from-[#0a0a15] to-[#050510] border border-white/5 mb-8">
             <div className="flex items-center gap-2 mb-6">
               <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse shadow-lg shadow-green-500/50" />
-              <h2 className="text-2xl font-bold" className='font-orbitron'>
+              <h2 className="font-orbitron text-2xl font-bold">
                 Live Crypto Prices
               </h2>
               <span className="text-sm text-gray-500 ml-auto">Coinbase</span>
@@ -122,11 +121,11 @@ export default async function DashboardPage() {
                     <div className="text-gray-400 font-medium">{crypto.symbol}/USD</div>
                     <span className="text-green-400 text-sm font-semibold">{crypto.change}</span>
                   </div>
-                  <div className={`text-4xl font-bold mb-2 ${
+                  <div className={`font-orbitron text-4xl font-bold mb-2 ${
                     crypto.color === 'blue' ? 'text-blue-400' :
                     crypto.color === 'orange' ? 'text-orange-400' :
                     'text-purple-400'
-                  }`} className='font-orbitron'>
+                  }`}>
                     ${crypto.price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                   </div>
                   <div className="text-xs text-gray-500">24h Volume</div>
@@ -137,7 +136,7 @@ export default async function DashboardPage() {
 
           {/* Endpoints */}
           <div className="p-8 rounded-2xl bg-gradient-to-br from-[#0a0a15] to-[#050510] border border-white/5">
-            <h2 className="text-2xl font-bold mb-6" className='font-orbitron'>
+            <h2 className="font-orbitron text-2xl font-bold mb-6">
               API Endpoints
             </h2>
             <div className="space-y-3">

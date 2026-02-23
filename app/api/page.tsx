@@ -30,6 +30,14 @@ export default async function APIPage() {
     { method: 'GET', path: '/stats', cost: 'Free', desc: 'API usage statistics and metrics', color: 'gray' },
   ]
 
+  const colorClasses: Record<string, string> = {
+    green: 'bg-green-500/10 text-green-400',
+    blue: 'bg-blue-500/10 text-blue-400',
+    purple: 'bg-purple-500/10 text-purple-400',
+    orange: 'bg-orange-500/10 text-orange-400',
+    gray: 'bg-gray-500/10 text-gray-400',
+  }
+
   return (
     <main className="min-h-screen bg-[#050510] text-white font-exo2">
       {/* Navigation */}
@@ -41,7 +49,7 @@ export default async function APIPage() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
               </svg>
             </div>
-            <span className="font-bold text-lg tracking-tight" className='font-orbitron'>OMA-AI</span>
+            <span className="font-orbitron font-bold text-lg tracking-tight">OMA-AI</span>
           </a>
         </div>
       </nav>
@@ -49,7 +57,7 @@ export default async function APIPage() {
       <div className="pt-24 pb-16 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="mb-12">
-            <h1 className="text-5xl font-bold mb-4" className='font-orbitron'>
+            <h1 className="font-orbitron text-5xl font-bold mb-4">
               API Reference
             </h1>
             <p className="text-xl text-gray-300">
@@ -69,15 +77,15 @@ export default async function APIPage() {
             </div>
             <div className="grid md:grid-cols-3 gap-6">
               <div className="p-4 rounded-xl bg-[#050510] border border-white/5">
-                <div className="text-3xl font-bold text-white mb-1" className='font-orbitron'>{stats.calls || 0}</div>
+                <div className="font-orbitron text-3xl font-bold text-white mb-1">{stats.calls || 0}</div>
                 <div className="text-gray-400">Total Calls</div>
               </div>
               <div className="p-4 rounded-xl bg-[#050510] border border-white/5">
-                <div className="text-3xl font-bold text-green-400 mb-1" className='font-orbitron'>{stats.realPayments || 0}</div>
+                <div className="font-orbitron text-3xl font-bold text-green-400 mb-1">{stats.realPayments || 0}</div>
                 <div className="text-gray-400">Payments</div>
               </div>
               <div className="p-4 rounded-xl bg-[#050510] border border-white/5">
-                <div className="text-3xl font-bold text-blue-400 mb-1" className='font-orbitron'>${((stats.earnings || 0) / 100).toFixed(2)}</div>
+                <div className="font-orbitron text-3xl font-bold text-blue-400 mb-1">${((stats.earnings || 0) / 100).toFixed(2)}</div>
                 <div className="text-gray-400">Revenue</div>
               </div>
             </div>
@@ -86,7 +94,7 @@ export default async function APIPage() {
           {/* Endpoints */}
           <div className="rounded-2xl bg-[#0a0a15] border border-white/5 overflow-hidden mb-8">
             <div className="p-6 border-b border-white/5">
-              <h2 className="text-2xl font-bold" className='font-orbitron'>Available Endpoints</h2>
+              <h2 className="font-orbitron text-2xl font-bold">Available Endpoints</h2>
             </div>
             <table className="w-full">
               <thead className="bg-[#050510]">
@@ -102,13 +110,7 @@ export default async function APIPage() {
                 {endpoints.map((ep, i) => (
                   <tr key={i} className="border-t border-white/5 hover:bg-[#050510] transition-colors">
                     <td className="px-6 py-5">
-                      <span className={`px-2 py-1 rounded text-xs font-bold ${
-                        ep.color === 'green' ? 'bg-green-500/10 text-green-400' :
-                        ep.color === 'blue' ? 'bg-blue-500/10 text-blue-400' :
-                        ep.color === 'purple' ? 'bg-purple-500/10 text-purple-400' :
-                        ep.color === 'orange' ? 'bg-orange-500/10 text-orange-400' :
-                        'bg-gray-500/10 text-gray-400'
-                      }`}>
+                      <span className={`px-2 py-1 rounded text-xs font-bold ${colorClasses[ep.color]}`}>
                         {ep.method}
                       </span>
                     </td>
@@ -131,7 +133,7 @@ export default async function APIPage() {
           {/* Code Example */}
           <div className="rounded-2xl bg-[#0a0a15] border border-white/5 overflow-hidden">
             <div className="p-6 border-b border-white/5">
-              <h2 className="text-2xl font-bold" className='font-orbitron'>Quick Start</h2>
+              <h2 className="font-orbitron text-2xl font-bold">Quick Start</h2>
             </div>
             <div className="p-6">
               <p className="text-gray-300 mb-4">
