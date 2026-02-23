@@ -427,9 +427,9 @@ export default function MarketplacePage() {
               <div className="grid grid-cols-2 gap-4">
                 {[
                   { label: "APIs Available", value: "2" },
-                  { label: "Daily Calls", value: "2.5M" },
-                  { label: "Active Agents", value: "15K+" },
-                  { label: "Avg Response", value: "42ms" },
+                  { label: "Daily Calls", value: "1.7K" },
+                  { label: "Active Agents", value: "0" },
+                  { label: "Avg Response", value: "~50ms" },
                 ].map((stat, i) => (
                   <div
                     key={i}
@@ -456,7 +456,7 @@ export default function MarketplacePage() {
             Ready to Empower Your Agents?
           </h2>
           <p className="text-lg text-memoria-text-whisper max-w-2xl mx-auto font-light mb-10">
-            Join thousands of developers deploying autonomous agents that can
+            Join developers deploying autonomous agents that can
             discover, pay for, and integrate APIs independently. No
             infrastructure setup required.
           </p>
