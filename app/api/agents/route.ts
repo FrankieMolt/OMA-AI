@@ -41,7 +41,6 @@ export async function GET(request: NextRequest) {
 
   // Return demo data if Supabase is not configured
   if (!isSupabaseEnabled) {
-// console.log('Supabase not enabled, returning demo agents');
     const filteredAgents = status
       ? demoAgents.filter(agent => agent.status === status)
       : demoAgents;
@@ -108,7 +107,6 @@ export async function POST(request: NextRequest) {
 
     // If Supabase is not enabled, return the new agent without persisting
     if (!isSupabaseEnabled) {
-// console.log('Demo mode: Agent created but not persisted:', newAgent);
       return NextResponse.json(newAgent, { status: 201 });
     }
 

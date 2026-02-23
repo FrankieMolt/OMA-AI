@@ -38,7 +38,6 @@ export async function POST(req: Request) {
       })
       
       // Store lead in database or log
-      console.log('New lead:', { email, name, timestamp: new Date().toISOString() })
       
       return Response.json({ success: true, message: 'Email sent' })
     }
@@ -61,7 +60,6 @@ export async function POST(req: Request) {
     
     if (type === 'waitlist') {
       // Waitlist signup
-      console.log('Waitlist signup:', { email, timestamp: new Date().toISOString() })
       
       await resend.emails.send({
         from: 'OMA-AI <waitlist@oma-ai.com>',

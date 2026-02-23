@@ -124,7 +124,6 @@ export async function POST(request: NextRequest) {
       user = result.data;
     } catch (err) {
       // Users table may not exist yet - that's okay for demo
-// console.log('Users table not available, proceeding without user tracking');
     }
 
     // SECURITY WARNING: This is a SIMULATED payment for demo purposes only!
@@ -165,7 +164,6 @@ export async function POST(request: NextRequest) {
         });
     } catch (logError: any) {
       // Don't fail payment if logging fails
-// console.log('Audit logging error:', logError?.message);
     }
 
     // Update service usage count
