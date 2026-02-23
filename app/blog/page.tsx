@@ -24,6 +24,18 @@ const posts = [
     excerpt: 'Turn your API into a revenue stream with x402 micropayments.',
     date: '2026-02-23',
   },
+  {
+    slug: 'ai-agent-best-practices',
+    title: 'AI Agent Best Practices',
+    excerpt: 'Best practices for building and deploying AI agents.',
+    date: '2026-02-23',
+  },
+  {
+    slug: 'future-of-autonomous-agents',
+    title: 'The Future of Autonomous AI Agents',
+    excerpt: 'Explore the future of autonomous AI agents.',
+    date: '2026-02-23',
+  },
 ]
 
 export default function BlogPage() {
