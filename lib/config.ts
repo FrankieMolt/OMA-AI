@@ -1,6 +1,8 @@
 export const API_CONFIG = {
-  baseURL: process.env.NEXT_PUBLIC_API_URL || 'https://oooijcrqpuqymgzlidrw.supabase.co/functions/v1',
-  fallbackURL: 'http://localhost:8000',
+  baseURL:
+    process.env.NEXT_PUBLIC_API_URL ||
+    "https://oooijcrqpuqymgzlidrw.supabase.co/functions/v1",
+  fallbackURL: "http://localhost:8000",
   timeout: 30000, // 30 seconds
 };
 
@@ -10,7 +12,7 @@ export const SUPABASE_CONFIG = {
 };
 
 export const X402_CONFIG = {
-  network: 'base',
+  network: "base",
   chainId: 8453,
-  rpcUrl: 'https://mainnet.base.org',
+  rpcUrl: "https://mainnet.base.org",
 };

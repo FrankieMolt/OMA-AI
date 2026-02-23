@@ -1,53 +1,53 @@
-'use client'
+"use client";
 
-import { useState, useEffect } from 'react'
-import { X, Menu } from 'lucide-react'
+import { useState, useEffect } from "react";
+import { X, Menu } from "lucide-react";
 
 export function MobileMenu() {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
 
-  const toggleMenu = () => setIsOpen(!isOpen)
+  const toggleMenu = () => setIsOpen(!isOpen);
 
-  const closeMenu = () => setIsOpen(false)
+  const closeMenu = () => setIsOpen(false);
 
   // Prevent body scroll when menu is open
   useEffect(() => {
     if (isOpen) {
-      document.body.style.overflow = 'hidden'
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = 'unset'
+      document.body.style.overflow = "unset";
     }
 
     return () => {
-      document.body.style.overflow = 'unset'
-    }
-  }, [isOpen])
+      document.body.style.overflow = "unset";
+    };
+  }, [isOpen]);
 
   // Close menu on escape key
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        closeMenu()
+      if (e.key === "Escape") {
+        closeMenu();
       }
-    }
+    };
 
-    document.addEventListener('keydown', handleEscape)
+    document.addEventListener("keydown", handleEscape);
     return () => {
-      document.removeEventListener('keydown', handleEscape)
-    }
-  }, [])
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, []);
 
   const navLinks = [
-    { href: '/', label: 'Home' },
-    { href: '/apis', label: 'All APIs' },
-    { href: '/trending', label: 'Trending' },
-    { href: '/pricing', label: 'Pricing' },
-    { href: '/docs', label: 'Documentation' },
-    { href: '/bounties', label: 'Bounties' },
-    { href: '/about', label: 'About' },
-    { href: '/blog', label: 'Blog' },
-    { href: '/contact', label: 'Contact' },
-  ]
+    { href: "/", label: "Home" },
+    { href: "/apis", label: "All APIs" },
+    { href: "/trending", label: "Trending" },
+    { href: "/pricing", label: "Pricing" },
+    { href: "/docs", label: "Documentation" },
+    { href: "/bounties", label: "Bounties" },
+    { href: "/about", label: "About" },
+    { href: "/blog", label: "Blog" },
+    { href: "/contact", label: "Contact" },
+  ];
 
   return (
     <>
@@ -115,5 +115,5 @@ export function MobileMenu() {
         </div>
       )}
     </>
-  )
+  );
 }

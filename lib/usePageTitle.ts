@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect } from "react";
 
 /**
  * Hook to dynamically update page title for client components
@@ -9,7 +9,7 @@ export function usePageTitle(title: string) {
     const fullTitle = `${title} | OMA-AI`;
     document.title = fullTitle;
     return () => {
-      document.title = 'OMA-AI - Open Market Access for AI Agents';
+      document.title = "OMA-AI - Open Market Access for AI Agents";
     };
   }, [title]);
 }
@@ -25,17 +25,20 @@ export function useMetadata(title: string, description: string) {
     // Update or create meta description
     let metaDesc = document.querySelector('meta[name="description"]');
     if (!metaDesc) {
-      metaDesc = document.createElement('meta');
-      metaDesc.setAttribute('name', 'description');
+      metaDesc = document.createElement("meta");
+      metaDesc.setAttribute("name", "description");
       document.head.appendChild(metaDesc);
     }
-    metaDesc.setAttribute('content', description);
+    metaDesc.setAttribute("content", description);
 
     // Cleanup
     return () => {
-      document.title = 'OMA-AI - Open Market Access for AI Agents';
+      document.title = "OMA-AI - Open Market Access for AI Agents";
       if (metaDesc) {
-        metaDesc.setAttribute('content', 'Browse, test, and integrate 22+ APIs and MCP servers. Pay only for what you use with x402 crypto payments.');
+        metaDesc.setAttribute(
+          "content",
+          "Browse, test, and integrate 22+ APIs and MCP servers. Pay only for what you use with x402 crypto payments.",
+        );
       }
     };
   }, [title, description]);

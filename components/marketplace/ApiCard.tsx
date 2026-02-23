@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import React, { memo } from 'react';
-import { motion } from 'framer-motion';
-import { Star, BookOpen, Shield } from 'lucide-react';
-import { ApiService } from '@/lib/mock-api-data';
+import React, { memo } from "react";
+import { motion } from "framer-motion";
+import { Star, BookOpen, Shield } from "lucide-react";
+import { ApiService } from "@/lib/mock-api-data";
 
 interface ApiCardProps {
   service: ApiService;
@@ -22,7 +22,7 @@ const ApiCard = memo(({ service, index }: ApiCardProps) => (
         <h3 className="text-xl font-bold mb-2">{service.name}</h3>
         <p className="text-sm text-zinc-400 mb-3">{service.description}</p>
         <div className="flex flex-wrap gap-2 mb-3">
-          {service.tags.map(tag => (
+          {service.tags.map((tag) => (
             <span key={tag} className="tag-chip">
               {tag}
             </span>
@@ -31,11 +31,13 @@ const ApiCard = memo(({ service, index }: ApiCardProps) => (
       </div>
       <div className="text-right ml-4">
         <div className="text-2xl font-bold mb-1">
-          {service.priceType === 'free' ? 'Free' : `$${service.price.toFixed(3)}`}
-          {service.priceType !== 'free' && service.priceType === 'per_call' && (
+          {service.priceType === "free"
+            ? "Free"
+            : `$${service.price.toFixed(3)}`}
+          {service.priceType !== "free" && service.priceType === "per_call" && (
             <span className="text-sm font-normal text-zinc-500">/call</span>
           )}
-          {service.priceType === 'monthly' && (
+          {service.priceType === "monthly" && (
             <span className="text-sm font-normal text-zinc-500">/mo</span>
           )}
         </div>
@@ -72,6 +74,6 @@ const ApiCard = memo(({ service, index }: ApiCardProps) => (
   </motion.div>
 ));
 
-ApiCard.displayName = 'ApiCard';
+ApiCard.displayName = "ApiCard";
 
 export default ApiCard;

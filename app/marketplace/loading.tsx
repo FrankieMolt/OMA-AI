@@ -6,5 +6,5 @@ export default function MarketplaceLoading() {
         <p className="text-gray-400">Loading marketplace...</p>
       </div>
     </div>
-  )
+  );
 }

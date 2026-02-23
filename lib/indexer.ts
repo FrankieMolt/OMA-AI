@@ -1,17 +1,41 @@
-import fs from 'fs';
-import path from 'path';
-import { indexFile, searchFiles, getIndexedFiles, clearFileIndex } from './db/queries';
+import fs from "fs";
+import path from "path";
+import {
+  indexFile,
+  searchFiles,
+  getIndexedFiles,
+  clearFileIndex,
+} from "./db/queries";
 
 // File extensions to index
 const INDEXABLE_EXTENSIONS = [
-  '.md', '.txt', '.json', '.js', '.ts', '.tsx', '.jsx',
-  '.css', '.html', '.py', '.rs', '.go', '.yaml', '.yml', '.toml'
+  ".md",
+  ".txt",
+  ".json",
+  ".js",
+  ".ts",
+  ".tsx",
+  ".jsx",
+  ".css",
+  ".html",
+  ".py",
+  ".rs",
+  ".go",
+  ".yaml",
+  ".yml",
+  ".toml",
 ];
 
 // Directories to skip
 const SKIP_DIRECTORIES = [
-  'node_modules', '.next', '.git', 'dist', 'build',
-  'coverage', '.vercel', '.clawhub'
+  "node_modules",
+  ".next",
+  ".git",
+  "dist",
+  "build",
+  "coverage",
+  ".vercel",
+  ".clawhub",
 ];
 
 // Maximum file size to index (in bytes)
@@ -46,9 +70,12 @@ export async function indexDirectory(dirPath: string, maxFiles: number = 1000) {
           const ext = path.extname(item).toLowerCase();
 
           // Check if file is indexable
-          if (INDEXABLE_EXTENSIONS.includes(ext) && stat.size <= MAX_FILE_SIZE) {
+          if (
+            INDEXABLE_EXTENSIONS.includes(ext) &&
+            stat.size <= MAX_FILE_SIZE
+          ) {
             try {
-              const content = fs.readFileSync(fullPath, 'utf-8');
+              const content = fs.readFileSync(fullPath, "utf-8");
               const relativePath = path.relative(process.cwd(), fullPath);
 
               indexFile({
@@ -57,7 +84,7 @@ export async function indexDirectory(dirPath: string, maxFiles: number = 1000) {
                 content: content.substring(0, 50000), // Limit content to 50k chars
                 last_modified: stat.mtime.toISOString(),
                 file_type: ext.substring(1),
-                size: stat.size
+                size: stat.size,
               });
 
               indexedCount++;

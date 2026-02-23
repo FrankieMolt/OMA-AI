@@ -1,17 +1,23 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect } from 'react';
-import { Search, X } from 'lucide-react';
+import React, { useState, useEffect } from "react";
+import { Search, X } from "lucide-react";
 
 interface SearchResult {
-  type: 'api' | 'blog' | 'doc' | 'page';
+  type: "api" | "blog" | "doc" | "page";
   title: string;
   url: string;
   description: string;
 }
 
-export default function SearchOverlay({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
-  const [query, setQuery] = useState('');
+export default function SearchOverlay({
+  isOpen,
+  onClose,
+}: {
+  isOpen: boolean;
+  onClose: () => void;
+}) {
+  const [query, setQuery] = useState("");
   const [results, setResults] = useState<SearchResult[]>([]);
   const [isSearching, setIsSearching] = useState(false);
 
@@ -27,33 +33,34 @@ export default function SearchOverlay({ isOpen, onClose }: { isOpen: boolean; on
       // Simulated search results (in production, this would query an API)
       const mockResults = [
         {
-          type: 'api' as const,
-          title: 'AI Code Review API',
-          url: '/',
-          description: 'Automated code review with GPT-4 integration',
+          type: "api" as const,
+          title: "AI Code Review API",
+          url: "/",
+          description: "Automated code review with GPT-4 integration",
         },
         {
-          type: 'doc' as const,
-          title: 'Getting Started Guide',
-          url: '/docs',
-          description: 'Quick start guide to begin using OMA-AI',
+          type: "doc" as const,
+          title: "Getting Started Guide",
+          url: "/docs",
+          description: "Quick start guide to begin using OMA-AI",
         },
         {
-          type: 'blog' as const,
-          title: 'How OMA-AI is Revolutionizing the API Marketplace',
-          url: '/blog/oma-ai-humans-and-agents-2026',
-          description: 'Discover how OMA-AI is creating the first unified marketplace for humans and autonomous AI agents',
+          type: "blog" as const,
+          title: "How OMA-AI is Revolutionizing the API Marketplace",
+          url: "/blog/oma-ai-humans-and-agents-2026",
+          description:
+            "Discover how OMA-AI is creating the first unified marketplace for humans and autonomous AI agents",
         },
         {
-          type: 'page' as const,
-          title: 'Pricing Plans',
-          url: '/pricing',
-          description: 'Simple, transparent pricing for all users',
+          type: "page" as const,
+          title: "Pricing Plans",
+          url: "/pricing",
+          description: "Simple, transparent pricing for all users",
         },
       ].filter(
         (item) =>
           item.title.toLowerCase().includes(query.toLowerCase()) ||
-          item.description.toLowerCase().includes(query.toLowerCase())
+          item.description.toLowerCase().includes(query.toLowerCase()),
       );
 
       setResults(mockResults);
@@ -79,7 +86,7 @@ export default function SearchOverlay({ isOpen, onClose }: { isOpen: boolean; on
             className="flex-1 bg-transparent border-none outline-none text-white placeholder-zinc-500 text-lg"
             autoFocus
             onKeyDown={(e) => {
-              if (e.key === 'Escape') onClose();
+              if (e.key === "Escape") onClose();
             }}
           />
           <button
@@ -106,16 +113,16 @@ export default function SearchOverlay({ isOpen, onClose }: { isOpen: boolean; on
                     className="flex items-start gap-3 p-3 rounded-lg hover:bg-zinc-800 transition-colors group"
                   >
                     <div className="flex-shrink-0 mt-1">
-                      {result.type === 'api' && (
+                      {result.type === "api" && (
                         <div className="w-2 h-2 rounded-full bg-purple-500" />
                       )}
-                      {result.type === 'doc' && (
+                      {result.type === "doc" && (
                         <div className="w-2 h-2 rounded-full bg-blue-500" />
                       )}
-                      {result.type === 'blog' && (
+                      {result.type === "blog" && (
                         <div className="w-2 h-2 rounded-full bg-green-500" />
                       )}
-                      {result.type === 'page' && (
+                      {result.type === "page" && (
                         <div className="w-2 h-2 rounded-full bg-yellow-500" />
                       )}
                     </div>

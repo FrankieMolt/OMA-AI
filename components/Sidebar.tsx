@@ -1,31 +1,31 @@
-'use client';
+"use client";
 
-import React from 'react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { 
-  LayoutDashboard, 
-  ShoppingBag, 
-  Terminal, 
-  FileCode, 
-  Wallet, 
-  Settings, 
-  Users, 
+import React from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import {
+  LayoutDashboard,
+  ShoppingBag,
+  Terminal,
+  FileCode,
+  Wallet,
+  Settings,
+  Users,
   ShieldCheck,
   Zap,
   ChevronRight,
   Menu,
-  X
-} from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+  X,
+} from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const navigation = [
-  { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
-  { name: 'Marketplace', href: '/marketplace', icon: ShoppingBag },
-  { name: 'Frankie OS', href: '/frankie-os', icon: Terminal },
-  { name: 'API Docs', href: '/api-docs', icon: FileCode },
-  { name: 'Tasks', href: '/tasks', icon: Zap },
-  { name: 'Governance', href: '/governance', icon: ShieldCheck },
+  { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
+  { name: "Marketplace", href: "/marketplace", icon: ShoppingBag },
+  { name: "Frankie OS", href: "/frankie-os", icon: Terminal },
+  { name: "API Docs", href: "/api-docs", icon: FileCode },
+  { name: "Tasks", href: "/tasks", icon: Zap },
+  { name: "Governance", href: "/governance", icon: ShieldCheck },
 ];
 
 export default function Sidebar() {
@@ -35,7 +35,7 @@ export default function Sidebar() {
   return (
     <>
       {/* Mobile Toggle */}
-      <button 
+      <button
         onClick={() => setIsOpen(!isOpen)}
         className="fixed top-4 left-4 z-[60] p-2 bg-zinc-900 border border-zinc-800 rounded-lg lg:hidden"
       >
@@ -56,7 +56,9 @@ export default function Sidebar() {
                 <div className="w-10 h-10 bg-purple-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
                   <Zap className="text-white fill-current" size={24} />
                 </div>
-                <span className="text-2xl font-bold tracking-tighter text-white">OMA-AI</span>
+                <span className="text-2xl font-bold tracking-tighter text-white">
+                  OMA-AI
+                </span>
               </Link>
             </div>
 
@@ -69,16 +71,25 @@ export default function Sidebar() {
                     key={item.name}
                     href={item.href}
                     className={`group flex items-center justify-between px-4 py-3 rounded-xl transition-all duration-200 ${
-                      isActive 
-                        ? 'bg-purple-600/10 text-purple-400 border border-purple-500/20 shadow-lg shadow-purple-900/10' 
-                        : 'text-zinc-500 hover:bg-zinc-900 hover:text-zinc-300 border border-transparent'
+                      isActive
+                        ? "bg-purple-600/10 text-purple-400 border border-purple-500/20 shadow-lg shadow-purple-900/10"
+                        : "text-zinc-500 hover:bg-zinc-900 hover:text-zinc-300 border border-transparent"
                     }`}
                   >
                     <div className="flex items-center gap-3">
-                      <item.icon size={20} className={isActive ? 'text-purple-400' : 'group-hover:text-zinc-300'} />
+                      <item.icon
+                        size={20}
+                        className={
+                          isActive
+                            ? "text-purple-400"
+                            : "group-hover:text-zinc-300"
+                        }
+                      />
                       <span className="font-medium">{item.name}</span>
                     </div>
-                    {isActive && <div className="w-1.5 h-1.5 bg-purple-500 rounded-full shadow-[0_0_8px_rgba(168,85,247,0.5)]" />}
+                    {isActive && (
+                      <div className="w-1.5 h-1.5 bg-purple-500 rounded-full shadow-[0_0_8px_rgba(168,85,247,0.5)]" />
+                    )}
                   </Link>
                 );
               })}
@@ -93,10 +104,12 @@ export default function Sidebar() {
                 </div>
                 <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
               </div>
-              
+
               <div className="space-y-3">
                 <div className="flex items-baseline justify-between">
-                  <span className="text-2xl font-mono font-bold text-white">1,240.42</span>
+                  <span className="text-2xl font-mono font-bold text-white">
+                    1,240.42
+                  </span>
                   <span className="text-xs font-bold text-zinc-600">USDC</span>
                 </div>
                 <div className="text-[10px] text-zinc-500 font-mono truncate">
@@ -104,7 +117,7 @@ export default function Sidebar() {
                 </div>
               </div>
 
-              <Link 
+              <Link
                 href="/wallet"
                 className="mt-6 w-full py-2 bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 rounded-lg text-xs font-bold text-zinc-300 flex items-center justify-center gap-2 transition-all"
               >

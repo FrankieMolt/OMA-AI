@@ -45,6 +45,9 @@ export interface Product {
   addedAt?: string;
 }
 
+// Alias for backwards compatibility
+export type RealProduct = Product;
+
 export interface CartItem extends Product {
   quantity: number;
 }

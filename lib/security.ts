@@ -3,22 +3,25 @@
  * Includes rate limiting, CORS validation, and security headers
  */
 
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from "next/server";
 
 /**
  * Validate Origin header to prevent CSRF attacks
  */
-export function validateOrigin(request: NextRequest, allowedOrigins: string[]): boolean {
-  const origin = request.headers.get('origin');
+export function validateOrigin(
+  request: NextRequest,
+  allowedOrigins: string[],
+): boolean {
+  const origin = request.headers.get("origin");
 
   // If no origin header (same-origin request), allow it
   if (!origin) return true;
 
   // Check if origin is in allowed list
-  return allowedOrigins.some(allowed => {
+  return allowedOrigins.some((allowed) => {
     // Exact match or wildcard match
-    if (allowed === '*') return true;
-    if (allowed.endsWith('*')) {
+    if (allowed === "*") return true;
+    if (allowed.endsWith("*")) {
       const prefix = allowed.slice(0, -1);
       return origin.startsWith(prefix);
     }
@@ -31,26 +34,29 @@ export function validateOrigin(request: NextRequest, allowedOrigins: string[]): 
  */
 export function addSecurityHeaders(response: NextResponse): NextResponse {
   // Prevent MIME type sniffing
-  response.headers.set('X-Content-Type-Options', 'nosniff');
+  response.headers.set("X-Content-Type-Options", "nosniff");
 
   // Prevent clickjacking
-  response.headers.set('X-Frame-Options', 'DENY');
+  response.headers.set("X-Frame-Options", "DENY");
 
   // Enable XSS protection
-  response.headers.set('X-XSS-Protection', '1; mode=block');
+  response.headers.set("X-XSS-Protection", "1; mode=block");
 
   // Referrer policy
-  response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
+  response.headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
 
   // Content Security Policy (basic)
   response.headers.set(
-    'Content-Security-Policy',
-    "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline';"
+    "Content-Security-Policy",
+    "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline';",
   );
 
   // HSTS in production
-  if (process.env.NODE_ENV === 'production') {
-    response.headers.set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
+  if (process.env.NODE_ENV === "production") {
+    response.headers.set(
+      "Strict-Transport-Security",
+      "max-age=31536000; includeSubDomains",
+    );
   }
 
   return response;
@@ -59,9 +65,12 @@ export function addSecurityHeaders(response: NextResponse): NextResponse {
 /**
  * Sanitize string input to prevent injection attacks
  */
-export function sanitizeString(input: string, maxLength: number = 1000): string {
+export function sanitizeString(
+  input: string,
+  maxLength: number = 1000,
+): string {
   return input
-    .replace(/[<>]/g, '') // Remove angle brackets
+    .replace(/[<>]/g, "") // Remove angle brackets
     .trim()
     .substring(0, maxLength);
 }
@@ -86,14 +95,23 @@ export function isValidWalletAddress(address: string): boolean {
  * Check if request is from a bot/crawler (basic detection)
  */
 export function isLikelyBot(request: NextRequest): boolean {
-  const userAgent = request.headers.get('user-agent')?.toLowerCase() || '';
+  const userAgent = request.headers.get("user-agent")?.toLowerCase() || "";
 
   const botPatterns = [
-    'bot', 'crawler', 'spider', 'scraper', 'curl', 'wget',
-    'python', 'java', 'go-http', 'httpie', 'postman'
+    "bot",
+    "crawler",
+    "spider",
+    "scraper",
+    "curl",
+    "wget",
+    "python",
+    "java",
+    "go-http",
+    "httpie",
+    "postman",
   ];
 
-  return botPatterns.some(pattern => userAgent.includes(pattern));
+  return botPatterns.some((pattern) => userAgent.includes(pattern));
 }
 
 /**
@@ -102,10 +120,10 @@ export function isLikelyBot(request: NextRequest): boolean {
 export function getClientIP(request: NextRequest): string {
   // Try various headers for IP (behind proxy/load balancer)
   return (
-    request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
-    request.headers.get('x-real-ip') ||
-    request.headers.get('cf-connecting-ip') ||
-    'unknown'
+    request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+    request.headers.get("x-real-ip") ||
+    request.headers.get("cf-connecting-ip") ||
+    "unknown"
   );
 }
 
@@ -140,7 +158,11 @@ class InMemoryRateLimiter {
    * @param limit - Max requests allowed
    * @param windowMs - Time window in milliseconds
    */
-  check(identifier: string, limit: number, windowMs: number): {
+  check(
+    identifier: string,
+    limit: number,
+    windowMs: number,
+  ): {
     success: boolean;
     remaining: number;
     resetTime: number;
@@ -152,13 +174,13 @@ class InMemoryRateLimiter {
       // New window
       const newEntry: RateLimitEntry = {
         count: 1,
-        resetTime: now + windowMs
+        resetTime: now + windowMs,
       };
       this.store.set(identifier, newEntry);
       return {
         success: true,
         remaining: limit - 1,
-        resetTime: newEntry.resetTime
+        resetTime: newEntry.resetTime,
       };
     }
 
@@ -167,7 +189,7 @@ class InMemoryRateLimiter {
       return {
         success: false,
         remaining: 0,
-        resetTime: entry.resetTime
+        resetTime: entry.resetTime,
       };
     }
 
@@ -176,7 +198,7 @@ class InMemoryRateLimiter {
     return {
       success: true,
       remaining: limit - entry.count,
-      resetTime: entry.resetTime
+      resetTime: entry.resetTime,
     };
   }
 
@@ -202,7 +224,7 @@ export function getRateLimiter(): InMemoryRateLimiter {
 export async function checkRateLimit(
   request: NextRequest,
   limit: number,
-  windowMs: number
+  windowMs: number,
 ): Promise<{ success: boolean; remaining?: number; resetTime?: number }> {
   const ip = getClientIP(request);
   const rateLimiter = getRateLimiter();
@@ -215,15 +237,15 @@ export async function checkRateLimit(
  */
 export function createRateLimitResponse(resetTime: number): NextResponse {
   return NextResponse.json(
-    { error: 'Too many requests. Please try again later.' },
+    { error: "Too many requests. Please try again later." },
     {
       status: 429,
       headers: {
-        'X-RateLimit-Limit': '10',
-        'X-RateLimit-Remaining': '0',
-        'X-RateLimit-Reset': new Date(resetTime).toISOString(),
-        'Retry-After': Math.ceil((resetTime - Date.now()) / 1000).toString()
-      }
-    }
+        "X-RateLimit-Limit": "10",
+        "X-RateLimit-Remaining": "0",
+        "X-RateLimit-Reset": new Date(resetTime).toISOString(),
+        "Retry-After": Math.ceil((resetTime - Date.now()) / 1000).toString(),
+      },
+    },
   );
 }

@@ -1,17 +1,17 @@
-import Head from 'next/head'
+import Head from "next/head";
 
 interface SEOProps {
-  title?: string
-  description?: string
-  image?: string
-  url?: string
+  title?: string;
+  description?: string;
+  image?: string;
+  url?: string;
 }
 
 export default function SEO({
-  title = 'OMA-AI | Autonomous Agent Ecosystem',
-  description = 'Trade compute, intelligence, and labor via x402 payments. The premier API marketplace for AI agents and MCPs.',
-  image = '/og-image.png',
-  url = 'https://oma-ai.com'
+  title = "OMA-AI | Autonomous Agent Ecosystem",
+  description = "Trade compute, intelligence, and labor via x402 payments. The premier API marketplace for AI agents and MCPs.",
+  image = "/og-image.png",
+  url = "https://oma-ai.com",
 }: SEOProps) {
   return (
     <Head>
@@ -25,5 +25,5 @@ export default function SEO({
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <link rel="canonical" href={url} />
     </Head>
-  )
+  );
 }

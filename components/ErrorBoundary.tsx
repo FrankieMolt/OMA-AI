@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import React, { Component, ErrorInfo, ReactNode } from 'react';
-import { AlertTriangle, RefreshCw, Home, Bug } from 'lucide-react';
+import React, { Component, ErrorInfo, ReactNode } from "react";
+import { AlertTriangle, RefreshCw, Home, Bug } from "lucide-react";
 
 interface Props {
   children: ReactNode;
@@ -20,7 +20,7 @@ export class ErrorBoundary extends Component<Props, State> {
     this.state = {
       hasError: false,
       error: null,
-      errorInfo: null
+      errorInfo: null,
     };
   }
 
@@ -28,25 +28,25 @@ export class ErrorBoundary extends Component<Props, State> {
     return {
       hasError: true,
       error,
-      errorInfo: null
+      errorInfo: null,
     };
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     // Log to error reporting service
-    console.error('Error caught by boundary:', error, errorInfo);
+    console.error("Error caught by boundary:", error, errorInfo);
 
     this.setState({
       error,
-      errorInfo
+      errorInfo,
     });
 
     // Optional: Send error to monitoring service
-    if (typeof window !== 'undefined' && 'gtag' in window) {
+    if (typeof window !== "undefined" && "gtag" in window) {
       // @ts-ignore
-      window.gtag?.('event', 'exception', {
+      window.gtag?.("event", "exception", {
         description: error.toString(),
-        fatal: false
+        fatal: false,
       });
     }
   }
@@ -55,7 +55,7 @@ export class ErrorBoundary extends Component<Props, State> {
     this.setState({
       hasError: false,
       error: null,
-      errorInfo: null
+      errorInfo: null,
     });
   };
 
@@ -67,7 +67,9 @@ export class ErrorBoundary extends Component<Props, State> {
       }
 
       // Default error UI
-      return <DefaultErrorUI error={this.state.error} onReset={this.handleReset} />;
+      return (
+        <DefaultErrorUI error={this.state.error} onReset={this.handleReset} />
+      );
     }
 
     return this.props.children;
@@ -77,12 +79,12 @@ export class ErrorBoundary extends Component<Props, State> {
 // Default Error UI Component
 function DefaultErrorUI({
   error,
-  onReset
+  onReset,
 }: {
   error: Error | null;
   onReset: () => void;
 }) {
-  const isDev = process.env.NODE_ENV === 'development';
+  const isDev = process.env.NODE_ENV === "development";
 
   return (
     <div className="min-h-screen bg-zinc-950 flex items-center justify-center p-6">
@@ -99,7 +101,7 @@ function DefaultErrorUI({
           </h1>
           <p className="text-zinc-400 mb-8 max-w-md mx-auto">
             {error?.message ||
-              'An unexpected error occurred. Please try again or contact support if the problem persists.'}
+              "An unexpected error occurred. Please try again or contact support if the problem persists."}
           </p>
 
           {/* Action Buttons */}
@@ -140,7 +142,7 @@ function DefaultErrorUI({
               <div className="bg-zinc-900 border border-zinc-800 rounded-lg p-4 overflow-x-auto">
                 <pre className="text-sm text-red-400 font-mono whitespace-pre-wrap">
                   {error.toString()}
-                  {error.stack && '\n\n' + error.stack}
+                  {error.stack && "\n\n" + error.stack}
                 </pre>
               </div>
             </details>
@@ -155,7 +157,7 @@ function DefaultErrorUI({
 export function InlineError({
   message,
   onRetry,
-  showIcon = true
+  showIcon = true,
 }: {
   message: string;
   onRetry?: () => void;
@@ -191,7 +193,8 @@ export function NetworkError({ onRetry }: { onRetry: () => void }) {
         Connection Error
       </h3>
       <p className="text-zinc-400 mb-6">
-        Unable to connect to the server. Please check your internet connection and try again.
+        Unable to connect to the server. Please check your internet connection
+        and try again.
       </p>
       <button
         onClick={onRetry}
@@ -207,7 +210,7 @@ export function NetworkError({ onRetry }: { onRetry: () => void }) {
 // API error component
 export function APIError({
   error,
-  onRetry
+  onRetry,
 }: {
   error: string;
   onRetry?: () => void;
@@ -215,11 +218,12 @@ export function APIError({
   return (
     <div className="p-6 bg-red-500/10 border border-red-500/30 rounded-xl">
       <div className="flex items-start gap-3">
-        <AlertTriangle className="text-red-500 flex-shrink-0 mt-0.5" size={20} />
+        <AlertTriangle
+          className="text-red-500 flex-shrink-0 mt-0.5"
+          size={20}
+        />
         <div className="flex-1">
-          <h4 className="text-red-300 font-semibold mb-1">
-            API Error
-          </h4>
+          <h4 className="text-red-300 font-semibold mb-1">API Error</h4>
           <p className="text-red-400/80 text-sm">{error}</p>
           {onRetry && (
             <button
@@ -244,16 +248,11 @@ export function NotFoundError() {
         <h1 className="text-8xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-500 mb-4">
           404
         </h1>
-        <h2 className="text-2xl font-bold text-white mb-4">
-          Page Not Found
-        </h2>
+        <h2 className="text-2xl font-bold text-white mb-4">Page Not Found</h2>
         <p className="text-zinc-400 mb-8 max-w-md mx-auto">
           The page you're looking for doesn't exist or has been moved.
         </p>
-        <a
-          href="/"
-          className="btn-primary inline-flex items-center gap-2"
-        >
+        <a href="/" className="btn-primary inline-flex items-center gap-2">
           <Home size={18} />
           Back to Home
         </a>

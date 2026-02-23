@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 
 interface SkeletonProps {
   className?: string;
 }
 
-export function Skeleton({ className = '' }: SkeletonProps) {
+export function Skeleton({ className = "" }: SkeletonProps) {
   return (
     <div
       className={`relative overflow-hidden bg-zinc-800/50 rounded ${className}`}
@@ -14,12 +14,12 @@ export function Skeleton({ className = '' }: SkeletonProps) {
       <motion.div
         className="absolute inset-0 bg-gradient-to-r from-transparent via-zinc-700/30 to-transparent"
         animate={{
-          x: ['-100%', '100%']
+          x: ["-100%", "100%"],
         }}
         transition={{
           duration: 1.5,
           repeat: Infinity,
-          ease: 'linear'
+          ease: "linear",
         }}
       />
     </div>

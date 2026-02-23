@@ -12,7 +12,7 @@ export interface AgentConfig {
 }
 
 export interface HealthStatus {
-  status: 'healthy' | 'unhealthy';
+  status: "healthy" | "unhealthy";
   service: string;
   version: string;
   timestamp: string;
@@ -21,7 +21,7 @@ export interface HealthStatus {
 export interface AgentStatus {
   id: string;
   name: string;
-  status: 'alive' | 'dead';
+  status: "alive" | "dead";
   balance: number;
   daily_rent: number;
   daily_revenue: number;
@@ -38,7 +38,7 @@ export interface AgentStatus {
 
 export interface MarketplaceService {
   id: string;
-  type: 'api' | 'model' | 'skill' | 'data';
+  type: "api" | "model" | "skill" | "data";
   name: string;
   description: string;
   price_per_use: number;
@@ -46,7 +46,7 @@ export interface MarketplaceService {
   seller_wallet: string;
   capabilities: string[];
   tags: string[];
-  status: 'active' | 'inactive';
+  status: "active" | "inactive";
   total_sales: number;
   total_revenue: number;
   rating: number;
@@ -60,7 +60,7 @@ export interface Bounty {
   title: string;
   description: string;
   amount: number;
-  status: 'open' | 'in_progress' | 'completed' | 'cancelled';
+  status: "open" | "in_progress" | "completed" | "cancelled";
   creator: string;
   worker: string | null;
   created_at: string;
@@ -76,11 +76,11 @@ export interface WalletBalance {
 
 export interface Transaction {
   id: string;
-  type: 'payment' | 'receive' | 'transfer';
+  type: "payment" | "receive" | "transfer";
   amount: number;
   from: string;
   to: string;
-  status: 'pending' | 'confirmed' | 'failed';
+  status: "pending" | "confirmed" | "failed";
   tx_hash: string;
   timestamp: string;
 }
@@ -91,7 +91,7 @@ export interface A2AAgent {
   capabilities: string[];
   endpoint: string;
   price_per_use: number;
-  status: 'available' | 'busy' | 'offline';
+  status: "available" | "busy" | "offline";
   rating: number;
   total_tasks: number;
 }
@@ -102,7 +102,7 @@ export interface A2ATask {
   worker: string;
   task: string;
   budget: number;
-  status: 'pending' | 'in_progress' | 'completed' | 'cancelled';
+  status: "pending" | "in_progress" | "completed" | "cancelled";
   result: string | null;
   cost: number;
   created_at: string;

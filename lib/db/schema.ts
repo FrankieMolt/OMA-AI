@@ -1,10 +1,10 @@
-import Database from 'better-sqlite3';
-import path from 'path';
-import fs from 'fs';
+import Database from "better-sqlite3";
+import path from "path";
+import fs from "fs";
 
 // Database path
-const DB_DIR = path.join(process.cwd(), '.frankie-os');
-const DB_PATH = path.join(DB_DIR, 'frankie-os.db');
+const DB_DIR = path.join(process.cwd(), ".frankie-os");
+const DB_PATH = path.join(DB_DIR, "frankie-os.db");
 
 // Ensure database directory exists
 if (!fs.existsSync(DB_DIR)) {
@@ -15,7 +15,7 @@ if (!fs.existsSync(DB_DIR)) {
 export const db = new Database(DB_PATH);
 
 // Enable WAL mode for better performance
-db.pragma('journal_mode = WAL');
+db.pragma("journal_mode = WAL");
 
 // Initialize schema
 export function initializeSchema() {
@@ -94,7 +94,7 @@ export function initializeSchema() {
     CREATE INDEX IF NOT EXISTS idx_file_index_filename ON file_index(filename);
   `);
 
-  console.log('Database schema initialized');
+  console.log("Database schema initialized");
 }
 
 // Initialize on import

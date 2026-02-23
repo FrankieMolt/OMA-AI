@@ -1,34 +1,34 @@
-import { Metadata } from 'next'
+import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'Bounties | OMA-AI',
-  description: 'Earn rewards by contributing to the OMA-AI ecosystem.',
-}
+  title: "Bounties | OMA-AI",
+  description: "Earn rewards by contributing to the OMA-AI ecosystem.",
+};
 
 export default function BountiesPage() {
   const bounties = [
     {
-      title: 'API Integration',
-      reward: '$500',
-      description: 'Integrate OMA-AI with a new blockchain',
-      difficulty: 'Medium',
-      status: 'open',
+      title: "API Integration",
+      reward: "$500",
+      description: "Integrate OMA-AI with a new blockchain",
+      difficulty: "Medium",
+      status: "open",
     },
     {
-      title: 'Documentation',
-      reward: '$200',
-      description: 'Write comprehensive API documentation',
-      difficulty: 'Easy',
-      status: 'open',
+      title: "Documentation",
+      reward: "$200",
+      description: "Write comprehensive API documentation",
+      difficulty: "Easy",
+      status: "open",
     },
     {
-      title: 'Bug Bounty',
-      reward: '$1000',
-      description: 'Find and report critical security issues',
-      difficulty: 'Hard',
-      status: 'open',
+      title: "Bug Bounty",
+      reward: "$1000",
+      description: "Find and report critical security issues",
+      difficulty: "Hard",
+      status: "open",
     },
-  ]
+  ];
 
   return (
     <main className="min-h-screen bg-[#050510] text-white font-exo2">
@@ -49,10 +49,17 @@ export default function BountiesPage() {
 
           <div className="grid md:grid-cols-3 gap-6">
             {bounties.map((bounty, i) => (
-              <div key={i} className="p-6 rounded-2xl bg-[#0a0a15] border border-white/5">
+              <div
+                key={i}
+                className="p-6 rounded-2xl bg-[#0a0a15] border border-white/5"
+              >
                 <div className="flex justify-between items-start mb-4">
-                  <h3 className="font-orbitron text-xl font-bold">{bounty.title}</h3>
-                  <span className="font-orbitron text-green-400 font-bold">{bounty.reward}</span>
+                  <h3 className="font-orbitron text-xl font-bold">
+                    {bounty.title}
+                  </h3>
+                  <span className="font-orbitron text-green-400 font-bold">
+                    {bounty.reward}
+                  </span>
                 </div>
                 <p className="text-gray-400 mb-4">{bounty.description}</p>
                 <div className="flex gap-2">
@@ -69,5 +76,5 @@ export default function BountiesPage() {
         </div>
       </div>
     </main>
-  )
+  );
 }

@@ -1,12 +1,12 @@
 // OMA-AI TypeScript SDK - Agent Wrapper
 
-import { OMAClient } from './client';
-import { ethers } from 'ethers';
+import { OMAClient } from "./client";
+import { ethers } from "ethers";
 
 export interface AgentData {
   id: string;
   name: string;
-  status: 'alive' | 'dead';
+  status: "alive" | "dead";
   balance: number;
   daily_rent: number;
   daily_revenue: number;
@@ -21,37 +21,53 @@ export interface AgentData {
 export class Agent {
   private data: AgentData;
   private client: OMAClient;
-  
+
   constructor(data: AgentData, client: OMAClient) {
     this.data = data;
     this.client = client;
   }
-  
+
   // ============ Getters ============
-  
-  get id(): string { return this.data.id; }
-  get name(): string { return this.data.name; }
-  get status(): string { return this.data.status; }
-  get balance(): number { return this.data.balance; }
-  get capabilities(): string[] { return this.data.capabilities; }
-  get children(): string[] { return this.data.children; }
-  get isAlive(): boolean { return this.data.status === 'alive'; }
-  
+
+  get id(): string {
+    return this.data.id;
+  }
+  get name(): string {
+    return this.data.name;
+  }
+  get status(): string {
+    return this.data.status;
+  }
+  get balance(): number {
+    return this.data.balance;
+  }
+  get capabilities(): string[] {
+    return this.data.capabilities;
+  }
+  get children(): string[] {
+    return this.data.children;
+  }
+  get isAlive(): boolean {
+    return this.data.status === "alive";
+  }
+
   // ============ Actions ============
-  
+
   async think(task: string): Promise<string> {
-    const response = await this.client.generate(
-      'llama-3.3-70b-versatile',
-      [{ role: 'user', content: task }]
-    );
+    const response = await this.client.generate("llama-3.3-70b-versatile", [
+      { role: "user", content: task },
+    ]);
     return response.choices[0].message.content;
   }
-  
+
   async spawnChild(name: string, balance: number = 10): Promise<Agent> {
-    const response = await this.client.httpPost(`/api/agents/${this.id}/spawn`, {
-      name,
-      balance,
-    });
+    const response = await this.client.httpPost(
+      `/api/agents/${this.id}/spawn`,
+      {
+        name,
+        balance,
+      },
+    );
     return new Agent(response.data, this.client);
   }
 
@@ -69,7 +85,7 @@ export class Agent {
 
   async addCapability(capability: string): Promise<void> {
     await this.client.httpPost(`/api/agents/${this.id}/capabilities`, {
-      capability
+      capability,
     });
     this.data.capabilities.push(capability);
   }
@@ -88,34 +104,38 @@ export class Agent {
     net_profit: number;
     daily_average: number;
   }> {
-    const response = await this.client.httpGet(`/api/agents/${this.id}/earnings`);
+    const response = await this.client.httpGet(
+      `/api/agents/${this.id}/earnings`,
+    );
     return response;
   }
 
   async getChildren(): Promise<Agent[]> {
-    const response = await this.client.httpGet(`/api/agents/${this.id}/children`);
+    const response = await this.client.httpGet(
+      `/api/agents/${this.id}/children`,
+    );
     return response.children.map((a: any) => new Agent(a, this.client));
   }
-  
+
   // ============ Economics ============
-  
+
   get survivalDays(): number {
     if (this.data.daily_rent <= 0) return Infinity;
     const daily_net = this.data.daily_revenue - this.data.daily_rent;
     if (daily_net <= 0) return 0;
     return Math.floor(this.data.balance / Math.abs(daily_net));
   }
-  
+
   get netWorth(): number {
-    return this.data.balance - (this.data.children.length * 5); // 5 per child spawned
+    return this.data.balance - this.data.children.length * 5; // 5 per child spawned
   }
-  
+
   get canSpawn(): boolean {
-    return this.data.balance >= 10 && this.data.status === 'alive';
+    return this.data.balance >= 10 && this.data.status === "alive";
   }
-  
+
   // ============ JSON ============
-  
+
   toJSON(): AgentData {
     return this.data;
   }

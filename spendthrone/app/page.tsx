@@ -9,16 +9,16 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Search, Heart, ShoppingBag, TrendingUp, Flame, Sparkles } from 'lucide-react';
 import Link from 'next/link';
-import { PRODUCTS } from '@/data/products';
-import { Product } from '@/types';
+import { realProducts } from '@/data/products';
+import { RealProduct } from '@/types';
 
 export default function HomePage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
   
-  const categories = ['all', ...new Set(PRODUCTS.map(p => p.category))];
+  const categories = ['all', ...new Set(realProducts.map(p => p.category))];
   
-  const filteredProducts = PRODUCTS.filter(product => {
+  const filteredProducts = realProducts.filter(product => {
     const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
                           product.description.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesCategory = selectedCategory === 'all' || product.category === selectedCategory;
@@ -149,7 +149,7 @@ export default function HomePage() {
           </motion.div>
 
           <p className="text-zinc-600 text-sm">
-            Showing {filteredProducts.length} of {PRODUCTS.length} products
+            Showing {filteredProducts.length} of {realProducts.length} products
           </p>
         </div>
       </section>
@@ -203,7 +203,7 @@ export default function HomePage() {
 }
 
 // Product Card Component
-function ProductCard({ product }: { product: Product }) {
+function ProductCard({ product }: { product: RealProduct }) {
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',

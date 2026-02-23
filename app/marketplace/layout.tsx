@@ -1,14 +1,14 @@
-import { Metadata } from 'next'
+import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'Marketplace',
-  description: 'Discover and access hundreds of APIs for AI agents.',
-}
+  title: "Marketplace",
+  description: "Discover and access hundreds of APIs for AI agents.",
+};
 
 export default function MarketplaceLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
-  return <>{children}</>
+  return <>{children}</>;
 }

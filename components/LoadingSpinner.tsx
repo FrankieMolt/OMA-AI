@@ -1,44 +1,48 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { Loader2 } from 'lucide-react';
+import React from "react";
+import { Loader2 } from "lucide-react";
 
 interface LoadingSpinnerProps {
-  size?: 'sm' | 'md' | 'lg';
-  color?: 'purple' | 'blue' | 'green' | 'white';
+  size?: "sm" | "md" | "lg";
+  color?: "purple" | "blue" | "green" | "white";
   text?: string;
   className?: string;
 }
 
 const sizeClasses = {
-  sm: 'w-4 h-4',
-  md: 'w-8 h-8',
-  lg: 'w-12 h-12'
+  sm: "w-4 h-4",
+  md: "w-8 h-8",
+  lg: "w-12 h-12",
 };
 
 const colorClasses = {
-  purple: 'text-purple-500',
-  blue: 'text-blue-500',
-  green: 'text-green-500',
-  white: 'text-white'
+  purple: "text-purple-500",
+  blue: "text-blue-500",
+  green: "text-green-500",
+  white: "text-white",
 };
 
 export default function LoadingSpinner({
-  size = 'md',
-  color = 'purple',
+  size = "md",
+  color = "purple",
   text,
-  className = ''
+  className = "",
 }: LoadingSpinnerProps) {
   return (
-    <div className={`flex flex-col items-center justify-center gap-3 ${className}`}>
-      <Loader2 className={`animate-spin ${sizeClasses[size]} ${colorClasses[color]}`} />
+    <div
+      className={`flex flex-col items-center justify-center gap-3 ${className}`}
+    >
+      <Loader2
+        className={`animate-spin ${sizeClasses[size]} ${colorClasses[color]}`}
+      />
       {text && <p className="text-sm text-zinc-400">{text}</p>}
     </div>
   );
 }
 
 // Full page loading state
-export function FullPageLoader({ text = 'Loading...' }: { text?: string }) {
+export function FullPageLoader({ text = "Loading..." }: { text?: string }) {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-zinc-950/80 backdrop-blur-sm">
       <LoadingSpinner size="lg" text={text} />
@@ -47,12 +51,9 @@ export function FullPageLoader({ text = 'Loading...' }: { text?: string }) {
 }
 
 // Inline loader for content sections
-export function InlineLoader({ height = '200px' }: { height?: string }) {
+export function InlineLoader({ height = "200px" }: { height?: string }) {
   return (
-    <div
-      className="flex items-center justify-center"
-      style={{ height }}
-    >
+    <div className="flex items-center justify-center" style={{ height }}>
       <LoadingSpinner size="md" />
     </div>
   );
@@ -167,7 +168,7 @@ export function DotLoader({ count = 3 }: { count?: number }) {
           className="w-2 h-2 bg-purple-500 rounded-full animate-bounce"
           style={{
             animationDelay: `${i * 0.1}s`,
-            animationDuration: '0.6s'
+            animationDuration: "0.6s",
           }}
         />
       ))}

@@ -1,5 +1,5 @@
 export function getCanonicalUrl(path: string): string {
-  const baseUrl = 'https://oma-ai.com';
+  const baseUrl = "https://oma-ai.com";
   return `${baseUrl}${path}`;
 }
 
@@ -22,7 +22,7 @@ export function generateMetaTags({
       title,
       description,
       url: getCanonicalUrl(path),
-      siteName: 'OMA-AI',
+      siteName: "OMA-AI",
     },
   };
 }

@@ -4,7 +4,10 @@ const CACHE_TTL = 60 * 1000; // 1 minute
 
 const cache = new Map<string, { data: unknown; timestamp: number }>();
 
-export async function cachedQuery(key: string, queryFn: () => Promise<unknown>) {
+export async function cachedQuery(
+  key: string,
+  queryFn: () => Promise<unknown>,
+) {
   const cached = cache.get(key);
   if (cached && Date.now() - cached.timestamp < CACHE_TTL) {
     return cached.data;
@@ -25,5 +28,5 @@ export function getPagination(page: number, limit: number = 20) {
 // Search helper
 export function buildSearchQuery(searchTerm: string, fields: string[]) {
   const conditions = fields.map((field) => `${field}.ilike.%${searchTerm}%`);
-  return conditions.join(',');
+  return conditions.join(",");
 }

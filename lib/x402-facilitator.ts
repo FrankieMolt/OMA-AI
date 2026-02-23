@@ -4,9 +4,9 @@
  * This module configures x402 payment processing for Base and Solana networks
  */
 
-import { HTTPFacilitatorClient } from '@x402/core/server';
-import { ExactEvmScheme } from '@x402/evm/exact/server';
-import { ExactSvmScheme } from '@x402/svm/exact/server';
+import { HTTPFacilitatorClient } from "@x402/core/server";
+import { ExactEvmScheme } from "@x402/evm/exact/server";
+import { ExactSvmScheme } from "@x402/svm/exact/server";
 
 /**
  * x402 Facilitator Configuration
@@ -16,14 +16,16 @@ import { ExactSvmScheme } from '@x402/svm/exact/server';
 export const facilitatorConfig = {
   // Production CDP Facilitator
   production: {
-    url: process.env.X402_FACILITATOR_URL || 'https://api.cdp.coinbase.com/platform/v2/x402',
-    apiKey: process.env.CDP_API_KEY || '',
+    url:
+      process.env.X402_FACILITATOR_URL ||
+      "https://api.cdp.coinbase.com/platform/v2/x402",
+    apiKey: process.env.CDP_API_KEY || "",
   },
 
   // Testnet Facilitator (FREE, no API key needed)
   testnet: {
-    url: process.env.X402_TESTNET_URL || 'https://www.x402.org/facilitator',
-    apiKey: '', // No API key needed for testnet
+    url: process.env.X402_TESTNET_URL || "https://www.x402.org/facilitator",
+    apiKey: "", // No API key needed for testnet
   },
 };
 
@@ -32,8 +34,10 @@ export const facilitatorConfig = {
  * These wallets receive x402 payments from agents
  */
 export const treasuryWallets = {
-  base: process.env.TREASURY_WALLET_BASE || '0x590FdA238A52bBA79fD4635e73bDAC1eAe558e784',
-  solana: process.env.TREASURY_WALLET_SOLANA || 'YourSolanaAddress',
+  base:
+    process.env.TREASURY_WALLET_BASE ||
+    "0x590FdA238A52bBA79fD4635e73bDAC1eAe558e784",
+  solana: process.env.TREASURY_WALLET_SOLANA || "YourSolanaAddress",
 };
 
 /**
@@ -41,17 +45,17 @@ export const treasuryWallets = {
  */
 export const networks = {
   base: {
-    caip2: 'eip155:8453',
-    testnetCaip2: 'eip155:84532',
-    name: 'Base',
-    token: '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913', // USDC on Base
+    caip2: "eip155:8453",
+    testnetCaip2: "eip155:84532",
+    name: "Base",
+    token: "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913", // USDC on Base
     decimals: 6,
   },
   solana: {
-    caip2: 'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp',
-    testnetCaip2: 'solana:EtWTRABZaYq6iMfeYKouRu166VU2xqa1',
-    name: 'Solana',
-    token: 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v', // USDC on Solana
+    caip2: "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+    testnetCaip2: "solana:EtWTRABZaYq6iMfeYKouRu166VU2xqa1",
+    name: "Solana",
+    token: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v", // USDC on Solana
     decimals: 6,
   },
 };
@@ -62,8 +66,10 @@ export const networks = {
 let facilitatorClient: HTTPFacilitatorClient | null = null;
 
 export function getFacilitatorClient(): HTTPFacilitatorClient {
-  const isProduction = process.env.NODE_ENV === 'production';
-  const config = isProduction ? facilitatorConfig.production : facilitatorConfig.testnet;
+  const isProduction = process.env.NODE_ENV === "production";
+  const config = isProduction
+    ? facilitatorConfig.production
+    : facilitatorConfig.testnet;
 
   if (!facilitatorClient) {
     facilitatorClient = new HTTPFacilitatorClient({
@@ -87,10 +93,11 @@ export interface ServicePaymentConfig {
 
 export function getServicePaymentConfig(
   priceUsdc: number,
-  network: 'base' | 'solana'
+  network: "base" | "solana",
 ): ServicePaymentConfig {
   const net = networks[network];
-  const wallet = network === 'base' ? treasuryWallets.base : treasuryWallets.solana;
+  const wallet =
+    network === "base" ? treasuryWallets.base : treasuryWallets.solana;
 
   return {
     price: `$${priceUsdc.toFixed(3)}`,

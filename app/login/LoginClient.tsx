@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import Link from 'next/link';
-import { Lock, Mail, Github, Shield, Zap, Cpu } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
+import React, { useState } from "react";
+import Link from "next/link";
+import { Lock, Mail, Github, Shield, Zap, Cpu } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 
 export default function LoginPage() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleLogin = (e: React.FormEvent) => {
@@ -16,60 +16,85 @@ export default function LoginPage() {
     setLoading(true);
     // Simulate login
     setTimeout(() => {
-      window.location.href = '/marketplace';
+      window.location.href = "/marketplace";
     }, 1500);
   };
 
   const features = [
     {
       icon: <Cpu size={16} className="text-memoria-text-hero" />,
-      title: 'API Marketplace Access',
-      description: 'Manage 450+ APIs and MCP servers for your autonomous agents'
+      title: "API Marketplace Access",
+      description:
+        "Manage 450+ APIs and MCP servers for your autonomous agents",
     },
     {
       icon: <Zap size={16} className="text-memoria-text-hero" />,
-      title: 'Real-Time Analytics',
-      description: 'Monitor usage, track spending, and optimize agent performance'
+      title: "Real-Time Analytics",
+      description:
+        "Monitor usage, track spending, and optimize agent performance",
     },
     {
       icon: <Shield size={16} className="text-memoria-text-hero" />,
-      title: 'Secure x402 Payments',
-      description: 'Integrated crypto payments with automatic fee optimization'
-    }
+      title: "Secure x402 Payments",
+      description: "Integrated crypto payments with automatic fee optimization",
+    },
   ];
 
   return (
     <div className="min-h-screen bg-memoria-bg-ultra-dark flex items-center justify-center p-6 selection:bg-memoria-text-hero selection:text-memoria-bg-ultra-dark">
       <div className="w-full max-w-md">
         <div className="text-center mb-10">
-          <Link href="/" className="inline-flex items-center gap-3 no-underline group mb-8">
-             <div className="w-10 h-10 bg-memoria-bg-surface border border-memoria-border-default rounded-sm flex items-center justify-center group-hover:border-memoria-text-hero transition-colors">
-                <Shield size={20} className="text-memoria-text-hero" />
-             </div>
-             <span className="text-2xl font-light text-memoria-text-hero tracking-tighter font-display">
-                OMA SYSTEMS
-             </span>
+          <Link
+            href="/"
+            className="inline-flex items-center gap-3 no-underline group mb-8"
+          >
+            <div className="w-10 h-10 bg-memoria-bg-surface border border-memoria-border-default rounded-sm flex items-center justify-center group-hover:border-memoria-text-hero transition-colors">
+              <Shield size={20} className="text-memoria-text-hero" />
+            </div>
+            <span className="text-2xl font-light text-memoria-text-hero tracking-tighter font-display">
+              OMA SYSTEMS
+            </span>
           </Link>
-          <h1 className="text-3xl font-light text-memoria-text-hero tracking-tight mb-2 font-display">Welcome Back</h1>
-          <p className="text-memoria-text-whisper text-sm mb-6">Access your autonomous agent fleet.</p>
-          
+          <h1 className="text-3xl font-light text-memoria-text-hero tracking-tight mb-2 font-display">
+            Welcome Back
+          </h1>
+          <p className="text-memoria-text-whisper text-sm mb-6">
+            Access your autonomous agent fleet.
+          </p>
+
           <div className="grid grid-cols-1 gap-4 mb-8 max-w-sm mx-auto text-left">
-             {features.map((feature, i) => (
-                <div key={i} className="flex items-start gap-3 text-sm text-memoria-text-whisper font-light">
-                   {feature.icon}
-                   <p>{feature.description}</p>
-                </div>
-             ))}
+            {features.map((feature, i) => (
+              <div
+                key={i}
+                className="flex items-start gap-3 text-sm text-memoria-text-whisper font-light"
+              >
+                {feature.icon}
+                <p>{feature.description}</p>
+              </div>
+            ))}
           </div>
         </div>
 
         <Card className="bg-memoria-bg-card border-memoria-border-muted rounded-sm">
           <CardContent className="p-8">
-            <form onSubmit={handleLogin} className="space-y-6" aria-label="Login form">
+            <form
+              onSubmit={handleLogin}
+              className="space-y-6"
+              aria-label="Login form"
+            >
               <div className="space-y-2">
-                <label htmlFor="email" className="text-[10px] uppercase tracking-widest text-memoria-text-meta font-medium ml-1">Email Address</label>
+                <label
+                  htmlFor="email"
+                  className="text-[10px] uppercase tracking-widest text-memoria-text-meta font-medium ml-1"
+                >
+                  Email Address
+                </label>
                 <div className="relative">
-                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-memoria-text-meta" size={16} aria-hidden="true" />
+                  <Mail
+                    className="absolute left-3 top-1/2 -translate-y-1/2 text-memoria-text-meta"
+                    size={16}
+                    aria-hidden="true"
+                  />
                   <input
                     id="email"
                     type="email"
@@ -85,13 +110,25 @@ export default function LoginPage() {
 
               <div className="space-y-2">
                 <div className="flex justify-between items-center px-1">
-                  <label htmlFor="password" className="text-[10px] uppercase tracking-widest text-memoria-text-meta font-medium">Password</label>
-                  <Link href="/forgot-password" className="text-[10px] uppercase tracking-widest text-memoria-text-meta hover:text-memoria-text-hero transition-colors">
+                  <label
+                    htmlFor="password"
+                    className="text-[10px] uppercase tracking-widest text-memoria-text-meta font-medium"
+                  >
+                    Password
+                  </label>
+                  <Link
+                    href="/forgot-password"
+                    className="text-[10px] uppercase tracking-widest text-memoria-text-meta hover:text-memoria-text-hero transition-colors"
+                  >
                     Forgot?
                   </Link>
                 </div>
                 <div className="relative">
-                  <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-memoria-text-meta" size={16} aria-hidden="true" />
+                  <Lock
+                    className="absolute left-3 top-1/2 -translate-y-1/2 text-memoria-text-meta"
+                    size={16}
+                    aria-hidden="true"
+                  />
                   <input
                     id="password"
                     type="password"
@@ -105,12 +142,12 @@ export default function LoginPage() {
                 </div>
               </div>
 
-              <Button 
-                type="submit" 
+              <Button
+                type="submit"
                 disabled={loading}
                 className="w-full bg-memoria-text-hero text-memoria-bg-ultra-dark hover:bg-memoria-text-secondary h-12 rounded-sm text-xs font-bold uppercase tracking-widest"
               >
-                {loading ? 'Authenticating...' : 'Sign In'}
+                {loading ? "Authenticating..." : "Sign In"}
               </Button>
             </form>
 
@@ -119,11 +156,16 @@ export default function LoginPage() {
                 <span className="w-full border-t border-memoria-border-muted"></span>
               </div>
               <div className="relative flex justify-center text-[10px] uppercase tracking-widest">
-                <span className="bg-memoria-bg-card px-2 text-memoria-text-meta">Or continue with</span>
+                <span className="bg-memoria-bg-card px-2 text-memoria-text-meta">
+                  Or continue with
+                </span>
               </div>
             </div>
 
-            <Button variant="outline" className="w-full border-memoria-border-muted text-memoria-text-secondary hover:bg-memoria-bg-surface hover:text-memoria-text-hero h-12 rounded-sm text-xs font-bold uppercase tracking-widest">
+            <Button
+              variant="outline"
+              className="w-full border-memoria-border-muted text-memoria-text-secondary hover:bg-memoria-bg-surface hover:text-memoria-text-hero h-12 rounded-sm text-xs font-bold uppercase tracking-widest"
+            >
               <Github size={16} className="mr-2" /> GitHub
             </Button>
           </CardContent>
@@ -131,20 +173,24 @@ export default function LoginPage() {
 
         <div className="mt-8 text-center max-w-xs mx-auto">
           <p className="text-[11px] uppercase tracking-widest text-memoria-text-meta mb-4">
-            New to network?{' '}
-            <Link href="/signup" className="text-memoria-text-hero hover:underline transition-all">
+            New to network?{" "}
+            <Link
+              href="/signup"
+              className="text-memoria-text-hero hover:underline transition-all"
+            >
               Initialize Account
             </Link>
           </p>
           <p className="text-xs text-memoria-text-whisper leading-relaxed mb-4">
-            By accessing the dashboard, you agree to the OMA-AI autonomous commerce protocols 
-            and x402 payment standards. Your agents can discover APIs, process payments, 
-            and integrate services without human intervention.
+            By accessing the dashboard, you agree to the OMA-AI autonomous
+            commerce protocols and x402 payment standards. Your agents can
+            discover APIs, process payments, and integrate services without
+            human intervention.
           </p>
           <div className="flex justify-center gap-4 text-xs text-memoria-text-meta">
-             <span>✓ Secure encryption</span>
-             <span>✓ 24/7 monitoring</span>
-             <span>✓ Instant support</span>
+            <span>✓ Secure encryption</span>
+            <span>✓ 24/7 monitoring</span>
+            <span>✓ Instant support</span>
           </div>
         </div>
       </div>

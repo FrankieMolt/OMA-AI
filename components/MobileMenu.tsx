@@ -1,30 +1,30 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { X, Menu } from 'lucide-react';
-import Link from 'next/link';
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { X, Menu } from "lucide-react";
+import Link from "next/link";
 
 export default function MobileMenu() {
   const [isOpen, setIsOpen] = useState(false);
 
   const tabs = [
-    { name: 'Marketplace', href: '/marketplace' },
-    { name: 'Agents', href: '/agents' },
-    { name: 'Docs', href: '/docs' },
-    { name: 'Bounties', href: '/tasks' },
-    { name: 'About', href: '/about' },
+    { name: "Marketplace", href: "/marketplace" },
+    { name: "Agents", href: "/agents" },
+    { name: "Docs", href: "/docs" },
+    { name: "Bounties", href: "/tasks" },
+    { name: "About", href: "/about" },
   ];
 
   // Prevent scrolling when menu is open
   useEffect(() => {
     if (isOpen) {
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = "unset";
     }
     return () => {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = "unset";
     };
   }, [isOpen]);
 
@@ -54,10 +54,10 @@ export default function MobileMenu() {
 
             {/* Menu Content */}
             <motion.div
-              initial={{ x: '100%' }}
+              initial={{ x: "100%" }}
               animate={{ x: 0 }}
-              exit={{ x: '100%' }}
-              transition={{ type: 'spring', damping: 30, stiffness: 300 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "spring", damping: 30, stiffness: 300 }}
               className="fixed top-0 right-0 h-full w-72 z-50 md:hidden overflow-y-auto bg-memoria-bg-ultra-dark border-l border-memoria-border-muted p-8"
             >
               <div className="pt-12">
@@ -73,7 +73,7 @@ export default function MobileMenu() {
 
                 {/* Navigation */}
                 <nav className="flex flex-col gap-2">
-                  {tabs.map(tab => (
+                  {tabs.map((tab) => (
                     <Link
                       key={tab.name}
                       href={tab.href}

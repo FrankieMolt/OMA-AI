@@ -1,10 +1,17 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { X, Wallet, Loader2, CheckCircle, AlertCircle, ExternalLink } from 'lucide-react';
-import { createWalletClient, custom, parseEther } from 'viem';
-import { base } from 'viem/chains';
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  X,
+  Wallet,
+  Loader2,
+  CheckCircle,
+  AlertCircle,
+  ExternalLink,
+} from "lucide-react";
+import { createWalletClient, custom, parseEther } from "viem";
+import { base } from "viem/chains";
 
 interface PaymentModalProps {
   isOpen: boolean;
@@ -18,85 +25,95 @@ interface PaymentModalProps {
   onSuccess?: (txHash: string) => void;
 }
 
-type PaymentStatus = 'idle' | 'connecting' | 'signing' | 'processing' | 'success' | 'error';
+type PaymentStatus =
+  | "idle"
+  | "connecting"
+  | "signing"
+  | "processing"
+  | "success"
+  | "error";
 
-export function PaymentModal({ isOpen, onClose, service, onSuccess }: PaymentModalProps) {
-  const [status, setStatus] = useState<PaymentStatus>('idle');
-  const [error, setError] = useState('');
-  const [txHash, setTxHash] = useState('');
+export function PaymentModal({
+  isOpen,
+  onClose,
+  service,
+  onSuccess,
+}: PaymentModalProps) {
+  const [status, setStatus] = useState<PaymentStatus>("idle");
+  const [error, setError] = useState("");
+  const [txHash, setTxHash] = useState("");
 
   const handlePayment = async () => {
-    setStatus('connecting');
-    setError('');
+    setStatus("connecting");
+    setError("");
 
-    if (typeof window === 'undefined' || !window.ethereum) {
-      setError('No wallet found. Please install MetaMask or Coinbase Wallet.');
-      setStatus('error');
+    if (typeof window === "undefined" || !window.ethereum) {
+      setError("No wallet found. Please install MetaMask or Coinbase Wallet.");
+      setStatus("error");
       return;
     }
 
     try {
       const client = createWalletClient({
         chain: base,
-        transport: custom(window.ethereum)
+        transport: custom(window.ethereum),
       });
 
       const [account] = await client.requestAddresses();
-      setStatus('signing');
+      setStatus("signing");
 
       // Create x402 payment message
       const paymentMessage = JSON.stringify({
         service_id: service.id,
         amount: service.price,
-        currency: 'USDC',
-        chain: 'base',
-        timestamp: Date.now()
+        currency: "USDC",
+        chain: "base",
+        timestamp: Date.now(),
       });
 
       // Sign the payment authorization
       const signature = await client.signMessage({
         account,
-        message: paymentMessage
+        message: paymentMessage,
       });
 
-      setStatus('processing');
+      setStatus("processing");
 
       // Send to backend for processing
-      const response = await fetch('/api/payments/execute', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const response = await fetch("/api/payments/execute", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           serviceId: service.id,
           walletAddress: account,
           signature,
-          message: paymentMessage
-        })
+          message: paymentMessage,
+        }),
       });
 
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || 'Payment failed');
+        throw new Error(data.error || "Payment failed");
       }
 
-      setTxHash(data.txHash || 'simulated_tx');
-      setStatus('success');
-      
+      setTxHash(data.txHash || "simulated_tx");
+      setStatus("success");
+
       if (onSuccess) {
         onSuccess(data.txHash);
       }
-
     } catch (err: any) {
-      console.error('Payment error:', err);
-      setError(err.message || 'Payment failed');
-      setStatus('error');
+      console.error("Payment error:", err);
+      setError(err.message || "Payment failed");
+      setStatus("error");
     }
   };
 
   const resetAndClose = () => {
-    setStatus('idle');
-    setError('');
-    setTxHash('');
+    setStatus("idle");
+    setError("");
+    setTxHash("");
     onClose();
   };
 
@@ -106,7 +123,7 @@ export function PaymentModal({ isOpen, onClose, service, onSuccess }: PaymentMod
     <AnimatePresence>
       <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
         {/* Backdrop */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -122,7 +139,7 @@ export function PaymentModal({ isOpen, onClose, service, onSuccess }: PaymentMod
           className="relative bg-zinc-900 border border-zinc-800 rounded-2xl p-6 w-full max-w-md shadow-2xl"
         >
           {/* Close Button */}
-          <button 
+          <button
             onClick={resetAndClose}
             className="absolute top-4 right-4 text-zinc-500 hover:text-white transition-colors"
           >
@@ -144,25 +161,31 @@ export function PaymentModal({ isOpen, onClose, service, onSuccess }: PaymentMod
               <div>
                 <h3 className="font-semibold">{service.name}</h3>
                 {service.description && (
-                  <p className="text-sm text-zinc-400 mt-1 line-clamp-2">{service.description}</p>
+                  <p className="text-sm text-zinc-400 mt-1 line-clamp-2">
+                    {service.description}
+                  </p>
                 )}
               </div>
               <div className="text-right">
-                <div className="text-2xl font-bold text-green-400">${service.price}</div>
+                <div className="text-2xl font-bold text-green-400">
+                  ${service.price}
+                </div>
                 <div className="text-xs text-zinc-500">USDC on Base</div>
               </div>
             </div>
           </div>
 
           {/* Status Display */}
-          {status === 'success' && (
+          {status === "success" && (
             <div className="mb-6 p-4 bg-green-500/10 border border-green-500/30 rounded-xl">
               <div className="flex items-center gap-3">
                 <CheckCircle className="text-green-400" size={24} />
                 <div>
-                  <p className="font-medium text-green-400">Payment Successful!</p>
+                  <p className="font-medium text-green-400">
+                    Payment Successful!
+                  </p>
                   {txHash && (
-                    <a 
+                    <a
                       href={`https://basescan.org/tx/${txHash}`}
                       target="_blank"
                       rel="noopener noreferrer"
@@ -176,7 +199,7 @@ export function PaymentModal({ isOpen, onClose, service, onSuccess }: PaymentMod
             </div>
           )}
 
-          {status === 'error' && (
+          {status === "error" && (
             <div className="mb-6 p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
               <div className="flex items-center gap-3">
                 <AlertCircle className="text-red-400" size={24} />
@@ -189,7 +212,7 @@ export function PaymentModal({ isOpen, onClose, service, onSuccess }: PaymentMod
           )}
 
           {/* Action Buttons */}
-          {status === 'idle' && (
+          {status === "idle" && (
             <button
               onClick={handlePayment}
               className="w-full py-4 bg-gradient-to-r from-purple-600 to-blue-600 rounded-xl font-semibold text-white hover:opacity-90 transition-opacity"
@@ -198,24 +221,26 @@ export function PaymentModal({ isOpen, onClose, service, onSuccess }: PaymentMod
             </button>
           )}
 
-          {(status === 'connecting' || status === 'signing' || status === 'processing') && (
+          {(status === "connecting" ||
+            status === "signing" ||
+            status === "processing") && (
             <button
               disabled
               className="w-full py-4 bg-zinc-800 rounded-xl font-semibold text-zinc-400 flex items-center justify-center gap-2"
             >
               <Loader2 size={20} className="animate-spin" />
-              {status === 'connecting' && 'Connecting Wallet...'}
-              {status === 'signing' && 'Confirm in Wallet...'}
-              {status === 'processing' && 'Processing Payment...'}
+              {status === "connecting" && "Connecting Wallet..."}
+              {status === "signing" && "Confirm in Wallet..."}
+              {status === "processing" && "Processing Payment..."}
             </button>
           )}
 
-          {(status === 'success' || status === 'error') && (
+          {(status === "success" || status === "error") && (
             <button
               onClick={resetAndClose}
               className="w-full py-4 bg-zinc-800 rounded-xl font-semibold hover:bg-zinc-700 transition-colors"
             >
-              {status === 'success' ? 'Done' : 'Try Again'}
+              {status === "success" ? "Done" : "Try Again"}
             </button>
           )}
 

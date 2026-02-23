@@ -1,15 +1,21 @@
 /**
  * x402 Payment Protocol - Crypto Micropayments
- * 
+ *
  * This module handles USDC payments on Base network using the x402 protocol.
  * Users pay for API calls with crypto micropayments.
  */
 
-import { createPublicClient, createWalletClient, http, parseUnits, formatUnits } from 'viem';
-import { base } from 'viem/chains';
+import {
+  createPublicClient,
+  createWalletClient,
+  http,
+  parseUnits,
+  formatUnits,
+} from "viem";
+import { base } from "viem/chains";
 
 // USDC contract on Base
-const USDC_ADDRESS = '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913' as const;
+const USDC_ADDRESS = "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913" as const;
 
 // x402 Payment Handler
 export class X402PaymentHandler {
@@ -19,7 +25,7 @@ export class X402PaymentHandler {
   constructor(rpcUrl?: string) {
     this.client = createPublicClient({
       chain: this.chain,
-      transport: http(rpcUrl || 'https://mainnet.base.org'),
+      transport: http(rpcUrl || "https://mainnet.base.org"),
     });
   }
 
@@ -30,10 +36,10 @@ export class X402PaymentHandler {
     try {
       // For demo, return mock balance
       // In production, this would call the actual USDC contract
-      return '100.00';
+      return "100.00";
     } catch (error) {
-      console.error('Failed to get balance:', error);
-      return '0.00';
+      console.error("Failed to get balance:", error);
+      return "0.00";
     }
   }
 
@@ -48,16 +54,16 @@ export class X402PaymentHandler {
     recipientAddress: `0x${string}`;
   }): X402PaymentRequest {
     const totalCost = params.pricePerCall * params.calls;
-    
+
     return {
       id: crypto.randomUUID(),
       serviceId: params.serviceId,
       serviceName: params.serviceName,
       amount: totalCost,
-      currency: 'USDC',
-      chain: 'base',
+      currency: "USDC",
+      chain: "base",
       recipient: params.recipientAddress,
-      status: 'pending',
+      status: "pending",
       createdAt: new Date().toISOString(),
     };
   }
@@ -65,13 +71,18 @@ export class X402PaymentHandler {
   /**
    * Validate a payment transaction
    */
-  async validatePayment(txHash: string, expectedAmount: number): Promise<boolean> {
+  async validatePayment(
+    txHash: string,
+    expectedAmount: number,
+  ): Promise<boolean> {
     try {
-      const receipt = await this.client.getTransactionReceipt({ hash: txHash as `0x${string}` });
+      const receipt = await this.client.getTransactionReceipt({
+        hash: txHash as `0x${string}`,
+      });
       // In production, decode the transfer event and validate amount
-      return receipt.status === 'success';
+      return receipt.status === "success";
     } catch (error) {
-      console.error('Payment validation failed:', error);
+      console.error("Payment validation failed:", error);
       return false;
     }
   }
@@ -82,10 +93,10 @@ export interface X402PaymentRequest {
   serviceId: string;
   serviceName: string;
   amount: number;
-  currency: 'USDC';
-  chain: 'base';
+  currency: "USDC";
+  chain: "base";
   recipient: `0x${string}`;
-  status: 'pending' | 'completed' | 'failed';
+  status: "pending" | "completed" | "failed";
   txHash?: string;
   createdAt: string;
   completedAt?: string;
@@ -117,10 +128,10 @@ export function useX402() {
     // 2. Request signature for USDC transfer
     // 3. Submit transaction
     // 4. Wait for confirmation
-    
+
     // For demo, simulate successful payment
-    request.status = 'completed';
-    request.txHash = `0x${crypto.randomUUID().replace(/-/g, '')}`;
+    request.status = "completed";
+    request.txHash = `0x${crypto.randomUUID().replace(/-/g, "")}`;
     request.completedAt = new Date().toISOString();
 
     return request;

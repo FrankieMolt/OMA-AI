@@ -1,16 +1,16 @@
-'use client';
+"use client";
 
-import React, { useState, useRef, ReactNode, MouseEvent } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useRef, ReactNode, MouseEvent } from "react";
+import { motion } from "framer-motion";
 
 interface RippleButtonProps {
   children: ReactNode;
   onClick?: () => void;
   className?: string;
-  variant?: 'primary' | 'secondary' | 'ghost';
-  size?: 'sm' | 'md' | 'lg';
+  variant?: "primary" | "secondary" | "ghost";
+  size?: "sm" | "md" | "lg";
   disabled?: boolean;
-  type?: 'button' | 'submit' | 'reset';
+  type?: "button" | "submit" | "reset";
   ariaLabel?: string;
 }
 
@@ -23,12 +23,12 @@ interface Ripple {
 export function RippleButton({
   children,
   onClick,
-  className = '',
-  variant = 'primary',
-  size = 'md',
+  className = "",
+  variant = "primary",
+  size = "md",
   disabled = false,
-  type = 'button',
-  ariaLabel
+  type = "button",
+  ariaLabel,
 }: RippleButtonProps) {
   const [ripples, setRipples] = useState<Ripple[]>([]);
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -47,31 +47,35 @@ export function RippleButton({
     const newRipple: Ripple = {
       x,
       y,
-      id: rippleId.current++
+      id: rippleId.current++,
     };
 
-    setRipples(prev => [...prev, newRipple]);
+    setRipples((prev) => [...prev, newRipple]);
 
     // Remove ripple after animation
     setTimeout(() => {
-      setRipples(prev => prev.filter(r => r.id !== newRipple.id));
+      setRipples((prev) => prev.filter((r) => r.id !== newRipple.id));
     }, 600);
 
     onClick?.();
   };
 
-  const baseStyles = 'relative overflow-hidden font-semibold transition-all duration-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-zinc-950 disabled:opacity-50 disabled:cursor-not-allowed';
-  
+  const baseStyles =
+    "relative overflow-hidden font-semibold transition-all duration-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-zinc-950 disabled:opacity-50 disabled:cursor-not-allowed";
+
   const variantStyles = {
-    primary: 'bg-gradient-to-r from-purple-600 to-blue-600 text-white hover:from-purple-700 hover:to-blue-700 focus:ring-purple-500 shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40',
-    secondary: 'bg-zinc-800 text-zinc-200 border border-zinc-700 hover:bg-zinc-700 hover:border-zinc-600 hover:text-white focus:ring-zinc-500',
-    ghost: 'bg-transparent text-zinc-400 hover:text-white hover:bg-zinc-800/50 focus:ring-zinc-500'
+    primary:
+      "bg-gradient-to-r from-purple-600 to-blue-600 text-white hover:from-purple-700 hover:to-blue-700 focus:ring-purple-500 shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40",
+    secondary:
+      "bg-zinc-800 text-zinc-200 border border-zinc-700 hover:bg-zinc-700 hover:border-zinc-600 hover:text-white focus:ring-zinc-500",
+    ghost:
+      "bg-transparent text-zinc-400 hover:text-white hover:bg-zinc-800/50 focus:ring-zinc-500",
   };
 
   const sizeStyles = {
-    sm: 'px-4 py-2 text-sm',
-    md: 'px-6 py-3 text-base',
-    lg: 'px-8 py-4 text-lg'
+    sm: "px-4 py-2 text-sm",
+    md: "px-6 py-3 text-base",
+    lg: "px-8 py-4 text-lg",
   };
 
   return (
@@ -86,18 +90,20 @@ export function RippleButton({
       whileTap={{ scale: disabled ? 1 : 0.98 }}
       transition={{ duration: 0.15 }}
     >
-      {ripples.map(ripple => (
+      {ripples.map((ripple) => (
         <span
           key={ripple.id}
           className="absolute rounded-full bg-white/30 animate-ripple pointer-events-none"
           style={{
             left: ripple.x,
             top: ripple.y,
-            transform: 'translate(-50%, -50%)'
+            transform: "translate(-50%, -50%)",
           }}
         />
       ))}
-      <span className="relative z-10 flex items-center justify-center gap-2">{children}</span>
+      <span className="relative z-10 flex items-center justify-center gap-2">
+        {children}
+      </span>
     </motion.button>
   );
 }
@@ -112,14 +118,14 @@ interface AnimatedLinkProps {
 export function AnimatedLink({
   children,
   href,
-  className = '',
-  external = false
+  className = "",
+  external = false,
 }: AnimatedLinkProps) {
   return (
     <motion.a
       href={href}
-      target={external ? '_blank' : undefined}
-      rel={external ? 'noopener noreferrer' : undefined}
+      target={external ? "_blank" : undefined}
+      rel={external ? "noopener noreferrer" : undefined}
       className={`relative inline-block text-purple-400 hover:text-purple-300 transition-colors duration-200 group ${className}`}
       whileHover={{ x: 2 }}
       transition={{ duration: 0.2 }}
@@ -138,7 +144,7 @@ interface LoadingButtonProps extends RippleButtonProps {
 export function LoadingButton({
   children,
   loading = false,
-  loadingText = 'Loading...',
+  loadingText = "Loading...",
   ...props
 }: LoadingButtonProps) {
   return (
@@ -184,8 +190,8 @@ interface IconButtonProps {
 export function IconButton({
   children,
   onClick,
-  className = '',
-  ariaLabel
+  className = "",
+  ariaLabel,
 }: IconButtonProps) {
   return (
     <motion.button

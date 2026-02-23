@@ -4,14 +4,14 @@
  * Handles HTTP 402 Payment Required responses and x402 payment verification
  */
 
-import { NextRequest, NextResponse } from 'next/server';
-import { getFacilitatorClient } from './x402-facilitator';
+import { NextRequest, NextResponse } from "next/server";
+import { getFacilitatorClient } from "./x402-facilitator";
 
 /**
  * x402 Payment Required Response Headers
  */
 export interface X402PaymentRequired {
-  scheme: 'exact';
+  scheme: "exact";
   network: string;
   price: string;
   payTo: string;
@@ -26,18 +26,20 @@ export interface X402PaymentRequired {
 /**
  * Create HTTP 402 Payment Required Response
  */
-export function create402Response(paymentConfig: X402PaymentRequired): NextResponse {
+export function create402Response(
+  paymentConfig: X402PaymentRequired,
+): NextResponse {
   const response = NextResponse.json(
     {
-      error: 'Payment Required',
+      error: "Payment Required",
       paymentRequired: paymentConfig,
     },
-    { status: 402 }
+    { status: 402 },
   );
 
   // Set x402 headers
-  response.headers.set('PAYMENT-REQUIRED', JSON.stringify(paymentConfig));
-  response.headers.set('Access-Control-Expose-Headers', 'PAYMENT-REQUIRED');
+  response.headers.set("PAYMENT-REQUIRED", JSON.stringify(paymentConfig));
+  response.headers.set("Access-Control-Expose-Headers", "PAYMENT-REQUIRED");
 
   return response;
 }
@@ -50,10 +52,10 @@ export function checkX402Payment(request: NextRequest): {
   payment?: any;
   error?: string;
 } {
-  const paymentHeader = request.headers.get('X-PAYMENT');
+  const paymentHeader = request.headers.get("X-PAYMENT");
 
   if (!paymentHeader) {
-    return { valid: false, error: 'No payment header' };
+    return { valid: false, error: "No payment header" };
   }
 
   try {
@@ -61,12 +63,12 @@ export function checkX402Payment(request: NextRequest): {
 
     // Basic validation
     if (!payment.signature || !payment.scheme) {
-      return { valid: false, error: 'Invalid payment format' };
+      return { valid: false, error: "Invalid payment format" };
     }
 
     return { valid: true, payment };
   } catch (error) {
-    return { valid: false, error: 'Invalid payment JSON' };
+    return { valid: false, error: "Invalid payment JSON" };
   }
 }
 
@@ -76,19 +78,23 @@ export function checkX402Payment(request: NextRequest): {
  */
 export interface X402RouteConfig {
   price: number; // Price in USDC
-  network: 'base' | 'solana';
+  network: "base" | "solana";
   route?: string;
   description?: string;
 }
 
 export function createX402Middleware(config: X402RouteConfig) {
-  return async (request: NextRequest, response: NextResponse, next: Function) => {
+  return async (
+    request: NextRequest,
+    response: NextResponse,
+    next: Function,
+  ) => {
     const client = getFacilitatorClient();
 
     if (!client) {
       return NextResponse.json(
-        { error: 'Facilitator not configured' },
-        { status: 503 }
+        { error: "Facilitator not configured" },
+        { status: 503 },
       );
     }
 
@@ -104,14 +110,22 @@ export function createX402Middleware(config: X402RouteConfig) {
 
     // No payment - send 402 with payment details
     const paymentConfig = {
-      scheme: 'exact' as const,
-      network: config.network === 'base' ? 'eip155:84532' : 'solana:EtWTRABZaYq6iMfeYKouRu166VU2xqa1',
+      scheme: "exact" as const,
+      network:
+        config.network === "base"
+          ? "eip155:84532"
+          : "solana:EtWTRABZaYq6iMfeYKouRu166VU2xqa1",
       price: `$${config.price.toFixed(3)}`,
-      payTo: config.network === 'base'
-        ? process.env.NEXT_PUBLIC_TREASURY_WALLET_BASE || '0x590FdA238A52bBA79fD4635e73bDAC1eAe558e784'
-        : process.env.NEXT_PUBLIC_TREASURY_WALLET_SOLANA || 'YourSolanaAddress',
+      payTo:
+        config.network === "base"
+          ? process.env.NEXT_PUBLIC_TREASURY_WALLET_BASE ||
+            "0x590FdA238A52bBA79fD4635e73bDAC1eAe558e784"
+          : process.env.NEXT_PUBLIC_TREASURY_WALLET_SOLANA ||
+            "YourSolanaAddress",
       maxTimeoutSeconds: 60,
-      description: config.description || `Access to ${config.route || 'protected resource'}`,
+      description:
+        config.description ||
+        `Access to ${config.route || "protected resource"}`,
     };
 
     return create402Response(paymentConfig);
@@ -122,14 +136,14 @@ export function createX402Middleware(config: X402RouteConfig) {
  * Verify x402 payment with facilitator (future implementation)
  */
 export async function verifyX402Payment(
-  paymentHeader: string
+  paymentHeader: string,
 ): Promise<{ valid: boolean; txHash?: string; error?: string }> {
   try {
     const payment = JSON.parse(paymentHeader);
     const client = getFacilitatorClient();
 
     if (!client) {
-      return { valid: false, error: 'Facilitator not configured' };
+      return { valid: false, error: "Facilitator not configured" };
     }
 
     // TODO: Implement actual x402 verification
@@ -150,7 +164,7 @@ export async function verifyX402Payment(
   } catch (error) {
     return {
       valid: false,
-      error: error instanceof Error ? error.message : 'Verification failed',
+      error: error instanceof Error ? error.message : "Verification failed",
     };
   }
 }

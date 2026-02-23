@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 
 export default function Loading() {
   return (
@@ -9,7 +9,7 @@ export default function Loading() {
         {/* Animated Spinner */}
         <motion.div
           animate={{ rotate: 360 }}
-          transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
+          transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
           className="text-6xl mb-8"
         >
           🧟‍♂️
@@ -32,9 +32,7 @@ export default function Loading() {
           transition={{ delay: 0.4 }}
           className="flex items-center justify-center gap-2 text-memoria-text-whisper"
         >
-          <motion.div
-            className="w-6 h-6 border-2 border-memoria-text-hero border-t-transparent rounded-full animate-spin"
-          />
+          <motion.div className="w-6 h-6 border-2 border-memoria-text-hero border-t-transparent rounded-full animate-spin" />
           <span className="text-lg">Loading marketplace...</span>
         </motion.div>
 
@@ -47,9 +45,9 @@ export default function Loading() {
         >
           <div className="w-64 h-1 bg-memoria-bg-surface rounded-full overflow-hidden mx-auto">
             <motion.div
-              initial={{ width: '0%' }}
-              animate={{ width: '100%' }}
-              transition={{ duration: 1.5, ease: 'easeInOut' }}
+              initial={{ width: "0%" }}
+              animate={{ width: "100%" }}
+              transition={{ duration: 1.5, ease: "easeInOut" }}
               className="h-full bg-memoria-text-hero"
             />
           </div>

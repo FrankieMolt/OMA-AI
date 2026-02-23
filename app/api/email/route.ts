@@ -1,10 +1,26 @@
 import { Resend } from 'resend'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
+// Lazy init to avoid build errors when API key not set
+let resend: Resend | null = null
+function getResend() {
+  if (!resend && process.env.RESEND_API_KEY) {
+    resend = new Resend(process.env.RESEND_API_KEY)
+  }
+  return resend
+}
 
 export async function POST(req: Request) {
   try {
     const { email, name, message, type } = await req.json()
+    const resend = getResend()
+    
+    if (!resend) {
+      return Response.json({ 
+        success: false, 
+        error: 'Email service not configured. Set RESEND_API_KEY.',
+        fallback: { email, name, message, type, timestamp: new Date().toISOString() }
+      })
+    }
     
     if (type === 'contact') {
       // Contact form submission

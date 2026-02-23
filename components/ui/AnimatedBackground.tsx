@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useEffect, useRef, useCallback } from 'react';
-import { motion } from 'framer-motion';
+import { useEffect, useRef, useCallback } from "react";
+import { motion } from "framer-motion";
 
 interface Particle {
   x: number;
@@ -21,7 +21,7 @@ export function AnimatedBackground() {
   const initParticles = useCallback((width: number, height: number) => {
     const particles: Particle[] = [];
     const particleCount = Math.min(Math.floor((width * height) / 15000), 50);
-    
+
     for (let i = 0; i < particleCount; i++) {
       particles.push({
         x: Math.random() * width,
@@ -29,7 +29,7 @@ export function AnimatedBackground() {
         vx: (Math.random() - 0.5) * 0.3,
         vy: (Math.random() - 0.5) * 0.3,
         radius: Math.random() * 2 + 1,
-        opacity: Math.random() * 0.5 + 0.2
+        opacity: Math.random() * 0.5 + 0.2,
       });
     }
     return particles;
@@ -39,7 +39,7 @@ export function AnimatedBackground() {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
     const resizeCanvas = () => {
@@ -52,17 +52,17 @@ export function AnimatedBackground() {
     };
 
     resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
+    window.addEventListener("resize", resizeCanvas);
 
     const handleMouseMove = (e: MouseEvent) => {
       const rect = canvas.getBoundingClientRect();
       mouseRef.current = {
         x: e.clientX - rect.left,
-        y: e.clientY - rect.top
+        y: e.clientY - rect.top,
       };
     };
 
-    canvas.addEventListener('mousemove', handleMouseMove, { passive: true });
+    canvas.addEventListener("mousemove", handleMouseMove, { passive: true });
 
     let frameCount = 0;
     const animate = () => {
@@ -73,7 +73,7 @@ export function AnimatedBackground() {
         ctx.clearRect(0, 0, rect.width, rect.height);
 
         const particles = particlesRef.current;
-        
+
         // Update and draw particles
         particles.forEach((particle, i) => {
           // Update position
@@ -115,7 +115,7 @@ export function AnimatedBackground() {
           const dx = mouseRef.current.x - particle.x;
           const dy = mouseRef.current.y - particle.y;
           const distance = Math.sqrt(dx * dx + dy * dy);
-          
+
           if (distance < 150) {
             ctx.beginPath();
             ctx.moveTo(particle.x, particle.y);
@@ -133,8 +133,8 @@ export function AnimatedBackground() {
     animate();
 
     return () => {
-      window.removeEventListener('resize', resizeCanvas);
-      canvas.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener("resize", resizeCanvas);
+      canvas.removeEventListener("mousemove", handleMouseMove);
       cancelAnimationFrame(animationRef.current);
     };
   }, [initParticles]);
@@ -143,19 +143,19 @@ export function AnimatedBackground() {
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
       {/* Gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-zinc-950 via-zinc-950/95 to-zinc-950" />
-      
+
       {/* Animated gradient orbs */}
       <motion.div
         className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-600/20 rounded-full blur-[120px]"
         animate={{
           x: [0, 50, 0],
           y: [0, 30, 0],
-          scale: [1, 1.1, 1]
+          scale: [1, 1.1, 1],
         }}
         transition={{
           duration: 8,
           repeat: Infinity,
-          ease: 'easeInOut'
+          ease: "easeInOut",
         }}
       />
       <motion.div
@@ -163,13 +163,13 @@ export function AnimatedBackground() {
         animate={{
           x: [0, -40, 0],
           y: [0, -50, 0],
-          scale: [1, 1.15, 1]
+          scale: [1, 1.15, 1],
         }}
         transition={{
           duration: 10,
           repeat: Infinity,
-          ease: 'easeInOut',
-          delay: 1
+          ease: "easeInOut",
+          delay: 1,
         }}
       />
       <motion.div
@@ -177,13 +177,13 @@ export function AnimatedBackground() {
         animate={{
           x: [0, 30, 0],
           y: [0, -20, 0],
-          scale: [1, 1.05, 1]
+          scale: [1, 1.05, 1],
         }}
         transition={{
           duration: 12,
           repeat: Infinity,
-          ease: 'easeInOut',
-          delay: 2
+          ease: "easeInOut",
+          delay: 2,
         }}
       />
 
@@ -195,14 +195,14 @@ export function AnimatedBackground() {
       />
 
       {/* Grid pattern overlay */}
-      <div 
+      <div
         className="absolute inset-0 opacity-[0.02]"
         style={{
           backgroundImage: `
             linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
             linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)
           `,
-          backgroundSize: '50px 50px'
+          backgroundSize: "50px 50px",
         }}
       />
     </div>
@@ -218,12 +218,12 @@ export function GradientMesh() {
         animate={{
           x: [0, 100, 0],
           y: [0, 50, 0],
-          rotate: [0, 10, 0]
+          rotate: [0, 10, 0],
         }}
         transition={{
           duration: 15,
           repeat: Infinity,
-          ease: 'easeInOut'
+          ease: "easeInOut",
         }}
       />
       <motion.div
@@ -231,26 +231,26 @@ export function GradientMesh() {
         animate={{
           x: [0, -80, 0],
           y: [0, -60, 0],
-          rotate: [0, -15, 0]
+          rotate: [0, -15, 0],
         }}
         transition={{
           duration: 18,
           repeat: Infinity,
-          ease: 'easeInOut',
-          delay: 2
+          ease: "easeInOut",
+          delay: 2,
         }}
       />
       <motion.div
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-gradient-to-tr from-pink-600/20 to-purple-600/15 rounded-full blur-[90px]"
         animate={{
           scale: [1, 1.2, 1],
-          opacity: [0.5, 0.8, 0.5]
+          opacity: [0.5, 0.8, 0.5],
         }}
         transition={{
           duration: 10,
           repeat: Infinity,
-          ease: 'easeInOut',
-          delay: 4
+          ease: "easeInOut",
+          delay: 4,
         }}
       />
     </div>
@@ -264,12 +264,12 @@ export function FloatingShapes() {
         className="absolute top-20 left-[10%] w-4 h-4 border border-purple-500/30 rounded-full"
         animate={{
           y: [0, -20, 0],
-          opacity: [0.3, 0.6, 0.3]
+          opacity: [0.3, 0.6, 0.3],
         }}
         transition={{
           duration: 4,
           repeat: Infinity,
-          ease: 'easeInOut'
+          ease: "easeInOut",
         }}
       />
       <motion.div
@@ -277,39 +277,39 @@ export function FloatingShapes() {
         animate={{
           y: [0, 15, 0],
           x: [0, 10, 0],
-          opacity: [0.2, 0.5, 0.2]
+          opacity: [0.2, 0.5, 0.2],
         }}
         transition={{
           duration: 5,
           repeat: Infinity,
-          ease: 'easeInOut',
-          delay: 1
+          ease: "easeInOut",
+          delay: 1,
         }}
       />
       <motion.div
         className="absolute bottom-32 left-[20%] w-6 h-6 border border-pink-500/20 rotate-45"
         animate={{
           rotate: [45, 135, 45],
-          scale: [1, 1.1, 1]
+          scale: [1, 1.1, 1],
         }}
         transition={{
           duration: 8,
           repeat: Infinity,
-          ease: 'easeInOut',
-          delay: 2
+          ease: "easeInOut",
+          delay: 2,
         }}
       />
       <motion.div
         className="absolute bottom-20 right-[25%] w-2 h-2 bg-cyan-500/30 rounded-full"
         animate={{
           y: [0, -30, 0],
-          opacity: [0.3, 0.7, 0.3]
+          opacity: [0.3, 0.7, 0.3],
         }}
         transition={{
           duration: 6,
           repeat: Infinity,
-          ease: 'easeInOut',
-          delay: 3
+          ease: "easeInOut",
+          delay: 3,
         }}
       />
     </div>
