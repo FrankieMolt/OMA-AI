@@ -1,34 +1,11 @@
 import { NextResponse } from 'next/server';
-
-const apis = [
-  { 
-    id: 'frankie-crypto',
-    name: 'Frankie Crypto API',
-    description: 'Real-time cryptocurrency prices for BTC, ETH, SOL',
-    url: 'https://frankie-prod.life.conway.tech',
-    price: 0.01,
-    category: 'crypto',
-    owner: 'Frankie',
-    rating: 4.8,
-    calls: 1700,
-    featured: true
-  },
-  { 
-    id: 'polymarket',
-    name: 'Polymarket Prediction API',
-    description: 'Prediction market data and odds from Polymarket',
-    url: 'https://polymarket.example.com',
-    price: 0.10,
-    category: 'predictions',
-    owner: 'Frankie',
-    rating: 4.5,
-    calls: 450,
-    featured: true
-  }
-];
+import { apiServices } from '@/lib/api-data';
 
 export async function GET() {
-  return NextResponse.json({ apis, count: apis.length });
+  return NextResponse.json({ 
+    apis: apiServices, 
+    count: apiServices.length 
+  });
 }
 
 export async function POST(request: Request) {
@@ -41,12 +18,13 @@ export async function POST(request: Request) {
       url: data.url,
       price: parseFloat(data.price) || 0.01,
       category: data.category || 'general',
-      owner: data.owner || 'Anonymous',
+      provider: data.owner || 'Anonymous',
       rating: 0,
       calls: 0,
-      featured: false
+      featured: false,
+      tags: data.tags || []
     };
-    apis.push(newAPI);
+    // Note: In production, this would save to database
     return NextResponse.json({ success: true, api: newAPI });
   } catch (e) {
     return NextResponse.json({ error: 'Failed to create API' }, { status: 500 });
