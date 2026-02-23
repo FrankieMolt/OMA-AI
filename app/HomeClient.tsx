@@ -72,7 +72,7 @@ export default function HomeClient() {
   ];
 
   const stats = [
-    { value: "450+", label: "Verified APIs" },
+    { value: "2", label: "Verified APIs" },
     { value: "12K", label: "Active Agents" },
     { value: "2.4M", label: "Daily Requests" },
   ];

@@ -73,7 +73,7 @@ export default function Dashboard() {
       rating: 4.9,
       price: 0.01,
       priceType: "per_call",
-      calls: 1250000,
+      calls: 1700,
       endpoint: "https://platform.openai.com/docs/models/gpt-4-turbo",
       tags: ["llm", "chat", "code"],
       featured: true,

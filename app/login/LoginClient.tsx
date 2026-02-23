@@ -25,7 +25,7 @@ export default function LoginPage() {
       icon: <Cpu size={16} className="text-memoria-text-hero" />,
       title: "API Marketplace Access",
       description:
-        "Manage 450+ APIs and MCP servers for your autonomous agents",
+        "Manage 2 APIs and MCP servers for your autonomous agents",
     },
     {
       icon: <Zap size={16} className="text-memoria-text-hero" />,

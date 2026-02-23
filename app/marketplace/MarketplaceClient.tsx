@@ -118,7 +118,7 @@ export default function MarketplacePage() {
             <span className="text-memoria-text-secondary">Marketplace</span>
           </h1>
           <p className="text-xl text-memoria-text-whisper max-w-2xl font-light leading-relaxed mb-8">
-            Discover and integrate 450+ verified APIs and Model Context Protocol
+            Discover and integrate 2 verified APIs and Model Context Protocol
             servers. Enable your autonomous agents to discover tools, negotiate
             access, and pay for services independently through x402 crypto
             payments.
@@ -426,7 +426,7 @@ export default function MarketplacePage() {
               </h2>
               <div className="grid grid-cols-2 gap-4">
                 {[
-                  { label: "APIs Available", value: "450+" },
+                  { label: "APIs Available", value: "2" },
                   { label: "Daily Calls", value: "2.5M" },
                   { label: "Active Agents", value: "15K+" },
                   { label: "Avg Response", value: "42ms" },

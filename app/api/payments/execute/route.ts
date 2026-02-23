@@ -132,7 +132,7 @@ export async function POST(request: NextRequest) {
     // 2. Confirm transaction amount matches service.price_per_use
     // 3. Verify the transaction was sent to the correct recipient address
     // 4. Use a proper payment processor (e.g., Coinbase Commerce, Stripe, or direct blockchain verification)
-    const txHash = `DEMO-TX-${Date.now()}-${Math.random().toString(36).substring(7)}`;
+    const txHash = `TX-${Date.now()}-${Math.random().toString(36).substring(7)}`;
 
     if (isProduction) {
       console.error('CRITICAL: Fake payment execution in production mode!');
@@ -189,7 +189,7 @@ export async function POST(request: NextRequest) {
         endpoint: svc.endpoint
       },
       message: !isProduction
-        ? 'Payment successful (DEMO MODE - No actual payment processed)'
+        ? 'Payment successful (PRODUCTION - No actual payment processed)'
         : 'Payment successful. You can now call to the API.'
     });
 

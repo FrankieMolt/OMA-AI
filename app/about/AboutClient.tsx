@@ -264,7 +264,7 @@ export default function AboutClient() {
           <div className="grid grid-cols-3 gap-8">
             <div className="text-center">
               <span className="label-whisper block mb-4">APIs & MCPs</span>
-              <div className="hero-number text-7xl">450+</div>
+              <div className="hero-number text-7xl">2</div>
             </div>
             <div className="text-center">
               <span className="label-whisper block mb-4">Active Agents</span>

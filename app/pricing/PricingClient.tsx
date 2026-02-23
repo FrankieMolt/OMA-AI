@@ -28,7 +28,7 @@ export default function PricingClient() {
       description:
         "Perfect for building and testing your first autonomous agents.",
       features: [
-        "Access to 450+ APIs",
+        "Access to 2 APIs",
         "Standard MCP Discovery",
         "Up to 1,000 requests/day",
         "x402 Micropayments enabled",
