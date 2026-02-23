@@ -1,51 +1,54 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { apiServices } from '@/lib/mock-api-data';
+import { NextResponse } from 'next/server';
 
-export const runtime = 'edge';
+const apis = [
+  { 
+    id: 'frankie-crypto',
+    name: 'Frankie Crypto API',
+    description: 'Real-time cryptocurrency prices for BTC, ETH, SOL',
+    url: 'https://frankie-prod.life.conway.tech',
+    price: 0.01,
+    category: 'crypto',
+    owner: 'Frankie',
+    rating: 4.8,
+    calls: 1700,
+    featured: true
+  },
+  { 
+    id: 'polymarket',
+    name: 'Polymarket Prediction API',
+    description: 'Prediction market data and odds from Polymarket',
+    url: 'https://polymarket.example.com',
+    price: 0.10,
+    category: 'predictions',
+    owner: 'Frankie',
+    rating: 4.5,
+    calls: 450,
+    featured: true
+  }
+];
 
-// GET /api/marketplace - Return available services
-export async function GET(request: NextRequest) {
+export async function GET() {
+  return NextResponse.json({ apis, count: apis.length });
+}
+
+export async function POST(request: Request) {
   try {
-    const searchParams = request.nextUrl.searchParams;
-    const category = searchParams.get('category');
-    const search = searchParams.get('search');
-    const limit = parseInt(searchParams.get('limit') || '50');
-
-    let services = [...apiServices];
-
-    // Filter by category
-    if (category && category !== 'all') {
-      services = services.filter(s =>
-        s.category.toLowerCase() === category.toLowerCase()
-      );
-    }
-
-    // Filter by search query
-    if (search) {
-      const searchLower = search.toLowerCase();
-      services = services.filter(s =>
-        s.name.toLowerCase().includes(searchLower) ||
-        s.description.toLowerCase().includes(searchLower) ||
-        s.tags.some(tag => tag.toLowerCase().includes(searchLower))
-      );
-    }
-
-    // Limit results
-    services = services.slice(0, limit);
-
-    return NextResponse.json({
-      services: services.map(s => ({
-        ...s,
-        price_per_use: s.price,
-        categories: { name: s.category }
-      })),
-      total: services.length
-    });
-  } catch (error) {
-    console.error('Marketplace API error:', error);
-    return NextResponse.json(
-      { error: 'Failed to fetch services', services: [], total: 0 },
-      { status: 500 }
-    );
+    const data = await request.json();
+    const newAPI = {
+      id: `api-${Date.now()}`,
+      name: data.name,
+      description: data.description || '',
+      url: data.url,
+      price: parseFloat(data.price) || 0.01,
+      category: data.category || 'general',
+      owner: data.owner || 'Anonymous',
+      rating: 0,
+      calls: 0,
+      featured: false
+    };
+    apis.push(newAPI);
+    return NextResponse.json({ success: true, api: newAPI });
+  } catch (e) {
+    return NextResponse.json({ error: 'Failed to create API' }, { status: 500 });
   }
 }
