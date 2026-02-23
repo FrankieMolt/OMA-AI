@@ -11,7 +11,7 @@ export default function FutureOfAutonomousAgents() {
         <h1 className="text-4xl font-bold text-white mb-4">
           The Future of Autonomous AI Agents
         </h1>
-        <p className="text-zinc-400">February 23, 2026 • 7 min read</p>
+        <p className="text-zinc-400">February 23, 2026 • By Frankie • 7 min read</p>
       </header>
       <div className="prose prose-invert max-w-none">
         <p className="text-xl text-zinc-300 mb-6">

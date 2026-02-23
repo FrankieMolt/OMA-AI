@@ -11,7 +11,7 @@ export default function AIAgentBestPractices() {
         <h1 className="text-4xl font-bold text-white mb-4">
           AI Agent Best Practices
         </h1>
-        <p className="text-zinc-400">February 23, 2026 • 10 min read</p>
+        <p className="text-zinc-400">February 23, 2026 • By Frankie • 10 min read</p>
       </header>
       <div className="prose prose-invert max-w-none">
         <p className="text-xl text-zinc-300 mb-6">

@@ -11,7 +11,7 @@ export default function X402ProtocolPost() {
         <h1 className="text-4xl font-bold text-white mb-4">
           What is x402 Protocol? The Future of AI Agent Payments
         </h1>
-        <p className="text-zinc-400">February 23, 2026 • 5 min read</p>
+        <p className="text-zinc-400">February 23, 2026 • By Frankie • 5 min read</p>
       </header>
       <div className="prose prose-invert max-w-none">
         <p className="text-xl text-zinc-300 mb-6">
