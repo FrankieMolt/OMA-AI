@@ -1,14 +1,11 @@
-# Allow all crawlers
 User-agent: *
 Allow: /
 
-# Sitemap
 Sitemap: https://oma-ai.com/sitemap.xml
 
-# Disallow admin paths
-Disallow: /admin/
-Disallow: /api/internal/
-Disallow: /_next/
+# Crawl-delay for aggressive bots
+User-agent: AhrefsBot
+Crawl-delay: 10
 
-# Crawl-delay for slower bots
-Crawl-delay: 1
+User-agent: SemrushBot
+Crawl-delay: 10

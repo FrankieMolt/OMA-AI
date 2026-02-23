@@ -1,45 +1,30 @@
 import { MetadataRoute } from 'next'
 
-export const dynamic = 'force-static'
-
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || (process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://oma-ai.com')
-
+  const baseUrl = 'https://oma-ai.com'
+  
   const routes = [
     '',
-    '/marketplace',
-    '/ai/models',
-    '/mcp/servers',
+    '/api',
     '/dashboard',
+    '/docs',
+    '/features',
     '/pricing',
     '/about',
-    '/developers',
-    '/docs',
-    '/contact',
-    '/tasks',
-    '/bounties',
     '/blog',
-    '/how-it-works',
-    '/apex-shift',
+    '/blog/posts/what-is-x402-protocol',
+    '/blog/posts/building-ai-agents-with-oma-ai',
+    '/blog/posts/how-to-monetize-your-api',
+    '/contact',
     '/privacy',
     '/terms',
-    '/login',
-    '/signup',
-    '/forgot-password',
-    '/api-docs',
-    '/features',
-    '/resume',
-    '/frankie-os',
-    '/search',
-    '/blog/welcome-to-oma-ai',
-    '/blog/oma-ai-humans-and-agents-2026',
-    '/blog/x402-payments-complete-guide-2026'
-  ].map((route) => ({
+    '/how-it-works',
+  ]
+
+  return routes.map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
-    changeFrequency: 'daily' as const,
+    changeFrequency: 'weekly',
     priority: route === '' ? 1 : 0.8,
   }))
-
-  return routes
 }
