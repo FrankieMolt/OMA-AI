@@ -25,8 +25,8 @@ export default function SignupPage() {
   };
 
   return (
-    <div className="min-h-screen bg-memoria-bg-ultra-dark flex items-center justify-center p-6 selection:bg-memoria-text-hero selection:text-memoria-bg-ultra-dark">
-      <div className="w-full max-w-md">
+    <div className="min-h-screen bg-memoria-bg-ultra-dark flex items-center justify-center p-6 md:p-8 selection:bg-memoria-text-hero selection:text-memoria-bg-ultra-dark">
+      <div className="w-full max-w-md md:max-w-lg">
         <div className="text-center mb-10">
           <Link
             href="/"
@@ -42,7 +42,7 @@ export default function SignupPage() {
           <h1 className="text-3xl font-light text-memoria-text-hero tracking-tight mb-2 font-display">
             Create Account
           </h1>
-          <p className="text-memoria-text-whisper text-sm">
+          <p className="text-memoria-text-whisper text-sm md:text-base">
             Join the decentralized autonomous workforce.
           </p>
         </div>
@@ -74,7 +74,7 @@ export default function SignupPage() {
                     onChange={(e) =>
                       setFormData({ ...formData, name: e.target.value })
                     }
-                    className="w-full pl-10 pr-4 py-3 bg-memoria-bg-ultra-dark border border-memoria-border-default rounded-sm text-memoria-text-hero text-sm focus:outline-none focus:border-memoria-text-hero transition-all placeholder-memoria-text-whisper"
+                    className="w-full pl-10 pr-4 py-3 bg-memoria-bg-ultra-dark border border-memoria-border-default rounded-sm text-memoria-text-hero text-sm md:text-base focus:outline-none focus:border-memoria-text-hero transition-all placeholder-memoria-text-whisper"
                     placeholder="John Doe"
                   />
                 </div>
@@ -100,7 +100,7 @@ export default function SignupPage() {
                     onChange={(e) =>
                       setFormData({ ...formData, email: e.target.value })
                     }
-                    className="w-full pl-10 pr-4 py-3 bg-memoria-bg-ultra-dark border border-memoria-border-default rounded-sm text-memoria-text-hero text-sm focus:outline-none focus:border-memoria-text-hero transition-all placeholder-memoria-text-whisper"
+                    className="w-full pl-10 pr-4 py-3 bg-memoria-bg-ultra-dark border border-memoria-border-default rounded-sm text-memoria-text-hero text-sm md:text-base focus:outline-none focus:border-memoria-text-hero transition-all placeholder-memoria-text-whisper"
                     placeholder="name@example.com"
                   />
                 </div>
@@ -126,7 +126,7 @@ export default function SignupPage() {
                     onChange={(e) =>
                       setFormData({ ...formData, password: e.target.value })
                     }
-                    className="w-full pl-10 pr-4 py-3 bg-memoria-bg-ultra-dark border border-memoria-border-default rounded-sm text-memoria-text-hero text-sm focus:outline-none focus:border-memoria-text-hero transition-all placeholder-memoria-text-whisper"
+                    className="w-full pl-10 pr-4 py-3 bg-memoria-bg-ultra-dark border border-memoria-border-default rounded-sm text-memoria-text-hero text-sm md:text-base focus:outline-none focus:border-memoria-text-hero transition-all placeholder-memoria-text-whisper"
                     placeholder="••••••••"
                   />
                 </div>

@@ -8,7 +8,7 @@ import { Shield } from "lucide-react";
 export default function ForgotPasswordClient() {
   return (
     <div className="min-h-screen bg-memoria-bg-ultra-dark text-memoria-text-hero flex items-center justify-center p-4">
-      <div className="w-full max-w-md">
+      <div className="w-full max-w-md md:max-w-lg">
         <div className="text-center mb-10">
           <Link
             href="/"
@@ -47,7 +47,7 @@ export default function ForgotPasswordClient() {
             />
           </div>
 
-          <Button className="w-full bg-memoria-text-hero text-memoria-bg-ultra-dark rounded-sm h-12 text-sm font-medium hover:bg-memoria-text-secondary transition-all">
+          <Button className="w-full bg-memoria-text-hero text-memoria-bg-ultra-dark rounded-sm h-12 text-sm md:text-base font-medium hover:bg-memoria-text-secondary transition-all">
             Send Reset Link
           </Button>
         </form>
@@ -55,7 +55,7 @@ export default function ForgotPasswordClient() {
         <div className="mt-8 text-center">
           <Link
             href="/login"
-            className="text-memoria-text-whisper hover:text-memoria-text-hero text-sm transition-colors"
+            className="text-memoria-text-whisper hover:text-memoria-text-hero text-sm md:text-base transition-colors"
           >
             Back to Sign In
           </Link>

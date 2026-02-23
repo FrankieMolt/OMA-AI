@@ -86,13 +86,11 @@ const data = await result.json()`}</code>
         <pre className="bg-zinc-900 p-4 rounded-lg overflow-x-auto">
 <code className="text-sm">{`if (response.status === 402) {
   const { price, address } = await response.json()
-  console.log(\`Payment required: \$\${price} to \${address}\`)
   // Initiate payment flow
 } else if (response.status === 403) {
   console.error('Payment verification failed')
 } else if (response.status === 200) {
   const data = await response.json()
-  console.log('Success:', data)
 }`}</code>
         </pre>
 

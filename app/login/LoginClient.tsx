@@ -41,8 +41,8 @@ export default function LoginPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-memoria-bg-ultra-dark flex items-center justify-center p-6 selection:bg-memoria-text-hero selection:text-memoria-bg-ultra-dark">
-      <div className="w-full max-w-md">
+    <div className="min-h-screen bg-memoria-bg-ultra-dark flex items-center justify-center p-6 md:p-8 selection:bg-memoria-text-hero selection:text-memoria-bg-ultra-dark">
+      <div className="w-full max-w-md md:max-w-lg">
         <div className="text-center mb-10">
           <Link
             href="/"
@@ -58,7 +58,7 @@ export default function LoginPage() {
           <h1 className="text-3xl font-light text-memoria-text-hero tracking-tight mb-2 font-display">
             Welcome Back
           </h1>
-          <p className="text-memoria-text-whisper text-sm mb-6">
+          <p className="text-memoria-text-whisper text-sm md:text-base mb-6">
             Access your autonomous agent fleet.
           </p>
 
@@ -66,7 +66,7 @@ export default function LoginPage() {
             {features.map((feature, i) => (
               <div
                 key={i}
-                className="flex items-start gap-3 text-sm text-memoria-text-whisper font-light"
+                className="flex items-start gap-3 text-sm md:text-base text-memoria-text-whisper font-light"
               >
                 {feature.icon}
                 <p>{feature.description}</p>
@@ -101,7 +101,7 @@ export default function LoginPage() {
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full pl-10 pr-4 py-3 bg-memoria-bg-ultra-dark border border-memoria-border-default rounded-sm text-memoria-text-hero text-sm focus:outline-none focus:border-memoria-text-hero transition-all placeholder-memoria-text-whisper"
+                    className="w-full pl-10 pr-4 py-3 bg-memoria-bg-ultra-dark border border-memoria-border-default rounded-sm text-memoria-text-hero text-sm md:text-base focus:outline-none focus:border-memoria-text-hero transition-all placeholder-memoria-text-whisper"
                     placeholder="name@example.com"
                     aria-label="Email address"
                   />
@@ -135,7 +135,7 @@ export default function LoginPage() {
                     required
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="w-full pl-10 pr-4 py-3 bg-memoria-bg-ultra-dark border border-memoria-border-default rounded-sm text-memoria-text-hero text-sm focus:outline-none focus:border-memoria-text-hero transition-all placeholder-memoria-text-whisper"
+                    className="w-full pl-10 pr-4 py-3 bg-memoria-bg-ultra-dark border border-memoria-border-default rounded-sm text-memoria-text-hero text-sm md:text-base focus:outline-none focus:border-memoria-text-hero transition-all placeholder-memoria-text-whisper"
                     placeholder="•••••••"
                     aria-label="Password"
                   />
