@@ -196,7 +196,7 @@ export default function BountiesPage() {
           <div className="flex items-center gap-4 overflow-x-auto pb-1 scrollbar-hide w-full md:w-auto">
             <Filter className="text-[#71717a] shrink-0" size={16} />
             {categories.map((category) => (
-              <button aria-label="Action button"
+              <button
                 aria-label="Task action"
                 key={category}
                 onClick={() => setSelectedCategory(category)}
