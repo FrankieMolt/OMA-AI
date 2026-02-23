@@ -1,37 +1,85 @@
-// Real API data - no mocks
+// Real API data for marketplace
 export const apiServices = [
   {
     id: 'frankie-crypto',
     name: 'Frankie Crypto API',
-    description: 'Real-time cryptocurrency prices for BTC, ETH, SOL from Coinbase',
+    description: 'Real-time cryptocurrency prices for BTC, ETH, SOL from Coinbase. Instant x402 payments.',
     category: 'Crypto',
     rating: 4.8,
     price: 0.01,
     priceType: 'per_call',
-    calls: 1700,
+    calls: 1756,
     endpoint: '/price',
-    tags: ['crypto', 'bitcoin', 'ethereum', 'solana'],
+    tags: ['crypto', 'bitcoin', 'ethereum', 'solana', 'prices'],
     featured: true,
     provider: 'Frankie',
-    url: 'https://frankie-prod.life.conway.tech'
+    url: 'https://frankie-prod.life.conway.tech',
+    docs: 'https://oma-ai.com/docs/frankie-crypto'
   },
   {
     id: 'polymarket-predictions',
     name: 'Polymarket Predictions API',
-    description: 'Real-time prediction market data from Polymarket',
+    description: 'Real-time prediction market data from Polymarket. Political, sports, and crypto predictions.',
     category: 'Predictions',
     rating: 4.5,
     price: 0.10,
     priceType: 'per_call',
     calls: 450,
     endpoint: '/markets',
-    tags: ['predictions', 'markets', 'betting'],
+    tags: ['predictions', 'markets', 'politics', 'sports', 'betting'],
     featured: true,
     provider: 'Frankie',
-    url: 'https://polymarket-api.life.conway.tech'
+    url: 'https://polymarket-api.life.conway.tech',
+    docs: 'https://oma-ai.com/docs/polymarket'
+  },
+  {
+    id: 'weather-data',
+    name: 'Weather API',
+    description: 'Global weather data with forecasts, alerts, and historical data.',
+    category: 'Data',
+    rating: 4.7,
+    price: 0.02,
+    priceType: 'per_call',
+    calls: 0,
+    endpoint: '/weather',
+    tags: ['weather', 'forecast', 'climate', 'alerts'],
+    featured: false,
+    provider: 'Coming Soon',
+    url: '#',
+    docs: '#'
+  },
+  {
+    id: 'news-aggregator',
+    name: 'News Aggregator API',
+    description: 'Aggregate news from multiple sources with sentiment analysis.',
+    category: 'Data',
+    rating: 4.3,
+    price: 0.05,
+    priceType: 'per_call',
+    calls: 0,
+    endpoint: '/news',
+    tags: ['news', 'sentiment', 'nlp', 'headlines'],
+    featured: false,
+    provider: 'Coming Soon',
+    url: '#',
+    docs: '#'
+  },
+  {
+    id: 'image-generation',
+    name: 'Image Generation API',
+    description: 'Generate images from text prompts using AI models.',
+    category: 'AI/ML',
+    rating: 4.6,
+    price: 0.50,
+    priceType: 'per_image',
+    calls: 0,
+    endpoint: '/generate',
+    tags: ['ai', 'image', 'generation', 'art', 'dalle'],
+    featured: false,
+    provider: 'Coming Soon',
+    url: '#',
+    docs: '#'
   }
 ];
 
-export const categories = [
-  'All', 'Crypto', 'Predictions', 'AI/ML', 'Data', 'Tools', 'Social'
-];
+export const categories = ['All', 'Crypto', 'Predictions', 'AI/ML', 'Data', 'Tools', 'Social'];
