@@ -9,7 +9,7 @@ const posts = [
   {
     slug: 'what-is-x402-protocol',
     title: 'What is x402 Protocol? The Future of AI Agent Payments',
-    excerpt: 'Learn about x402 protocol - the revolutionary micropayment system for AI agents.',
+    excerpt: 'Learn about x402 protocol - the micropayment system for AI agents.',
     date: '2026-02-23',
   },
   {

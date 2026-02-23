@@ -1,6 +1,6 @@
 export const metadata = {
   title: 'What is x402 Protocol? The Future of AI Agent Payments | OMA-AI',
-  description: 'Learn about x402 protocol - the revolutionary micropayment system for AI agents. Pay-per-request with crypto, powered by Base network.',
+  description: 'Learn about x402 protocol - the micropayment system for AI agents. Pay-per-request with crypto, powered by Base network.',
   keywords: 'x402 protocol, AI payments, micropayments, crypto API, Base network',
 }
 
