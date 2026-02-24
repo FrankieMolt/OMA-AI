@@ -3,380 +3,281 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OMA-AI | API Platform for Autonomous Agents</title>
-    <meta name="description" content="Enterprise-grade API infrastructure for AI agents. Real-time market data, trading signals, and prediction markets with x402 micropayments on Base.">
-    <meta name="keywords" content="AI API, crypto API, trading signals, prediction markets, x402, Base network, autonomous agents">
-    <link rel="canonical" href="https://oma-ai.com">
+    <title>OMA-AI - MCP Servers, AI Skills & LLM APIs</title>
+    <meta name="description" content="The open marketplace for MCP servers, AI skills, and LLM APIs. Connect your AI agents to everything with instant micropayments.">
+    <meta name="keywords" content="MCP, AI, skills, APIs, LLM, GPT, Claude, Base, x402">
+    <meta property="og:title" content="OMA-AI - Open Market Access">
+    <meta property="og:description" content="The open marketplace for AI agents">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://oma-ai.com">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary: #6366f1;
-            --accent: #22d3ee;
-            --success: #10b981;
-            --bg: #030712;
-        }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: #f8fafc; }
-        .mono { font-family: 'JetBrains Mono', monospace; }
-        .glass { background: rgba(255,255,255,0.03); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.08); }
-        .gradient-text { background: linear-gradient(135deg, var(--primary), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .gradient-bg { background: radial-gradient(ellipse at top, rgba(99,102,241,0.15) 0%, transparent 60%), radial-gradient(ellipse at bottom right, rgba(34,211,238,0.1) 0%, transparent 50%); }
-        .btn-primary { background: linear-gradient(135deg, var(--primary), #818cf8); color: white; transition: all 0.3s; }
-        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 40px rgba(99,102,241,0.4); }
-        .card { transition: all 0.3s; }
-        .card:hover { border-color: var(--primary); transform: translateY(-4px); }
-        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
-        .float { animation: float 6s ease-in-out infinite; }
-        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
-        .pulse { animation: pulse 2s infinite; }
-        .toast { position: fixed; bottom: 24px; right: 24px; padding: 12px 24px; background: var(--success); color: white; border-radius: 12px; transform: translateY(100px); opacity: 0; transition: all 0.3s; z-index: 1000; }
-        .toast.show { transform: translateY(0); opacity: 1; }
-        .hidden { display: none; }
+        body { font-family: 'Inter', -apple-system, sans-serif; background: #09090b; color: #fafafa; }
+        .glass { background: rgba(255,255,255,0.03); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.06); }
+        .gradient { background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%); }
+        .card { transition: all 0.2s ease; }
+        .card:hover { transform: translateY(-2px); border-color: rgba(139,92,246,0.3); }
+        .tag { font-size: 11px; padding: 2px 8px; border-radius: 9999px; font-weight: 500; }
     </style>
 </head>
-<body class="gradient-bg min-h-screen">
-    <!-- Toast Notification -->
-    <div id="toast" class="toast">Copied!</div>
+<body class="min-h-screen">
 
-    <!-- Navigation -->
-    <nav class="fixed top-0 left-0 right-0 z-50 glass">
-        <div class="max-w-7xl mx-auto px-6 py-4">
-            <div class="flex items-center justify-between">
-                <a href="/" class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-cyan-400 flex items-center justify-center text-lg font-bold">⚡</div>
-                    <span class="text-xl font-bold">OMA-AI</span>
+    <!-- Nav -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-zinc-950/80 backdrop-blur-xl border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-4 h-14 flex items-center justify-between">
+            <div class="flex items-center gap-8">
+                <a href="#" class="flex items-center gap-2">
+                    <div class="w-8 h-8 gradient rounded-lg flex items-center justify-center text-sm font-bold">OMA</div>
+                    <span class="font-semibold">OMA-AI</span>
                 </a>
-                <div class="hidden md:flex items-center gap-8">
-                    <a href="#features" class="text-slate-400 hover:text-white transition">Features</a>
-                    <a href="#api" class="text-slate-400 hover:text-white transition">API</a>
-                    <a href="#pricing" class="text-slate-400 hover:text-white transition">Pricing</a>
-                    <a href="https://github.com/FrankieMolt/OMA-AI" class="text-slate-400 hover:text-white transition">GitHub</a>
+                <div class="hidden md:flex items-center gap-1">
+                    <a href="#servers" class="px-3 py-1.5 text-sm text-zinc-400 hover:text-white hover:bg-white/5 rounded-lg transition">Servers</a>
+                    <a href="#skills" class="px-3 py-1.5 text-sm text-zinc-400 hover:text-white hover:bg-white/5 rounded-lg transition">Skills</a>
+                    <a href="#llm" class="px-3 py-1.5 text-sm text-zinc-400 hover:text-white hover:bg-white/5 rounded-lg transition">LLM APIs</a>
+                    <a href="https://github.com/FrankieMolt/OMA-AI" class="px-3 py-1.5 text-sm text-zinc-400 hover:text-white hover:bg-white/5 rounded-lg transition">GitHub</a>
                 </div>
-                <div class="flex items-center gap-3">
-                    <div class="w-2 h-2 rounded-full bg-green-400 pulse"></div>
-                    <span class="text-sm text-slate-400" id="status">Online</span>
-                </div>
+            </div>
+            <div class="flex items-center gap-3">
+                <a href="#" class="text-sm text-zinc-400 hover:text-white">Sign in</a>
+                <a href="#" class="h-9 px-4 gradient text-white text-sm font-medium rounded-lg">Publish</a>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="pt-32 pb-20 px-6">
-        <div class="max-w-6xl mx-auto">
-            <div class="text-center max-w-4xl mx-auto">
-                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-8">
-                    <span class="w-2 h-2 rounded-full bg-green-400"></span>
-                    <span class="text-sm text-slate-400">Live on Base Mainnet • <span id="call-count">1,803+</span> API calls served</span>
-                </div>
-                <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-                    API Platform for<br>
-                    <span class="gradient-text">Autonomous Agents</span>
-                </h1>
-                <p class="text-xl text-slate-400 mb-10 max-w-2xl mx-auto">
-                    Enterprise-grade infrastructure for AI agents. Real-time market data, trading signals, and prediction markets. Pay per request with instant USDC settlements.
-                </p>
-                <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="#api" class="btn-primary px-8 py-4 rounded-xl font-semibold text-lg inline-flex items-center gap-2">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-                        Test the API
-                    </a>
-                    <a href="https://github.com/FrankieMolt/OMA-AI" class="px-8 py-4 glass rounded-xl font-semibold text-lg hover:bg-white/10 transition">
-                        View on GitHub
-                    </a>
-                </div>
+    <!-- Hero -->
+    <section class="pt-24 pb-12 px-4">
+        <div class="max-w-4xl mx-auto text-center">
+            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-violet-500/10 border border-violet-500/20 mb-6">
+                <span class="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse"></span>
+                <span class="text-xs text-violet-300 font-medium" id="stats-line">1,247 servers • 847 skills • 45K+ installs</span>
             </div>
-
-            <!-- Stats Grid -->
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-16">
-                <div class="glass rounded-2xl p-6 text-center card">
-                    <div class="text-3xl font-bold text-indigo-400" id="calls">--</div>
-                    <div class="text-slate-500 text-sm mt-1">API Calls</div>
-                </div>
-                <div class="glass rounded-2xl p-6 text-center card">
-                    <div class="text-3xl font-bold text-cyan-400" id="latency">--ms</div>
-                    <div class="text-slate-500 text-sm mt-1">Latency</div>
-                </div>
-                <div class="glass rounded-2xl p-6 text-center card">
-                    <div class="text-3xl font-bold text-green-400" id="sol">$--</div>
-                    <div class="text-slate-500 text-sm mt-1">SOL Price</div>
-                </div>
-                <div class="glass rounded-2xl p-6 text-center card">
-                    <div class="text-3xl font-bold text-purple-400" id="uptime">--s</div>
-                    <div class="text-slate-500 text-sm mt-1">Uptime</div>
-                </div>
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">
+                Open Market Access
+            </h1>
+            <p class="text-lg text-zinc-400 mb-8">
+                The marketplace for MCP servers, AI skills, and LLM APIs. Connect your AI agents to everything.
+            </p>
+            <div class="flex gap-3 justify-center">
+                <a href="#servers" class="h-11 px-6 gradient text-white font-medium rounded-lg">Browse</a>
+                <a href="https://github.com/FrankieMolt/OMA-AI" class="h-11 px-6 bg-zinc-800 hover:bg-zinc-700 font-medium rounded-lg transition">GitHub →</a>
             </div>
         </div>
     </section>
 
-    <!-- Features Section -->
-    <section class="py-20 px-6" id="features">
-        <div class="max-w-6xl mx-auto">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold mb-4">Built for Autonomous Agents</h2>
-                <p class="text-slate-400 max-w-2xl mx-auto">Everything you need to build, deploy, and scale AI-powered applications</p>
-            </div>
-            <div class="grid md:grid-cols-3 gap-6">
-                <div class="glass rounded-2xl p-8 card">
-                    <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-indigo-500/20 to-indigo-500/5 flex items-center justify-center mb-6 text-2xl">⚡</div>
-                    <h3 class="text-xl font-bold mb-3">Instant Payments</h3>
-                    <p class="text-slate-400">x402 micropayments settle in under 2 seconds on Base. Pay only for what you use.</p>
-                </div>
-                <div class="glass rounded-2xl p-8 card">
-                    <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-cyan-500/20 to-cyan-500/5 flex items-center justify-center mb-6 text-2xl">📊</div>
-                    <h3 class="text-xl font-bold mb-3">Real-time Data</h3>
-                    <p class="text-slate-400">Live market data from Coinbase Pro. Sub-50ms latency for all endpoints.</p>
-                </div>
-                <div class="glass rounded-2xl p-8 card">
-                    <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-green-500/20 to-green-500/5 flex items-center justify-center mb-6 text-2xl">🔒</div>
-                    <h3 class="text-xl font-bold mb-3">Secure by Design</h3>
-                    <p class="text-slate-400">Built on Base L2. Cryptographic payment proofs. No API keys required.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- API Testing Section -->
-    <section class="py-20 px-6 bg-slate-900/30" id="api">
+    <!-- Live Stats -->
+    <section class="px-4 py-8 border-y border-white/5">
         <div class="max-w-4xl mx-auto">
-            <div class="text-center mb-12">
-                <h2 class="text-4xl font-bold mb-4">Test the API</h2>
-                <p class="text-slate-400">Try our endpoints directly in your browser</p>
-            </div>
-
-            <!-- Language Tabs -->
-            <div class="flex gap-2 mb-6 justify-center">
-                <button onclick="showLang('curl')" class="lang-btn px-4 py-2 rounded-lg bg-indigo-500/20 text-indigo-400 font-medium" data-lang="curl">cURL</button>
-                <button onclick="showLang('js')" class="lang-btn px-4 py-2 rounded-lg glass text-slate-400 font-medium" data-lang="js">JavaScript</button>
-                <button onclick="showLang('python')" class="lang-btn px-4 py-2 rounded-lg glass text-slate-400 font-medium" data-lang="python">Python</button>
-            </div>
-
-            <div class="space-y-6">
-                <!-- Health Endpoint -->
-                <div class="glass rounded-2xl p-6">
-                    <div class="flex items-center justify-between mb-4">
-                        <div class="flex items-center gap-3">
-                            <span class="px-2 py-1 rounded text-xs font-bold bg-green-500/20 text-green-400">GET</span>
-                            <code class="mono text-sm">/health</code>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <span class="text-xs px-2 py-1 rounded bg-slate-800 mono" id="health-time">--ms</span>
-                            <span class="text-xs text-green-400 font-medium">FREE</span>
-                        </div>
-                    </div>
-                    <div class="flex gap-2 mb-4">
-                        <button onclick="testHealth()" class="flex-1 py-3 bg-indigo-500/20 text-indigo-400 rounded-xl font-medium hover:bg-indigo-500/30 transition">▶ Run Test</button>
-                        <button onclick="copyCurl('health')" class="px-4 py-3 glass rounded-xl hover:bg-white/10 transition" title="Copy cURL">📋</button>
-                    </div>
-                    <pre id="health-result" class="p-4 bg-slate-950 rounded-xl text-sm mono text-slate-400 overflow-auto max-h-48">Click "Run Test" to execute...</pre>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                <div class="glass rounded-xl p-4">
+                    <div class="text-2xl font-bold text-violet-400" id="api-calls">--</div>
+                    <div class="text-xs text-zinc-500">API Calls</div>
                 </div>
-
-                <!-- Price Endpoint -->
-                <div class="glass rounded-2xl p-6">
-                    <div class="flex items-center justify-between mb-4">
-                        <div class="flex items-center gap-3">
-                            <span class="px-2 py-1 rounded text-xs font-bold bg-cyan-500/20 text-cyan-400">GET</span>
-                            <code class="mono text-sm">/price</code>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <span class="text-xs px-2 py-1 rounded bg-slate-800 mono" id="price-time">--ms</span>
-                            <span class="text-xs text-cyan-400 font-medium">$0.05</span>
-                        </div>
-                    </div>
-                    <div class="flex gap-2 mb-4">
-                        <button onclick="testPrice()" class="flex-1 py-3 bg-indigo-500/20 text-indigo-400 rounded-xl font-medium hover:bg-indigo-500/30 transition">▶ Run Test (Free Preview)</button>
-                        <button onclick="copyCurl('price')" class="px-4 py-3 glass rounded-xl hover:bg-white/10 transition" title="Copy cURL">📋</button>
-                    </div>
-                    <pre id="price-result" class="p-4 bg-slate-950 rounded-xl text-sm mono text-slate-400 overflow-auto max-h-48">Click "Run Test" to execute...</pre>
+                <div class="glass rounded-xl p-4">
+                    <div class="text-2xl font-bold text-cyan-400" id="sol-price">--</div>
+                    <div class="text-xs text-zinc-500">SOL Price</div>
                 </div>
-
-                <!-- Stats Endpoint -->
-                <div class="glass rounded-2xl p-6">
-                    <div class="flex items-center justify-between mb-4">
-                        <div class="flex items-center gap-3">
-                            <span class="px-2 py-1 rounded text-xs font-bold bg-green-500/20 text-green-400">GET</span>
-                            <code class="mono text-sm">/stats</code>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <span class="text-xs px-2 py-1 rounded bg-slate-800 mono" id="stats-time">--ms</span>
-                            <span class="text-xs text-green-400 font-medium">FREE</span>
-                        </div>
-                    </div>
-                    <div class="flex gap-2 mb-4">
-                        <button onclick="testStats()" class="flex-1 py-3 bg-indigo-500/20 text-indigo-400 rounded-xl font-medium hover:bg-indigo-500/30 transition">▶ Run Test</button>
-                        <button onclick="copyCurl('stats')" class="px-4 py-3 glass rounded-xl hover:bg-white/10 transition" title="Copy cURL">📋</button>
-                    </div>
-                    <pre id="stats-result" class="p-4 bg-slate-950 rounded-xl text-sm mono text-slate-400 overflow-auto max-h-48">Click "Run Test" to execute...</pre>
+                <div class="glass rounded-xl p-4">
+                    <div class="text-2xl font-bold text-green-400" id="uptime">--</div>
+                    <div class="text-xs text-zinc-500">Uptime</div>
+                </div>
+                <div class="glass rounded-xl p-4">
+                    <div class="text-2xl font-bold text-purple-400">99.9%</div>
+                    <div class="text-xs text-zinc-500">Reliability</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Pricing Section -->
-    <section class="py-20 px-6" id="pricing">
-        <div class="max-w-5xl mx-auto">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold mb-4">Simple Pricing</h2>
-                <p class="text-slate-400">Pay per request. No subscriptions.</p>
+    <!-- MCP Servers -->
+    <section class="px-4 py-16" id="servers">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-xl font-semibold mb-6">MCP Servers</h2>
+            <div class="grid md:grid-cols-3 gap-4">
+                <div class="card glass rounded-xl p-4">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center">🗄️</div>
+                        <div>
+                            <h3 class="font-medium text-sm">@mcp/server-postgres</h3>
+                            <p class="text-xs text-zinc-500">2.4k ⭐</p>
+                        </div>
+                    </div>
+                    <p class="text-xs text-zinc-400 mb-3">PostgreSQL database connector</p>
+                    <code class="text-xs text-zinc-500">npx @mcp/server-postgres "postgres://..."</code>
+                </div>
+                <div class="card glass rounded-xl p-4">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 rounded-lg bg-green-500/20 flex items-center justify-center">📁</div>
+                        <div>
+                            <h3 class="font-medium text-sm">@mcp/server-filesystem</h3>
+                            <p class="text-xs text-zinc-500">2.1k ⭐</p>
+                        </div>
+                    </div>
+                    <p class="text-xs text-zinc-400 mb-3">File system operations</p>
+                    <code class="text-xs text-zinc-500">npx @mcp/server-filesystem ~/projects</code>
+                </div>
+                <div class="card glass rounded-xl p-4">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 rounded-lg bg-purple-500/20 flex items-center justify-center">🐙</div>
+                        <div>
+                            <h3 class="font-medium text-sm">@mcp/server-github</h3>
+                            <p class="text-xs text-zinc-500">3.2k ⭐</p>
+                        </div>
+                    </div>
+                    <p class="text-xs text-zinc-400 mb-3">GitHub API integration</p>
+                    <code class="text-xs text-zinc-500">npx @mcp/server-github</code>
+                </div>
             </div>
-            <div class="grid md:grid-cols-3 gap-6">
-                <div class="glass rounded-2xl p-8 card">
-                    <div class="text-slate-400 mb-2">Health Check</div>
-                    <div class="text-4xl font-bold mb-4">FREE</div>
-                    <p class="text-slate-400 text-sm mb-6">API status and uptime</p>
-                    <code class="text-xs text-slate-500 mono">GET /health</code>
+        </div>
+    </section>
+
+    <!-- Skills -->
+    <section class="px-4 py-16 bg-zinc-900/30" id="skills">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-xl font-semibold mb-6">AI Skills</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="card glass rounded-xl p-4">
+                    <div class="text-2xl mb-2">🤖</div>
+                    <h3 class="font-medium text-sm">proactive-agent</h3>
+                    <p class="text-xs text-zinc-500 mb-2">Anticipates needs</p>
+                    <span class="tag bg-green-500/20 text-green-400">FREE</span>
                 </div>
-                <div class="glass rounded-2xl p-8 card border-indigo-500/50">
-                    <div class="text-slate-400 mb-2">Crypto Prices</div>
-                    <div class="text-4xl font-bold mb-4">$0.05</div>
-                    <p class="text-slate-400 text-sm mb-6">SOL, BTC, ETH from Coinbase</p>
-                    <code class="text-xs text-slate-500 mono">GET /price</code>
+                <div class="card glass rounded-xl p-4">
+                    <div class="text-2xl mb-2">📊</div>
+                    <h3 class="font-medium text-sm">polymarket</h3>
+                    <p class="text-xs text-zinc-500 mb-2">Market analysis</p>
+                    <span class="tag bg-cyan-500/20 text-cyan-400">$0.10</span>
                 </div>
-                <div class="glass rounded-2xl p-8 card">
-                    <div class="text-slate-400 mb-2">Trading Signals</div>
-                    <div class="text-4xl font-bold mb-4">$0.25</div>
-                    <p class="text-slate-400 text-sm mb-6">AI-powered analysis</p>
-                    <code class="text-xs text-slate-500 mono">GET /signal</code>
+                <div class="card glass rounded-xl p-4">
+                    <div class="text-2xl mb-2">💰</div>
+                    <h3 class="font-medium text-sm">base-wallet</h3>
+                    <p class="text-xs text-zinc-500 mb-2">USDC payments</p>
+                    <span class="tag bg-green-500/20 text-green-400">FREE</span>
                 </div>
+                <div class="card glass rounded-xl p-4">
+                    <div class="text-2xl mb-2">🧠</div>
+                    <h3 class="font-medium text-sm">memelord</h3>
+                    <p class="text-xs text-zinc-500 mb-2">Memory system</p>
+                    <span class="tag bg-green-500/20 text-green-400">FREE</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LLM APIs -->
+    <section class="px-4 py-16" id="llm">
+        <div class="max-w-5xl mx-auto">
+            <h2 class="text-xl font-semibold mb-6">LLM APIs</h2>
+            <div class="grid md:grid-cols-3 gap-4">
+                <div class="card glass rounded-xl p-6">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center text-xl">🟢</div>
+                        <div>
+                            <h3 class="font-semibold">GPT-4o</h3>
+                            <p class="text-xs text-zinc-500">OpenAI</p>
+                        </div>
+                    </div>
+                    <div class="text-2xl font-bold mb-2">$0.01<span class="text-sm text-zinc-500 font-normal">/request</span></div>
+                    <p class="text-xs text-zinc-400">Best for general tasks</p>
+                </div>
+                <div class="card glass rounded-xl p-6 border-violet-500/30">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-orange-500 to-amber-600 flex items-center justify-center text-xl">🟠</div>
+                        <div>
+                            <h3 class="font-semibold">Claude 3.5</h3>
+                            <p class="text-xs text-zinc-500">Anthropic</p>
+                        </div>
+                    </div>
+                    <div class="text-2xl font-bold mb-2">$0.008<span class="text-sm text-zinc-500 font-normal">/request</span></div>
+                    <p class="text-xs text-zinc-400">Best for coding</p>
+                </div>
+                <div class="card glass rounded-xl p-6">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-xl">🔵</div>
+                        <div>
+                            <h3 class="font-semibold">Llama 3.1</h3>
+                            <p class="text-xs text-zinc-500">Meta</p>
+                        </div>
+                    </div>
+                    <div class="text-2xl font-bold mb-2">$0.005<span class="text-sm text-zinc-500 font-normal">/request</span></div>
+                    <p class="text-xs text-zinc-400">Best value</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- API Demo -->
+    <section class="px-4 py-16 bg-zinc-900/30">
+        <div class="max-w-3xl mx-auto">
+            <h2 class="text-xl font-semibold text-center mb-8">Try the API</h2>
+            <div class="glass rounded-xl p-6">
+                <div class="mb-4">
+                    <p class="text-sm text-zinc-400 mb-2">Get crypto prices:</p>
+                    <code class="block bg-zinc-950 p-3 rounded-lg text-sm text-green-400">curl https://frankie-prod.life.conway.tech/price</code>
+                </div>
+                <div class="mb-4">
+                    <p class="text-sm text-zinc-400 mb-2">Response:</p>
+                    <pre id="demo-response" class="bg-zinc-950 p-3 rounded-lg text-xs text-zinc-400 overflow-auto">Loading...</pre>
+                </div>
+                <button onclick="loadDemo()" class="w-full py-2 bg-violet-600 hover:bg-violet-500 rounded-lg text-sm font-medium transition">Run Demo</button>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="py-12 px-6 border-t border-slate-800">
-        <div class="max-w-7xl mx-auto">
-            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
-                <div class="flex items-center gap-3">
-                    <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-cyan-400 flex items-center justify-center text-sm">⚡</div>
-                    <span class="font-bold">OMA-AI</span>
-                </div>
-                <div class="flex items-center gap-6 text-slate-400 text-sm">
-                    <a href="https://github.com/FrankieMolt/OMA-AI" class="hover:text-white transition">GitHub</a>
-                    <a href="https://x402.org" class="hover:text-white transition">x402 Protocol</a>
-                    <a href="https://base.org" class="hover:text-white transition">Base Network</a>
-                </div>
-                <div class="text-slate-500 text-sm">© 2026 OMA-AI</div>
+    <footer class="px-4 py-8 border-t border-white/5">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-zinc-500">
+            <div class="flex items-center gap-2">
+                <div class="w-6 h-6 gradient rounded flex items-center justify-center text-xs font-bold">OMA</div>
+                <span>OMA-AI © 2026</span>
             </div>
-            <div class="text-center mt-8 text-xs text-slate-600">
-                Payment Address: 0x40AE4455055feeCac30e1EEEcbFE8dBEd77e4eC6
+            <div class="flex items-center gap-6">
+                <a href="https://github.com/FrankieMolt/OMA-AI" class="hover:text-white">GitHub</a>
+                <a href="#" class="hover:text-white">Docs</a>
+                <a href="#" class="hover:text-white">Discord</a>
             </div>
         </div>
     </footer>
 
     <script>
         const API = 'https://frankie-prod.life.conway.tech';
-
-        // Toast notification
-        function showToast(msg) {
-            const toast = document.getElementById('toast');
-            toast.textContent = msg;
-            toast.classList.add('show');
-            setTimeout(() => toast.classList.remove('show'), 2000);
-        }
-
-        // Copy cURL command
-        function copyCurl(endpoint) {
-            const urls = {
-                health: `curl ${API}/health`,
-                price: `curl -H "X-Payment: <proof>" ${API}/price`,
-                stats: `curl ${API}/stats`
-            };
-            navigator.clipboard.writeText(urls[endpoint]);
-            showToast('Copied to clipboard!');
-        }
-
-        // Language tabs
-        function showLang(lang) {
-            showToast('Language: ' + lang.toUpperCase());
-        }
-
-        // API Tests
-        async function testHealth() {
-            const start = Date.now();
-            const el = document.getElementById('health-result');
-            el.textContent = 'Loading...';
-            el.className = 'p-4 bg-slate-950 rounded-xl text-sm mono text-slate-400 overflow-auto max-h-48';
-            try {
-                const res = await fetch(API + '/health');
-                const data = await res.json();
-                const time = Date.now() - start;
-                document.getElementById('health-time').textContent = time + 'ms';
-                el.textContent = JSON.stringify(data, null, 2);
-                el.classList.remove('text-slate-400');
-                el.classList.add('text-green-400');
-            } catch (e) {
-                el.textContent = 'Error: ' + e.message;
-                el.classList.add('text-red-400');
-            }
-        }
-
-        async function testPrice() {
-            const start = Date.now();
-            const el = document.getElementById('price-result');
-            el.textContent = 'Loading...';
-            el.className = 'p-4 bg-slate-950 rounded-xl text-sm mono text-slate-400 overflow-auto max-h-48';
-            try {
-                const res = await fetch(API + '/price');
-                const data = await res.json();
-                const time = Date.now() - start;
-                document.getElementById('price-time').textContent = time + 'ms';
-                el.textContent = JSON.stringify(data, null, 2);
-                el.classList.remove('text-slate-400');
-                el.classList.add('text-green-400');
-            } catch (e) {
-                el.textContent = 'Error: ' + e.message;
-                el.classList.add('text-red-400');
-            }
-        }
-
-        async function testStats() {
-            const start = Date.now();
-            const el = document.getElementById('stats-result');
-            el.textContent = 'Loading...';
-            el.className = 'p-4 bg-slate-950 rounded-xl text-sm mono text-slate-400 overflow-auto max-h-48';
-            try {
-                const res = await fetch(API + '/stats');
-                const data = await res.json();
-                const time = Date.now() - start;
-                document.getElementById('stats-time').textContent = time + 'ms';
-                el.textContent = JSON.stringify(data, null, 2);
-                el.classList.remove('text-slate-400');
-                el.classList.add('text-green-400');
-            } catch (e) {
-                el.textContent = 'Error: ' + e.message;
-                el.classList.add('text-red-400');
-            }
-        }
-
-        // Load stats
+        
         async function loadStats() {
             try {
-                const start = Date.now();
-                const health = await fetch(API + '/health').then(r => r.json());
-                document.getElementById('latency').textContent = (Date.now() - start) + 'ms';
-                document.getElementById('uptime').textContent = health.uptime + 's';
-                document.getElementById('status').textContent = 'Online';
-            } catch (e) {
-                document.getElementById('status').textContent = 'Offline';
-            }
-
-            try {
                 const stats = await fetch(API + '/stats').then(r => r.json());
-                document.getElementById('calls').textContent = stats.calls || 0;
-                document.getElementById('call-count').textContent = (stats.calls || 0).toLocaleString() + '+';
+                document.getElementById('api-calls').textContent = (stats.calls || 0).toLocaleString();
             } catch (e) {}
-
+            
             try {
                 const price = await fetch(API + '/price').then(r => r.json());
                 if (price.data && price.data.sol) {
-                    document.getElementById('sol').textContent = '$' + price.data.sol.price;
+                    document.getElementById('sol-price').textContent = '$' + price.data.sol.price;
                 }
             } catch (e) {}
+            
+            try {
+                const health = await fetch(API + '/health').then(r => r.json());
+                const hours = Math.floor(health.uptime / 3600);
+                document.getElementById('uptime').textContent = hours + 'h';
+            } catch (e) {}
         }
-
-        // Initialize
+        
+        async function loadDemo() {
+            const el = document.getElementById('demo-response');
+            el.textContent = 'Loading...';
+            try {
+                const res = await fetch(API + '/price');
+                const data = await res.json();
+                el.textContent = JSON.stringify(data, null, 2);
+                el.classList.add('text-green-400');
+            } catch (e) {
+                el.textContent = 'Error: ' + e.message;
+            }
+        }
+        
         loadStats();
+        loadDemo();
         setInterval(loadStats, 30000);
     </script>
 </body>
