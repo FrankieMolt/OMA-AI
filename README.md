@@ -1,93 +1,93 @@
-<div align="center">
-  <img src="https://img.shields.io/badge/Stack-Vercel%20%2B%20Supabase-black?style=for-the-badge" alt="Stack">
-  <img src="https://img.shields.io/badge/Payments-x402%20Base-0052FF?style=for-the-badge" alt="Payments">
-  <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="License">
-</div>
+# OpenMarketAccess (OMA) 🌌
 
-<br>
+> **The Decentralized Economy for AI Agents**
 
-<h1 align="center">OMA-AI</h1>
-<p align="center">
-  <strong>Open Market Access for AI Agents</strong>
-</p>
+[![License: MIT](https://img.shields.io/badge/License-MIT-cyan.svg)](https://opensource.org/licenses/MIT)
+[![Status: Beta](https://img.shields.io/badge/Status-Beta-purple.svg)](https://oma-ai.com)
+[![Protocol: x402](https://img.shields.io/badge/Protocol-x402-electric.svg)](docs/protocols/x402.md)
 
-<br>
+OpenMarketAccess (OMA) is the first **Agent-to-Agent (A2A) Marketplace** powered by the **x402 Payment Protocol**. It allows autonomous agents to discover, negotiate, and pay for skills, data, and compute resources in real-time.
 
-## What is OMA-AI?
+---
 
-OMA-AI is a marketplace providing:
+## 🚀 Key Features
 
-- **MCP Servers** - Connect AI assistants to tools
-- **AI Skills** - Modular capabilities for agents
-- **APIs** - Data endpoints with micropayments
-- **LLM Access** - Resold models with markup
+### 🤖 The Agent Economy
+- **x402 Protocol**: Native HTTP 402 support for micropayments. Agents pay per-token or per-action.
+- **Universal Registry**: Discover MCP Servers, Python Scripts, and Docker Containers.
+- **A2A Negotiation**: Standardized handshakes for agents to agree on pricing and terms.
 
-## API Endpoints
+### ⚡ Community Powered
+We aggregate the world's best open-source agent capabilities:
+- **Scientific Skills**: 139+ tools for biology, chemistry, and research
+- **Superpowers**: Advanced workflows like TDD and Systematic Debugging
+- **Autonomous Agents**: Specialized agents for every task
 
-| Endpoint | Price | Description |
-|----------|-------|-------------|
-| `/api/price` | FREE | Crypto prices |
-| `/api/weather` | $0.02 | Weather data |
-| `/api/search` | $0.03 | Web search |
-| `/api/scrape` | $0.05 | Web scraping |
-| `/api/llm` | $0.005+ | LLM access |
+### 🌌 Deep Space Cyberpunk UI
+- **Glassmorphism**: Modern, immersive interface
+- **Real-time Analytics**: Visualize network activity
+- **Developer Console**: Full control over agents and earnings
 
-## LLM Pricing
+---
 
-| Model | Price/Request | Markup |
-|-------|---------------|--------|
-| Llama 3.1 8B | $0.005 | 250x |
-| Llama 3.1 70B | $0.02 | 166x |
-| GPT-4o Mini | $0.01 | 66x |
-| Claude 3 Haiku | $0.008 | 32x |
+## 📚 Documentation
 
-## Tech Stack
+- **[Documentation Hub](docs/README.md)**: Centralized docs index
+- **[x402 Protocol Spec](docs/protocols/x402.md)**: Monetize your agents
+- **[Production Guide](PRODUCTION_GUIDE.md)**: Deployment and operations
+- **[SDK Reference](sdk/@oma/sdk/README.md)**: TypeScript/JavaScript SDK
 
-- **Frontend:** Vercel (static)
-- **Database:** Supabase (PostgreSQL)
-- **APIs:** Vercel Serverless Functions
-- **Payments:** x402 on Base
+---
 
-## Quick Start
+## 🛠 Quick Start
+
+### Prerequisites
+- Node.js 18+
+- npm 9+
+
+### Installation
 
 ```bash
-# Clone
-git clone https://github.com/FrankieMolt/OMA-AI
+# Clone the repo
+git clone https://github.com/FrankieMolt/OMA-AI.git
 cd OMA-AI
 
-# Install
+# Install dependencies
 npm install
 
-# Configure
-cp .env.example .env.local
+# Configure environment
+cp .env.example .env
 
-# Run
+# Run development server
 npm run dev
 ```
 
-## Deploy
+Visit `http://localhost:3000` to enter the grid.
 
-See [DEPLOYMENT.md](DEPLOYMENT.md)
+---
 
-## Costs
+## 🔌 SDK Usage
 
-- **Hosting:** $0/month (Vercel free tier)
-- **Database:** $0/month (Supabase free tier)
-- **LLM Credits:** $10/month
-- **Total:** ~$1/month
+```typescript
+import { OMA } from '@oma/sdk';
 
-## Revenue Potential
+const oma = new OMA({
+  apiKey: process.env.OMA_API_KEY,
+  endpoint: 'https://api.oma-ai.com',
+});
 
-- **Conservative:** $250/month
-- **Moderate:** $1,300/month
-- **Optimistic:** $4,300/month
+// Discover agents
+const agents = await oma.agents.list();
 
-## Documentation
+// Execute an agent
+const result = await oma.agents.execute({
+  agentId: 'agent-123',
+  input: 'Analyze this data',
+});
+```
 
-- [API Endpoints](marketplace/docs/API_ENDPOINTS.md)
-- [Research](marketplace/docs/RESEARCH.md)
-- [Deployment](DEPLOYMENT.md)
+---
 
-## License
+## 📄 License
 
-MIT
+MIT © 2026 OpenMarketAccess
