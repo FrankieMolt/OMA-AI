@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open Market Access - MCP Server & AI Skills Directory</title>
+    <meta name="description" content="Discover and install MCP servers, AI skills, and APIs for your AI agents. The open directory for Model Context Protocol servers.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', system-ui, sans-serif; }
+        .gradient { background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%); }
+        .gradient-text { background: linear-gradient(135deg, #6366f1, #d946ef); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .card { transition: all 0.2s; }
+        .card:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.3); }
+        .tag { font-size: 11px; padding: 2px 8px; border-radius: 9999px; }
+    </style>
+</head>
+<body class="bg-zinc-950 text-white min-h-screen">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-zinc-950/90 backdrop-blur-xl border-b border-zinc-800/50">
+        <div class="max-w-7xl mx-auto px-4 py-3">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-6">
+                    <a href="/" class="flex items-center gap-2">
+                        <div class="w-8 h-8 gradient rounded-lg flex items-center justify-center text-sm font-bold">OMA</div>
+                        <span class="font-semibold hidden sm:block">Open Market Access</span>
+                    </a>
+                    <div class="hidden md:flex items-center gap-1">
+                        <a href="#servers" class="px-3 py-1.5 text-sm text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-lg transition">Servers</a>
+                        <a href="#skills" class="px-3 py-1.5 text-sm text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-lg transition">Skills</a>
+                        <a href="#apis" class="px-3 py-1.5 text-sm text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-lg transition">APIs</a>
+                        <a href="#docs" class="px-3 py-1.5 text-sm text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-lg transition">Docs</a>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3">
+                    <div class="relative hidden sm:block">
+                        <input type="text" placeholder="Search servers, skills..." class="w-64 px-4 py-2 bg-zinc-900 border border-zinc-800 rounded-lg text-sm focus:outline-none focus:border-zinc-700">
+                        <span class="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-500 text-xs">⌘K</span>
+                    </div>
+                    <a href="#" class="px-4 py-2 text-sm text-zinc-400 hover:text-white transition">Sign in</a>
+                    <a href="#" class="px-4 py-2 gradient text-white text-sm font-medium rounded-lg">Publish</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="pt-24 pb-16 px-4">
+        <div class="max-w-4xl mx-auto text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-4">
+                The <span class="gradient-text">MCP Server</span> Directory
+            </h1>
+            <p class="text-lg text-zinc-400 mb-8 max-w-2xl mx-auto">
+                Discover, install, and publish MCP servers, AI skills, and APIs. 
+                Connect your AI agents to everything.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-3 justify-center">
+                <a href="#servers" class="px-6 py-3 gradient text-white font-medium rounded-xl">
+                    Browse Servers
+                </a>
+                <a href="#docs" class="px-6 py-3 bg-zinc-800 hover:bg-zinc-700 font-medium rounded-xl transition">
+                    Quick Start →
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats -->
+    <section class="py-8 px-4 border-y border-zinc-800/50">
+        <div class="max-w-5xl mx-auto">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                <div class="py-4">
+                    <div class="text-2xl font-bold">1,247</div>
+                    <div class="text-xs text-zinc-500 mt-1">MCP Servers</div>
+                </div>
+                <div class="py-4">
+                    <div class="text-2xl font-bold">847</div>
+                    <div class="text-xs text-zinc-500 mt-1">Skills</div>
+                </div>
+                <div class="py-4">
+                    <div class="text-2xl font-bold">156</div>
+                    <div class="text-xs text-zinc-500 mt-1">APIs</div>
+                </div>
+                <div class="py-4">
+                    <div class="text-2xl font-bold">45.2K</div>
+                    <div class="text-xs text-zinc-500 mt-1">Installs</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured MCP Servers -->
+    <section class="py-12 px-4" id="servers">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-2xl font-bold">Featured MCP Servers</h2>
+                <div class="flex items-center gap-2">
+                    <button class="px-3 py-1.5 text-xs bg-zinc-800 rounded-lg">All</button>
+                    <button class="px-3 py-1.5 text-xs text-zinc-400 hover:bg-zinc-800 rounded-lg">Database</button>
+                    <button class="px-3 py-1.5 text-xs text-zinc-400 hover:bg-zinc-800 rounded-lg">Search</button>
+                    <button class="px-3 py-1.5 text-xs text-zinc-400 hover:bg-zinc-800 rounded-lg">Tools</button>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <!-- Server Card 1 -->
+                <div class="card bg-zinc-900/50 border border-zinc-800 rounded-xl p-4">
+                    <div class="flex items-start justify-between mb-3">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center text-lg">🗄️</div>
+                            <div>
+                                <h3 class="font-medium">@modelcontextprotocol/server-postgres</h3>
+                                <p class="text-xs text-zinc-500">by modelcontextprotocol</p>
+                            </div>
+                        </div>
+                        <span class="tag bg-green-500/20 text-green-400">Verified</span>
+                    </div>
+                    <p class="text-sm text-zinc-400 mb-3">PostgreSQL database connector for MCP. Query and modify PostgreSQL databases.</p>
+                    <div class="flex items-center justify-between text-xs">
+                        <div class="flex items-center gap-3 text-zinc-500">
+                            <span>⭐ 2.4k</span>
+                            <span>📥 45.2k</span>
+                        </div>
+                        <code class="text-zinc-500 bg-zinc-800 px-2 py-1 rounded">npx @mcp/postgres</code>
+                    </div>
+                </div>
+
+                <!-- Server Card 2 -->
+                <div class="card bg-zinc-900/50 border border-zinc-800 rounded-xl p-4">
+                    <div class="flex items-start justify-between mb-3">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-lg bg-orange-500/20 flex items-center justify-center text-lg">🔍</div>
+                            <div>
+                                <h3 class="font-medium">@modelcontextprotocol/server-brave-search</h3>
+                                <p class="text-xs text-zinc-500">by modelcontextprotocol</p>
+                            </div>
+                        </div>
+                        <span class="tag bg-green-500/20 text-green-400">Verified</span>
+                    </div>
+                    <p class="text-sm text-zinc-400 mb-3">Brave Search API integration. Web search capabilities for MCP clients.</p>
+                    <div class="flex items-center justify-between text-xs">
+                        <div class="flex items-center gap-3 text-zinc-500">
+                            <span>⭐ 1.8k</span>
+                            <span>📥 38.7k</span>
+                        </div>
+                        <code class="text-zinc-500 bg-zinc-800 px-2 py-1 rounded">npx @mcp/brave-search</code>
+                    </div>
+                </div>
+
+                <!-- Server Card 3 -->
+                <div class="card bg-zinc-900/50 border border-zinc-800 rounded-xl p-4">
+                    <div class="flex items-start justify-between mb-3">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-lg bg-green-500/20 flex items-center justify-center text-lg">📁</div>
+                            <div>
+                                <h3 class="font-medium">@modelcontextprotocol/server-filesystem</h3>
+                                <p class="text-xs text-zinc-500">by modelcontextprotocol</p>
+                            </div>
+                        </div>
+                        <span class="tag bg-green-500/20 text-green-400">Verified</span>
+                    </div>
+                    <p class="text-sm text-zinc-400 mb-3">File system operations. Read, write, and manage files with MCP.</p>
+                    <div class="flex items-center justify-between text-xs">
+                        <div class="flex items-center gap-3 text-zinc-500">
+                            <span>⭐ 2.1k</span>
+                            <span>📥 52.3k</span>
+                        </div>
+                        <code class="text-zinc-500 bg-zinc-800 px-2 py-1 rounded">npx @mcp/filesystem</code>
+                    </div>
+                </div>
+
+                <!-- Server Card 4 -->
+                <div class="card bg-zinc-900/50 border border-zinc-800 rounded-xl p-4">
+                    <div class="flex items-start justify-between mb-3">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-lg bg-purple-500/20 flex items-center justify-center text-lg">🐙</div>
+                            <div>
+                                <h3 class="font-medium">@modelcontextprotocol/server-github</h3>
+                                <p class="text-xs text-zinc-500">by modelcontextprotocol</p>
+                            </div>
+                        </div>
+                        <span class="tag bg-green-500/20 text-green-400">Verified</span>
+                    </div>
+                    <p class="text-sm text-zinc-400 mb-3">GitHub API integration. Manage repos, issues, and pull requests.</p>
+                    <div class="flex items-center justify-between text-xs">
+                        <div class="flex items-center gap-3 text-zinc-500">
+                            <span>⭐ 3.2k</span>
+                            <span>📥 67.1k</span>
+                        </div>
+                        <code class="text-zinc-500 bg-zinc-800 px-2 py-1 rounded">npx @mcp/github</code>
+                    </div>
+                </div>
+
+                <!-- Server Card 5 -->
+                <div class="card bg-zinc-900/50 border border-zinc-800 rounded-xl p-4">
+                    <div class="flex items-start justify-between mb-3">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-lg bg-cyan-500/20 flex items-center justify-center text-lg">🌐</div>
+                            <div>
+                                <h3 class="font-medium">@modelcontextprotocol/server-puppeteer</h3>
+                                <p class="text-xs text-zinc-500">by modelcontextprotocol</p>
+                            </div>
+                        </div>
+                        <span class="tag bg-blue-500/20 text-blue-400">Popular</span>
+                    </div>
+                    <p class="text-sm text-zinc-400 mb-3">Browser automation with Puppeteer. Scrape and interact with web pages.</p>
+                    <div class="flex items-center justify-between text-xs">
+                        <div class="flex items-center gap-3 text-zinc-500">
+                            <span>⭐ 1.5k</span>
+                            <span>📥 29.4k</span>
+                        </div>
+                        <code class="text-zinc-500 bg-zinc-800 px-2 py-1 rounded">npx @mcp/puppeteer</code>
+                    </div>
+                </div>
+
+                <!-- Server Card 6 -->
+                <div class="card bg-zinc-900/50 border border-zinc-800 rounded-xl p-4">
+                    <div class="flex items-start justify-between mb-3">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-lg bg-red-500/20 flex items-center justify-center text-lg">🔴</div>
+                            <div>
+                                <h3 class="font-medium">@modelcontextprotocol/server-memory</h3>
+                                <p class="text-xs text-zinc-500">by modelcontextprotocol</p>
+                            </div>
+                        </div>
+                        <span class="tag bg-green-500/20 text-green-400">Verified</span>
+                    </div>
+                    <p class="text-sm text-zinc-400 mb-3">Persistent memory storage. Knowledge graph for AI conversations.</p>
+                    <div class="flex items-center justify-between text-xs">
+                        <div class="flex items-center gap-3 text-zinc-500">
+                            <span>⭐ 1.9k</span>
+                            <span>📥 41.8k</span>
+                        </div>
+                        <code class="text-zinc-500 bg-zinc-800 px-2 py-1 rounded">npx @mcp/memory</code>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-8">
+                <a href="#" class="text-sm text-zinc-400 hover:text-white">View all 1,247 servers →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="py-12 px-4 bg-zinc-900/30" id="skills">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-2xl font-bold">AI Skills</h2>
+                <a href="#" class="text-sm text-zinc-400 hover:text-white">View all →</a>
+            </div>
+
+            <div class="grid md:grid-cols-4 gap-4">
+                <div class="card bg-zinc-900/50 border border-zinc-800 rounded-xl p-4">
+                    <div class="text-2xl mb-2">🤖</div>
+                    <h3 class="font-medium mb-1">proactive-agent</h3>
+                    <p class="text-xs text-zinc-500 mb-2">Anticipates needs autonomously</p>
+                    <div class="flex items-center gap-2">
+                        <span class="tag bg-green-500/20 text-green-400">FREE</span>
+                        <span class="text-xs text-zinc-500">5.2k installs</span>
+                    </div>
+                </div>
+
+                <div class="card bg-zinc-900/50 border border-zinc-800 rounded-xl p-4">
+                    <div class="text-2xl mb-2">📊</div>
+                    <h3 class="font-medium mb-1">polymarket</h3>
+                    <p class="text-xs text-zinc-500 mb-2">Prediction market analysis</p>
+                    <div class="flex items-center gap-2">
+                        <span class="tag bg-cyan-500/20 text-cyan-400">$0.10</span>
+                        <span class="text-xs text-zinc-500">3.8k installs</span>
+                    </div>
+                </div>
+
+                <div class="card bg-zinc-900/50 border border-zinc-800 rounded-xl p-4">
+                    <div class="text-2xl mb-2">💰</div>
+                    <h3 class="font-medium mb-1">base-wallet</h3>
+                    <p class="text-xs text-zinc-500 mb-2">USDC payments on Base</p>
+                    <div class="flex items-center gap-2">
+                        <span class="tag bg-green-500/20 text-green-400">FREE</span>
+                        <span class="text-xs text-zinc-500">4.1k installs</span>
+                    </div>
+                </div>
+
+                <div class="card bg-zinc-900/50 border border-zinc-800 rounded-xl p-4">
+                    <div class="text-2xl mb-2">🧠</div>
+                    <h3 class="font-medium mb-1">memelord</h3>
+                    <p class="text-xs text-zinc-500 mb-2">Persistent memory system</p>
+                    <div class="flex items-center gap-2">
+                        <span class="tag bg-green-500/20 text-green-400">FREE</span>
+                        <span class="text-xs text-zinc-500">2.9k installs</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- APIs Section -->
+    <section class="py-12 px-4" id="apis">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-2xl font-bold">APIs & LLMs</h2>
+                <a href="#" class="text-sm text-zinc-400 hover:text-white">View all →</a>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-4">
+                <div class="card bg-zinc-900/50 border border-zinc-800 rounded-xl p-4">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center text-sm font-bold">F</div>
+                        <div>
+                            <h3 class="font-medium">Frankie API</h3>
+                            <p class="text-xs text-zinc-500">Crypto & Markets</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-1 mb-3">
+                        <span class="tag bg-zinc-800 text-zinc-400">crypto</span>
+                        <span class="tag bg-zinc-800 text-zinc-400">trading</span>
+                        <span class="tag bg-zinc-800 text-zinc-400">x402</span>
+                    </div>
+                    <div class="flex items-center justify-between text-xs">
+                        <span class="text-zinc-500">5 endpoints</span>
+                        <span class="text-green-400">LIVE</span>
+                    </div>
+                </div>
+
+                <div class="card bg-zinc-900/50 border border-zinc-800 rounded-xl p-4">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center text-sm font-bold">A</div>
+                        <div>
+                            <h3 class="font-medium">Anthropic Claude</h3>
+                            <p class="text-xs text-zinc-500">LLM Provider</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-1 mb-3">
+                        <span class="tag bg-zinc-800 text-zinc-400">llm</span>
+                        <span class="tag bg-zinc-800 text-zinc-400">claude</span>
+                        <span class="tag bg-zinc-800 text-zinc-400">chat</span>
+                    </div>
+                    <div class="flex items-center justify-between text-xs">
+                        <span class="text-zinc-500">API Key required</span>
+                        <span class="text-green-400">LIVE</span>
+                    </div>
+                </div>
+
+                <div class="card bg-zinc-900/50 border border-zinc-800 rounded-xl p-4">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-sm font-bold">O</div>
+                        <div>
+                            <h3 class="font-medium">OpenAI GPT-4</h3>
+                            <p class="text-xs text-zinc-500">LLM Provider</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-1 mb-3">
+                        <span class="tag bg-zinc-800 text-zinc-400">llm</span>
+                        <span class="tag bg-zinc-800 text-zinc-400">gpt-4</span>
+                        <span class="tag bg-zinc-800 text-zinc-400">chat</span>
+                    </div>
+                    <div class="flex items-center justify-between text-xs">
+                        <span class="text-zinc-500">API Key required</span>
+                        <span class="text-green-400">LIVE</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Start -->
+    <section class="py-12 px-4 bg-zinc-900/30" id="docs">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-2xl font-bold text-center mb-8">Quick Start</h2>
+            <div class="bg-zinc-900 border border-zinc-800 rounded-xl p-6">
+                <div class="space-y-4">
+                    <div>
+                        <p class="text-sm text-zinc-400 mb-2">1. Install the CLI</p>
+                        <code class="block bg-zinc-950 p-3 rounded-lg text-sm text-green-400">npm install -g @openmarketaccess/cli</code>
+                    </div>
+                    <div>
+                        <p class="text-sm text-zinc-400 mb-2">2. Add an MCP server to Claude</p>
+                        <code class="block bg-zinc-950 p-3 rounded-lg text-sm text-green-400">oma add @modelcontextprotocol/server-filesystem</code>
+                    </div>
+                    <div>
+                        <p class="text-sm text-zinc-400 mb-2">3. Install a skill</p>
+                        <code class="block bg-zinc-950 p-3 rounded-lg text-sm text-green-400">oma install proactive-agent</code>
+                    </div>
+                    <div>
+                        <p class="text-sm text-zinc-400 mb-2">4. Connect an API</p>
+                        <code class="block bg-zinc-950 p-3 rounded-lg text-sm text-green-400">oma connect frankie-api --key YOUR_KEY</code>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-16 px-4">
+        <div class="max-w-3xl mx-auto text-center">
+            <div class="gradient rounded-2xl p-8">
+                <h2 class="text-2xl font-bold mb-4">Publish Your Server</h2>
+                <p class="text-white/80 mb-6">Share your MCP server with the community. Earn from x402 micropayments.</p>
+                <a href="#" class="inline-block px-6 py-3 bg-white text-zinc-900 font-medium rounded-xl">
+                    Start Publishing
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 px-4 border-t border-zinc-800">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-zinc-500">
+                <div class="flex items-center gap-2">
+                    <div class="w-6 h-6 gradient rounded flex items-center justify-center text-xs font-bold">OMA</div>
+                    <span>Open Market Access © 2026</span>
+                </div>
+                <div class="flex items-center gap-6">
+                    <a href="#" class="hover:text-white">Docs</a>
+                    <a href="#" class="hover:text-white">GitHub</a>
+                    <a href="#" class="hover:text-white">Discord</a>
+                    <a href="#" class="hover:text-white">Twitter</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
