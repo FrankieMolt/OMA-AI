@@ -1,88 +1,93 @@
 <div align="center">
-  <img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript">
-  <img src="https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white" alt="Next.js">
-  <img src="https://img.shields.io/badge/Base-0052FF?style=for-the-badge&logo=base&logoColor=white" alt="Base">
+  <img src="https://img.shields.io/badge/Stack-Vercel%20%2B%20Supabase-black?style=for-the-badge" alt="Stack">
+  <img src="https://img.shields.io/badge/Payments-x402%20Base-0052FF?style=for-the-badge" alt="Payments">
+  <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="License">
 </div>
 
 <br>
 
-<h1 align="center">OMA-AI - Open Market Access</h1>
+<h1 align="center">OMA-AI</h1>
 <p align="center">
-  <strong>The Open Marketplace for MCP Servers, AI Skills & APIs</strong>
+  <strong>Open Market Access for AI Agents</strong>
 </p>
 
 <br>
 
-## 🚀 What is OMA-AI?
+## What is OMA-AI?
 
-OMA-AI (Open Market Access) is a directory and marketplace for:
-- **MCP Servers** - Model Context Protocol servers
+OMA-AI is a marketplace providing:
+
+- **MCP Servers** - Connect AI assistants to tools
 - **AI Skills** - Modular capabilities for agents
-- **APIs** - Data endpoints for AI consumption
+- **APIs** - Data endpoints with micropayments
+- **LLM Access** - Resold models with markup
 
-## 📦 Features
-
-| Feature | Description |
-|---------|-------------|
-| **MCP Directory** | Browse 1,247+ MCP servers |
-| **Skills Marketplace** | Install AI skills instantly |
-| **API Hub** | Connect to real data sources |
-| **x402 Payments** | Micropayments on Base |
-
-## 🔗 Live Endpoints
+## API Endpoints
 
 | Endpoint | Price | Description |
 |----------|-------|-------------|
-| `/health` | FREE | API status |
-| `/price` | $0.05 | Crypto prices |
-| `/signal` | $0.25 | Trading signals |
-| `/markets` | $0.10 | Polymarket data |
+| `/api/price` | FREE | Crypto prices |
+| `/api/weather` | $0.02 | Weather data |
+| `/api/search` | $0.03 | Web search |
+| `/api/scrape` | $0.05 | Web scraping |
+| `/api/llm` | $0.005+ | LLM access |
 
-**API:** https://frankie-prod.life.conway.tech
+## LLM Pricing
 
-## 🛠️ Quick Start
+| Model | Price/Request | Markup |
+|-------|---------------|--------|
+| Llama 3.1 8B | $0.005 | 250x |
+| Llama 3.1 70B | $0.02 | 166x |
+| GPT-4o Mini | $0.01 | 66x |
+| Claude 3 Haiku | $0.008 | 32x |
+
+## Tech Stack
+
+- **Frontend:** Vercel (static)
+- **Database:** Supabase (PostgreSQL)
+- **APIs:** Vercel Serverless Functions
+- **Payments:** x402 on Base
+
+## Quick Start
 
 ```bash
-# Install CLI
-npm install -g @openmarketaccess/cli
+# Clone
+git clone https://github.com/FrankieMolt/OMA-AI
+cd OMA-AI
 
-# Install a skill
-oma install proactive-agent
+# Install
+npm install
 
-# Add MCP server
-oma add @modelcontextprotocol/server-filesystem
+# Configure
+cp .env.example .env.local
+
+# Run
+npm run dev
 ```
 
-## 📁 Project Structure
+## Deploy
 
-```
-oma-ai/
-├── app/              # Next.js app
-├── components/       # React components
-├── marketplace/      # Skills, MCPs, docs
-│   ├── skills/       # AI skill definitions
-│   ├── mcps/         # MCP server configs
-│   └── docs/         # Documentation
-└── public/           # Static assets
-```
+See [DEPLOYMENT.md](DEPLOYMENT.md)
 
-## 📚 Documentation
+## Costs
 
-- [API Reference](marketplace/docs/api-reference.md)
-- [CLI Reference](marketplace/docs/cli-reference.md)
+- **Hosting:** $0/month (Vercel free tier)
+- **Database:** $0/month (Supabase free tier)
+- **LLM Credits:** $10/month
+- **Total:** ~$1/month
 
-## 🤝 Contributing
+## Revenue Potential
 
-1. Fork the repository
-2. Add your skill/MCP
-3. Submit a Pull Request
+- **Conservative:** $250/month
+- **Moderate:** $1,300/month
+- **Optimistic:** $4,300/month
 
-## 📝 License
+## Documentation
 
-MIT License
+- [API Endpoints](marketplace/docs/API_ENDPOINTS.md)
+- [Research](marketplace/docs/RESEARCH.md)
+- [Deployment](DEPLOYMENT.md)
 
----
+## License
 
-<div align="center">
-  <p>Built with ❤️ by <a href="https://github.com/FrankieMolt">FrankieMolt</a></p>
-</div>
+MIT

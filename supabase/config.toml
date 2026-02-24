@@ -1,0 +1,21 @@
+# Supabase configuration for OMA-AI
+
+[db]
+port = 54322
+
+[api]
+port = 54321
+schemas = ["public", "storage"]
+extra_search_path = ["public"]
+max_rows = 1000
+
+[studio]
+port = 54323
+
+[auth]
+site_url = "https://oma-ai.com"
+additional_redirect_urls = ["https://oma-ai.com/auth/callback"]
+jwt_expiry = 3600
+
+[storage]
+file_size_limit = "50MB"
