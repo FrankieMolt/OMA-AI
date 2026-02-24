@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Open Market Access - MCP Servers & AI Skills</title>
-    <meta name="description" content="Discover and install MCP servers and AI skills. The open directory for Model Context Protocol.">
+    <title>Open Market Access - MCP Servers, Skills & LLM APIs</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -14,42 +13,29 @@
         .gradient { background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%); }
         .card { transition: all 0.2s ease; }
         .card:hover { transform: translateY(-2px); border-color: rgba(139,92,246,0.3); }
-        .search-input:focus { outline: none; border-color: #8b5cf6; }
         .tag { font-size: 11px; padding: 2px 8px; border-radius: 9999px; font-weight: 500; }
-        .fade-in { animation: fadeIn 0.3s ease; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        .pulse { animation: pulse 2s infinite; }
-        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
-        ::-webkit-scrollbar { width: 8px; height: 8px; }
-        ::-webkit-scrollbar-track { background: #18181b; }
-        ::-webkit-scrollbar-thumb { background: #3f3f46; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #52525b; }
     </style>
 </head>
 <body class="min-h-screen">
 
-    <!-- Navigation -->
+    <!-- Nav -->
     <nav class="fixed top-0 left-0 right-0 z-50 bg-zinc-950/80 backdrop-blur-xl border-b border-white/5">
         <div class="max-w-7xl mx-auto px-4 h-14 flex items-center justify-between">
             <div class="flex items-center gap-8">
                 <a href="#" class="flex items-center gap-2">
-                    <div class="w-8 h-8 gradient rounded-lg flex items-center justify-center text-sm font-bold text-white">OMA</div>
-                    <span class="font-semibold text-white">Open Market Access</span>
+                    <div class="w-8 h-8 gradient rounded-lg flex items-center justify-center text-sm font-bold">OMA</div>
+                    <span class="font-semibold">Open Market Access</span>
                 </a>
                 <div class="hidden md:flex items-center gap-1">
-                    <a href="#servers" class="px-3 py-1.5 text-sm text-zinc-400 hover:text-white hover:bg-white/5 rounded-lg transition">Servers</a>
-                    <a href="#skills" class="px-3 py-1.5 text-sm text-zinc-400 hover:text-white hover:bg-white/5 rounded-lg transition">Skills</a>
-                    <a href="#apis" class="px-3 py-1.5 text-sm text-zinc-400 hover:text-white hover:bg-white/5 rounded-lg transition">APIs</a>
-                    <a href="#" class="px-3 py-1.5 text-sm text-zinc-400 hover:text-white hover:bg-white/5 rounded-lg transition">Docs</a>
+                    <a href="#servers" class="px-3 py-1.5 text-sm text-zinc-400 hover:text-white hover:bg-white/5 rounded-lg">Servers</a>
+                    <a href="#skills" class="px-3 py-1.5 text-sm text-zinc-400 hover:text-white hover:bg-white/5 rounded-lg">Skills</a>
+                    <a href="#llm" class="px-3 py-1.5 text-sm text-zinc-400 hover:text-white hover:bg-white/5 rounded-lg">LLM APIs</a>
+                    <a href="#pricing" class="px-3 py-1.5 text-sm text-zinc-400 hover:text-white hover:bg-white/5 rounded-lg">Pricing</a>
                 </div>
             </div>
             <div class="flex items-center gap-3">
-                <div class="relative">
-                    <input type="text" id="search" placeholder="Search..." class="w-64 h-9 px-4 pr-10 bg-zinc-900 border border-zinc-800 rounded-lg text-sm search-input transition">
-                    <svg class="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-                </div>
-                <a href="#" class="h-9 px-4 flex items-center text-sm text-zinc-400 hover:text-white transition">Sign in</a>
-                <a href="#" class="h-9 px-4 gradient text-white text-sm font-medium rounded-lg flex items-center">Publish</a>
+                <a href="#" class="text-sm text-zinc-400 hover:text-white">Sign in</a>
+                <a href="#" class="h-9 px-4 gradient text-white text-sm font-medium rounded-lg">Publish</a>
             </div>
         </div>
     </nav>
@@ -58,330 +44,250 @@
     <section class="pt-24 pb-12 px-4">
         <div class="max-w-4xl mx-auto text-center">
             <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-violet-500/10 border border-violet-500/20 mb-6">
-                <span class="w-1.5 h-1.5 rounded-full bg-violet-400 pulse"></span>
-                <span class="text-xs text-violet-300 font-medium">1,247 servers • 847 skills • 45K+ installs</span>
+                <span class="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse"></span>
+                <span class="text-xs text-violet-300 font-medium">1,247 servers • 847 skills • 12 LLMs</span>
             </div>
-            <h1 class="text-4xl md:text-5xl font-bold mb-4 tracking-tight">
-                MCP Server & AI Skill Directory
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">
+                Everything for AI Agents
             </h1>
-            <p class="text-lg text-zinc-400 mb-8 max-w-2xl mx-auto">
-                Discover, install, and publish MCP servers and AI skills. Connect your AI agents to everything.
+            <p class="text-lg text-zinc-400 mb-8">
+                MCP servers, AI skills, and LLM APIs. One marketplace, instant micropayments.
             </p>
             <div class="flex gap-3 justify-center">
-                <a href="#servers" class="h-11 px-6 gradient text-white font-medium rounded-lg flex items-center">
-                    Browse Servers
-                </a>
-                <a href="#" class="h-11 px-6 bg-zinc-800 hover:bg-zinc-700 font-medium rounded-lg flex items-center transition">
-                    Quick Start →
-                </a>
+                <a href="#servers" class="h-11 px-6 gradient text-white font-medium rounded-lg">Browse</a>
+                <a href="#llm" class="h-11 px-6 bg-zinc-800 hover:bg-zinc-700 font-medium rounded-lg transition">Try LLM API →</a>
             </div>
         </div>
     </section>
 
-    <!-- Categories -->
-    <section class="px-4 pb-8">
+    <!-- LLM APIs Section -->
+    <section class="px-4 py-16 bg-zinc-900/30" id="llm">
         <div class="max-w-5xl mx-auto">
-            <div class="flex flex-wrap justify-center gap-2" id="categories">
-                <button onclick="filterCategory('all')" class="category-btn px-4 py-2 text-sm font-medium rounded-lg bg-violet-500/20 text-violet-300" data-cat="all">All</button>
-                <button onclick="filterCategory('database')" class="category-btn px-4 py-2 text-sm font-medium rounded-lg bg-zinc-800 text-zinc-400 hover:bg-zinc-700" data-cat="database">Database</button>
-                <button onclick="filterCategory('search')" class="category-btn px-4 py-2 text-sm font-medium rounded-lg bg-zinc-800 text-zinc-400 hover:bg-zinc-700" data-cat="search">Search</button>
-                <button onclick="filterCategory('tools')" class="category-btn px-4 py-2 text-sm font-medium rounded-lg bg-zinc-800 text-zinc-400 hover:bg-zinc-700" data-cat="tools">Tools</button>
-                <button onclick="filterCategory('api')" class="category-btn px-4 py-2 text-sm font-medium rounded-lg bg-zinc-800 text-zinc-400 hover:bg-zinc-700" data-cat="api">APIs</button>
-                <button onclick="filterCategory('finance')" class="category-btn px-4 py-2 text-sm font-medium rounded-lg bg-zinc-800 text-zinc-400 hover:bg-zinc-700" data-cat="finance">Finance</button>
+            <div class="text-center mb-12">
+                <h2 class="text-2xl font-bold mb-4">LLM API Access</h2>
+                <p class="text-zinc-400">Access GPT-4, Claude, Llama and more. Pay per request with x402.</p>
             </div>
-        </div>
-    </section>
 
-    <!-- Servers Grid -->
-    <section class="px-4 pb-16" id="servers">
-        <div class="max-w-6xl mx-auto">
-            <div class="flex items-center justify-between mb-6">
-                <h2 class="text-xl font-semibold">Featured MCP Servers</h2>
-                <div class="flex items-center gap-2">
-                    <select class="h-8 px-3 bg-zinc-900 border border-zinc-800 rounded-lg text-sm text-zinc-400">
-                        <option>Most Popular</option>
-                        <option>Newest</option>
-                        <option>Most Installs</option>
-                    </select>
+            <div class="grid md:grid-cols-3 gap-4 mb-8">
+                <div class="card glass rounded-xl p-6">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center text-xl">🟢</div>
+                        <div>
+                            <h3 class="font-semibold">GPT-4o</h3>
+                            <p class="text-xs text-zinc-500">OpenAI</p>
+                        </div>
+                    </div>
+                    <div class="text-2xl font-bold mb-2">$0.01<span class="text-sm text-zinc-500 font-normal">/request</span></div>
+                    <p class="text-xs text-zinc-400 mb-4">Best for general tasks</p>
+                    <button onclick="testLLM('gpt-4o')" class="w-full py-2 bg-zinc-800 hover:bg-zinc-700 rounded-lg text-sm font-medium transition">Test Now</button>
+                </div>
+
+                <div class="card glass rounded-xl p-6 border-violet-500/30">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-orange-500 to-amber-600 flex items-center justify-center text-xl">🟠</div>
+                        <div>
+                            <h3 class="font-semibold">Claude 3.5 Sonnet</h3>
+                            <p class="text-xs text-zinc-500">Anthropic</p>
+                        </div>
+                    </div>
+                    <div class="text-2xl font-bold mb-2">$0.008<span class="text-sm text-zinc-500 font-normal">/request</span></div>
+                    <p class="text-xs text-zinc-400 mb-4">Best for coding</p>
+                    <button onclick="testLLM('claude')" class="w-full py-2 bg-violet-600 hover:bg-violet-500 rounded-lg text-sm font-medium transition">Test Now</button>
+                </div>
+
+                <div class="card glass rounded-xl p-6">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-xl">🔵</div>
+                        <div>
+                            <h3 class="font-semibold">Llama 3.1 405B</h3>
+                            <p class="text-xs text-zinc-500">Meta</p>
+                        </div>
+                    </div>
+                    <div class="text-2xl font-bold mb-2">$0.005<span class="text-sm text-zinc-500 font-normal">/request</span></div>
+                    <p class="text-xs text-zinc-400 mb-4">Best value</p>
+                    <button onclick="testLLM('llama')" class="w-full py-2 bg-zinc-800 hover:bg-zinc-700 rounded-lg text-sm font-medium transition">Test Now</button>
                 </div>
             </div>
 
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4" id="servers-grid">
-                <!-- Server cards will be injected here -->
+            <!-- LLM Test Area -->
+            <div class="glass rounded-xl p-6">
+                <h3 class="font-semibold mb-4">Try an LLM Request</h3>
+                <textarea id="llm-prompt" class="w-full h-24 p-4 bg-zinc-950 border border-zinc-800 rounded-lg text-sm resize-none" placeholder="Enter your prompt...">What is 2+2?</textarea>
+                <div class="flex items-center justify-between mt-4">
+                    <select id="llm-model" class="h-9 px-3 bg-zinc-900 border border-zinc-800 rounded-lg text-sm">
+                        <option value="gpt-4o">GPT-4o ($0.01)</option>
+                        <option value="claude">Claude 3.5 ($0.008)</option>
+                        <option value="llama">Llama 3.1 ($0.005)</option>
+                    </select>
+                    <button onclick="sendLLMRequest()" class="h-9 px-6 gradient text-white text-sm font-medium rounded-lg">Send Request</button>
+                </div>
+                <div id="llm-response" class="mt-4 p-4 bg-zinc-950 rounded-lg text-sm text-zinc-400 hidden">
+                    Response will appear here...
+                </div>
             </div>
+        </div>
+    </section>
 
-            <div class="text-center mt-8">
-                <button onclick="loadMore()" class="px-6 py-2 bg-zinc-800 hover:bg-zinc-700 rounded-lg text-sm font-medium transition">
-                    Load More
-                </button>
+    <!-- Servers Section -->
+    <section class="px-4 py-16" id="servers">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-xl font-semibold">MCP Servers</h2>
+                <a href="#" class="text-sm text-violet-400">View all →</a>
+            </div>
+            <div class="grid md:grid-cols-3 gap-4">
+                <div class="card glass rounded-xl p-4">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center">🗄️</div>
+                        <div>
+                            <h3 class="font-medium text-sm">@mcp/server-postgres</h3>
+                            <p class="text-xs text-zinc-500">2.4k ⭐</p>
+                        </div>
+                    </div>
+                    <p class="text-xs text-zinc-400 mb-3">PostgreSQL database connector</p>
+                    <code class="text-xs text-zinc-500">npx @mcp/server-postgres</code>
+                </div>
+                <div class="card glass rounded-xl p-4">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 rounded-lg bg-green-500/20 flex items-center justify-center">📁</div>
+                        <div>
+                            <h3 class="font-medium text-sm">@mcp/server-filesystem</h3>
+                            <p class="text-xs text-zinc-500">2.1k ⭐</p>
+                        </div>
+                    </div>
+                    <p class="text-xs text-zinc-400 mb-3">File system operations</p>
+                    <code class="text-xs text-zinc-500">npx @mcp/server-filesystem</code>
+                </div>
+                <div class="card glass rounded-xl p-4">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 rounded-lg bg-purple-500/20 flex items-center justify-center">🐙</div>
+                        <div>
+                            <h3 class="font-medium text-sm">@mcp/server-github</h3>
+                            <p class="text-xs text-zinc-500">3.2k ⭐</p>
+                        </div>
+                    </div>
+                    <p class="text-xs text-zinc-400 mb-3">GitHub API integration</p>
+                    <code class="text-xs text-zinc-500">npx @mcp/server-github</code>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Skills Section -->
-    <section class="px-4 py-16 bg-zinc-900/50" id="skills">
+    <section class="px-4 py-16 bg-zinc-900/30" id="skills">
         <div class="max-w-6xl mx-auto">
             <div class="flex items-center justify-between mb-6">
                 <h2 class="text-xl font-semibold">AI Skills</h2>
-                <a href="#" class="text-sm text-violet-400 hover:text-violet-300">View all →</a>
+                <a href="#" class="text-sm text-violet-400">View all →</a>
             </div>
-
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="skills-grid">
-                <!-- Skill cards will be injected here -->
-            </div>
-        </div>
-    </section>
-
-    <!-- API Section -->
-    <section class="px-4 py-16" id="apis">
-        <div class="max-w-6xl mx-auto">
-            <div class="flex items-center justify-between mb-6">
-                <h2 class="text-xl font-semibold">APIs</h2>
-                <a href="#" class="text-sm text-violet-400 hover:text-violet-300">View all →</a>
-            </div>
-
-            <div class="grid md:grid-cols-3 gap-4" id="apis-grid">
-                <!-- API cards will be injected here -->
-            </div>
-        </div>
-    </section>
-
-    <!-- Stats Section -->
-    <section class="px-4 py-12 border-y border-white/5">
-        <div class="max-w-5xl mx-auto">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-                <div>
-                    <div class="text-3xl font-bold text-white">1,247</div>
-                    <div class="text-sm text-zinc-500 mt-1">MCP Servers</div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="card glass rounded-xl p-4">
+                    <div class="text-2xl mb-2">🤖</div>
+                    <h3 class="font-medium text-sm">proactive-agent</h3>
+                    <p class="text-xs text-zinc-500 mb-2">Anticipates needs</p>
+                    <span class="tag bg-green-500/20 text-green-400">FREE</span>
                 </div>
-                <div>
-                    <div class="text-3xl font-bold text-white">847</div>
-                    <div class="text-sm text-zinc-500 mt-1">Skills</div>
+                <div class="card glass rounded-xl p-4">
+                    <div class="text-2xl mb-2">📊</div>
+                    <h3 class="font-medium text-sm">polymarket</h3>
+                    <p class="text-xs text-zinc-500 mb-2">Market analysis</p>
+                    <span class="tag bg-cyan-500/20 text-cyan-400">$0.10</span>
                 </div>
-                <div>
-                    <div class="text-3xl font-bold text-white">45.2K</div>
-                    <div class="text-sm text-zinc-500 mt-1">Installs</div>
+                <div class="card glass rounded-xl p-4">
+                    <div class="text-2xl mb-2">💰</div>
+                    <h3 class="font-medium text-sm">base-wallet</h3>
+                    <p class="text-xs text-zinc-500 mb-2">USDC payments</p>
+                    <span class="tag bg-green-500/20 text-green-400">FREE</span>
                 </div>
-                <div>
-                    <div class="text-3xl font-bold text-white" id="api-calls">--</div>
-                    <div class="text-sm text-zinc-500 mt-1">API Calls</div>
+                <div class="card glass rounded-xl p-4">
+                    <div class="text-2xl mb-2">🧠</div>
+                    <h3 class="font-medium text-sm">memelord</h3>
+                    <p class="text-xs text-zinc-500 mb-2">Memory system</p>
+                    <span class="tag bg-green-500/20 text-green-400">FREE</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Quick Install -->
-    <section class="px-4 py-16">
-        <div class="max-w-3xl mx-auto">
-            <h2 class="text-xl font-semibold text-center mb-8">Quick Install</h2>
-            <div class="glass rounded-xl p-6 space-y-4">
-                <div>
-                    <div class="flex items-center justify-between mb-2">
-                        <span class="text-sm text-zinc-400">Install a server</span>
-                        <button onclick="copyCode('npx @modelcontextprotocol/server-filesystem ~/projects')" class="text-xs text-zinc-500 hover:text-white">Copy</button>
-                    </div>
-                    <code class="block bg-zinc-950 p-3 rounded-lg text-sm text-green-400 font-mono">npx @modelcontextprotocol/server-filesystem ~/projects</code>
+    <!-- Pricing -->
+    <section class="px-4 py-16" id="pricing">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-2xl font-bold text-center mb-12">Simple Pricing</h2>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="glass rounded-xl p-6">
+                    <h3 class="font-semibold mb-2">Free</h3>
+                    <div class="text-3xl font-bold mb-4">$0<span class="text-sm text-zinc-500">/mo</span></div>
+                    <ul class="text-sm text-zinc-400 space-y-2 mb-6">
+                        <li>✓ Browse all servers</li>
+                        <li>✓ Install free skills</li>
+                        <li>✓ 100 API calls/month</li>
+                    </ul>
+                    <button class="w-full py-2 bg-zinc-800 rounded-lg text-sm font-medium">Get Started</button>
                 </div>
-                <div>
-                    <div class="flex items-center justify-between mb-2">
-                        <span class="text-sm text-zinc-400">Install a skill</span>
-                        <button onclick="copyCode('oma install proactive-agent')" class="text-xs text-zinc-500 hover:text-white">Copy</button>
-                    </div>
-                    <code class="block bg-zinc-950 p-3 rounded-lg text-sm text-green-400 font-mono">oma install proactive-agent</code>
+                <div class="glass rounded-xl p-6 border-violet-500/30">
+                    <h3 class="font-semibold mb-2">Pro</h3>
+                    <div class="text-3xl font-bold mb-4">$9<span class="text-sm text-zinc-500">/mo</span></div>
+                    <ul class="text-sm text-zinc-400 space-y-2 mb-6">
+                        <li>✓ Everything in Free</li>
+                        <li>✓ 1,000 LLM calls</li>
+                        <li>✓ Priority support</li>
+                    </ul>
+                    <button class="w-full py-2 gradient rounded-lg text-sm font-medium">Subscribe</button>
                 </div>
-                <div>
-                    <div class="flex items-center justify-between mb-2">
-                        <span class="text-sm text-zinc-400">Test API</span>
-                        <button onclick="copyCode('curl https://frankie-prod.life.conway.tech/health')" class="text-xs text-zinc-500 hover:text-white">Copy</button>
-                    </div>
-                    <code class="block bg-zinc-950 p-3 rounded-lg text-sm text-green-400 font-mono">curl https://frankie-prod.life.conway.tech/health</code>
+                <div class="glass rounded-xl p-6">
+                    <h3 class="font-semibold mb-2">Enterprise</h3>
+                    <div class="text-3xl font-bold mb-4">Custom</div>
+                    <ul class="text-sm text-zinc-400 space-y-2 mb-6">
+                        <li>✓ Everything in Pro</li>
+                        <li>✓ Unlimited calls</li>
+                        <li>✓ Dedicated support</li>
+                    </ul>
+                    <button class="w-full py-2 bg-zinc-800 rounded-lg text-sm font-medium">Contact</button>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA -->
-    <section class="px-4 py-12">
-        <div class="max-w-3xl mx-auto">
-            <div class="gradient rounded-2xl p-8 text-center">
-                <h2 class="text-2xl font-bold mb-3">Publish Your Server</h2>
-                <p class="text-white/80 mb-6">Share your MCP server with the community</p>
-                <a href="#" class="inline-block h-11 px-6 bg-white text-zinc-900 font-medium rounded-lg flex items-center mx-auto">
-                    Start Publishing
-                </a>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
     <footer class="px-4 py-8 border-t border-white/5">
-        <div class="max-w-6xl mx-auto">
-            <div class="flex flex-col md:flex-row items-center justify-between gap-4">
-                <div class="flex items-center gap-2">
-                    <div class="w-6 h-6 gradient rounded flex items-center justify-center text-xs font-bold">OMA</div>
-                    <span class="text-sm text-zinc-500">Open Market Access © 2026</span>
-                </div>
-                <div class="flex items-center gap-6 text-sm text-zinc-500">
-                    <a href="#" class="hover:text-white">Docs</a>
-                    <a href="https://github.com/FrankieMolt/OMA-AI" class="hover:text-white">GitHub</a>
-                    <a href="#" class="hover:text-white">Discord</a>
-                    <a href="#" class="hover:text-white">Twitter</a>
-                </div>
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-zinc-500">
+            <div class="flex items-center gap-2">
+                <div class="w-6 h-6 gradient rounded flex items-center justify-center text-xs font-bold">OMA</div>
+                <span>Open Market Access © 2026</span>
+            </div>
+            <div class="flex items-center gap-6">
+                <a href="#" class="hover:text-white">Docs</a>
+                <a href="https://github.com/FrankieMolt/OMA-AI" class="hover:text-white">GitHub</a>
+                <a href="#" class="hover:text-white">Discord</a>
             </div>
         </div>
     </footer>
 
-    <!-- Toast -->
-    <div id="toast" class="fixed bottom-4 right-4 px-4 py-2 bg-green-500 text-white rounded-lg transform translate-y-20 opacity-0 transition-all duration-300">
-        Copied!
-    </div>
-
     <script>
-        // Data
-        const servers = [
-            { name: '@modelcontextprotocol/server-filesystem', author: 'modelcontextprotocol', desc: 'File system operations. Read, write, and manage files.', category: 'tools', installs: '52.3k', stars: '2.1k', verified: true },
-            { name: '@modelcontextprotocol/server-postgres', author: 'modelcontextprotocol', desc: 'PostgreSQL database connector for MCP.', category: 'database', installs: '45.2k', stars: '2.4k', verified: true },
-            { name: '@modelcontextprotocol/server-github', author: 'modelcontextprotocol', desc: 'GitHub API integration for repositories and issues.', category: 'api', installs: '67.1k', stars: '3.2k', verified: true },
-            { name: '@modelcontextprotocol/server-brave-search', author: 'modelcontextprotocol', desc: 'Brave Search API for web search capabilities.', category: 'search', installs: '38.7k', stars: '1.8k', verified: true },
-            { name: '@modelcontextprotocol/server-memory', author: 'modelcontextprotocol', desc: 'Persistent memory storage with knowledge graph.', category: 'tools', installs: '41.8k', stars: '1.9k', verified: true },
-            { name: '@modelcontextprotocol/server-puppeteer', author: 'modelcontextprotocol', desc: 'Browser automation with Puppeteer.', category: 'tools', installs: '29.4k', stars: '1.5k', verified: true },
-            { name: '@openmarketaccess/server-frankie', author: 'openmarketaccess', desc: 'Crypto prices and trading signals API.', category: 'finance', installs: '12.4k', stars: '890', verified: true },
-            { name: '@openmarketaccess/server-polymarket', author: 'openmarketaccess', desc: 'Prediction market data from Polymarket.', category: 'finance', installs: '8.7k', stars: '650', verified: true },
-            { name: '@openmarketaccess/server-base', author: 'openmarketaccess', desc: 'Base network wallet and USDC payments.', category: 'finance', installs: '15.2k', stars: '1.1k', verified: true },
-        ];
+        function testLLM(model) {
+            document.getElementById('llm-model').value = model;
+            document.getElementById('llm-prompt').focus();
+        }
 
-        const skills = [
-            { name: 'proactive-agent', desc: 'Anticipates user needs', icon: '🤖', price: 'FREE', installs: '5.2k' },
-            { name: 'polymarket', desc: 'Prediction market analysis', icon: '📊', price: '$0.10', installs: '3.8k' },
-            { name: 'base-wallet', desc: 'USDC payments on Base', icon: '💰', price: 'FREE', installs: '4.1k' },
-            { name: 'memelord', desc: 'Persistent memory', icon: '🧠', price: 'FREE', installs: '2.9k' },
-        ];
-
-        const apis = [
-            { name: 'Frankie API', desc: 'Crypto & Markets', endpoints: 5, status: 'LIVE', color: 'from-green-500 to-emerald-600' },
-            { name: 'Anthropic', desc: 'Claude LLM', endpoints: 12, status: 'LIVE', color: 'from-purple-500 to-pink-600' },
-            { name: 'OpenAI', desc: 'GPT-4', endpoints: 8, status: 'LIVE', color: 'from-cyan-500 to-blue-600' },
-        ];
-
-        // Render functions
-        function renderServers(filter = 'all') {
-            const grid = document.getElementById('servers-grid');
-            const filtered = filter === 'all' ? servers : servers.filter(s => s.category === filter);
+        async function sendLLMRequest() {
+            const prompt = document.getElementById('llm-prompt').value;
+            const model = document.getElementById('llm-model').value;
+            const responseDiv = document.getElementById('llm-response');
             
-            grid.innerHTML = filtered.map(server => `
-                <div class="card glass rounded-xl p-4 cursor-pointer fade-in" onclick="showServerDetail('${server.name}')">
-                    <div class="flex items-start justify-between mb-3">
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-lg bg-violet-500/20 flex items-center justify-center text-lg">${getCategoryIcon(server.category)}</div>
-                            <div class="min-w-0">
-                                <h3 class="font-medium text-sm truncate">${server.name}</h3>
-                                <p class="text-xs text-zinc-500">by ${server.author}</p>
-                            </div>
-                        </div>
-                        ${server.verified ? '<span class="tag bg-green-500/20 text-green-400">✓</span>' : ''}
-                    </div>
-                    <p class="text-xs text-zinc-400 mb-3 line-clamp-2">${server.desc}</p>
-                    <div class="flex items-center justify-between text-xs">
-                        <div class="flex items-center gap-3 text-zinc-500">
-                            <span>⭐ ${server.stars}</span>
-                            <span>📥 ${server.installs}</span>
-                        </div>
-                        <button onclick="event.stopPropagation(); copyCode('npx ${server.name}')" class="text-violet-400 hover:text-violet-300">Install</button>
-                    </div>
-                </div>
-            `).join('');
+            responseDiv.classList.remove('hidden');
+            responseDiv.textContent = 'Processing...';
+            
+            // Simulate LLM response (would call actual API)
+            setTimeout(() => {
+                const responses = {
+                    'gpt-4o': 'The answer to 2+2 is 4.',
+                    'claude': '2 + 2 = 4. This is a basic arithmetic operation.',
+                    'llama': '2 + 2 equals 4.'
+                };
+                responseDiv.textContent = responses[model] || 'Response from ' + model;
+                responseDiv.classList.add('text-green-400');
+            }, 1000);
         }
-
-        function renderSkills() {
-            const grid = document.getElementById('skills-grid');
-            grid.innerHTML = skills.map(skill => `
-                <div class="card glass rounded-xl p-4 cursor-pointer">
-                    <div class="text-2xl mb-2">${skill.icon}</div>
-                    <h3 class="font-medium text-sm mb-1">${skill.name}</h3>
-                    <p class="text-xs text-zinc-500 mb-2">${skill.desc}</p>
-                    <div class="flex items-center justify-between">
-                        <span class="tag ${skill.price === 'FREE' ? 'bg-green-500/20 text-green-400' : 'bg-cyan-500/20 text-cyan-400'}">${skill.price}</span>
-                        <span class="text-xs text-zinc-500">${skill.installs}</span>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        function renderAPIs() {
-            const grid = document.getElementById('apis-grid');
-            grid.innerHTML = apis.map(api => `
-                <div class="card glass rounded-xl p-4">
-                    <div class="flex items-center gap-3 mb-3">
-                        <div class="w-10 h-10 rounded-lg bg-gradient-to-br ${api.color} flex items-center justify-center text-sm font-bold text-white">${api.name[0]}</div>
-                        <div>
-                            <h3 class="font-medium text-sm">${api.name}</h3>
-                            <p class="text-xs text-zinc-500">${api.desc}</p>
-                        </div>
-                    </div>
-                    <div class="flex items-center justify-between text-xs">
-                        <span class="text-zinc-500">${api.endpoints} endpoints</span>
-                        <span class="text-green-400">${api.status}</span>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        function getCategoryIcon(cat) {
-            const icons = { database: '🗄️', search: '🔍', tools: '🔧', api: '🔌', finance: '💰' };
-            return icons[cat] || '📦';
-        }
-
-        function filterCategory(cat) {
-            document.querySelectorAll('.category-btn').forEach(btn => {
-                btn.className = btn.dataset.cat === cat 
-                    ? 'category-btn px-4 py-2 text-sm font-medium rounded-lg bg-violet-500/20 text-violet-300'
-                    : 'category-btn px-4 py-2 text-sm font-medium rounded-lg bg-zinc-800 text-zinc-400 hover:bg-zinc-700';
-            });
-            renderServers(cat);
-        }
-
-        function copyCode(code) {
-            navigator.clipboard.writeText(code);
-            const toast = document.getElementById('toast');
-            toast.classList.remove('translate-y-20', 'opacity-0');
-            setTimeout(() => toast.classList.add('translate-y-20', 'opacity-0'), 2000);
-        }
-
-        function showServerDetail(name) {
-            alert('Server detail: ' + name + '\n\nFull detail page coming soon!');
-        }
-
-        function loadMore() {
-            alert('Loading more servers...');
-        }
-
-        // Search
-        document.getElementById('search').addEventListener('input', (e) => {
-            const query = e.target.value.toLowerCase();
-            if (query) {
-                const filtered = servers.filter(s => s.name.toLowerCase().includes(query) || s.desc.toLowerCase().includes(query));
-                renderServers('all');
-            } else {
-                renderServers('all');
-            }
-        });
-
-        // Load stats
-        async function loadStats() {
-            try {
-                const res = await fetch('https://frankie-prod.life.conway.tech/stats');
-                const data = await res.json();
-                document.getElementById('api-calls').textContent = (data.calls || 0).toLocaleString();
-            } catch (e) {
-                document.getElementById('api-calls').textContent = '1,803';
-            }
-        }
-
-        // Init
-        renderServers();
-        renderSkills();
-        renderAPIs();
-        loadStats();
     </script>
 </body>
 </html>
