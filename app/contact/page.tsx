@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 
+export const revalidate = 3600;
 export const metadata: Metadata = {
   title: "Contact Us - OMA-AI Support",
   description:
