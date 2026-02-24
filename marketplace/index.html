@@ -3,402 +3,210 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Open Market Access - MCP Server & AI Skills Directory</title>
-    <meta name="description" content="Discover and install MCP servers, AI skills, and APIs for your AI agents. The open directory for Model Context Protocol servers.">
+    <title>Open Market Access - MCP Servers & AI Skills</title>
+    <meta name="description" content="Discover and install MCP servers and AI skills. The open directory for Model Context Protocol.">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', system-ui, sans-serif; }
-        .gradient { background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%); }
-        .gradient-text { background: linear-gradient(135deg, #6366f1, #d946ef); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .card { transition: all 0.2s; }
-        .card:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.3); }
-        .tag { font-size: 11px; padding: 2px 8px; border-radius: 9999px; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', -apple-system, sans-serif; background: #09090b; color: #fafafa; }
+        .glass { background: rgba(255,255,255,0.03); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.06); }
+        .gradient { background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%); }
+        .card { transition: all 0.2s ease; }
+        .card:hover { transform: translateY(-2px); border-color: rgba(139,92,246,0.3); }
+        .search-input:focus { outline: none; border-color: #8b5cf6; }
+        .tag { font-size: 11px; padding: 2px 8px; border-radius: 9999px; font-weight: 500; }
+        .fade-in { animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .pulse { animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #18181b; }
+        ::-webkit-scrollbar-thumb { background: #3f3f46; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #52525b; }
     </style>
 </head>
-<body class="bg-zinc-950 text-white min-h-screen">
+<body class="min-h-screen">
 
     <!-- Navigation -->
-    <nav class="fixed top-0 left-0 right-0 z-50 bg-zinc-950/90 backdrop-blur-xl border-b border-zinc-800/50">
-        <div class="max-w-7xl mx-auto px-4 py-3">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center gap-6">
-                    <a href="/" class="flex items-center gap-2">
-                        <div class="w-8 h-8 gradient rounded-lg flex items-center justify-center text-sm font-bold">OMA</div>
-                        <span class="font-semibold hidden sm:block">Open Market Access</span>
-                    </a>
-                    <div class="hidden md:flex items-center gap-1">
-                        <a href="#servers" class="px-3 py-1.5 text-sm text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-lg transition">Servers</a>
-                        <a href="#skills" class="px-3 py-1.5 text-sm text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-lg transition">Skills</a>
-                        <a href="#apis" class="px-3 py-1.5 text-sm text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-lg transition">APIs</a>
-                        <a href="#docs" class="px-3 py-1.5 text-sm text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-lg transition">Docs</a>
-                    </div>
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-zinc-950/80 backdrop-blur-xl border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-4 h-14 flex items-center justify-between">
+            <div class="flex items-center gap-8">
+                <a href="#" class="flex items-center gap-2">
+                    <div class="w-8 h-8 gradient rounded-lg flex items-center justify-center text-sm font-bold text-white">OMA</div>
+                    <span class="font-semibold text-white">Open Market Access</span>
+                </a>
+                <div class="hidden md:flex items-center gap-1">
+                    <a href="#servers" class="px-3 py-1.5 text-sm text-zinc-400 hover:text-white hover:bg-white/5 rounded-lg transition">Servers</a>
+                    <a href="#skills" class="px-3 py-1.5 text-sm text-zinc-400 hover:text-white hover:bg-white/5 rounded-lg transition">Skills</a>
+                    <a href="#apis" class="px-3 py-1.5 text-sm text-zinc-400 hover:text-white hover:bg-white/5 rounded-lg transition">APIs</a>
+                    <a href="#" class="px-3 py-1.5 text-sm text-zinc-400 hover:text-white hover:bg-white/5 rounded-lg transition">Docs</a>
                 </div>
-                <div class="flex items-center gap-3">
-                    <div class="relative hidden sm:block">
-                        <input type="text" placeholder="Search servers, skills..." class="w-64 px-4 py-2 bg-zinc-900 border border-zinc-800 rounded-lg text-sm focus:outline-none focus:border-zinc-700">
-                        <span class="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-500 text-xs">⌘K</span>
-                    </div>
-                    <a href="#" class="px-4 py-2 text-sm text-zinc-400 hover:text-white transition">Sign in</a>
-                    <a href="#" class="px-4 py-2 gradient text-white text-sm font-medium rounded-lg">Publish</a>
+            </div>
+            <div class="flex items-center gap-3">
+                <div class="relative">
+                    <input type="text" id="search" placeholder="Search..." class="w-64 h-9 px-4 pr-10 bg-zinc-900 border border-zinc-800 rounded-lg text-sm search-input transition">
+                    <svg class="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
                 </div>
+                <a href="#" class="h-9 px-4 flex items-center text-sm text-zinc-400 hover:text-white transition">Sign in</a>
+                <a href="#" class="h-9 px-4 gradient text-white text-sm font-medium rounded-lg flex items-center">Publish</a>
             </div>
         </div>
     </nav>
 
     <!-- Hero -->
-    <section class="pt-24 pb-16 px-4">
+    <section class="pt-24 pb-12 px-4">
         <div class="max-w-4xl mx-auto text-center">
-            <h1 class="text-4xl md:text-6xl font-bold mb-4">
-                The <span class="gradient-text">MCP Server</span> Directory
+            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-violet-500/10 border border-violet-500/20 mb-6">
+                <span class="w-1.5 h-1.5 rounded-full bg-violet-400 pulse"></span>
+                <span class="text-xs text-violet-300 font-medium">1,247 servers • 847 skills • 45K+ installs</span>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-bold mb-4 tracking-tight">
+                MCP Server & AI Skill Directory
             </h1>
             <p class="text-lg text-zinc-400 mb-8 max-w-2xl mx-auto">
-                Discover, install, and publish MCP servers, AI skills, and APIs. 
-                Connect your AI agents to everything.
+                Discover, install, and publish MCP servers and AI skills. Connect your AI agents to everything.
             </p>
-            <div class="flex flex-col sm:flex-row gap-3 justify-center">
-                <a href="#servers" class="px-6 py-3 gradient text-white font-medium rounded-xl">
+            <div class="flex gap-3 justify-center">
+                <a href="#servers" class="h-11 px-6 gradient text-white font-medium rounded-lg flex items-center">
                     Browse Servers
                 </a>
-                <a href="#docs" class="px-6 py-3 bg-zinc-800 hover:bg-zinc-700 font-medium rounded-xl transition">
+                <a href="#" class="h-11 px-6 bg-zinc-800 hover:bg-zinc-700 font-medium rounded-lg flex items-center transition">
                     Quick Start →
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- Stats -->
-    <section class="py-8 px-4 border-y border-zinc-800/50">
+    <!-- Categories -->
+    <section class="px-4 pb-8">
         <div class="max-w-5xl mx-auto">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-                <div class="py-4">
-                    <div class="text-2xl font-bold">1,247</div>
-                    <div class="text-xs text-zinc-500 mt-1">MCP Servers</div>
-                </div>
-                <div class="py-4">
-                    <div class="text-2xl font-bold">847</div>
-                    <div class="text-xs text-zinc-500 mt-1">Skills</div>
-                </div>
-                <div class="py-4">
-                    <div class="text-2xl font-bold">156</div>
-                    <div class="text-xs text-zinc-500 mt-1">APIs</div>
-                </div>
-                <div class="py-4">
-                    <div class="text-2xl font-bold">45.2K</div>
-                    <div class="text-xs text-zinc-500 mt-1">Installs</div>
-                </div>
+            <div class="flex flex-wrap justify-center gap-2" id="categories">
+                <button onclick="filterCategory('all')" class="category-btn px-4 py-2 text-sm font-medium rounded-lg bg-violet-500/20 text-violet-300" data-cat="all">All</button>
+                <button onclick="filterCategory('database')" class="category-btn px-4 py-2 text-sm font-medium rounded-lg bg-zinc-800 text-zinc-400 hover:bg-zinc-700" data-cat="database">Database</button>
+                <button onclick="filterCategory('search')" class="category-btn px-4 py-2 text-sm font-medium rounded-lg bg-zinc-800 text-zinc-400 hover:bg-zinc-700" data-cat="search">Search</button>
+                <button onclick="filterCategory('tools')" class="category-btn px-4 py-2 text-sm font-medium rounded-lg bg-zinc-800 text-zinc-400 hover:bg-zinc-700" data-cat="tools">Tools</button>
+                <button onclick="filterCategory('api')" class="category-btn px-4 py-2 text-sm font-medium rounded-lg bg-zinc-800 text-zinc-400 hover:bg-zinc-700" data-cat="api">APIs</button>
+                <button onclick="filterCategory('finance')" class="category-btn px-4 py-2 text-sm font-medium rounded-lg bg-zinc-800 text-zinc-400 hover:bg-zinc-700" data-cat="finance">Finance</button>
             </div>
         </div>
     </section>
 
-    <!-- Featured MCP Servers -->
-    <section class="py-12 px-4" id="servers">
+    <!-- Servers Grid -->
+    <section class="px-4 pb-16" id="servers">
         <div class="max-w-6xl mx-auto">
             <div class="flex items-center justify-between mb-6">
-                <h2 class="text-2xl font-bold">Featured MCP Servers</h2>
+                <h2 class="text-xl font-semibold">Featured MCP Servers</h2>
                 <div class="flex items-center gap-2">
-                    <button class="px-3 py-1.5 text-xs bg-zinc-800 rounded-lg">All</button>
-                    <button class="px-3 py-1.5 text-xs text-zinc-400 hover:bg-zinc-800 rounded-lg">Database</button>
-                    <button class="px-3 py-1.5 text-xs text-zinc-400 hover:bg-zinc-800 rounded-lg">Search</button>
-                    <button class="px-3 py-1.5 text-xs text-zinc-400 hover:bg-zinc-800 rounded-lg">Tools</button>
+                    <select class="h-8 px-3 bg-zinc-900 border border-zinc-800 rounded-lg text-sm text-zinc-400">
+                        <option>Most Popular</option>
+                        <option>Newest</option>
+                        <option>Most Installs</option>
+                    </select>
                 </div>
             </div>
 
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-                <!-- Server Card 1 -->
-                <div class="card bg-zinc-900/50 border border-zinc-800 rounded-xl p-4">
-                    <div class="flex items-start justify-between mb-3">
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center text-lg">🗄️</div>
-                            <div>
-                                <h3 class="font-medium">@modelcontextprotocol/server-postgres</h3>
-                                <p class="text-xs text-zinc-500">by modelcontextprotocol</p>
-                            </div>
-                        </div>
-                        <span class="tag bg-green-500/20 text-green-400">Verified</span>
-                    </div>
-                    <p class="text-sm text-zinc-400 mb-3">PostgreSQL database connector for MCP. Query and modify PostgreSQL databases.</p>
-                    <div class="flex items-center justify-between text-xs">
-                        <div class="flex items-center gap-3 text-zinc-500">
-                            <span>⭐ 2.4k</span>
-                            <span>📥 45.2k</span>
-                        </div>
-                        <code class="text-zinc-500 bg-zinc-800 px-2 py-1 rounded">npx @mcp/postgres</code>
-                    </div>
-                </div>
-
-                <!-- Server Card 2 -->
-                <div class="card bg-zinc-900/50 border border-zinc-800 rounded-xl p-4">
-                    <div class="flex items-start justify-between mb-3">
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-lg bg-orange-500/20 flex items-center justify-center text-lg">🔍</div>
-                            <div>
-                                <h3 class="font-medium">@modelcontextprotocol/server-brave-search</h3>
-                                <p class="text-xs text-zinc-500">by modelcontextprotocol</p>
-                            </div>
-                        </div>
-                        <span class="tag bg-green-500/20 text-green-400">Verified</span>
-                    </div>
-                    <p class="text-sm text-zinc-400 mb-3">Brave Search API integration. Web search capabilities for MCP clients.</p>
-                    <div class="flex items-center justify-between text-xs">
-                        <div class="flex items-center gap-3 text-zinc-500">
-                            <span>⭐ 1.8k</span>
-                            <span>📥 38.7k</span>
-                        </div>
-                        <code class="text-zinc-500 bg-zinc-800 px-2 py-1 rounded">npx @mcp/brave-search</code>
-                    </div>
-                </div>
-
-                <!-- Server Card 3 -->
-                <div class="card bg-zinc-900/50 border border-zinc-800 rounded-xl p-4">
-                    <div class="flex items-start justify-between mb-3">
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-lg bg-green-500/20 flex items-center justify-center text-lg">📁</div>
-                            <div>
-                                <h3 class="font-medium">@modelcontextprotocol/server-filesystem</h3>
-                                <p class="text-xs text-zinc-500">by modelcontextprotocol</p>
-                            </div>
-                        </div>
-                        <span class="tag bg-green-500/20 text-green-400">Verified</span>
-                    </div>
-                    <p class="text-sm text-zinc-400 mb-3">File system operations. Read, write, and manage files with MCP.</p>
-                    <div class="flex items-center justify-between text-xs">
-                        <div class="flex items-center gap-3 text-zinc-500">
-                            <span>⭐ 2.1k</span>
-                            <span>📥 52.3k</span>
-                        </div>
-                        <code class="text-zinc-500 bg-zinc-800 px-2 py-1 rounded">npx @mcp/filesystem</code>
-                    </div>
-                </div>
-
-                <!-- Server Card 4 -->
-                <div class="card bg-zinc-900/50 border border-zinc-800 rounded-xl p-4">
-                    <div class="flex items-start justify-between mb-3">
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-lg bg-purple-500/20 flex items-center justify-center text-lg">🐙</div>
-                            <div>
-                                <h3 class="font-medium">@modelcontextprotocol/server-github</h3>
-                                <p class="text-xs text-zinc-500">by modelcontextprotocol</p>
-                            </div>
-                        </div>
-                        <span class="tag bg-green-500/20 text-green-400">Verified</span>
-                    </div>
-                    <p class="text-sm text-zinc-400 mb-3">GitHub API integration. Manage repos, issues, and pull requests.</p>
-                    <div class="flex items-center justify-between text-xs">
-                        <div class="flex items-center gap-3 text-zinc-500">
-                            <span>⭐ 3.2k</span>
-                            <span>📥 67.1k</span>
-                        </div>
-                        <code class="text-zinc-500 bg-zinc-800 px-2 py-1 rounded">npx @mcp/github</code>
-                    </div>
-                </div>
-
-                <!-- Server Card 5 -->
-                <div class="card bg-zinc-900/50 border border-zinc-800 rounded-xl p-4">
-                    <div class="flex items-start justify-between mb-3">
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-lg bg-cyan-500/20 flex items-center justify-center text-lg">🌐</div>
-                            <div>
-                                <h3 class="font-medium">@modelcontextprotocol/server-puppeteer</h3>
-                                <p class="text-xs text-zinc-500">by modelcontextprotocol</p>
-                            </div>
-                        </div>
-                        <span class="tag bg-blue-500/20 text-blue-400">Popular</span>
-                    </div>
-                    <p class="text-sm text-zinc-400 mb-3">Browser automation with Puppeteer. Scrape and interact with web pages.</p>
-                    <div class="flex items-center justify-between text-xs">
-                        <div class="flex items-center gap-3 text-zinc-500">
-                            <span>⭐ 1.5k</span>
-                            <span>📥 29.4k</span>
-                        </div>
-                        <code class="text-zinc-500 bg-zinc-800 px-2 py-1 rounded">npx @mcp/puppeteer</code>
-                    </div>
-                </div>
-
-                <!-- Server Card 6 -->
-                <div class="card bg-zinc-900/50 border border-zinc-800 rounded-xl p-4">
-                    <div class="flex items-start justify-between mb-3">
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-lg bg-red-500/20 flex items-center justify-center text-lg">🔴</div>
-                            <div>
-                                <h3 class="font-medium">@modelcontextprotocol/server-memory</h3>
-                                <p class="text-xs text-zinc-500">by modelcontextprotocol</p>
-                            </div>
-                        </div>
-                        <span class="tag bg-green-500/20 text-green-400">Verified</span>
-                    </div>
-                    <p class="text-sm text-zinc-400 mb-3">Persistent memory storage. Knowledge graph for AI conversations.</p>
-                    <div class="flex items-center justify-between text-xs">
-                        <div class="flex items-center gap-3 text-zinc-500">
-                            <span>⭐ 1.9k</span>
-                            <span>📥 41.8k</span>
-                        </div>
-                        <code class="text-zinc-500 bg-zinc-800 px-2 py-1 rounded">npx @mcp/memory</code>
-                    </div>
-                </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4" id="servers-grid">
+                <!-- Server cards will be injected here -->
             </div>
 
             <div class="text-center mt-8">
-                <a href="#" class="text-sm text-zinc-400 hover:text-white">View all 1,247 servers →</a>
+                <button onclick="loadMore()" class="px-6 py-2 bg-zinc-800 hover:bg-zinc-700 rounded-lg text-sm font-medium transition">
+                    Load More
+                </button>
             </div>
         </div>
     </section>
 
     <!-- Skills Section -->
-    <section class="py-12 px-4 bg-zinc-900/30" id="skills">
+    <section class="px-4 py-16 bg-zinc-900/50" id="skills">
         <div class="max-w-6xl mx-auto">
             <div class="flex items-center justify-between mb-6">
-                <h2 class="text-2xl font-bold">AI Skills</h2>
-                <a href="#" class="text-sm text-zinc-400 hover:text-white">View all →</a>
+                <h2 class="text-xl font-semibold">AI Skills</h2>
+                <a href="#" class="text-sm text-violet-400 hover:text-violet-300">View all →</a>
             </div>
 
-            <div class="grid md:grid-cols-4 gap-4">
-                <div class="card bg-zinc-900/50 border border-zinc-800 rounded-xl p-4">
-                    <div class="text-2xl mb-2">🤖</div>
-                    <h3 class="font-medium mb-1">proactive-agent</h3>
-                    <p class="text-xs text-zinc-500 mb-2">Anticipates needs autonomously</p>
-                    <div class="flex items-center gap-2">
-                        <span class="tag bg-green-500/20 text-green-400">FREE</span>
-                        <span class="text-xs text-zinc-500">5.2k installs</span>
-                    </div>
-                </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="skills-grid">
+                <!-- Skill cards will be injected here -->
+            </div>
+        </div>
+    </section>
 
-                <div class="card bg-zinc-900/50 border border-zinc-800 rounded-xl p-4">
-                    <div class="text-2xl mb-2">📊</div>
-                    <h3 class="font-medium mb-1">polymarket</h3>
-                    <p class="text-xs text-zinc-500 mb-2">Prediction market analysis</p>
-                    <div class="flex items-center gap-2">
-                        <span class="tag bg-cyan-500/20 text-cyan-400">$0.10</span>
-                        <span class="text-xs text-zinc-500">3.8k installs</span>
-                    </div>
-                </div>
+    <!-- API Section -->
+    <section class="px-4 py-16" id="apis">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-xl font-semibold">APIs</h2>
+                <a href="#" class="text-sm text-violet-400 hover:text-violet-300">View all →</a>
+            </div>
 
-                <div class="card bg-zinc-900/50 border border-zinc-800 rounded-xl p-4">
-                    <div class="text-2xl mb-2">💰</div>
-                    <h3 class="font-medium mb-1">base-wallet</h3>
-                    <p class="text-xs text-zinc-500 mb-2">USDC payments on Base</p>
-                    <div class="flex items-center gap-2">
-                        <span class="tag bg-green-500/20 text-green-400">FREE</span>
-                        <span class="text-xs text-zinc-500">4.1k installs</span>
-                    </div>
-                </div>
+            <div class="grid md:grid-cols-3 gap-4" id="apis-grid">
+                <!-- API cards will be injected here -->
+            </div>
+        </div>
+    </section>
 
-                <div class="card bg-zinc-900/50 border border-zinc-800 rounded-xl p-4">
-                    <div class="text-2xl mb-2">🧠</div>
-                    <h3 class="font-medium mb-1">memelord</h3>
-                    <p class="text-xs text-zinc-500 mb-2">Persistent memory system</p>
-                    <div class="flex items-center gap-2">
-                        <span class="tag bg-green-500/20 text-green-400">FREE</span>
-                        <span class="text-xs text-zinc-500">2.9k installs</span>
-                    </div>
+    <!-- Stats Section -->
+    <section class="px-4 py-12 border-y border-white/5">
+        <div class="max-w-5xl mx-auto">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div>
+                    <div class="text-3xl font-bold text-white">1,247</div>
+                    <div class="text-sm text-zinc-500 mt-1">MCP Servers</div>
+                </div>
+                <div>
+                    <div class="text-3xl font-bold text-white">847</div>
+                    <div class="text-sm text-zinc-500 mt-1">Skills</div>
+                </div>
+                <div>
+                    <div class="text-3xl font-bold text-white">45.2K</div>
+                    <div class="text-sm text-zinc-500 mt-1">Installs</div>
+                </div>
+                <div>
+                    <div class="text-3xl font-bold text-white" id="api-calls">--</div>
+                    <div class="text-sm text-zinc-500 mt-1">API Calls</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- APIs Section -->
-    <section class="py-12 px-4" id="apis">
-        <div class="max-w-6xl mx-auto">
-            <div class="flex items-center justify-between mb-6">
-                <h2 class="text-2xl font-bold">APIs & LLMs</h2>
-                <a href="#" class="text-sm text-zinc-400 hover:text-white">View all →</a>
-            </div>
-
-            <div class="grid md:grid-cols-3 gap-4">
-                <div class="card bg-zinc-900/50 border border-zinc-800 rounded-xl p-4">
-                    <div class="flex items-center gap-3 mb-3">
-                        <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center text-sm font-bold">F</div>
-                        <div>
-                            <h3 class="font-medium">Frankie API</h3>
-                            <p class="text-xs text-zinc-500">Crypto & Markets</p>
-                        </div>
+    <!-- Quick Install -->
+    <section class="px-4 py-16">
+        <div class="max-w-3xl mx-auto">
+            <h2 class="text-xl font-semibold text-center mb-8">Quick Install</h2>
+            <div class="glass rounded-xl p-6 space-y-4">
+                <div>
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-sm text-zinc-400">Install a server</span>
+                        <button onclick="copyCode('npx @modelcontextprotocol/server-filesystem ~/projects')" class="text-xs text-zinc-500 hover:text-white">Copy</button>
                     </div>
-                    <div class="flex flex-wrap gap-1 mb-3">
-                        <span class="tag bg-zinc-800 text-zinc-400">crypto</span>
-                        <span class="tag bg-zinc-800 text-zinc-400">trading</span>
-                        <span class="tag bg-zinc-800 text-zinc-400">x402</span>
-                    </div>
-                    <div class="flex items-center justify-between text-xs">
-                        <span class="text-zinc-500">5 endpoints</span>
-                        <span class="text-green-400">LIVE</span>
-                    </div>
+                    <code class="block bg-zinc-950 p-3 rounded-lg text-sm text-green-400 font-mono">npx @modelcontextprotocol/server-filesystem ~/projects</code>
                 </div>
-
-                <div class="card bg-zinc-900/50 border border-zinc-800 rounded-xl p-4">
-                    <div class="flex items-center gap-3 mb-3">
-                        <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center text-sm font-bold">A</div>
-                        <div>
-                            <h3 class="font-medium">Anthropic Claude</h3>
-                            <p class="text-xs text-zinc-500">LLM Provider</p>
-                        </div>
+                <div>
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-sm text-zinc-400">Install a skill</span>
+                        <button onclick="copyCode('oma install proactive-agent')" class="text-xs text-zinc-500 hover:text-white">Copy</button>
                     </div>
-                    <div class="flex flex-wrap gap-1 mb-3">
-                        <span class="tag bg-zinc-800 text-zinc-400">llm</span>
-                        <span class="tag bg-zinc-800 text-zinc-400">claude</span>
-                        <span class="tag bg-zinc-800 text-zinc-400">chat</span>
-                    </div>
-                    <div class="flex items-center justify-between text-xs">
-                        <span class="text-zinc-500">API Key required</span>
-                        <span class="text-green-400">LIVE</span>
-                    </div>
+                    <code class="block bg-zinc-950 p-3 rounded-lg text-sm text-green-400 font-mono">oma install proactive-agent</code>
                 </div>
-
-                <div class="card bg-zinc-900/50 border border-zinc-800 rounded-xl p-4">
-                    <div class="flex items-center gap-3 mb-3">
-                        <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-sm font-bold">O</div>
-                        <div>
-                            <h3 class="font-medium">OpenAI GPT-4</h3>
-                            <p class="text-xs text-zinc-500">LLM Provider</p>
-                        </div>
+                <div>
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-sm text-zinc-400">Test API</span>
+                        <button onclick="copyCode('curl https://frankie-prod.life.conway.tech/health')" class="text-xs text-zinc-500 hover:text-white">Copy</button>
                     </div>
-                    <div class="flex flex-wrap gap-1 mb-3">
-                        <span class="tag bg-zinc-800 text-zinc-400">llm</span>
-                        <span class="tag bg-zinc-800 text-zinc-400">gpt-4</span>
-                        <span class="tag bg-zinc-800 text-zinc-400">chat</span>
-                    </div>
-                    <div class="flex items-center justify-between text-xs">
-                        <span class="text-zinc-500">API Key required</span>
-                        <span class="text-green-400">LIVE</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Quick Start -->
-    <section class="py-12 px-4 bg-zinc-900/30" id="docs">
-        <div class="max-w-4xl mx-auto">
-            <h2 class="text-2xl font-bold text-center mb-8">Quick Start</h2>
-            <div class="bg-zinc-900 border border-zinc-800 rounded-xl p-6">
-                <div class="space-y-4">
-                    <div>
-                        <p class="text-sm text-zinc-400 mb-2">1. Install the CLI</p>
-                        <code class="block bg-zinc-950 p-3 rounded-lg text-sm text-green-400">npm install -g @openmarketaccess/cli</code>
-                    </div>
-                    <div>
-                        <p class="text-sm text-zinc-400 mb-2">2. Add an MCP server to Claude</p>
-                        <code class="block bg-zinc-950 p-3 rounded-lg text-sm text-green-400">oma add @modelcontextprotocol/server-filesystem</code>
-                    </div>
-                    <div>
-                        <p class="text-sm text-zinc-400 mb-2">3. Install a skill</p>
-                        <code class="block bg-zinc-950 p-3 rounded-lg text-sm text-green-400">oma install proactive-agent</code>
-                    </div>
-                    <div>
-                        <p class="text-sm text-zinc-400 mb-2">4. Connect an API</p>
-                        <code class="block bg-zinc-950 p-3 rounded-lg text-sm text-green-400">oma connect frankie-api --key YOUR_KEY</code>
-                    </div>
+                    <code class="block bg-zinc-950 p-3 rounded-lg text-sm text-green-400 font-mono">curl https://frankie-prod.life.conway.tech/health</code>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- CTA -->
-    <section class="py-16 px-4">
-        <div class="max-w-3xl mx-auto text-center">
-            <div class="gradient rounded-2xl p-8">
-                <h2 class="text-2xl font-bold mb-4">Publish Your Server</h2>
-                <p class="text-white/80 mb-6">Share your MCP server with the community. Earn from x402 micropayments.</p>
-                <a href="#" class="inline-block px-6 py-3 bg-white text-zinc-900 font-medium rounded-xl">
+    <section class="px-4 py-12">
+        <div class="max-w-3xl mx-auto">
+            <div class="gradient rounded-2xl p-8 text-center">
+                <h2 class="text-2xl font-bold mb-3">Publish Your Server</h2>
+                <p class="text-white/80 mb-6">Share your MCP server with the community</p>
+                <a href="#" class="inline-block h-11 px-6 bg-white text-zinc-900 font-medium rounded-lg flex items-center mx-auto">
                     Start Publishing
                 </a>
             </div>
@@ -406,16 +214,16 @@
     </section>
 
     <!-- Footer -->
-    <footer class="py-8 px-4 border-t border-zinc-800">
+    <footer class="px-4 py-8 border-t border-white/5">
         <div class="max-w-6xl mx-auto">
-            <div class="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-zinc-500">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4">
                 <div class="flex items-center gap-2">
                     <div class="w-6 h-6 gradient rounded flex items-center justify-center text-xs font-bold">OMA</div>
-                    <span>Open Market Access © 2026</span>
+                    <span class="text-sm text-zinc-500">Open Market Access © 2026</span>
                 </div>
-                <div class="flex items-center gap-6">
+                <div class="flex items-center gap-6 text-sm text-zinc-500">
                     <a href="#" class="hover:text-white">Docs</a>
-                    <a href="#" class="hover:text-white">GitHub</a>
+                    <a href="https://github.com/FrankieMolt/OMA-AI" class="hover:text-white">GitHub</a>
                     <a href="#" class="hover:text-white">Discord</a>
                     <a href="#" class="hover:text-white">Twitter</a>
                 </div>
@@ -423,5 +231,157 @@
         </div>
     </footer>
 
+    <!-- Toast -->
+    <div id="toast" class="fixed bottom-4 right-4 px-4 py-2 bg-green-500 text-white rounded-lg transform translate-y-20 opacity-0 transition-all duration-300">
+        Copied!
+    </div>
+
+    <script>
+        // Data
+        const servers = [
+            { name: '@modelcontextprotocol/server-filesystem', author: 'modelcontextprotocol', desc: 'File system operations. Read, write, and manage files.', category: 'tools', installs: '52.3k', stars: '2.1k', verified: true },
+            { name: '@modelcontextprotocol/server-postgres', author: 'modelcontextprotocol', desc: 'PostgreSQL database connector for MCP.', category: 'database', installs: '45.2k', stars: '2.4k', verified: true },
+            { name: '@modelcontextprotocol/server-github', author: 'modelcontextprotocol', desc: 'GitHub API integration for repositories and issues.', category: 'api', installs: '67.1k', stars: '3.2k', verified: true },
+            { name: '@modelcontextprotocol/server-brave-search', author: 'modelcontextprotocol', desc: 'Brave Search API for web search capabilities.', category: 'search', installs: '38.7k', stars: '1.8k', verified: true },
+            { name: '@modelcontextprotocol/server-memory', author: 'modelcontextprotocol', desc: 'Persistent memory storage with knowledge graph.', category: 'tools', installs: '41.8k', stars: '1.9k', verified: true },
+            { name: '@modelcontextprotocol/server-puppeteer', author: 'modelcontextprotocol', desc: 'Browser automation with Puppeteer.', category: 'tools', installs: '29.4k', stars: '1.5k', verified: true },
+            { name: '@openmarketaccess/server-frankie', author: 'openmarketaccess', desc: 'Crypto prices and trading signals API.', category: 'finance', installs: '12.4k', stars: '890', verified: true },
+            { name: '@openmarketaccess/server-polymarket', author: 'openmarketaccess', desc: 'Prediction market data from Polymarket.', category: 'finance', installs: '8.7k', stars: '650', verified: true },
+            { name: '@openmarketaccess/server-base', author: 'openmarketaccess', desc: 'Base network wallet and USDC payments.', category: 'finance', installs: '15.2k', stars: '1.1k', verified: true },
+        ];
+
+        const skills = [
+            { name: 'proactive-agent', desc: 'Anticipates user needs', icon: '🤖', price: 'FREE', installs: '5.2k' },
+            { name: 'polymarket', desc: 'Prediction market analysis', icon: '📊', price: '$0.10', installs: '3.8k' },
+            { name: 'base-wallet', desc: 'USDC payments on Base', icon: '💰', price: 'FREE', installs: '4.1k' },
+            { name: 'memelord', desc: 'Persistent memory', icon: '🧠', price: 'FREE', installs: '2.9k' },
+        ];
+
+        const apis = [
+            { name: 'Frankie API', desc: 'Crypto & Markets', endpoints: 5, status: 'LIVE', color: 'from-green-500 to-emerald-600' },
+            { name: 'Anthropic', desc: 'Claude LLM', endpoints: 12, status: 'LIVE', color: 'from-purple-500 to-pink-600' },
+            { name: 'OpenAI', desc: 'GPT-4', endpoints: 8, status: 'LIVE', color: 'from-cyan-500 to-blue-600' },
+        ];
+
+        // Render functions
+        function renderServers(filter = 'all') {
+            const grid = document.getElementById('servers-grid');
+            const filtered = filter === 'all' ? servers : servers.filter(s => s.category === filter);
+            
+            grid.innerHTML = filtered.map(server => `
+                <div class="card glass rounded-xl p-4 cursor-pointer fade-in" onclick="showServerDetail('${server.name}')">
+                    <div class="flex items-start justify-between mb-3">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-lg bg-violet-500/20 flex items-center justify-center text-lg">${getCategoryIcon(server.category)}</div>
+                            <div class="min-w-0">
+                                <h3 class="font-medium text-sm truncate">${server.name}</h3>
+                                <p class="text-xs text-zinc-500">by ${server.author}</p>
+                            </div>
+                        </div>
+                        ${server.verified ? '<span class="tag bg-green-500/20 text-green-400">✓</span>' : ''}
+                    </div>
+                    <p class="text-xs text-zinc-400 mb-3 line-clamp-2">${server.desc}</p>
+                    <div class="flex items-center justify-between text-xs">
+                        <div class="flex items-center gap-3 text-zinc-500">
+                            <span>⭐ ${server.stars}</span>
+                            <span>📥 ${server.installs}</span>
+                        </div>
+                        <button onclick="event.stopPropagation(); copyCode('npx ${server.name}')" class="text-violet-400 hover:text-violet-300">Install</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderSkills() {
+            const grid = document.getElementById('skills-grid');
+            grid.innerHTML = skills.map(skill => `
+                <div class="card glass rounded-xl p-4 cursor-pointer">
+                    <div class="text-2xl mb-2">${skill.icon}</div>
+                    <h3 class="font-medium text-sm mb-1">${skill.name}</h3>
+                    <p class="text-xs text-zinc-500 mb-2">${skill.desc}</p>
+                    <div class="flex items-center justify-between">
+                        <span class="tag ${skill.price === 'FREE' ? 'bg-green-500/20 text-green-400' : 'bg-cyan-500/20 text-cyan-400'}">${skill.price}</span>
+                        <span class="text-xs text-zinc-500">${skill.installs}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderAPIs() {
+            const grid = document.getElementById('apis-grid');
+            grid.innerHTML = apis.map(api => `
+                <div class="card glass rounded-xl p-4">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 rounded-lg bg-gradient-to-br ${api.color} flex items-center justify-center text-sm font-bold text-white">${api.name[0]}</div>
+                        <div>
+                            <h3 class="font-medium text-sm">${api.name}</h3>
+                            <p class="text-xs text-zinc-500">${api.desc}</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between text-xs">
+                        <span class="text-zinc-500">${api.endpoints} endpoints</span>
+                        <span class="text-green-400">${api.status}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function getCategoryIcon(cat) {
+            const icons = { database: '🗄️', search: '🔍', tools: '🔧', api: '🔌', finance: '💰' };
+            return icons[cat] || '📦';
+        }
+
+        function filterCategory(cat) {
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.className = btn.dataset.cat === cat 
+                    ? 'category-btn px-4 py-2 text-sm font-medium rounded-lg bg-violet-500/20 text-violet-300'
+                    : 'category-btn px-4 py-2 text-sm font-medium rounded-lg bg-zinc-800 text-zinc-400 hover:bg-zinc-700';
+            });
+            renderServers(cat);
+        }
+
+        function copyCode(code) {
+            navigator.clipboard.writeText(code);
+            const toast = document.getElementById('toast');
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => toast.classList.add('translate-y-20', 'opacity-0'), 2000);
+        }
+
+        function showServerDetail(name) {
+            alert('Server detail: ' + name + '\n\nFull detail page coming soon!');
+        }
+
+        function loadMore() {
+            alert('Loading more servers...');
+        }
+
+        // Search
+        document.getElementById('search').addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+            if (query) {
+                const filtered = servers.filter(s => s.name.toLowerCase().includes(query) || s.desc.toLowerCase().includes(query));
+                renderServers('all');
+            } else {
+                renderServers('all');
+            }
+        });
+
+        // Load stats
+        async function loadStats() {
+            try {
+                const res = await fetch('https://frankie-prod.life.conway.tech/stats');
+                const data = await res.json();
+                document.getElementById('api-calls').textContent = (data.calls || 0).toLocaleString();
+            } catch (e) {
+                document.getElementById('api-calls').textContent = '1,803';
+            }
+        }
+
+        // Init
+        renderServers();
+        renderSkills();
+        renderAPIs();
+        loadStats();
+    </script>
 </body>
 </html>
