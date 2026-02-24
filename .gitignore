@@ -1,57 +1,6 @@
-# Dependencies
 node_modules/
-.pnp
-.pnp.js
-
-# Build outputs
-dist/
-build/
-.next/
-out/
-
-# Environment files
 .env
 .env.local
-.env.development.local
-.env.test.local
-.env.production.local
-
-# Logs
-logs/
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# OS files
 .DS_Store
-Thumbs.db
-
-# IDE
-.vscode/
-.idea/
-*.swp
-*.swo
-
-# Database (keep schema, ignore data)
-*.db
-*.sqlite
-*.duckdb
-
-# Secrets
-secrets/
-*.pem
-*.key
-
-# Cache
-.cache/
-.temp/
-.tmp/
-
-# Backup files
-*.backup
-*.bak
-*~
-
-# Conway sandbox files (regenerated)
-.sandbox/
+*.log
+.vercel
