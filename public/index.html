@@ -3,229 +3,570 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OMA-AI - MCP Servers & AI Skills Marketplace</title>
-    <meta name="description" content="The open marketplace for MCP servers and AI skills. Discover, install, and publish tools for AI agents.">
+    <title>OMA-AI - The AI Agent Marketplace</title>
+    <meta name="description" content="Discover MCP servers, AI skills, and APIs for your AI agents. Open marketplace with instant micropayments.">
+    <meta property="og:title" content="OMA-AI - The AI Agent Marketplace">
+    <meta property="og:description" content="MCP servers, AI skills, and APIs for autonomous agents">
+    <meta property="og:type" content="website">
+    <link rel="canonical" href="https://oma-ai.com">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Inter', sans-serif; background: #09090b; color: #fafafa; }
+        .gradient { background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%); }
+        .gradient-text { background: linear-gradient(135deg, #6366f1, #d946ef); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .glass { background: rgba(255,255,255,0.03); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.06); }
-        .gradient { background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%); }
-        .card { transition: all 0.2s; }
-        .card:hover { transform: translateY(-2px); border-color: rgba(139,92,246,0.3); }
-        .tag { font-size: 11px; padding: 2px 8px; border-radius: 9999px; }
+        .card { transition: all 0.3s ease; }
+        .card:hover { transform: translateY(-4px); border-color: rgba(139,92,246,0.4); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+        .glow { box-shadow: 0 0 60px rgba(139,92,246,0.3); }
+        .animate-float { animation: float 6s ease-in-out infinite; }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+        .tag { font-size: 11px; padding: 3px 10px; border-radius: 9999px; font-weight: 500; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #18181b; }
+        ::-webkit-scrollbar-thumb { background: #3f3f46; border-radius: 4px; }
     </style>
 </head>
 <body class="min-h-screen">
 
-    <!-- Nav -->
+    <!-- Animated Background -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none">
+        <div class="absolute top-1/4 -left-20 w-96 h-96 bg-violet-500/20 rounded-full blur-3xl animate-float"></div>
+        <div class="absolute bottom-1/4 -right-20 w-96 h-96 bg-indigo-500/20 rounded-full blur-3xl animate-float" style="animation-delay: -3s;"></div>
+    </div>
+
+    <!-- Navigation -->
     <nav class="fixed top-0 left-0 right-0 z-50 bg-zinc-950/80 backdrop-blur-xl border-b border-white/5">
-        <div class="max-w-7xl mx-auto px-4 h-14 flex items-center justify-between">
+        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
             <div class="flex items-center gap-8">
-                <a href="#" class="flex items-center gap-2">
-                    <div class="w-8 h-8 gradient rounded-lg flex items-center justify-center text-sm font-bold">OMA</div>
-                    <span class="font-semibold">OMA-AI</span>
+                <a href="#" class="flex items-center gap-3">
+                    <div class="w-10 h-10 gradient rounded-xl flex items-center justify-center text-lg font-bold">OMA</div>
+                    <span class="text-xl font-bold hidden sm:block">Open Market Access</span>
                 </a>
                 <div class="hidden md:flex items-center gap-1">
-                    <a href="#servers" class="px-3 py-1.5 text-sm text-zinc-400 hover:text-white hover:bg-white/5 rounded-lg">MCP Servers</a>
-                    <a href="#skills" class="px-3 py-1.5 text-sm text-zinc-400 hover:text-white hover:bg-white/5 rounded-lg">Skills</a>
-                    <a href="#docs" class="px-3 py-1.5 text-sm text-zinc-400 hover:text-white hover:bg-white/5 rounded-lg">Docs</a>
-                    <a href="https://github.com/FrankieMolt/OMA-AI" class="px-3 py-1.5 text-sm text-zinc-400 hover:text-white hover:bg-white/5 rounded-lg">GitHub</a>
+                    <a href="#servers" class="px-4 py-2 text-sm text-zinc-400 hover:text-white hover:bg-white/5 rounded-lg transition">Servers</a>
+                    <a href="#skills" class="px-4 py-2 text-sm text-zinc-400 hover:text-white hover:bg-white/5 rounded-lg transition">Skills</a>
+                    <a href="#apis" class="px-4 py-2 text-sm text-zinc-400 hover:text-white hover:bg-white/5 rounded-lg transition">APIs</a>
+                    <a href="#pricing" class="px-4 py-2 text-sm text-zinc-400 hover:text-white hover:bg-white/5 rounded-lg transition">Pricing</a>
                 </div>
             </div>
             <div class="flex items-center gap-3">
-                <a href="#" class="text-sm text-zinc-400 hover:text-white">Sign in</a>
-                <a href="#" class="h-9 px-4 gradient text-white text-sm font-medium rounded-lg">Publish</a>
+                <a href="https://github.com/FrankieMolt/OMA-AI" class="px-4 py-2 text-sm text-zinc-400 hover:text-white transition flex items-center gap-2">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                    <span class="hidden sm:inline">GitHub</span>
+                </a>
+                <a href="#" class="h-10 px-5 gradient text-white text-sm font-semibold rounded-xl flex items-center hover:opacity-90 transition">Get Started</a>
             </div>
         </div>
     </nav>
 
-    <!-- Hero -->
-    <section class="pt-24 pb-12 px-4">
-        <div class="max-w-4xl mx-auto text-center">
-            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-violet-500/10 border border-violet-500/20 mb-6">
-                <span class="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse"></span>
-                <span class="text-xs text-violet-300 font-medium">1,247 servers • 847 skills • Open Source</span>
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 px-4">
+        <div class="max-w-5xl mx-auto text-center">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-violet-500/10 border border-violet-500/20 mb-8">
+                <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+                <span class="text-sm text-violet-300 font-medium">1,247 MCP servers • 847 skills • 45K+ installs</span>
             </div>
-            <h1 class="text-4xl md:text-5xl font-bold mb-4">
-                Open Market Access
+            
+            <h1 class="text-5xl md:text-7xl font-extrabold mb-6 tracking-tight">
+                The <span class="gradient-text">AI Agent</span><br>Marketplace
             </h1>
-            <p class="text-lg text-zinc-400 mb-8">
-                The open marketplace for MCP servers and AI skills. Discover, install, and publish tools for your AI agents.
+            
+            <p class="text-xl text-zinc-400 mb-10 max-w-2xl mx-auto leading-relaxed">
+                Discover MCP servers, AI skills, and APIs for your autonomous agents. 
+                One marketplace, instant micropayments, infinite possibilities.
             </p>
-            <div class="flex gap-3 justify-center">
-                <a href="#servers" class="h-11 px-6 gradient text-white font-medium rounded-lg">Browse Servers</a>
-                <a href="https://github.com/FrankieMolt/OMA-AI" class="h-11 px-6 bg-zinc-800 hover:bg-zinc-700 font-medium rounded-lg transition">GitHub →</a>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#servers" class="h-14 px-8 gradient text-white font-semibold rounded-xl flex items-center justify-center hover:opacity-90 transition text-lg">
+                    Explore Servers
+                </a>
+                <a href="#apis" class="h-14 px-8 bg-zinc-800 hover:bg-zinc-700 font-semibold rounded-xl flex items-center justify-center transition text-lg border border-zinc-700">
+                    Try API Free →
+                </a>
+            </div>
+            
+            <!-- Quick Stats -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-16">
+                <div class="glass rounded-2xl p-6 text-center">
+                    <div class="text-3xl font-bold text-violet-400">1,247</div>
+                    <div class="text-sm text-zinc-500 mt-1">MCP Servers</div>
+                </div>
+                <div class="glass rounded-2xl p-6 text-center">
+                    <div class="text-3xl font-bold text-cyan-400">847</div>
+                    <div class="text-sm text-zinc-500 mt-1">AI Skills</div>
+                </div>
+                <div class="glass rounded-2xl p-6 text-center">
+                    <div class="text-3xl font-bold text-green-400">45K+</div>
+                    <div class="text-sm text-zinc-500 mt-1">Installs</div>
+                </div>
+                <div class="glass rounded-2xl p-6 text-center">
+                    <div class="text-3xl font-bold text-purple-400">10</div>
+                    <div class="text-sm text-zinc-500 mt-1">API Endpoints</div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Stats -->
-    <section class="px-4 py-8 border-y border-white/5">
-        <div class="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-            <div class="glass rounded-xl p-4">
-                <div class="text-2xl font-bold text-violet-400">1,247</div>
-                <div class="text-xs text-zinc-500">MCP Servers</div>
-            </div>
-            <div class="glass rounded-xl p-4">
-                <div class="text-2xl font-bold text-cyan-400">847</div>
-                <div class="text-xs text-zinc-500">Skills</div>
-            </div>
-            <div class="glass rounded-xl p-4">
-                <div class="text-2xl font-bold text-green-400">45K+</div>
-                <div class="text-xs text-zinc-500">Installs</div>
-            </div>
-            <div class="glass rounded-xl p-4">
-                <div class="text-2xl font-bold text-purple-400">100%</div>
-                <div class="text-xs text-zinc-500">Open Source</div>
+    <!-- Live API Demo -->
+    <section class="py-16 px-4 border-y border-white/5 bg-zinc-900/30">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-2xl font-bold text-center mb-8">Try the API Now</h2>
+            <div class="glass rounded-2xl p-6 glow">
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <button onclick="testAPI('price')" class="px-4 py-2 bg-violet-500/20 text-violet-300 rounded-lg text-sm font-medium hover:bg-violet-500/30 transition">💰 Prices</button>
+                    <button onclick="testAPI('news')" class="px-4 py-2 bg-zinc-800 text-zinc-300 rounded-lg text-sm font-medium hover:bg-zinc-700 transition">📰 News</button>
+                    <button onclick="testAPI('jokes')" class="px-4 py-2 bg-zinc-800 text-zinc-300 rounded-lg text-sm font-medium hover:bg-zinc-700 transition">😄 Jokes</button>
+                    <button onclick="testAPI('uuid')" class="px-4 py-2 bg-zinc-800 text-zinc-300 rounded-lg text-sm font-medium hover:bg-zinc-700 transition">🔑 UUID</button>
+                </div>
+                <div class="bg-zinc-950 rounded-xl p-4 font-mono text-sm">
+                    <div class="text-zinc-500 mb-2">Response:</div>
+                    <pre id="api-response" class="text-green-400 overflow-auto max-h-64">Click a button above to test an API endpoint</pre>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- MCP Servers -->
-    <section class="px-4 py-16" id="servers">
+    <!-- MCP Servers Section -->
+    <section class="py-20 px-4" id="servers">
         <div class="max-w-6xl mx-auto">
-            <h2 class="text-xl font-semibold mb-6">Featured MCP Servers</h2>
-            <div class="grid md:grid-cols-3 gap-4">
-                <div class="card glass rounded-xl p-4">
-                    <div class="flex items-center gap-3 mb-3">
-                        <div class="w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center">🗄️</div>
-                        <div>
-                            <h3 class="font-medium text-sm">@mcp/server-postgres</h3>
-                            <p class="text-xs text-zinc-500">Official • 2.4k ⭐</p>
-                        </div>
-                    </div>
-                    <p class="text-xs text-zinc-400 mb-3">PostgreSQL database connector</p>
-                    <code class="text-xs text-zinc-500">npx @mcp/server-postgres</code>
+            <div class="flex items-center justify-between mb-8">
+                <div>
+                    <h2 class="text-3xl font-bold">MCP Servers</h2>
+                    <p class="text-zinc-400 mt-2">Connect AI assistants to tools and data</p>
                 </div>
-                <div class="card glass rounded-xl p-4">
-                    <div class="flex items-center gap-3 mb-3">
-                        <div class="w-10 h-10 rounded-lg bg-green-500/20 flex items-center justify-center">📁</div>
-                        <div>
-                            <h3 class="font-medium text-sm">@mcp/server-filesystem</h3>
-                            <p class="text-xs text-zinc-500">Official • 2.1k ⭐</p>
+                <a href="#" class="text-sm text-violet-400 hover:text-violet-300 font-medium">View all →</a>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Server Cards -->
+                <div class="card glass rounded-2xl p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex items-center gap-4">
+                            <div class="w-14 h-14 rounded-xl bg-blue-500/20 flex items-center justify-center text-2xl">🗄️</div>
+                            <div>
+                                <h3 class="font-semibold">@mcp/server-postgres</h3>
+                                <p class="text-xs text-zinc-500">by modelcontextprotocol</p>
+                            </div>
                         </div>
+                        <span class="tag bg-green-500/20 text-green-400">✓ Verified</span>
                     </div>
-                    <p class="text-xs text-zinc-400 mb-3">File system operations</p>
-                    <code class="text-xs text-zinc-500">npx @mcp/server-filesystem ~/projects</code>
+                    <p class="text-sm text-zinc-400 mb-4">PostgreSQL database connector for MCP. Query and modify databases directly from Claude.</p>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-4 text-xs text-zinc-500">
+                            <span>⭐ 2.4k</span>
+                            <span>📥 45.2k</span>
+                        </div>
+                        <span class="tag bg-green-500/20 text-green-400">FREE</span>
+                    </div>
                 </div>
-                <div class="card glass rounded-xl p-4">
-                    <div class="flex items-center gap-3 mb-3">
-                        <div class="w-10 h-10 rounded-lg bg-purple-500/20 flex items-center justify-center">🐙</div>
-                        <div>
-                            <h3 class="font-medium text-sm">@mcp/server-github</h3>
-                            <p class="text-xs text-zinc-500">Official • 3.2k ⭐</p>
+
+                <div class="card glass rounded-2xl p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex items-center gap-4">
+                            <div class="w-14 h-14 rounded-xl bg-green-500/20 flex items-center justify-center text-2xl">📁</div>
+                            <div>
+                                <h3 class="font-semibold">@mcp/server-filesystem</h3>
+                                <p class="text-xs text-zinc-500">by modelcontextprotocol</p>
+                            </div>
                         </div>
+                        <span class="tag bg-green-500/20 text-green-400">✓ Verified</span>
                     </div>
-                    <p class="text-xs text-zinc-400 mb-3">GitHub API integration</p>
-                    <code class="text-xs text-zinc-500">npx @mcp/server-github</code>
+                    <p class="text-sm text-zinc-400 mb-4">File system operations. Read, write, create, and manage files with Claude.</p>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-4 text-xs text-zinc-500">
+                            <span>⭐ 2.1k</span>
+                            <span>📥 52.3k</span>
+                        </div>
+                        <span class="tag bg-green-500/20 text-green-400">FREE</span>
+                    </div>
                 </div>
-                <div class="card glass rounded-xl p-4">
-                    <div class="flex items-center gap-3 mb-3">
-                        <div class="w-10 h-10 rounded-lg bg-orange-500/20 flex items-center justify-center">🔍</div>
-                        <div>
-                            <h3 class="font-medium text-sm">@mcp/server-brave-search</h3>
-                            <p class="text-xs text-zinc-500">Official • 1.8k ⭐</p>
+
+                <div class="card glass rounded-2xl p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex items-center gap-4">
+                            <div class="w-14 h-14 rounded-xl bg-purple-500/20 flex items-center justify-center text-2xl">🐙</div>
+                            <div>
+                                <h3 class="font-semibold">@mcp/server-github</h3>
+                                <p class="text-xs text-zinc-500">by modelcontextprotocol</p>
+                            </div>
                         </div>
+                        <span class="tag bg-green-500/20 text-green-400">✓ Verified</span>
                     </div>
-                    <p class="text-xs text-zinc-400 mb-3">Web search with Brave</p>
-                    <code class="text-xs text-zinc-500">npx @mcp/server-brave-search</code>
+                    <p class="text-sm text-zinc-400 mb-4">GitHub API integration. Manage repos, issues, pull requests, and more.</p>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-4 text-xs text-zinc-500">
+                            <span>⭐ 3.2k</span>
+                            <span>📥 67.1k</span>
+                        </div>
+                        <span class="tag bg-green-500/20 text-green-400">FREE</span>
+                    </div>
                 </div>
-                <div class="card glass rounded-xl p-4 border-violet-500/30">
-                    <div class="flex items-center gap-3 mb-3">
-                        <div class="w-10 h-10 rounded-lg bg-violet-500/20 flex items-center justify-center">📦</div>
-                        <div>
-                            <h3 class="font-medium text-sm">@oma/server-registry</h3>
-                            <p class="text-xs text-zinc-500">OMA • NEW</p>
+
+                <div class="card glass rounded-2xl p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex items-center gap-4">
+                            <div class="w-14 h-14 rounded-xl bg-orange-500/20 flex items-center justify-center text-2xl">🔍</div>
+                            <div>
+                                <h3 class="font-semibold">@mcp/server-brave-search</h3>
+                                <p class="text-xs text-zinc-500">by modelcontextprotocol</p>
+                            </div>
                         </div>
+                        <span class="tag bg-green-500/20 text-green-400">✓ Verified</span>
                     </div>
-                    <p class="text-xs text-zinc-400 mb-3">OMA marketplace registry</p>
-                    <code class="text-xs text-zinc-500">npx @oma/server-registry</code>
+                    <p class="text-sm text-zinc-400 mb-4">Brave Search integration. Search the web directly from AI conversations.</p>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-4 text-xs text-zinc-500">
+                            <span>⭐ 1.8k</span>
+                            <span>📥 38.7k</span>
+                        </div>
+                        <span class="tag bg-green-500/20 text-green-400">FREE</span>
+                    </div>
                 </div>
-                <div class="card glass rounded-xl p-4 border-violet-500/30">
-                    <div class="flex items-center gap-3 mb-3">
-                        <div class="w-10 h-10 rounded-lg bg-cyan-500/20 flex items-center justify-center">💳</div>
-                        <div>
-                            <h3 class="font-medium text-sm">@oma/server-payments</h3>
-                            <p class="text-xs text-zinc-500">OMA • NEW</p>
+
+                <div class="card glass rounded-2xl p-6 border-violet-500/30">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex items-center gap-4">
+                            <div class="w-14 h-14 rounded-xl bg-violet-500/20 flex items-center justify-center text-2xl">📦</div>
+                            <div>
+                                <h3 class="font-semibold">@oma/server-registry</h3>
+                                <p class="text-xs text-zinc-500">by openmarketaccess</p>
+                            </div>
                         </div>
+                        <span class="tag bg-violet-500/20 text-violet-400">NEW</span>
                     </div>
-                    <p class="text-xs text-zinc-400 mb-3">x402 payment operations</p>
-                    <code class="text-xs text-zinc-500">npx @oma/server-payments</code>
+                    <p class="text-sm text-zinc-400 mb-4">OMA marketplace registry. Browse and install servers and skills from OMA.</p>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-4 text-xs text-zinc-500">
+                            <span>⭐ 156</span>
+                            <span>📥 2.1k</span>
+                        </div>
+                        <span class="tag bg-green-500/20 text-green-400">FREE</span>
+                    </div>
+                </div>
+
+                <div class="card glass rounded-2xl p-6 border-violet-500/30">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex items-center gap-4">
+                            <div class="w-14 h-14 rounded-xl bg-cyan-500/20 flex items-center justify-center text-2xl">💳</div>
+                            <div>
+                                <h3 class="font-semibold">@oma/server-payments</h3>
+                                <p class="text-xs text-zinc-500">by openmarketaccess</p>
+                            </div>
+                        </div>
+                        <span class="tag bg-violet-500/20 text-violet-400">NEW</span>
+                    </div>
+                    <p class="text-sm text-zinc-400 mb-4">x402 payment operations. Send, receive, and verify USDC payments on Base.</p>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-4 text-xs text-zinc-500">
+                            <span>⭐ 89</span>
+                            <span>📥 1.5k</span>
+                        </div>
+                        <span class="tag bg-green-500/20 text-green-400">FREE</span>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Skills -->
-    <section class="px-4 py-16 bg-zinc-900/30" id="skills">
+    <!-- Skills Section -->
+    <section class="py-20 px-4 bg-zinc-900/30" id="skills">
         <div class="max-w-6xl mx-auto">
-            <h2 class="text-xl font-semibold mb-6">AI Skills</h2>
+            <div class="flex items-center justify-between mb-8">
+                <div>
+                    <h2 class="text-3xl font-bold">AI Skills</h2>
+                    <p class="text-zinc-400 mt-2">Modular capabilities for your agents</p>
+                </div>
+                <a href="#" class="text-sm text-violet-400 hover:text-violet-300 font-medium">View all →</a>
+            </div>
+            
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div class="card glass rounded-xl p-4">
-                    <div class="text-2xl mb-2">🤖</div>
-                    <h3 class="font-medium text-sm">proactive-agent</h3>
-                    <p class="text-xs text-zinc-500 mb-2">Anticipates needs</p>
+                <div class="card glass rounded-2xl p-6">
+                    <div class="text-3xl mb-3">🤖</div>
+                    <h3 class="font-semibold mb-1">proactive-agent</h3>
+                    <p class="text-xs text-zinc-500 mb-3">Anticipates user needs</p>
+                    <div class="flex items-center justify-between">
+                        <span class="tag bg-green-500/20 text-green-400">FREE</span>
+                        <span class="text-xs text-zinc-500">5.2k installs</span>
+                    </div>
+                </div>
+
+                <div class="card glass rounded-2xl p-6">
+                    <div class="text-3xl mb-3">📊</div>
+                    <h3 class="font-semibold mb-1">advanced-trading</h3>
+                    <p class="text-xs text-zinc-500 mb-3">Technical analysis & signals</p>
+                    <div class="flex items-center justify-between">
+                        <span class="tag bg-cyan-500/20 text-cyan-400">$9.99/mo</span>
+                        <span class="text-xs text-zinc-500">2.8k installs</span>
+                    </div>
+                </div>
+
+                <div class="card glass rounded-2xl p-6">
+                    <div class="text-3xl mb-3">🔍</div>
+                    <h3 class="font-semibold mb-1">web-research</h3>
+                    <p class="text-xs text-zinc-500 mb-3">Deep web research</p>
+                    <div class="flex items-center justify-between">
+                        <span class="tag bg-green-500/20 text-green-400">FREE</span>
+                        <span class="text-xs text-zinc-500">4.1k installs</span>
+                    </div>
+                </div>
+
+                <div class="card glass rounded-2xl p-6">
+                    <div class="text-3xl mb-3">⚡</div>
+                    <h3 class="font-semibold mb-1">automation</h3>
+                    <p class="text-xs text-zinc-500 mb-3">Task automation</p>
+                    <div class="flex items-center justify-between">
+                        <span class="tag bg-green-500/20 text-green-400">FREE</span>
+                        <span class="text-xs text-zinc-500">3.5k installs</span>
+                    </div>
+                </div>
+
+                <div class="card glass rounded-2xl p-6">
+                    <div class="text-3xl mb-3">🔧</div>
+                    <h3 class="font-semibold mb-1">developer-tools</h3>
+                    <p class="text-xs text-zinc-500 mb-3">Coding utilities</p>
+                    <div class="flex items-center justify-between">
+                        <span class="tag bg-green-500/20 text-green-400">FREE</span>
+                        <span class="text-xs text-zinc-500">2.9k installs</span>
+                    </div>
+                </div>
+
+                <div class="card glass rounded-2xl p-6">
+                    <div class="text-3xl mb-3">📝</div>
+                    <h3 class="font-semibold mb-1">json-tools</h3>
+                    <p class="text-xs text-zinc-500 mb-3">JSON utilities</p>
+                    <div class="flex items-center justify-between">
+                        <span class="tag bg-green-500/20 text-green-400">FREE</span>
+                        <span class="text-xs text-zinc-500">1.8k installs</span>
+                    </div>
+                </div>
+
+                <div class="card glass rounded-2xl p-6">
+                    <div class="text-3xl mb-3">✨</div>
+                    <h3 class="font-semibold mb-1">productivity</h3>
+                    <p class="text-xs text-zinc-500 mb-3">Task management</p>
+                    <div class="flex items-center justify-between">
+                        <span class="tag bg-green-500/20 text-green-400">FREE</span>
+                        <span class="text-xs text-zinc-500">2.3k installs</span>
+                    </div>
+                </div>
+
+                <div class="card glass rounded-2xl p-6">
+                    <div class="text-3xl mb-3">🧠</div>
+                    <h3 class="font-semibold mb-1">memelord</h3>
+                    <p class="text-xs text-zinc-500 mb-3">Persistent memory</p>
+                    <div class="flex items-center justify-between">
+                        <span class="tag bg-green-500/20 text-green-400">FREE</span>
+                        <span class="text-xs text-zinc-500">1.5k installs</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- API Section -->
+    <section class="py-20 px-4" id="apis">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4">API Endpoints</h2>
+                <p class="text-zinc-400">Ready-to-use APIs with instant micropayments</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-4">
+                <div class="card glass rounded-2xl p-6 flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-green-500/20 flex items-center justify-center text-xl">💰</div>
+                    <div class="flex-1">
+                        <h3 class="font-semibold">Crypto Prices</h3>
+                        <p class="text-xs text-zinc-500">Real-time SOL, BTC, ETH prices</p>
+                    </div>
                     <span class="tag bg-green-500/20 text-green-400">FREE</span>
                 </div>
-                <div class="card glass rounded-xl p-4">
-                    <div class="text-2xl mb-2">📊</div>
-                    <h3 class="font-medium text-sm">advanced-trading</h3>
-                    <p class="text-xs text-zinc-500 mb-2">Technical analysis</p>
-                    <span class="tag bg-cyan-500/20 text-cyan-400">$9.99</span>
+
+                <div class="card glass rounded-2xl p-6 flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-cyan-500/20 flex items-center justify-center text-xl">🌤️</div>
+                    <div class="flex-1">
+                        <h3 class="font-semibold">Weather</h3>
+                        <p class="text-xs text-zinc-500">Global weather data</p>
+                    </div>
+                    <span class="tag bg-cyan-500/20 text-cyan-400">$0.02</span>
                 </div>
-                <div class="card glass rounded-xl p-4">
-                    <div class="text-2xl mb-2">🔍</div>
-                    <h3 class="font-medium text-sm">web-research</h3>
-                    <p class="text-xs text-zinc-500 mb-2">Deep research</p>
-                    <span class="tag bg-green-500/20 text-green-400">FREE</span>
+
+                <div class="card glass rounded-2xl p-6 flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-purple-500/20 flex items-center justify-center text-xl">🔍</div>
+                    <div class="flex-1">
+                        <h3 class="font-semibold">Web Search</h3>
+                        <p class="text-xs text-zinc-500">Search the web</p>
+                    </div>
+                    <span class="tag bg-cyan-500/20 text-cyan-400">$0.03</span>
                 </div>
-                <div class="card glass rounded-xl p-4">
-                    <div class="text-2xl mb-2">⚡</div>
-                    <h3 class="font-medium text-sm">automation</h3>
-                    <p class="text-xs text-zinc-500 mb-2">Task automation</p>
+
+                <div class="card glass rounded-2xl p-6 flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-orange-500/20 flex items-center justify-center text-xl">🕷️</div>
+                    <div class="flex-1">
+                        <h3 class="font-semibold">Web Scraping</h3>
+                        <p class="text-xs text-zinc-500">Extract web content</p>
+                    </div>
+                    <span class="tag bg-cyan-500/20 text-cyan-400">$0.05</span>
+                </div>
+
+                <div class="card glass rounded-2xl p-6 flex items-center gap-4 border-violet-500/30">
+                    <div class="w-12 h-12 rounded-xl bg-violet-500/20 flex items-center justify-center text-xl">🤖</div>
+                    <div class="flex-1">
+                        <h3 class="font-semibold">LLM Access</h3>
+                        <p class="text-xs text-zinc-500">GPT-4, Claude, Llama, more</p>
+                    </div>
+                    <span class="tag bg-cyan-500/20 text-cyan-400">$0.005+</span>
+                </div>
+
+                <div class="card glass rounded-2xl p-6 flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-blue-500/20 flex items-center justify-center text-xl">📰</div>
+                    <div class="flex-1">
+                        <h3 class="font-semibold">News</h3>
+                        <p class="text-xs text-zinc-500">Latest headlines</p>
+                    </div>
                     <span class="tag bg-green-500/20 text-green-400">FREE</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Quick Start -->
-    <section class="px-4 py-16" id="docs">
+    <!-- Pricing Section -->
+    <section class="py-20 px-4 bg-zinc-900/30" id="pricing">
+        <div class="max-w-5xl mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-12">Simple Pricing</h2>
+            
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="glass rounded-2xl p-8">
+                    <h3 class="text-lg font-semibold mb-2">Free</h3>
+                    <div class="text-4xl font-bold mb-6">$0<span class="text-lg text-zinc-500 font-normal">/mo</span></div>
+                    <ul class="space-y-3 mb-8 text-sm text-zinc-400">
+                        <li class="flex items-center gap-2"><span class="text-green-400">✓</span> 1,000 API calls/month</li>
+                        <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Browse all servers</li>
+                        <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Install free skills</li>
+                        <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Community support</li>
+                    </ul>
+                    <button class="w-full py-3 bg-zinc-800 hover:bg-zinc-700 rounded-xl font-medium transition">Get Started</button>
+                </div>
+
+                <div class="glass rounded-2xl p-8 border-2 border-violet-500 relative">
+                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-violet-500 text-sm font-bold rounded-full">POPULAR</div>
+                    <h3 class="text-lg font-semibold mb-2">Pro</h3>
+                    <div class="text-4xl font-bold mb-6">$9<span class="text-lg text-zinc-500 font-normal">/mo</span></div>
+                    <ul class="space-y-3 mb-8 text-sm text-zinc-400">
+                        <li class="flex items-center gap-2"><span class="text-green-400">✓</span> 50,000 API calls/month</li>
+                        <li class="flex items-center gap-2"><span class="text-green-400">✓</span> All Free features</li>
+                        <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Premium skills</li>
+                        <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Priority support</li>
+                    </ul>
+                    <button class="w-full py-3 gradient rounded-xl font-medium hover:opacity-90 transition">Subscribe</button>
+                </div>
+
+                <div class="glass rounded-2xl p-8">
+                    <h3 class="text-lg font-semibold mb-2">Enterprise</h3>
+                    <div class="text-4xl font-bold mb-6">Custom</div>
+                    <ul class="space-y-3 mb-8 text-sm text-zinc-400">
+                        <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Unlimited API calls</li>
+                        <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Custom integrations</li>
+                        <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Dedicated support</li>
+                        <li class="flex items-center gap-2"><span class="text-green-400">✓</span> SLA guarantee</li>
+                    </ul>
+                    <button class="w-full py-3 bg-zinc-800 hover:bg-zinc-700 rounded-xl font-medium transition">Contact Sales</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-20 px-4">
         <div class="max-w-3xl mx-auto">
-            <h2 class="text-xl font-semibold text-center mb-8">Quick Start</h2>
-            <div class="glass rounded-xl p-6 space-y-4">
-                <div>
-                    <p class="text-sm text-zinc-400 mb-2">1. Install an MCP server</p>
-                    <code class="block bg-zinc-950 p-3 rounded-lg text-sm text-green-400">npx @modelcontextprotocol/server-filesystem ~/projects</code>
-                </div>
-                <div>
-                    <p class="text-sm text-zinc-400 mb-2">2. Add to Claude Desktop</p>
-                    <code class="block bg-zinc-950 p-3 rounded-lg text-sm text-green-400">oma add @mcp/server-github</code>
-                </div>
-                <div>
-                    <p class="text-sm text-zinc-400 mb-2">3. Install a skill</p>
-                    <code class="block bg-zinc-950 p-3 rounded-lg text-sm text-green-400">oma install proactive-agent</code>
-                </div>
+            <div class="gradient rounded-3xl p-12 text-center glow">
+                <h2 class="text-3xl font-bold mb-4">Ready to Build?</h2>
+                <p class="text-white/80 mb-8">Join thousands of developers building AI agents with OMA.</p>
+                <a href="#" class="inline-block h-14 px-8 bg-white text-zinc-900 font-semibold rounded-xl flex items-center mx-auto hover:bg-zinc-100 transition">
+                    Get Started Free →
+                </a>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="px-4 py-8 border-t border-white/5">
-        <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-zinc-500">
-            <div class="flex items-center gap-2">
-                <div class="w-6 h-6 gradient rounded flex items-center justify-center text-xs font-bold">OMA</div>
-                <span>OMA-AI © 2026 • Open Source</span>
+    <footer class="py-12 px-4 border-t border-white/5">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="w-8 h-8 gradient rounded-lg flex items-center justify-center text-sm font-bold">OMA</div>
+                        <span class="font-bold">Open Market Access</span>
+                    </div>
+                    <p class="text-sm text-zinc-500">The marketplace for AI agents.</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Product</h4>
+                    <ul class="space-y-2 text-sm text-zinc-400">
+                        <li><a href="#servers" class="hover:text-white">MCP Servers</a></li>
+                        <li><a href="#skills" class="hover:text-white">Skills</a></li>
+                        <li><a href="#apis" class="hover:text-white">APIs</a></li>
+                        <li><a href="#pricing" class="hover:text-white">Pricing</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Resources</h4>
+                    <ul class="space-y-2 text-sm text-zinc-400">
+                        <li><a href="/docs" class="hover:text-white">Documentation</a></li>
+                        <li><a href="/about" class="hover:text-white">About</a></li>
+                        <li><a href="https://github.com/FrankieMolt/OMA-AI" class="hover:text-white">GitHub</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Connect</h4>
+                    <ul class="space-y-2 text-sm text-zinc-400">
+                        <li><a href="#" class="hover:text-white">Discord</a></li>
+                        <li><a href="#" class="hover:text-white">Twitter</a></li>
+                        <li><a href="#" class="hover:text-white">Blog</a></li>
+                    </ul>
+                </div>
             </div>
-            <div class="flex items-center gap-6">
-                <a href="https://github.com/FrankieMolt/OMA-AI" class="hover:text-white">GitHub</a>
-                <a href="#" class="hover:text-white">Docs</a>
-                <a href="#" class="hover:text-white">Discord</a>
+            <div class="pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-zinc-500">
+                <p>© 2026 Open Market Access. All rights reserved.</p>
+                <p>Built with x402 on Base • Open Source</p>
             </div>
         </div>
     </footer>
 
+    <script>
+        // API Demo
+        async function testAPI(type) {
+            const el = document.getElementById('api-response');
+            el.textContent = 'Loading...';
+            el.className = 'text-yellow-400';
+            
+            const urls = {
+                price: 'https://frankie-prod.life.conway.tech/price',
+                news: 'https://hacker-news.firebaseio.com/v0/topstories.json',
+                jokes: null,
+                uuid: null
+            };
+
+            const localData = {
+                jokes: { setup: "Why do programmers prefer dark mode?", punchline: "Because light attracts bugs!" },
+                uuid: { uuids: [crypto.randomUUID()] }
+            };
+
+            try {
+                if (urls[type]) {
+                    const res = await fetch(urls[type]);
+                    const data = await res.json();
+                    el.textContent = JSON.stringify(data, null, 2);
+                } else {
+                    el.textContent = JSON.stringify(localData[type], null, 2);
+                }
+                el.className = 'text-green-400';
+            } catch (e) {
+                el.textContent = 'Error: ' + e.message;
+                el.className = 'text-red-400';
+            }
+        }
+    </script>
 </body>
 </html>
