@@ -60,11 +60,14 @@
         .gradient { background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%); }
         .gradient-text { background: linear-gradient(135deg, #6366f1, #d946ef); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .glass { background: rgba(255,255,255,0.03); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.06); }
+        .glass:hover { background: rgba(255,255,255,0.05); border-color: rgba(139,92,246,0.3); }
         .card { transition: all 0.3s ease; }
         .card:hover { transform: translateY(-4px); border-color: rgba(139,92,246,0.4); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
         .glow { box-shadow: 0 0 60px rgba(139,92,246,0.3); }
         .animate-float { animation: float 6s ease-in-out infinite; }
+        .animate-pulse-slow { animation: pulse 3s ease-in-out infinite; }
         @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+        @keyframes pulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
         .tag { font-size: 11px; padding: 3px 10px; border-radius: 9999px; font-weight: 500; }
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #18181b; }
