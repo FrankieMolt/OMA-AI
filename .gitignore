@@ -13,3 +13,4 @@ keys/
 *.key
 secrets/
 private/
+.next/
