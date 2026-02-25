@@ -247,7 +247,7 @@ pm2 monit             # Real-time monitoring
 
 ### GitHub
 - **Username:** frankiemolt
-- **Main Repo:** https://github.com/FrankieMolt/OMA-AI
+- **Main Repo:** https://github.com/nosytlabs/open-market-access
 - **Fork:** None
 - **PR Status:** Open (3 sites ready to merge)
 

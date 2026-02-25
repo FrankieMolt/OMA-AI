@@ -63,7 +63,7 @@ mcporter config add my-server https://mcp.example.com
 
 ### GitHub
 - **Username:** frankiemolt
-- **Main Repo:** https://github.com/FrankieMolt/OMA-AI
+- **Main Repo:** https://github.com/nosytlabs/open-market-access
 - **Auth:** Configured via gh CLI
 
 ---
@@ -202,7 +202,7 @@ mcporter config add my-server https://mcp.example.com
 - **Path:** `/home/nosyt/.openclaw/workspace/` (workspace is the repo)
 - **Framework:** Next.js 16.1.6
 - **Database:** Supabase (oooijcrqpuqymgzlidrw)
-- **Repo:** https://github.com/FrankieMolt/OMA-AI
+- **Repo:** https://github.com/nosytlabs/open-market-access
 - **Domain:** oma-ai.com
 
 ### nosyt-ai
