@@ -6,23 +6,6 @@ import type { ParamMap, AppRouteHandlerRoutes } from "./routes.js"
 import type { NextApiHandler } from "next/types.js"
 import type { NextRequest } from 'next/server.js'
 
-type PagesPageConfig = {
-  default: React.ComponentType<any> | ((props: any) => React.ReactNode | Promise<React.ReactNode> | never | void)
-  getStaticProps?: (context: any) => Promise<any> | any
-  getStaticPaths?: (context: any) => Promise<any> | any
-  getServerSideProps?: (context: any) => Promise<any> | any
-  getInitialProps?: (context: any) => Promise<any> | any
-  /**
-   * Segment configuration for legacy Pages Router pages.
-   * Validated at build-time by parsePagesSegmentConfig.
-   */
-  config?: {
-    maxDuration?: number
-    runtime?: 'edge' | 'experimental-edge' | 'nodejs' | string // necessary unless config is exported as const
-    regions?: string[]
-  }
-}
-
 type RouteHandlerConfig<Route extends AppRouteHandlerRoutes = AppRouteHandlerRoutes> = {
   GET?: (request: NextRequest, context: { params: Promise<ParamMap[Route]> }) => Promise<Response | void> | Response | void
   POST?: (request: NextRequest, context: { params: Promise<ParamMap[Route]> }) => Promise<Response | void> | Response | void
@@ -58,14 +41,16 @@ type ApiRouteConfig = {
   type __Unused = __Check
 }
 
-// Validate ../../../pages/index.ts
+// Validate ../../../app/route.ts
 {
-  type __IsExpected<Specific extends PagesPageConfig> = Specific
-  const handler = {} as typeof import("../../../pages/index.js")
+  type __IsExpected<Specific extends RouteHandlerConfig<"/">> = Specific
+  const handler = {} as typeof import("../../../app/route.js")
   type __Check = __IsExpected<typeof handler>
   // @ts-ignore
   type __Unused = __Check
 }
+
+
 
 // Validate ../../../pages/api/premium-price.ts
 {

@@ -466,17 +466,17 @@ function triggerUpdate(msg) {
 "use strict";
 
 __turbopack_context__.s([
-    "default",
-    ()=>Home
+    "GET",
+    ()=>GET
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$oma$2d$ai$2d$repo$2f$node_modules$2f$next$2f$navigation$2e$js__$5b$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/oma-ai-repo/node_modules/next/navigation.js [client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$oma$2d$ai$2d$repo$2f$node_modules$2f$next$2f$server$2e$js__$5b$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/oma-ai-repo/node_modules/next/server.js [client] (ecmascript)");
 ;
-function Home() {
-    (0, __TURBOPACK__imported__module__$5b$project$5d2f$oma$2d$ai$2d$repo$2f$node_modules$2f$next$2f$navigation$2e$js__$5b$client$5d$__$28$ecmascript$29$__["redirect"])('/index.html');
+function GET() {
+    return __TURBOPACK__imported__module__$5b$project$5d2f$oma$2d$ai$2d$repo$2f$node_modules$2f$next$2f$server$2e$js__$5b$client$5d$__$28$ecmascript$29$__["NextResponse"].redirect(new URL('/index.html', 'http://localhost:3000'));
 }
-_c = Home;
+_c = GET;
 var _c;
-__turbopack_context__.k.register(_c, "Home");
+__turbopack_context__.k.register(_c, "GET");
 if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);
 }

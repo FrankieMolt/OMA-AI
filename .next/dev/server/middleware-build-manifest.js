@@ -1,18 +1,18 @@
 globalThis.__BUILD_MANIFEST = {
   "pages": {
     "/": [
-      "static/chunks/e3d3f_next_dist_compiled_14ad9197._.js",
-      "static/chunks/e3d3f_next_dist_shared_lib_56e278de._.js",
-      "static/chunks/e3d3f_next_dist_client_7fbafc89._.js",
-      "static/chunks/e3d3f_next_dist_f3dc2208._.js",
-      "static/chunks/e3d3f_next_navigation_ecc7ca5b.js",
+      "static/chunks/e3d3f_next_dist_compiled_7a21a519._.js",
+      "static/chunks/e3d3f_next_dist_shared_lib_de2d6a31._.js",
+      "static/chunks/e3d3f_next_dist_client_c83a9770._.js",
+      "static/chunks/e3d3f_next_dist_3208353c._.js",
+      "static/chunks/e3d3f_next_server_cf014f23.js",
       "static/chunks/e3d3f_react_c9123ef4._.js",
       "static/chunks/e3d3f_react-dom_cjs_react-dom_development_c7834770.js",
       "static/chunks/e3d3f_react-dom_da419a94._.js",
       "static/chunks/e3d3f_dd691c14._.js",
       "static/chunks/[root-of-the-server]__0561a070._.js",
       "static/chunks/oma-ai-repo_pages_index_2da965e7._.js",
-      "static/chunks/turbopack-oma-ai-repo_pages_index_683ce0cc._.js"
+      "static/chunks/turbopack-oma-ai-repo_pages_index_06307ea6._.js"
     ],
     "/_app": [
       "static/chunks/e3d3f_next_dist_compiled_14ad9197._.js",
@@ -46,9 +46,22 @@ globalThis.__BUILD_MANIFEST = {
     ]
   },
   "devFiles": [],
-  "polyfillFiles": [],
+  "polyfillFiles": [
+    "static/chunks/e3d3f_next_dist_build_polyfills_polyfill-nomodule.js"
+  ],
   "lowPriorityFiles": [],
-  "rootMainFiles": []
+  "rootMainFiles": [
+    "static/chunks/[turbopack]_browser_dev_hmr-client_hmr-client_ts_3d42da40._.js",
+    "static/chunks/e3d3f_next_dist_compiled_react-dom_c1d103b4._.js",
+    "static/chunks/e3d3f_next_dist_compiled_react-server-dom-turbopack_e7be2913._.js",
+    "static/chunks/e3d3f_next_dist_compiled_next-devtools_index_76db5451.js",
+    "static/chunks/e3d3f_next_dist_compiled_f524e555._.js",
+    "static/chunks/e3d3f_next_dist_client_39049881._.js",
+    "static/chunks/e3d3f_next_dist_31866c80._.js",
+    "static/chunks/e3d3f_@swc_helpers_cjs_3ad7d00c._.js",
+    "static/chunks/oma-ai-repo_a0ff3932._.js",
+    "static/chunks/turbopack-oma-ai-repo_a9965b89._.js"
+  ]
 };
 globalThis.__BUILD_MANIFEST.lowPriorityFiles = [
 "/static/" + process.env.__NEXT_BUILD_ID + "/_buildManifest.js",
