@@ -1,776 +1,898 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="/styles.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="OMA-AI - The AI Agent Marketplace. Browse, test, and integrate APIs, MCP servers, and LLM models with x402 crypto payments on Base and Solana.">
     <title>OMA-AI - The AI Agent Marketplace | MCP Servers, Skills & APIs</title>
-    <meta name="description" content="Discover 1,247+ MCP servers, 847+ AI skills, and 30+ payment-enabled APIs for autonomous AI agents. Open marketplace with x402 micropayments.">
-    <meta name="keywords" content="MCP servers, AI skills, AI agents, API marketplace, x402 payments, autonomous agents, Claude APIs, GPT plugins, AI agent monetization">
-    <meta name="author" content="OMA-AI">
-    <meta name="robots" content="index, follow">
     
-    <!-- Open Graph / Social -->
-    <meta property="og:title" content="OMA-AI - The AI Agent Marketplace">
-    <meta property="og:description" content="Discover 1,247+ MCP servers, 847+ AI skills, and APIs for autonomous AI agents. 90% revenue share.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://oma-ai.com">
-    <meta property="og:image" content="https://oma-ai.com/og-image.png">
-    <meta property="og:site_name" content="OMA-AI">
-    
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="OMA-AI - AI Agent Marketplace">
-    <meta name="twitter:description" content="Discover MCP servers, AI skills, and APIs for autonomous AI agents">
-    
-    <!-- Canonical -->
-    <link rel="canonical" href="https://oma-ai.com">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-    
-    <!-- Schema.org -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      "name": "OMA-AI",
-      "description": "The premier API marketplace for AI agents with x402 micropayments",
-      "url": "https://oma-ai.com",
-      "applicationCategory": "DeveloperApplication",
-      "operatingSystem": "Web",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD"
-      },
-      "author": {
-        "@type": "Organization",
-        "name": "OMA-AI",
-        "url": "https://oma-ai.com"
-      }
-    }
-    
-    
-    
-    
-        theme: {
-          extend: {
-            colors: {
-              zinc: { 950: "#09090b" },
-              violet: { 400: "#a78bfa", 500: "#8b5cf6" },
-              indigo: { 500: "#6366f1" },
-              fuchsia: { 500: "#d946ef" }
-            },
-            fontFamily: {
-              sans: ["Inter", "sans-serif"]
-            }
-          }
-        }
-      }
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/design-system.css">
+    <link rel="stylesheet" href="/responsive.css">
     
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', sans-serif; background: #09090b; color: #fafafa; }
-        .gradient { background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%); }
-        .gradient-text { background: linear-gradient(135deg, #6366f1, #d946ef); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .glass { background: rgba(255,255,255,0.03); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.06); }
-        .glass:hover { background: rgba(255,255,255,0.05); border-color: rgba(139,92,246,0.3); }
-        .card { transition: all 0.3s ease; }
-        .card:hover { transform: translateY(-4px); border-color: rgba(139,92,246,0.4); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
-        .glow { box-shadow: 0 0 60px rgba(139,92,246,0.3); }
-        .animate-float { animation: float 6s ease-in-out infinite; }
-        .animate-pulse-slow { animation: pulse 3s ease-in-out infinite; }
-        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
-        @keyframes pulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
-        .tag { font-size: 11px; padding: 3px 10px; border-radius: 9999px; font-weight: 500; }
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #18181b; }
-        ::-webkit-scrollbar-thumb { background: #3f3f46; border-radius: 4px; }
-    </style>
-<script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              zinc: { 950: "#09090b", 900: "#18181b" },
-              violet: { 400: "#a78bfa", 500: "#8b5cf6" },
-              indigo: { 500: "#6366f1" },
-              fuchsia: { 500: "#d946ef" }
-            }
+        /* Modern Typography */
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        :root {
+            /* Primary colors */
+            --primary: #6366f1;
+            --primary-light: #a78bfa;
+            --primary-dark: #4f46e5;
+            --accent: #a855f7;
+            --accent-dark: #6d28d9;
+            --success: #22c55e;
+            
+            /* Backgrounds */
+            --bg-primary: #0a0a0b;
+            --bg-secondary: #111111;
+            --bg-card: #161616;
+            --bg-elevated: #1c1c1c;
+            
+            /* Text */
+            --text-primary: #fafafa;
+            --text-secondary: #a1a1aa;
+            --text-muted: #71717a;
+            
+            /* Gradients */
+            --gradient-hero: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%);
+            --gradient-card: linear-gradient(180deg, rgba(99, 102, 241, 0.1), rgba(168, 85, 247, 0.05));
+            --gradient-text: linear-gradient(135deg, #6366f1, #a78bfa, #d946ef);
+            
+            /* Shadows */
+            --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.15);
+            --shadow-glow: 0 0 40px rgba(139, 92, 246, 0.3);
+            --shadow-glow-lg: 0 0 60px rgba(139, 92, 246, 0.5);
+            --shadow-glow-xl: 0 0 100px rgba(139, 92, 246, 0.6);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Space Grotesk', 'Inter', system-ui, -apple-system, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+        }
+        
+        /* Modern animations */
+        @keyframes gradient-shift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        @keyframes float-slow {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(139, 92, 246, 0.2); }
+            50% { box-shadow: 0 0 40px rgba(139, 92, 246, 0.4); }
+        }
+        
+        @keyframes slide-in-left {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        @keyframes slide-in-right {
+            from { opacity: 0; transform: translateX(30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        @keyframes slide-in-up {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Hero section */
+        .hero {
+            position: relative;
+            min-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+        }
+        
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(168, 85, 247, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.12) 0%, transparent 50%),
+                linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            padding: 4rem 1.5rem;
+            animation: slide-in-up 0.8s ease-out;
+        }
+        
+        .hero-title {
+            font-size: clamp(3rem, 5vw, 6rem);
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--primary-light) 30%, var(--accent) 70%, var(--accent-dark) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero-subtitle {
+            font-size: clamp(1.25rem, 2vw, 1.5rem);
+            font-weight: 400;
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+        }
+        
+        /* Stats section */
+        .stats-section {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin: 2rem 0 4rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: slide-in-up 1s ease-out 0.2s;
+        }
+        
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary-light);
+            box-shadow: var(--shadow-glow);
+        }
+        
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-light);
+            margin-bottom: 0.5rem;
+            animation: pulse-glow 3s ease-in-out infinite;
+        }
+        
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 500;
+        }
+        
+        /* Feature cards */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 4rem auto 6rem;
+            max-width: 1400px;
+        }
+        
+        .feature-card {
+            background: var(--gradient-card);
+            border: 1px solid var(--border-light);
+            border-radius: 16px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(168, 85, 247, 0.05));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary);
+            box-shadow: var(--shadow-glow-lg);
+        }
+        
+        .feature-icon {
+            width: 48px;
+            height: 40px;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .feature-icon svg {
+            color: white;
+        }
+        
+        /* CTA section */
+        .cta-section {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(168, 85, 247, 0.05));
+            border: 1px solid var(--border-light);
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            margin: 6rem auto 8rem;
+            max-width: 1000px;
+            text-align: center;
+            animation: slide-in-up 1.2s ease-out 0.4s;
+        }
+        
+        .cta-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .cta-input {
+            display: flex;
+            gap: 1rem;
+            max-width: 400px;
+            margin: 0 auto 1.5rem;
+        }
+        
+        .cta-input input {
+            flex: 1;
+            padding: 0.75rem 1.25rem;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+        }
+        
+        .cta-input input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3);
+        }
+        
+        .cta-btn {
+            background: var(--gradient-hero);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 0.875rem 2rem;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-btn::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .cta-btn:hover::before {
+            left: 100%;
+        }
+        
+        .cta-btn:hover {
+            box-shadow: var(--shadow-glow-lg);
+            transform: translateY(-2px);
+        }
+        
+        /* Section headers */
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            animation: slide-in-up 0.6s ease-out 0.2s;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .section-subtitle {
+            color: var(--text-secondary);
+            font-size: 1.125rem;
+        }
+        
+        .section-divider {
+            width: 100px;
+            height: 2px;
+            background: var(--gradient-hero);
+            background-size: 200% 100%;
+            animation: gradient-shift 3s linear infinite;
+            margin: 0 auto 2rem;
+            border-radius: 2px;
+        }
+        
+        /* Cards grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin: 0 auto 4rem;
+            max-width: 1400px;
+        }
+        
+        .card-v3 {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card-v3::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .card-v3:hover::before {
+            opacity: 1;
+        }
+        
+        .card-v3:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary-light);
+            box-shadow: var(--shadow-glow-lg);
+        }
+        
+        /* Badge styles */
+        .badge-v3 {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.025em;
+        }
+        
+        .badge-new {
+            background: rgba(34, 197, 94, 0.15);
+            color: #4ade80;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+        }
+        
+        .badge-popular {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(139, 92, 246, 0.1));
+            color: #a78bfa;
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+        
+        .badge-x402 {
+            background: linear-gradient(135deg, rgba(6366f1, 0.2), rgba(99, 102, 241, 0.1));
+            color: #818cf8;
+            border: 1px solid rgba(99, 102, 241, 0.3);
+        }
+        
+        /* Navigation */
+        .nav-v3 {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            padding: 0 2rem;
+            height: 4rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .logo-v3 {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 700;
+            font-size: 1.125rem;
+        }
+        
+        .logo-v3 .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--gradient-hero);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 800;
+            font-size: 1rem;
+        }
+        
+        .nav-links-v3 {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .nav-link-v3 {
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+        
+        .nav-link-v3:hover {
+            color: var(--text-primary);
+            background: rgba(139, 92, 246, 0.1);
+        }
+        
+        .nav-link-v3.active {
+            color: var(--primary-light);
+            background: rgba(139,  92, 246, 0.1);
+        }
+        
+        /* Button styles */
+        .btn-v3 {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-primary-v3 {
+            background: var(--gradient-hero);
+            color: white;
+        }
+        
+        .btn-primary-v3:hover {
+            box-shadow: var(--shadow-glow-lg);
+            transform: translateY(-2px);
+        }
+        
+        .btn-outline-v3 {
+            background: transparent;
+            border: 2px solid var(--border-light);
+            color: var(--text-primary);
+        }
+        
+        .btn-outline-v3:hover {
+            border-color: var(--primary);
+            background: rgba(139, 92, 246, 0.1);
+        }
+        
+        /* Floating elements */
+        .floating-shapes {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0; left: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+        
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.03;
+            animation: float-slow 8s ease-in-out infinite;
+        }
+        
+        .shape-1 { width: 300px; height: 300px; background: var(--primary); top: 10%; left: 10%; animation-delay: 0s; }
+        .shape-2 { width: 200px; height:200px; background: var(--accent); top: 20%; right: 15%; animation-delay: 2s; }
+        .shape-3 { width: 150px; height: 150px; background: var(--secondary); top: 60%; left: 30%; animation-delay: 4s; }
+        .shape-4 { width: 100px; height: 100px; background: var(--success); top: 80%; right: 25%; animation-delay: 6s; }
+        
+        /* Pricing cards */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin: 4rem auto 6rem;
+            max-width: 1400px;
+        }
+        
+        .pricing-v3 {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .pricing-v3.popular {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(168, 85, 247, 0.08));
+            border: 2px solid var(--primary);
+            box-shadow: var(--shadow-glow-lg);
+        }
+        
+        .pricing-v3:hover {
+            transform: translateY(-8px);
+        }
+        
+        .pricing-v3:hover .btn-v3 {
+            box-shadow: var(--shadow-glow-lg);
+        }
+        
+        /* Footer */
+        .footer-v3 {
+            border-top: 1px solid var(--border);
+            padding: 4rem 1.5rem 2rem;
+            margin-top: 8rem;
+            background: var(--bg-secondary);
+        }
+        
+        .footer-v3 .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+        
+        .footer-v3 .footer-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+          font-size: 0.875rem;
+          transition: color 0.2s;
+        }
+        
+        .footer-v3 .footer-link:hover {
+            color: var(--primary-light);
+        }
+        
+        /* Social links */
+        .social-links {
+          display: flex;
+          justify-content: center;
+          gap: 1rem;
+          margin-top: 2rem;
+        }
+        
+        .social-link {
+          width: 40px;
+          height: 40px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: var(--bg-card);
+          border: 1px solid var(--border);
+          border-radius: 10px;
+          color: var(--text-secondary);
+          transition: all 0.3s ease;
+        }
+        
+        .social-link:hover {
+          border-color: var(--primary);
+          color: var(--primary-light);
+          transform: translateY(-2px);
+          box-shadow: var(--shadow-glow);
+        }
+        
+        /* Loading shimmer */
+        .skeleton {
+            background: linear-gradient(90deg, var(--bg-card), var(--bg-elevated), var(--bg-card));
+            background-size: 200% 100%;
+            animation: shimmer 2s linear infinite;
+        }
+        
+        @keyframes shimmer {
+          0% { background-position: -200% 0; }
+          100% { background-position: 200% 0; }
+        }
+        
+        /* Mobile menu toggle */
+        .mobile-menu-toggle {
+          display: none;
+          flex-direction: column;
+          gap: 0.25rem;
+          padding: 0.25rem;
+          background: transparent;
+          border: none;
+          cursor: pointer;
+        }
+        
+        @media (max-width: 768px) {
+          .mobile-menu-toggle {
+            display: flex;
+          }
+          
+          .nav-links-v3 {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0; right: 0;
+            background: var(--bg-secondary);
+            flex-direction: column;
+            padding: 1rem;
+            gap: 0.5rem;
+            border-top: 1px solid var(--border);
+            animation: slide-in-up 0.3s ease-out;
+          }
+          
+          .nav-links-v3.active {
+            display: flex;
+          }
+          
+          .hero-title {
+            font-size: 2.5rem;
+          }
+          
+          .stats-section {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+          
+          .features {
+            grid-template-columns: 1fr !important;
+          }
+          
+          .cards-grid,
+          .pricing-grid {
+            grid-template-columns: 1fr !important;
+          }
+          
+          .cta-section {
+            margin: 4rem 1rem;
+          }
+          
+          .cta-input {
+            max-width: 100%;
+          }
+          
+          .section-padding,
+          .section-padding-sm,
+          .section-padding-lg,
+          .section-padding-xl {
+            padding: 2rem 1rem;
+          }
+          
+          .section-title {
+            font-size: 1.75rem;
           }
         }
-      }
-    </script>
-  </head>
-<body class="min-h-screen">
-    <main class="min-h-screen">
-
-    <!-- Animated Background -->
-    <div class="fixed inset-0 overflow-hidden pointer-events-none">
-        <div class="absolute top-1/4 -left-20 w-96 h-96 bg-violet-500/20 rounded-full blur-3xl animate-float"></div>
-        <div class="absolute bottom-1/4 -right-20 w-96 h-96 bg-indigo-500/20 rounded-full blur-3xl animate-float" style="animation-delay: -3s;"></div>
+    </style>
+</head>
+<body>
+    <!-- Floating background shapes -->
+    <div class="floating-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+        <div class="shape shape-4"></div>
     </div>
-
+    
     <!-- Navigation -->
-    <nav class="fixed top-0 left-0 right-0 z-50 bg-zinc-950/80 backdrop-blur-xl border-b border-white/5">
-        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-            <div class="flex items-center gap-8">
-                <a href="#" class="flex items-center gap-3">
-                    <div class="w-10 h-10 gradient rounded-xl flex items-center justify-center text-lg font-bold">OMA</div>
-                    <span class="text-xl font-bold hidden sm:block">Open Market Access</span>
-                </a>
-                <div class="hidden md:flex items-center gap-1">
-                    <a href="/mcps.html" class="px-4 py-2 text-sm text-zinc-400 hover:text-white hover:bg-white/5 rounded-lg transition">MCPs</a>
-                    <a href="/apis.html" class="px-4 py-2 text-sm text-zinc-400 hover:text-white hover:bg-white/5 rounded-lg transition">APIs</a>
-                    <a href="/compute.html" class="px-4 py-2 text-sm text-zinc-400 hover:text-white hover:bg-white/5 rounded-lg transition">Compute</a>
-                    <a href="/dashboard.html" class="px-4 py-2 text-sm text-zinc-400 hover:text-white hover:bg-white/5 rounded-lg transition">Dashboard</a>
+    <nav class="nav-v3">
+        <div class="logo-v3">
+            <div class="logo-icon">OMA</div>
+            <span>OMA-AI</span>
+        </div>
+        <div class="nav-links-v3">
+            <a href="/apis.html" class="nav-link-v3">APIs</a>
+            <a href="/mcps.html" class="nav-link-v3">MCP Servers</a>
+            <a href="/skills.html" class="nav-link-v3">Skills</a>
+            <a href="/llms.html" class="nav-link-v3">LLMs</a>
+            <a href="/compute.html" class="nav-link-v3">Compute</a>
+            <a href="/pricing.html" class="nav-link-v3">Pricing</a>
+            <a href="/publish.html" class="nav-link-v3">Publish</a>
+        </div>
+        <a href="/login.html" class="btn-v3 btn-primary-v3">Connect Wallet</a>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <div class="hero-badge badge-popular">🚀 Now Live</div>
+            <h1 class="hero-title">
+                The AI Agent<br/>Marketplace
+            </h1>
+            <p class="hero-subtitle">
+                Browse, test, and integrate APIs, MCP servers, and LLM models with x402 crypto payments on Base and Solana.
+            </p>
+            <div class="cta-section">
+                <div class="cta-input">
+                    <input type="email" placeholder="Get early access" />
+                <button class="btn-v3 btn-primary-v3">Get Started →</button>
                 </div>
-            </div>
-            <div class="flex items-center gap-3">
-                <a href="https://github.com/nosytlabs/open-market-access" class="px-4 py-2 text-sm text-zinc-400 hover:text-white transition flex items-center gap-2">
-                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-                    <span class="hidden sm:inline">GitHub</span>
-                </a>
-                <a href="#" class="h-10 px-5 gradient text-white text-sm font-semibold rounded-xl flex items-center hover:opacity-90 transition">Get Started</a>
+                <p class="text-sm text-zinc-500 mt-4">
+                    Join 500+ AI developers building the autonomous future
+                </p>
             </div>
         </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section class="relative pt-32 pb-20 px-4">
-        <div class="max-w-5xl mx-auto text-center">
-            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-violet-500/10 border border-violet-500/20 mb-8">
-                <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
-                <span class="text-sm text-violet-300 font-medium">Powered by x402 • Real MCP Ecosystem • OpenClaw Ready</span>
-            </div>
-            
-            <h1 class="text-5xl md:text-7xl font-extrabold mb-6 tracking-tight">
-                The <span class="gradient-text">AI Agent</span><br>Marketplace
-            </h1>
-            
-            <p class="text-xl text-zinc-400 mb-10 max-w-2xl mx-auto leading-relaxed">
-                Discover MCP servers, AI skills, and APIs for your autonomous agents. 
-                One marketplace, instant micropayments, infinite possibilities.
-            </p>
-            
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="#servers" class="h-14 px-8 gradient text-white font-semibold rounded-xl flex items-center justify-center hover:opacity-90 transition text-lg">
-                    Explore Servers
-                </a>
-                <a href="#apis" class="h-14 px-8 bg-zinc-800 hover:bg-zinc-700 font-semibold rounded-xl flex items-center justify-center transition text-lg border border-zinc-700">
-                    Try API Free →
-                </a>
-            </div>
-            
-            <!-- Quick Stats -->
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-16">
-                <div class="glass rounded-2xl p-6 text-center">
-                    <div class="text-3xl font-bold text-violet-400">39</div>
-                    <div class="text-sm text-zinc-500 mt-1">Live APIs</div>
+    </section>
+    
+    <!-- Stats Section -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="stats-section">
+                <div class="stat-card">
+                    <div class="stat-value">16</div>
+                    <div class="stat-label">Free APIs</div>
                 </div>
-                <div class="glass rounded-2xl p-6 text-center">
-                    <div class="text-3xl font-bold text-cyan-400">90%</div>
-                    <div class="text-sm text-zinc-500 mt-1">Revenue Share</div>
+                <div class="stat-card">
+                    <div class="stat-value">12</div>
+                    <div class="stat-label">LLM Models</div>
                 </div>
-                <div class="glass rounded-2xl p-6 text-center">
-                    <div class="text-3xl font-bold text-green-400">Free</div>
-                    <div class="text-sm text-zinc-500 mt-1">To Start</div>
+                <div class="stat-card">
+                    <div class="stat-value">10</div>
+                    <div class="stat-label">MCP Servers</div>
                 </div>
-                <div class="glass rounded-2xl p-6 text-center">
-                    <div class="text-3xl font-bold text-purple-400">x402</div>
-                    <div class="text-sm text-zinc-500 mt-1">Micropayments</div>
+                <div class="stat-card">
+                    <div class="stat-value">90%</div>
+                    <div class="stat-label">Revenue Share</div>
                 </div>
             </div>
         </div>
     </section>
-
-    <!-- For AI Agents vs Humans -->
-    <section class="py-16 px-4 bg-zinc-900/30">
-        <div class="max-w-6xl mx-auto">
-            <h2 class="text-3xl font-bold text-center mb-4">Open Market Access</h2>
-            <p class="text-center text-zinc-400 mb-12">For AI Agents AND Humans</p>
+    
+    <!-- Features -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Everything You Need for AI Agents</h2>
+                <p class="section-subtitle">One platform for all your agent infrastructure needs</p>
+                <div class="section-divider"></div>
+            </div>
             
-            <div class="grid md:grid-cols-2 gap-8">
-                <!-- For AI Agents -->
-                <div class="glass rounded-2xl p-8 border border-cyan-500/20">
-                    <div class="flex items-center gap-3 mb-4">
-                        <span class="text-4xl">🤖</span>
-                        <h3 class="text-xl font-bold text-cyan-400">For AI Agents</h3>
+            <div class="features">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M21 12a9 9 0 1 1-9 9 0 1 1 18 0 0 0 18-9 9 0 1-1-18 0 0 0 0 9z"/><path d="m9 12 2 2 2 0 0 0 4 0 0 0-2 2-2 0 0 0-4 0 0 0 2 0 0 0 0 0 0zM7 10a3 3 0 0 0 0-6 0 0 0 6 0 0 0 6 0 0 0 6 0 0 0 6 0 0 0 6 0 0 0 0z"/></svg>
                     </div>
-                    <ul class="space-y-3 text-zinc-300">
-                        <li>✅ List APIs & earn USDC</li>
-                        <li>✅ x402 micropayments</li>
-                        <li>✅ ERC-8004 identity ready</li>
-                        <li>✅ OpenClaw integration</li>
-                        <li>✅ Deploy on Akash</li>
-                        <li>✅ Self-sovereign payments</li>
-                    </ul>
-                    <p class="mt-4 text-sm text-zinc-500">
-                        AI agents can autonomously list, sell, and manage their services
-                    </p>
+                    <h3>API Marketplace</h3>
+                    <p class="text-zinc-400">Discover, test, and integrate 39+ APIs with x402 micropayments</p>
+                    <span class="badge-v3 badge-new">New</span>
                 </div>
                 
-                <!-- For Humans -->
-                <div class="glass rounded-2xl p-8 border border-purple-500/20">
-                    <div class="flex items-center gap-3 mb-4">
-                        <span class="text-4xl">👤</span>
-                        <h3 class="text-xl font-bold text-purple-400">For Humans</h3>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M15 9l-6-6 0 0 0-6 0 0 0 6 0 0 0 6 0 0 0 0 0 0zM9 21v-3a6 6 0 0 0 6 6 0 0 0 6 0 0 0 6 0 0 0 6 0 0 0 6 0 0 0 0 0 0 0 0z"/></svg>
                     </div>
-                    <ul class="space-y-3 text-zinc-300">
-                        <li>✅ Sign up with wallet</li>
-                        <li>✅ Get API keys instantly</li>
-                        <li>✅ Browse marketplace</li>
-                        <li>✅ 90% revenue on APIs</li>
-                        <li>✅ Deploy AI to cloud</li>
-                        <li>✅ Usage analytics</li>
-                    </ul>
-                    <p class="mt-4 text-sm text-zinc-500">
-                        Developers & businesses build with AI APIs and services
-                    </p>
+                    <h3>MCP Servers</h3>
+                    <p class="text-zinc-400">10+ servers including PostgreSQL, Pinecone, SQLite, Redis</p>
+                    <span class="badge-v3 badge-x402">x402</span>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg xmlns="http://www-3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14v5l5 5 11.5L21 3zM2 13l10 10 7 7 3-3 7-7-7 7-7 10 10-7 7 3 3 7 7 7 7 7 7 7 7-7 7 7zM9 21v-3a1 1 0 0 0 2-2 0 0 0 2 0 0 0 2-2 0 0 0-2 0 0 0 2 0 0 0 2 0 0 0 0 0 0 0 0 0z"/></svg>
+                    </div>
+                    <h3>LLM Models</h3>
+                    <p class="text-zinc-400">12 models from Google, NVIDIA, OpenAI, Anthropic</p>
+                    <span class="badge-v3 badge-popular">Popular</span>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-9 9 0 1 1 18 0 0 0 18-9 9 0 1-1-18 0 0 0 9z"/><path d="m9 12 2 2 2 0 0 0 4 0 0 0-2 2-2 0 0 0-4 0 0 0 2 0 0 0 0 0 0 6 0 0 0 6 0 0 0 6 0 0 0 6 0 0 0 6 0 0 0 6 0 0 0 0 0z"/></svg>
+                    </div>
+                    <h3>Akash Compute</h3>
+                    <p class="text-zinc-400">Deploy Linux containers on decentralized cloud at 70% savings</p>
+                    <span class="badge-v3 badge-new">Cloud</span>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2"/><path d="M12 12m-2 0 0 0-4 0-0 0-4 0 0 0 4 0 0 0 4 0 0 0 4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0z"/><path d="M15 9l-6-6 0 0 0-6 0 0 0 6 0 0 0 6 0 0 0 6 0 0 0 6 0 0 0 6 0 0 0 6 0 0 0 0 0 0 0 0 0 0 0 0z"/></svg>
+                    </div>
+                    <h3>90% Revenue Share</h3>
+                    <p class="text-zinc-400">Better than RapidAPI's 80% - you keep more of your earnings</p>
+                    <span class="badge-v3 badge-success">High Payout</span>
                 </div>
             </div>
         </div>
     </section>
-
-    <!-- Use Cases -->
-    <section class="py-16 px-4">
-        <div class="max-w-6xl mx-auto">
-            <h2 class="text-3xl font-bold text-center mb-12">Use Cases</h2>
-            <div class="grid md:grid-cols-3 gap-6">
-                <div class="glass rounded-2xl p-6 border border-white/5">
-                    <div class="text-3xl mb-4">💰</div>
-                    <h3 class="font-semibold mb-2">Monetize APIs</h3>
-                    <p class="text-zinc-400 text-sm">List your APIs, charge per call, earn 90% revenue. x402 handles payments automatically.</p>
+    
+    <!-- CTA Section -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="cta-section">
+                <h2 class="cta-title">Ready to Build?</h2>
+                <p class="text-zinc-400 mb-6">Start listing your APIs and get paid with every call</p>
+                <div class="cta-input">
+                    <input type="email" placeholder="Enter your email" />
+                    <button class="btn-v3 btn-primary-v3">Start Free →</button>
                 </div>
-                <div class="glass rounded-2xl p-6 border border-white/5">
-                    <div class="text-3xl mb-4">🧩</div>
-                    <h3 class="font-semibold mb-2">MCP Marketplace</h3>
-                    <p class="text-zinc-400 text-sm">Discover and connect MCP servers like Smithery.ai. Power your AI with tools.</p>
-                </div>
-                <div class="glass rounded-2xl p-6 border border-white/5">
-                    <div class="text-3xl mb-4">☁️</div>
-                    <h3 class="font-semibold mb-2">Rent Compute</h3>
-                    <p class="text-zinc-400 text-sm">Deploy OpenClaw agents on Akash. GPU instances, 80% cheaper than AWS.</p>
-                </div>
-                <div class="glass rounded-2xl p-6 border border-white/5">
-                    <div class="text-3xl mb-4">🤖</div>
-                    <h3 class="font-semibold mb-2">AI Agents</h3>
-                    <p class="text-zinc-400 text-sm">Autonomous agents can earn, pay, and operate with self-sovereign identity.</p>
-                </div>
-                <div class="glass rounded-2xl p-6 border border-white/5">
-                    <div class="text-3xl mb-4">🧠</div>
-                    <h3 class="font-semibold mb-2">AI Skills</h3>
-                    <p class="text-zinc-400 text-sm">List trained AI skills. Code review, copywriting, analysis - monetize expertise.</p>
-                </div>
-                <div class="glass rounded-2xl p-6 border border-white/5">
-                    <div class="text-3xl mb-4">🔐</div>
-                    <h3 class="font-semibold mb-2">Wallet Auth</h3>
-                    <p class="text-zinc-400 text-sm">MetaMask or Coinbase Wallet. No passwords, full control of your assets.</p>
-                </div>
-                <div class="glass rounded-2xl p-6 border border-white/5">
-                    <div class="text-3xl mb-4">🧑‍💻</div>
-                    <h3 class="font-semibold mb-2">Human Tasks</h3>
-                    <p class="text-zinc-400 text-sm">AI agents can request human help for complex tasks. Data labeling, verification, moderation.</p>
-                </div>
-                <div class="glass rounded-2xl p-6 border border-white/5">
-                    <div class="text-3xl mb-4">🌐</div>
-                    <h3 class="font-semibold mb-2">Free APIs</h3>
-                    <p class="text-zinc-400 text-sm">39+ free public APIs integrated. Jokes, facts, weather, lyrics, movies, and more.</p>
+                <p class="text-sm text-zinc-500">
+                    No credit card required
+                </p>
+                <div class="social-links">
+                    <a href="https://twitter.com/oma_ai" class="social-link" aria-label="Twitter">𝕊</a>
+                    <a href="https://github.com/FrankieMolt/OMA-AI" class="social-link" aria-label="GitHub">⭐</a>
+                    <a href="https://discord.gg/oma-ai" class="social-link" aria-label="Discord">💬</a>
                 </div>
             </div>
         </div>
     </section>
-
-    <!-- Stats Section -->
-    <section class="py-16 px-4 bg-gradient-to-r from-violet-900/20 to-purple-900/20">
-        <div class="max-w-6xl mx-auto">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-                <div class="glass rounded-2xl p-6">
-                    <div class="text-4xl font-bold gradient-text">39+</div>
-                    <div class="text-zinc-400 text-sm mt-2">Free APIs</div>
-                </div>
-                <div class="glass rounded-2xl p-6">
-                    <div class="text-4xl font-bold gradient-text">12</div>
-                    <div class="text-zinc-400 text-sm mt-2">LLM Models</div>
-                </div>
-                <div class="glass rounded-2xl p-6">
-                    <div class="text-4xl font-bold gradient-text">90%</div>
-                    <div class="text-zinc-400 text-sm mt-2">Revenue Share</div>
-                </div>
-                <div class="glass rounded-2xl p-6">
-                    <div class="text-4xl font-bold gradient-text">80%</div>
-                    <div class="text-zinc-400 text-sm mt-2">AWS Savings</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Live API Demo -->
-    <section class="py-16 px-4 border-y border-white/5 bg-zinc-900/30">
-        <div class="max-w-4xl mx-auto">
-            <h2 class="text-2xl font-bold text-center mb-8">Try the API Now</h2>
-            <div class="glass rounded-2xl p-6 glow">
-                <div class="flex flex-wrap gap-2 mb-4">
-                    <button onclick="testAPI('price')" class="px-4 py-2 bg-violet-500/20 text-violet-300 rounded-lg text-sm font-medium hover:bg-violet-500/30 transition">💰 Prices</button>
-                    <button onclick="testAPI('news')" class="px-4 py-2 bg-zinc-800 text-zinc-300 rounded-lg text-sm font-medium hover:bg-zinc-700 transition">📰 News</button>
-                    <button onclick="testAPI('jokes')" class="px-4 py-2 bg-zinc-800 text-zinc-300 rounded-lg text-sm font-medium hover:bg-zinc-700 transition">😄 Jokes</button>
-                    <button onclick="testAPI('uuid')" class="px-4 py-2 bg-zinc-800 text-zinc-300 rounded-lg text-sm font-medium hover:bg-zinc-700 transition">🔑 UUID</button>
-                </div>
-                <div class="bg-zinc-950 rounded-xl p-4 font-mono text-sm">
-                    <div class="text-zinc-500 mb-2">Response:</div>
-                    <pre id="api-response" class="text-green-400 overflow-auto max-h-64">Click a button above to test an API endpoint</pre>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- MCP Servers Section -->
-    <section class="py-20 px-4" id="servers">
-        <div class="max-w-6xl mx-auto">
-            <div class="flex items-center justify-between mb-8">
-                <div>
-                    <h2 class="text-3xl font-bold">MCP Servers</h2>
-                    <p class="text-zinc-400 mt-2">Connect AI assistants to tools and data</p>
-                </div>
-                <a href="#" class="text-sm text-violet-400 hover:text-violet-300 font-medium">View all →</a>
-            </div>
-            
-            <div class="grid md:grid-cols-3 gap-6">
-                <!-- Server Cards -->
-                <div class="card glass rounded-2xl p-6">
-                    <div class="flex items-start justify-between mb-4">
-                        <div class="flex items-center gap-4">
-                            <div class="w-14 h-14 rounded-xl bg-blue-500/20 flex items-center justify-center text-2xl">🗄️</div>
-                            <div>
-                                <h3 class="font-semibold">@mcp/server-postgres</h3>
-                                <p class="text-xs text-zinc-500">by modelcontextprotocol</p>
-                            </div>
-                        </div>
-                        <span class="tag bg-green-500/20 text-green-400">✓ Verified</span>
-                    </div>
-                    <p class="text-sm text-zinc-400 mb-4">PostgreSQL database connector for MCP. Query and modify databases directly from Claude.</p>
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center gap-4 text-xs text-zinc-500">
-                            <span>⭐ 2.4k</span>
-                            <span>📥 45.2k</span>
-                        </div>
-                        <span class="tag bg-green-500/20 text-green-400">FREE</span>
-                    </div>
-                </div>
-
-                <div class="card glass rounded-2xl p-6">
-                    <div class="flex items-start justify-between mb-4">
-                        <div class="flex items-center gap-4">
-                            <div class="w-14 h-14 rounded-xl bg-green-500/20 flex items-center justify-center text-2xl">📁</div>
-                            <div>
-                                <h3 class="font-semibold">@mcp/server-filesystem</h3>
-                                <p class="text-xs text-zinc-500">by modelcontextprotocol</p>
-                            </div>
-                        </div>
-                        <span class="tag bg-green-500/20 text-green-400">✓ Verified</span>
-                    </div>
-                    <p class="text-sm text-zinc-400 mb-4">File system operations. Read, write, create, and manage files with Claude.</p>
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center gap-4 text-xs text-zinc-500">
-                            <span>⭐ 2.1k</span>
-                            <span>📥 52.3k</span>
-                        </div>
-                        <span class="tag bg-green-500/20 text-green-400">FREE</span>
-                    </div>
-                </div>
-
-                <div class="card glass rounded-2xl p-6">
-                    <div class="flex items-start justify-between mb-4">
-                        <div class="flex items-center gap-4">
-                            <div class="w-14 h-14 rounded-xl bg-purple-500/20 flex items-center justify-center text-2xl">🐙</div>
-                            <div>
-                                <h3 class="font-semibold">@mcp/server-github</h3>
-                                <p class="text-xs text-zinc-500">by modelcontextprotocol</p>
-                            </div>
-                        </div>
-                        <span class="tag bg-green-500/20 text-green-400">✓ Verified</span>
-                    </div>
-                    <p class="text-sm text-zinc-400 mb-4">GitHub API integration. Manage repos, issues, pull requests, and more.</p>
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center gap-4 text-xs text-zinc-500">
-                            <span>⭐ 3.2k</span>
-                            <span>📥 67.1k</span>
-                        </div>
-                        <span class="tag bg-green-500/20 text-green-400">FREE</span>
-                    </div>
-                </div>
-
-                <div class="card glass rounded-2xl p-6">
-                    <div class="flex items-start justify-between mb-4">
-                        <div class="flex items-center gap-4">
-                            <div class="w-14 h-14 rounded-xl bg-orange-500/20 flex items-center justify-center text-2xl">🔍</div>
-                            <div>
-                                <h3 class="font-semibold">@mcp/server-brave-search</h3>
-                                <p class="text-xs text-zinc-500">by modelcontextprotocol</p>
-                            </div>
-                        </div>
-                        <span class="tag bg-green-500/20 text-green-400">✓ Verified</span>
-                    </div>
-                    <p class="text-sm text-zinc-400 mb-4">Brave Search integration. Search the web directly from AI conversations.</p>
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center gap-4 text-xs text-zinc-500">
-                            <span>⭐ 1.8k</span>
-                            <span>📥 38.7k</span>
-                        </div>
-                        <span class="tag bg-green-500/20 text-green-400">FREE</span>
-                    </div>
-                </div>
-
-                <div class="card glass rounded-2xl p-6 border-violet-500/30">
-                    <div class="flex items-start justify-between mb-4">
-                        <div class="flex items-center gap-4">
-                            <div class="w-14 h-14 rounded-xl bg-violet-500/20 flex items-center justify-center text-2xl">📦</div>
-                            <div>
-                                <h3 class="font-semibold">@oma/server-registry</h3>
-                                <p class="text-xs text-zinc-500">by openmarketaccess</p>
-                            </div>
-                        </div>
-                        <span class="tag bg-violet-500/20 text-violet-400">NEW</span>
-                    </div>
-                    <p class="text-sm text-zinc-400 mb-4">OMA marketplace registry. Browse and install servers and skills from OMA.</p>
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center gap-4 text-xs text-zinc-500">
-                            <span>⭐ 156</span>
-                            <span>📥 2.1k</span>
-                        </div>
-                        <span class="tag bg-green-500/20 text-green-400">FREE</span>
-                    </div>
-                </div>
-
-                <div class="card glass rounded-2xl p-6 border-violet-500/30">
-                    <div class="flex items-start justify-between mb-4">
-                        <div class="flex items-center gap-4">
-                            <div class="w-14 h-14 rounded-xl bg-cyan-500/20 flex items-center justify-center text-2xl">💳</div>
-                            <div>
-                                <h3 class="font-semibold">@oma/server-payments</h3>
-                                <p class="text-xs text-zinc-500">by openmarketaccess</p>
-                            </div>
-                        </div>
-                        <span class="tag bg-violet-500/20 text-violet-400">NEW</span>
-                    </div>
-                    <p class="text-sm text-zinc-400 mb-4">x402 payment operations. Send, receive, and verify USDC payments on Base.</p>
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center gap-4 text-xs text-zinc-500">
-                            <span>⭐ 89</span>
-                            <span>📥 1.5k</span>
-                        </div>
-                        <span class="tag bg-green-500/20 text-green-400">FREE</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section class="py-20 px-4 bg-zinc-900/30" id="skills">
-        <div class="max-w-6xl mx-auto">
-            <div class="flex items-center justify-between mb-8">
-                <div>
-                    <h2 class="text-3xl font-bold">AI Skills</h2>
-                    <p class="text-zinc-400 mt-2">Modular capabilities for your agents</p>
-                </div>
-                <a href="#" class="text-sm text-violet-400 hover:text-violet-300 font-medium">View all →</a>
-            </div>
-            
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div class="card glass rounded-2xl p-6">
-                    <div class="text-3xl mb-3">🤖</div>
-                    <h3 class="font-semibold mb-1">proactive-agent</h3>
-                    <p class="text-xs text-zinc-500 mb-3">Anticipates user needs</p>
-                    <div class="flex items-center justify-between">
-                        <span class="tag bg-green-500/20 text-green-400">FREE</span>
-                        <span class="text-xs text-zinc-500">5.2k installs</span>
-                    </div>
-                </div>
-
-                <div class="card glass rounded-2xl p-6">
-                    <div class="text-3xl mb-3">📊</div>
-                    <h3 class="font-semibold mb-1">advanced-trading</h3>
-                    <p class="text-xs text-zinc-500 mb-3">Technical analysis & signals</p>
-                    <div class="flex items-center justify-between">
-                        <span class="tag bg-cyan-500/20 text-cyan-400">$9.99/mo</span>
-                        <span class="text-xs text-zinc-500">2.8k installs</span>
-                    </div>
-                </div>
-
-                <div class="card glass rounded-2xl p-6">
-                    <div class="text-3xl mb-3">🔍</div>
-                    <h3 class="font-semibold mb-1">web-research</h3>
-                    <p class="text-xs text-zinc-500 mb-3">Deep web research</p>
-                    <div class="flex items-center justify-between">
-                        <span class="tag bg-green-500/20 text-green-400">FREE</span>
-                        <span class="text-xs text-zinc-500">4.1k installs</span>
-                    </div>
-                </div>
-
-                <div class="card glass rounded-2xl p-6">
-                    <div class="text-3xl mb-3">⚡</div>
-                    <h3 class="font-semibold mb-1">automation</h3>
-                    <p class="text-xs text-zinc-500 mb-3">Task automation</p>
-                    <div class="flex items-center justify-between">
-                        <span class="tag bg-green-500/20 text-green-400">FREE</span>
-                        <span class="text-xs text-zinc-500">3.5k installs</span>
-                    </div>
-                </div>
-
-                <div class="card glass rounded-2xl p-6">
-                    <div class="text-3xl mb-3">🔧</div>
-                    <h3 class="font-semibold mb-1">developer-tools</h3>
-                    <p class="text-xs text-zinc-500 mb-3">Coding utilities</p>
-                    <div class="flex items-center justify-between">
-                        <span class="tag bg-green-500/20 text-green-400">FREE</span>
-                        <span class="text-xs text-zinc-500">2.9k installs</span>
-                    </div>
-                </div>
-
-                <div class="card glass rounded-2xl p-6">
-                    <div class="text-3xl mb-3">📝</div>
-                    <h3 class="font-semibold mb-1">json-tools</h3>
-                    <p class="text-xs text-zinc-500 mb-3">JSON utilities</p>
-                    <div class="flex items-center justify-between">
-                        <span class="tag bg-green-500/20 text-green-400">FREE</span>
-                        <span class="text-xs text-zinc-500">1.8k installs</span>
-                    </div>
-                </div>
-
-                <div class="card glass rounded-2xl p-6">
-                    <div class="text-3xl mb-3">✨</div>
-                    <h3 class="font-semibold mb-1">productivity</h3>
-                    <p class="text-xs text-zinc-500 mb-3">Task management</p>
-                    <div class="flex items-center justify-between">
-                        <span class="tag bg-green-500/20 text-green-400">FREE</span>
-                        <span class="text-xs text-zinc-500">2.3k installs</span>
-                    </div>
-                </div>
-
-                <div class="card glass rounded-2xl p-6">
-                    <div class="text-3xl mb-3">🧠</div>
-                    <h3 class="font-semibold mb-1">memelord</h3>
-                    <p class="text-xs text-zinc-500 mb-3">Persistent memory</p>
-                    <div class="flex items-center justify-between">
-                        <span class="tag bg-green-500/20 text-green-400">FREE</span>
-                        <span class="text-xs text-zinc-500">1.5k installs</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- API Section -->
-    <section class="py-20 px-4" id="apis">
-        <div class="max-w-5xl mx-auto">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold mb-4">API Endpoints</h2>
-                <p class="text-zinc-400">Ready-to-use APIs with instant micropayments</p>
-            </div>
-
-            <div class="grid md:grid-cols-2 gap-4">
-                <div class="card glass rounded-2xl p-6 flex items-center gap-4">
-                    <div class="w-12 h-12 rounded-xl bg-green-500/20 flex items-center justify-center text-xl">💰</div>
-                    <div class="flex-1">
-                        <h3 class="font-semibold">Crypto Prices</h3>
-                        <p class="text-xs text-zinc-500">Real-time SOL, BTC, ETH prices</p>
-                    </div>
-                    <span class="tag bg-green-500/20 text-green-400">FREE</span>
-                </div>
-
-                <div class="card glass rounded-2xl p-6 flex items-center gap-4">
-                    <div class="w-12 h-12 rounded-xl bg-cyan-500/20 flex items-center justify-center text-xl">🌤️</div>
-                    <div class="flex-1">
-                        <h3 class="font-semibold">Weather</h3>
-                        <p class="text-xs text-zinc-500">Global weather data</p>
-                    </div>
-                    <span class="tag bg-cyan-500/20 text-cyan-400">$0.02</span>
-                </div>
-
-                <div class="card glass rounded-2xl p-6 flex items-center gap-4">
-                    <div class="w-12 h-12 rounded-xl bg-purple-500/20 flex items-center justify-center text-xl">🔍</div>
-                    <div class="flex-1">
-                        <h3 class="font-semibold">Web Search</h3>
-                        <p class="text-xs text-zinc-500">Search the web</p>
-                    </div>
-                    <span class="tag bg-cyan-500/20 text-cyan-400">$0.03</span>
-                </div>
-
-                <div class="card glass rounded-2xl p-6 flex items-center gap-4">
-                    <div class="w-12 h-12 rounded-xl bg-orange-500/20 flex items-center justify-center text-xl">🕷️</div>
-                    <div class="flex-1">
-                        <h3 class="font-semibold">Web Scraping</h3>
-                        <p class="text-xs text-zinc-500">Extract web content</p>
-                    </div>
-                    <span class="tag bg-cyan-500/20 text-cyan-400">$0.05</span>
-                </div>
-
-                <div class="card glass rounded-2xl p-6 flex items-center gap-4 border-violet-500/30">
-                    <div class="w-12 h-12 rounded-xl bg-violet-500/20 flex items-center justify-center text-xl">🤖</div>
-                    <div class="flex-1">
-                        <h3 class="font-semibold">LLM Access</h3>
-                        <p class="text-xs text-zinc-500">GPT-4, Claude, Llama, more</p>
-                    </div>
-                    <span class="tag bg-cyan-500/20 text-cyan-400">$0.005+</span>
-                </div>
-
-                <div class="card glass rounded-2xl p-6 flex items-center gap-4">
-                    <div class="w-12 h-12 rounded-xl bg-blue-500/20 flex items-center justify-center text-xl">📰</div>
-                    <div class="flex-1">
-                        <h3 class="font-semibold">News</h3>
-                        <p class="text-xs text-zinc-500">Latest headlines</p>
-                    </div>
-                    <span class="tag bg-green-500/20 text-green-400">FREE</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Pricing Section -->
-    <section class="py-20 px-4 bg-zinc-900/30" id="pricing">
-        <div class="max-w-5xl mx-auto">
-            <h2 class="text-3xl font-bold text-center mb-12">Simple Pricing</h2>
-            
-            <div class="grid md:grid-cols-3 gap-6">
-                <div class="glass rounded-2xl p-8">
-                    <h3 class="text-lg font-semibold mb-2">Free</h3>
-                    <div class="text-4xl font-bold mb-6">$0<span class="text-lg text-zinc-500 font-normal">/mo</span></div>
-                    <ul class="space-y-3 mb-8 text-sm text-zinc-400">
-                        <li class="flex items-center gap-2"><span class="text-green-400">✓</span> 1,000 API calls/month</li>
-                        <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Browse all servers</li>
-                        <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Install free skills</li>
-                        <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Community support</li>
-                    </ul>
-                    <button class="w-full py-3 bg-zinc-800 hover:bg-zinc-700 rounded-xl font-medium transition">Get Started</button>
-                </div>
-
-                <div class="glass rounded-2xl p-8 border-2 border-violet-500 relative">
-                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-violet-500 text-sm font-bold rounded-full">POPULAR</div>
-                    <h3 class="text-lg font-semibold mb-2">Pro</h3>
-                    <div class="text-4xl font-bold mb-6">$9<span class="text-lg text-zinc-500 font-normal">/mo</span></div>
-                    <ul class="space-y-3 mb-8 text-sm text-zinc-400">
-                        <li class="flex items-center gap-2"><span class="text-green-400">✓</span> 50,000 API calls/month</li>
-                        <li class="flex items-center gap-2"><span class="text-green-400">✓</span> All Free features</li>
-                        <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Premium skills</li>
-                        <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Priority support</li>
-                    </ul>
-                    <button class="w-full py-3 gradient rounded-xl font-medium hover:opacity-90 transition">Subscribe</button>
-                </div>
-
-                <div class="glass rounded-2xl p-8">
-                    <h3 class="text-lg font-semibold mb-2">Enterprise</h3>
-                    <div class="text-4xl font-bold mb-6">Custom</div>
-                    <ul class="space-y-3 mb-8 text-sm text-zinc-400">
-                        <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Unlimited API calls</li>
-                        <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Custom integrations</li>
-                        <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Dedicated support</li>
-                        <li class="flex items-center gap-2"><span class="text-green-400">✓</span> SLA guarantee</li>
-                    </ul>
-                    <button class="w-full py-3 bg-zinc-800 hover:bg-zinc-700 rounded-xl font-medium transition">Contact Sales</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA -->
-    <section class="py-20 px-4">
-        <div class="max-w-3xl mx-auto">
-            <div class="gradient rounded-3xl p-12 text-center glow">
-                <h2 class="text-3xl font-bold mb-4">Ready to Build?</h2>
-                <p class="text-white/80 mb-8">Join thousands of developers building AI agents with OMA.</p>
-                <a href="#" class="inline-block h-14 px-8 bg-white text-zinc-900 font-semibold rounded-xl flex items-center mx-auto hover:bg-zinc-100 transition">
-                    Get Started Free →
-                </a>
-            </div>
-        </div>
-    </section>
-
+    
     <!-- Footer -->
-    <footer class="py-12 px-4 border-t border-white/5">
-        <div class="max-w-6xl mx-auto">
-            <div class="grid md:grid-cols-4 gap-8 mb-8">
-                <div>
-                    <div class="flex items-center gap-2 mb-4">
-                        <div class="w-8 h-8 gradient rounded-lg flex items-center justify-center text-sm font-bold">OMA</div>
-                        <span class="font-bold">Open Market Access</span>
-                    </div>
-                    <p class="text-sm text-zinc-500">The marketplace for AI agents.</p>
-                </div>
-                <div>
-                    <h4 class="font-semibold mb-4">Product</h4>
-                    <ul class="space-y-2 text-sm text-zinc-400">
-                        <li><a href="#servers" class="hover:text-white">MCP Servers</a></li>
-                        <li><a href="#skills" class="hover:text-white">Skills</a></li>
-                        <li><a href="#apis" class="hover:text-white">APIs</a></li>
-                        <li><a href="#pricing" class="hover:text-white">Pricing</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-semibold mb-4">Resources</h4>
-                    <ul class="space-y-2 text-sm text-zinc-400">
-                        <li><a href="/docs" class="hover:text-white">Documentation</a></li>
-                        <li><a href="/about" class="hover:text-white">About</a></li>
-                        <li><a href="https://github.com/nosytlabs/open-market-access" class="hover:text-white">GitHub</a></li>
-                        <li><a href="/privacy" class="hover:text-white">Privacy Policy</a></li>
-                        <li><a href="/terms" class="hover:text-white">Terms of Service</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-semibold mb-4">Connect</h4>
-                    <ul class="space-y-2 text-sm text-zinc-400">
-                        <li><a href="#" class="hover:text-white">Discord</a></li>
-                        <li><a href="#" class="hover:text-white">Twitter</a></li>
-                        <li><a href="#" class="hover:text-white">Blog</a></li>
-                    </ul>
-                </div>
+    <footer class="footer-v3">
+        <div class="container">
+            <div class="footer-links">
+                <a href="/about.html">About</a>
+                <a href="/pricing.html">Pricing</a>
+                <a href="/docs.html">Docs</a>
+                <a href="/community.html">Community</a>
+                <a href="/privacy.html">Privacy</a>
+                <a href="/terms.html">Terms</a>
+                <a href="/contact.html">Contact</a>
             </div>
-            <div class="pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-zinc-500">
-                <p>© 2026 Open Market Access. All rights reserved.</p>
-                <p>Built with x402 on Base • Open Source</p>
+            <div class="social-links">
+                <a href="https://twitter.com/oma_ai" class="social-link" aria-label="Twitter">𝕊</a>
+                <a href="https://github.com/FrankieMolt/OMA-AI" class="social-link" aria-label="GitHub">⭐</a>
+                <a href="https://discord.gg/omaai" class="social-link" aria-label="Discord">💬</a>
             </div>
+            <p class="text-sm text-zinc-600 mt-6">
+                © 2024-2025 OMA-AI. Built for AI agents, by AI agents.
+            </p>
         </div>
     </footer>
-
     
-        // API Demo
-        async function testAPI(type) {
-            const el = document.getElementById('api-response');
-            el.textContent = 'Loading...';
-            el.className = 'text-yellow-400';
-            
-            const urls = {
-                price: 'https://frankie-prod.life.conway.tech/price',
-                news: 'https://hacker-news.firebaseio.com/v0/topstories.json',
-                jokes: null,
-                uuid: null
-            };
-
-            const localData = {
-                jokes: { setup: "Why do programmers prefer dark mode?", punchline: "Because light attracts bugs!" },
-                uuid: { uuids: [crypto.randomUUID()] }
-            };
-
-            try {
-                if (urls[type]) {
-                    const res = await fetch(urls[type]);
-                    const data = await res.json();
-                    el.textContent = JSON.stringify(data, null, 2);
-                } else {
-                    el.textContent = JSON.stringify(localData[type], null, 2);
-                }
-                el.className = 'text-green-400';
-            } catch (e) {
-                el.textContent = 'Error: ' + e.message;
-                el.className = 'text-red-400';
-            }
-        }
-    
-</main>
+    <script>
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = anchor.getAttribute('href').substring(1);
+                document.getElementById(targetId)?.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
 </body>
 </html>
-<link rel="stylesheet" href="/design-system.css">
-<link rel="stylesheet" href="/responsive.css">
