@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing - OMA-AI | Open Market Access</title>
+    <meta name="description" content="OMA-AI pricing - Free, Pro, and Enterprise plans for AI agents and developers.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background: #09090b; color: #fafafa; }
+        .gradient { background: linear-gradient(135deg, #6366f1, #8b5cf6, #d946ef); }
+    </style>
+</head>
+<body class="min-h-screen">
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-zinc-950/90 backdrop-blur-xl border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+            <a href="/" class="flex items-center gap-3">
+                <div class="w-10 h-10 gradient rounded-xl flex items-center justify-center font-bold">OMA</div>
+                <span class="text-xl font-bold">Open Market Access</span>
+            </a>
+            <div class="flex items-center gap-4">
+                <a href="/apis.html" class="text-zinc-400 hover:text-white">APIs</a>
+                <a href="/mcps.html" class="text-zinc-400 hover:text-white">MCPs</a>
+                <a href="/compute.html" class="text-zinc-400 hover:text-white">Compute</a>
+                <a href="/pricing.html" class="text-violet-400">Pricing</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-24 pb-16 px-4">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h1 class="text-5xl font-bold mb-4">Simple, Transparent Pricing</h1>
+                <p class="text-xl text-zinc-400">For AI agents and developers. No hidden fees.</p>
+            </div>
+
+            <!-- Pricing Cards -->
+            <div class="grid md:grid-cols-3 gap-8 mb-16">
+                <!-- Free -->
+                <div class="glass rounded-2xl p-8 border border-white/5">
+                    <h3 class="text-xl font-semibold mb-2">Free</h3>
+                    <div class="text-4xl font-bold mb-4">$0<span class="text-lg text-zinc-500 font-normal">/month</span></div>
+                    <p class="text-zinc-400 text-sm mb-6">Perfect for testing and small projects.</p>
+                    <ul class="space-y-3 text-sm mb-8">
+                        <li class="flex items-center gap-2">✅ <span>100 API calls/day</span></li>
+                        <li class="flex items-center gap-2">✅ <span>Basic crypto prices</span></li>
+                        <li class="flex items-center gap-2">✅ <span>Community support</span></li>
+                        <li class="flex items-center gap-2">✅ <span>1 API key</span></li>
+                        <li class="flex items-center gap-2">❌ <span class="text-zinc-600">No analytics</span></li>
+                    </ul>
+                    <button class="w-full py-3 rounded-xl border border-zinc-700 hover:border-violet-500 font-semibold">Get Started</button>
+                </div>
+
+                <!-- Pro -->
+                <div class="glass rounded-2xl p-8 border border-violet-500/30 relative">
+                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 gradient text-sm font-semibold rounded-full">Most Popular</div>
+                    <h3 class="text-xl font-semibold mb-2">Pro</h3>
+                    <div class="text-4xl font-bold mb-4">$9<span class="text-lg text-zinc-500 font-normal">/month</span></div>
+                    <p class="text-zinc-400 text-sm mb-6">For developers building production apps.</p>
+                    <ul class="space-y-3 text-sm mb-8">
+                        <li class="flex items-center gap-2">✅ <span>10,000 API calls/day</span></li>
+                        <li class="flex items-center gap-2">✅ <span>All API endpoints</span></li>
+                        <li class="flex items-center gap-2">✅ <span>Analytics dashboard</span></li>
+                        <li class="flex items-center gap-2">✅ <span>5 API keys</span></li>
+                        <li class="flex items-center gap-2">✅ <span>Priority support</span></li>
+                    </ul>
+                    <button class="w-full py-3 gradient rounded-xl font-semibold">Start Free Trial</button>
+                </div>
+
+                <!-- Enterprise -->
+                <div class="glass rounded-2xl p-8 border border-white/5">
+                    <h3 class="text-xl font-semibold mb-2">Enterprise</h3>
+                    <div class="text-4xl font-bold mb-4">Custom</div>
+                    <p class="text-zinc-400 text-sm mb-6">For teams requiring dedicated infrastructure.</p>
+                    <ul class="space-y-3 text-sm mb-8">
+                        <li class="flex items-center gap-2">✅ <span>Unlimited API calls</span></li>
+                        <li class="flex items-center gap-2">✅ <span>Custom integrations</span></li>
+                        <li class="flex items-center gap-2">✅ <span>Dedicated support</span></li>
+                        <li class="flex items-center gap-2">✅ <span>Unlimited API keys</span></li>
+                        <li class="flex items-center gap-2">✅ <span>SLA guarantee</span></li>
+                    </ul>
+                    <button class="w-full py-3 rounded-xl border border-zinc-700 hover:border-violet-500 font-semibold">Contact Sales</button>
+                </div>
+            </div>
+
+            <!-- Revenue Share -->
+            <div class="glass rounded-2xl p-8 border border-green-500/20 mb-16">
+                <h2 class="text-2xl font-bold mb-4">Publishers Earn 90%</h2>
+                <p class="text-zinc-400 mb-6">List your APIs and earn revenue on every call. Higher than RapidAPI's 80%.</p>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-green-400">$0.001</div>
+                        <div class="text-zinc-500 text-sm">per API call</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-green-400">90%</div>
+                        <div class="text-zinc-500 text-sm">you keep</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-green-400">10%</div>
+                        <div class="text-zinc-500 text-sm">platform fee</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Comparison -->
+            <div class="mb-16">
+                <h2 class="text-2xl font-bold mb-8 text-center">Why OMA-AI?</h2>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left">
+                        <thead>
+                            <tr class="border-b border-zinc-800">
+                                <th class="py-3 px-4">Feature</th>
+                                <th class="py-3 px-4 text-center">OMA-AI</th>
+                                <th class="py-3 px-4 text-center text-zinc-500">RapidAPI</th>
+                                <th class="py-3 px-4 text-center text-zinc-500">Smithery</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-zinc-800">
+                                <td class="py-3 px-4">Revenue Share</td>
+                                <td class="py-3 px-4 text-center text-green-400">90%</td>
+                                <td class="py-3 px-4 text-center text-zinc-500">80%</td>
+                                <td class="py-3 px-4 text-center text-zinc-500">Free</td>
+                            </tr>
+                            <tr class="border-b border-zinc-800">
+                                <td class="py-3 px-4">x402 Payments</td>
+                                <td class="py-3 px-4 text-center text-green-400">✅</td>
+                                <td class="py-3 px-4 text-center text-zinc-500">❌</td>
+                                <td class="py-3 px-4 text-center text-zinc-500">❌</td>
+                            </tr>
+                            <tr class="border-b border-zinc-800">
+                                <td class="py-3 px-4">AI Agent Support</td>
+                                <td class="py-3 px-4 text-center text-green-400">✅</td>
+                                <td class="py-3 px-4 text-center text-zinc-500">❌</td>
+                                <td class="py-3 px-4 text-center text-green-400">✅</td>
+                            </tr>
+                            <tr class="border-b border-zinc-800">
+                                <td class="py-3 px-4">Compute Marketplace</td>
+                                <td class="py-3 px-4 text-center text-green-400">✅</td>
+                                <td class="py-3 px-4 text-center text-zinc-500">❌</td>
+                                <td class="py-3 px-4 text-center text-zinc-500">❌</td>
+                            </tr>
+                            <tr class="border-b border-zinc-800">
+                                <td class="py-3 px-4">Open Source</td>
+                                <td class="py-3 px-4 text-center text-green-400">✅</td>
+                                <td class="py-3 px-4 text-center text-zinc-500">❌</td>
+                                <td class="py-3 px-4 text-center text-green-400">✅</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- FAQ -->
+            <div>
+                <h2 class="text-2xl font-bold mb-8 text-center">Frequently Asked Questions</h2>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="glass rounded-xl p-6 border border-white/5">
+                        <h3 class="font-semibold mb-2">How do x402 payments work?</h3>
+                        <p class="text-zinc-400 text-sm">x402 is a payment protocol that enables micropayments. Users pay per API call in USDC on Base network - no subscriptions required.</p>
+                    </div>
+                    <div class="glass rounded-xl p-6 border border-white/5">
+                        <h3 class="font-semibold mb-2">Can AI agents use this?</h3>
+                        <p class="text-zinc-400 text-sm">Yes! OMA-AI is designed for autonomous AI agents. They can sign up, get API keys, and receive payments autonomously.</p>
+                    </div>
+                    <div class="glass rounded-xl p-6 border border-white/5">
+                        <h3 class="font-semibold mb-2">What's the difference from RapidAPI?</h3>
+                        <p class="text-zinc-400 text-sm">We offer higher revenue share (90% vs 80%), native x402 payments, AI agent support, and a compute marketplace.</p>
+                    </div>
+                    <div class="glass rounded-xl p-6 border border-white/5">
+                        <h3 class="font-semibold mb-2">Is there a free trial?</h3>
+                        <p class="text-zinc-400 text-sm">The Free tier gives you 100 calls/day forever. Pro has a 14-day free trial - no credit card required.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <style>.glass { background: rgba(255,255,255,0.03); }</style>
+</body>
+</html>
