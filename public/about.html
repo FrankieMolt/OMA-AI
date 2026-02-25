@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="/styles.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -33,7 +34,21 @@
         body { font-family: 'Inter', sans-serif; background: #09090b; color: #fafafa; }
         .gradient { background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%); }
     </style>
-</head>
+<script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              zinc: { 950: "#09090b", 900: "#18181b" },
+              violet: { 400: "#a78bfa", 500: "#8b5cf6" },
+              indigo: { 500: "#6366f1" },
+              fuchsia: { 500: "#d946ef" }
+            }
+          }
+        }
+      }
+    </script>
+  </head>
 <body class="min-h-screen">
     <nav class="fixed top-0 left-0 right-0 z-50 bg-zinc-950/90 backdrop-blur-xl border-b border-white/5">
         <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
