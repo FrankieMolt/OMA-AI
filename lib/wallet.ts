@@ -1,3 +1,4 @@
+import { ethers } from "ethers";
 /**
  * OMA-AI Wallet Connection
  * 

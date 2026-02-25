@@ -93,14 +93,14 @@ export class LLMAPI {
   constructor(private client: OMAClient) {}
 
   /** Generate text using AI */
-  async generate(prompt: string, options?: {
+  async generate(prompt: strin...(options ? { model: options.model, temperature: String(options.temperature || 0.7), maxTokens: String(options.maxTokens || 1000) } : {})?: {
     model?: string;
     temperature?: number;
     maxTokens?: number;
   }): Promise<LLMResponse> {
     const res = await this.client.request('/api/llm', {
       prompt,
-      ...options
+      ...(options ? { model: options.model, temperature: String(options.temperature || 0.7), maxTokens: String(options.maxTokens || 1000) } : {})
     });
     return res.data;
   }
@@ -256,7 +256,7 @@ export class OMAClient {
   async request(
     endpoint: string, 
     params: Record<string, string> = {},
-    options: { requirePayment?: boolean } = {}
+ ...(options ? { model: options.model, temperature: String(options.temperature || 0.7), maxTokens: String(options.maxTokens || 1000) } : {}): { requirePayment?: boolean } = {}
   ): Promise<APIResponse<any>> {
     const url = new URL(`${this.baseUrl}${endpoint}`);
     Object.entries(params).forEach(([k, v]) => url.searchParams.set(k, v));
@@ -266,7 +266,7 @@ export class OMAClient {
     };
 
     // Add payment header if required
-    if (options.requirePayment && this.privateKey) {
+    i...(options ? { model: options.model, temperature: String(options.temperature || 0.7), maxTokens: String(options.maxTokens || 1000) } : {}).requirePayment && this.privateKey) {
       // Create payment authorization (simplified)
       // In production, use proper x402 signature
       headers['X-Payment'] = 'paid';
