@@ -1,21 +1,8 @@
 {
   "buildCommand": "npm run build",
   "outputDirectory": "public",
-  "framework": null,
-  "functions": {
-    "api/*.js": {
-      "runtime": "nodejs20.x"
-    }
-  },
-  "rewrites": [
-    { "source": "/api/price", "destination": "/api/price.js" },
-    { "source": "/api/search", "destination": "/api/search.js" },
-    { "source": "/api/scrape", "destination": "/api/scrape.js" },
-    { "source": "/api/weather", "destination": "/api/weather.js" },
-    { "source": "/api/llm", "destination": "/api/llm.js" },
-    { "source": "/api/premium-price", "destination": "/api/premium-price.js" },
-    { "source": "/(.*)", "destination": "/index.html" }
-  ],
+  "framework": "nextjs",
+  "regions": ["iad1"],
   "headers": [
     {
       "source": "/api/(.*)",
@@ -30,6 +17,13 @@
       "source": "/(.*).html",
       "headers": [
         { "key": "Cache-Control", "value": "public, max-age=3600" }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Frame-Options", "value": "DENY" }
       ]
     }
   ]
