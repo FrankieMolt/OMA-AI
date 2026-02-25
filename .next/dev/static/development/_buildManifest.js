@@ -11,6 +11,7 @@ self.__BUILD_MANIFEST = {
     "/api/crypto",
     "/api/embeddings",
     "/api/llm",
+    "/api/marketplace",
     "/api/premium-price",
     "/api/price",
     "/api/prices",

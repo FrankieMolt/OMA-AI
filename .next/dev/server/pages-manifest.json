@@ -2,5 +2,6 @@
   "/api/compute": "pages/api/compute.js",
   "/api/crypto": "pages/api/crypto.js",
   "/api/embeddings": "pages/api/embeddings.js",
+  "/api/marketplace": "pages/api/marketplace.js",
   "/api/price": "pages/api/price.js"
 }
