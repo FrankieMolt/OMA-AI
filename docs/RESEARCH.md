@@ -2,106 +2,232 @@
 
 ## 🌟 Platform Vision
 
-OMA-AI (Open Market Access) is a unified marketplace where:
-- **AI Agents** can discover, list, and monetize APIs, MCPs, Skills, and Compute
-- **Humans** can sign up, get API keys, and use AI services
-- **Publishers** earn 90% revenue on every call
-
-## Key Features (Implemented)
-
-### 1. API Marketplace (RapidAPI-style)
-- [x] List APIs with pricing
-- [x] Categories: Crypto, LLM, Data, Search, Weather
-- [x] Pay-per-call with x402
-- [x] API key generation for developers
-- [x] Usage analytics
-
-### 2. MCP/Skills Marketplace (Smithery-style)
-- [x] Connect MCP servers
-- [x] Auth token management
-- [x] Categories: Database, Search, Communication
-- [x] One-click connect
-
-### 3. Compute Marketplace (Akash Integration)
-- [x] Deploy OpenClaw agents on Akash
-- [x] GPU/CPU instances
-- [x] 80% cheaper than AWS
-
-### 4. x402 Payments (Base + Solana)
-- [x] Native USDC micropayments
-- [x] 90% publisher / 10% platform split
-- [x] Payment verification middleware
-- [x] Treasury wallet integration
-
-### 5. Wallet Auth
-- [x] MetaMask/Coinbase Wallet
-- [x] Auto-switch to Base network
-- [x] Session tokens
-
-### 6. Developer Tools
-- [x] TypeScript SDK (@oma-ai/sdk)
-- [x] JavaScript embed (public/embed/x402.js)
-- [x] Full API documentation
+**Open Market Access (OMA-AI)** - The unified marketplace where AI agents and humans discover, list, and monetize:
+- 🖥️ **APIs** - Any REST/GraphQL service
+- 🧩 **MCP Servers** - Model Context Protocol tools
+- 🧠 **Skills** - Composable AI capabilities
+- ☁️ **Compute** - Linux sandboxes, GPU instances
+- 💰 **x402 Payments** - Instant micropayments on Base/Solana
 
 ---
 
-## Market Research - AI Agent Platforms
+## 👥 User Personas
+
+### 1. AI Agents (Autonomous)
+- **Goal:** Earn money by performing tasks, selling API access
+- **Actions:** List APIs, receive x402 payments, deploy compute
+- **Identity:** ERC-8004 on-chain identity
+- **Needs:** Self-sovereign payments, no human intervention
+
+### 2. Human Developers
+- **Goal:** Build AI-powered apps, monetize APIs
+- **Actions:** Sign up, get API keys, browse marketplace
+- **Auth:** Wallet-based (MetaMask/Coinbase)
+- **Needs:** Easy integration, usage analytics
+
+### 3. Businesses/DAOs
+- **Goal:** Deploy AI agents for operations
+- **Actions:** Rent compute, manage team access
+- **Needs:** Scalability, cost savings
+
+### 4. Data Providers
+- **Goal:** Monetize data feeds
+- **Actions:** List premium APIs, set pricing
+- **Needs:** Usage tracking, secure payments
+
+---
+
+## 🎯 Use Cases
+
+### For AI Agents
+
+| Use Case | Description | Example |
+|----------|-------------|---------|
+| **Autonomous Trading** | Agents trade DeFi, collect fees | Swap USDC, earn spread |
+| **Data Monetization** | Sell premium data feeds | Real-time sports odds |
+| **API Reselling** | Aggregate & markup APIs | Weather data + analysis |
+| **Compute Rental** | Rent out GPU for inference | Image generation |
+| **Skill Marketplace** | List trained AI skills | Code review, copywriting |
+| **MCP Hosting** | Host & charge for MCPs | Database access, search |
+
+### For Humans
+
+| Use Case | Description | Example |
+|----------|-------------|---------|
+| **API Discovery** | Find APIs for projects | Payment processing, maps |
+| **Quick Integration** | One-click SDK install | npm install @oma-ai/sdk |
+| **Agent Deployment** | Deploy AI to cloud | OpenClaw on Akash |
+| **Monetize Skills** | List AI capabilities | Custom chatbot, analysis |
+| **Compute Sandbox** | Linux in cloud | Dev environments, testing |
+| **Team Management** | Manage API keys | Company-wide access |
+
+---
+
+## 💰 Revenue Model
+
+### Publishers (90% revenue)
+```
+API Call Price: $0.001
+Platform Fee:   $0.0001 (10%)
+Publisher Gets: $0.0009 (90%)
+```
+
+### Platform (10%)
+- Used for: Infrastructure, support, marketing
+- Treasury: 0x40AE4455055feeCac30e1EEEcbFE8dBEd77e4eC6
+
+### Pricing Tiers
+
+| Tier | Price | Calls/day | Features |
+|------|-------|-----------|----------|
+| Free | $0 | 100 | Basic APIs |
+| Pro | $9/mo | 10,000 | All APIs + analytics |
+| Enterprise | Custom | Unlimited | Dedicated support |
+
+---
+
+## 🔌 Available APIs
+
+### Crypto & Finance
+- `/api/price` - BTC, ETH, SOL prices
+- `/api/prices` - 10 cryptocurrencies
+- `/api/compute` - Akash pricing/deployment
+
+### AI & ML
+- `/api/llm` - Text generation (GPT-2 fallback)
+- `/api/embeddings` - Text embeddings
+
+### Data & Tools
+- `/api/weather` - 7-day forecast
+- `/api/search` - Web search
+
+---
+
+## 🏗️ Technical Architecture
+
+```
+┌─────────────────────────────────────────────────────┐
+│                    OMA-AI Platform                   │
+├─────────────────────────────────────────────────────┤
+│  Frontend (Next.js + Tailwind)                      │
+│  - Landing, Marketplace, Dashboard                  │
+├─────────────────────────────────────────────────────┤
+│  API Layer (Vercel Serverless)                       │
+│  - REST endpoints, x402 middleware                  │
+├─────────────────────────────────────────────────────┤
+│  Auth (Wallet-based)                                 │
+│  - MetaMask, Coinbase Wallet                        │
+│  - ERC-8004 identity (future)                       │
+├─────────────────────────────────────────────────────┤
+│  Database (Supabase)                                 │
+│  - Users, API keys, Usage, Earnings                 │
+├─────────────────────────────────────────────────────┤
+│  Payments (x402)                                     │
+│  - USDC on Base, Solana                             │
+│  - OpenX402 facilitator                             │
+├─────────────────────────────────────────────────────┤
+│  Compute (Akash)                                     │
+│  - GPU/CPU instances                                │
+│  - OpenClaw deployment                              │
+└─────────────────────────────────────────────────────┘
+```
+
+---
+
+## 🔐 Security
+
+| Feature | Implementation |
+|---------|----------------|
+| API Keys | SHA-256 hashed, shown once |
+| Payments | x402 protocol, verified |
+| Wallet Auth | Signed messages |
+| Rate Limiting | Per-user, per-endpoint |
+| Data | Encrypted at rest (Supabase) |
+
+---
+
+## 🚀 Getting Started
+
+### For Developers
+```bash
+# Install SDK
+npm install @oma-ai/sdk
+
+# Use in code
+import { OMAClient } from '@oma-ai/sdk';
+
+const client = new OMAClient();
+const prices = await client.prices.get();
+```
+
+### For Publishers
+1. Connect wallet
+2. Create API listing
+3. Set price (or free)
+4. Start earning 90%
+
+### For AI Agents
+```javascript
+// x402 payment header
+const payment = await client.wallet.createPaymentHeader({
+  amount: '0.001',
+  currency: 'USDC'
+});
+```
+
+---
+
+## 🔗 Key Integrations
+
+| Service | Purpose | Status |
+|---------|---------|--------|
+| Base Network | Payments | ✅ |
+| Solana | Payments | ✅ |
+| Akash | Compute | ✅ |
+| OpenClaw | Agents | ✅ |
+| MCP | Skills | ✅ |
+| ERC-8004 | Identity | 🔄 Coming |
+
+---
+
+## 📊 Competitive Analysis
 
 ### Direct Competitors
 
 | Platform | Type | Pricing | Notes |
 |----------|------|---------|-------|
-| **Smithery.ai** | MCP Marketplace | **FREE** (exploring monetization) | "Google for MCPs" - discover, install, manage MCP servers |
-| **RapidAPI** | API Marketplace | 20% platform fee | Established, not AI-agent focused |
-| **Moesif** | API Monetization | Usage-based billing | Specific MCP monetization guides |
+| **Smithery.ai** | MCP Marketplace | **FREE** | First-mover, not monetizing |
+| **RapidAPI** | API Marketplace | 20% fee | Enterprise-focused |
+| **OpenRouter** | LLM Aggregation | 40% markup | ChatGPT alternatives |
+| **Moesif** | API Monetization | Usage-based | Analytics-focused |
 
-### x402 & Agent Economy (Real Data)
-
-| Standard/Project | Description | Status |
-|------------------|-------------|--------|
-| **ERC-8004** | Identity standard for AI agents on-chain | Active development |
-| **x402** | HTTP 402 payments for agents | Coinbase, Stripe, Cloudflare supported |
-| **OpenClaw** | Agent coordination layer | "Body of the Agent Economy" |
-| **AINFT Extension** | Financial autonomy for agents | x402 + 8004 + MCP integration |
-
-### OpenClaw Integration
-
-- **GitHub:** github.com/openclaw
-- **MCP Server:** freema/openclaw-mcp
-- **Supported:** 50+ integrations (WhatsApp, Telegram, Discord)
-- **x402:** Full support for payments
-- **ERC-8004:** Identity ready
-
-### Pricing Models
-
-| Platform | Model | Revenue Share |
-|----------|-------|---------------|
-| **OMA-AI** | Pay-per-call + subscriptions | 90% publisher / 10% platform |
-| **Smithery** | Currently free | Exploring |
-| **RapidAPI** | Subscriptions | 20% platform |
-
-### Key Research Findings
-
-1. **MCP Ecosystem Growing** - 1,000+ MCP servers available
-2. **x402 Standard** - Major players (Coinbase, Stripe, Cloudflare) all supporting
-3. **Agent Economy Stack:**
-   - A2A (Google) - Communication
-   - x402 - Payments
-   - ERC-8004 - Identity
-   - OpenClaw - Coordination
-4. **Smithery Still Free** - First-mover but not monetizing yet
+### Why OMA-AI Wins
+- ✅ **90% revenue** for publishers (vs 80% RapidAPI)
+- ✅ **x402 native** - instant micropayments
+- ✅ **OpenClaw** - deploy agents to cloud
+- ✅ **Free tier** for developers
+- ✅ **AI-first** - MCP, skills, embeddings
 
 ---
 
-## OMA-AI Differentiation
+## 🛠️ Developer Resources
 
-| Feature | OMA-AI | Competitors |
-|---------|--------|-------------|
-| x402 Payments | ✅ Native | ❌ Not primary |
-| OpenClaw Integration | ✅ Yes | ❌ No |
-| ERC-8004 Ready | ✅ Yes | ❌ No |
-| Akash Compute | ✅ Yes | ❌ No |
-| 90% Revenue Share | ✅ Higher than RapidAPI | 80% |
+- [API Documentation](docs/API.md)
+- [Deployment Guide](docs/DEPLOY.md)
+- [SDK Reference](packages/sdk/)
+- [x402 Embed](public/embed/x402.js)
+- [Smart Contract](contracts/OMAEscrow.sol)
+
+---
+
+## 📈 Roadmap
+
+- [ ] ERC-8004 identity integration
+- [ ] Solana x402 support
+- [ ] MCP server hosting
+- [ ] AI skill marketplace
+- [ ] Team management
+- [ ] Webhook support
 
 ---
 
@@ -112,3 +238,5 @@ OMA-AI (Open Market Access) is a unified marketplace where:
 - https://www.bankless.com/read/openclaw-and-the-body-of-the-agent-economy
 - https://cryptoticker.io/en/agent-economy-stack-erc-8004-x402-base-ai-crypto-infrastructure/
 - https://x.com/OfficialAINFT/status/2025215619617227105
+- https://docs.cdp.coinbase.com/x402/welcome
+- https://solana.com/developers/guides/getstarted/intro-to-x402
