@@ -9,6 +9,45 @@
 - ☁️ **Compute** - Linux sandboxes, GPU instances
 - 💰 **x402 Payments** - Instant micropayments on Base/Solana
 
+## 🔬 x402 Deep Dive
+
+### How x402 Works
+x402 is a payment standard enabling per-request micropayments:
+
+```http
+# Request with payment header
+GET /api/premium-data HTTP/1.1
+Host: oma-ai.com
+X-Payment: base64(ERC-20 transfer)
+```
+
+### Payment Flow
+1. **User** sends request with x402 payment header
+2. **Facilitator** (OpenX402) validates payment
+3. **Funds** held in escrow
+4. **Service** rendered
+5. **Funds** released to provider (90%) + platform (10%)
+
+### Supported Chains
+- **Base** (Chain ID: 8453) - Primary, low fees
+- **Solana** (Chain ID: 101) - Fast, high throughput
+- **Monad** (Chain ID: ???) - Coming soon
+
+## 🧬 ERC-8004: Trustless Agents
+
+The Ethereum standard for AI agent identity:
+
+### Three Registries
+1. **Identity Registry** - Censorship-resistant handle (ERC-721 URIStorage)
+2. **Reputation Registry** - Feedback signals from interactions
+3. **Validation Registry** - Capability verification
+
+### Why It Matters
+- Agents can sign messages (SIWE)
+- Build reputation over time
+- No centralized identity provider
+- Portable across platforms
+
 ---
 
 ## 👥 User Personas
