@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Keys - OMA-AI | Open Market Access</title>
+    <meta name="description" content="Manage your OMA-AI API keys for API access.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background: #09090b; color: #fafafa; }
+        .gradient { background: linear-gradient(135deg, #6366f1, #8b5cf6, #d946ef); }
+        code { font-family: 'Fira Code', monospace; }
+    </style>
+</head>
+<body class="min-h-screen">
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-zinc-950/90 backdrop-blur-xl border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+            <a href="/" class="flex items-center gap-3">
+                <div class="w-10 h-10 gradient rounded-xl flex items-center justify-center font-bold">OMA</div>
+                <span class="text-xl font-bold">Open Market Access</span>
+            </a>
+            <div class="flex items-center gap-4">
+                <a href="/dashboard.html" class="text-zinc-400 hover:text-white">Dashboard</a>
+                <a href="/keys.html" class="text-violet-400">API Keys</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-24 pb-16 px-4">
+        <div class="max-w-4xl mx-auto">
+            <div class="flex items-center justify-between mb-8">
+                <div>
+                    <h1 class="text-3xl font-bold mb-2">API Keys</h1>
+                    <p class="text-zinc-400">Manage your API keys for OMA-AI access</p>
+                </div>
+                <button onclick="createKey()" class="px-6 py-3 gradient rounded-xl font-semibold">+ Create New Key</button>
+            </div>
+
+            <!-- Quick Start -->
+            <div class="glass rounded-2xl p-6 border border-white/5 mb-8">
+                <h2 class="font-semibold mb-4">Quick Start</h2>
+                <p class="text-zinc-400 text-sm mb-4">Use your API key in the Authorization header:</p>
+                <div class="bg-zinc-900 p-4 rounded-xl overflow-x-auto">
+                    <code class="text-green-400">curl -H "Authorization: Bearer YOUR_API_KEY" \
+  https://oma-ai.com/api/price</code>
+                </div>
+            </div>
+
+            <!-- API Keys List -->
+            <div class="glass rounded-2xl p-6 border border-white/5">
+                <h2 class="font-semibold mb-4">Your API Keys</h2>
+                
+                <div id="keysList" class="space-y-4">
+                    <!-- Sample key -->
+                    <div class="flex items-center justify-between p-4 bg-zinc-900 rounded-xl">
+                        <div>
+                            <div class="font-semibold">Production Key</div>
+                            <div class="text-sm text-zinc-500 font-mono mt-1">oma_live_****************************ab12</div>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <span class="text-xs bg-green-500/20 text-green-400 px-2 py-1 rounded">Active</span>
+                            <button class="text-zinc-400 hover:text-white text-sm">Copy</button>
+                            <button class="text-red-400 hover:text-red-300 text-sm">Revoke</button>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between p-4 bg-zinc-900 rounded-xl">
+                        <div>
+                            <div class="font-semibold">Development Key</div>
+                            <div class="text-sm text-zinc-500 font-mono mt-1">oma_test_****************************cd34</div>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <span class="text-xs bg-yellow-500/20 text-yellow-400 px-2 py-1 rounded">Test</span>
+                            <button class="text-zinc-400 hover:text-white text-sm">Copy</button>
+                            <button class="text-red-400 hover:text-red-300 text-sm">Revoke</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Usage Stats -->
+                <div class="mt-8 pt-6 border-t border-zinc-800">
+                    <h3 class="font-semibold mb-4">Usage This Month</h3>
+                    <div class="grid grid-cols-3 gap-4">
+                        <div class="text-center p-4 bg-zinc-900 rounded-xl">
+                            <div class="text-2xl font-bold text-violet-400">2,450</div>
+                            <div class="text-sm text-zinc-500">API Calls</div>
+                        </div>
+                        <div class="text-center p-4 bg-zinc-900 rounded-xl">
+                            <div class="text-2xl font-bold text-cyan-400">8.2%</div>
+                            <div class="text-sm text-zinc-500">Rate Limit Used</div>
+                        </div>
+                        <div class="text-center p-4 bg-zinc-900 rounded-xl">
+                            <div class="text-2xl font-bold text-green-400">$0.00</div>
+                            <div class="text-sm text-zinc-500">Spent</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rate Limits -->
+            <div class="glass rounded-2xl p-6 border border-white/5 mt-6">
+                <h2 class="font-semibold mb-4">Rate Limits</h2>
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="text-zinc-400">Free Tier</span>
+                        <span class="font-mono">100 calls/day</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-zinc-400">Pro Tier</span>
+                        <span class="font-mono">10,000 calls/day</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-zinc-400">Enterprise</span>
+                        <span class="font-mono">Unlimited</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function createKey() {
+            const key = 'oma_live_' + Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+            alert('API Key created: ' + key.substring(0, 20) + '...\n\nCopy it now - you won\'t see it again!');
+        }
+    </script>
+    <style>.glass { background: rgba(255,255,255,0.03); }</style>
+</body>
+</html>
