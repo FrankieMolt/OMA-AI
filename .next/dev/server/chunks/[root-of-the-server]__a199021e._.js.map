@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 46, "column": 0}, "map": {"version":3,"sources":["file:///home/nosyt/.openclaw/workspace/oma-ai-repo/app/route.ts"],"sourcesContent":["import { NextResponse } from 'next/server';\n\nexport async function GET() {\n  // Read and serve the index.html file\n  const fs = await import('fs');\n  const path = await import('path');\n  \n  try {\n    const filePath = path.join(process.cwd(), 'public', 'index.html');\n    const content = fs.readFileSync(filePath, 'utf-8');\n    return new NextResponse(content, {\n      headers: { 'Content-Type': 'text/html' }\n    });\n  } catch {\n    return new NextResponse('Not Found', { status: 404 });\n  }\n}"],"names":[],"mappings":";;;;AAAA;;AAEO,eAAe;IACpB,qCAAqC;IACrC,MAAM,KAAK;IACX,MAAM,OAAO;IAEb,IAAI;QACF,MAAM,WAAW,KAAK,IAAI,CAAC,QAAQ,GAAG,IAAI,UAAU;QACpD,MAAM,UAAU,GAAG,YAAY,CAAC,UAAU;QAC1C,OAAO,IAAI,qKAAY,CAAC,SAAS;YAC/B,SAAS;gBAAE,gBAAgB;YAAY;QACzC;IACF,EAAE,OAAM;QACN,OAAO,IAAI,qKAAY,CAAC,aAAa;YAAE,QAAQ;QAAI;IACrD;AACF"}}]
-}

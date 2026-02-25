@@ -14,3 +14,4 @@ keys/
 secrets/
 private/
 .next/
+.env*.local
