@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="/styles.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LLM Models - OMA-AI | Open Market Access</title>
     <meta name="description" content="Access 100+ LLM models via unified API. GPT, Claude, Gemini, Llama and more.">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
+    
+    
       tailwind.config = {
         theme: {
           extend: {
@@ -22,7 +23,7 @@
           }
         }
       }
-    </script>
+    
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Inter', sans-serif; background: #09090b; color: #fafafa; }
@@ -80,7 +81,7 @@
         </div>
     </main>
 
-    <script>
+    
         const models = [
             { name: 'GPT-4o', provider: 'openai', context: 128000, price: 2.5, tier: 'flagship', desc: 'Latest GPT-4 with vision' },
             { name: 'GPT-4o-mini', provider: 'openai', context: 128000, price: 0.15, tier: 'balanced', desc: 'Fast, affordable GPT-4' },
@@ -125,7 +126,7 @@
         });
 
         renderModels();
-    </script>
+    
     <style>.glass { background: rgba(255,255,255,0.03); }</style>
 </body>
 </html>
