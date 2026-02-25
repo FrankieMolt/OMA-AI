@@ -7,6 +7,9 @@ self.__BUILD_MANIFEST = {
   "sortedPages": [
     "/_app",
     "/_error",
+    "/api/compute",
+    "/api/crypto",
+    "/api/embeddings",
     "/api/llm",
     "/api/premium-price",
     "/api/price",
