@@ -5,7 +5,7 @@ const APIS = {
   coincap: 'https://api.coincap.io/v2'
 };
 
-let cache = { data: null, time: 0 };
+let cache: { data: any, time: number } = { data: null, time: 0 };
 
 async function fetchPrices() {
   const now = Date.now();

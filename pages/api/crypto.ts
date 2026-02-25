@@ -12,7 +12,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const { assets = 'bitcoin,ethereum,solana,cardano,polkadot,chainlink,uniswap,avalanche-2,sui,aptos' } = req.query;
 
   try {
-    const response = await fetch(`${CRYPTO_API}/assets?ids=${assets}`);
+    const response = await fetch(`${COINCAP_API}/assets?ids=${assets}`);
     
     if (!response.ok) {
       throw new Error(`CoinCap error: ${response.status}`);

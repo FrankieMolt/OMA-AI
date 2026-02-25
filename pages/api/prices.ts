@@ -42,7 +42,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const markets = await response.json();
     
     // Transform to simpler format
-    const data = {};
+    const data: any = {};
     markets.forEach((coin: any) => {
       data[coin.id] = {
         price: coin.current_price,
