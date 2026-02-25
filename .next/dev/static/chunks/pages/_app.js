@@ -1,0 +1,15 @@
+__turbopack_load_page_chunks__("/_app", [
+  "static/chunks/e3d3f_next_dist_compiled_14ad9197._.js",
+  "static/chunks/e3d3f_next_dist_shared_lib_6a3b911c._.js",
+  "static/chunks/e3d3f_next_dist_client_2f426ed7._.js",
+  "static/chunks/e3d3f_next_dist_1e7f35e5._.js",
+  "static/chunks/e3d3f_next_app_12f9a26b.js",
+  "static/chunks/[next]_entry_page-loader_ts_b7d58b2c._.js",
+  "static/chunks/e3d3f_react_c9123ef4._.js",
+  "static/chunks/e3d3f_react-dom_cjs_react-dom_development_c7834770.js",
+  "static/chunks/e3d3f_react-dom_da419a94._.js",
+  "static/chunks/e3d3f_dd691c14._.js",
+  "static/chunks/[root-of-the-server]__937c51ac._.js",
+  "static/chunks/oma-ai-repo_pages__app_2da965e7._.js",
+  "static/chunks/turbopack-oma-ai-repo_pages__app_e376531e._.js"
+])
