@@ -1,6 +1,15 @@
 node_modules/
 .env
 .env.local
+.env.*
+!.env.example
 .DS_Store
 *.log
 .vercel
+mcporter.json
+credentials/
+keys/
+*.pem
+*.key
+secrets/
+private/

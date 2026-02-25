@@ -1,0 +1,42 @@
+{
+  "$schema": "https://raw.githubusercontent.com/nosytlabs/mcporter/main/schema.json",
+  "mcpServers": {
+    "oma-ai-prices": {
+      "command": "npx",
+      "args": ["-y", "@oma-ai/price-mcp"],
+      "env": {
+        "API_KEY": "${OMA_AI_API_KEY}"
+      },
+      "keepAlive": true,
+      "description": "Real-time crypto prices from OMA-AI"
+    },
+    "oma-ai-search": {
+      "command": "npx", 
+      "args": ["-y", "@oma-ai/search-mcp"],
+      "env": {
+        "API_KEY": "${OMA_AI_API_KEY}"
+      },
+      "keepAlive": true,
+      "description": "AI-powered web search via OMA-AI"
+    },
+    "akash-deploy": {
+      "command": "npx",
+      "args": ["-y", "@akash-network/akash-mcp"],
+      "env": {
+        "AKASH_KEY": "${AKASH_KEY}",
+        "AKASH_NODE": "https://api.mainnet.akash.net:443"
+      },
+      "keepAlive": true,
+      "description": "Deploy OpenClaw agents on Akash Network"
+    },
+    "base-wallet": {
+      "command": "npx",
+      "args": ["-y", "@base-wallet/mcp"],
+      "env": {
+        "PRIVATE_KEY": "${BASE_PRIVATE_KEY}"
+      },
+      "keepAlive": false,
+      "description": "Base network wallet operations"
+    }
+  }
+}
