@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLM Models - OMA-AI | Open Market Access</title>
+    <meta name="description" content="Access 100+ LLM models via unified API. GPT, Claude, Gemini, Llama and more.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background: #09090b; color: #fafafa; }
+        .gradient { background: linear-gradient(135deg, #6366f1, #8b5cf6, #d946ef); }
+    </style>
+</head>
+<body class="min-h-screen">
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-zinc-950/90 backdrop-blur-xl border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+            <a href="/" class="flex items-center gap-3">
+                <div class="w-10 h-10 gradient rounded-xl flex items-center justify-center font-bold">OMA</div>
+                <span class="text-xl font-bold">Open Market Access</span>
+            </a>
+            <div class="flex items-center gap-4">
+                <a href="/llms.html" class="text-violet-400">LLMs</a>
+                <a href="/apis.html" class="text-zinc-400 hover:text-white">APIs</a>
+                <a href="/compute.html" class="text-zinc-400 hover:text-white">Compute</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-24 pb-16 px-4">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-12">
+                <h1 class="text-5xl font-bold mb-4">LLM Models</h1>
+                <p class="text-xl text-zinc-400 max-w-2xl mx-auto">
+                    Access 100+ language models through a single unified API. 
+                    GPT-4, Claude 3, Gemini Pro, Llama 3, and more.
+                </p>
+            </div>
+
+            <!-- Filters -->
+            <div class="flex flex-wrap gap-4 mb-8">
+                <select id="providerFilter" class="px-4 py-2 bg-zinc-900 border border-zinc-700 rounded-lg">
+                    <option value="">All Providers</option>
+                    <option value="openai">OpenAI</option>
+                    <option value="anthropic">Anthropic</option>
+                    <option value="google">Google</option>
+                    <option value="meta">Meta</option>
+                    <option value="mistral">Mistral</option>
+                </select>
+                <select id="tierFilter" class="px-4 py-2 bg-zinc-900 border border-zinc-700 rounded-lg">
+                    <option value="">All Tiers</option>
+                    <option value="flagship">Flagship</option>
+                    <option value="balanced">Balanced</option>
+                    <option value="cheap">Budget</option>
+                </select>
+                <input type="text" id="searchInput" placeholder="Search models..." class="px-4 py-2 bg-zinc-900 border border-zinc-700 rounded-lg">
+            </div>
+
+            <!-- Models Grid -->
+            <div id="modelsGrid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <!-- Models loaded via JS -->
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const models = [
+            { name: 'GPT-4o', provider: 'openai', context: 128000, price: 2.5, tier: 'flagship', desc: 'Latest GPT-4 with vision' },
+            { name: 'GPT-4o-mini', provider: 'openai', context: 128000, price: 0.15, tier: 'balanced', desc: 'Fast, affordable GPT-4' },
+            { name: 'GPT-4 Turbo', provider: 'openai', context: 128000, price: 10, tier: 'flagship', desc: 'Previous flagship model' },
+            { name: 'Claude 3.5 Sonnet', provider: 'anthropic', context: 200000, price: 3, tier: 'flagship', desc: 'Anthropic\'s best model' },
+            { name: 'Claude 3 Haiku', provider: 'anthropic', context: 200000, price: 0.25, tier: 'balanced', desc: 'Fast, efficient model' },
+            { name: 'Claude 3 Opus', provider: 'anthropic', context: 200000, price: 15, tier: 'flagship', desc: 'Most capable model' },
+            { name: 'Gemini 1.5 Pro', provider: 'google', context: 1000000, price: 1.25, tier: 'flagship', desc: '1M token context' },
+            { name: 'Gemini 1.5 Flash', provider: 'google', context: 1000000, price: 0.075, tier: 'balanced', desc: 'Fast, cheap model' },
+            { name: 'Llama 3.1 70B', provider: 'meta', context: 128000, price: 0.9, tier: 'flagship', desc: 'Open source flagship' },
+            { name: 'Llama 3.1 8B', provider: 'meta', context: 128000, price: 0.2, tier: 'balanced', desc: 'Lightweight open model' },
+            { name: 'Mistral Large', provider: 'mistral', context: 128000, price: 2, tier: 'flagship', desc: 'European flagship' },
+            { name: 'Mistral Nemo', provider: 'mistral', context: 128000, price: 0.15, tier: 'balanced', desc: 'Balanced performance' },
+        ];
+
+        function renderModels(filtered = models) {
+            const grid = document.getElementById('modelsGrid');
+            grid.innerHTML = filtered.map(m => `
+                <div class="glass rounded-xl p-5 border border-white/5 hover:border-violet-500/50 transition">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-xs uppercase font-semibold ${m.provider === 'openai' ? 'text-green-400' : m.provider === 'anthropic' ? 'text-orange-400' : m.provider === 'google' ? 'text-blue-400' : 'text-purple-400'}">${m.provider}</span>
+                        <span class="text-xs bg-zinc-800 px-2 py-1 rounded">${m.tier}</span>
+                    </div>
+                    <h3 class="font-semibold text-lg mb-1">${m.name}</h3>
+                    <p class="text-zinc-400 text-sm mb-4">${m.desc}</p>
+                    <div class="flex items-center justify-between text-sm">
+                        <span class="text-zinc-500">${(m.context/1000).toLocaleString()}K ctx</span>
+                        <span class="font-mono font-semibold">$${m.price}/M</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            const q = e.target.value.toLowerCase();
+            renderModels(models.filter(m => m.name.toLowerCase().includes(q) || m.desc.toLowerCase().includes(q)));
+        });
+
+        document.getElementById('providerFilter').addEventListener('change', (e) => {
+            const p = e.target.value;
+            renderModels(p ? models.filter(m => m.provider === p) : models);
+        });
+
+        renderModels();
+    </script>
+    <style>.glass { background: rgba(255,255,255,0.03); }</style>
+</body>
+</html>

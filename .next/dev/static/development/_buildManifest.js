@@ -13,6 +13,7 @@ self.__BUILD_MANIFEST = {
     "/api/embeddings",
     "/api/health",
     "/api/llm",
+    "/api/llms",
     "/api/marketplace",
     "/api/mcps",
     "/api/premium-price",
