@@ -8,6 +8,7 @@
   "/api/llms": "pages/api/llms.js",
   "/api/marketplace": "pages/api/marketplace.js",
   "/api/mcps": "pages/api/mcps.js",
+  "/api/premium-price": "pages/api/premium-price.js",
   "/api/price": "pages/api/price.js",
   "/api/prices": "pages/api/prices.js",
   "/api/search": "pages/api/search.js",
