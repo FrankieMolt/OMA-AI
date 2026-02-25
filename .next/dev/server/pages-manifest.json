@@ -3,5 +3,8 @@
   "/_app": "pages/_app.js",
   "/_document": "pages/_document.js",
   "/_error": "pages/_error.js",
-  "/api/price": "pages/api/price.js"
+  "/api/llm": "pages/api/llm.js",
+  "/api/price": "pages/api/price.js",
+  "/api/prices": "pages/api/prices.js",
+  "/api/weather": "pages/api/weather.js"
 }

@@ -1,50 +1,53 @@
 /**
  * OMA-AI x402 Payment Integration
  * 
- * Handles HTTP 402 payments using OpenX402 facilitator
- * Supports Base (USDC) and Solana (USDC) networks
- * 
- * @module x402
+ * Real x402 payments on Base network
+ * Uses OpenX402 facilitator protocol
  */
 
-const FACILITATOR_URL = 'https://facilitator.openx402.ai';
-const USDC_BASE = '0x833589fCD6eDb6E08f4c7C32D4f71b54bDA02513';
-const USDC_SOLANA = 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v';
+import { ethers } from 'ethers';
 
-/**
- * Treasury Wallet Configuration
- * Platform receives 10% fee, publisher receives 90%
- */
-const TREASURY = {
-  base: process.env.TREASURY_WALLET_BASE || '0x742d35Cc6634C0532925a3b844Bc9e7595f0eB1D',
-  solana: process.env.TREASURY_WALLET_SOL || '7xKXtg2CW87d97TXJSDpbD5jBkheTqA83TZRuJosgAsU',
-  platformFee: 0.10, // 10% platform fee
+// x402 Protocol Configuration
+export const X402_CONFIG = {
+  version: 1,
+  scheme: 'erc20',
+  currency: 'USDC',
+  network: 'base',
+  // Our treasury wallet from KEYS.md
+  recipient: process.env.TREASURY_WALLET_BASE || '0x40AE4455055feeCac30e1EEEcbFE8dBEd77e4eC6',
+  // USDC on Base
+  token: process.env.NEXT_PUBLIC_USDC_ADDRESS || '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913',
+  // OpenX402 Facilitator
+  facilitator: 'https://facilitator.openx402.ai'
 };
 
+// Platform fee (10%)
+export const PLATFORM_FEE = 0.10;
+
 /**
- * Create payment requirement for an endpoint
+ * Create a payment requirement for an API endpoint
  */
-function createPaymentRequirement(options) {
+export function createPaymentRequirement(amount: string, description: string) {
   return {
-    'x402-version': 1,
-    scheme: options.scheme || 'erc20',
-    currency: options.currency || 'USDC',
-    amount: options.amount || '0.001',
-    recipient: options.recipient || TREASURY.base,
-    network: options.network || 'base',
-    description: options.description || 'API access',
-    expires: Date.now() + 3600000, // 1 hour
+    'x402-version': X402_CONFIG.version,
+    scheme: X402_CONFIG.scheme,
+    currency: X402_CONFIG.currency,
+    amount,
+    recipient: X402_CONFIG.recipient,
+    network: X402_CONFIG.network,
+    description,
+    expires: Date.now() + 3600000 // 1 hour
   };
 }
 
 /**
- * Verify payment with OpenX402 facilitator
+ * Verify payment from client
  */
-async function verifyPayment(authHeader, network = 'base') {
-  if (!authHeader) return { valid: false, reason: 'No payment header' };
+export async function verifyPayment(authHeader: string): Promise<boolean> {
+  if (!authHeader) return false;
   
   try {
-    const response = await fetch(`${FACILITATOR_URL}/verify`, {
+    const response = await fetch(`${X402_CONFIG.facilitator}/verify`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -52,67 +55,71 @@ async function verifyPayment(authHeader, network = 'base') {
       },
       body: JSON.stringify({
         authorization: authHeader,
-        network
+        network: X402_CONFIG.network
       })
     });
     
-    return { valid: response.ok, status: response.status };
+    return response.ok;
   } catch (error) {
-    console.error('Payment verification error:', error);
-    return { valid: false, reason: error.message };
+    console.error('Payment verification failed:', error);
+    return false;
   }
 }
 
 /**
- * Calculate payment split (90% publisher, 10% platform)
+ * Calculate revenue split (90% publisher, 10% platform)
  */
-function calculateSplit(amount) {
-  const platformAmount = parseFloat(amount) * TREASURY.platformFee;
-  const publisherAmount = parseFloat(amount) - platformAmount;
+export function calculateSplit(totalAmount: string) {
+  const total = parseFloat(totalAmount);
+  const platformAmount = total * PLATFORM_FEE;
+  const publisherAmount = total - platformAmount;
   
   return {
-    total: amount,
+    total,
     platform: platformAmount.toFixed(6),
     publisher: publisherAmount.toFixed(6),
+    breakdown: {
+      platform_fee_percent: PLATFORM_FEE * 100,
+      publisher_percent: (1 - PLATFORM_FEE) * 100
+    }
   };
 }
 
 /**
- * Middleware to protect API routes with x402
+ * Middleware to protect API routes with x402 payments
  */
-function requirePayment(amount, currency = 'USDC', network = 'base') {
-  return async (req, res, next) => {
-    const paymentHeader = req.headers['x-payment'];
-    
-    // For development, allow free access
+export function requirePayment(amount: string, description: string) {
+  return async (req: any, res: any, next: Function) => {
+    // Skip payment in development
     if (process.env.NODE_ENV === 'development') {
       return next();
     }
-    
-    // Check for payment
-    const verification = await verifyPayment(paymentHeader, network);
-    
-    if (!verification.valid) {
+
+    const paymentHeader = req.headers['x-payment'];
+    const verified = await verifyPayment(paymentHeader);
+
+    if (!verified) {
       res.setHeader('X-Payment-Required', JSON.stringify(
-        createPaymentRequirement({ amount, currency, network })
+        createPaymentRequirement(amount, description)
       ));
       return res.status(402).json({
         error: 'Payment Required',
-        payment: createPaymentRequirement({ amount, currency, network })
+        payment: createPaymentRequirement(amount, description)
       });
     }
-    
+
     next();
   };
 }
 
-module.exports = {
-  TREASURY,
-  createPaymentRequirement,
-  verifyPayment,
-  calculateSplit,
-  requirePayment,
-  FACILITATOR_URL,
-  USDC_BASE,
-  USDC_SOLANA,
-};
+/**
+ * Get wallet info (read-only)
+ */
+export function getWalletInfo() {
+  return {
+    address: X402_CONFIG.recipient,
+    network: X402_CONFIG.network,
+    currency: X402_CONFIG.currency,
+    fee_percent: PLATFORM_FEE * 100
+  };
+}

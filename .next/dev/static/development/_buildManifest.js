@@ -13,8 +13,10 @@ self.__BUILD_MANIFEST = {
   "sortedPages": [
     "/_app",
     "/_error",
+    "/api/llm",
     "/api/premium-price",
     "/api/price",
+    "/api/prices",
     "/api/search",
     "/api/weather"
   ]
