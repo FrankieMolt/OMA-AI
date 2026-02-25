@@ -270,7 +270,36 @@ const payment = await client.wallet.createPaymentHeader({
 
 ---
 
-## References
+## 🔬 Latest Research (2026)
+
+### Akash Network - Decentralized Compute
+- **MCP Server**: Akash has an official MCP server for AI agents
+- **Autonomous Deployment**: AI agents can now provision compute independently
+- **$100 Free Credits**: New users get $100 free compute credits
+- **H100 Pricing**: ~$1.14/hour for H100 GPU
+- **Use Case**: Deploy OpenClaw agents to Akash for decentralized execution
+
+### x402 Protocol Updates
+- **HTTP 402 Revival**: Uses original HTTP 402 status code
+- **Stablecoin Payments**: USDC, USDT on Base/Solana
+- **Micropayments**: No minimum, instant settlement
+- **AI Agent Payments**: Autonomous agents paying for API access
+
+### ERC-8004 Standard
+- **Identity Layer**: On-chain identity for AI agents
+- **Three Registries**: Identity, Reputation, Validation
+- **SIWE**: Sign-In with Ethereum for agent authentication
+- **Portable Reputation**: Agent reputation travels with identity
+
+### Competitive Updates
+| Platform | Status | Notes |
+|----------|--------|-------|
+| Smithery.ai | FREE | 7,300+ MCP servers, not monetizing |
+| RapidAPI | 80/20 | Enterprise focus, subscription model |
+| OMA-AI | 90/10 | x402 micropayments, Akash compute |
+| ClawHub | Growing | OpenClaw skills marketplace |
+
+### References
 
 - https://smithery.ai - MCP Marketplace
 - https://www.moesif.com/blog/api-strategy/model-context-protocol/Monetizing-MCP-Model-Context-Protocol-Servers-With-Moesif/
@@ -279,3 +308,4 @@ const payment = await client.wallet.createPaymentHeader({
 - https://x.com/OfficialAINFT/status/2025215619617227105
 - https://docs.cdp.coinbase.com/x402/welcome
 - https://solana.com/developers/guides/getstarted/intro-to-x402
+- https://akash.network/blog/akashml-managed-ai-inference-on-the-decentralized-supercloud/
