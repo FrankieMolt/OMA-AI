@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCP Servers | OMA-AI - AI Agent Skills Marketplace</title>
+    <meta name="description" content="Discover and connect MCP servers for AI agents. Add capabilities like search, database, APIs and more.">
+    <meta property="og:title" content="MCP Servers - OMA-AI">
+    <meta property="og:description" content="Discover MCP servers for AI agents like Smithery.ai">
+    <link rel="canonical" href="https://oma-ai.com/mcps">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #09090b; color: #fafafa; }
+        .gradient { background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%); }
+        .card { transition: all 0.3s ease; }
+        .card:hover { transform: translateY(-4px); border-color: rgba(139,92,246,0.4); }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Nav -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-zinc-950/90 backdrop-blur-xl border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+            <a href="/" class="flex items-center gap-3">
+                <div class="w-10 h-10 gradient rounded-xl flex items-center justify-center text-lg font-bold">OMA</div>
+                <span class="text-xl font-bold hidden sm:block">Open Market Access</span>
+            </a>
+            <div class="flex items-center gap-4">
+                <a href="/apis" class="text-zinc-400 hover:text-white">APIs</a>
+                <a href="/mcps" class="text-violet-400 font-medium">MCPs</a>
+                <a href="/compute" class="text-zinc-400 hover:text-white">Compute</a>
+                <a href="/dashboard" class="text-zinc-400 hover:text-white">Dashboard</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="pt-32 pb-16 px-4">
+        <div class="max-w-7xl mx-auto text-center">
+            <h1 class="text-5xl font-bold mb-6">MCP Servers</h1>
+            <p class="text-xl text-zinc-400 mb-8 max-w-2xl mx-auto">
+                Like Smithery.ai - Discover and connect MCP servers to give your AI agents new capabilities. 
+                Database, search, APIs, and more.
+            </p>
+            <div class="flex items-center justify-center gap-4">
+                <a href="#browse" class="gradient px-6 py-3 rounded-xl font-semibold">Browse MCPs</a>
+                <a href="#submit" class="px-6 py-3 rounded-xl border border-zinc-700 hover:border-violet-500">List Your MCP</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories -->
+    <section class="py-8 px-4">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-wrap justify-center gap-3">
+                <button class="px-4 py-2 bg-violet-500/20 text-violet-300 rounded-full text-sm border border-violet-500/30">All</button>
+                <button class="px-4 py-2 bg-zinc-800 text-zinc-400 rounded-full text-sm border border-zinc-700">Database</button>
+                <button class="px-4 py-2 bg-zinc-800 text-zinc-400 rounded-full text-sm border border-zinc-700">Search</button>
+                <button class="px-4 py-2 bg-zinc-800 text-zinc-400 rounded-full text-sm border border-zinc-700">Communication</button>
+                <button class="px-4 py-2 bg-zinc-800 text-zinc-400 rounded-full text-sm border border-zinc-700">Storage</button>
+                <button class="px-4 py-2 bg-zinc-800 text-zinc-400 rounded-full text-sm border border-zinc-700">Analytics</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- MCP Grid -->
+    <section id="browse" class="py-16 px-4">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- MCP Card 1 -->
+                <div class="card glass rounded-2xl p-6 border border-white/5">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center text-2xl">🗄️</div>
+                        <div>
+                            <h3 class="font-semibold text-lg">PostgreSQL</h3>
+                            <span class="text-xs text-zinc-500">Database</span>
+                        </div>
+                    </div>
+                    <p class="text-zinc-400 text-sm mb-4">Connect to PostgreSQL databases. Run queries, manage data, and sync state.</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-green-400 text-sm">✓ Connected</span>
+                        <button class="text-sm text-violet-400 hover:text-white">Configure</button>
+                    </div>
+                </div>
+
+                <!-- MCP Card 2 -->
+                <div class="card glass rounded-2xl p-6 border border-white/5">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 bg-yellow-500/20 rounded-xl flex items-center justify-center text-2xl">🔍</div>
+                        <div>
+                            <h3 class="font-semibold text-lg">Exa Search</h3>
+                            <span class="text-xs text-zinc-500">Search</span>
+                        </div>
+                    </div>
+                    <p class="text-zinc-400 text-sm mb-4">AI-powered semantic search. Find relevant content across the web.</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-green-400 text-sm">✓ Connected</span>
+                        <button class="text-sm text-violet-400 hover:text-white">Configure</button>
+                    </div>
+                </div>
+
+                <!-- MCP Card 3 -->
+                <div class="card glass rounded-2xl p-6 border border-white/5">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 bg-green-500/20 rounded-xl flex items-center justify-center text-2xl">📧</div>
+                        <div>
+                            <h3 class="font-semibold text-lg">Email</h3>
+                            <span class="text-xs text-zinc-500">Communication</span>
+                        </div>
+                    </div>
+                    <p class="text-zinc-400 text-sm mb-4">Send and receive emails. Gmail, SMTP, and custom server support.</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-zinc-500 text-sm">Not connected</span>
+                        <button class="text-sm text-violet-400 hover:text-white">Connect</button>
+                    </div>
+                </div>
+
+                <!-- MCP Card 4 -->
+                <div class="card glass rounded-2xl p-6 border border-white/5">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 bg-purple-500/20 rounded-xl flex items-center justify-center text-2xl">📅</div>
+                        <div>
+                            <h3 class="font-semibold text-lg">Calendar</h3>
+                            <span class="text-xs text-zinc-500">Communication</span>
+                        </div>
+                    </div>
+                    <p class="text-zinc-400 text-sm mb-4">Google Calendar integration. Create events, check availability.</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-zinc-500 text-sm">Not connected</span>
+                        <button class="text-sm text-violet-400 hover:text-white">Connect</button>
+                    </div>
+                </div>
+
+                <!-- MCP Card 5 -->
+                <div class="card glass rounded-2xl p-6 border border-white/5">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 bg-red-500/20 rounded-xl flex items-center justify-center text-2xl">💰</div>
+                        <div>
+                            <h3 class="font-semibold text-lg">Crypto Wallet</h3>
+                            <span class="text-xs text-zinc-500">Blockchain</span>
+                        </div>
+                    </div>
+                    <p class="text-zinc-400 text-sm mb-4">Base & Solana wallet integration. Sign messages, send transactions.</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-green-400 text-sm">✓ Connected</span>
+                        <button class="text-sm text-violet-400 hover:text-white">Configure</button>
+                    </div>
+                </div>
+
+                <!-- MCP Card 6 -->
+                <div class="card glass rounded-2xl p-6 border border-white/5">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 bg-cyan-500/20 rounded-xl flex items-center justify-center text-2xl">📊</div>
+                        <div>
+                            <h3 class="font-semibold text-lg">Analytics</h3>
+                            <span class="text-xs text-zinc-500">Data</span>
+                        </div>
+                    </div>
+                    <p class="text-zinc-400 text-sm mb-4">Track and analyze agent behavior. Usage stats and performance metrics.</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-zinc-500 text-sm">Not connected</span>
+                        <button class="text-sm text-violet-400 hover:text-white">Connect</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="py-16 px-4 bg-zinc-900/50">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-12">How MCP Servers Work</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="text-center">
+                    <div class="w-16 h-16 gradient rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4">1</div>
+                    <h3 class="font-semibold text-lg mb-2">Find</h3>
+                    <p class="text-zinc-400">Browse MCP servers or search for specific capabilities your agent needs.</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-16 h-16 gradient rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4">2</div>
+                    <h3 class="font-semibold text-lg mb-2">Connect</h3>
+                    <p class="text-zinc-400">Authenticate with your API keys. MCP servers handle the connection securely.</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-16 h-16 gradient rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4">3</div>
+                    <h3 class="font-semibold text-lg mb-2">Use</h3>
+                    <p class="text-zinc-400">Your agent can now use these capabilities. Pay per call via x402.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/5 py-12 px-4">
+        <div class="max-w-7xl mx-auto text-center text-zinc-500 text-sm">
+            © 2026 OMA-AI. MCP Servers like Smithery.ai. Built with x402 on Base.
+        </div>
+    </footer>
+</body>
+</html>

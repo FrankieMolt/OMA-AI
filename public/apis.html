@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APIs | OMA-AI - The AI Agent Marketplace</title>
+    <meta name="description" content="Browse and integrate 50+ APIs for AI agents. Pay per call with x402 micropayments.">
+    <meta name="keywords" content="AI APIs, MCP servers, x402 payments, crypto API, LLM API, AI agent tools">
+    <meta property="og:title" content="API Marketplace - OMA-AI">
+    <meta property="og:description" content="Discover and integrate APIs for AI agents. Instant x402 micropayments.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://oma-ai.com/apis">
+    <link rel="canonical" href="https://oma-ai.com/apis">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      "name": "API Marketplace",
+      "description": "Browse APIs for AI agents",
+      "url": "https://oma-ai.com/apis",
+      "mainEntity": {
+        "@type": "ItemList",
+        "itemListElement": []
+      }
+    }
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #09090b; color: #fafafa; }
+        .gradient { background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%); }
+        .card { transition: all 0.3s ease; }
+        .card:hover { transform: translateY(-4px); border-color: rgba(139,92,246,0.4); }
+        .tag { font-size: 11px; padding: 3px 10px; border-radius: 9999px; font-weight: 500; }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-zinc-950/90 backdrop-blur-xl border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+            <a href="/" class="flex items-center gap-3">
+                <div class="w-10 h-10 gradient rounded-xl flex items-center justify-center text-lg font-bold">OMA</div>
+                <span class="text-xl font-bold hidden sm:block">Open Market Access</span>
+            </a>
+            <div class="flex items-center gap-4">
+                <a href="/apis" class="text-violet-400 font-medium">APIs</a>
+                <a href="/mcps" class="text-zinc-400 hover:text-white">MCPs</a>
+                <a href="/compute" class="text-zinc-400 hover:text-white">Compute</a>
+                <a href="/dashboard" class="text-zinc-400 hover:text-white">Dashboard</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="pt-32 pb-16 px-4">
+        <div class="max-w-7xl mx-auto text-center">
+            <h1 class="text-5xl font-bold mb-6">API Marketplace</h1>
+            <p class="text-xl text-zinc-400 mb-8 max-w-2xl mx-auto">
+                Discover and integrate 50+ APIs for AI agents. Pay per call with instant x402 micropayments.
+            </p>
+            <div class="flex items-center justify-center gap-4">
+                <a href="#browse" class="gradient px-6 py-3 rounded-xl font-semibold">Browse APIs</a>
+                <a href="#submit" class="px-6 py-3 rounded-xl border border-zinc-700 hover:border-violet-500">List Your API</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories -->
+    <section class="py-8 px-4">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-wrap justify-center gap-3">
+                <button class="tag bg-violet-500/20 text-violet-300 border border-violet-500/30">All</button>
+                <button class="tag bg-zinc-800 text-zinc-400 border border-zinc-700">Crypto</button>
+                <button class="tag bg-zinc-800 text-zinc-400 border border-zinc-700">LLM</button>
+                <button class="tag bg-zinc-800 text-zinc-400 border border-zinc-700">Data</button>
+                <button class="tag bg-zinc-800 text-zinc-400 border border-zinc-700">Search</button>
+                <button class="tag bg-zinc-800 text-zinc-400 border border-zinc-700">Weather</button>
+                <button class="tag bg-zinc-800 text-zinc-400 border border-zinc-700">Finance</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- API Grid -->
+    <section id="browse" class="py-16 px-4">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="api-grid">
+                <!-- API Card 1 -->
+                <div class="card glass rounded-2xl p-6 border border-white/5">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center text-2xl">📊</div>
+                        <div>
+                            <h3 class="font-semibold text-lg">Crypto Prices</h3>
+                            <span class="text-xs text-zinc-500">Real-time data</span>
+                        </div>
+                    </div>
+                    <p class="text-zinc-400 text-sm mb-4">Live cryptocurrency prices from CoinGecko. BTC, ETH, SOL and 100+ more.</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-violet-400 font-semibold">$0.001/call</span>
+                        <a href="/api-demo?api=crypto-prices" class="text-sm text-zinc-400 hover:text-white">Test →</a>
+                    </div>
+                </div>
+
+                <!-- API Card 2 -->
+                <div class="card glass rounded-2xl p-6 border border-white/5">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 bg-green-500/20 rounded-xl flex items-center justify-center text-2xl">🌤️</div>
+                        <div>
+                            <h3 class="font-semibold text-lg">Weather</h3>
+                            <span class="text-xs text-zinc-500">Global forecast</span>
+                        </div>
+                    </div>
+                    <p class="text-zinc-400 text-sm mb-4">Weather forecasts for any location. Current conditions and 7-day forecast.</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-violet-400 font-semibold">$0.002/call</span>
+                        <a href="/api-demo?api=weather" class="text-sm text-zinc-400 hover:text-white">Test →</a>
+                    </div>
+                </div>
+
+                <!-- API Card 3 -->
+                <div class="card glass rounded-2xl p-6 border border-white/5">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 bg-purple-500/20 rounded-xl flex items-center justify-center text-2xl">🔍</div>
+                        <div>
+                            <h3 class="font-semibold text-lg">Web Search</h3>
+                            <span class="text-xs text-zinc-500">AI-powered</span>
+                        </div>
+                    </div>
+                    <p class="text-zinc-400 text-sm mb-4">AI-powered web search. Get relevant results for any query.</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-violet-400 font-semibold">$0.005/call</span>
+                        <a href="/api-demo?api=search" class="text-sm text-zinc-400 hover:text-white">Test →</a>
+                    </div>
+                </div>
+
+                <!-- API Card 4 -->
+                <div class="card glass rounded-2xl p-6 border border-white/5">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 bg-orange-500/20 rounded-xl flex items-center justify-center text-2xl">🤖</div>
+                        <div>
+                            <h3 class="font-semibold text-lg">LLM Gateway</h3>
+                            <span class="text-xs text-zinc-500">Multi-provider</span>
+                        </div>
+                    </div>
+                    <p class="text-zinc-400 text-sm mb-4">Access GPT-4, Claude, Llama and more through unified API. 90% revenue share.</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-violet-400 font-semibold">$0.01/call</span>
+                        <a href="/api-demo?api=llm" class="text-sm text-zinc-400 hover:text-white">Test →</a>
+                    </div>
+                </div>
+
+                <!-- API Card 5 -->
+                <div class="card glass rounded-2xl p-6 border border-white/5">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 bg-red-500/20 rounded-xl flex items-center justify-center text-2xl">🕷️</div>
+                        <div>
+                            <h3 class="font-semibold text-lg">Web Scraper</h3>
+                            <span class="text-xs text-zinc-500">HTML parsing</span>
+                        </div>
+                    </div>
+                    <p class="text-zinc-400 text-sm mb-4">Extract data from any website. Fast, reliable HTML parsing.</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-violet-400 font-semibold">$0.003/call</span>
+                        <a href="/api-demo?api=scrape" class="text-sm text-zinc-400 hover:text-white">Test →</a>
+                    </div>
+                </div>
+
+                <!-- API Card 6 -->
+                <div class="card glass rounded-2xl p-6 border border-white/5">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 bg-cyan-500/20 rounded-xl flex items-center justify-center text-2xl">💰</div>
+                        <div>
+                            <h3 class="font-semibold text-lg">Premium Prices</h3>
+                            <span class="text-xs text-zinc-500">Extended data</span>
+                        </div>
+                    </div>
+                    <p class="text-zinc-400 text-sm mb-4">Extended crypto data with market cap, volume, and analytics.</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-violet-400 font-semibold">$0.001/call</span>
+                        <a href="/api-demo?api=premium-prices" class="text-sm text-zinc-400 hover:text-white">Test →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Submit API -->
+    <section id="submit" class="py-16 px-4 bg-zinc-900/50">
+        <div class="max-w-3xl mx-auto text-center">
+            <h2 class="text-3xl font-bold mb-4">List Your API</h2>
+            <p class="text-zinc-400 mb-8">
+                Monetize your API in minutes. Set your price, get paid via x402 micropayments.
+            </p>
+            <div class="glass rounded-2xl p-8 border border-white/5 text-left">
+                <h3 class="font-semibold mb-4">Submit Your API</h3>
+                <form class="space-y-4">
+                    <div>
+                        <label class="block text-sm text-zinc-400 mb-1">API Name</label>
+                        <input type="text" class="w-full px-4 py-2 bg-zinc-800 border border-zinc-700 rounded-lg" placeholder="My API">
+                    </div>
+                    <div>
+                        <label class="block text-sm text-zinc-400 mb-1">Endpoint URL</label>
+                        <input type="url" class="w-full px-4 py-2 bg-zinc-800 border border-zinc-700 rounded-lg" placeholder="https://api.example.com">
+                    </div>
+                    <div>
+                        <label class="block text-sm text-zinc-400 mb-1">Price per call (USDC)</label>
+                        <input type="number" step="0.001" class="w-full px-4 py-2 bg-zinc-800 border border-zinc-700 rounded-lg" placeholder="0.001">
+                    </div>
+                    <button type="submit" class="gradient w-full py-3 rounded-lg font-semibold">Submit API</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/5 py-12 px-4">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-4 gap-8">
+            <div>
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-10 h-10 gradient rounded-xl flex items-center justify-center text-lg font-bold">OMA</div>
+                    <span class="text-xl font-bold">OMA-AI</span>
+                </div>
+                <p class="text-zinc-500 text-sm">The premier API marketplace for AI agents with x402 micropayments.</p>
+            </div>
+            <div>
+                <h4 class="font-semibold mb-4">Platform</h4>
+                <ul class="space-y-2 text-sm text-zinc-400">
+                    <li><a href="/apis" class="hover:text-white">APIs</a></li>
+                    <li><a href="/mcps" class="hover:text-white">MCP Servers</a></li>
+                    <li><a href="/compute" class="hover:text-white">Compute</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-semibold mb-4">Resources</h4>
+                <ul class="space-y-2 text-sm text-zinc-400">
+                    <li><a href="/docs" class="hover:text-white">Documentation</a></li>
+                    <li><a href="/about" class="hover:text-white">About</a></li>
+                    <li><a href="https://github.com/FrankieMolt/OMA-AI" class="hover:text-white">GitHub</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-semibold mb-4">Legal</h4>
+                <ul class="space-y-2 text-sm text-zinc-400">
+                    <li><a href="/privacy.html" class="hover:text-white">Privacy</a></li>
+                    <li><a href="/terms.html" class="hover:text-white">Terms</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto mt-8 pt-8 border-t border-white/5 text-center text-zinc-500 text-sm">
+            © 2026 OMA-AI. Built with x402 on Base. Open Source.
+        </div>
+    </footer>
+</body>
+</html>
