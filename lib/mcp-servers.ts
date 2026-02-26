@@ -150,7 +150,7 @@ export const mcpServers = [
     rating: 4.6,
     x402_enabled: true,
     config_schema: {
-      type: object',
+      type: 'object',
       properties: {
         apiKey: { type: 'string' },
         authDomain: { type: 'string' },
