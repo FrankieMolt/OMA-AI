@@ -5,10 +5,10 @@ export function proxy(request: NextRequest) {
   const nonce = Buffer.from(crypto.randomUUID()).toString('base64');
   const cspHeader = `
     default-src 'self';
-    script-src 'self' 'unsafe-eval' 'unsafe-inline' https://*.vercel.app;
-    style-src 'self' 'unsafe-inline' https://*.vercel.app;
-    img-src 'self' blob: data: https://*.vercel.app;
-    font-src 'self';
+    script-src 'self' 'unsafe-eval' 'unsafe-inline' https://cdn.tailwindcss.com https://*.vercel.app;
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.tailwindcss.com https://*.vercel.app;
+    img-src 'self' blob: data: https://*;
+    font-src 'self' https://fonts.gstatic.com;
     object-src 'none';
     base-uri 'self';
     form-action 'self';
