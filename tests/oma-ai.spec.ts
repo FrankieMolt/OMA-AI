@@ -5,7 +5,7 @@ import { test, expect } from '@playwright/test';
  * Tests the OMA-AI marketplace platform
  */
 
-const BASE_URL = process.env.BASE_URL || 'http://localhost:3000';
+const BASE_URL = process.env.BASE_URL || 'https://oma-ai.com';
 
 test.describe('OMA-AI User Flows', () => {
   
