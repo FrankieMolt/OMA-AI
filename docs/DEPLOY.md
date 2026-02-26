@@ -1,119 +1,93 @@
-# OMA-AI Deployment Guide
+# Deploying OMA-AI.COM
 
-## Prerequisites
+## Option 1: Vercel (Recommended)
 
-1. Node.js 18+
-2. Vercel account
-3. Supabase project (free tier)
-4. Base wallet with USDC (for testing)
+1. Go to https://vercel.com
+2. Import GitHub repo: `FrankieMolt/OMA-AI`
+3. Configure:
+   - Framework: Other
+   - Root Directory: `public`
+   - Build Command: (none)
+   - Output Directory: `public`
+4. Add domain:
+   - Go to Settings → Domains
+   - Add `oma-ai.com`
+   - Update DNS records
+
+### DNS Records for Vercel
+
+| Type | Name | Value |
+|------|------|-------|
+| A | @ | 76.76.21.21 |
+| CNAME | www | cname.vercel-dns.com |
+
+## Option 2: GitHub Pages
+
+1. Go to repo Settings → Pages
+2. Source: Deploy from branch
+3. Branch: main
+4. Folder: /public
+5. Custom domain: oma-ai.com
+
+### DNS Records for GitHub Pages
+
+| Type | Name | Value |
+|------|------|-------|
+| A | @ | 185.199.108.153 |
+| A | @ | 185.199.109.153 |
+| A | @ | 185.199.110.153 |
+| A | @ | 185.199.111.153 |
+| CNAME | www | frankiemolt.github.io |
+
+## Option 3: Netlify
+
+1. Go to https://netlify.com
+2. Import GitHub repo
+3. Publish directory: `public`
+4. Add custom domain
+
+## Option 4: Cloudflare Pages
+
+1. Go to https://pages.cloudflare.com
+2. Connect GitHub repo
+3. Build output: `public`
+4. Add custom domain
 
 ---
 
-## Step 1: Clone & Install
+## Quick Deploy Commands
 
+### Vercel CLI
 ```bash
-git clone https://github.com/FrankieMolt/OMA-AI.git
-cd OMA-AI
-npm install
-```
-
-## Step 2: Configure Environment
-
-```bash
-cp .env.example .env.local
-```
-
-Edit `.env.local`:
-
-```env
-# Supabase (create at supabase.com)
-NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
-
-# x402 (optional - dev mode works without)
-# PRIVATE_KEY=0x...
-# TREASURY_WALLET_BASE=0x40AE4455055feeCac30e1EEEcbFE8dBEd77e4eC6
-```
-
-## Step 3: Deploy to Vercel
-
-```bash
-# Login
-vercel login
-
-# Deploy
+npm i -g vercel
+cd oma-ai-repo
 vercel --prod
 ```
 
-**Or connect GitHub:** https://vercel.com/new/import/github/FrankieMolt/OMA-AI
-
-## Step 4: Setup Supabase
-
-1. Create project at https://supabase.com
-2. Get URL and anon key
-3. Add to Vercel project settings
-4. Push schema:
-
+### Netlify CLI
 ```bash
-npx supabase db push
-```
-
-## Step 5: Test Locally
-
-```bash
-npm run dev
-# Visit http://localhost:3000
-```
-
-## Step 6: Run Tests
-
-```bash
-npx playwright test
-# 10 tests should pass
+npm i -g netlify-cli
+cd oma-ai-repo
+netlify deploy --prod --dir=public
 ```
 
 ---
 
-## Network Configuration
+## After Deployment
 
-### Base Mainnet
-- Chain ID: 8453
-- RPC: https://mainnet.base.org
-- USDC: 0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913
-
-### Testnet (Sepolia)
-- Chain ID: 84532
-- RPC: https://sepolia.base.org
-- USDC: 0x... (get from faucet)
+1. Verify site loads at oma-ai.com
+2. Test API calls work (CORS)
+3. Check all links work
+4. Enable HTTPS (automatic on Vercel/Netlify)
+5. Set up monitoring
 
 ---
 
-## Cost Optimization
+## Current Status
 
-| Service | Free Tier | Notes |
-|---------|-----------|-------|
-| Vercel | 100 deploys/day | 100GB bandwidth |
-| Supabase | 500MB DB, 5GB storage | Unlimited users |
-| CoinGecko | 10-30 calls/min | No key needed |
-| WeatherAPI | 1M calls/month | Free tier |
-| Exa | 1000 searches/month | Free tier |
-
----
-
-## Troubleshooting
-
-### "Address already in use"
-```bash
-lsof -i :3000
-kill -9 <PID>
-```
-
-### Build errors
-```bash
-rm -rf .next
-npm run dev
-```
-
-### Wallet not connecting
-- Install MetaMask or Coinbase Wallet
-- Switch to Base network
+- ✅ Site ready in `public/index.html`
+- ✅ Vercel config created
+- ✅ Pushed to GitHub
+- ⬜ Deploy to hosting provider
+- ⬜ Configure DNS
+- ⬜ Enable HTTPS
