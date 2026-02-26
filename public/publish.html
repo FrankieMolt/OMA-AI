@@ -153,12 +153,12 @@
                     <div class="space-y-4">
                         <div>
                             <label class="block text-sm text-zinc-400 mb-2">Monthly API Calls</label>
-                            <input type="range" min="1000" max="1000000" value="10000" class="w-full" oninput="updateCalc()">
+                            <input type="range" id="callVolume" aria-label="Expected monthly calls" min="1000" max="1000000" value="10000" class="w-full" oninput="updateCalc()">
                             <div class="text-right text-violet-400 font-mono" id="callsDisplay">10,000 calls/mo</div>
                         </div>
                         <div>
                             <label class="block text-sm text-zinc-400 mb-2">Price per Call</label>
-                            <input type="number" step="0.001" value="0.01" class="w-full px-4 py-2 bg-zinc-900 border border-zinc-700 rounded-xl" oninput="updateCalc()">
+                            <input type="number" id="pricePerCall" aria-label="Price per call in USDC" step="0.001" value="0.01" class="w-full px-4 py-2 bg-zinc-900 border border-zinc-700 rounded-xl" oninput="updateCalc()">
                         </div>
                     </div>
                     <div class="bg-zinc-900 rounded-xl p-6">
