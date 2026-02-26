@@ -59,21 +59,30 @@
 
             <!-- Filters -->
             <div class="flex flex-wrap gap-4 mb-8">
-                <select id="providerFilter" aria-label="Filter by provider" class="px-4 py-2 bg-zinc-900 border border-zinc-700 rounded-lg">
-                    <option value="">All Providers</option>
-                    <option value="openai">OpenAI</option>
-                    <option value="anthropic">Anthropic</option>
-                    <option value="google">Google</option>
-                    <option value="meta">Meta</option>
-                    <option value="mistral">Mistral</option>
-                </select>
-                <select id="tierFilter" aria-label="Filter by tier" class="px-4 py-2 bg-zinc-900 border border-zinc-700 rounded-lg">
-                    <option value="">All Tiers</option>
-                    <option value="flagship">Flagship</option>
-                    <option value="balanced">Balanced</option>
-                    <option value="cheap">Budget</option>
-                </select>
-                <input type="search" id="searchInput" aria-label="Search models" placeholder="Search models..." class="px-4 py-2 bg-zinc-900 border border-zinc-700 rounded-lg">
+                <div>
+                    <label for="providerFilter" class="sr-only">Provider</label>
+                    <select id="providerFilter" class="px-4 py-2 bg-zinc-900 border border-zinc-700 rounded-lg">
+                        <option value="">All Providers</option>
+                        <option value="openai">OpenAI</option>
+                        <option value="anthropic">Anthropic</option>
+                        <option value="google">Google</option>
+                        <option value="meta">Meta</option>
+                        <option value="mistral">Mistral</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="tierFilter" class="sr-only">Tier</label>
+                    <select id="tierFilter" class="px-4 py-2 bg-zinc-900 border border-zinc-700 rounded-lg">
+                        <option value="">All Tiers</option>
+                        <option value="flagship">Flagship</option>
+                        <option value="balanced">Balanced</option>
+                        <option value="cheap">Budget</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="searchInput" class="sr-only">Search</label>
+                    <input type="search" id="searchInput" placeholder="Search models..." class="px-4 py-2 bg-zinc-900 border border-zinc-700 rounded-lg">
+                </div>
             </div>
 
             <!-- Models Grid -->
