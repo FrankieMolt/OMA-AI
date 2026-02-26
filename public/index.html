@@ -718,12 +718,19 @@
     </div>
     
     <!-- Navigation -->
-    <nav class="nav-v3">
+    <nav class="nav-v3" role="navigation" aria-label="Main navigation">
         <div class="logo-v3">
-            <div class="logo-icon">OMA</div>
-            <span>OMA-AI</span>
+            <a href="/" aria-label="OMA-AI Home">
+                <div class="logo-icon">OMA</div>
+                <span>OMA-AI</span>
+            </a>
         </div>
-        <div class="nav-links-v3">
+        <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false" id="mobile-menu-btn">
+            <span style="width:24px;height:2px;background:currentColor"></span>
+            <span style="width:24px;height:2px;background:currentColor"></span>
+            <span style="width:24px;height:2px;background:currentColor"></span>
+        </button>
+        <div class="nav-links-v3" id="nav-links">
             <a href="/apis.html" class="nav-link-v3">APIs</a>
             <a href="/mcps.html" class="nav-link-v3">MCP Servers</a>
             <a href="/skills.html" class="nav-link-v3">Skills</a>
@@ -747,10 +754,9 @@
                 Browse, test, and integrate APIs, MCP servers, and LLM models with x402 crypto payments on Base and Solana.
             </p>
             <div class="cta-section">
-                <div class="cta-input">
-                    <input type="email" placeholder="Get early access" />
-                <button class="btn-v3 btn-primary-v3">Get Started →</button>
-                </div>
+                <a href="/apis.html" class="btn-v3 btn-primary-v3" style="font-size:1.25rem;padding:1rem 2.5rem;">
+                    Explore APIs →
+                </a>
                 <p class="text-sm text-zinc-500 mt-4">
                     Join 500+ AI developers building the autonomous future
                 </p>
@@ -846,12 +852,11 @@
             <div class="cta-section">
                 <h2 class="cta-title">Ready to Build?</h2>
                 <p class="text-zinc-400 mb-6">Start listing your APIs and get paid with every call</p>
-                <div class="cta-input">
-                    <input type="email" placeholder="Enter your email" />
-                    <button class="btn-v3 btn-primary-v3">Start Free →</button>
-                </div>
-                <p class="text-sm text-zinc-500">
-                    No credit card required
+                <a href="/apis.html" class="btn-v3 btn-primary-v3" style="font-size:1.125rem;padding:0.875rem 2rem;">
+                    Browse APIs →
+                </a>
+                <p class="text-sm text-zinc-500 mt-4">
+                    No credit card required • Free tier available
                 </p>
                 <div class="social-links">
                     <a href="https://twitter.com/oma_ai" class="social-link" aria-label="Twitter">𝕊</a>
@@ -886,6 +891,16 @@
     </footer>
     
     <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const navLinks = document.getElementById('nav-links');
+        
+        mobileMenuBtn?.addEventListener('click', () => {
+            const isExpanded = mobileMenuBtn.getAttribute('aria-expanded') === 'true';
+            mobileMenuBtn.setAttribute('aria-expanded', !isExpanded);
+            navLinks?.classList.toggle('active');
+        });
+        
         // Smooth scroll for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
