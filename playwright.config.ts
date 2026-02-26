@@ -8,7 +8,7 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   reporter: 'list',
   use: {
-    baseURL: 'https://oma-ai.vercel.app',
+    baseURL: 'https://oma-ai.com',
     trace: 'on-first-retry',
   },
   projects: [

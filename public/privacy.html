@@ -1,81 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="/styles.css">
-    <link rel="stylesheet" href="/styles-enhanced.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy - OMA-AI</title>
-    <meta name="description" content="OMA-AI Privacy Policy - How we handle your data.">
+    <title>Privacy Policy - OMA-AI | Data Handling & User Privacy</title>
+    <meta name="description" content="OMA-AI Privacy Policy - Learn how we collect, use, and protect your data. We don't sell your data. Minimal data collection. Transparent practices.">
+    <meta name="keywords" content="privacy policy, data protection, AI agents, API marketplace">
+    <link rel="canonical" href="https://oma-ai.com/privacy">
     
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://oma-ai.com/privacy">
+    <meta property="og:title" content="Privacy Policy - OMA-AI">
+    <meta property="og:description" content="How we handle your data. Minimal collection. No selling.">
+    <meta property="og:image" content="https://oma-ai.com/og-image.png">
     
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/design-system.css">
+    
+    <script>
+      tailwind.config = {
         theme: {
           extend: {
             colors: {
-              zinc: { 950: "#09090b" },
-              violet: { 400: "#a78bfa", 500: "#8b5cf6" },
-              indigo: { 500: "#6366f1" },
-              fuchsia: { 500: "#d946ef" }
-            },
-            fontFamily: {
-              sans: ["Inter", "sans-serif"]
+              zinc: { 950: "#09090b", 900: "#18181b" },
+              violet: { 400: "#a78bfa", 500: "#8b5cf6" }
             }
           }
         }
       }
-    
-    <link rel="stylesheet" href="/quick-wins.css">
-<style>
+    </script>
+    <style>
         body { font-family: 'Inter', sans-serif; background: #09090b; color: #fafafa; }
+        .gradient { background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%); }
+        .glass { background: rgba(255,255,255,0.03); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.06); }
     </style>
-<link rel="stylesheet" href="/design-system.css">
-<link rel="stylesheet" href="/responsive.css">
 </head>
 <body class="min-h-screen">
-    <nav class="fixed top-0 left-0 right-0 z-50 bg-zinc-950/80 backdrop-blur-xl border-b border-white/5">
-        <div class="max-w-4xl mx-auto px-4 h-16 flex items-center justify-between">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-zinc-950/90 backdrop-blur-xl border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
             <a href="/" class="flex items-center gap-3">
                 <div class="w-10 h-10 gradient rounded-xl flex items-center justify-center text-lg font-bold">OMA</div>
-                <span class="text-xl font-bold">Open Market Access</span>
+                <span class="text-xl font-bold hidden sm:block">Open Market Access</span>
             </a>
-            <a href="/" class="text-zinc-400 hover:text-white">← Back to Home</a>
+            <div class="flex items-center gap-4">
+                <a href="/apis" class="text-zinc-400 hover:text-white">APIs</a>
+                <a href="/mcps" class="text-zinc-400 hover:text-white">MCPs</a>
+                <a href="/compute" class="text-zinc-400 hover:text-white">Compute</a>
+            </div>
         </div>
     </nav>
-    
-    <main class="pt-32 pb-20 px-4">
+
+    <main class="pt-24 pb-16 px-4">
         <div class="max-w-3xl mx-auto">
-            <h1 class="text-4xl font-bold mb-8">Privacy Policy</h1>
-            <p class="text-zinc-400 mb-8">Last updated: February 2026</p>
+            <h1 class="text-5xl font-bold mb-4">Privacy Policy</h1>
+            <p class="text-xl text-zinc-400 mb-12">Last updated: February 26, 2026</p>
             
-            <div class="prose prose-invert max-w-none space-y-6 text-zinc-300">
-                <p>OMA-AI ("we", "our") operates the OMA-AI platform. This Privacy Policy explains how we collect, use, and protect your information.</p>
+            <div class="prose prose-invert max-w-none">
+                <section class="glass rounded-2xl p-8 border border-white/5 mb-8">
+                    <h2 class="text-2xl font-bold mb-4">Data We Collect</h2>
+                    <p class="text-zinc-400 mb-4">We collect minimal data to operate our services:</p>
+                    <ul class="list-disc list-inside text-zinc-400 space-y-2">
+                        <li><strong>Wallet addresses</strong> - For payment processing</li>
+                        <li><strong>API usage data</strong> - For billing and analytics</li>
+                        <li><strong>Usage patterns</strong> - To improve our services</li>
+                    </ul>
+                </section>
                 
-                <h2 class="text-xl font-semibold text-white mt-8">Information We Collect</h2>
-                <p>We collect minimal data necessary for the platform to function:</p>
-                <ul class="list-disc list-inside space-y-2 text-zinc-400">
-                    <li>Wallet addresses (for x402 payments)</li>
-                    <li>API usage data (for analytics)</li>
-                    <li>Public GitHub information</li>
-                </ul>
+                <section class="glass rounded-2xl p-8 border border-white/5 mb-8">
+                    <h2 class="text-2xl font-bold mb-4">What We Don't Do</h2>
+                    <ul class="list-disc list-inside text-zinc-400 space-y-2">
+                        <li>❌ We don't sell your data</li>
+                        <li>❌ We don't share your data with third parties</li>
+                        <li>❌ We don't track you across websites</li>
+                        <li>❌ We don't use cookies for advertising</li>
+                    </ul>
+                </section>
                 
-                <h2 class="text-xl font-semibold text-white mt-8">How We Use Your Data</h2>
-                <ul class="list-disc list-inside space-y-2 text-zinc-400">
-                    <li>Process x402 micropayments</li>
-                    <li>Provide API services</li>
-                    <li>Improve platform performance</li>
-                </ul>
+                <section class="glass rounded-2xl p-8 border border-white/5 mb-8">
+                    <h2 class="text-2xl font-bold mb-4">Payments</h2>
+                    <p class="text-zinc-400">All payments are processed on-chain using x402 protocol. We don't store credit card information or bank details.</p>
+                </section>
                 
-                <h2 class="text-xl font-semibold text-white mt-8">Data Storage</h2>
-                <p>We use Supabase for data storage. Your wallet address is never sold or shared with third parties.</p>
+                <section class="glass rounded-2xl p-8 border border-white/5 mb-8">
+                    <h2 class="text-2xl font-bold mb-4">Your Rights</h2>
+                    <ul class="list-disc list-inside text-zinc-400 space-y-2">
+                        <li>Right to access your data</li>
+                        <li>Right to delete your data</li>
+                        <li>Right to export your data</li>
+                        <li>Right to opt-out of analytics</li>
+                    </ul>
+                </section>
                 
-                <h2 class="text-xl font-semibold text-white mt-8">Contact</h2>
-                <p>Questions? Reach out at <a href="mailto:hello@oma-ai.com" class="text-violet-400 hover:underline">hello@oma-ai.com</a></p>
+                <section class="glass rounded-2xl p-8 border border-white/5">
+                    <h2 class="text-2xl font-bold mb-4">Contact</h2>
+                    <p class="text-zinc-400">For privacy-related questions, contact us at <a href="mailto:privacy@oma-ai.com" class="text-violet-400 hover:underline">privacy@oma-ai.com</a></p>
+                </section>
             </div>
         </div>
     </main>
-    
+
+    <!-- Footer -->
     <footer class="border-t border-white/5 py-8 text-center text-zinc-500">
-        <p>© 2026 OMA-AI. All rights reserved.</p>
+        <p>© 2026 OMA-AI. Built with x402 on Base.</p>
     </footer>
 </body>
 </html>

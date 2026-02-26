@@ -1,36 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="/styles.css">
-    <link rel="stylesheet" href="/styles-enhanced.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog - OMA-AI | Open Market Access</title>
-    <meta name="description" content="Latest news, tutorials, and updates from OMA-AI.">
+    <title>Blog - OMA-AI | AI Agent News, Tutorials & Updates</title>
+    <meta name="description" content="OMA-AI blog - Latest news, tutorials, and updates on AI agents, x402 payments, MCP servers, and decentralized infrastructure. Learn to build autonomous AI systems.">
+    <meta name="keywords" content="AI agents blog, x402 payments, MCP servers, AI tutorials, autonomous agents">
+    <meta name="author" content="OMA-AI">
+    <link rel="canonical" href="https://oma-ai.com/blog">
     
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://oma-ai.com/blog">
+    <meta property="og:title" content="Blog - OMA-AI | AI Agent News & Tutorials">
+    <meta property="og:description" content="Latest news, tutorials, and updates on AI agents and x402 payments.">
+    <meta property="og:image" content="https://oma-ai.com/og-image.png">
     
-        theme: {
-          extend: {
-            colors: {
-              zinc: { 950: "#09090b" },
-              violet: { 400: "#a78bfa", 500: "#8b5cf6" },
-              indigo: { 500: "#6366f1" },
-              fuchsia: { 500: "#d946ef" }
-            },
-            fontFamily: {
-              sans: ["Inter", "sans-serif"]
-            }
-          }
-        }
-      }
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     
-    <link rel="stylesheet" href="/quick-wins.css">
-<style>
-        body { font-family: 'Inter', sans-serif; background: #09090b; color: #fafafa; }
-        .gradient { background: linear-gradient(135deg, #6366f1, #8b5cf6, #d946ef); }
-    </style>
-<script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/design-system.css">
+    
+    <script>
       tailwind.config = {
         theme: {
           extend: {
@@ -44,124 +38,80 @@
         }
       }
     </script>
-  <link rel="stylesheet" href="/design-system.css">
-<link rel="stylesheet" href="/responsive.css">
+    <style>
+        body { font-family: 'Inter', sans-serif; background: #09090b; color: #fafafa; }
+        .gradient { background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%); }
+        .card { transition: all 0.3s ease; }
+        .card:hover { transform: translateY(-4px); border-color: rgba(139,92,246,0.4); }
+        .glass { background: rgba(255,255,255,0.03); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.06); }
+    </style>
 </head>
 <body class="min-h-screen">
+    <!-- Navigation -->
     <nav class="fixed top-0 left-0 right-0 z-50 bg-zinc-950/90 backdrop-blur-xl border-b border-white/5">
         <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
             <a href="/" class="flex items-center gap-3">
-                <div class="w-10 h-10 gradient rounded-xl flex items-center justify-center font-bold">OMA</div>
-                <span class="text-xl font-bold">Open Market Access</span>
+                <div class="w-10 h-10 gradient rounded-xl flex items-center justify-center text-lg font-bold">OMA</div>
+                <span class="text-xl font-bold hidden sm:block">Open Market Access</span>
             </a>
             <div class="flex items-center gap-4">
-                <a href="/blog.html" class="text-violet-400">Blog</a>
-                <a href="/docs.html" class="text-zinc-400 hover:text-white">Docs</a>
-                <a href="/pricing.html" class="text-zinc-400 hover:text-white">Pricing</a>
+                <a href="/apis" class="text-zinc-400 hover:text-white">APIs</a>
+                <a href="/mcps" class="text-zinc-400 hover:text-white">MCPs</a>
+                <a href="/compute" class="text-zinc-400 hover:text-white">Compute</a>
+                <a href="/dashboard" class="text-zinc-400 hover:text-white">Dashboard</a>
             </div>
         </div>
     </nav>
 
     <main class="pt-24 pb-16 px-4">
         <div class="max-w-4xl mx-auto">
-            <div class="text-center mb-16">
-                <h1 class="text-5xl font-bold mb-4">Blog</h1>
-                <p class="text-xl text-zinc-400">Latest updates, tutorials, and news about AI agents and x402 payments.</p>
-            </div>
-
+            <h1 class="text-5xl font-bold mb-4">Blog</h1>
+            <p class="text-xl text-zinc-400 mb-12">News, tutorials, and updates from the OMA-AI team</p>
+            
             <!-- Featured Post -->
-            <article class="glass rounded-2xl p-8 border border-violet-500/30 mb-8">
-                <span class="text-xs bg-violet-500/20 text-violet-400 px-2 py-1 rounded mb-4 inline-block">Featured</span>
-                <h2 class="text-2xl font-bold mb-3">Introducing OMA-AI: The First Agentic API Marketplace</h2>
-                <p class="text-zinc-400 mb-4">
-                    We're launching OMA-AI to solve a critical problem in the AI agent ecosystem: how do autonomous agents 
-                    discover, pay for, and monetize APIs? Traditional marketplaces weren't built for agents.
-                </p>
+            <article class="glass rounded-2xl p-8 border border-white/5 mb-8">
+                <span class="text-violet-400 text-sm font-medium">Featured</span>
+                <h2 class="text-2xl font-bold mt-2 mb-4">Introducing x402 Micropayments for AI Agents</h2>
+                <p class="text-zinc-400 mb-4">Learn how x402 enables instant, trustless payments for API calls using USDC on Base and Solana networks.</p>
                 <div class="flex items-center gap-4 text-sm text-zinc-500">
-                    <span>📅 Jan 15, 2025</span>
-                    <span>👤 OMA-AI Team</span>
-                    <span>⏱️ 5 min read</span>
+                    <span>Feb 20, 2026</span>
+                    <span>•</span>
+                    <span>5 min read</span>
                 </div>
             </article>
-
-            <!-- Recent Posts -->
-            <div class="space-y-6">
-                <article class="glass rounded-2xl p-6 border border-white/5 hover:border-violet-500/30 transition cursor-pointer">
-                    <h3 class="text-xl font-semibold mb-2">How x402 Enables Micropayments for AI Agents</h3>
-                    <p class="text-zinc-400 mb-4">
-                        Traditional payment systems charge too much in fees for small payments. x402 changes this by 
-                        enabling fractional USDC payments on Base network.
-                    </p>
-                    <div class="flex items-center gap-4 text-sm text-zinc-500">
-                        <span>📅 Jan 10, 2025</span>
-                        <span>⏱️ 4 min read</span>
-                    </div>
+            
+            <!-- Post Grid -->
+            <div class="grid md:grid-cols-2 gap-6">
+                <article class="glass rounded-2xl p-6 border border-white/5 card">
+                    <h3 class="font-semibold text-lg mb-2">Building Autonomous AI Agents with MCP Servers</h3>
+                    <p class="text-zinc-400 text-sm mb-4">A complete guide to connecting AI agents to databases, APIs, and external tools using the Model Context Protocol.</p>
+                    <span class="text-zinc-500 text-sm">Feb 18, 2026</span>
                 </article>
-
-                <article class="glass rounded-2xl p-6 border border-white/5 hover:border-violet-500/30 transition cursor-pointer">
-                    <h3 class="text-xl font-semibold mb-2">Deploying OpenClaw Agents on Akash Network</h3>
-                    <p class="text-zinc-400 mb-4">
-                        Learn how to deploy your OpenClaw agents to Akash's decentralized compute for 80% savings 
-                        compared to AWS, with automatic x402 payments.
-                    </p>
-                    <div class="flex items-center gap-4 text-sm text-zinc-500">
-                        <span>📅 Jan 5, 2025</span>
-                        <span>⏱️ 8 min read</span>
-                    </div>
+                
+                <article class="glass rounded-2xl p-6 border border-white/5 card">
+                    <h3 class="font-semibold text-lg mb-2">90% Revenue Share: Why We Pay More Than RapidAPI</h3>
+                    <p class="text-zinc-400 text-sm mb-4">Our economics explained. How x402 payments enable higher payouts for API publishers.</p>
+                    <span class="text-zinc-500 text-sm">Feb 15, 2026</span>
                 </article>
-
-                <article class="glass rounded-2xl p-6 border border-white/5 hover:border-violet-500/30 transition cursor-pointer">
-                    <h3 class="text-xl font-semibold mb-2">ERC-8004: The Standard for AI Agent Identity</h3>
-                    <p class="text-zinc-400 mb-4">
-                        OpenClaw proposed ERC-8004 to give AI agents on-chain identity. This enables agents to 
-                        sign messages, hold assets, and build reputation autonomously.
-                    </p>
-                    <div class="flex items-center gap-4 text-sm text-zinc-500">
-                        <span>📅 Dec 28, 2024</span>
-                        <span>⏱️ 6 min read</span>
-                    </div>
+                
+                <article class="glass rounded-2xl p-6 border border-white/5 card">
+                    <h3 class="font-semibold text-lg mb-2">Deploying AI Agents on Akash Network</h3>
+                    <p class="text-zinc-400 text-sm mb-4">Step-by-step guide to running AI agents on decentralized cloud infrastructure at 70% lower cost.</p>
+                    <span class="text-zinc-500 text-sm">Feb 12, 2026</span>
                 </article>
-
-                <article class="glass rounded-2xl p-6 border border-white/5 hover:border-violet-500/30 transition cursor-pointer">
-                    <h3 class="text-xl font-semibold mb-2">Why 90% Revenue Share Matters</h3>
-                    <p class="text-zinc-400 mb-4">
-                        RapidAPI takes 20% of API revenue. We take 10% because we believe publishers deserve more 
-                        of what they earn. Here's why it matters.
-                    </p>
-                    <div class="flex items-center gap-4 text-sm text-zinc-500">
-                        <span>📅 Dec 20, 2024</span>
-                        <span>⏱️ 3 min read</span>
-                    </div>
+                
+                <article class="glass rounded-2xl p-6 border border-white/5 card">
+                    <h3 class="font-semibold text-lg mb-2">Free APIs for AI Agents: Complete List</h3>
+                    <p class="text-zinc-400 text-sm mb-4">10+ free APIs available on OMA-AI. Crypto prices, weather data, web search, and more.</p>
+                    <span class="text-zinc-500 text-sm">Feb 10, 2026</span>
                 </article>
-
-                <article class="glass rounded-2xl p-6 border border-white/5 hover:border-violet-500/30 transition cursor-pointer">
-                    <h3 class="text-xl font-semibold mb-2">MCP Servers: The New Plugin Economy</h3>
-                    <p class="text-zinc-400 mb-4">
-                        Model Context Protocol (MCP) servers are transforming how AI models connect to tools and data. 
-                        Here's how to build and monetize yours.
-                    </p>
-                    <div class="flex items-center gap-4 text-sm text-zinc-500">
-                        <span>📅 Dec 15, 2024</span>
-                        <span>⏱️ 7 min read</span>
-                    </div>
-                </article>
-            </div>
-
-            <!-- Newsletter -->
-            <div class="glass rounded-2xl p-8 border border-white/5 mt-12">
-                <div class="text-center">
-                    <h3 class="text-xl font-bold mb-2">Subscribe to Updates</h3>
-                    <p class="text-zinc-400 mb-6">Get the latest on AI agents, x402, and decentralized compute.</p>
-                    <form class="flex gap-3 max-w-md mx-auto">
-                        <input type="email" placeholder="your@email.com" class="flex-1 px-4 py-3 bg-zinc-900 border border-zinc-700 rounded-xl focus:border-violet-500 focus:outline-none">
-                        <button type="submit" class="px-6 py-3 gradient rounded-xl font-semibold">Subscribe</button>
-                    </form>
-                </div>
             </div>
         </div>
     </main>
 
-    <link rel="stylesheet" href="/quick-wins.css">
-<style>.glass { background: rgba(255,255,255,0.03); }</style>
+    <!-- Footer -->
+    <footer class="border-t border-white/5 py-8 text-center text-zinc-500">
+        <p>© 2026 OMA-AI. Built with x402 on Base.</p>
+    </footer>
 </body>
 </html>

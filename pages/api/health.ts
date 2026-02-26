@@ -4,8 +4,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Cache-Control', 'no-cache');
 
-  // Test all endpoints
+  // Test all endpoints (internal calls don't need x402 payment)
   const baseUrl = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000';
+  
+  // For health checks, we test if endpoints respond (not if they require payment)
   const endpoints = [
     { name: 'price', url: `${baseUrl}/api/price` },
     { name: 'prices', url: `${baseUrl}/api/prices` },
@@ -18,14 +20,30 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const results = await Promise.all(
     endpoints.map(async (ep) => {
       try {
-        const response = await fetch(ep.url);
-        return { name: ep.name, status: response.ok ? 'ok' : 'error', code: response.status };
+        const response = await fetch(ep.url, {
+          headers: {
+            'User-Agent': 'OMA-AI-HealthCheck/1.0'
+          }
+        });
+        // 402 (Payment Required) means endpoint is working but needs x402 payment
+        // 401 (Unauthorized) means endpoint exists but needs auth
+        // 200 means working
+        const isWorking = response.status === 200 || response.status === 402 || response.status === 401;
+        return { 
+          name: ep.name, 
+          status: isWorking ? 'ok' : 'error', 
+          code: response.status,
+          message: response.status === 402 ? 'x402 payment required' : 
+                   response.status === 401 ? 'auth required' : 
+                   response.status === 200 ? 'working' : 'error'
+        };
       } catch (e) {
-        return { name: ep.name, status: 'error', code: 0 };
+        return { name: ep.name, status: 'error', code: 0, message: 'connection failed' };
       }
     })
   );
 
+  // Platform is healthy if all endpoints respond (even if they require payment)
   const allOk = results.every(r => r.status === 'ok');
 
   res.json({

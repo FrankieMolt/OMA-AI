@@ -1,279 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="/styles.css">
-    <link rel="stylesheet" href="/styles-enhanced.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Docs - OMA-AI | Open Market Access</title>
-    <meta name="description" content="Complete API documentation for OMA-AI platform. Integrate crypto prices, weather, search, and more.">
+    <title>Documentation - OMA-AI | API Reference & Guides</title>
+    <meta name="description" content="OMA-AI API documentation - Quick start guide, authentication, endpoints reference. JavaScript, Python, cURL examples. Learn to integrate x402 payments.">
+    <meta name="keywords" content="API documentation, x402 payments, AI agents, MCP servers, API reference">
+    <link rel="canonical" href="https://oma-ai.com/docs">
     
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://oma-ai.com/docs">
+    <meta property="og:title" content="Documentation - OMA-AI">
+    <meta property="og:description" content="API documentation with JavaScript, Python, cURL examples.">
+    <meta property="og:image" content="https://oma-ai.com/og-image.png">
     
-        theme: {
-          extend: {
-            colors: {
-              zinc: { 950: "#09090b" },
-              violet: { 400: "#a78bfa", 500: "#8b5cf6" },
-              indigo: { 500: "#6366f1" },
-              fuchsia: { 500: "#d946ef" }
-            },
-            fontFamily: {
-              sans: ["Inter", "sans-serif"]
-            }
-          }
-        }
-      }
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/design-system.css">
     
-    <link rel="stylesheet" href="/quick-wins.css">
-<style>
-        body { font-family: 'Inter', sans-serif; background: #09090b; color: #fafafa; }
-        .gradient { background: linear-gradient(135deg, #6366f1, #8b5cf6, #d946ef); }
-        code { font-family: 'Fira Code', monospace; }
-    </style>
-<script>
+    <script>
       tailwind.config = {
         theme: {
           extend: {
             colors: {
               zinc: { 950: "#09090b", 900: "#18181b" },
-              violet: { 400: "#a78bfa", 500: "#8b5cf6" },
-              indigo: { 500: "#6366f1" },
-              fuchsia: { 500: "#d946ef" }
+              violet: { 400: "#a78bfa", 500: "#8b5cf6" }
             }
           }
         }
       }
     </script>
-  <link rel="stylesheet" href="/design-system.css">
-<link rel="stylesheet" href="/responsive.css">
+    <style>
+        body { font-family: 'Inter', sans-serif; background: #09090b; color: #fafafa; }
+        .gradient { background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%); }
+        .glass { background: rgba(255,255,255,0.03); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.06); }
+        pre { background: #18181b; padding: 1rem; border-radius: 0.5rem; overflow-x: auto; }
+        code { font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; }
+    </style>
 </head>
 <body class="min-h-screen">
-    <!-- Nav -->
+    <!-- Navigation -->
     <nav class="fixed top-0 left-0 right-0 z-50 bg-zinc-950/90 backdrop-blur-xl border-b border-white/5">
         <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
             <a href="/" class="flex items-center gap-3">
-                <div class="w-10 h-10 gradient rounded-xl flex items-center justify-center font-bold">OMA</div>
-                <span class="text-xl font-bold">Open Market Access</span>
+                <div class="w-10 h-10 gradient rounded-xl flex items-center justify-center text-lg font-bold">OMA</div>
+                <span class="text-xl font-bold hidden sm:block">Open Market Access</span>
             </a>
             <div class="flex items-center gap-4">
-                <a href="/apis.html" class="text-zinc-400 hover:text-white">APIs</a>
-                <a href="/mcps.html" class="text-zinc-400 hover:text-white">MCPs</a>
-                <a href="/compute.html" class="text-zinc-400 hover:text-white">Compute</a>
-                <a href="/docs.html" class="text-violet-400">Docs</a>
+                <a href="/apis" class="text-zinc-400 hover:text-white">APIs</a>
+                <a href="/mcps" class="text-zinc-400 hover:text-white">MCPs</a>
+                <a href="/compute" class="text-zinc-400 hover:text-white">Compute</a>
+                <a href="/dashboard" class="text-zinc-400 hover:text-white">Dashboard</a>
             </div>
         </div>
     </nav>
 
-    <div class="flex pt-16">
-        <!-- Sidebar -->
-        <aside class="fixed left-0 top-16 bottom-0 w-64 bg-zinc-900/50 border-r border-white/5 p-6 overflow-y-auto">
-            <h3 class="text-sm font-semibold text-zinc-400 uppercase tracking-wider mb-4">Getting Started</h3>
-            <ul class="space-y-2 text-sm">
-                <li><a href="#introduction" class="text-zinc-300 hover:text-white block py-1">Introduction</a></li>
-                <li><a href="#authentication" class="text-zinc-300 hover:text-white block py-1">Authentication</a></li>
-                <li><a href="#quickstart" class="text-zinc-300 hover:text-white block py-1">Quick Start</a></li>
-                <li><a href="#pricing" class="text-zinc-300 hover:text-white block py-1">Pricing</a></li>
-            </ul>
+    <main class="pt-24 pb-16 px-4">
+        <div class="max-w-4xl mx-auto">
+            <h1 class="text-5xl font-bold mb-4">Documentation</h1>
+            <p class="text-xl text-zinc-400 mb-12">Everything you need to integrate OMA-AI APIs</p>
             
-            <h3 class="text-sm font-semibold text-zinc-400 uppercase tracking-wider mb-4 mt-8">API Reference</h3>
-            <ul class="space-y-2 text-sm">
-                <li><a href="#price-api" class="text-zinc-300 hover:text-white block py-1">/api/price</a></li>
-                <li><a href="#prices-api" class="text-zinc-300 hover:text-white block py-1">/api/prices</a></li>
-                <li><a href="#weather-api" class="text-zinc-300 hover:text-white block py-1">/api/weather</a></li>
-                <li><a href="#search-api" class="text-zinc-300 hover:text-white block py-1">/api/search</a></li>
-                <li><a href="#llm-api" class="text-zinc-300 hover:text-white block py-1">/api/llm</a></li>
-                <li><a href="#compute-api" class="text-zinc-300 hover:text-white block py-1">/api/compute</a></li>
-            </ul>
-
-            <h3 class="text-sm font-semibold text-zinc-400 uppercase tracking-wider mb-4 mt-8">SDK</h3>
-            <ul class="space-y-2 text-sm">
-                <li><a href="#sdk-javascript" class="text-zinc-300 hover:text-white block py-1">JavaScript</a></li>
-                <li><a href="#sdk-python" class="text-zinc-300 hover:text-white block py-1">Python</a></li>
-                <li><a href="#sdk-curl" class="text-zinc-300 hover:text-white block py-1">cURL</a></li>
-            </ul>
-        </aside>
-
-        <!-- Main Content -->
-        <main class="ml-64 max-w-4xl p-8 pb-20">
-            <h1 class="text-4xl font-bold mb-4">API Documentation</h1>
-            <p class="text-zinc-400 text-lg mb-12">Complete reference for OMA-AI's API endpoints, authentication, and integration.</p>
-
-            <!-- Introduction -->
-            <section id="introduction" class="mb-16">
-                <h2 class="text-2xl font-bold mb-4">Introduction</h2>
+            <!-- Quick Start -->
+            <section class="mb-12">
+                <h2 class="text-2xl font-bold mb-6">Quick Start</h2>
                 <div class="glass rounded-2xl p-6 border border-white/5">
-                    <p class="text-zinc-300 mb-4">OMA-AI provides a unified API for AI agents and developers to access:</p>
-                    <ul class="grid md:grid-cols-2 gap-3 text-zinc-400">
-                        <li>✅ Crypto prices (CoinGecko)</li>
-                        <li>✅ Weather forecasts</li>
-                        <li>✅ Web search</li>
-                        <li>✅ AI text generation</li>
-                        <li>✅ Text embeddings</li>
-                        <li>✅ Compute deployment</li>
+                    <h3 class="font-semibold mb-4">1. Get API Access</h3>
+                    <p class="text-zinc-400 mb-4">Connect your wallet to get started. Free tier includes 1000 API calls/day.</p>
+                    <pre><code class="text-violet-300"># No API key needed for free tier
+curl https://oma-ai.com/api/prices</code></pre>
+                </div>
+            </section>
+            
+            <!-- Endpoints -->
+            <section class="mb-12">
+                <h2 class="text-2xl font-bold mb-6">API Endpoints</h2>
+                <div class="space-y-4">
+                    <div class="glass rounded-2xl p-6 border border-white/5">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="px-2 py-1 bg-green-500/20 text-green-400 text-xs rounded">GET</span>
+                            <code class="text-violet-300">/api/prices</code>
+                        </div>
+                        <p class="text-zinc-400 mb-4">Get real-time cryptocurrency prices from CoinGecko.</p>
+                        <pre><code class="text-violet-300">curl https://oma-ai.com/api/prices
+
+# Response
+{
+  "success": true,
+  "data": {
+    "bitcoin": { "price": 67000, "change_24h": 2.5 },
+    "ethereum": { "price": 3500, "change_24h": 1.2 }
+  }
+}</code></pre>
+                    </div>
+                    
+                    <div class="glass rounded-2xl p-6 border border-white/5">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="px-2 py-1 bg-green-500/20 text-green-400 text-xs rounded">GET</span>
+                            <code class="text-violet-300">/api/weather?city=London</code>
+                        </div>
+                        <p class="text-zinc-400 mb-4">Get weather data for any city. x402 payment required.</p>
+                        <pre><code class="text-violet-300">curl -H "X-Payment: <x402-payment>" \
+  https://oma-ai.com/api/weather?city=London</code></pre>
+                    </div>
+                    
+                    <div class="glass rounded-2xl p-6 border border-white/5">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="px-2 py-1 bg-green-500/20 text-green-400 text-xs rounded">GET</span>
+                            <code class="text-violet-300">/api/search?q=bitcoin</code>
+                        </div>
+                        <p class="text-zinc-400 mb-4">AI-powered web search. x402 payment required.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- x402 Payments -->
+            <section class="mb-12">
+                <h2 class="text-2xl font-bold mb-6">x402 Payments</h2>
+                <div class="glass rounded-2xl p-6 border border-white/5">
+                    <p class="text-zinc-400 mb-4">x402 enables instant micropayments using USDC on Base and Solana networks.</p>
+                    <ul class="list-disc list-inside text-zinc-400 space-y-2">
+                        <li>Pay only for what you use</li>
+                        <li>No subscriptions required</li>
+                        <li>Instant settlement</li>
+                        <li>Works with any wallet</li>
                     </ul>
                 </div>
             </section>
+        </div>
+    </main>
 
-            <!-- Authentication -->
-            <section id="authentication" class="mb-16">
-                <h2 class="text-2xl font-bold mb-4">Authentication</h2>
-                <div class="glass rounded-2xl p-6 border border-white/5">
-                    <h3 class="font-semibold mb-3">API Keys</h3>
-                    <p class="text-zinc-400 mb-4">Include your API key in the <code class="bg-zinc-800 px-2 py-1 rounded">Authorization</code> header:</p>
-                    <pre class="bg-zinc-900 p-4 rounded-xl overflow-x-auto"><code class="text-green-400">curl -H "Authorization: Bearer YOUR_API_KEY" \
-  https://oma-ai.com/api/price</code></pre>
-                    
-                    <h3 class="font-semibold mb-3 mt-6">x402 Payments</h3>
-                    <p class="text-zinc-400 mb-4">For paid endpoints, include the payment header:</p>
-                    <pre class="bg-zinc-900 p-4 rounded-xl overflow-x-auto"><code class="text-green-400">curl -H "X-Payment: BASE64_ENCODED_PAYMENT" \
-  https://oma-ai.com/api/premium-price</code></pre>
-                </div>
-            </section>
-
-            <!-- Price API -->
-            <section id="price-api" class="mb-16">
-                <div class="flex items-center gap-3 mb-4">
-                    <span class="px-2 py-1 bg-green-500/20 text-green-400 text-xs rounded">GET</span>
-                    <h2 class="text-2xl font-bold">/api/price</h2>
-                </div>
-                <p class="text-zinc-400 mb-4">Get cryptocurrency prices for BTC, ETH, and SOL.</p>
-                
-                <div class="glass rounded-2xl p-6 border border-white/5">
-                    <h3 class="font-semibold mb-3">Request</h3>
-                    <pre class="bg-zinc-900 p-4 rounded-xl overflow-x-auto"><code class="text-green-400">GET https://oma-ai.com/api/price</code></pre>
-                    
-                    <h3 class="font-semibold mb-3 mt-6">Response</h3>
-                    <pre class="bg-zinc-900 p-4 rounded-xl overflow-x-auto"><code class="text-yellow-400">{
-  "success": true,
-  "data": {
-    "btc": { "price": 66159, "change_24h": 3.15, "symbol": "BTC" },
-    "eth": { "price": 1930, "change_24h": 4.78, "symbol": "ETH" },
-    "sol": { "price": 82, "change_24h": 5.93, "symbol": "SOL" }
-  },
-  "source": "coingecko",
-  "timestamp": 1708000000000
-}</code></pre>
-                    
-                    <div class="mt-4 flex gap-2">
-                        <span class="text-xs bg-zinc-800 px-2 py-1 rounded">Free</span>
-                        <span class="text-xs bg-zinc-800 px-2 py-1 rounded">Rate limit: 30/min</span>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Weather API -->
-            <section id="weather-api" class="mb-16">
-                <div class="flex items-center gap-3 mb-4">
-                    <span class="px-2 py-1 bg-green-500/20 text-green-400 text-xs rounded">GET</span>
-                    <h2 class="text-2xl font-bold">/api/weather</h2>
-                </div>
-                <p class="text-zinc-400 mb-4">Get weather forecasts for any city.</p>
-                
-                <div class="glass rounded-2xl p-6 border border-white/5">
-                    <h3 class="font-semibold mb-3">Parameters</h3>
-                    <table class="w-full text-sm">
-                        <tr class="border-b border-zinc-800">
-                            <td class="py-2 text-zinc-400">city</td>
-                            <td class="py-2 text-zinc-300">City name (default: New York)</td>
-                        </tr>
-                    </table>
-                    
-                    <h3 class="font-semibold mb-3 mt-6">Example</h3>
-                    <pre class="bg-zinc-900 p-4 rounded-xl overflow-x-auto"><code class="text-green-400">GET https://oma-ai.com/api/weather?city=London</code></pre>
-                    
-                    <div class="mt-4 flex gap-2">
-                        <span class="text-xs bg-yellow-500/20 text-yellow-400 px-2 py-1 rounded">$0.002/call</span>
-                    </div>
-                </div>
-            </section>
-
-            <!-- SDK Examples -->
-            <section id="sdk-javascript" class="mb-16">
-                <h2 class="text-2xl font-bold mb-4">SDK Examples</h2>
-                
-                <div class="glass rounded-2xl p-6 border border-white/5 mb-6">
-                    <h3 class="font-semibold mb-3">JavaScript / TypeScript</h3>
-                    <pre class="bg-zinc-900 p-4 rounded-xl overflow-x-auto text-sm"><code class="text-blue-400">import { OMAClient } from '@oma-ai/sdk';
-
-const client = new OMAClient();
-
-// Get crypto prices
-const prices = await client.prices.get();
-console.log(prices.btc.price);
-
-// Get weather
-const weather = await client.weather.get('San Francisco');
-
-// AI generation
-const result = await client.ai.generate('Write a poem');</code></pre>
-                </div>
-
-                <div class="glass rounded-2xl p-6 border border-white/5 mb-6">
-                    <h3 class="font-semibold mb-3">Python</h3>
-                    <pre class="bg-zinc-900 p-4 rounded-xl overflow-x-auto text-sm"><code class="text-blue-400"># Coming soon
-# pip install oma-ai
-
-import omaai
-
-client = omaai.Client()
-prices = client.prices.get()
-print(prices)</code></pre>
-                </div>
-
-                <div class="glass rounded-2xl p-6 border border-white/5">
-                    <h3 class="font-semibold mb-3">cURL</h3>
-                    <pre class="bg-zinc-900 p-4 rounded-xl overflow-x-auto text-sm"><code class="text-green-400"># Get prices
-curl https://oma-ai.com/api/price
-
-# Get weather
-curl "https://oma-ai.com/api/weather?city=Tokyo"
-
-# Search
-curl "https://oma-ai.com/api/search?q=AI+agents"</code></pre>
-                </div>
-            </section>
-
-            <!-- Pricing -->
-            <section id="pricing" class="mb-16">
-                <h2 class="text-2xl font-bold mb-4">Pricing</h2>
-                <div class="grid md:grid-cols-3 gap-6">
-                    <div class="glass rounded-2xl p-6 border border-white/5">
-                        <h3 class="font-semibold text-lg mb-2">Free</h3>
-                        <div class="text-3xl font-bold mb-4">$0<span class="text-zinc-500 text-sm">/mo</span></div>
-                        <ul class="text-sm text-zinc-400 space-y-2">
-                            <li>100 calls/day</li>
-                            <li>Basic APIs</li>
-                            <li>Community support</li>
-                        </ul>
-                    </div>
-                    <div class="glass rounded-2xl p-6 border border-violet-500/30">
-                        <span class="text-xs bg-violet-500 text-white px-2 py-1 rounded mb-2 inline-block">Popular</span>
-                        <h3 class="font-semibold text-lg mb-2">Pro</h3>
-                        <div class="text-3xl font-bold mb-4">$9<span class="text-zinc-500 text-sm">/mo</span></div>
-                        <ul class="text-sm text-zinc-400 space-y-2">
-                            <li>10,000 calls/day</li>
-                            <li>All APIs</li>
-                            <li>Analytics dashboard</li>
-                        </ul>
-                    </div>
-                    <div class="glass rounded-2xl p-6 border border-white/5">
-                        <h3 class="font-semibold text-lg mb-2">Enterprise</h3>
-                        <div class="text-3xl font-bold mb-4">Custom</div>
-                        <ul class="text-sm text-zinc-400 space-y-2">
-                            <li>Unlimited calls</li>
-                            <li>Dedicated support</li>
-                            <li>Custom integrations</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-        </main>
-    </div>
-
-    <link rel="stylesheet" href="/quick-wins.css">
-<style>
-        .glass { background: rgba(255,255,255,0.03); }
-    </style>
+    <!-- Footer -->
+    <footer class="border-t border-white/5 py-8 text-center text-zinc-500">
+        <p>© 2026 OMA-AI. Built with x402 on Base.</p>
+    </footer>
 </body>
 </html>
