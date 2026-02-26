@@ -1,60 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="/styles.css">
-    <link rel="stylesheet" href="/styles-enhanced.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>APIs | OMA-AI - The AI Agent Marketplace</title>
-    <meta name="description" content="Browse APIs for AI agents. Pay per call with x402 micropayments on Base network. Free tier available.">
+    <meta name="description" content="Browse APIs for AI agents. Pay per call with x402 micropayments on Base network. Crypto, weather, search, LLM, and more. Free tier available.">
     <meta name="keywords" content="AI APIs, MCP servers, x402 payments, crypto API, LLM API, AI agent tools">
     <meta property="og:title" content="API Marketplace - OMA-AI">
     <meta property="og:description" content="Discover and integrate APIs for AI agents. Instant x402 micropayments.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://oma-ai.com/apis">
+    <meta property="og:image" content="https://oma-ai.com/og-image.png">
     <link rel="canonical" href="https://oma-ai.com/apis">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     
-        theme: {
-          extend: {
-            colors: {
-              zinc: { 950: "#09090b" },
-              violet: { 400: "#a78bfa", 500: "#8b5cf6" },
-              indigo: { 500: "#6366f1" },
-              fuchsia: { 500: "#d946ef" }
-            },
-            fontFamily: {
-              sans: ["Inter", "sans-serif"]
-            }
-          }
-        }
-      }
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/design-system.css">
+    <link rel="stylesheet" href="/responsive.css">
+    <link rel="stylesheet" href="/quick-wins.css">
     
+    <!-- Valid JSON-LD Structured Data -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "CollectionPage",
       "name": "API Marketplace",
-      "description": "Browse APIs for AI agents",
+      "description": "Browse APIs for AI agents with x402 micropayments",
       "url": "https://oma-ai.com/apis",
       "mainEntity": {
         "@type": "ItemList",
-        "itemListElement": []
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "item": {
+              "@type": "SoftwareApplication",
+              "name": "Crypto Prices API",
+              "description": "Real-time cryptocurrency prices"
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "item": {
+              "@type": "SoftwareApplication",
+              "name": "Weather API",
+              "description": "Global weather forecasts"
+            }
+          }
+        ]
       }
     }
+    </script>
     
-    <link rel="stylesheet" href="/quick-wins.css">
-<style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', sans-serif; background: #09090b; color: #fafafa; }
-        .gradient { background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%); }
-        .card { transition: all 0.3s ease; }
-        .card:hover { transform: translateY(-4px); border-color: rgba(139,92,246,0.4); }
-        .tag { font-size: 11px; padding: 3px 10px; border-radius: 9999px; font-weight: 500; }
-    </style>
-<script>
+    <script>
       tailwind.config = {
         theme: {
           extend: {
@@ -68,8 +72,15 @@
         }
       }
     </script>
-  <link rel="stylesheet" href="/design-system.css">
-<link rel="stylesheet" href="/responsive.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #09090b; color: #fafafa; }
+        .gradient { background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%); }
+        .card { transition: all 0.3s ease; }
+        .card:hover { transform: translateY(-4px); border-color: rgba(139,92,246,0.4); }
+        .tag { font-size: 11px; padding: 3px 10px; border-radius: 9999px; font-weight: 500; }
+        .glass { background: rgba(255,255,255,0.03); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.06); }
+    </style>
 </head>
 <body class="min-h-screen">
     <main class="min-h-screen">
@@ -81,7 +92,7 @@
                 <span class="text-xl font-bold hidden sm:block">Open Market Access</span>
             </a>
             <div class="flex items-center gap-4">
-                <a href="/apis" class="text-violet-400 font-medium">APIs</a>
+                <a href="/apis" class="text-violet-400 font-medium" aria-current="page">APIs</a>
                 <a href="/mcps" class="text-zinc-400 hover:text-white">MCPs</a>
                 <a href="/compute" class="text-zinc-400 hover:text-white">Compute</a>
                 <a href="/dashboard" class="text-zinc-400 hover:text-white">Dashboard</a>
@@ -106,14 +117,14 @@
     <!-- Categories -->
     <section class="py-8 px-4">
         <div class="max-w-7xl mx-auto">
-            <div class="flex flex-wrap justify-center gap-3">
-                <button class="tag bg-violet-500/20 text-violet-300 border border-violet-500/30">All</button>
-                <button class="tag bg-zinc-800 text-zinc-400 border border-zinc-700">Crypto</button>
-                <button class="tag bg-zinc-800 text-zinc-400 border border-zinc-700">LLM</button>
-                <button class="tag bg-zinc-800 text-zinc-400 border border-zinc-700">Data</button>
-                <button class="tag bg-zinc-800 text-zinc-400 border border-zinc-700">Search</button>
-                <button class="tag bg-zinc-800 text-zinc-400 border border-zinc-700">Weather</button>
-                <button class="tag bg-zinc-800 text-zinc-400 border border-zinc-700">Finance</button>
+            <div class="flex flex-wrap justify-center gap-3" role="tablist" aria-label="API categories">
+                <button class="tag bg-violet-500/20 text-violet-300 border border-violet-500/30" role="tab" aria-selected="true">All</button>
+                <button class="tag bg-zinc-800 text-zinc-400 border border-zinc-700" role="tab" aria-selected="false">Crypto</button>
+                <button class="tag bg-zinc-800 text-zinc-400 border border-zinc-700" role="tab" aria-selected="false">LLM</button>
+                <button class="tag bg-zinc-800 text-zinc-400 border border-zinc-700" role="tab" aria-selected="false">Data</button>
+                <button class="tag bg-zinc-800 text-zinc-400 border border-zinc-700" role="tab" aria-selected="false">Search</button>
+                <button class="tag bg-zinc-800 text-zinc-400 border border-zinc-700" role="tab" aria-selected="false">Weather</button>
+                <button class="tag bg-zinc-800 text-zinc-400 border border-zinc-700" role="tab" aria-selected="false">Finance</button>
             </div>
         </div>
     </section>
@@ -122,101 +133,101 @@
     <section id="browse" class="py-16 px-4">
         <div class="max-w-7xl mx-auto">
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="api-grid">
-                <!-- API Card 1 -->
-                <div class="card glass rounded-2xl p-6 border border-white/5">
+                <!-- API Card 1: Crypto Prices -->
+                <article class="card glass rounded-2xl p-6 border border-white/5">
                     <div class="flex items-center gap-3 mb-4">
-                        <div class="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center text-2xl">📊</div>
+                        <div class="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center text-2xl" aria-hidden="true">📊</div>
                         <div>
-                            <h3 class="font-semibold text-lg">Crypto Prices</h3>
+                            <h2 class="font-semibold text-lg">Crypto Prices</h2>
                             <span class="text-xs text-zinc-500">Real-time data</span>
                         </div>
                     </div>
                     <p class="text-zinc-400 text-sm mb-4">Live cryptocurrency prices from CoinGecko. BTC, ETH, SOL and 100+ more.</p>
                     <div class="flex items-center justify-between">
                         <span class="text-violet-400 font-semibold">$0.001/call</span>
-                        <a href="/api-demo?api=crypto-prices" class="text-sm text-zinc-400 hover:text-white">Test →</a>
+                        <a href="https://api.oma-ai.com/v1/crypto/prices" class="text-sm text-zinc-400 hover:text-white" target="_blank" rel="noopener">Docs →</a>
                     </div>
-                </div>
+                </article>
 
-                <!-- API Card 2 -->
-                <div class="card glass rounded-2xl p-6 border border-white/5">
+                <!-- API Card 2: Weather -->
+                <article class="card glass rounded-2xl p-6 border border-white/5">
                     <div class="flex items-center gap-3 mb-4">
-                        <div class="w-12 h-12 bg-green-500/20 rounded-xl flex items-center justify-center text-2xl">🌤️</div>
+                        <div class="w-12 h-12 bg-green-500/20 rounded-xl flex items-center justify-center text-2xl" aria-hidden="true">🌤️</div>
                         <div>
-                            <h3 class="font-semibold text-lg">Weather</h3>
+                            <h2 class="font-semibold text-lg">Weather</h2>
                             <span class="text-xs text-zinc-500">Global forecast</span>
                         </div>
                     </div>
                     <p class="text-zinc-400 text-sm mb-4">Weather forecasts for any location. Current conditions and 7-day forecast.</p>
                     <div class="flex items-center justify-between">
                         <span class="text-violet-400 font-semibold">$0.002/call</span>
-                        <a href="/api-demo?api=weather" class="text-sm text-zinc-400 hover:text-white">Test →</a>
+                        <a href="https://api.oma-ai.com/v1/weather" class="text-sm text-zinc-400 hover:text-white" target="_blank" rel="noopener">Docs →</a>
                     </div>
-                </div>
+                </article>
 
-                <!-- API Card 3 -->
-                <div class="card glass rounded-2xl p-6 border border-white/5">
+                <!-- API Card 3: Web Search -->
+                <article class="card glass rounded-2xl p-6 border border-white/5">
                     <div class="flex items-center gap-3 mb-4">
-                        <div class="w-12 h-12 bg-purple-500/20 rounded-xl flex items-center justify-center text-2xl">🔍</div>
+                        <div class="w-12 h-12 bg-purple-500/20 rounded-xl flex items-center justify-center text-2xl" aria-hidden="true">🔍</div>
                         <div>
-                            <h3 class="font-semibold text-lg">Web Search</h3>
+                            <h2 class="font-semibold text-lg">Web Search</h2>
                             <span class="text-xs text-zinc-500">AI-powered</span>
                         </div>
                     </div>
                     <p class="text-zinc-400 text-sm mb-4">AI-powered web search. Get relevant results for any query.</p>
                     <div class="flex items-center justify-between">
                         <span class="text-violet-400 font-semibold">$0.005/call</span>
-                        <a href="/api-demo?api=search" class="text-sm text-zinc-400 hover:text-white">Test →</a>
+                        <a href="https://api.oma-ai.com/v1/search" class="text-sm text-zinc-400 hover:text-white" target="_blank" rel="noopener">Docs →</a>
                     </div>
-                </div>
+                </article>
 
-                <!-- API Card 4 -->
-                <div class="card glass rounded-2xl p-6 border border-white/5">
+                <!-- API Card 4: LLM Gateway -->
+                <article class="card glass rounded-2xl p-6 border border-white/5">
                     <div class="flex items-center gap-3 mb-4">
-                        <div class="w-12 h-12 bg-orange-500/20 rounded-xl flex items-center justify-center text-2xl">🤖</div>
+                        <div class="w-12 h-12 bg-orange-500/20 rounded-xl flex items-center justify-center text-2xl" aria-hidden="true">🤖</div>
                         <div>
-                            <h3 class="font-semibold text-lg">LLM Gateway</h3>
+                            <h2 class="font-semibold text-lg">LLM Gateway</h2>
                             <span class="text-xs text-zinc-500">Multi-provider</span>
                         </div>
                     </div>
                     <p class="text-zinc-400 text-sm mb-4">Access GPT-4, Claude, Llama and more through unified API. 90% revenue share.</p>
                     <div class="flex items-center justify-between">
                         <span class="text-violet-400 font-semibold">$0.01/call</span>
-                        <a href="/api-demo?api=llm" class="text-sm text-zinc-400 hover:text-white">Test →</a>
+                        <a href="https://api.oma-ai.com/v1/llm" class="text-sm text-zinc-400 hover:text-white" target="_blank" rel="noopener">Docs →</a>
                     </div>
-                </div>
+                </article>
 
-                <!-- API Card 5 -->
-                <div class="card glass rounded-2xl p-6 border border-white/5">
+                <!-- API Card 5: Web Scraper -->
+                <article class="card glass rounded-2xl p-6 border border-white/5">
                     <div class="flex items-center gap-3 mb-4">
-                        <div class="w-12 h-12 bg-red-500/20 rounded-xl flex items-center justify-center text-2xl">🕷️</div>
+                        <div class="w-12 h-12 bg-red-500/20 rounded-xl flex items-center justify-center text-2xl" aria-hidden="true">🕷️</div>
                         <div>
-                            <h3 class="font-semibold text-lg">Web Scraper</h3>
+                            <h2 class="font-semibold text-lg">Web Scraper</h2>
                             <span class="text-xs text-zinc-500">HTML parsing</span>
                         </div>
                     </div>
                     <p class="text-zinc-400 text-sm mb-4">Extract data from any website. Fast, reliable HTML parsing.</p>
                     <div class="flex items-center justify-between">
                         <span class="text-violet-400 font-semibold">$0.003/call</span>
-                        <a href="/api-demo?api=scrape" class="text-sm text-zinc-400 hover:text-white">Test →</a>
+                        <a href="https://api.oma-ai.com/v1/scrape" class="text-sm text-zinc-400 hover:text-white" target="_blank" rel="noopener">Docs →</a>
                     </div>
-                </div>
+                </article>
 
-                <!-- API Card 6 -->
-                <div class="card glass rounded-2xl p-6 border border-white/5">
+                <!-- API Card 6: Premium Prices -->
+                <article class="card glass rounded-2xl p-6 border border-white/5">
                     <div class="flex items-center gap-3 mb-4">
-                        <div class="w-12 h-12 bg-cyan-500/20 rounded-xl flex items-center justify-center text-2xl">💰</div>
+                        <div class="w-12 h-12 bg-cyan-500/20 rounded-xl flex items-center justify-center text-2xl" aria-hidden="true">💰</div>
                         <div>
-                            <h3 class="font-semibold text-lg">Premium Prices</h3>
+                            <h2 class="font-semibold text-lg">Premium Prices</h2>
                             <span class="text-xs text-zinc-500">Extended data</span>
                         </div>
                     </div>
                     <p class="text-zinc-400 text-sm mb-4">Extended crypto data with market cap, volume, and analytics.</p>
                     <div class="flex items-center justify-between">
                         <span class="text-violet-400 font-semibold">$0.001/call</span>
-                        <a href="/api-demo?api=premium-prices" class="text-sm text-zinc-400 hover:text-white">Test →</a>
+                        <a href="https://api.oma-ai.com/v1/crypto/premium" class="text-sm text-zinc-400 hover:text-white" target="_blank" rel="noopener">Docs →</a>
                     </div>
-                </div>
+                </article>
             </div>
         </div>
     </section>
@@ -230,20 +241,20 @@
             </p>
             <div class="glass rounded-2xl p-8 border border-white/5 text-left">
                 <h3 class="font-semibold mb-4">Submit Your API</h3>
-                <form class="space-y-4">
+                <form class="space-y-4" action="https://api.oma-ai.com/v1/apis/submit" method="POST">
                     <div>
-                        <label class="block text-sm text-zinc-400 mb-1">API Name</label>
-                        <input type="text" class="w-full px-4 py-2 bg-zinc-800 border border-zinc-700 rounded-lg" placeholder="My API">
+                        <label for="api-name" class="block text-sm text-zinc-400 mb-1">API Name</label>
+                        <input type="text" id="api-name" name="name" class="w-full px-4 py-2 bg-zinc-800 border border-zinc-700 rounded-lg focus:border-violet-500 focus:outline-none" placeholder="My API" required>
                     </div>
                     <div>
-                        <label class="block text-sm text-zinc-400 mb-1">Endpoint URL</label>
-                        <input type="url" class="w-full px-4 py-2 bg-zinc-800 border border-zinc-700 rounded-lg" placeholder="https://api.example.com">
+                        <label for="api-url" class="block text-sm text-zinc-400 mb-1">Endpoint URL</label>
+                        <input type="url" id="api-url" name="endpoint" class="w-full px-4 py-2 bg-zinc-800 border border-zinc-700 rounded-lg focus:border-violet-500 focus:outline-none" placeholder="https://api.example.com" required>
                     </div>
                     <div>
-                        <label class="block text-sm text-zinc-400 mb-1">Price per call (USDC)</label>
-                        <input type="number" step="0.001" class="w-full px-4 py-2 bg-zinc-800 border border-zinc-700 rounded-lg" placeholder="0.001">
+                        <label for="api-price" class="block text-sm text-zinc-400 mb-1">Price per call (USDC)</label>
+                        <input type="number" id="api-price" name="price" step="0.001" min="0.001" class="w-full px-4 py-2 bg-zinc-800 border border-zinc-700 rounded-lg focus:border-violet-500 focus:outline-none" placeholder="0.001" required>
                     </div>
-                    <button type="submit" class="gradient w-full py-3 rounded-lg font-semibold">Submit API</button>
+                    <button type="submit" class="gradient w-full py-3 rounded-lg font-semibold hover:opacity-90 transition-opacity">Submit API</button>
                 </form>
             </div>
         </div>
@@ -272,14 +283,14 @@
                 <ul class="space-y-2 text-sm text-zinc-400">
                     <li><a href="/docs" class="hover:text-white">Documentation</a></li>
                     <li><a href="/about" class="hover:text-white">About</a></li>
-                    <li><a href="https://github.com/FrankieMolt/OMA-AI" class="hover:text-white">GitHub</a></li>
+                    <li><a href="https://github.com/FrankieMolt" class="hover:text-white" target="_blank" rel="noopener">GitHub</a></li>
                 </ul>
             </div>
             <div>
                 <h4 class="font-semibold mb-4">Legal</h4>
                 <ul class="space-y-2 text-sm text-zinc-400">
-                    <li><a href="/privacy.html" class="hover:text-white">Privacy</a></li>
-                    <li><a href="/terms.html" class="hover:text-white">Terms</a></li>
+                    <li><a href="/privacy" class="hover:text-white">Privacy</a></li>
+                    <li><a href="/terms" class="hover:text-white">Terms</a></li>
                 </ul>
             </div>
         </div>
