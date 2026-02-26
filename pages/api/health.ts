@@ -5,13 +5,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   res.setHeader('Cache-Control', 'no-cache');
 
   // Test all endpoints
+  const baseUrl = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000';
   const endpoints = [
-    { name: 'price', url: 'http://localhost:3000/api/price' },
-    { name: 'prices', url: 'http://localhost:3000/api/prices' },
-    { name: 'weather', url: 'http://localhost:3000/api/weather?city=London' },
-    { name: 'search', url: 'http://localhost:3000/api/search?q=test' },
-    { name: 'compute', url: 'http://localhost:3000/api/compute?action=list' },
-    { name: 'marketplace', url: 'http://localhost:3000/api/marketplace' }
+    { name: 'price', url: `${baseUrl}/api/price` },
+    { name: 'prices', url: `${baseUrl}/api/prices` },
+    { name: 'weather', url: `${baseUrl}/api/weather?city=London` },
+    { name: 'search', url: `${baseUrl}/api/search?q=test` },
+    { name: 'compute', url: `${baseUrl}/api/compute?action=list` },
+    { name: 'marketplace', url: `${baseUrl}/api/marketplace` }
   ];
 
   const results = await Promise.all(
