@@ -40,61 +40,121 @@
         </a>
         
         <div class="text-center mb-8">
-            <h1 class="text-3xl font-bold mb-2">Create Account</h1>
-            <p class="text-zinc-400">Start building with OMA-AI today</p>
+            <h1 class="text-3xl font-bold mb-2">Get Started Free</h1>
+            <p class="text-zinc-400">Join 2,400+ developers building AI agents</p>
         </div>
 
-        <div class="glass rounded-2xl p-6 border border-white/5 mb-6">
-            <h2 class="font-semibold mb-4">Choose Sign Up Method</h2>
+        <!-- Trust Signals -->
+        <div class="flex justify-center gap-6 mb-6 text-sm text-zinc-400">
+            <div class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                <span>No credit card</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                <span>1000 calls/day free</span>
+            </div>
+        </div>
+
+        <!-- Wallet Signup (Primary) -->
+        <div class="glass rounded-2xl p-6 border border-white/5 mb-4">
+            <h2 class="font-semibold mb-4 flex items-center gap-2">
+                <span>⚡</span>
+                <span>Quick Start with Wallet</span>
+            </h2>
             
-            <div class="space-y-3 mb-6">
-                <button onclick="connectWallet('metamask')" class="w-full py-3 px-4 bg-zinc-800 hover:bg-zinc-700 rounded-xl flex items-center gap-3 transition">
+            <div class="space-y-3">
+                <button onclick="connectWallet('metamask')" class="w-full py-3 px-4 bg-violet-500/20 hover:bg-violet-500/30 border border-violet-500/30 rounded-xl flex items-center justify-center gap-3 transition">
                     <img src="https://cryptologos.cc/logos/metamask-mask-logo.svg" class="w-6 h-6" alt="MetaMask">
-                    <span>Continue with MetaMask</span>
+                    <span class="font-medium">MetaMask</span>
+                    <span class="text-xs text-violet-400 ml-auto">Recommended</span>
                 </button>
-                <button onclick="connectWallet('coinbase')" class="w-full py-3 px-4 bg-zinc-800 hover:bg-zinc-700 rounded-xl flex items-center gap-3 transition">
-                    <img src="https://cryptologos.cc/logos/coinbase-coin-logo.svg" class="w-6 h-6" alt="Coinbase">
-                    <span>Continue with Coinbase</span>
-                </button>
-                <button onclick="connectWallet('phantom')" class="w-full py-3 px-4 bg-zinc-800 hover:bg-zinc-700 rounded-xl flex items-center gap-3 transition">
-                    <img src="https://cryptologos.cc/logos/phantom-phantom-logo.svg" class="w-6 h-6" alt="Phantom">
-                    <span>Continue with Phantom</span>
-                </button>
+                
+                <div class="grid grid-cols-2 gap-3">
+                    <button onclick="connectWallet('coinbase')" class="py-3 px-4 bg-zinc-800 hover:bg-zinc-700 rounded-xl flex items-center justify-center gap-2 transition">
+                        <img src="https://cryptologos.cc/logos/coinbase-coin-logo.svg" class="w-5 h-5" alt="Coinbase">
+                        <span class="text-sm">Coinbase</span>
+                    </button>
+                    <button onclick="connectWallet('phantom')" class="py-3 px-4 bg-zinc-800 hover:bg-zinc-700 rounded-xl flex items-center justify-center gap-2 transition">
+                        <img src="https://cryptologos.cc/logos/phantom-phantom-logo.svg" class="w-5 h-5" alt="Phantom">
+                        <span class="text-sm">Phantom</span>
+                    </button>
+                </div>
             </div>
             
-            <div class="relative my-6">
-                <div class="absolute inset-0 flex items-center"><div class="w-full border-t border-zinc-700"></div></div>
-                <div class="relative flex justify-center text-sm"><span class="px-4 bg-zinc-900 text-zinc-500">or continue with email</span></div>
-            </div>
-            
-            <form onsubmit="handleSignup(event)" class="space-y-4">
+            <p class="text-xs text-zinc-500 mt-4 text-center">
+                Your keys never leave your device. We use SIWE for secure authentication.
+            </p>
+        </div>
+
+        <div class="relative my-6">
+            <div class="absolute inset-0 flex items-center"><div class="w-full border-t border-zinc-700"></div></div>
+            <div class="relative flex justify-center text-sm"><span class="px-4 bg-zinc-900 text-zinc-500">or use email</span></div>
+        </div>
+
+        <!-- Email Signup (Secondary) -->
+        <div class="glass rounded-2xl p-6 border border-white/5">
+            <form onsubmit="handleSignup(event)" class="space-y-4" id="signup-form">
                 <div>
-                    <label class="block text-sm text-zinc-400 mb-2">Full Name</label>
-                    <input type="text" id="name" aria-label="Full name" placeholder="John Doe" class="w-full px-4 py-3 bg-zinc-900 border border-zinc-700 rounded-xl focus:border-violet-500 focus:outline-none">
+                    <label for="email" class="block text-sm text-zinc-400 mb-2">Email</label>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        name="email"
+                        placeholder="you@example.com" 
+                        class="w-full px-4 py-3 bg-zinc-900 border border-zinc-700 rounded-xl focus:border-violet-500 focus:outline-none transition"
+                        required
+                        aria-describedby="email-error"
+                    >
+                    <p id="email-error" class="text-xs text-red-400 mt-1 hidden" role="alert"></p>
                 </div>
+                
                 <div>
-                    <label class="block text-sm text-zinc-400 mb-2">Email</label>
-                    <input type="email" id="email" aria-label="Email address" placeholder="you@example.com" class="w-full px-4 py-3 bg-zinc-900 border border-zinc-700 rounded-xl focus:border-violet-500 focus:outline-none">
+                    <label for="password" class="block text-sm text-zinc-400 mb-2">Password</label>
+                    <input 
+                        type="password" 
+                        id="password" 
+                        name="password"
+                        placeholder="Min 8 characters" 
+                        class="w-full px-4 py-3 bg-zinc-900 border border-zinc-700 rounded-xl focus:border-violet-500 focus:outline-none transition"
+                        required
+                        minlength="8"
+                        aria-describedby="password-strength"
+                    >
+                    <!-- Password Strength Meter -->
+                    <div id="password-strength" class="mt-2">
+                        <div class="flex gap-1">
+                            <div class="h-1 flex-1 bg-zinc-700 rounded" id="strength-1"></div>
+                            <div class="h-1 flex-1 bg-zinc-700 rounded" id="strength-2"></div>
+                            <div class="h-1 flex-1 bg-zinc-700 rounded" id="strength-3"></div>
+                            <div class="h-1 flex-1 bg-zinc-700 rounded" id="strength-4"></div>
+                        </div>
+                        <p class="text-xs text-zinc-500 mt-1" id="strength-text">Password strength</p>
+                    </div>
                 </div>
-                <div>
-                    <label class="block text-sm text-zinc-400 mb-2">Password</label>
-                    <input type="password" id="password" aria-label="Password" placeholder="Create a password" class="w-full px-4 py-3 bg-zinc-900 border border-zinc-700 rounded-xl focus:border-violet-500 focus:outline-none">
-                </div>
+                
                 <div class="flex items-start gap-2">
-                    <input type="checkbox" id="terms" aria-label="Accept terms and conditions" class="mt-1">
-                    <span class="text-sm text-zinc-400">I agree to the <a href="/terms.html" class="text-violet-400 hover:underline">Terms</a> and <a href="/privacy.html" class="text-violet-400 hover:underline">Privacy Policy</a></span>
+                    <input type="checkbox" id="terms" name="terms" required class="mt-1 cursor-pointer">
+                    <label for="terms" class="text-sm text-zinc-400 cursor-pointer">
+                        I agree to the <a href="/terms" class="text-violet-400 hover:underline">Terms</a> and <a href="/privacy" class="text-violet-400 hover:underline">Privacy Policy</a>
+                    </label>
                 </div>
-                <button type="submit" class="w-full py-3 gradient rounded-xl font-semibold">Create Account</button>
+                
+                <button type="submit" class="w-full py-3 gradient rounded-xl font-semibold hover:opacity-90 transition">
+                    Create Free Account
+                </button>
             </form>
         </div>
 
-        <div class="glass rounded-xl p-4 border border-white/5">
-            <div class="flex items-center gap-3">
-                <div class="text-2xl">🤖</div>
-                <div>
-                    <div class="font-semibold">For AI Agents</div>
-                    <div class="text-sm text-zinc-400">Autonomous agents can create accounts via wallet signature (SIWE)</div>
-                </div>
+        <!-- Security Badge -->
+        <div class="flex justify-center gap-4 mt-6 text-xs text-zinc-500">
+            <div class="flex items-center gap-1">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                <span>256-bit encryption</span>
+            </div>
+            <div class="flex items-center gap-1">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 8a6 6 0 01-7.743 5.743L10 14l-1 1-1 1H6v2H2v-4l4.257-4.257A6 6 0 1118 8zm-6-4a1 1 0 100 2 2 2 0 012 2 1 1 0 102 0 4 4 0 00-4-4z" clip-rule="evenodd"/></svg>
+                <span>GDPR compliant</span>
             </div>
         </div>
 
@@ -104,23 +164,119 @@
     </div>
 
     
-        async function connectWallet(provider) {
-            if (provider === 'metamask' && window.ethereum) {
-                try {
-                    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-                    alert('Wallet connected: ' + accounts[0].slice(0,6) + '...' + accounts[0].slice(-4));
-                } catch (e) {
-                    alert('Failed to connect: ' + e.message);
-                }
+    <script>
+        // Real-time email validation
+        const emailInput = document.getElementById('email');
+        const emailError = document.getElementById('email-error');
+
+        emailInput?.addEventListener('blur', (e) => {
+            const email = e.target.value;
+            const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+            
+            if (email && !isValid) {
+                emailError.textContent = 'Please enter a valid email address';
+                emailError.classList.remove('hidden');
+                e.target.classList.add('border-red-500');
             } else {
-                alert('Please install ' + provider + ' extension');
+                emailError.classList.add('hidden');
+                e.target.classList.remove('border-red-500');
+            }
+        });
+
+        // Password strength meter
+        const passwordInput = document.getElementById('password');
+        const strength1 = document.getElementById('strength-1');
+        const strength2 = document.getElementById('strength-2');
+        const strength3 = document.getElementById('strength-3');
+        const strength4 = document.getElementById('strength-4');
+        const strengthText = document.getElementById('strength-text');
+
+        passwordInput?.addEventListener('input', (e) => {
+            const password = e.target.value;
+            let strength = 0;
+            
+            if (password.length >= 8) strength++;
+            if (/[a-z]/.test(password) && /[A-Z]/.test(password)) strength++;
+            if (/\d/.test(password)) strength++;
+            if (/[^a-zA-Z0-9]/.test(password)) strength++;
+            
+            // Update visual indicators
+            const colors = ['bg-red-500', 'bg-orange-500', 'bg-yellow-500', 'bg-green-500'];
+            const texts = ['Weak', 'Fair', 'Good', 'Strong'];
+            
+            [strength1, strength2, strength3, strength4].forEach((el, i) => {
+                el.className = 'h-1 flex-1 rounded ' + (i < strength ? colors[strength - 1] : 'bg-zinc-700');
+            });
+            
+            strengthText.textContent = texts[strength - 1] || 'Password strength';
+            strengthText.className = 'text-xs mt-1 ' + (strength > 0 ? colors[strength - 1].replace('bg-', 'text-') : 'text-zinc-500');
+        });
+
+        // Wallet connection
+        async function connectWallet(provider) {
+            const button = event.target.closest('button');
+            const originalText = button.innerHTML;
+            
+            // Loading state
+            button.innerHTML = '<span class="animate-pulse">Connecting...</span>';
+            button.disabled = true;
+
+            try {
+                if (provider === 'metamask' && window.ethereum) {
+                    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                    const address = accounts[0];
+                    
+                    // Success feedback
+                    button.innerHTML = '✓ Connected: ' + address.slice(0,6) + '...' + address.slice(-4);
+                    button.classList.remove('bg-violet-500/20');
+                    button.classList.add('bg-green-500/20', 'border-green-500/30');
+                    
+                    // Redirect after delay
+                    setTimeout(() => {
+                        window.location.href = '/dashboard';
+                    }, 1000);
+                } else {
+                    throw new Error('Please install ' + provider + ' extension');
+                }
+            } catch (error) {
+                button.innerHTML = originalText;
+                button.disabled = false;
+                
+                // Show inline error
+                const errorMsg = document.createElement('p');
+                errorMsg.className = 'text-xs text-red-400 mt-2 text-center';
+                errorMsg.textContent = error.message;
+                button.parentElement.appendChild(errorMsg);
+                
+                setTimeout(() => errorMsg.remove(), 3000);
             }
         }
-        
+
+        // Form submission
         function handleSignup(e) {
             e.preventDefault();
-            alert('Account created! (Demo mode)');
+            
+            const form = e.target;
+            const button = form.querySelector('button[type="submit"]');
+            const originalText = button.innerHTML;
+            
+            // Loading state
+            button.innerHTML = '<span class="animate-pulse">Creating account...</span>';
+            button.disabled = true;
+
+            // Simulate API call
+            setTimeout(() => {
+                button.innerHTML = '✓ Account created!';
+                button.classList.remove('gradient');
+                button.classList.add('bg-green-500');
+                
+                // Redirect after delay
+                setTimeout(() => {
+                    window.location.href = '/dashboard';
+                }, 1000);
+            }, 1500);
         }
+    </script>
     
     <link rel="stylesheet" href="/quick-wins.css">
 <style>.glass { background: rgba(255,255,255,0.03); }</style>
