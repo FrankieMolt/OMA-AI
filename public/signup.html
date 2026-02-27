@@ -87,9 +87,7 @@
                         placeholder="you@example.com" 
                         class="w-full px-4 py-3 bg-zinc-900 border border-zinc-700 rounded-xl focus:border-violet-500 focus:outline-none transition"
                         required
-                        aria-describedby="email-error"
                     >
-                    <p id="email-error" class="text-xs text-red-400 mt-1 hidden" role="alert"></p>
                 </div>
                 
                 <div>
@@ -102,18 +100,7 @@
                         class="w-full px-4 py-3 bg-zinc-900 border border-zinc-700 rounded-xl focus:border-violet-500 focus:outline-none transition"
                         required
                         minlength="8"
-                        aria-describedby="password-strength"
                     >
-                    <!-- Password Strength Meter -->
-                    <div id="password-strength" class="mt-2">
-                        <div class="flex gap-1">
-                            <div class="h-1 flex-1 bg-zinc-700 rounded" id="strength-1"></div>
-                            <div class="h-1 flex-1 bg-zinc-700 rounded" id="strength-2"></div>
-                            <div class="h-1 flex-1 bg-zinc-700 rounded" id="strength-3"></div>
-                            <div class="h-1 flex-1 bg-zinc-700 rounded" id="strength-4"></div>
-                        </div>
-                        <p class="text-xs text-zinc-500 mt-1" id="strength-text">Password strength</p>
-                    </div>
                 </div>
                 
                 <div class="flex items-start gap-2">
@@ -129,135 +116,98 @@
             </form>
         </div>
 
-        <!-- Security Badge -->
-        <div class="flex justify-center gap-4 mt-6 text-xs text-zinc-500">
-            <div class="flex items-center gap-1">
-                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
-                <span>256-bit encryption</span>
-            </div>
-            <div class="flex items-center gap-1">
-                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 8a6 6 0 01-7.743 5.743L10 14l-1 1-1 1H6v2H2v-4l4.257-4.257A6 6 0 1118 8zm-6-4a1 1 0 100 2 2 2 0 012 2 1 1 0 102 0 4 4 0 00-4-4z" clip-rule="evenodd"/></svg>
-                <span>GDPR compliant</span>
-            </div>
-        </div>
-
         <p class="text-center text-zinc-500 text-sm mt-6">
             Already have an account? <a href="/login" class="text-violet-400 hover:underline">Sign in</a>
         </p>
     </div>
 
-    
     <script>
-        // Real-time email validation
-        const emailInput = document.getElementById('email');
-        const emailError = document.getElementById('email-error');
-
-        emailInput?.addEventListener('blur', (e) => {
-            const email = e.target.value;
-            const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-            
-            if (email && !isValid) {
-                emailError.textContent = 'Please enter a valid email address';
-                emailError.classList.remove('hidden');
-                e.target.classList.add('border-red-500');
-            } else {
-                emailError.classList.add('hidden');
-                e.target.classList.remove('border-red-500');
-        });
-
-        // Password strength meter
-        const passwordInput = document.getElementById('password');
-        const strength1 = document.getElementById('strength-1');
-        const strength2 = document.getElementById('strength-2');
-        const strength3 = document.getElementById('strength-3');
-        const strength4 = document.getElementById('strength-4');
-        const strengthText = document.getElementById('strength-text');
-
-        passwordInput?.addEventListener('input', (e) => {
-            const password = e.target.value;
-            let strength = 0;
-            
-            if (password.length >= 8) strength++;
-            if (/[a-z]/.test(password) && /[A-Z]/.test(password)) strength++;
-            if (/\d/.test(password)) strength++;
-            if (/[^a-zA-Z0-9]/.test(password)) strength++;
-            
-            // Update visual indicators
-            const colors = ['bg-red-500', 'bg-orange-500', 'bg-yellow-500', 'bg-green-500'];
-            const texts = ['Weak', 'Fair', 'Good', 'Strong'];
-            
-            [strength1, strength2, strength3, strength4].forEach((el, i) => {
-                el.className = 'h-1 flex-1 rounded ' + (i < strength ? colors[strength - 1] : 'bg-zinc-700');
-            });
-            
-            strengthText.textContent = texts[strength - 1] || 'Password strength';
-            strengthText.className = 'text-xs mt-1 ' + (strength > 0 ? colors[strength - 1].replace('bg-', 'text-') : 'text-zinc-500');
-        });
-
-        // Wallet connection
         async function connectWallet(provider) {
             const button = event.target.closest('button');
             const originalText = button.innerHTML;
-            
-            // Loading state
             button.innerHTML = '<span class="animate-pulse">Connecting...</span>';
             button.disabled = true;
 
             try {
+                let address = null;
+                
                 if (provider === 'metamask' && window.ethereum) {
                     const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-                    const address = accounts[0];
+                    address = accounts[0];
+                } else if (provider === 'phantom' && window.solana) {
+                    const resp = await window.solana.connect();
+                    address = resp.publicKey.toString();
+                } else if (provider === 'coinbase' && window.coinbaseWalletExtension) {
+                    const accounts = await window.coinbaseWalletExtension.request({ method: 'eth_requestAccounts' });
+                    address = accounts[0];
+                } else {
+                    throw new Error('Please install ' + provider);
+                }
+                
+                const response = await fetch('/api/auth/signup', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ wallet_address: address })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    localStorage.setItem('oma_user', JSON.stringify(data.user));
+                    if (data.api_key) localStorage.setItem('oma_api_key', data.api_key);
                     
-                    // Success feedback
-                    button.innerHTML = '<svg class="w-5 h-5 text-green-400 inline"><use href="/icons.svg#icon-check"/></svg> Connected: ' + address.slice(0,6) + '...' + address.slice(-4);
-                    button.classList.remove('bg-violet-500/20');
+                    button.innerHTML = '✓ Connected: ' + address.slice(0,6) + '...' + address.slice(-4);
                     button.classList.add('bg-green-500/20', 'border-green-500/30');
                     
-                    // Redirect after delay
-                    setTimeout(() => {
-                        window.location.href = '/dashboard';
-                    }, 1000);
+                    setTimeout(() => window.location.href = '/dashboard', 1000);
                 } else {
-                    throw new Error('Please install ' + provider + ' extension');
+                    throw new Error(data.error || 'Signup failed');
+                }
             } catch (error) {
                 button.innerHTML = originalText;
                 button.disabled = false;
-                
-                // Show inline error
-                const errorMsg = document.createElement('p');
-                errorMsg.className = 'text-xs text-red-400 mt-2 text-center';
-                errorMsg.textContent = error.message;
-                button.parentElement.appendChild(errorMsg);
-                
-                setTimeout(() => errorMsg.remove(), 3000);
+                alert(error.message);
+            }
         }
 
-        // Form submission
-        function handleSignup(e) {
+        async function handleSignup(e) {
             e.preventDefault();
-            
             const form = e.target;
             const button = form.querySelector('button[type="submit"]');
             const originalText = button.innerHTML;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
             
-            // Loading state
             button.innerHTML = '<span class="animate-pulse">Creating account...</span>';
             button.disabled = true;
 
-            // Simulate API call
-            setTimeout(() => {
-                button.innerHTML = '<svg class="w-5 h-5 text-green-400 inline"><use href="/icons.svg#icon-check"/></svg> Account created!';
-                button.classList.remove('gradient');
-                button.classList.add('bg-green-500');
+            try {
+                const response = await fetch('/api/auth/signup', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
                 
-                // Redirect after delay
-                setTimeout(() => {
-                    window.location.href = '/dashboard';
-                }, 1000);
-            }, 1500);
+                const data = await response.json();
+                
+                if (data.success) {
+                    localStorage.setItem('oma_user', JSON.stringify(data.user));
+                    if (data.api_key) localStorage.setItem('oma_api_key', data.api_key);
+                    
+                    button.innerHTML = '✓ Account created!';
+                    button.classList.remove('gradient');
+                    button.classList.add('bg-green-500');
+                    
+                    setTimeout(() => window.location.href = '/dashboard', 1000);
+                } else {
+                    throw new Error(data.error || 'Signup failed');
+                }
+            } catch (error) {
+                button.innerHTML = originalText;
+                button.disabled = false;
+                alert(error.message);
+            }
+        }
     </script>
-    
-    <link rel="stylesheet" href="/quick-wins.css">
-<style>.glass { background: rgba(255,255,255,0.03); }</style>
 </body>
 </html>
