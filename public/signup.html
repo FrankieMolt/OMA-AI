@@ -8,23 +8,6 @@
     <link rel="canonical" href="https://oma-ai.com/signup">
     <title>Sign Up - OMA-AI | Open Market Access</title>
     <meta name="description" content="Create your OMA-AI account and start building AI agent APIs.">
-    
-    
-        theme: {
-          extend: {
-            colors: {
-              zinc: { 950: "#09090b" },
-              violet: { 400: "#a78bfa", 500: "#8b5cf6" },
-              indigo: { 500: "#6366f1" },
-              fuchsia: { 500: "#d946ef" }
-            },
-            fontFamily: {
-              sans: ["Inter", "sans-serif"]
-            }
-          }
-        }
-      }
-    
     <link rel="stylesheet" href="/quick-wins.css">
 <style>
         body { font-family: 'Inter', sans-serif; background: #09090b; color: #fafafa; }
@@ -180,7 +163,6 @@
             } else {
                 emailError.classList.add('hidden');
                 e.target.classList.remove('border-red-500');
-            }
         });
 
         // Password strength meter
@@ -237,7 +219,6 @@
                     }, 1000);
                 } else {
                     throw new Error('Please install ' + provider + ' extension');
-                }
             } catch (error) {
                 button.innerHTML = originalText;
                 button.disabled = false;
@@ -249,7 +230,6 @@
                 button.parentElement.appendChild(errorMsg);
                 
                 setTimeout(() => errorMsg.remove(), 3000);
-            }
         }
 
         // Form submission
@@ -275,7 +255,6 @@
                     window.location.href = '/dashboard';
                 }, 1000);
             }, 1500);
-        }
     </script>
     
     <link rel="stylesheet" href="/quick-wins.css">

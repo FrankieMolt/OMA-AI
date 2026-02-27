@@ -8,23 +8,6 @@
     <link rel="canonical" href="https://oma-ai.com/skills">
     <title>Skills - OMA-AI | Open Market Access</title>
     <meta name="description" content="Discover AI skills for OpenClaw agents. Browse 50+ skills for autonomous agents.">
-    
-    
-        theme: {
-          extend: {
-            colors: {
-              zinc: { 950: "#09090b" },
-              violet: { 400: "#a78bfa", 500: "#8b5cf6" },
-              indigo: { 500: "#6366f1" },
-              fuchsia: { 500: "#d946ef" }
-            },
-            fontFamily: {
-              sans: ["Inter", "sans-serif"]
-            }
-          }
-        }
-      }
-    
     <link rel="stylesheet" href="/quick-wins.css">
 <style>
         body { font-family: 'Inter', sans-serif; background: #09090b; color: #fafafa; }
@@ -128,8 +111,6 @@
                     </div>
                 </div>
             `).join('');
-        }
-
         document.getElementById('categoryFilter').addEventListener('change', (e) => renderSkills(e.target.value));
         document.getElementById('searchInput').addEventListener('input', (e) => {
             const q = e.target.value.toLowerCase();

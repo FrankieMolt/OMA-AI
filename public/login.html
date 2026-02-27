@@ -8,23 +8,6 @@
     <link rel="canonical" href="https://oma-ai.com/login">
     <title>Sign In - OMA-AI | Open Market Access</title>
     <meta name="description" content="Sign in to OMA-AI to manage your APIs, MCPs, and compute resources.">
-    
-    
-        theme: {
-          extend: {
-            colors: {
-              zinc: { 950: "#09090b" },
-              violet: { 400: "#a78bfa", 500: "#8b5cf6" },
-              indigo: { 500: "#6366f1" },
-              fuchsia: { 500: "#d946ef" }
-            },
-            fontFamily: {
-              sans: ["Inter", "sans-serif"]
-            }
-          }
-        }
-      }
-    
     <link rel="stylesheet" href="/quick-wins.css">
 <style>
         body { font-family: 'Inter', sans-serif; background: #09090b; color: #fafafa; }
@@ -91,17 +74,13 @@
                     alert('Wallet connected: ' + accounts[0].slice(0,6) + '...' + accounts[0].slice(-4));
                 } catch (e) {
                     alert('Failed to connect: ' + e.message);
-                }
             } else {
                 alert('Please install ' + provider + ' extension');
-            }
         }
         
         function handleEmailLogin(e) {
             e.preventDefault();
             alert('Magic link sent! (Demo mode)');
-        }
-    
     <link rel="stylesheet" href="/quick-wins.css">
 <style>.glass { background: rgba(255,255,255,0.03); }</style>
 </body>
