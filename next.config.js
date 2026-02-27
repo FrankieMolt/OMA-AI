@@ -7,6 +7,11 @@ const nextConfig = {
   compress: true,
   poweredByHeader: false,
 
+  // Fix Turbopack workspace root issue
+  turbopack: {
+    root: __dirname,
+  },
+
   // Enable experimental features for better performance
   experimental: {
     optimizePackageImports: ['lucide-react', 'framer-motion'],
