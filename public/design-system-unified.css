@@ -970,3 +970,114 @@ input:focus-visible {
   background: rgba(124, 58, 237, 0.1);
   color: white;
 }
+
+/* ===========================================
+   FINAL UI/UX FIXES - Feb 27, 2026
+   =========================================== */
+
+/* Fix: Consistent button sizing */
+.btn {
+  min-height: 44px; /* Minimum touch target */
+  min-width: 120px;
+}
+
+/* Fix: Form input consistency */
+input[type="email"],
+input[type="password"],
+input[type="text"],
+input[type="search"] {
+  min-height: 44px; /* Minimum touch target */
+  padding: var(--spacing-3) var(--spacing-4);
+}
+
+/* Fix: Form checkbox styling */
+input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--color-primary);
+  cursor: pointer;
+}
+
+/* Fix: Card padding consistency */
+.card {
+  padding: var(--spacing-6);
+}
+
+/* Fix: Section spacing consistency */
+.section {
+  padding-top: var(--spacing-16);
+  padding-bottom: var(--spacing-16);
+}
+
+/* Fix: Navigation consistency */
+.nav-link {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  padding: var(--spacing-2) var(--spacing-3);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast) var(--ease-out);
+}
+
+.nav-link:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--color-primary-light);
+}
+
+/* Fix: Badge color consistency */
+.badge {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.badge-primary {
+  background: var(--color-primary);
+  color: white;
+}
+
+.badge-success {
+  background: var(--color-success);
+  color: white;
+}
+
+/* Fix: Pricing card alignment */
+.pricing-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.pricing-card .btn {
+  margin-top: auto;
+}
+
+/* Fix: Ensure buttons don't get cut off */
+.btn {
+  overflow: visible;
+  text-overflow: clip;
+  white-space: nowrap;
+}
+
+/* Fix: Mobile menu button */
+.mobile-menu-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+}
+
+.mobile-menu-toggle:hover {
+  background: var(--color-surface-light);
+}
+
+/* Fix: Theme code hidden */
+.theme-config {
+  display: none !important;
+}
+
