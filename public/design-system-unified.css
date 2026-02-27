@@ -521,3 +521,125 @@ p {
   opacity: 1;
   visibility: visible;
 }
+
+/* ===========================================
+   HERO & SECTION BACKGROUNDS
+   =========================================== */
+
+.hero-bg {
+  background: radial-gradient(circle at 50% 50%, rgba(124, 58, 237, 0.1) 0%, transparent 70%);
+}
+
+.section-bg-alt {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.section-bg-gradient {
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.1) 0%, rgba(236, 72, 153, 0.1) 100%);
+}
+
+/* ===========================================
+   ACCESSIBILITY IMPROVEMENTS
+   =========================================== */
+
+/* Skip to main content link */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--color-primary);
+  color: white;
+  padding: var(--spacing-2) var(--spacing-4);
+  z-index: 100;
+  transition: top var(--transition-fast);
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* Active nav link indicator */
+.nav-link[aria-current="page"] {
+  color: var(--color-primary-light);
+}
+
+/* Focus trap for modals */
+.focus-trap:focus {
+  outline: none;
+}
+
+/* ===========================================
+   TEXT GRADIENT ALIAS
+   =========================================== */
+
+/* Support both naming conventions */
+.text-gradient {
+  background: linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-accent-light) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ===========================================
+   CODE BLOCKS
+   =========================================== */
+
+pre {
+  background: var(--color-surface);
+  padding: var(--spacing-4);
+  border-radius: var(--radius-lg);
+  overflow-x: auto;
+  border: 1px solid var(--color-border);
+}
+
+code {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-sm);
+  color: var(--color-primary-light);
+}
+
+pre code {
+  background: transparent;
+  padding: 0;
+  border: none;
+}
+
+/* ===========================================
+   FORM IMPROVEMENTS
+   =========================================== */
+
+input[type="email"],
+input[type="password"],
+input[type="text"],
+input[type="search"] {
+  width: 100%;
+  padding: var(--spacing-3) var(--spacing-4);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  color: var(--color-text-primary);
+  font-size: var(--font-size-base);
+  transition: border-color var(--transition-fast);
+}
+
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="text"]:focus,
+input[type="search"]:focus {
+  outline: none;
+  border-color: var(--color-primary-light);
+}
+
+input[type="checkbox"] {
+  width: 1rem;
+  height: 1rem;
+  accent-color: var(--color-primary);
+}
+
+label {
+  display: block;
+  margin-bottom: var(--spacing-2);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
