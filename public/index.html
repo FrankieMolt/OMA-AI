@@ -4,991 +4,243 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OMA-AI - AI Agent Marketplace | APIs & MCP Servers</title>
-    <meta name="description" content="OMA-AI - The AI Agent Marketplace. Browse 16+ APIs, 10+ MCP servers, and LLM models with x402 crypto micropayments. Free tier available. 90% revenue share for publishers.">
-    <meta name="keywords" content="AI agents, API marketplace, MCP servers, x402 payments, crypto payments, Base, Solana, LLM, AI APIs">
-    <meta name="author" content="OMA-AI">
+    <meta name="description" content="OMA-AI - The AI Agent Marketplace. Browse 16+ APIs, 10+ MCP servers with x402 crypto micropayments. Free tier available. 90% revenue share for publishers.">
     <link rel="canonical" href="https://oma-ai.com/">
     
-    <!-- Open Graph -->
+    <!-- Open Graph & Twitter -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://oma-ai.com/">
     <meta property="og:title" content="OMA-AI - The AI Agent Marketplace">
-    <meta property="og:description" content="Browse APIs, MCP servers, and LLM models with x402 crypto micropayments. Free tier available.">
+    <meta property="og:description" content="Browse APIs, MCP servers with x402 crypto micropayments. Free tier available.">
     <meta property="og:image" content="https://oma-ai.com/og-image.png">
-    <meta property="og:site_name" content="OMA-AI">
-    
-    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="@oma_ai">
     <meta name="twitter:title" content="OMA-AI - The AI Agent Marketplace">
-    <meta name="twitter:description" content="Browse APIs, MCP servers, and LLM models with x402 crypto micropayments.">
-    <meta name="twitter:image" content="https://oma-ai.com/og-image.png">
     
-    <!-- Fonts -->
+    <!-- Fonts & Styles -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Styles -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="/design-system.css">
-    <link rel="stylesheet" href="/responsive.css">
-    <link rel="stylesheet" href="/quick-wins.css">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-<style>
-        /* Modern Typography */
-        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
-        
-        :root {
-            /* Primary colors */
-            --primary: #6366f1;
-            --primary-light: #a78bfa;
-            --primary-dark: #4f46e5;
-            --accent: #a855f7;
-            --accent-dark: #6d28d9;
-            --success: #22c55e;
-            
-            /* Backgrounds */
-            --bg-primary: #0a0a0b;
-            --bg-secondary: #111111;
-            --bg-card: #161616;
-            --bg-elevated: #1c1c1c;
-            
-            /* Text */
-            --text-primary: #fafafa;
-            --text-secondary: #a1a1aa;
-            --text-muted: #71717a;
-            
-            /* Gradients */
-            --gradient-hero: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%);
-            --gradient-card: linear-gradient(180deg, rgba(99, 102, 241, 0.1), rgba(168, 85, 247, 0.05));
-            --gradient-text: linear-gradient(135deg, #6366f1, #a78bfa, #d946ef);
-            
-            /* Shadows */
-            --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.15);
-            --shadow-glow: 0 0 40px rgba(139, 92, 246, 0.3);
-            --shadow-glow-lg: 0 0 60px rgba(139, 92, 246, 0.5);
-            --shadow-glow-xl: 0 0 100px rgba(139, 92, 246, 0.6);
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Space Grotesk', 'Inter', system-ui, -apple-system, sans-serif;
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            overflow-x: hidden;
-        }
-        
-        /* Modern animations */
-        @keyframes gradient-shift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-        
-        @keyframes float-slow {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-        
-        @keyframes pulse-glow {
-            0%, 100% { box-shadow: 0 0 20px rgba(139, 92, 246, 0.2); }
-            50% { box-shadow: 0 0 40px rgba(139, 92, 246, 0.4); }
-        }
-        
-        @keyframes slide-in-left {
-            from { opacity: 0; transform: translateX(-30px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-        
-        @keyframes slide-in-right {
-            from { opacity: 0; transform: translateX(30px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-        
-        @keyframes slide-in-up {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        /* Hero section */
-        .hero {
-            position: relative;
-            min-height: 90vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            overflow: hidden;
-        }
-        
-        .hero-bg {
-            position: absolute;
-            inset: 0;
-            background: 
-                radial-gradient(circle at 20% 50%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(168, 85, 247, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.12) 0%, transparent 50%),
-                linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
-            pointer-events: none;
-            z-index: 0;
-        }
-        
-        .hero-content {
-            position: relative;
-            z-index: 1;
-            max-width: 1200px;
-            padding: 4rem 1.5rem;
-            animation: slide-in-up 0.8s ease-out;
-        }
-        
-        .hero-title {
-            font-size: clamp(3rem, 5vw, 6rem);
-            font-weight: 800;
-            line-height: 1.1;
-            letter-spacing: -0.02em;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, var(--text-primary) 0%, var(--primary-light) 30%, var(--accent) 70%, var(--accent-dark) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .hero-subtitle {
-            font-size: clamp(1.25rem, 2vw, 1.5rem);
-            font-weight: 400;
-            color: var(--text-secondary);
-            margin-bottom: 2.5rem;
-            line-height: 1.6;
-        }
-        
-        /* Stats section */
-        .stats-section {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin: 2rem 0 4rem;
-            max-width: 1200px;
-            margin-left: auto;
-            margin-right: auto;
-            animation: slide-in-up 1s ease-out 0.2s;
-        }
-        
-        .stat-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 2rem;
-            text-align: center;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .stat-card:hover {
-            transform: translateY(-8px);
-            border-color: var(--primary-light);
-            box-shadow: var(--shadow-glow);
-        }
-        
-        .stat-value {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--primary-light);
-            margin-bottom: 0.5rem;
-            animation: pulse-glow 3s ease-in-out infinite;
-        }
-        
-        .stat-label {
-            color: var(--text-secondary);
-            font-size: 0.875rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            font-weight: 500;
-        }
-        
-        /* Feature cards */
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin: 4rem auto 6rem;
-            max-width: 1400px;
-        }
-        
-        .feature-card {
-            background: var(--gradient-card);
-            border: 1px solid var(--border-light);
-            border-radius: 16px;
-            padding: 2rem;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(168, 85, 247, 0.05));
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
-        .feature-card:hover::before {
-            opacity: 1;
-        }
-        
-        .feature-card:hover {
-            transform: translateY(-8px);
-            border-color: var(--primary);
-            box-shadow: var(--shadow-glow-lg);
-        }
-        
-        .feature-icon {
-            width: 48px;
-            height: 40px;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .feature-icon svg {
-            color: white;
-        }
-        
-        /* CTA section */
-        .cta-section {
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(168, 85, 247, 0.05));
-            border: 1px solid var(--border-light);
-            border-radius: 20px;
-            padding: 3rem 2rem;
-            margin: 6rem auto 8rem;
-            max-width: 1000px;
-            text-align: center;
-            animation: slide-in-up 1.2s ease-out 0.4s;
-        }
-        
-        .cta-title {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-        }
-        
-        .cta-input {
-            display: flex;
-            gap: 1rem;
-            max-width: 400px;
-            margin: 0 auto 1.5rem;
-        }
-        
-        .cta-input input {
-            flex: 1;
-            padding: 0.75rem 1.25rem;
-            background: var(--bg-primary);
-            border: 1px solid var(--border-light);
-            border-radius: 8px;
-            color: var(--text-primary);
-            font-size: 0.95rem;
-        }
-        
-        .cta-input input:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3);
-        }
-        
-        .cta-btn {
-            background: var(--gradient-hero);
-            color: white;
-            border: none;
-            border-radius: 12px;
-            padding: 0.875rem 2rem;
-            font-weight: 600;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .cta-btn::before {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s;
-        }
-        
-        .cta-btn:hover::before {
-            left: 100%;
-        }
-        
-        .cta-btn:hover {
-            box-shadow: var(--shadow-glow-lg);
-            transform: translateY(-2px);
-        }
-        
-        /* Section headers */
-        .section-header {
-            text-align: center;
-            margin-bottom: 4rem;
-            animation: slide-in-up 0.6s ease-out 0.2s;
-        }
-        
-        .section-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
-        
-        .section-subtitle {
-            color: var(--text-secondary);
-            font-size: 1.125rem;
-        }
-        
-        .section-divider {
-            width: 100px;
-            height: 2px;
-            background: var(--gradient-hero);
-            background-size: 200% 100%;
-            animation: gradient-shift 3s linear infinite;
-            margin: 0 auto 2rem;
-            border-radius: 2px;
-        }
-        
-        /* Cards grid */
-        .cards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
-            margin: 0 auto 4rem;
-            max-width: 1400px;
-        }
-        
-        .card-v3 {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 2rem;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .card-v3::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, transparent, var(--primary), transparent);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
-        .card-v3:hover::before {
-            opacity: 1;
-        }
-        
-        .card-v3:hover {
-            transform: translateY(-8px);
-            border-color: var(--primary-light);
-            box-shadow: var(--shadow-glow-lg);
-        }
-        
-        /* Badge styles */
-        .badge-v3 {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.25rem;
-            padding: 0.25rem 0.75rem;
-            border-radius: 9999px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            letter-spacing: 0.025em;
-        }
-        
-        .badge-new {
-            background: rgba(34, 197, 94, 0.15);
-            color: #4ade80;
-            border: 1px solid rgba(34, 197, 94, 0.3);
-        }
-        
-        .badge-popular {
-            background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(139, 92, 246, 0.1));
-            color: #a78bfa;
-            border: 1px solid rgba(139, 92, 246, 0.3);
-            animation: pulse-glow 2s ease-in-out infinite;
-        }
-        
-        .badge-x402 {
-            background: linear-gradient(135deg, rgba(6366f1, 0.2), rgba(99, 102, 241, 0.1));
-            color: #818cf8;
-            border: 1px solid rgba(99, 102, 241, 0.3);
-        }
-        
-        /* Navigation */
-        .nav-v3 {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border);
-            padding: 0 2rem;
-            height: 4rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        
-        .logo-v3 {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            font-weight: 700;
-            font-size: 1.125rem;
-        }
-        
-        .logo-v3 .logo-icon {
-            width: 36px;
-            height: 36px;
-            background: var(--gradient-hero);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 800;
-            font-size: 1rem;
-        }
-        
-        .nav-links-v3 {
-            display: flex;
-            gap: 0.5rem;
-        }
-        
-        .nav-link-v3 {
-            color: var(--text-secondary);
-            text-decoration: none;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            font-size: 0.875rem;
-            font-weight: 500;
-            transition: all 0.2s ease;
-        }
-        
-        .nav-link-v3:hover {
-            color: var(--text-primary);
-            background: rgba(139, 92, 246, 0.1);
-        }
-        
-        .nav-link-v3.active {
-            color: var(--primary-light);
-            background: rgba(139,  92, 246, 0.1);
-        }
-        
-        /* Button styles */
-        .btn-v3 {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            padding: 0.75rem 1.5rem;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 0.95rem;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            border: none;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .btn-primary-v3 {
-            background: var(--gradient-hero);
-            color: white;
-        }
-        
-        .btn-primary-v3:hover {
-            box-shadow: var(--shadow-glow-lg);
-            transform: translateY(-2px);
-        }
-        
-        .btn-outline-v3 {
-            background: transparent;
-            border: 2px solid var(--border-light);
-            color: var(--text-primary);
-        }
-        
-        .btn-outline-v3:hover {
-            border-color: var(--primary);
-            background: rgba(139, 92, 246, 0.1);
-        }
-        
-        /* Floating elements */
-        .floating-shapes {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            top: 0; left: 0;
-            pointer-events: none;
-            z-index: 0;
-            overflow: hidden;
-        }
-        
-        .shape {
-            position: absolute;
-            border-radius: 50%;
-            opacity: 0.03;
-            animation: float-slow 8s ease-in-out infinite;
-        }
-        
-        .shape-1 { width: 300px; height: 300px; background: var(--primary); top: 10%; left: 10%; animation-delay: 0s; }
-        .shape-2 { width: 200px; height:200px; background: var(--accent); top: 20%; right: 15%; animation-delay: 2s; }
-        .shape-3 { width: 150px; height: 150px; background: var(--secondary); top: 60%; left: 30%; animation-delay: 4s; }
-        .shape-4 { width: 100px; height: 100px; background: var(--success); top: 80%; right: 25%; animation-delay: 6s; }
-        
-        /* Pricing cards */
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
-            margin: 4rem auto 6rem;
-            max-width: 1400px;
-        }
-        
-        .pricing-v3 {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 2.5rem 2rem;
-            text-align: center;
-            position: relative;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .pricing-v3.popular {
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(168, 85, 247, 0.08));
-            border: 2px solid var(--primary);
-            box-shadow: var(--shadow-glow-lg);
-        }
-        
-        .pricing-v3:hover {
-            transform: translateY(-8px);
-        }
-        
-        .pricing-v3:hover .btn-v3 {
-            box-shadow: var(--shadow-glow-lg);
-        }
-        
-        /* Footer */
-        .footer-v3 {
-            border-top: 1px solid var(--border);
-            padding: 4rem 1.5rem 2rem;
-            margin-top: 8rem;
-            background: var(--bg-secondary);
-        }
-        
-        .footer-v3 .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            flex-wrap: wrap;
-            margin-top: 2rem;
-        }
-        
-        .footer-v3 .footer-link {
-            color: var(--text-secondary);
-            text-decoration: none;
-          font-size: 0.875rem;
-          transition: color 0.2s;
-        }
-        
-        .footer-v3 .footer-link:hover {
-            color: var(--primary-light);
-        }
-        
-        /* Social links */
-        .social-links {
-          display: flex;
-          justify-content: center;
-          gap: 1rem;
-          margin-top: 2rem;
-        }
-        
-        .social-link {
-          width: 40px;
-          height: 40px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          background: var(--bg-card);
-          border: 1px solid var(--border);
-          border-radius: 10px;
-          color: var(--text-secondary);
-          transition: all 0.3s ease;
-        }
-        
-        .social-link:hover {
-          border-color: var(--primary);
-          color: var(--primary-light);
-          transform: translateY(-2px);
-          box-shadow: var(--shadow-glow);
-        }
-        
-        /* Loading shimmer */
-        .skeleton {
-            background: linear-gradient(90deg, var(--bg-card), var(--bg-elevated), var(--bg-card));
-            background-size: 200% 100%;
-            animation: shimmer 2s linear infinite;
-        }
-        
-        @keyframes shimmer {
-          0% { background-position: -200% 0; }
-          100% { background-position: 200% 0; }
-        }
-        
-        /* Mobile menu toggle */
-        .mobile-menu-toggle {
-          display: none;
-          flex-direction: column;
-          gap: 0.25rem;
-          padding: 0.25rem;
-          background: transparent;
-          border: none;
-          cursor: pointer;
-        }
-        
-        @media (max-width: 768px) {
-          .mobile-menu-toggle {
-            display: flex;
-          }
-          
-          .nav-links-v3 {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0; right: 0;
-            background: var(--bg-secondary);
-            flex-direction: column;
-            padding: 1rem;
-            gap: 0.5rem;
-            border-top: 1px solid var(--border);
-            animation: slide-in-up 0.3s ease-out;
-          }
-          
-          .nav-links-v3.active {
-            display: flex;
-          }
-          
-          .hero-title {
-            font-size: 2.5rem;
-          }
-          
-          .stats-section {
-            grid-template-columns: repeat(2, 1fr) !important;
-          }
-          
-          .features {
-            grid-template-columns: 1fr !important;
-          }
-          
-          .cards-grid,
-          .pricing-grid {
-            grid-template-columns: 1fr !important;
-          }
-          
-          .cta-section {
-            margin: 4rem 1rem;
-          }
-          
-          .cta-input {
-            max-width: 100%;
-          }
-          
-          .section-padding,
-          .section-padding-sm,
-          .section-padding-lg,
-          .section-padding-xl {
-            padding: 2rem 1rem;
-          }
-          
-          .section-title {
-            font-size: 1.75rem;
-          }
-        }
-    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/design-system-unified.css">
+    
+    <!-- SVG Icons -->
+    <link rel="preload" href="/icons.svg" as="image" type="image/svg+xml">
 </head>
 <body>
-    <!-- Floating background shapes -->
-    <div class="floating-shapes">
-        <div class="shape shape-1"></div>
-        <div class="shape shape-2"></div>
-        <div class="shape shape-3"></div>
-        <div class="shape shape-4"></div>
+    <!-- SVG Sprite -->
+    <div style="display: none;">
+        <svg xmlns="http://www.w3.org/2000/svg">
+            <symbol id="icon-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+            </symbol>
+            <symbol id="icon-zap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+            </symbol>
+            <symbol id="icon-api" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/><line x1="12" y1="2" x2="12" y2="22"/>
+            </symbol>
+            <symbol id="icon-database" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/><path d="M3 12c0 1.66 4 3 9 3s9-1.34 9-3"/>
+            </symbol>
+            <symbol id="icon-server" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect width="20" height="8" x="2" y="2" rx="2" ry="2"/><rect width="20" height="8" x="2" y="14" rx="2" ry="2"/>
+                <line x1="6" x2="6.01" y1="6" y2="6"/><line x1="6" x2="6.01" y1="18" y2="18"/>
+            </symbol>
+            <symbol id="icon-dollar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="12" y1="2" x2="12" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+            </symbol>
+            <symbol id="icon-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </symbol>
+            <symbol id="icon-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
+                <path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            </symbol>
+            <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="20 6 9 17 4 12"/>
+            </symbol>
+            <symbol id="icon-star" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+            </symbol>
+            <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+            </symbol>
+        </svg>
     </div>
-    
+
     <!-- Navigation -->
-    <nav class="nav-v3" role="navigation" aria-label="Main navigation">
-        <div class="logo-v3">
-            <a href="/" aria-label="OMA-AI Home">
-                <div class="logo-icon" aria-hidden="true">OMA</div>
-                <span aria-hidden="true">OMA-AI</span>
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">
+                <div class="w-10 h-10 gradient-primary rounded-xl flex items-center justify-center font-bold text-lg">OMA</div>
+                <span class="hidden sm:block">Open Market Access</span>
             </a>
+            
+            <div class="nav-links">
+                <a href="/apis" class="nav-link">APIs</a>
+                <a href="/mcps" class="nav-link">MCPs</a>
+                <a href="/compute" class="nav-link">Compute</a>
+                <a href="/pricing" class="nav-link">Pricing</a>
+                <a href="/dashboard" class="btn btn-primary btn-sm">Dashboard</a>
+            </div>
         </div>
-        <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false" id="mobile-menu-btn">
-            <span style="width:24px;height:2px;background:currentColor"></span>
-            <span style="width:24px;height:2px;background:currentColor"></span>
-            <span style="width:24px;height:2px;background:currentColor"></span>
-        </button>
-        <div class="nav-links-v3" id="nav-links">
-            <a href="/apis.html" class="nav-link-v3">APIs</a>
-            <a href="/mcps.html" class="nav-link-v3">MCP Servers</a>
-            <a href="/skills.html" class="nav-link-v3">Skills</a>
-            <a href="/llms.html" class="nav-link-v3">LLMs</a>
-            <a href="/compute.html" class="nav-link-v3">Compute</a>
-            <a href="/pricing.html" class="nav-link-v3">Pricing</a>
-            <a href="/publish.html" class="nav-link-v3">Publish</a>
-        </div>
-        <a href="/login.html" class="btn-v3 btn-primary-v3">Connect Wallet</a>
     </nav>
-    
+
     <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-bg"></div>
-        <div class="hero-content">
-            <div class="hero-badge badge-popular">🚀 Now Live</div>
-            <h1 class="hero-title">
-                The AI Agent<br/>Marketplace
+    <section class="pt-32 pb-20 px-4" style="background: radial-gradient(circle at 50% 50%, rgba(124, 58, 237, 0.1) 0%, transparent 70%);">
+        <div class="container text-center">
+            <div class="inline-flex items-center gap-2 px-4 py-2 bg-violet-500/10 border border-violet-500/20 rounded-full text-sm text-violet-400 mb-8">
+                <svg class="icon-sm"><use href="#icon-zap"/></svg>
+                <span>2,400+ developers building AI agents</span>
+            </div>
+            
+            <h1 class="text-5xl md:text-7xl font-bold mb-6" style="line-height: 1.1;">
+                The <span class="text-gradient">AI Agent</span><br>Marketplace
             </h1>
-            <p class="hero-subtitle">
-                Browse, test, and integrate APIs, MCP servers, and LLM models with x402 crypto payments on Base and Solana.
+            
+            <p class="text-xl text-zinc-400 mb-12 max-w-2xl mx-auto">
+                Browse 16+ APIs, 10+ MCP servers with instant x402 crypto micropayments. 
+                Free tier available. 90% revenue share for publishers.
             </p>
-            <div class="cta-section">
-                <a href="/apis.html" class="btn-v3 btn-primary-v3" style="font-size:1.25rem;padding:1rem 2.5rem;">
-                    Explore APIs →
+            
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
+                <a href="/apis" class="btn btn-primary btn-lg w-full sm:w-auto">
+                    <svg class="icon"><use href="#icon-search"/></svg>
+                    Browse APIs
                 </a>
-                <p class="text-sm text-zinc-500 mt-4">
-                    Join 500+ AI developers building the autonomous future
-                </p>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Stats Section -->
-    <section class="section-padding">
-        <div class="container">
-            <div class="stats-section">
-                <div class="stat-card">
-                    <div class="stat-value">16</div>
-                    <div class="stat-label">Free APIs</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-value">12</div>
-                    <div class="stat-label">LLM Models</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-value">10</div>
-                    <div class="stat-label">MCP Servers</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-value">90%</div>
-                    <div class="stat-label">Revenue Share</div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Features -->
-    <section class="section-padding">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Everything You Need for AI Agents</h2>
-                <p class="section-subtitle">One platform for all your agent infrastructure needs</p>
-                <div class="section-divider"></div>
+                <a href="/signup" class="btn btn-secondary btn-lg w-full sm:w-auto">
+                    Get Started Free
+                    <svg class="icon"><use href="#icon-arrow-right"/></svg>
+                </a>
             </div>
             
-            <div class="features">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M21 12a9 9 0 1 1-9 9 0 1 1 18 0 0 0 18-9 9 0 1-1-18 0 0 0 0 9z"/><path d="m9 12 2 2 2 0 0 0 4 0 0 0-2 2-2 0 0 0-4 0 0 0 2 0 0 0 0 0 0zM7 10a3 3 0 0 0 0-6 0 0 0 6 0 0 0 6 0 0 0 6 0 0 0 6 0 0 0 6 0 0 0 0z"/></svg>
-                    </div>
-                    <h3>API Marketplace</h3>
-                    <p class="text-zinc-400">Discover, test, and integrate 39+ APIs with x402 micropayments</p>
-                    <span class="badge-v3 badge-new">New</span>
+            <!-- Stats -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
+                <div class="glass rounded-xl p-6">
+                    <div class="text-3xl font-bold text-gradient">16+</div>
+                    <div class="text-sm text-zinc-400 mt-1">APIs</div>
                 </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M15 9l-6-6 0 0 0-6 0 0 0 6 0 0 0 6 0 0 0 0 0 0zM9 21v-3a6 6 0 0 0 6 6 0 0 0 6 0 0 0 6 0 0 0 6 0 0 0 6 0 0 0 0 0 0 0 0z"/></svg>
-                    </div>
-                    <h3>MCP Servers</h3>
-                    <p class="text-zinc-400">10+ servers including PostgreSQL, Pinecone, SQLite, Redis</p>
-                    <span class="badge-v3 badge-x402">x402</span>
+                <div class="glass rounded-xl p-6">
+                    <div class="text-3xl font-bold text-gradient">10+</div>
+                    <div class="text-sm text-zinc-400 mt-1">MCP Servers</div>
                 </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg xmlns="http://www-3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14v5l5 5 11.5L21 3zM2 13l10 10 7 7 3-3 7-7-7 7-7 10 10-7 7 3 3 7 7 7 7 7 7 7 7-7 7 7zM9 21v-3a1 1 0 0 0 2-2 0 0 0 2 0 0 0 2-2 0 0 0-2 0 0 0 2 0 0 0 2 0 0 0 0 0 0 0 0 0z"/></svg>
-                    </div>
-                    <h3>LLM Models</h3>
-                    <p class="text-zinc-400">12 models from Google, NVIDIA, OpenAI, Anthropic</p>
-                    <span class="badge-v3 badge-popular">Popular</span>
+                <div class="glass rounded-xl p-6">
+                    <div class="text-3xl font-bold text-gradient">90%</div>
+                    <div class="text-sm text-zinc-400 mt-1">Revenue Share</div>
                 </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-9 9 0 1 1 18 0 0 0 18-9 9 0 1-1-18 0 0 0 9z"/><path d="m9 12 2 2 2 0 0 0 4 0 0 0-2 2-2 0 0 0-4 0 0 0 2 0 0 0 0 0 0 6 0 0 0 6 0 0 0 6 0 0 0 6 0 0 0 6 0 0 0 6 0 0 0 0 0z"/></svg>
-                    </div>
-                    <h3>Akash Compute</h3>
-                    <p class="text-zinc-400">Deploy Linux containers on decentralized cloud at 70% savings</p>
-                    <span class="badge-v3 badge-new">Cloud</span>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2"/><path d="M12 12m-2 0 0 0-4 0-0 0-4 0 0 0 4 0 0 0 4 0 0 0 4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0z"/><path d="M15 9l-6-6 0 0 0-6 0 0 0 6 0 0 0 6 0 0 0 6 0 0 0 6 0 0 0 6 0 0 0 6 0 0 0 0 0 0 0 0 0 0 0 0z"/></svg>
-                    </div>
-                    <h3>90% Revenue Share</h3>
-                    <p class="text-zinc-400">Better than RapidAPI's 80% - you keep more of your earnings</p>
-                    <span class="badge-v3 badge-success">High Payout</span>
+                <div class="glass rounded-xl p-6">
+                    <div class="text-3xl font-bold text-gradient">1000</div>
+                    <div class="text-sm text-zinc-400 mt-1">Free Calls/Day</div>
                 </div>
             </div>
         </div>
     </section>
-    
-    <!-- CTA Section -->
-    <section class="section-padding">
+
+    <!-- Features Grid -->
+    <section class="section">
         <div class="container">
-            <div class="cta-section">
-                <h2 class="cta-title">Ready to Build?</h2>
-                <p class="text-zinc-400 mb-6">Start listing your APIs and get paid with every call</p>
-                <a href="/apis.html" class="btn-v3 btn-primary-v3" style="font-size:1.125rem;padding:0.875rem 2rem;">
-                    Browse APIs →
-                </a>
-                <p class="text-sm text-zinc-500 mt-4">
-                    No credit card required • Free tier available
-                </p>
-                <div class="social-links">
-                    <a href="https://twitter.com/oma_ai" class="social-link" aria-label="Twitter"><span aria-hidden="true">𝕊</span></a>
-                    <a href="https://github.com/FrankieMolt" class="social-link" aria-label="GitHub"><span aria-hidden="true">⭐</span></a>
-                    <a href="https://discord.gg/oma-ai" class="social-link" aria-label="Discord"><span aria-hidden="true">💬</span></a>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Footer -->
-    <footer class="footer-v3">
-        <div class="container">
-            <div class="footer-links">
-                <a href="/about">About</a>
-                <a href="/pricing">Pricing</a>
-                <a href="/docs">Docs</a>
-                <a href="/blog">Blog</a>
-                <a href="/community">Community</a>
-                <a href="/privacy">Privacy</a>
-                <a href="/terms">Terms</a>
-                <a href="/contact">Contact</a>
-            </div>
-            <div class="social-links">
-                <a href="https://twitter.com/oma_ai" class="social-link" aria-label="Twitter"><span aria-hidden="true">𝕊</span></a>
-                <a href="https://github.com/FrankieMolt" class="social-link" aria-label="GitHub"><span aria-hidden="true">⭐</span></a>
-                <a href="https://discord.gg/omaai" class="social-link" aria-label="Discord"><span aria-hidden="true">💬</span></a>
-            </div>
-            <p class="text-sm text-zinc-600 mt-6">
-                © 2024-2025 OMA-AI. Built for AI agents, by AI agents.
+            <h2 class="text-4xl font-bold text-center mb-4">Everything You Need</h2>
+            <p class="text-xl text-zinc-400 text-center mb-12 max-w-2xl mx-auto">
+                Built for AI agents with crypto-native infrastructure
             </p>
-        </div>
-    </footer>
-    
-    <script>
-        // Mobile menu toggle
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const navLinks = document.getElementById('nav-links');
-        
-        mobileMenuBtn?.addEventListener('click', () => {
-            const isExpanded = mobileMenuBtn.getAttribute('aria-expanded') === 'true';
-            mobileMenuBtn.setAttribute('aria-expanded', !isExpanded);
-            navLinks?.classList.toggle('active');
-        });
-        
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const targetId = anchor.getAttribute('href').substring(1);
-                document.getElementById(targetId)?.scrollIntoView({ behavior: 'smooth' });
-            });
-        });
-    </script>
-</body>
-</html>
-    <!-- Features Deep Dive -->
-    <section class="py-20 px-4 bg-zinc-900/30">
-        <div class="max-w-6xl mx-auto">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">Built for AI Agents</h2>
-            <p class="text-zinc-400 text-center max-w-2xl mx-auto mb-16">Everything you need to build autonomous AI systems with crypto payments</p>
             
-            <div class="grid md:grid-cols-2 gap-8">
-                <div class="glass rounded-2xl p-8 border border-white/5">
-                    <div class="w-12 h-12 rounded-xl bg-violet-500/20 flex items-center justify-center text-violet-400 text-2xl mb-6">💳</div>
-                    <h3 class="text-xl font-semibold mb-4">x402 Micropayments</h3>
-                    <p class="text-zinc-400 leading-relaxed">Revolutionary payment protocol enabling instant, trustless transactions for API calls. No subscriptions. No lock-in. Pay per use with USDC on Base or Solana.</p>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Feature 1: APIs -->
+                <a href="/apis" class="card group">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="w-12 h-12 bg-violet-500/20 rounded-xl flex items-center justify-center">
+                            <svg class="icon-lg text-violet-400"><use href="#icon-api"/></svg>
+                        </div>
+                        <span class="badge badge-primary">16+ APIs</span>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2 group-hover:text-violet-400 transition-colors">API Marketplace</h3>
+                    <p class="text-zinc-400 text-sm">Crypto prices, weather, search, LLM, and more. Pay per call with x402 micropayments.</p>
+                </a>
+                
+                <!-- Feature 2: MCP Servers -->
+                <a href="/mcps" class="card group">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center">
+                            <svg class="icon-lg text-blue-400"><use href="#icon-database"/></svg>
+                        </div>
+                        <span class="badge badge-primary">10+ Servers</span>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2 group-hover:text-violet-400 transition-colors">MCP Servers</h3>
+                    <p class="text-zinc-400 text-sm">Model Context Protocol servers for PostgreSQL, Pinecone, Redis, and more.</p>
+                </a>
+                
+                <!-- Feature 3: Compute -->
+                <a href="/compute" class="card group">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="w-12 h-12 bg-green-500/20 rounded-xl flex items-center justify-center">
+                            <svg class="icon-lg text-green-400"><use href="#icon-server"/></svg>
+                        </div>
+                        <span class="badge badge-success">70% Cheaper</span>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2 group-hover:text-violet-400 transition-colors">Decentralized Compute</h3>
+                    <p class="text-zinc-400 text-sm">Deploy AI agents on Akash Network. GPU and CPU instances available.</p>
+                </a>
+                
+                <!-- Feature 4: Revenue Share -->
+                <div class="card">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="w-12 h-12 bg-yellow-500/20 rounded-xl flex items-center justify-center">
+                            <svg class="icon-lg text-yellow-400"><use href="#icon-dollar"/></svg>
+                        </div>
+                        <span class="badge badge-warning">90% Share</span>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">90% Revenue Share</h3>
+                    <p class="text-zinc-400 text-sm">Highest payout in the industry. Keep 90% of every payment. We only take 10%.</p>
                 </div>
                 
-                <div class="glass rounded-2xl p-8 border border-white/5">
-                    <div class="w-12 h-12 rounded-xl bg-blue-500/20 flex items-center justify-center text-blue-400 text-2xl mb-6">🔌</div>
-                    <h3 class="text-xl font-semibold mb-4">MCP Servers</h3>
-                    <p class="text-zinc-400 leading-relaxed">Model Context Protocol servers let your AI agents connect to databases, APIs, and external tools. PostgreSQL, Pinecone, Redis, and more available instantly.</p>
+                <!-- Feature 5: Security -->
+                <div class="card">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="w-12 h-12 bg-pink-500/20 rounded-xl flex items-center justify-center">
+                            <svg class="icon-lg text-pink-400"><use href="#icon-shield"/></svg>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Secure by Design</h3>
+                    <p class="text-zinc-400 text-sm">Your keys never leave your device. SIWE authentication. No KYC required.</p>
                 </div>
                 
-                <div class="glass rounded-2xl p-8 border border-white/5">
-                    <div class="w-12 h-12 rounded-xl bg-green-500/20 flex items-center justify-center text-green-400 text-2xl mb-6">💰</div>
-                    <h3 class="text-xl font-semibold mb-4">90% Revenue Share</h3>
-                    <p class="text-zinc-400 leading-relaxed">The highest payout in the industry. When you publish an API, you keep 90% of every payment. We only take 10% to cover infrastructure costs.</p>
-                </div>
-                
-                <div class="glass rounded-2xl p-8 border border-white/5">
-                    <div class="w-12 h-12 rounded-xl bg-orange-500/20 flex items-center justify-center text-orange-400 text-2xl mb-6">☁️</div>
-                    <h3 class="text-xl font-semibold mb-4">Decentralized Compute</h3>
-                    <p class="text-zinc-400 leading-relaxed">Deploy your AI agents on Akash Network for 70% less than AWS. GPU and CPU instances available with instant provisioning and crypto payments.</p>
+                <!-- Feature 6: Community -->
+                <div class="card">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="w-12 h-12 bg-cyan-500/20 rounded-xl flex items-center justify-center">
+                            <svg class="icon-lg text-cyan-400"><use href="#icon-users"/></svg>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Growing Community</h3>
+                    <p class="text-zinc-400 text-sm">2,400+ developers. Open source. Community-driven development.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- How It Works -->
-    <section class="py-20 px-4">
-        <div class="max-w-4xl mx-auto text-center">
-            <h2 class="text-3xl md:text-4xl font-bold mb-4">How It Works</h2>
-            <p class="text-zinc-400 mb-16">Get started in minutes with our simple three-step process</p>
+    <section class="section" style="background: rgba(255, 255, 255, 0.02);">
+        <div class="container">
+            <h2 class="text-4xl font-bold text-center mb-4">How It Works</h2>
+            <p class="text-xl text-zinc-400 text-center mb-12">Get started in minutes</p>
             
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="relative">
-                    <div class="w-16 h-16 rounded-full gradient flex items-center justify-center text-2xl font-bold mx-auto mb-6">1</div>
+            <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <div class="text-center">
+                    <div class="w-16 h-16 gradient-primary rounded-2xl flex items-center justify-center text-2xl font-bold mx-auto mb-6">1</div>
                     <h3 class="text-xl font-semibold mb-3">Connect Wallet</h3>
-                    <p class="text-zinc-400">Link your MetaMask, Rainbow, or any EVM-compatible wallet. No KYC required.</p>
+                    <p class="text-zinc-400">Link your MetaMask, Coinbase, or Phantom wallet. No KYC required.</p>
                 </div>
                 
-                <div class="relative">
-                    <div class="w-16 h-16 rounded-full gradient flex items-center justify-center text-2xl font-bold mx-auto mb-6">2</div>
+                <div class="text-center">
+                    <div class="w-16 h-16 gradient-primary rounded-2xl flex items-center justify-center text-2xl font-bold mx-auto mb-6">2</div>
                     <h3 class="text-xl font-semibold mb-3">Browse APIs</h3>
-                    <p class="text-zinc-400">Explore 16+ APIs across crypto, weather, search, LLM, and more categories.</p>
+                    <p class="text-zinc-400">Explore 16+ APIs across crypto, weather, search, LLM categories.</p>
                 </div>
                 
-                <div class="relative">
-                    <div class="w-16 h-16 rounded-full gradient flex items-center justify-center text-2xl font-bold mx-auto mb-6">3</div>
+                <div class="text-center">
+                    <div class="w-16 h-16 gradient-primary rounded-2xl flex items-center justify-center text-2xl font-bold mx-auto mb-6">3</div>
                     <h3 class="text-xl font-semibold mb-3">Start Building</h3>
                     <p class="text-zinc-400">Make API calls with automatic x402 payments. Only pay for what you use.</p>
                 </div>
@@ -996,3 +248,116 @@
         </div>
     </section>
 
+    <!-- Trust Signals -->
+    <section class="section">
+        <div class="container">
+            <div class="glass-elevated rounded-3xl p-8 md:p-12 max-w-4xl mx-auto text-center">
+                <h2 class="text-3xl font-bold mb-6">Why Developers Love OMA-AI</h2>
+                
+                <div class="grid md:grid-cols-2 gap-6 text-left mb-8">
+                    <div class="flex items-start gap-3">
+                        <svg class="icon-lg text-green-400 flex-shrink-0 mt-1"><use href="#icon-check"/></svg>
+                        <div>
+                            <div class="font-semibold mb-1">Free Tier Available</div>
+                            <div class="text-sm text-zinc-400">1,000 API calls/day at no cost</div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start gap-3">
+                        <svg class="icon-lg text-green-400 flex-shrink-0 mt-1"><use href="#icon-check"/></svg>
+                        <div>
+                            <div class="font-semibold mb-1">No Credit Card Required</div>
+                            <div class="text-sm text-zinc-400">Start building immediately</div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start gap-3">
+                        <svg class="icon-lg text-green-400 flex-shrink-0 mt-1"><use href="#icon-check"/></svg>
+                        <div>
+                            <div class="font-semibold mb-1">Instant Payments</div>
+                            <div class="text-sm text-zinc-400">x402 micropayments settle in seconds</div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start gap-3">
+                        <svg class="icon-lg text-green-400 flex-shrink-0 mt-1"><use href="#icon-check"/></svg>
+                        <div>
+                            <div class="font-semibold mb-1">Open Source</div>
+                            <div class="text-sm text-zinc-400">Transparent and community-driven</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <a href="/signup" class="btn btn-primary btn-lg">
+                    Get Started Free
+                    <svg class="icon"><use href="#icon-arrow-right"/></svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section" style="background: linear-gradient(135deg, rgba(124, 58, 237, 0.1) 0%, rgba(236, 72, 153, 0.1) 100%);">
+        <div class="container text-center">
+            <h2 class="text-4xl font-bold mb-4">Ready to Build?</h2>
+            <p class="text-xl text-zinc-400 mb-8 max-w-2xl mx-auto">
+                Join 2,400+ developers building the next generation of AI agents
+            </p>
+            
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="/apis" class="btn btn-primary btn-lg">
+                    Browse APIs
+                </a>
+                <a href="/publish" class="btn btn-secondary btn-lg">
+                    List Your API
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="section-sm border-t border-zinc-800">
+        <div class="container">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-8 h-8 gradient-primary rounded-lg flex items-center justify-center font-bold text-sm">OMA</div>
+                        <span class="font-semibold">Open Market Access</span>
+                    </div>
+                    <p class="text-sm text-zinc-400">The AI Agent Marketplace with crypto-native payments.</p>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Products</h4>
+                    <ul class="space-y-2 text-sm text-zinc-400">
+                        <li><a href="/apis" class="hover:text-white transition-colors">APIs</a></li>
+                        <li><a href="/mcps" class="hover:text-white transition-colors">MCP Servers</a></li>
+                        <li><a href="/compute" class="hover:text-white transition-colors">Compute</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Company</h4>
+                    <ul class="space-y-2 text-sm text-zinc-400">
+                        <li><a href="/about" class="hover:text-white transition-colors">About</a></li>
+                        <li><a href="/blog" class="hover:text-white transition-colors">Blog</a></li>
+                        <li><a href="https://github.com/FrankieMolt" class="hover:text-white transition-colors">GitHub</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Legal</h4>
+                    <ul class="space-y-2 text-sm text-zinc-400">
+                        <li><a href="/privacy" class="hover:text-white transition-colors">Privacy</a></li>
+                        <li><a href="/terms" class="hover:text-white transition-colors">Terms</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="pt-8 border-t border-zinc-800 text-center text-sm text-zinc-500">
+                © 2026 OMA-AI. Built with x402 on Base. Open Source.
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

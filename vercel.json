@@ -40,6 +40,18 @@
     { "source": "/blog", "destination": "/blog.html" },
     { "source": "/privacy", "destination": "/privacy.html" },
     { "source": "/terms", "destination": "/terms.html" },
-    { "source": "/community", "destination": "/community.html" }
+    { "source": "/community", "destination": "/community.html" },
+    { "source": "/theme", "destination": "/theme.html" },
+    { "source": "/signup", "destination": "/signup.html" },
+    { "source": "/login", "destination": "/login.html" },
+    { "source": "/agents", "destination": "/agents.html" },
+    { "source": "/skills", "destination": "/skills.html" },
+    { "source": "/llms", "destination": "/llms.html" },
+    { "source": "/publish", "destination": "/publish.html" },
+    { "source": "/faq", "destination": "/faq.html" },
+    { "source": "/integrations", "destination": "/integrations.html" },
+    { "source": "/keys", "destination": "/keys.html" },
+    { "source": "/tasks", "destination": "/tasks.html" },
+    { "source": "/status", "destination": "/status.html" }
   ]
 }
