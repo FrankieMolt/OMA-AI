@@ -643,3 +643,330 @@ label {
   color: var(--color-text-secondary);
 }
 
+
+/* ===========================================
+   UI/UX FIXES - Screenshot Analysis Feb 27, 2026
+   =========================================== */
+
+/* FIX: Navigation text contrast (WCAG AA) */
+.nav-link {
+  color: #d4d4d8; /* zinc-300 - better contrast */
+  transition: color var(--transition-fast) var(--ease-out);
+}
+
+.nav-link:hover {
+  color: var(--color-primary-light);
+}
+
+/* FIX: Primary vs Secondary button hierarchy */
+.btn-primary {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+  color: white;
+  box-shadow: 0 4px 14px rgba(124, 58, 237, 0.4);
+  transform: translateY(0);
+  transition: all var(--transition-fast) var(--ease-out);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(124, 58, 237, 0.5);
+}
+
+.btn-secondary {
+  background: transparent;
+  border: 2px solid var(--color-border-hover);
+  color: var(--color-text-primary);
+  transform: translateY(0);
+  transition: all var(--transition-fast) var(--ease-out);
+}
+
+.btn-secondary:hover {
+  background: rgba(139, 92, 246, 0.1);
+  border-color: var(--color-primary-light);
+  transform: translateY(-2px);
+}
+
+/* FIX: Card spacing consistency */
+.card {
+  padding: var(--spacing-6);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-2xl);
+  transition: all var(--transition-base) var(--ease-out);
+}
+
+.card:hover {
+  border-color: var(--color-border-hover);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* FIX: Stat card alignment */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--spacing-6);
+}
+
+@media (max-width: 768px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-4);
+  }
+}
+
+/* FIX: Code block syntax highlighting */
+pre {
+  background: #1e1e2e;
+  padding: var(--spacing-4);
+  border-radius: var(--radius-lg);
+  overflow-x: auto;
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-sm);
+  line-height: 1.7;
+}
+
+code {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-sm);
+}
+
+/* Syntax highlighting colors */
+code .keyword { color: #cba6f7; }
+code .string { color: #a6e3a1; }
+code .number { color: #fab387; }
+code .comment { color: #6c7086; font-style: italic; }
+code .function { color: #89b4fa; }
+
+/* FIX: Form validation states */
+input.error {
+  border-color: var(--color-error);
+  background: rgba(239, 68, 68, 0.05);
+}
+
+input.success {
+  border-color: var(--color-success);
+  background: rgba(34, 197, 94, 0.05);
+}
+
+.error-message {
+  color: var(--color-error);
+  font-size: var(--font-size-sm);
+  margin-top: var(--spacing-1);
+}
+
+.success-message {
+  color: var(--color-success);
+  font-size: var(--font-size-sm);
+  margin-top: var(--spacing-1);
+}
+
+/* FIX: Password visibility toggle */
+.password-toggle {
+  position: absolute;
+  right: var(--spacing-3);
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  padding: var(--spacing-1);
+}
+
+.password-toggle:hover {
+  color: var(--color-text-secondary);
+}
+
+/* FIX: Wallet button selection state */
+.wallet-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-3);
+  padding: var(--spacing-3) var(--spacing-4);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  cursor: pointer;
+  transition: all var(--transition-fast) var(--ease-out);
+}
+
+.wallet-btn:hover {
+  background: var(--color-surface-light);
+  border-color: var(--color-border-hover);
+}
+
+.wallet-btn.selected {
+  border-color: var(--color-primary);
+  background: rgba(124, 58, 237, 0.1);
+}
+
+.wallet-btn .wallet-icon {
+  width: 24px;
+  height: 24px;
+}
+
+/* FIX: Badge consistency */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--spacing-1) var(--spacing-3);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  border-radius: var(--radius-full);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.badge-primary {
+  background: rgba(124, 58, 237, 0.2);
+  color: var(--color-primary-light);
+}
+
+.badge-success {
+  background: rgba(34, 197, 94, 0.2);
+  color: var(--color-secondary-light);
+}
+
+.badge-warning {
+  background: rgba(245, 158, 11, 0.2);
+  color: #fbbf24;
+}
+
+/* FIX: Pricing card alignment */
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-6);
+  align-items: stretch;
+}
+
+@media (max-width: 1024px) {
+  .pricing-grid {
+    grid-template-columns: 1fr;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+}
+
+.pricing-card {
+  display: flex;
+  flex-direction: column;
+  padding: var(--spacing-8);
+}
+
+.pricing-card .btn {
+  margin-top: auto;
+}
+
+/* FIX: Mobile navigation improvements */
+@media (max-width: 640px) {
+  .nav-links {
+    display: none;
+  }
+  
+  .nav-links.mobile-open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--color-background);
+    padding: var(--spacing-4);
+    border-bottom: 1px solid var(--color-border);
+  }
+  
+  .mobile-menu-toggle {
+    display: block;
+  }
+}
+
+@media (min-width: 641px) {
+  .mobile-menu-toggle {
+    display: none;
+  }
+}
+
+/* FIX: Focus states for accessibility */
+*:focus-visible {
+  outline: 2px solid var(--color-primary-light);
+  outline-offset: 2px;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--color-primary-light);
+  outline-offset: 2px;
+}
+
+/* FIX: Icon alignment in badges and buttons */
+.icon-sm {
+  width: 1rem;
+  height: 1rem;
+  vertical-align: middle;
+}
+
+.icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  vertical-align: middle;
+}
+
+/* FIX: Section spacing consistency */
+.section {
+  padding: var(--spacing-16) 0;
+}
+
+.section-sm {
+  padding: var(--spacing-8) 0;
+}
+
+/* FIX: Search bar improvements */
+.search-input {
+  width: 100%;
+  padding: var(--spacing-3) var(--spacing-4);
+  padding-left: var(--spacing-10);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  color: var(--color-text-primary);
+  font-size: var(--font-size-base);
+  transition: border-color var(--transition-fast) var(--ease-out);
+}
+
+.search-input::placeholder {
+  color: var(--color-text-muted);
+}
+
+.search-input:focus {
+  border-color: var(--color-primary-light);
+  outline: none;
+}
+
+/* FIX: JSON response formatting in docs */
+.json-response {
+  max-height: 300px;
+  overflow-y: auto;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-sm);
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+
+/* Button outline style */
+.btn-outline {
+  background: transparent;
+  border: 2px solid var(--color-primary);
+  color: var(--color-primary-light);
+  transition: all var(--transition-fast) var(--ease-out);
+}
+
+.btn-outline:hover {
+  background: rgba(124, 58, 237, 0.1);
+  color: white;
+}
