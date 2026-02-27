@@ -59,7 +59,7 @@
         <!-- Wallet Signup (Primary) -->
         <div class="glass rounded-2xl p-6 border border-white/5 mb-4">
             <h2 class="font-semibold mb-4 flex items-center gap-2">
-                <span>⚡</span>
+                <span><svg class="w-6 h-6"><use href="/icons.svg#icon-zap"/></svg></span>
                 <span>Quick Start with Wallet</span>
             </h2>
             
@@ -227,7 +227,7 @@
                     const address = accounts[0];
                     
                     // Success feedback
-                    button.innerHTML = '✓ Connected: ' + address.slice(0,6) + '...' + address.slice(-4);
+                    button.innerHTML = '<svg class="w-5 h-5 text-green-400 inline"><use href="/icons.svg#icon-check"/></svg> Connected: ' + address.slice(0,6) + '...' + address.slice(-4);
                     button.classList.remove('bg-violet-500/20');
                     button.classList.add('bg-green-500/20', 'border-green-500/30');
                     
@@ -266,7 +266,7 @@
 
             // Simulate API call
             setTimeout(() => {
-                button.innerHTML = '✓ Account created!';
+                button.innerHTML = '<svg class="w-5 h-5 text-green-400 inline"><use href="/icons.svg#icon-check"/></svg> Account created!';
                 button.classList.remove('gradient');
                 button.classList.add('bg-green-500');
                 

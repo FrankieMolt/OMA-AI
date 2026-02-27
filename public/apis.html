@@ -166,7 +166,9 @@
                 <article class="card glass rounded-2xl p-6 border border-white/5" data-category="crypto">
                     <div class="flex items-start justify-between mb-4">
                         <div class="flex items-center gap-3">
-                            <div class="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center text-2xl" aria-hidden="true">📊</div>
+                            <div class="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center">
+                                <svg class="w-6 h-6 text-blue-400"><use href="/icons.svg#icon-crypto"/></svg>
+                            </div>
                             <div>
                                 <h2 class="font-semibold text-lg">Crypto Prices</h2>
                                 <span class="text-xs text-zinc-500">Real-time data</span>
@@ -179,7 +181,7 @@
                     <!-- Ratings & Stats -->
                     <div class="flex items-center gap-4 mb-4 text-sm">
                         <div class="flex items-center gap-1" aria-label="4.8 out of 5 stars">
-                            <span class="text-yellow-400" aria-hidden="true">★★★★★</span>
+                            <svg class="w-4 h-4 text-yellow-400"><use href="/icons.svg#icon-star"/></svg>
                             <span class="text-zinc-400">4.8</span>
                         </div>
                         <span class="text-zinc-600">•</span>
@@ -190,14 +192,17 @@
                     
                     <div class="flex items-center justify-between">
                         <span class="text-violet-400 font-semibold">$0.001/call</span>
-                        <a href="/api/prices" class="px-4 py-2 text-sm bg-violet-500/20 text-violet-300 rounded-lg hover:bg-violet-500/30 transition-colors" target="_blank" rel="noopener">View Docs</a>
+                        <a href="/api/prices" class="px-4 py-2 text-sm bg-violet-500/20 text-violet-300 rounded-lg hover:bg-violet-500/30 transition-colors inline-flex items-center gap-2" target="_blank" rel="noopener">
+                            <span>View Docs</span>
+                            <svg class="w-4 h-4"><use href="/icons.svg#icon-external"/></svg>
+                        </a>
                     </div>
                 </article>
 
                 <!-- API Card 2: Weather -->
                 <article class="card glass rounded-2xl p-6 border border-white/5">
                     <div class="flex items-center gap-3 mb-4">
-                        <div class="w-12 h-12 bg-green-500/20 rounded-xl flex items-center justify-center text-2xl" aria-hidden="true">🌤️</div>
+                        <div class="w-12 h-12 bg-green-500/20 rounded-xl flex items-center justify-center"><svg class="w-6 h-6 text-green-400"><use href="/icons.svg#icon-weather"/></svg></div>
                         <div>
                             <h2 class="font-semibold text-lg">Weather</h2>
                             <span class="text-xs text-zinc-500">Global forecast</span>
@@ -206,14 +211,14 @@
                     <p class="text-zinc-400 text-sm mb-4">Weather forecasts for any location. Current conditions and 7-day forecast.</p>
                     <div class="flex items-center justify-between">
                         <span class="text-violet-400 font-semibold">$0.002/call</span>
-                        <a href="/api/weather?city=London" class="text-sm text-zinc-400 hover:text-white" target="_blank" rel="noopener">Docs →</a>
+                        <a href="/api/weather?city=London" class="text-sm text-zinc-400 hover:text-white" target="_blank" rel="noopener"> <span>Docs</span> <svg class="w-4 h-4 inline"><use href="/icons.svg#icon-external"/></svg></a>
                     </div>
                 </article>
 
                 <!-- API Card 3: Web Search -->
                 <article class="card glass rounded-2xl p-6 border border-white/5" data-category="search">
                     <div class="flex items-center gap-3 mb-4">
-                        <div class="w-12 h-12 bg-purple-500/20 rounded-xl flex items-center justify-center text-2xl" aria-hidden="true">🔍</div>
+                        <div class="w-12 h-12 bg-purple-500/20 rounded-xl flex items-center justify-center"><svg class="w-6 h-6 text-purple-400"><use href="/icons.svg#icon-search"/></svg></div>
                         <div>
                             <h2 class="font-semibold text-lg">Web Search</h2>
                             <span class="text-xs text-zinc-500">AI-powered</span>
@@ -222,14 +227,14 @@
                     <p class="text-zinc-400 text-sm mb-4">AI-powered web search. Get relevant results for any query.</p>
                     <div class="flex items-center justify-between">
                         <span class="text-violet-400 font-semibold">$0.005/call</span>
-                        <a href="/api/search?q=bitcoin" class="text-sm text-zinc-400 hover:text-white" target="_blank" rel="noopener">Docs →</a>
+                        <a href="/api/search?q=bitcoin" class="text-sm text-zinc-400 hover:text-white" target="_blank" rel="noopener"> <span>Docs</span> <svg class="w-4 h-4 inline"><use href="/icons.svg#icon-external"/></svg></a>
                     </div>
                 </article>
 
                 <!-- API Card 4: LLM Gateway -->
                 <article class="card glass rounded-2xl p-6 border border-white/5" data-category="llm">
                     <div class="flex items-center gap-3 mb-4">
-                        <div class="w-12 h-12 bg-orange-500/20 rounded-xl flex items-center justify-center text-2xl" aria-hidden="true">🤖</div>
+                        <div class="w-12 h-12 bg-orange-500/20 rounded-xl flex items-center justify-center"><svg class="w-6 h-6 text-orange-400"><use href="/icons.svg#icon-llm"/></svg></div>
                         <div>
                             <h2 class="font-semibold text-lg">LLM Gateway</h2>
                             <span class="text-xs text-zinc-500">Multi-provider</span>
@@ -238,14 +243,14 @@
                     <p class="text-zinc-400 text-sm mb-4">Access GPT-4, Claude, Llama and more through unified API. 90% revenue share.</p>
                     <div class="flex items-center justify-between">
                         <span class="text-violet-400 font-semibold">$0.01/call</span>
-                        <a href="/api/llm?prompt=Hello" class="text-sm text-zinc-400 hover:text-white" target="_blank" rel="noopener">Docs →</a>
+                        <a href="/api/llm?prompt=Hello" class="text-sm text-zinc-400 hover:text-white" target="_blank" rel="noopener"> <span>Docs</span> <svg class="w-4 h-4 inline"><use href="/icons.svg#icon-external"/></svg></a>
                     </div>
                 </article>
 
                 <!-- API Card 5: Web Scraper -->
                 <article class="card glass rounded-2xl p-6 border border-white/5" data-category="data">
                     <div class="flex items-center gap-3 mb-4">
-                        <div class="w-12 h-12 bg-red-500/20 rounded-xl flex items-center justify-center text-2xl" aria-hidden="true">🕷️</div>
+                        <div class="w-12 h-12 bg-red-500/20 rounded-xl flex items-center justify-center "><svg class="w-6 h-6"><use href="/icons.svg#icon-database"/></svg></div>
                         <div>
                             <h2 class="font-semibold text-lg">Web Scraper</h2>
                             <span class="text-xs text-zinc-500">HTML parsing</span>
@@ -254,14 +259,14 @@
                     <p class="text-zinc-400 text-sm mb-4">Extract data from any website. Fast, reliable HTML parsing.</p>
                     <div class="flex items-center justify-between">
                         <span class="text-violet-400 font-semibold">$0.003/call</span>
-                        <a href="/api/search?q=example" class="text-sm text-zinc-400 hover:text-white" target="_blank" rel="noopener">Docs →</a>
+                        <a href="/api/search?q=example" class="text-sm text-zinc-400 hover:text-white" target="_blank" rel="noopener"> <span>Docs</span> <svg class="w-4 h-4 inline"><use href="/icons.svg#icon-external"/></svg></a>
                     </div>
                 </article>
 
                 <!-- API Card 6: Premium Prices -->
                 <article class="card glass rounded-2xl p-6 border border-white/5" data-category="crypto">
                     <div class="flex items-center gap-3 mb-4">
-                        <div class="w-12 h-12 bg-cyan-500/20 rounded-xl flex items-center justify-center text-2xl" aria-hidden="true">💰</div>
+                        <div class="w-12 h-12 bg-cyan-500/20 rounded-xl flex items-center justify-center"><svg class="w-6 h-6 text-cyan-400"><use href="/icons.svg#icon-dollar"/></svg></div>
                         <div>
                             <h2 class="font-semibold text-lg">Premium Prices</h2>
                             <span class="text-xs text-zinc-500">Extended data</span>
@@ -270,7 +275,7 @@
                     <p class="text-zinc-400 text-sm mb-4">Extended crypto data with market cap, volume, and analytics.</p>
                     <div class="flex items-center justify-between">
                         <span class="text-violet-400 font-semibold">$0.001/call</span>
-                        <a href="/api/prices" class="text-sm text-zinc-400 hover:text-white" target="_blank" rel="noopener">Docs →</a>
+                        <a href="/api/prices" class="text-sm text-zinc-400 hover:text-white" target="_blank" rel="noopener"> <span>Docs</span> <svg class="w-4 h-4 inline"><use href="/icons.svg#icon-external"/></svg></a>
                     </div>
                 </article>
             </div>
