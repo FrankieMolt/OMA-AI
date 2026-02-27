@@ -77,13 +77,16 @@ curl https://oma-ai.com/api/prices</code></pre>
             <!-- Endpoints -->
             <section class="mb-12">
                 <h2 class="text-2xl font-bold mb-6">API Endpoints</h2>
+                <p class="text-zinc-400 mb-6">OMA-AI provides 16+ production-ready APIs for AI agents. All endpoints support instant x402 micropayments on Base and Solana networks. No API keys required for the free tier.</p>
+                
                 <div class="space-y-4">
                     <div class="glass rounded-2xl p-6 border border-white/5">
                         <div class="flex items-center gap-3 mb-4">
                             <span class="px-2 py-1 bg-green-500/20 text-green-400 text-xs rounded">GET</span>
                             <code class="text-violet-300">/api/prices</code>
+                            <span class="ml-auto text-xs text-zinc-500">$0.001/call</span>
                         </div>
-                        <p class="text-zinc-400 mb-4">Get real-time cryptocurrency prices from CoinGecko.</p>
+                        <p class="text-zinc-400 mb-4">Get real-time cryptocurrency prices from CoinGecko. Supports 100+ cryptocurrencies including BTC, ETH, SOL, and more. Updates every 30 seconds.</p>
                         <pre><code class="text-violet-300">curl https://oma-ai.com/api/prices
 
 # Response
@@ -98,6 +101,98 @@ curl https://oma-ai.com/api/prices</code></pre>
                     
                     <div class="glass rounded-2xl p-6 border border-white/5">
                         <div class="flex items-center gap-3 mb-4">
+                            <span class="px-2 py-1 bg-green-500/20 text-green-400 text-xs rounded">GET</span>
+                            <code class="text-violet-300">/api/weather</code>
+                            <span class="ml-auto text-xs text-zinc-500">$0.002/call</span>
+                        </div>
+                        <p class="text-zinc-400 mb-4">Weather forecasts for any location worldwide. Returns current conditions and 7-day forecast with temperature, humidity, and precipitation data.</p>
+                        <pre><code class="text-violet-300">curl https://oma-ai.com/api/weather?city=London
+
+# Response
+{
+  "location": "London, UK",
+  "current": { "temp": 18, "humidity": 65 },
+  "forecast": [...]
+}</code></pre>
+                    </div>
+                    
+                    <div class="glass rounded-2xl p-6 border border-white/5">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="px-2 py-1 bg-green-500/20 text-green-400 text-xs rounded">POST</span>
+                            <code class="text-violet-300">/api/search</code>
+                            <span class="ml-auto text-xs text-zinc-500">$0.005/call</span>
+                        </div>
+                        <p class="text-zinc-400 mb-4">AI-powered web search. Returns relevant results with summaries. Perfect for AI agents that need to gather information from the web.</p>
+                    </div>
+                    
+                    <div class="glass rounded-2xl p-6 border border-white/5">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="px-2 py-1 bg-green-500/20 text-green-400 text-xs rounded">POST</span>
+                            <code class="text-violet-300">/api/llm</code>
+                            <span class="ml-auto text-xs text-zinc-500">$0.01/call</span>
+                        </div>
+                        <p class="text-zinc-400 mb-4">Multi-provider LLM gateway. Access GPT-4, Claude, Llama, and more through a unified API. 90% revenue share for publishers.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Authentication -->
+            <section class="mb-12">
+                <h2 class="text-2xl font-bold mb-6">Authentication & Payments</h2>
+                <div class="glass rounded-2xl p-6 border border-white/5">
+                    <h3 class="font-semibold mb-4">x402 Micropayment Protocol</h3>
+                    <p class="text-zinc-400 mb-4">OMA-AI uses the x402 payment protocol for instant, trustless micropayments. For paid APIs (Pro tier), include the X-Payment header with your signed transaction.</p>
+                    <pre><code class="text-violet-300"># Free tier - no authentication needed
+curl https://oma-ai.com/api/prices
+
+# Pro tier - include x402 payment
+curl -H "X-Payment: <signed-transaction>" \
+     https://oma-ai.com/api/search?q=bitcoin</code></pre>
+                    <p class="text-zinc-400 mt-4">Payments settle instantly on-chain. You only pay for what you use. No subscriptions, no monthly fees.</p>
+                </div>
+            </section>
+            
+            <!-- Rate Limits -->
+            <section class="mb-12">
+                <h2 class="text-2xl font-bold mb-6">Rate Limits</h2>
+                <div class="glass rounded-2xl p-6 border border-white/5">
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div>
+                            <h4 class="font-semibold mb-2">Free Tier</h4>
+                            <p class="text-zinc-400 text-sm">1,000 calls/day</p>
+                            <p class="text-zinc-500 text-xs mt-1">No credit card required</p>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold mb-2">Pro Tier</h4>
+                            <p class="text-zinc-400 text-sm">100,000 calls/day</p>
+                            <p class="text-zinc-500 text-xs mt-1">$29/month + pay-per-call</p>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold mb-2">Enterprise</h4>
+                            <p class="text-zinc-400 text-sm">Unlimited</p>
+                            <p class="text-zinc-500 text-xs mt-1">Custom pricing</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- SDKs -->
+            <section class="mb-12">
+                <h2 class="text-2xl font-bold mb-6">SDKs & Libraries</h2>
+                <div class="glass rounded-2xl p-6 border border-white/5">
+                    <p class="text-zinc-400 mb-6">Official SDKs for popular programming languages. All SDKs handle x402 payment signing automatically.</p>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="p-4 bg-zinc-900 rounded-lg">
+                            <h4 class="font-semibold mb-2">JavaScript/TypeScript</h4>
+                            <code class="text-sm text-violet-300">npm install @oma-ai/sdk</code>
+                        </div>
+                        <div class="p-4 bg-zinc-900 rounded-lg">
+                            <h4 class="font-semibold mb-2">Python</h4>
+                            <code class="text-sm text-violet-300">pip install oma-ai</code>
+                        </div>
+                    </div>
+                </div>
+            </section>
                             <span class="px-2 py-1 bg-green-500/20 text-green-400 text-xs rounded">GET</span>
                             <code class="text-violet-300">/api/weather?city=London</code>
                         </div>

@@ -1,11 +1,11 @@
 User-agent: *
 Allow: /
 
+# Block .html versions to prevent duplicate content
+Disallow: /*.html$
+
+# Sitemap
 Sitemap: https://oma-ai.com/sitemap.xml
 
-# Crawl-delay for aggressive bots
-User-agent: AhrefsBot
-Crawl-delay: 10
-
-User-agent: SemrushBot
-Crawl-delay: 10
+# Crawl-delay
+Crawl-delay: 1
