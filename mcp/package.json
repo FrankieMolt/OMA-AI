@@ -1,0 +1,30 @@
+{
+  "name": "@oma-ai/mcp-server",
+  "version": "1.0.0",
+  "description": "Model Context Protocol server for OMA-AI APIs",
+  "main": "dist/server.js",
+  "type": "module",
+  "bin": {
+    "oma-ai-mcp": "./dist/server.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/server.js"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "ai",
+    "api",
+    "oma-ai"
+  ],
+  "author": "Frankie",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
+  }
+}
