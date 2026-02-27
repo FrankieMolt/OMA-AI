@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { supabase, getOrCreateUser, generateApiKey } from '../../lib/supabase';
+import { supabase, getOrCreateUser, generateApiKey } from '@/lib/supabase';
 
 interface SignupRequest {
   email?: string;
