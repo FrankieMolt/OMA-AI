@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { supabase, getUserByWallet } from '../../../lib/supabase';
+import { supabase, getUserByWallet } from '../../lib/supabase';
 
 interface LoginRequest {
   email?: string;
