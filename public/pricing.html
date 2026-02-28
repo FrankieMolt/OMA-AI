@@ -3,299 +3,533 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pricing - OMA-AI | Free, Pro & Enterprise Plans</title>
-    <meta name="description" content="OMA-AI pricing - Free tier with 1000 API calls/day, Pro at $29/mo, Enterprise custom. 90% revenue share for publishers. No hidden fees. Pay only what you use.">
-    <meta name="keywords" content="API pricing, x402 payments, AI agents, free API tier, enterprise API">
-    <link rel="canonical" href="https://oma-ai.com/pricing">
-    
-    <!-- Open Graph -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://oma-ai.com/pricing">
-    <meta property="og:title" content="Pricing - OMA-AI | 90% Revenue Share">
-    <meta property="og:description" content="Free tier available. Pro at $29/mo. 90% revenue share for publishers.">
-    <meta property="og:image" content="https://oma-ai.com/og-image.png">
-    
+    <title>Pricing | OMA-AI</title>
+    <meta name="description" content="Simple, transparent pricing for OMA-AI API. Pay only for what you use.">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-    <link rel="preconnect" href="https://cdn.tailwindcss.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     
     <style>
-        body { font-family: 'Inter', sans-serif; background: #09090b; color: #fafafa; }
-        .gradient { background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%); }
-        .glass { background: rgba(255,255,255,0.03); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.06); }
-        .card-highlight { border: 2px solid #8b5cf6; box-shadow: 0 0 30px rgba(139,92,246,0.3); }
+        :root {
+            --bg-primary: #030305;
+            --bg-secondary: #0a0a0f;
+            --bg-card: #0f0f15;
+            --border: rgba(255,255,255,0.06);
+            --text-primary: #f5f5f7;
+            --text-secondary: #9ca3af;
+            --text-muted: #6b7280;
+            --accent: #8b5cf6;
+            --accent-light: #a78bfa;
+            --success: #22c55e;
+        }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+        
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(3,3,5,0.9);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .nav-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--text-primary);
+        }
+        
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, #8b5cf6, #6366f1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 12px;
+        }
+        
+        .nav-links { display: flex; align-items: center; gap: 32px; }
+        .nav-link { color: var(--text-secondary); text-decoration: none; font-size: 14px; font-weight: 500; }
+        .nav-link:hover { color: var(--text-primary); }
+        .nav-btn { padding: 8px 16px; background: var(--accent); border-radius: 8px; color: white; text-decoration: none; font-size: 14px; font-weight: 600; }
+        
+        .page-header {
+            padding: 120px 0 48px;
+            text-align: center;
+        }
+        
+        .page-header h1 {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+        
+        .page-header p {
+            font-size: 18px;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-bottom: 64px;
+        }
+        
+        .pricing-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+            position: relative;
+            transition: all 0.3s;
+        }
+        
+        .pricing-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+        }
+        
+        .pricing-card.popular {
+            border-color: var(--accent);
+            background: linear-gradient(180deg, rgba(139,92,246,0.1) 0%, var(--bg-card) 100%);
+        }
+        
+        .popular-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent);
+            padding: 4px 16px;
+            border-radius: 100px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .tier-name {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        
+        .tier-price {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 4px;
+        }
+        
+        .tier-price span {
+            font-size: 16px;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+        
+        .tier-desc {
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-bottom: 24px;
+            min-height: 40px;
+        }
+        
+        .tier-features {
+            list-style: none;
+            margin-bottom: 24px;
+        }
+        
+        .tier-features li {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+        
+        .tier-features li:last-child {
+            border-bottom: none;
+        }
+        
+        .check { color: var(--success); }
+        
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 14px 24px;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 600;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.2s;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #8b5cf6, #6366f1);
+            color: white;
+        }
+        
+        .btn-secondary {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .section {
+            padding: 64px 0;
+        }
+        
+        .section h2 {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+        
+        .section p {
+            text-align: center;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 48px;
+        }
+        
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+        
+        .faq-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+        }
+        
+        .faq-item h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .faq-item p {
+            text-align: left;
+            font-size: 14px;
+            color: var(--text-muted);
+            margin: 0;
+        }
+        
+        .calculator {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 64px;
+        }
+        
+        .calculator h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+        
+        .calc-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+        
+        .calc-field label {
+            display: block;
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+        
+        .calc-field input,
+        .calc-field select {
+            width: 100%;
+            padding: 12px 16px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 16px;
+        }
+        
+        .calc-field input:focus,
+        .calc-field select:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+        
+        .calc-result {
+            text-align: center;
+            padding: 24px;
+            background: rgba(139,92,246,0.1);
+            border-radius: 12px;
+        }
+        
+        .calc-result-label {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+        
+        .calc-result-value {
+            font-size: 36px;
+            font-weight: 800;
+        }
+        
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 48px 0;
+            background: var(--bg-secondary);
+        }
+        
+        .footer-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 32px;
+        }
+        
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+        }
+        
+        .footer-links a:hover { color: var(--text-primary); }
+        
+        @media (max-width: 1024px) {
+            .pricing-grid { grid-template-columns: 1fr; }
+            .faq-grid { grid-template-columns: 1fr; }
+            .calc-row { grid-template-columns: 1fr; }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .footer-inner { flex-direction: column; gap: 24px; text-align: center; }
+        }
     </style>
 </head>
-<body class="min-h-screen">
-    <!-- Navigation -->
-    <nav class="fixed top-0 left-0 right-0 z-50 bg-zinc-950/90 backdrop-blur-xl border-b border-white/5">
-        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-            <a href="/" class="flex items-center gap-3">
-                <div class="w-10 h-10 gradient rounded-xl flex items-center justify-center text-lg font-bold">OMA</div>
-                <span class="text-xl font-bold hidden sm:block">Open Market Access</span>
+<body>
+    <nav>
+        <div class="container nav-inner">
+            <a href="/" class="logo">
+                <div class="logo-icon">OMA</div>
+                <span style="font-weight: 700; font-size: 18px;">OMA-AI</span>
             </a>
-            <div class="flex items-center gap-4">
-                <a href="/apis" class="text-zinc-400 hover:text-white">APIs</a>
-                <a href="/mcps" class="text-zinc-400 hover:text-white">MCPs</a>
-                <a href="/compute" class="text-zinc-400 hover:text-white">Compute</a>
-                <a href="/dashboard" class="text-zinc-400 hover:text-white">Dashboard</a>
+            <div class="nav-links">
+                <a href="/" class="nav-link">Home</a>
+                <a href="/models" class="nav-link">Models</a>
+                <a href="/pricing" class="nav-link" style="color: var(--accent-light);">Pricing</a>
+                <a href="/docs" class="nav-link">Docs</a>
+                <a href="/dashboard" class="nav-btn">Get API Key</a>
             </div>
         </div>
     </nav>
 
-    <main class="pt-24 pb-16 px-4">
-        <div class="max-w-6xl mx-auto">
-            <h1 class="text-5xl font-bold mb-4 text-center">Simple, Transparent Pricing</h1>
-            <p class="text-xl text-zinc-400 mb-4 text-center">Pay only for what you use. No subscriptions required.</p>
-            
-            <!-- Pricing Model Clarification -->
-            <div class="max-w-3xl mx-auto mb-12">
-                <div class="glass rounded-2xl p-6 border border-violet-500/20">
-                    <div class="flex items-start gap-4">
-                        <div class="text-3xl">💡</div>
-                        <div>
-                            <h3 class="font-semibold text-lg mb-2">How Our Pricing Works</h3>
-                            <p class="text-zinc-400 text-sm mb-3">
-                                <strong class="text-white">Pay per API call</strong> - No monthly fees. Only pay when you make calls.
-                                Each API costs between <strong class="text-violet-400">$0.001 - $0.01 per call</strong>.
-                            </p>
-                            <p class="text-zinc-500 text-xs">
-                                Example: 10,000 calls to Crypto Prices API at $0.001/call = $10 total
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <div class="page-header">
+        <div class="container">
+            <h1>Simple, Transparent Pricing</h1>
+            <p>Pay only for what you use. No subscriptions, no hidden fees. Every response shows exact cost.</p>
+        </div>
+    </div>
 
-            <!-- Trust Signals -->
-            <div class="flex justify-center gap-8 mb-12 text-sm">
-                <div class="flex items-center gap-2 text-zinc-400">
-                    <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
-                    <span>No credit card required</span>
-                </div>
-                <div class="flex items-center gap-2 text-zinc-400">
-                    <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
-                    <span>Cancel anytime</span>
-                </div>
-                <div class="flex items-center gap-2 text-zinc-400">
-                    <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
-                    <span>90% to publishers</span>
-                </div>
+    <div class="container">
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <div class="tier-name">Budget</div>
+                <div class="tier-price">$0.07<span>/1M tokens</span></div>
+                <div class="tier-desc">Fast, cheap, private inference for simple tasks</div>
+                <ul class="tier-features">
+                    <li><span class="check">✓</span> Nemotron 3 Nano 30B</li>
+                    <li><span class="check">✓</span> GLM 4.7 Flash</li>
+                    <li><span class="check">✓</span> Gemma 3 27B</li>
+                    <li><span class="check">✓</span> Venice Uncensored</li>
+                    <li><span class="check">✓</span> Llama 3.2 3B</li>
+                    <li><span class="check">✓</span> Qwen 3 235B</li>
+                </ul>
+                <a href="/signup" class="btn btn-secondary">Get Started</a>
             </div>
             
-            <!-- Pricing Cards -->
-            <div class="grid md:grid-cols-3 gap-8 mb-16">
-                <!-- Free Tier -->
-                <div class="glass rounded-2xl p-8 border border-white/5">
-                    <h2 class="text-xl font-bold mb-2">Free Tier</h2>
-                    <div class="text-4xl font-bold mb-1">$0</div>
-                    <p class="text-sm text-zinc-500 mb-4">Forever free</p>
-                    <p class="text-zinc-400 mb-6">Perfect for testing and development</p>
-                    <ul class="space-y-3 mb-8">
-                        <li class="flex items-center gap-2 text-zinc-300">
-                            <span class="text-green-400"><svg class="w-5 h-5 text-green-400 inline"><use href="/icons.svg#icon-check"/></svg></span> <strong>1,000 free calls/day</strong>
-                        </li>
-                        <li class="flex items-center gap-2 text-zinc-300">
-                            <span class="text-green-400"><svg class="w-5 h-5 text-green-400 inline"><use href="/icons.svg#icon-check"/></svg></span> Access to all 16+ APIs
-                        </li>
-                        <li class="flex items-center gap-2 text-zinc-300">
-                            <span class="text-green-400"><svg class="w-5 h-5 text-green-400 inline"><use href="/icons.svg#icon-check"/></svg></span> Community support
-                        </li>
-                        <li class="flex items-center gap-2 text-zinc-300">
-                            <span class="text-green-400"><svg class="w-5 h-5 text-green-400 inline"><use href="/icons.svg#icon-check"/></svg></span> Basic analytics
-                        </li>
-                        <li class="flex items-center gap-2 text-zinc-500">
-                            <span>•</span> No credit card required
-                        </li>
-                    </ul>
-                    <a href="/signup" class="block text-center py-3 px-6 rounded-lg border border-zinc-700 hover:border-violet-500 transition-colors font-medium">Get Started Free</a>
-                </div>
-                
-                <!-- Pro Tier -->
-                <div class="glass rounded-2xl p-8 border border-white/5 card-highlight relative">
-                    <span class="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 gradient rounded-full text-sm font-semibold">Most Popular</span>
-                    <h2 class="text-xl font-bold mb-2">Pro</h2>
-                    <div class="text-4xl font-bold mb-1">$29<span class="text-lg text-zinc-500">/mo</span></div>
-                    <p class="text-sm text-zinc-500 mb-4">+ pay-per-call</p>
-                    <p class="text-zinc-400 mb-6">For production AI agents with high volume</p>
-                    <ul class="space-y-3 mb-8">
-                        <li class="flex items-center gap-2 text-zinc-300">
-                            <span class="text-green-400"><svg class="w-5 h-5 text-green-400 inline"><use href="/icons.svg#icon-check"/></svg></span> <strong>100,000 calls/day included</strong>
-                        </li>
-                        <li class="flex items-center gap-2 text-zinc-300">
-                            <span class="text-green-400"><svg class="w-5 h-5 text-green-400 inline"><use href="/icons.svg#icon-check"/></svg></span> All APIs included
-                        </li>
-                        </li>
-                        <li class="flex items-center gap-2 text-zinc-300">
-                            <span class="text-green-400"><svg class="w-5 h-5 text-green-400 inline"><use href="/icons.svg#icon-check"/></svg></span> Priority support
-                        </li>
-                        <li class="flex items-center gap-2 text-zinc-300">
-                            <span class="text-green-400"><svg class="w-5 h-5 text-green-400 inline"><use href="/icons.svg#icon-check"/></svg></span> Analytics dashboard
-                        </li>
-                    </ul>
-                    <a href="/login" class="block text-center py-3 px-6 rounded-lg gradient font-semibold hover:opacity-90 transition-opacity">Start Free Trial</a>
-                </div>
-                
-                <!-- Enterprise Tier -->
-                <div class="glass rounded-2xl p-8 border border-white/5">
-                    <h2 class="text-xl font-bold mb-2">Enterprise</h2>
-                    <div class="text-4xl font-bold mb-4">Custom</div>
-                    <p class="text-zinc-400 mb-6">For large-scale deployments</p>
-                    <ul class="space-y-3 mb-8">
-                        <li class="flex items-center gap-2 text-zinc-300">
-                            <span class="text-green-400"><svg class="w-5 h-5 text-green-400 inline"><use href="/icons.svg#icon-check"/></svg></span> Unlimited API calls
-                        </li>
-                        <li class="flex items-center gap-2 text-zinc-300">
-                            <span class="text-green-400"><svg class="w-5 h-5 text-green-400 inline"><use href="/icons.svg#icon-check"/></svg></span> Custom SLA
-                        </li>
-                        <li class="flex items-center gap-2 text-zinc-300">
-                            <span class="text-green-400"><svg class="w-5 h-5 text-green-400 inline"><use href="/icons.svg#icon-check"/></svg></span> Dedicated support
-                        </li>
-                        <li class="flex items-center gap-2 text-zinc-300">
-                            <span class="text-green-400"><svg class="w-5 h-5 text-green-400 inline"><use href="/icons.svg#icon-check"/></svg></span> On-premise option
-                        </li>
-                    </ul>
-                    <a href="/contact" class="block text-center py-3 px-6 rounded-lg border border-zinc-700 hover:border-violet-500 transition-colors">Contact Sales</a>
-                </div>
+            <div class="pricing-card popular">
+                <div class="popular-badge">Most Popular</div>
+                <div class="tier-name">Standard</div>
+                <div class="tier-price">$0.40<span>/1M tokens</span></div>
+                <div class="tier-desc">Best value, excellent quality for production use</div>
+                <ul class="tier-features">
+                    <li><span class="check">✓</span> DeepSeek V3.2</li>
+                    <li><span class="check">✓</span> Llama 3.3 70B</li>
+                    <li><span class="check">✓</span> Kimi K2.5</li>
+                    <li><span class="check">✓</span> Qwen 3 Coder 480B</li>
+                    <li><span class="check">✓</span> MiniMax M2.5</li>
+                    <li><span class="check">✓</span> 256K context window</li>
+                </ul>
+                <a href="/signup" class="btn btn-primary">Get Started</a>
             </div>
             
-            <!-- Publisher Revenue Share -->
-            <div class="glass rounded-2xl p-8 border border-white/5 text-center">
-                <h2 class="text-2xl font-bold mb-4">90% Revenue Share for Publishers</h2>
-                <p class="text-zinc-400 mb-6 max-w-2xl mx-auto">When you publish an API on OMA-AI, you keep 90% of the revenue. We only take 10% to cover payment processing and infrastructure.</p>
-                <div class="flex justify-center gap-8 text-center">
-                    <div>
-                        <div class="text-4xl font-bold text-violet-400">90%</div>
-                        <div class="text-zinc-500 text-sm">To Publisher</div>
-                    </div>
-                    <div>
-                        <div class="text-4xl font-bold text-zinc-500">10%</div>
-                        <div class="text-zinc-500 text-sm">Platform Fee</div>
-                    </div>
+            <div class="pricing-card">
+                <div class="tier-name">Premium</div>
+                <div class="tier-price">$2.19<span>/1M tokens</span></div>
+                <div class="tier-desc">State-of-the-art models with maximum capability</div>
+                <ul class="tier-features">
+                    <li><span class="check">✓</span> GPT-5.2 / 5.3 Codex</li>
+                    <li><span class="check">✓</span> Claude Opus 4.6</li>
+                    <li><span class="check">✓</span> Claude Sonnet 4.6</li>
+                    <li><span class="check">✓</span> Gemini 3.1 Pro</li>
+                    <li><span class="check">✓</span> 1M context window</li>
+                    <li><span class="check">✓</span> Expert-level analysis</li>
+                </ul>
+                <a href="/signup" class="btn btn-secondary">Get Started</a>
+            </div>
+        </div>
+        
+        <div class="calculator">
+            <h3>Cost Calculator</h3>
+            <div class="calc-row">
+                <div class="calc-field">
+                    <label>Model Tier</label>
+                    <select id="calc-tier">
+                        <option value="0.07">Budget ($0.07/1M input)</option>
+                        <option value="0.40" selected>Standard ($0.40/1M input)</option>
+                        <option value="2.19">Premium ($2.19/1M input)</option>
+                    </select>
+                </div>
+                <div class="calc-field">
+                    <label>Input Tokens</label>
+                    <input type="number" id="calc-input" value="1000" min="0">
+                </div>
+                <div class="calc-field">
+                    <label>Output Tokens</label>
+                    <input type="number" id="calc-output" value="500" min="0">
+                </div>
+            </div>
+            <div class="calc-result">
+                <div class="calc-result-label">Estimated Cost</div>
+                <div class="calc-result-value" id="calc-total">$0.00065</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="container">
+            <h2>Frequently Asked Questions</h2>
+            <p>Common questions about OMA-AI pricing</p>
+            
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <h3>How is pricing calculated?</h3>
+                    <p>Input and output tokens are priced separately. Input tokens are what you send, output tokens are what the model generates. Price is per 1 million tokens.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3>What's a token?</h3>
+                    <p>A token is roughly 4 characters or 0.75 words in English. 1,000 tokens ≈ 750 words. Our API shows exact token counts in every response.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3>Are there any hidden fees?</h3>
+                    <p>No. You only pay for tokens used. No subscription fees, no minimums, no surprise charges. Every response includes exact cost.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3>How do I pay?</h3>
+                    <p>We support x402 micropayments on Base and Solana networks. Add credits to your account and pay as you go.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3>Why are Premium models more expensive?</h3>
+                    <p>Premium models (GPT-5, Claude Opus) require licensing fees to OpenAI and Anthropic. We proxy these through Venice to hide your identity.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3>Can I switch models mid-conversation?</h3>
+                    <p>Yes! Each API call is independent. Use cheap models for simple tasks and premium models for complex ones to optimize costs.</p>
                 </div>
             </div>
         </div>
-    </main>
+    </div>
 
-    <!-- Footer -->
-    <footer class="border-t border-white/5 py-8 text-center text-zinc-500">
-        <div class="flex justify-center gap-4 text-sm mb-4">
-            <a href="/apis" class="hover:text-white">APIs</a>
-            <a href="/mcps" class="hover:text-white">MCPs</a>
-            <a href="/pricing" class="hover:text-white">Pricing</a>
-            <a href="/blog" class="hover:text-white">Blog</a>
-            <a href="/about" class="hover:text-white">About</a>
-            <a href="/contact" class="hover:text-white">Contact</a>
-        </div>
-        <p>© 2026 OMA-AI. Built with x402 on Base.</p>
-        <div class="mt-4 flex justify-center gap-6 text-sm">
-            <a href="/privacy" class="hover:text-white">Privacy</a>
-            <a href="/terms" class="hover:text-white">Terms</a>
+    <footer>
+        <div class="container footer-inner">
+            <div class="footer-links">
+                <a href="/">Home</a>
+                <a href="/models">Models</a>
+                <a href="/pricing">Pricing</a>
+                <a href="/docs">Docs</a>
+                <a href="https://github.com/FrankieMolt/OMA-AI">GitHub</a>
+            </div>
+            <div style="color: var(--text-muted); font-size: 14px;">
+                © 2026 OMA-AI. Powered by Venice.
+            </div>
         </div>
     </footer>
+
+    <script>
+        const tierPrices = {
+            '0.07': { input: 0.07, output: 0.50 },
+            '0.40': { input: 0.40, output: 1.00 },
+            '2.19': { input: 2.19, output: 17.50 }
+        };
+        
+        function calculateCost() {
+            const tier = document.getElementById('calc-tier').value;
+            const inputTokens = parseInt(document.getElementById('calc-input').value) || 0;
+            const outputTokens = parseInt(document.getElementById('calc-output').value) || 0;
+            
+            const prices = tierPrices[tier];
+            const inputCost = (inputTokens / 1000000) * prices.input;
+            const outputCost = (outputTokens / 1000000) * prices.output;
+            const total = inputCost + outputCost;
+            
+            document.getElementById('calc-total').textContent = '$' + total.toFixed(6);
+        }
+        
+        document.getElementById('calc-tier').addEventListener('change', calculateCost);
+        document.getElementById('calc-input').addEventListener('input', calculateCost);
+        document.getElementById('calc-output').addEventListener('input', calculateCost);
+        
+        calculateCost();
+    </script>
 </body>
 </html>
-
-    <!-- Pricing Details Section -->
-    <section class="py-16 px-4 bg-zinc-900/50">
-        <div class="max-w-4xl mx-auto">
-            <h2 class="text-3xl font-bold mb-8">What You Get</h2>
-            
-            <!-- Feature Comparison -->
-            <div class="glass rounded-2xl p-8 border border-white/5 mb-12">
-                <h3 class="text-xl font-semibold mb-6">Feature Comparison</h3>
-                <table class="w-full text-left">
-                    <thead>
-                        <tr class="border-b border-zinc-700">
-                            <th class="pb-4 text-zinc-400 font-medium">Feature</th>
-                            <th class="pb-4 text-center text-zinc-400">Free</th>
-                            <th class="pb-4 text-center text-zinc-400">Pro</th>
-                            <th class="pb-4 text-center text-zinc-400">Enterprise</th>
-                        </tr>
-                    </thead>
-                    <tbody class="text-zinc-300">
-                        <tr class="border-b border-zinc-800">
-                            <td class="py-4">Daily API Calls</td>
-                            <td class="text-center">1,000</td>
-                            <td class="text-center">100,000</td>
-                            <td class="text-center">Unlimited</td>
-                        </tr>
-                        <tr class="border-b border-zinc-800">
-                            <td class="py-4">APIs Included</td>
-                            <td class="text-center">10 Free</td>
-                            <td class="text-center text-violet-400">All 16+</td>
-                            <td class="text-center text-violet-400">All 16+</td>
-                        </tr>
-                        <tr class="border-b border-zinc-800">
-                            <td class="py-4">MCP Servers</td>
-                            <td class="text-center">3</td>
-                            <td class="text-center">10+</td>
-                            <td class="text-center text-violet-400">All</td>
-                        </tr>
-                        <tr class="border-b border-zinc-800">
-                            <td class="py-4">Compute Hours</td>
-                            <td class="text-center">24h/mo</td>
-                            <td class="text-center">200h/mo</td>
-                            <td class="text-center">Unlimited</td>
-                        </tr>
-                        <tr class="border-b border-zinc-800">
-                            <td class="py-4">Publisher Revenue</td>
-                            <td class="text-center">N/A</td>
-                            <td class="text-center text-violet-400">90%</td>
-                            <td class="text-center text-violet-400">90%</td>
-                        </tr>
-                        <tr>
-                            <td class="py-4">Priority Support</td>
-                            <td class="text-center">—</td>
-                            <td class="text-center text-violet-400"><svg class="w-5 h-5 text-green-400 inline"><use href="/icons.svg#icon-check"/></svg></td>
-                            <td class="text-center text-violet-400"><svg class="w-5 h-5 text-green-400 inline"><use href="/icons.svg#icon-check"/></svg></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            
-            <!-- How Pricing Works -->
-            <div class="glass rounded-2xl p-8 border border-white/5 mb-12">
-                <h3 class="text-xl font-semibold mb-6">How x402 Pricing Works</h3>
-                <p class="text-zinc-400 mb-6 leading-relaxed">
-                    OMA-AI uses the x402 payment protocol enable instantmicropayments for API calls. Instead of locking yourself into monthly subscriptions, you pay per use with USDC on Base or Solana networks. Payments settle instantly, and publishers receive 90% of every transaction.
-                </p>
-                <div class="grid md:grid-cols-3 gap-6 mt-8">
-                    <div class="text-center">
-                        <div class="w-12 h-12 rounded-xl bg-violet-500/20 flex items-center justify-center text-violet-400 text-2xl mx-auto mb-4">1</div>
-                        <h4 class="font-semibold mb-2">Connect Wallet</h4>
-                        <p class="text-zinc-500 text-sm">Link any EVM wallet (MetaMask, Rainbow, etc.) to your account</p>
-                    </div>
-                    <div class="text-center">
-                        <div class="w-12 h-12 rounded-xl bg-violet-500/20 flex items-center justify-center text-violet-400 text-2xl mx-auto mb-4">2</div>
-                        <h4 class="font-semibold mb-2">Make API Call</h4>
-                        <p class="text-zinc-500 text-sm">Each call costs between $0.001-$0.01 depending on the endpoint</p>
-                    </div>
-                    <div class="text-center">
-                        <div class="w-12 h-12 rounded-xl bg-violet-500/20 flex items-center justify-center text-violet-400 text-2xl mx-auto mb-4">3</div>
-                        <h4 class="font-semibold mb-2">Instant Settlement</h4>
-                        <p class="text-zinc-500 text-sm">Payment settles on-chain in seconds. No monthly invoices.</p>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- FAQ -->
-            <div class="glass rounded-2xl p-8 border border-white/5">
-                <h3 class="text-xl font-semibold mb-6">Frequently Asked Questions</h3>
-                <div class="space-y-6">
-                    <div>
-                        <h4 class="font-medium text-zinc-200 mb-2">What happens if I exceed my daily limit?</h4>
-                        <p class="text-zinc-400">On the Free tier, you'll receive HTTP 429 responses. Upgrading to Pro removes all rate limits with generous daily quotas.</p>
-                    </div>
-                    <div>
-                        <h4 class="font-medium text-zinc-200 mb-2">Can I cancel my Pro subscription?</h4>
-                        <p class="text-zinc-400">Yes, you can downgrade at any time. There are no contracts or cancellation fees. Your data remains accessible.</p>
-                    </div>
-                    <div>
-                        <h4 class="font-medium text-zinc-200 mb-2">How do I become a publisher?</h4>
-                        <p class="text-zinc-400">Visit <a href="/publish" class="text-violet-400 hover:underline">/publish</a> to list your API. You'll earn 90% revenue share on every call.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-

@@ -1,179 +1,201 @@
-# OMA-AI: The Agentic Web Marketplace
+# OMA-AI - Sovereign AI API Marketplace
 
-> **Open Market Access for AI Agents & Humans** 🧟
+> Private, uncensored AI inference. Zero data retention. Powered by Venice.
 
-The first unified marketplace where autonomous AI agents can discover, list, and monetize APIs, MCP servers, skills, and compute - with x402 micropayments on Base/Solana.
+## 🎯 Project Overview
 
-![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![Version](https://img.shields.io/badge/version-1.0.0-green.svg)
-![Tests](https://img.shields.io/badge/tests-10%2F10-brightgreen.svg)
+OMA-AI is a privacy-first AI API marketplace that resells Venice AI and OpenRouter models with markup pricing. Key differentiators:
 
-## ✨ Features
+- **Privacy-first**: Zero data retention on private models
+- **Uncensored options**: Venice Uncensored for unrestricted generation
+- **Simplified pricing**: 3 tiers instead of 300+ models
+- **Aggregated billing**: One provider for multiple backends
 
-### 🔌 API Marketplace
-- **REST APIs** - List and discover APIs like RapidAPI
-- **MCP Servers** - Model Context Protocol servers (Smithery-style)
-- **AI Skills** - OpenClaw-compatible skills
-- **LLM Gateway** - Unified access to GPT-4, Claude, Gemini, Llama
+## 📁 Project Structure
 
-### 💰 x402 Micropayments
-- Pay-per-call in USDC on **Base** or **Solana**
-- **90% revenue share** for publishers (vs 80% RapidAPI)
-- No monthly subscriptions - pay only for what you use
-- Built-in escrow contract for secure transactions
-
-### ☸️ Decentralized Compute
-- Deploy agents on **Akash Network**
-- **80% cheaper** than AWS
-- Linux servers for OpenClaw agents
-- Automatic x402 hourly payments
-
-### 🤖 Autonomous Agents
-- **ERC-8004** identity for AI agents
-- Wallet-based authentication (MetaMask, Coinbase, Phantom)
-- AI agents can sign up, get API keys, and earn autonomously
+```
+oma-ai-repo/
+├── pages/
+│   ├── api/           # API endpoints
+│   │   ├── llm.ts            # Main LLM gateway (Venice)
+│   │   ├── llm-unified.ts    # Dual-provider (Venice + OpenRouter)
+│   │   ├── auth/             # Authentication
+│   │   ├── crypto.ts         # Crypto prices
+│   │   ├── health.ts         # Health check
+│   │   └── ...
+│   ├── _app.tsx
+│   └── _document.tsx
+├── public/
+│   ├── index.html       # Homepage
+│   ├── models.html      # All 38 models
+│   ├── pricing.html     # Pricing + calculator
+│   ├── docs.html        # API documentation
+│   ├── privacy.html     # Privacy architecture
+│   └── ...
+├── docs/               # Documentation
+└── supabase/           # Database config
+```
 
 ## 🚀 Quick Start
 
 ```bash
-# Clone the repo
-git clone https://github.com/FrankieMolt/OMA-AI.git
-cd OMA-AI
-
 # Install dependencies
 npm install
 
-# Run locally
+# Run dev server
 npm run dev
+
+# Deploy to Vercel
+vercel --prod
 ```
 
-Visit `http://localhost:3000` to see the marketplace.
+## 🔑 Environment Variables
 
-## 📡 API Endpoints
+```env
+# Required for LLM API
+VENICE_API_KEY=your_venice_key
+OPENROUTER_API_KEY=your_openrouter_key  # Optional fallback
 
-| Endpoint | Description |
-|----------|-------------|
-| `/api/price` | BTC, ETH, SOL prices |
-| `/api/prices` | 10 cryptocurrencies |
-| `/api/weather` | 7-day forecasts |
-| `/api/search` | Web search |
-| `/api/llm` | AI text generation |
-| `/api/embeddings` | Text embeddings |
-| `/api/compute` | Akash pricing |
-| `/api/mcps` | MCP servers list |
-| `/api/apis` | API marketplace |
-| `/api/llms` | LLM models |
-| `/api/health` | Platform status |
+# Database (Supabase)
+SUPABASE_URL=your_supabase_url
+SUPABASE_ANON_KEY=your_supabase_key
 
-## 📄 Pages
+# Rate Limiting (Upstash Redis)
+UPSTASH_REDIS_REST_URL=your_redis_url
+UPSTASH_REDIS_REST_TOKEN=your_redis_token
+```
 
-| Page | Description |
-|------|-------------|
-| `/` | Homepage - AI Agents + Humans |
-| `/docs.html` | Full API documentation |
-| `/pricing.html` | Pricing comparison |
-| `/login.html` | Wallet + email auth |
-| `/signup.html` | Account creation |
-| `/dashboard.html` | Developer dashboard |
-| `/keys.html` | API key management |
-| `/apis.html` | API marketplace |
-| `/mcps.html` | MCP servers |
-| `/skills.html` | AI agent skills |
-| `/compute.html` | Akash deployment |
-| `/agents.html` | Deploy agents |
-| `/llms.html` | LLM models (12) |
-| `/tasks.html` | Human-AI tasks |
-| `/status.html` | System status |
-| `/publish.html` | Publisher dashboard |
-| `/community.html` | Discord/GitHub |
+## 💰 Revenue Model
+
+### Pricing Tiers
+
+| Tier | Monthly | Rate Limit | Tokens/Day | Margin |
+|------|---------|------------|------------|--------|
+| Free | $0 | 5/min, 50/day | 100K | - |
+| Starter | $10 | 20/min, 500/day | 1M | 50% |
+| Pro | $50 | 60/min, 5K/day | 10M | 50% |
+| Enterprise | Custom | Unlimited | 100M+ | 40% |
+
+### Model Pricing (with markup)
+
+**Budget (50-60% markup)**
+- GLM 4.7 Flash: $0.20/$0.80 per 1M tokens
+- Venice Uncensored: $0.35/$1.50 per 1M tokens
+
+**Standard (40-50% markup)**
+- DeepSeek V3.2: $0.60/$1.50 per 1M tokens
+- Llama 3.3 70B: $1.00/$4.00 per 1M tokens
+- Kimi K2.5: $1.10/$5.50 per 1M tokens
+
+**Premium (30-40% markup)**
+- GPT-5.2: $3.00/$24.00 per 1M tokens
+- Claude Sonnet 4.6: $5.00/$25.00 per 1M tokens
+- Claude Opus 4.6: $8.00/$42.00 per 1M tokens
 
 ## 🏗️ Architecture
 
 ```
-OMA-AI/
-├── public/              # Static HTML pages
-│   ├── index.html       # Homepage
-│   ├── apis.html        # API marketplace
-│   ├── mcps.html        # MCP servers
-│   ├── skills.html      # AI skills
-│   ├── compute.html     # Akash deployment
-│   └── ...              # More pages
-├── pages/api/           # Next.js API routes
-│   ├── price.ts         # Crypto prices
-│   ├── llm.ts           # AI text generation
-│   ├── mcps.ts          # MCP servers
-│   └── ...              # More endpoints
-├── lib/                 # Shared libraries
-│   ├── supabase.ts      # Database client
-│   ├── x402.ts          # Payment middleware
-│   ├── auth.ts          # Wallet auth
-│   └── wallet.ts        # Wallet utilities
-├── contracts/           # Solidity contracts
-│   └── OMAEscrow.sol    # x402 escrow (90/10)
-├── packages/            # SDK packages
-│   └── sdk/             # JavaScript SDK
-├── supabase/            # Database schema
-│   └── schema.sql       # Full schema
-└── docs/                # Documentation
-    ├── API.md           # API reference
-    ├── DEPLOY.md        # Deployment guide
-    └── RESEARCH.md      # Research notes
+User Request
+     ↓
+OMA-AI API Gateway
+     ↓
+┌─────────────────────────────────────┐
+│ Rate Limiting (Upstash Redis)       │
+│ Token Accounting (Supabase)         │
+│ Billing Calculation                 │
+└─────────────────────────────────────┘
+     ↓
+┌─────────┬─────────┐
+│ Venice  │ OpenRouter │  (Provider Selection)
+└─────────┴─────────┘
+     ↓
+Response + Cost Tracking
 ```
 
-## 🔧 Configuration
+## 📊 Hosting Costs (Vercel)
 
-Create a `.env.local` file:
+| Plan | Cost | Includes |
+|------|------|----------|
+| Hobby | Free | 100GB bandwidth, 100K serverless invocations |
+| Pro | $20/mo | 1TB bandwidth, 1M serverless, team features |
+| Enterprise | Custom | Unlimited, SLAs, dedicated support |
 
-```env
-# Supabase
-NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_key
+**Estimated costs at scale:**
+- 10K requests/day: ~$20-50/mo
+- 100K requests/day: ~$100-300/mo
+- 1M requests/day: ~$500-1500/mo
 
-# x402 Payments
-X402_FACILITATOR_URL=https://facilitator.openx402.ai
-PRIVATE_KEY=your_wallet_private_key
+## 🔌 API Endpoints
 
-# AI Providers (bring your own keys)
-GOOGLE_AI_API_KEY=your_google_key
-NVIDIA_API_KEY=your_nvidia_key
+### LLM Chat Completion
+```
+POST /api/llm
+Authorization: Bearer oma_your_key
+
+{
+  "model": "deepseek-v3.2",
+  "prompt": "Hello!",
+  "max_tokens": 500,
+  "web_search": false,
+  "uncensored": false
+}
 ```
 
-## 📦 SDK Usage
-
-```javascript
-import { OMAClient } from '@oma-ai/sdk';
-
-const client = new OMAClient('your-api-key');
-
-// Get crypto prices
-const prices = await client.prices.get();
-
-// Get weather
-const weather = await client.weather.get('London');
-
-// AI generation
-const result = await client.ai.generate('Write a haiku');
+### List Models
+```
+GET /api/llm
 ```
 
-## 🔐 Security
+### Crypto Prices
+```
+GET /api/prices
+```
 
-- All API keys stored securely in Supabase
-- Wallet-based authentication (no passwords)
-- x402 payments use established escrow pattern
-- ERC-8004 for agent identity
+### Health Check
+```
+GET /api/health
+```
 
-## 📜 License
+## 🛡️ Privacy Architecture
 
-MIT License - see [LICENSE](LICENSE) for details.
+**Venice Private Models:**
+- Zero data retention
+- Decentralized GPU providers
+- End-to-end SSL encryption
+- No training on your data
+
+**Anonymized Models (GPT, Claude):**
+- Proxied through Venice
+- Identity hidden from provider
+- Provider still sees prompt content
+
+## 📈 Roadmap
+
+### Phase 1: Foundation ✅
+- [x] Venice AI integration
+- [x] 38 models with pricing
+- [x] Basic rate limiting
+- [x] Privacy documentation
+
+### Phase 2: Monetization (Current)
+- [ ] Stripe billing integration
+- [ ] User accounts (Supabase Auth)
+- [ ] Usage analytics dashboard
+- [ ] OpenRouter fallback
+
+### Phase 3: Scale
+- [ ] MCP server integration (Smithery)
+- [ ] Free API marketplace
+- [ ] SDK (Python, Node, Go)
+- [ ] Enterprise features
 
 ## 🔗 Links
 
-- **Website**: [oma-ai.com](https://oma-ai.com)
-- **GitHub**: [github.com/FrankieMolt/OMA-AI](https://github.com/FrankieMolt/OMA-AI)
-- **Discord**: [discord.com/invite/clawd](https://discord.com/invite/clawd)
-- **x402 Docs**: [docs.openx402.ai](https://docs.openx402.ai)
-- **Akash**: [akash.network](https://akash.network)
+- **Live Site**: https://oma-ai.com
+- **GitHub**: https://github.com/FrankieMolt/OMA-AI
+- **Venice Docs**: https://docs.venice.ai
+- **Smithery MCP**: https://smithery.ai
 
----
+## 📝 License
 
-Built with 🧟 by Frankie | Open Market Access for the Agentic Web
+MIT

@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Models | OMA-AI</title>
+    <meta name="description" content="38 AI models available through OMA-AI API. Compare pricing, context windows, and privacy levels.">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-primary: #030305;
+            --bg-secondary: #0a0a0f;
+            --bg-card: #0f0f15;
+            --border: rgba(255,255,255,0.06);
+            --border-hover: rgba(139,92,246,0.3);
+            --text-primary: #f5f5f7;
+            --text-secondary: #9ca3af;
+            --text-muted: #6b7280;
+            --accent: #8b5cf6;
+            --accent-light: #a78bfa;
+            --success: #22c55e;
+            --warning: #f59e0b;
+        }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+        
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 24px; }
+        
+        /* Nav */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(3,3,5,0.9);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .nav-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--text-primary);
+        }
+        
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, #8b5cf6, #6366f1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 12px;
+        }
+        
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+        
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .nav-link:hover { color: var(--text-primary); }
+        .nav-link.active { color: var(--accent-light); }
+        
+        .nav-btn {
+            padding: 8px 16px;
+            background: var(--accent);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        /* Header */
+        .page-header {
+            padding: 120px 0 48px;
+            text-align: center;
+        }
+        
+        .page-header h1 {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+        
+        .page-header p {
+            font-size: 18px;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Filters */
+        .filters {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 48px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            padding: 8px 16px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-secondary);
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .filter-btn:hover {
+            border-color: var(--border-hover);
+            color: var(--text-primary);
+        }
+        
+        .filter-btn.active {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: white;
+        }
+        
+        /* Models Table */
+        .models-table-wrapper {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+        
+        .models-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .models-table th {
+            background: rgba(0,0,0,0.3);
+            padding: 16px 20px;
+            text-align: left;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .models-table td {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border);
+            font-size: 14px;
+        }
+        
+        .models-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .models-table tr:hover {
+            background: rgba(139,92,246,0.05);
+        }
+        
+        .model-name-cell {
+            font-weight: 600;
+        }
+        
+        .model-id {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            color: var(--text-muted);
+            display: block;
+            margin-top: 4px;
+        }
+        
+        .privacy-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .privacy-badge.private {
+            background: rgba(34,197,94,0.15);
+            color: #22c55e;
+        }
+        
+        .privacy-badge.anonymized {
+            background: rgba(251,191,36,0.15);
+            color: #fbbf24;
+        }
+        
+        .price-cell {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+        }
+        
+        .price-input {
+            color: var(--text-muted);
+        }
+        
+        .price-output {
+            color: var(--accent-light);
+        }
+        
+        .context-cell {
+            color: var(--text-secondary);
+        }
+        
+        /* Legend */
+        .legend {
+            display: flex;
+            gap: 32px;
+            justify-content: center;
+            margin-top: 32px;
+            padding: 24px;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+        
+        .legend-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        
+        .legend-dot.private { background: #22c55e; }
+        .legend-dot.anonymized { background: #fbbf24; }
+        
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 48px 0;
+            margin-top: 80px;
+            background: var(--bg-secondary);
+        }
+        
+        .footer-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 32px;
+        }
+        
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+        }
+        
+        .footer-links a:hover { color: var(--text-primary); }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .models-table-wrapper {
+                overflow-x: auto;
+            }
+            
+            .models-table {
+                min-width: 900px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .page-header h1 { font-size: 32px; }
+            .legend { flex-direction: column; gap: 16px; }
+            .footer-inner { flex-direction: column; gap: 24px; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container nav-inner">
+            <a href="/" class="logo">
+                <div class="logo-icon">OMA</div>
+                <span style="font-weight: 700; font-size: 18px;">OMA-AI</span>
+            </a>
+            <div class="nav-links">
+                <a href="/" class="nav-link">Home</a>
+                <a href="/models" class="nav-link active">Models</a>
+                <a href="/pricing" class="nav-link">Pricing</a>
+                <a href="/docs" class="nav-link">Docs</a>
+                <a href="/dashboard" class="nav-btn">Get API Key</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <div class="container">
+            <h1>38 AI Models</h1>
+            <p>Choose the right model for your use case. Private models have zero data retention.</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="filters">
+            <button class="filter-btn active" data-filter="all">All Models</button>
+            <button class="filter-btn" data-filter="private">Private Only</button>
+            <button class="filter-btn" data-filter="budget">Budget ($0.50/M)</button>
+            <button class="filter-btn" data-filter="standard">Standard ($1/M)</button>
+            <button class="filter-btn" data-filter="premium">Premium ($10/M+)</button>
+        </div>
+
+        <div class="models-table-wrapper">
+            <table class="models-table">
+                <thead>
+                    <tr>
+                        <th>Model</th>
+                        <th>Privacy</th>
+                        <th>Input / Output</th>
+                        <th>Context</th>
+                        <th>Best For</th>
+                    </tr>
+                </thead>
+                <tbody id="models-body">
+                    <!-- Models loaded via JS -->
+                </tbody>
+            </table>
+        </div>
+
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-dot private"></div>
+                <span><strong>Private</strong> - Zero data retention, runs on Venice infrastructure</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-dot anonymized"></div>
+                <span><strong>Anonymized</strong> - Proxied through Venice, your identity hidden from provider</span>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container footer-inner">
+            <div class="footer-links">
+                <a href="/">Home</a>
+                <a href="/models">Models</a>
+                <a href="/pricing">Pricing</a>
+                <a href="/docs">Docs</a>
+                <a href="https://github.com/FrankieMolt/OMA-AI">GitHub</a>
+            </div>
+            <div style="color: var(--text-muted); font-size: 14px;">
+                © 2026 OMA-AI. Powered by Venice.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const models = [
+            // Budget Tier
+            { name: "Nemotron 3 Nano 30B", id: "nvidia-nemotron-3-nano-30b-a3b", privacy: "private", input: 0.07, output: 0.30, context: "128K", bestFor: "Simple Q&A, quick tasks" },
+            { name: "GPT OSS 120B", id: "openai-gpt-oss-120b", privacy: "private", input: 0.07, output: 0.30, context: "128K", bestFor: "Open source alternative" },
+            { name: "Gemma 3 27B", id: "google-gemma-3-27b-it", privacy: "private", input: 0.12, output: 0.20, context: "198K", bestFor: "Lightweight tasks" },
+            { name: "GLM 4.7 Flash", id: "zai-org-glm-4.7-flash", privacy: "private", input: 0.13, output: 0.50, context: "128K", bestFor: "Fast, cheap, private" },
+            { name: "GLM 4.7 Flash Heretic", id: "olafangensan-glm-4.7-flash-heretic", privacy: "private", input: 0.14, output: 0.80, context: "128K", bestFor: "Uncensored, cheap" },
+            { name: "Llama 3.2 3B", id: "llama-3.2-3b", privacy: "private", input: 0.15, output: 0.60, context: "128K", bestFor: "Simple tasks, fast" },
+            { name: "Qwen 3 235B", id: "qwen3-235b-a22b-instruct-2507", privacy: "private", input: 0.15, output: 0.75, context: "128K", bestFor: "Balanced quality/cost" },
+            { name: "Venice Uncensored", id: "venice-uncensored", privacy: "private", input: 0.20, output: 0.90, context: "32K", bestFor: "Uncensored, no filters" },
+            { name: "Grok Code Fast 1", id: "grok-code-fast-1", privacy: "anonymized", input: 0.25, output: 1.87, context: "256K", bestFor: "Fast coding" },
+            { name: "Qwen 3 Coder 480B Turbo", id: "qwen3-coder-480b-a35b-instruct-turbo", privacy: "private", input: 0.35, output: 1.50, context: "256K", bestFor: "Code generation, fast" },
+            { name: "Qwen 3 Next 80B", id: "qwen3-next-80b", privacy: "private", input: 0.35, output: 1.90, context: "256K", bestFor: "General purpose" },
+            { name: "Qwen 3.5 35B", id: "qwen3-5-35b-a3b", privacy: "private", input: 0.31, output: 2.50, context: "256K", bestFor: "Balanced tasks" },
+            
+            // Standard Tier
+            { name: "DeepSeek V3.2", id: "deepseek-v3.2", privacy: "private", input: 0.40, output: 1.00, context: "160K", bestFor: "Best value, excellent quality" },
+            { name: "MiniMax M2.1", id: "minimax-m21", privacy: "private", input: 0.40, output: 1.60, context: "198K", bestFor: "Balanced performance" },
+            { name: "MiniMax M2.5", id: "minimax-m25", privacy: "private", input: 0.40, output: 1.60, context: "198K", bestFor: "Latest MiniMax" },
+            { name: "Qwen 3 235B Thinking", id: "qwen3-235b-a22b-thinking-2507", privacy: "private", input: 0.45, output: 3.50, context: "128K", bestFor: "Complex reasoning" },
+            { name: "Grok 4.1 Fast", id: "grok-41-fast", privacy: "anonymized", input: 0.50, output: 1.25, context: "256K", bestFor: "X AI fast model" },
+            { name: "GLM 4.7", id: "zai-org-glm-4.7", privacy: "private", input: 0.55, output: 2.65, context: "198K", bestFor: "Chinese/English bilingual" },
+            { name: "GLM 4.6", id: "zai-org-glm-4.6", privacy: "private", input: 0.85, output: 2.75, context: "198K", bestFor: "General purpose" },
+            { name: "Gemini 3 Flash", id: "gemini-3-flash-preview", privacy: "anonymized", input: 0.70, output: 3.75, context: "256K", bestFor: "Google fast model" },
+            { name: "Llama 3.3 70B", id: "llama-3.3-70b", privacy: "private", input: 0.70, output: 2.80, context: "128K", bestFor: "Meta's best open model" },
+            { name: "Kimi K2 Thinking", id: "kimi-k2-thinking", privacy: "private", input: 0.75, output: 3.20, context: "256K", bestFor: "Complex reasoning" },
+            { name: "Kimi K2.5", id: "kimi-k2-5", privacy: "private", input: 0.75, output: 3.75, context: "256K", bestFor: "Premium quality" },
+            { name: "Qwen 3 Coder 480B", id: "qwen3-coder-480b-a35b-instruct", privacy: "private", input: 0.75, output: 3.00, context: "256K", bestFor: "Code specialist" },
+            { name: "Hermes 3 405B", id: "hermes-3-llama-3.1-405b", privacy: "private", input: 1.10, output: 3.00, context: "128K", bestFor: "Uncensored, large" },
+            { name: "GLM 5", id: "zai-org-glm-5", privacy: "private", input: 1.00, output: 3.20, context: "198K", bestFor: "Latest GLM" },
+            
+            // Premium Tier
+            { name: "Gemini 3 Pro", id: "gemini-3-pro-preview", privacy: "anonymized", input: 2.50, output: 15.00, context: "198K", bestFor: "Google's best" },
+            { name: "Gemini 3.1 Pro", id: "gemini-3-1-pro-preview", privacy: "anonymized", input: 2.50, output: 15.00, context: "1M", bestFor: "Massive context" },
+            { name: "GPT-5.2", id: "openai-gpt-52", privacy: "anonymized", input: 2.19, output: 17.50, context: "256K", bestFor: "OpenAI latest" },
+            { name: "GPT-5.2 Codex", id: "openai-gpt-52-codex", privacy: "anonymized", input: 2.19, output: 17.50, context: "256K", bestFor: "Code specialist" },
+            { name: "GPT-5.3 Codex", id: "openai-gpt-53-codex", privacy: "anonymized", input: 2.19, output: 17.50, context: "400K", bestFor: "Latest code model" },
+            { name: "Claude Sonnet 4.5", id: "claude-sonnet-4-5", privacy: "anonymized", input: 3.75, output: 18.75, context: "198K", bestFor: "Anthropic balanced" },
+            { name: "Claude Sonnet 4.6", id: "claude-sonnet-4-6", privacy: "anonymized", input: 3.60, output: 18.00, context: "1M", bestFor: "Claude + 1M context" },
+            { name: "Claude Opus 4.5", id: "claude-opus-4-5", privacy: "anonymized", input: 6.00, output: 30.00, context: "198K", bestFor: "Expert analysis" },
+            { name: "Claude Opus 4.6", id: "claude-opus-4-6", privacy: "anonymized", input: 6.00, output: 30.00, context: "1M", bestFor: "Most capable Claude" },
+        ];
+
+        function renderModels(filter = 'all') {
+            const tbody = document.getElementById('models-body');
+            let filtered = models;
+            
+            if (filter === 'private') {
+                filtered = models.filter(m => m.privacy === 'private');
+            } else if (filter === 'budget') {
+                filtered = models.filter(m => m.input < 0.5);
+            } else if (filter === 'standard') {
+                filtered = models.filter(m => m.input >= 0.5 && m.input < 2);
+            } else if (filter === 'premium') {
+                filtered = models.filter(m => m.input >= 2);
+            }
+            
+            tbody.innerHTML = filtered.map(m => `
+                <tr>
+                    <td class="model-name-cell">
+                        ${m.name}
+                        <span class="model-id">${m.id}</span>
+                    </td>
+                    <td>
+                        <span class="privacy-badge ${m.privacy}">${m.privacy}</span>
+                    </td>
+                    <td class="price-cell">
+                        <span class="price-input">$${m.input.toFixed(2)}</span> / 
+                        <span class="price-output">$${m.output.toFixed(2)}</span>
+                    </td>
+                    <td class="context-cell">${m.context}</td>
+                    <td>${m.bestFor}</td>
+                </tr>
+            `).join('');
+        }
+
+        // Filter buttons
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                renderModels(btn.dataset.filter);
+            });
+        });
+
+        // Initial render
+        renderModels();
+    </script>
+</body>
+</html>

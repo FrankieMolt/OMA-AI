@@ -1,182 +1,393 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 /**
- * OMA-AI LLM Gateway
+ * OMA-AI LLM Gateway - 38 Models
  * 
- * Multi-provider LLM access with privacy-first routing
- * Providers: Venice AI (primary), OpenRouter (fallback), NVIDIA (optional)
- * 
- * Pricing: https://oma-ai.com/docs/llm-pricing
+ * Powered by Venice AI infrastructure
+ * Privacy-first, zero data retention for private models
  */
 
 const VENICE_API_URL = 'https://api.venice.ai/api/v1';
-const OPENROUTER_API_URL = 'https://openrouter.ai/api/v1';
-const NVIDIA_API_URL = 'https://integrate.api.nvidia.com/v1';
-
 const VENICE_API_KEY = process.env.VENICE_API_KEY || '';
-const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY || '';
-const NVIDIA_API_KEY = process.env.NVIDIA_API_KEY || '';
 
-// Real model IDs with pricing (input/output per 1M tokens)
+// All 38 models with real pricing
 const MODELS: Record<string, {
   id: string;
-  provider: 'venice' | 'openrouter' | 'nvidia';
+  provider: 'venice';
   inputPrice: number;
   outputPrice: number;
   context: number;
   privacy: 'private' | 'anonymized';
+  tier: 'budget' | 'standard' | 'premium';
+  bestFor: string;
 }> = {
-  // === VENICE AI MODELS (Privacy-First) ===
-  'claude-opus-4-5': {
-    id: 'claude-opus-4-5',
+  // Budget Tier (< $0.50/M input)
+  'nemotron-3-nano-30b': {
+    id: 'nvidia-nemotron-3-nano-30b-a3b',
     provider: 'venice',
-    inputPrice: 7.20,
-    outputPrice: 36.00,
+    inputPrice: 0.07,
+    outputPrice: 0.30,
+    context: 128000,
+    privacy: 'private',
+    tier: 'budget',
+    bestFor: 'Simple Q&A, quick tasks'
+  },
+  'gpt-oss-120b': {
+    id: 'openai-gpt-oss-120b',
+    provider: 'venice',
+    inputPrice: 0.07,
+    outputPrice: 0.30,
+    context: 128000,
+    privacy: 'private',
+    tier: 'budget',
+    bestFor: 'Open source alternative'
+  },
+  'gemma-3-27b': {
+    id: 'google-gemma-3-27b-it',
+    provider: 'venice',
+    inputPrice: 0.12,
+    outputPrice: 0.20,
     context: 198000,
-    privacy: 'anonymized'
-  },
-  'claude-sonnet-4-6': {
-    id: 'claude-sonnet-4-6',
-    provider: 'venice',
-    inputPrice: 4.32,
-    outputPrice: 21.60,
-    context: 1000000,
-    privacy: 'anonymized'
-  },
-  'deepseek-v3.2': {
-    id: 'deepseek-v3.2',
-    provider: 'venice',
-    inputPrice: 0.50,
-    outputPrice: 1.25,
-    context: 160000,
-    privacy: 'private'
+    privacy: 'private',
+    tier: 'budget',
+    bestFor: 'Lightweight tasks'
   },
   'glm-4.7-flash': {
     id: 'zai-org-glm-4.7-flash',
     provider: 'venice',
-    inputPrice: 0.17,
-    outputPrice: 0.65,
+    inputPrice: 0.13,
+    outputPrice: 0.50,
     context: 128000,
-    privacy: 'private'
+    privacy: 'private',
+    tier: 'budget',
+    bestFor: 'Fast, cheap, private'
   },
-  'glm-5': {
-    id: 'zai-org-glm-5',
+  'glm-4.7-flash-heretic': {
+    id: 'olafangensan-glm-4.7-flash-heretic',
     provider: 'venice',
-    inputPrice: 1.25,
-    outputPrice: 4.00,
-    context: 198000,
-    privacy: 'private'
-  },
-  'gpt-5.2': {
-    id: 'openai-gpt-52',
-    provider: 'venice',
-    inputPrice: 2.63,
-    outputPrice: 21.00,
-    context: 256000,
-    privacy: 'anonymized'
-  },
-  'kimi-k2.5': {
-    id: 'kimi-k2-5',
-    provider: 'venice',
-    inputPrice: 0.94,
-    outputPrice: 4.69,
-    context: 256000,
-    privacy: 'private'
-  },
-  'llama-3.3-70b': {
-    id: 'llama-3.3-70b',
-    provider: 'venice',
-    inputPrice: 0.88,
-    outputPrice: 3.50,
+    inputPrice: 0.14,
+    outputPrice: 0.80,
     context: 128000,
-    privacy: 'private'
+    privacy: 'private',
+    tier: 'budget',
+    bestFor: 'Uncensored, cheap'
   },
-  'minimax-m2.5': {
-    id: 'minimax-m25',
+  'llama-3.2-3b': {
+    id: 'llama-3.2-3b',
     provider: 'venice',
-    inputPrice: 0.52,
-    outputPrice: 2.08,
-    context: 198000,
-    privacy: 'private'
+    inputPrice: 0.15,
+    outputPrice: 0.60,
+    context: 128000,
+    privacy: 'private',
+    tier: 'budget',
+    bestFor: 'Simple tasks, fast'
   },
   'qwen-3-235b': {
     id: 'qwen3-235b-a22b-instruct-2507',
     provider: 'venice',
-    inputPrice: 0.19,
-    outputPrice: 0.94,
+    inputPrice: 0.15,
+    outputPrice: 0.75,
     context: 128000,
-    privacy: 'private'
-  },
-  'qwen-3-coder': {
-    id: 'qwen3-coder-480b-a35b-instruct',
-    provider: 'venice',
-    inputPrice: 0.94,
-    outputPrice: 3.75,
-    context: 256000,
-    privacy: 'private'
+    privacy: 'private',
+    tier: 'budget',
+    bestFor: 'Balanced quality/cost'
   },
   'venice-uncensored': {
     id: 'venice-uncensored',
     provider: 'venice',
-    inputPrice: 0.26,
-    outputPrice: 1.17,
+    inputPrice: 0.20,
+    outputPrice: 0.90,
     context: 32000,
-    privacy: 'private'
+    privacy: 'private',
+    tier: 'budget',
+    bestFor: 'Uncensored, no filters'
   },
-  
-  // === OPENROUTER MODELS (Cheapest) ===
-  'llama-3.2-3b': {
-    id: 'meta-llama/llama-3.2-3b-instruct',
-    provider: 'openrouter',
-    inputPrice: 0.03,
-    outputPrice: 0.03,
-    context: 131000,
-    privacy: 'anonymized'
+  'grok-code-fast-1': {
+    id: 'grok-code-fast-1',
+    provider: 'venice',
+    inputPrice: 0.25,
+    outputPrice: 1.87,
+    context: 256000,
+    privacy: 'anonymized',
+    tier: 'budget',
+    bestFor: 'Fast coding'
   },
-  'llama-3.3-70b-free': {
-    id: 'meta-llama/llama-3.3-70b-instruct:free',
-    provider: 'openrouter',
-    inputPrice: 0,
-    outputPrice: 0,
-    context: 128000,
-    privacy: 'anonymized'
+  'qwen-3-coder-turbo': {
+    id: 'qwen3-coder-480b-a35b-instruct-turbo',
+    provider: 'venice',
+    inputPrice: 0.35,
+    outputPrice: 1.50,
+    context: 256000,
+    privacy: 'private',
+    tier: 'budget',
+    bestFor: 'Code generation, fast'
   },
-  'qwen-3-coder-free': {
-    id: 'qwen/qwen3-coder:free',
-    provider: 'openrouter',
-    inputPrice: 0,
-    outputPrice: 0,
-    context: 262000,
-    privacy: 'anonymized'
+  'qwen-3-next-80b': {
+    id: 'qwen3-next-80b',
+    provider: 'venice',
+    inputPrice: 0.35,
+    outputPrice: 1.90,
+    context: 256000,
+    privacy: 'private',
+    tier: 'budget',
+    bestFor: 'General purpose'
   },
-  'deepseek-v3.2-or': {
-    id: 'deepseek/deepseek-v3.2',
-    provider: 'openrouter',
+  'qwen-3.5-35b': {
+    id: 'qwen3-5-35b-a3b',
+    provider: 'venice',
     inputPrice: 0.31,
-    outputPrice: 0.50,
-    context: 163000,
-    privacy: 'anonymized'
+    outputPrice: 2.50,
+    context: 256000,
+    privacy: 'private',
+    tier: 'budget',
+    bestFor: 'Balanced tasks'
   },
-  
-  // === NVIDIA MODELS ===
-  'qwen-3.5-397b': {
-    id: 'qwen/qwen3.5-397b-a17b',
-    provider: 'nvidia',
-    inputPrice: 0.69,
-    outputPrice: 4.38,
-    context: 262000,
-    privacy: 'anonymized'
-  }
+
+  // Standard Tier ($0.40-$1.10/M input)
+  'deepseek-v3.2': {
+    id: 'deepseek-v3.2',
+    provider: 'venice',
+    inputPrice: 0.40,
+    outputPrice: 1.00,
+    context: 160000,
+    privacy: 'private',
+    tier: 'standard',
+    bestFor: 'Best value, excellent quality'
+  },
+  'minimax-m2.1': {
+    id: 'minimax-m21',
+    provider: 'venice',
+    inputPrice: 0.40,
+    outputPrice: 1.60,
+    context: 198000,
+    privacy: 'private',
+    tier: 'standard',
+    bestFor: 'Balanced performance'
+  },
+  'minimax-m2.5': {
+    id: 'minimax-m25',
+    provider: 'venice',
+    inputPrice: 0.40,
+    outputPrice: 1.60,
+    context: 198000,
+    privacy: 'private',
+    tier: 'standard',
+    bestFor: 'Latest MiniMax'
+  },
+  'qwen-3-235b-thinking': {
+    id: 'qwen3-235b-a22b-thinking-2507',
+    provider: 'venice',
+    inputPrice: 0.45,
+    outputPrice: 3.50,
+    context: 128000,
+    privacy: 'private',
+    tier: 'standard',
+    bestFor: 'Complex reasoning'
+  },
+  'grok-4.1-fast': {
+    id: 'grok-41-fast',
+    provider: 'venice',
+    inputPrice: 0.50,
+    outputPrice: 1.25,
+    context: 256000,
+    privacy: 'anonymized',
+    tier: 'standard',
+    bestFor: 'X AI fast model'
+  },
+  'glm-4.7': {
+    id: 'zai-org-glm-4.7',
+    provider: 'venice',
+    inputPrice: 0.55,
+    outputPrice: 2.65,
+    context: 198000,
+    privacy: 'private',
+    tier: 'standard',
+    bestFor: 'Chinese/English bilingual'
+  },
+  'glm-4.6': {
+    id: 'zai-org-glm-4.6',
+    provider: 'venice',
+    inputPrice: 0.85,
+    outputPrice: 2.75,
+    context: 198000,
+    privacy: 'private',
+    tier: 'standard',
+    bestFor: 'General purpose'
+  },
+  'gemini-3-flash': {
+    id: 'gemini-3-flash-preview',
+    provider: 'venice',
+    inputPrice: 0.70,
+    outputPrice: 3.75,
+    context: 256000,
+    privacy: 'anonymized',
+    tier: 'standard',
+    bestFor: 'Google fast model'
+  },
+  'llama-3.3-70b': {
+    id: 'llama-3.3-70b',
+    provider: 'venice',
+    inputPrice: 0.70,
+    outputPrice: 2.80,
+    context: 128000,
+    privacy: 'private',
+    tier: 'standard',
+    bestFor: "Meta's best open model"
+  },
+  'kimi-k2-thinking': {
+    id: 'kimi-k2-thinking',
+    provider: 'venice',
+    inputPrice: 0.75,
+    outputPrice: 3.20,
+    context: 256000,
+    privacy: 'private',
+    tier: 'standard',
+    bestFor: 'Complex reasoning'
+  },
+  'kimi-k2.5': {
+    id: 'kimi-k2-5',
+    provider: 'venice',
+    inputPrice: 0.75,
+    outputPrice: 3.75,
+    context: 256000,
+    privacy: 'private',
+    tier: 'standard',
+    bestFor: 'Premium quality'
+  },
+  'qwen-3-coder-480b': {
+    id: 'qwen3-coder-480b-a35b-instruct',
+    provider: 'venice',
+    inputPrice: 0.75,
+    outputPrice: 3.00,
+    context: 256000,
+    privacy: 'private',
+    tier: 'standard',
+    bestFor: 'Code specialist'
+  },
+  'hermes-3-405b': {
+    id: 'hermes-3-llama-3.1-405b',
+    provider: 'venice',
+    inputPrice: 1.10,
+    outputPrice: 3.00,
+    context: 128000,
+    privacy: 'private',
+    tier: 'standard',
+    bestFor: 'Uncensored, large'
+  },
+  'glm-5': {
+    id: 'zai-org-glm-5',
+    provider: 'venice',
+    inputPrice: 1.00,
+    outputPrice: 3.20,
+    context: 198000,
+    privacy: 'private',
+    tier: 'standard',
+    bestFor: 'Latest GLM'
+  },
+
+  // Premium Tier ($2+/M input)
+  'gemini-3-pro': {
+    id: 'gemini-3-pro-preview',
+    provider: 'venice',
+    inputPrice: 2.50,
+    outputPrice: 15.00,
+    context: 198000,
+    privacy: 'anonymized',
+    tier: 'premium',
+    bestFor: "Google's best"
+  },
+  'gemini-3.1-pro': {
+    id: 'gemini-3-1-pro-preview',
+    provider: 'venice',
+    inputPrice: 2.50,
+    outputPrice: 15.00,
+    context: 1000000,
+    privacy: 'anonymized',
+    tier: 'premium',
+    bestFor: 'Massive context'
+  },
+  'gpt-5.2': {
+    id: 'openai-gpt-52',
+    provider: 'venice',
+    inputPrice: 2.19,
+    outputPrice: 17.50,
+    context: 256000,
+    privacy: 'anonymized',
+    tier: 'premium',
+    bestFor: 'OpenAI latest'
+  },
+  'gpt-5.2-codex': {
+    id: 'openai-gpt-52-codex',
+    provider: 'venice',
+    inputPrice: 2.19,
+    outputPrice: 17.50,
+    context: 256000,
+    privacy: 'anonymized',
+    tier: 'premium',
+    bestFor: 'Code specialist'
+  },
+  'gpt-5.3-codex': {
+    id: 'openai-gpt-53-codex',
+    provider: 'venice',
+    inputPrice: 2.19,
+    outputPrice: 17.50,
+    context: 400000,
+    privacy: 'anonymized',
+    tier: 'premium',
+    bestFor: 'Latest code model'
+  },
+  'claude-sonnet-4.5': {
+    id: 'claude-sonnet-4-5',
+    provider: 'venice',
+    inputPrice: 3.75,
+    outputPrice: 18.75,
+    context: 198000,
+    privacy: 'anonymized',
+    tier: 'premium',
+    bestFor: 'Anthropic balanced'
+  },
+  'claude-sonnet-4.6': {
+    id: 'claude-sonnet-4-6',
+    provider: 'venice',
+    inputPrice: 3.60,
+    outputPrice: 18.00,
+    context: 1000000,
+    privacy: 'anonymized',
+    tier: 'premium',
+    bestFor: 'Claude + 1M context'
+  },
+  'claude-opus-4.5': {
+    id: 'claude-opus-4-5',
+    provider: 'venice',
+    inputPrice: 6.00,
+    outputPrice: 30.00,
+    context: 198000,
+    privacy: 'anonymized',
+    tier: 'premium',
+    bestFor: 'Expert analysis'
+  },
+  'claude-opus-4.6': {
+    id: 'claude-opus-4-6',
+    provider: 'venice',
+    inputPrice: 6.00,
+    outputPrice: 30.00,
+    context: 1000000,
+    privacy: 'anonymized',
+    tier: 'premium',
+    bestFor: 'Most capable Claude'
+  },
 };
 
-// Default model aliases
+// Aliases for common use cases
 const ALIASES: Record<string, string> = {
   'default': 'deepseek-v3.2',
   'cheap': 'glm-4.7-flash',
-  'code': 'qwen-3-coder',
+  'fast': 'glm-4.7-flash',
+  'code': 'qwen-3-coder-turbo',
   'premium': 'kimi-k2.5',
   'uncensored': 'venice-uncensored',
-  'free': 'llama-3.3-70b-free'
+  'best': 'claude-opus-4.6',
+  'smart': 'claude-sonnet-4.6'
 };
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -187,37 +398,43 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(200).end();
   }
 
-  // Handle GET - list models
+  // GET - List all models
   if (req.method === 'GET') {
     const modelList = Object.entries(MODELS).map(([alias, model]) => ({
       id: alias,
       model_id: model.id,
-      provider: model.provider,
+      privacy: model.privacy,
+      tier: model.tier,
       pricing: {
-        input: `$${model.inputPrice}/M`,
-        output: `$${model.outputPrice}/M`
+        input: model.inputPrice,
+        output: model.outputPrice,
+        unit: 'per 1M tokens'
       },
       context: model.context,
-      privacy: model.privacy
+      best_for: model.bestFor
     }));
-    
+
     return res.json({
       success: true,
+      total: modelList.length,
       models: modelList,
       aliases: ALIASES,
-      default: 'deepseek-v3.2'
+      default_model: 'deepseek-v3.2',
+      privacy_info: {
+        private: 'Zero data retention, runs on Venice infrastructure',
+        anonymized: 'Proxied through Venice, your identity hidden from provider'
+      }
     });
   }
 
-  // Handle POST - completion
+  // POST - Chat completion
   const { 
     prompt, 
     model = 'default', 
     max_tokens = 1000, 
     temperature = 0.7,
     web_search = false,
-    uncensored = false,
-    stream = false
+    uncensored = false
   } = req.body;
 
   if (!prompt) {
@@ -231,32 +448,22 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   if (!modelConfig) {
     return res.status(400).json({ 
       error: 'Unknown model',
-      available: Object.keys(MODELS)
+      available: Object.keys(MODELS),
+      aliases: ALIASES
     });
   }
 
-  // Check API keys
-  const providerKey = modelConfig.provider === 'venice' ? VENICE_API_KEY :
-                      modelConfig.provider === 'openrouter' ? OPENROUTER_API_KEY :
-                      NVIDIA_API_KEY;
-
-  if (!providerKey) {
+  if (!VENICE_API_KEY) {
     return res.json({
       success: false,
-      error: `${modelConfig.provider.toUpperCase()}_API_KEY not configured`,
+      error: 'VENICE_API_KEY not configured',
       model: modelAlias,
-      setup: `Set ${modelConfig.provider.toUpperCase()}_API_KEY environment variable`
+      setup: 'Set VENICE_API_KEY environment variable at https://venice.ai/settings/api'
     });
   }
 
   try {
-    // Build API URL based on provider
-    const apiUrl = modelConfig.provider === 'venice' ? VENICE_API_URL :
-                   modelConfig.provider === 'openrouter' ? OPENROUTER_API_URL :
-                   NVIDIA_API_URL;
-
-    // Build request
-    const apiRequest: any = {
+    const veniceRequest: any = {
       model: modelConfig.id,
       messages: [{ role: 'user', content: prompt }],
       max_tokens: Number(max_tokens),
@@ -264,33 +471,30 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     };
 
     // Venice-specific features
-    if (modelConfig.provider === 'venice') {
-      apiRequest.venice_parameters = {};
-      
-      if (web_search) {
-        apiRequest.venice_parameters.enable_web_search = 'on';
-      }
-      
-      if (uncensored) {
-        apiRequest.venice_parameters.include_venice_system_prompt = false;
-      }
+    veniceRequest.venice_parameters = {};
+    
+    if (web_search) {
+      veniceRequest.venice_parameters.enable_web_search = 'on';
+    }
+    
+    if (uncensored) {
+      veniceRequest.venice_parameters.include_venice_system_prompt = false;
     }
 
-    // Make API call
-    const response = await fetch(`${apiUrl}/chat/completions`, {
+    const response = await fetch(`${VENICE_API_URL}/chat/completions`, {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${providerKey}`,
+        'Authorization': `Bearer ${VENICE_API_KEY}`,
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(apiRequest)
+      body: JSON.stringify(veniceRequest)
     });
 
     if (!response.ok) {
       const error = await response.text();
       return res.status(response.status).json({
         success: false,
-        error: `${modelConfig.provider} API error`,
+        error: 'Venice API error',
         details: error
       });
     }
@@ -308,17 +512,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       response: result.choices[0].message.content,
       model: modelAlias,
       model_id: modelConfig.id,
-      provider: modelConfig.provider,
       privacy: modelConfig.privacy,
+      tier: modelConfig.tier,
       usage: {
         prompt_tokens: usage.prompt_tokens,
         completion_tokens: usage.completion_tokens,
         total_tokens: usage.total_tokens
       },
       cost: {
-        input: inputCost.toFixed(6),
-        output: outputCost.toFixed(6),
-        total: totalCost.toFixed(6)
+        input_usd: inputCost.toFixed(6),
+        output_usd: outputCost.toFixed(6),
+        total_usd: totalCost.toFixed(6)
       },
       timestamp: Date.now()
     });
@@ -326,7 +530,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   } catch (error: any) {
     return res.status(500).json({
       success: false,
-      error: 'LLM service unavailable',
+      error: 'Venice API unavailable',
       message: error.message
     });
   }

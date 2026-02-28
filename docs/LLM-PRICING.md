@@ -1,164 +1,102 @@
-# OMA-AI LLM Pricing Model
+# OMA-AI LLM Pricing Strategy
 
-> Cost analysis and markup strategy for all LLM providers
+> Comprehensive pricing with 40-60% markup for profitability
 
----
+## Cost Basis vs Sell Price
 
-## Provider Comparison
+### Budget Tier (50-60% Markup)
 
-### Venice AI (Privacy-First, Uncensored)
+| Model | Venice Cost | OMA-AI Price | Margin |
+|-------|-------------|--------------|--------|
+| Nemotron 3 Nano | $0.07/$0.30 | $0.12/$0.50 | 60% |
+| GLM 4.7 Flash | $0.13/$0.50 | $0.20/$0.80 | 54% |
+| Gemma 3 27B | $0.12/$0.20 | $0.20/$0.35 | 67% |
+| Venice Uncensored | $0.20/$0.90 | $0.35/$1.50 | 66% |
+| Llama 3.2 3B | $0.15/$0.60 | $0.25/$1.00 | 60% |
 
-**Base URL:** `https://api.venice.ai/api/v1`
+### Standard Tier (40-50% Markup)
 
-| Model | Model ID | Venice Cost | OMA Price | Markup | Privacy |
-|-------|----------|-------------|-----------|--------|---------|
-| **Claude Opus 4.5** | `claude-opus-4-5` | $6.00/$30.00 | $7.20/$36.00 | 20% | Anonymized |
-| **Claude Sonnet 4.6** | `claude-sonnet-4-6` | $3.60/$18.00 | $4.32/$21.60 | 20% | Anonymized |
-| **DeepSeek V3.2** | `deepseek-v3.2` | $0.40/$1.00 | $0.50/$1.25 | 25% | Private ✅ |
-| **Gemini 3 Flash** | `gemini-3-flash-preview` | $0.70/$3.75 | $0.88/$4.69 | 25% | Anonymized |
-| **GLM 4.7 Flash** | `zai-org-glm-4.7-flash` | $0.13/$0.50 | $0.17/$0.65 | 30% | Private ✅ |
-| **GLM 5** | `zai-org-glm-5` | $1.00/$3.20 | $1.25/$4.00 | 25% | Private ✅ |
-| **GPT-5.2** | `openai-gpt-52` | $2.19/$17.50 | $2.63/$21.00 | 20% | Anonymized |
-| **Grok 4.1 Fast** | `grok-41-fast` | $0.50/$1.25 | $0.65/$1.63 | 30% | Anonymized |
-| **Kimi K2.5** | `kimi-k2-5` | $0.75/$3.75 | $0.94/$4.69 | 25% | Private ✅ |
-| **Llama 3.3 70B** | `llama-3.3-70b` | $0.70/$2.80 | $0.88/$3.50 | 25% | Private ✅ |
-| **MiniMax M2.5** | `minimax-m25` | $0.40/$1.60 | $0.52/$2.08 | 30% | Private ✅ |
-| **Qwen 3 235B** | `qwen3-235b-a22b-instruct-2507` | $0.15/$0.75 | $0.19/$0.94 | 25% | Private ✅ |
-| **Qwen 3 Coder 480B** | `qwen3-coder-480b-a35b-instruct` | $0.75/$3.00 | $0.94/$3.75 | 25% | Private ✅ |
-| **Qwen 3.5 35B** | `qwen3-5-35b-a3b` | $0.31/$2.50 | $0.39/$3.13 | 25% | Private ✅ |
-| **Venice Uncensored** | `venice-uncensored` | $0.20/$0.90 | $0.26/$1.17 | 30% | Private ✅ |
+| Model | Venice Cost | OMA-AI Price | Margin |
+|-------|-------------|--------------|--------|
+| DeepSeek V3.2 | $0.40/$1.00 | $0.60/$1.50 | 50% |
+| Llama 3.3 70B | $0.70/$2.80 | $1.00/$4.00 | 43% |
+| Kimi K2.5 | $0.75/$3.75 | $1.10/$5.50 | 47% |
+| Qwen 3 Coder | $0.75/$3.00 | $1.10/$4.50 | 47% |
+| MiniMax M2.5 | $0.40/$1.60 | $0.60/$2.40 | 50% |
 
-*Format: Input/Output per 1M tokens*
+### Premium Tier (30-40% Markup)
 
----
+| Model | Cost Basis | OMA-AI Price | Margin |
+|-------|------------|--------------|--------|
+| GPT-5.2 | $2.19/$17.50 | $3.00/$24.00 | 37% |
+| GPT-5.3 Codex | $2.19/$17.50 | $3.00/$24.00 | 37% |
+| Claude Sonnet 4.6 | $3.60/$18.00 | $5.00/$25.00 | 39% |
+| Claude Opus 4.6 | $6.00/$30.00 | $8.00/$42.00 | 33% |
+| Gemini 3.1 Pro | $2.50/$15.00 | $3.50/$21.00 | 40% |
 
-### OpenRouter (Cheapest Options)
+## User Tiers & Rate Limits
 
-**Base URL:** `https://openrouter.ai/api/v1`
+| Tier | Price | RPM | RPD | Tokens/Day |
+|------|-------|-----|-----|------------|
+| Free | $0 | 5 | 50 | 100K |
+| Starter | $10/mo | 20 | 500 | 1M |
+| Pro | $50/mo | 60 | 5K | 10M |
+| Enterprise | Custom | 200 | 50K | 100M+ |
 
-| Model | Model ID | OR Cost | OMA Price | Markup | Notes |
-|-------|----------|---------|-----------|--------|-------|
-| **Llama 3.2 3B** | `meta-llama/llama-3.2-3b-instruct` | $0.02/$0.02 | $0.03/$0.03 | 50% | FREE tier available |
-| **Llama 3.3 70B** | `meta-llama/llama-3.3-70b-instruct` | $0.10/$0.32 | $0.13/$0.42 | 30% | FREE tier available |
-| **GPT-5 Nano** | `openai/gpt-5-nano` | $0.05/$0.40 | $0.07/$0.52 | 30% | Fast, cheap |
-| **GPT-5 Mini** | `openai/gpt-5-mini` | $0.25/$2.00 | $0.31/$2.50 | 25% | Balanced |
-| **GPT-5.2** | `openai/gpt-5.2` | $1.75/$14.00 | $2.19/$17.50 | 25% | Full power |
-| **Kimi K2.5** | `moonshotai/kimi-k2.5` | $0.45/$2.20 | $0.56/$2.75 | 25% | Great value |
-| **DeepSeek V3.2** | `deepseek/deepseek-v3.2` | $0.25/$0.40 | $0.31/$0.50 | 25% | Very cheap |
-| **MiniMax M2.5** | `minimax/minimax-m2.5` | $0.29/$1.20 | $0.36/$1.50 | 25% | Good value |
-| **Qwen 3 Coder** | `qwen/qwen3-coder-next` | $0.12/$0.75 | $0.15/$0.94 | 25% | FREE tier |
-| **Qwen 3.5 397B** | `qwen/qwen3.5-397b-a17b` | $0.55/$3.50 | $0.69/$4.38 | 25% | Largest |
-| **GLM 5** | `z-ai/glm-5` | $0.95/$2.55 | $1.19/$3.19 | 25% | Chinese |
+## Provider Selection
 
-*Format: Input/Output per 1M tokens*
+**Primary: Venice AI**
+- Privacy-first (zero retention)
+- Unique models (Uncensored, GLM, DeepSeek)
+- Decentralized GPU network
 
----
+**Fallback: OpenRouter**
+- Wider model selection
+- Free tier models
+- Cheaper on some premium models
 
-### NVIDIA NIM (High Performance)
+## Revenue Projections
 
-**Base URL:** `https://integrate.api.nvidia.com/v1`
+| Users | Avg Spend | Monthly Revenue | Profit (50%) |
+|-------|-----------|-----------------|--------------|
+| 100 | $10 | $1,000 | $500 |
+| 500 | $15 | $7,500 | $3,750 |
+| 2,000 | $20 | $40,000 | $20,000 |
 
-| Model | Model ID | NVIDIA Cost | OMA Price | Markup |
-|-------|----------|-------------|-----------|--------|
-| **Qwen 3.5 397B** | `qwen/qwen3.5-397b-a17b` | ~$0.55/$3.50 | $0.69/$4.38 | 25% |
-| **Qwen 3 Coder 480B** | `qwen/qwen3-coder-480b-a35b-instruct` | ~$0.75/$3.00 | $0.94/$3.75 | 25% |
-| **Kimi K2.5** | `moonshotai/kimi-k2.5` | ~$0.45/$2.20 | $0.56/$2.75 | 25% |
-| **Nemotron Nano 12B VL** | `nvidia/nemotron-nano-12b-v2-vl` | FREE | $0.05/$0.10 | - |
+## Hosting Costs (Vercel)
 
----
+| Scale | Bandwidth | Functions | Est. Cost |
+|-------|-----------|-----------|-----------|
+| Small | <100GB | <1M | $20-50/mo |
+| Medium | 100GB-1TB | 1-10M | $50-300/mo |
+| Large | >1TB | >10M | $300-1500/mo |
 
-## OMA-AI Tiers (Recommended)
+## Profit Formula
 
-### Tier 1: Budget ($0.01-0.05/call)
+```
+Revenue = Users × AvgSpend
+Cost = VeniceAPI + OpenRouterAPI + Vercel + Redis
+Profit = Revenue - Cost
 
-| Model | Use Case | Cost/Call |
-|-------|----------|-----------|
-| Llama 3.2 3B | Simple Q&A | $0.01 |
-| GLM 4.7 Flash | Quick tasks | $0.02 |
-| Venice Uncensored | Uncensored | $0.02 |
-| Qwen 3 Coder Flash | Code | $0.03 |
+At 50% margin:
+100 users @ $15 = $1,500 revenue → $750 profit
+500 users @ $15 = $7,500 revenue → $3,750 profit
+2000 users @ $20 = $40,000 revenue → $20,000 profit
+```
 
-### Tier 2: Standard ($0.05-0.15/call)
+## API Pricing Implementation
 
-| Model | Use Case | Cost/Call |
-|-------|----------|-----------|
-| DeepSeek V3.2 | General purpose | $0.05 |
-| MiniMax M2.5 | Balanced | $0.06 |
-| Llama 3.3 70B | Open source | $0.08 |
-| Qwen 3 Coder | Code generation | $0.08 |
-
-### Tier 3: Premium ($0.15-0.50/call)
-
-| Model | Use Case | Cost/Call |
-|-------|----------|-----------|
-| Kimi K2.5 | Complex tasks | $0.15 |
-| Qwen 3.5 397B | Largest open | $0.20 |
-| GPT-5.2 | Enterprise | $0.35 |
-| Claude Sonnet 4.6 | Premium | $0.40 |
-
-### Tier 4: Expert ($0.50+/call)
-
-| Model | Use Case | Cost/Call |
-|-------|----------|-----------|
-| Claude Opus 4.5 | Expert analysis | $0.75 |
-| GPT-5.2 Pro | Top tier | $1.00+ |
-
----
-
-## Pricing Strategy
-
-### Cost-Based Markup
-
-| Tier | Markup | Reason |
-|------|--------|--------|
-| Budget | 40-50% | High volume, low margin |
-| Standard | 25-30% | Competitive pricing |
-| Premium | 20-25% | Quality over price |
-| Expert | 15-20% | Enterprise customers |
-
-### Revenue Share
-
-| Stakeholder | Share |
-|-------------|-------|
-| **API Publisher** | 70% |
-| **OMA-AI Platform** | 20% |
-| **x402 Protocol Fee** | 10% |
-
----
-
-## Free Tier Limits
-
-| Model | Free Calls/Day | Notes |
-|-------|----------------|-------|
-| Llama 3.3 70B | 100 | Via OpenRouter |
-| Qwen 3 Coder | 50 | Via OpenRouter |
-| DeepSeek V3.2 | 50 | Via Venice |
-| Venice Uncensored | 30 | Via Venice |
-
----
-
-## Recommended Default Models
-
-| Purpose | Model | Provider | Cost |
-|---------|-------|----------|------|
-| **Default** | DeepSeek V3.2 | Venice | $0.05/call |
-| **Code** | Qwen 3 Coder | OpenRouter | $0.08/call |
-| **Cheap** | GLM 4.7 Flash | Venice | $0.02/call |
-| **Premium** | Kimi K2.5 | Venice | $0.15/call |
-| **Uncensored** | Venice Uncensored | Venice | $0.02/call |
-
----
-
-## Implementation Notes
-
-1. **Venice API Key Required** - Get from https://venice.ai/settings/api
-2. **OpenRouter API Key Optional** - For free tier models
-3. **NVIDIA API Key Optional** - For hosted models
-4. **x402 Payments** - Enable micropayments per call
-5. **Rate Limiting** - Implement per-user limits
-6. **Caching** - Cache common responses to reduce costs
-
----
-
-*Last updated: 2026-02-28*
-*Generated by Frankie 🧟*
+```typescript
+const OMA_PRICING = {
+  // Budget
+  'glm-4.7-flash': { input: 0.20, output: 0.80, tier: 'budget' },
+  'venice-uncensored': { input: 0.35, output: 1.50, tier: 'budget' },
+  
+  // Standard  
+  'deepseek-v3.2': { input: 0.60, output: 1.50, tier: 'standard' },
+  'kimi-k2.5': { input: 1.10, output: 5.50, tier: 'standard' },
+  
+  // Premium
+  'claude-opus-4.6': { input: 8.00, output: 42.00, tier: 'premium' },
+};
+```

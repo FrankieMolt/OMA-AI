@@ -1,42 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="/styles.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="canonical" href="https://oma-ai.com">
-    <title>OMA-AI | API Marketplace for AI Agents</title>
-    <meta name="description" content="Discover and monetize APIs for AI agents. x402 micropayments, MCP servers, and decentralized compute. 90% revenue share for publishers.">
-    <meta name="keywords" content="API marketplace, AI agents, MCP servers, x402 payments, developer tools">
-    
-    <!-- Open Graph -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://oma-ai.com">
-    <meta property="og:title" content="OMA-AI | API Marketplace for AI Agents">
-    <meta property="og:description" content="Discover and monetize APIs for AI agents with x402 micropayments.">
-    <meta property="og:image" content="https://oma-ai.com/og-image.png">
+    <title>OMA-AI | Private AI API Marketplace</title>
+    <meta name="description" content="Access 38+ private AI models via API. Zero data retention. Uncensored. x402 micropayments. Powered by Venice AI infrastructure.">
     
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --bg-primary: #09090b;
-            --bg-secondary: #0f0f12;
-            --bg-card: #141419;
+            --bg-primary: #030305;
+            --bg-secondary: #0a0a0f;
+            --bg-card: #0f0f15;
+            --bg-card-hover: #141420;
             --border: rgba(255,255,255,0.06);
-            --border-hover: rgba(255,255,255,0.12);
-            --text-primary: #fafafa;
-            --text-secondary: #a1a1aa;
-            --text-muted: #71717a;
+            --border-hover: rgba(139,92,246,0.3);
+            --text-primary: #f5f5f7;
+            --text-secondary: #9ca3af;
+            --text-muted: #6b7280;
             --accent: #8b5cf6;
             --accent-light: #a78bfa;
-            --accent-glow: rgba(139, 92, 246, 0.15);
+            --accent-glow: rgba(139,92,246,0.2);
+            --success: #22c55e;
+            --warning: #f59e0b;
         }
         
         * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        html { scroll-behavior: smooth; }
         
         body {
             font-family: 'Inter', -apple-system, sans-serif;
@@ -46,16 +41,7 @@
             -webkit-font-smoothing: antialiased;
         }
         
-        .gradient-text {
-            background: linear-gradient(135deg, #a78bfa 0%, #8b5cf6 50%, #6366f1 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .gradient-bg {
-            background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
-        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
         
         /* Navigation */
         nav {
@@ -64,19 +50,16 @@
             left: 0;
             right: 0;
             z-index: 100;
-            background: rgba(9, 9, 11, 0.8);
-            backdrop-filter: blur(12px);
+            background: rgba(3,3,5,0.85);
+            backdrop-filter: blur(16px);
             border-bottom: 1px solid var(--border);
         }
         
-        .nav-container {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 0 24px;
-            height: 64px;
+        .nav-inner {
             display: flex;
             align-items: center;
             justify-content: space-between;
+            height: 64px;
         }
         
         .logo {
@@ -87,7 +70,7 @@
             color: var(--text-primary);
         }
         
-        .logo-mark {
+        .logo-icon {
             width: 36px;
             height: 36px;
             background: linear-gradient(135deg, #8b5cf6, #6366f1);
@@ -95,14 +78,11 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 700;
-            font-size: 14px;
+            font-weight: 800;
+            font-size: 12px;
         }
         
-        .logo-text {
-            font-weight: 600;
-            font-size: 18px;
-        }
+        .logo-text { font-weight: 700; font-size: 18px; }
         
         .nav-links {
             display: flex;
@@ -118,31 +98,28 @@
             transition: color 0.2s;
         }
         
-        .nav-link:hover {
-            color: var(--text-primary);
-        }
+        .nav-link:hover { color: var(--text-primary); }
         
-        .nav-cta {
+        .nav-btn {
             padding: 8px 16px;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
+            background: var(--accent);
+            border: none;
             border-radius: 8px;
-            color: var(--text-primary);
+            color: white;
             text-decoration: none;
             font-size: 14px;
-            font-weight: 500;
+            font-weight: 600;
             transition: all 0.2s;
         }
         
-        .nav-cta:hover {
-            background: var(--accent);
-            border-color: var(--accent);
+        .nav-btn:hover {
+            background: var(--accent-light);
+            transform: translateY(-1px);
         }
         
-        /* Hero Section */
+        /* Hero */
         .hero {
-            padding: 160px 24px 80px;
-            text-align: center;
+            padding: 140px 0 80px;
             position: relative;
             overflow: hidden;
         }
@@ -150,14 +127,16 @@
         .hero::before {
             content: '';
             position: absolute;
-            top: 0;
+            top: -200px;
             left: 50%;
             transform: translateX(-50%);
-            width: 800px;
-            height: 600px;
+            width: 1000px;
+            height: 800px;
             background: radial-gradient(ellipse, var(--accent-glow) 0%, transparent 70%);
             pointer-events: none;
         }
+        
+        .hero-content { position: relative; z-index: 1; text-align: center; }
         
         .hero-badge {
             display: inline-flex;
@@ -172,29 +151,42 @@
             margin-bottom: 32px;
         }
         
-        .hero-badge-dot {
-            width: 6px;
-            height: 6px;
-            background: #22c55e;
+        .badge-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--success);
             border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
         }
         
         .hero h1 {
-            font-size: clamp(40px, 6vw, 64px);
-            font-weight: 700;
-            line-height: 1.1;
+            font-size: clamp(40px, 6vw, 72px);
+            font-weight: 800;
+            line-height: 1.05;
             margin-bottom: 24px;
-            letter-spacing: -0.02em;
+            letter-spacing: -0.03em;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #a78bfa 0%, #8b5cf6 50%, #6366f1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
         
         .hero-subtitle {
-            font-size: clamp(18px, 2vw, 22px);
+            font-size: 20px;
             color: var(--text-secondary);
-            max-width: 600px;
+            max-width: 640px;
             margin: 0 auto 40px;
+            line-height: 1.7;
         }
         
-        .hero-ctas {
+        .hero-buttons {
             display: flex;
             gap: 16px;
             justify-content: center;
@@ -208,7 +200,7 @@
             padding: 14px 28px;
             border-radius: 10px;
             font-size: 15px;
-            font-weight: 500;
+            font-weight: 600;
             text-decoration: none;
             transition: all 0.2s;
             cursor: pointer;
@@ -218,12 +210,12 @@
         .btn-primary {
             background: linear-gradient(135deg, #8b5cf6, #6366f1);
             color: white;
-            box-shadow: 0 4px 20px rgba(139, 92, 246, 0.3);
+            box-shadow: 0 4px 24px rgba(139,92,246,0.4);
         }
         
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 30px rgba(139, 92, 246, 0.4);
+            box-shadow: 0 8px 32px rgba(139,92,246,0.5);
         }
         
         .btn-secondary {
@@ -234,27 +226,28 @@
         
         .btn-secondary:hover {
             border-color: var(--border-hover);
-            background: var(--bg-secondary);
+            background: var(--bg-card-hover);
         }
         
-        /* Stats Bar */
-        .stats-bar {
-            display: flex;
-            justify-content: center;
-            gap: 48px;
-            padding: 40px 24px;
+        /* Stats */
+        .stats {
+            padding: 48px 0;
             border-top: 1px solid var(--border);
             border-bottom: 1px solid var(--border);
             background: var(--bg-secondary);
         }
         
-        .stat {
-            text-align: center;
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
         }
         
+        .stat { text-align: center; }
+        
         .stat-value {
-            font-size: 32px;
-            font-weight: 700;
+            font-size: 36px;
+            font-weight: 800;
             margin-bottom: 4px;
         }
         
@@ -263,11 +256,9 @@
             color: var(--text-muted);
         }
         
-        /* Features Section */
+        /* Section */
         .section {
-            padding: 100px 24px;
-            max-width: 1280px;
-            margin: 0 auto;
+            padding: 100px 0;
         }
         
         .section-header {
@@ -276,9 +267,10 @@
         }
         
         .section-header h2 {
-            font-size: 36px;
-            font-weight: 700;
+            font-size: 40px;
+            font-weight: 800;
             margin-bottom: 16px;
+            letter-spacing: -0.02em;
         }
         
         .section-header p {
@@ -288,9 +280,141 @@
             margin: 0 auto;
         }
         
+        /* Privacy Section */
+        .privacy-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+        
+        .privacy-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+            transition: all 0.3s;
+        }
+        
+        .privacy-card:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-4px);
+        }
+        
+        .privacy-icon {
+            width: 56px;
+            height: 56px;
+            background: var(--accent-glow);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        
+        .privacy-card h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        
+        .privacy-card p {
+            color: var(--text-secondary);
+            font-size: 15px;
+            line-height: 1.7;
+        }
+        
+        /* How Models Work */
+        .how-it-works {
+            background: var(--bg-secondary);
+        }
+        
+        .architecture-flow {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 40px;
+            margin-top: 48px;
+        }
+        
+        .flow-diagram {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 32px;
+        }
+        
+        .flow-node {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px 28px;
+            text-align: center;
+            min-width: 140px;
+        }
+        
+        .flow-node.highlight {
+            border-color: var(--accent);
+            background: var(--accent-glow);
+        }
+        
+        .flow-node.step-label {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+        
+        .flow-node.step-title {
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        .flow-arrow {
+            color: var(--accent);
+            font-size: 24px;
+        }
+        
+        .flow-description {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            margin-top: 32px;
+        }
+        
+        .flow-step {
+            text-align: center;
+        }
+        
+        .flow-step-number {
+            width: 32px;
+            height: 32px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+            margin: 0 auto 12px;
+        }
+        
+        .flow-step h4 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .flow-step p {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+        
+        /* Features Grid */
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(2, 1fr);
             gap: 24px;
         }
         
@@ -299,51 +423,125 @@
             border: 1px solid var(--border);
             border-radius: 16px;
             padding: 32px;
-            transition: all 0.3s;
-        }
-        
-        .feature-card:hover {
-            border-color: var(--border-hover);
-            transform: translateY(-4px);
-        }
-        
-        .feature-icon {
-            width: 48px;
-            height: 48px;
-            background: var(--accent-glow);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 20px;
-        }
-        
-        .feature-icon svg {
-            width: 24px;
-            height: 24px;
-            stroke: var(--accent-light);
         }
         
         .feature-card h3 {
             font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 12px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
         
         .feature-card p {
             color: var(--text-secondary);
-            font-size: 15px;
+            margin-bottom: 16px;
         }
         
-        /* Code Preview */
+        .feature-list {
+            list-style: none;
+        }
+        
+        .feature-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        
+        .feature-list li::before {
+            content: '✓';
+            color: var(--success);
+            font-weight: 700;
+        }
+        
+        /* Model Tiers */
+        .tiers {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+        
+        .tier-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+            position: relative;
+        }
+        
+        .tier-card.popular {
+            border-color: var(--accent);
+        }
+        
+        .tier-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent);
+            padding: 4px 16px;
+            border-radius: 100px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .tier-name {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        
+        .tier-price {
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 4px;
+        }
+        
+        .tier-price span {
+            font-size: 14px;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+        
+        .tier-desc {
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-bottom: 24px;
+        }
+        
+        .tier-models {
+            list-style: none;
+            margin-bottom: 24px;
+        }
+        
+        .tier-models li {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+        
+        .tier-models li:last-child {
+            border-bottom: none;
+        }
+        
+        /* Code Example */
         .code-section {
             background: var(--bg-secondary);
-            padding: 100px 24px;
         }
         
-        .code-container {
-            max-width: 900px;
-            margin: 0 auto;
+        .code-block {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
         }
         
         .code-header {
@@ -351,10 +549,8 @@
             align-items: center;
             gap: 8px;
             padding: 12px 16px;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-bottom: none;
-            border-radius: 12px 12px 0 0;
+            background: rgba(0,0,0,0.3);
+            border-bottom: 1px solid var(--border);
         }
         
         .code-dot {
@@ -367,97 +563,83 @@
         .code-dot.yellow { background: #eab308; }
         .code-dot.green { background: #22c55e; }
         
-        .code-block {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 0 0 12px 12px;
+        .code-title {
+            margin-left: 12px;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+        
+        .code-content {
             padding: 24px;
             overflow-x: auto;
         }
         
-        .code-block pre {
+        .code-content pre {
             font-family: 'JetBrains Mono', monospace;
             font-size: 14px;
-            line-height: 1.7;
+            line-height: 1.8;
             color: var(--text-secondary);
         }
         
-        .code-block .keyword { color: #c084fc; }
-        .code-block .string { color: #4ade80; }
-        .code-block .comment { color: #52525b; }
-        .code-block .function { color: #60a5fa; }
+        .code-content .comment { color: #52525b; }
+        .code-content .keyword { color: #c084fc; }
+        .code-content .string { color: #4ade80; }
+        .code-content .function { color: #60a5fa; }
+        .code-content .number { color: #f59e0b; }
         
-        /* API Cards */
-        .api-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            margin-top: 48px;
+        /* Comparison Table */
+        .comparison-wrapper {
+            overflow-x: auto;
         }
         
-        .api-card {
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
             background: var(--bg-card);
-            border: 1px solid var(--border);
             border-radius: 12px;
-            padding: 24px;
-            text-decoration: none;
-            color: inherit;
-            transition: all 0.2s;
+            overflow: hidden;
         }
         
-        .api-card:hover {
-            border-color: var(--accent);
-            box-shadow: 0 0 30px var(--accent-glow);
+        .comparison-table th,
+        .comparison-table td {
+            padding: 16px 20px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
         }
         
-        .api-card-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 12px;
-        }
-        
-        .api-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-        }
-        
-        .api-card h4 {
-            font-size: 16px;
+        .comparison-table th {
+            background: rgba(0,0,0,0.3);
+            font-size: 12px;
+            text-transform: uppercase;
+            color: var(--text-muted);
             font-weight: 600;
         }
         
-        .api-card p {
+        .comparison-table td {
             font-size: 14px;
-            color: var(--text-muted);
-            margin-bottom: 12px;
         }
         
-        .api-price {
-            font-size: 13px;
-            color: var(--accent-light);
-            font-family: 'JetBrains Mono', monospace;
+        .comparison-table tr:hover td {
+            background: rgba(139,92,246,0.05);
         }
         
-        /* CTA Section */
-        .cta-section {
+        .check { color: var(--success); font-size: 18px; }
+        .cross { color: #ef4444; font-size: 18px; }
+        
+        /* CTA */
+        .cta {
             text-align: center;
-            padding: 100px 24px;
+            padding: 100px 0;
             background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
         }
         
-        .cta-section h2 {
-            font-size: 40px;
-            font-weight: 700;
+        .cta h2 {
+            font-size: 48px;
+            font-weight: 800;
             margin-bottom: 16px;
         }
         
-        .cta-section p {
+        .cta p {
             font-size: 18px;
             color: var(--text-secondary);
             margin-bottom: 32px;
@@ -466,13 +648,11 @@
         /* Footer */
         footer {
             border-top: 1px solid var(--border);
-            padding: 48px 24px;
+            padding: 48px 0;
             background: var(--bg-secondary);
         }
         
-        .footer-container {
-            max-width: 1280px;
-            margin: 0 auto;
+        .footer-inner {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -483,6 +663,7 @@
         .footer-links {
             display: flex;
             gap: 32px;
+            flex-wrap: wrap;
         }
         
         .footer-links a {
@@ -492,9 +673,7 @@
             transition: color 0.2s;
         }
         
-        .footer-links a:hover {
-            color: var(--text-primary);
-        }
+        .footer-links a:hover { color: var(--text-primary); }
         
         .footer-copy {
             font-size: 14px;
@@ -502,58 +681,424 @@
         }
         
         /* Responsive */
+        @media (max-width: 1024px) {
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .privacy-grid { grid-template-columns: 1fr; }
+            .features-grid { grid-template-columns: 1fr; }
+            .tiers { grid-template-columns: 1fr; }
+            .flow-description { grid-template-columns: repeat(2, 1fr); }
+        }
+        
         @media (max-width: 768px) {
             .nav-links { display: none; }
-            .hero { padding: 120px 20px 60px; }
-            .stats-bar { flex-direction: column; gap: 24px; }
-            .features-grid { grid-template-columns: 1fr; }
-            .footer-container { flex-direction: column; text-align: center; }
-            .footer-links { flex-wrap: wrap; justify-content: center; }
+            .hero { padding: 120px 0 60px; }
+            .stats-grid { grid-template-columns: 1fr; }
+            .flow-description { grid-template-columns: 1fr; }
+            .comparison-table { min-width: 600px; }
+            .footer-inner { flex-direction: column; text-align: center; }
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
     <nav>
-        <div class="nav-container">
+        <div class="container nav-inner">
             <a href="/" class="logo">
-                <div class="logo-mark">OMA</div>
-                <span class="logo-text">Open Market Access</span>
+                <div class="logo-icon">OMA</div>
+                <span class="logo-text">OMA-AI</span>
             </a>
             <div class="nav-links">
-                <a href="/apis" class="nav-link">APIs</a>
-                <a href="/mcps" class="nav-link">MCP Servers</a>
-                <a href="/compute" class="nav-link">Compute</a>
+                <a href="#privacy" class="nav-link">Privacy</a>
+                <a href="#models" class="nav-link">Models</a>
+                <a href="#how-it-works" class="nav-link">How It Works</a>
                 <a href="/docs" class="nav-link">Docs</a>
                 <a href="/pricing" class="nav-link">Pricing</a>
-                <a href="/dashboard" class="nav-cta">Dashboard</a>
+                <a href="/dashboard" class="nav-btn">Get API Key</a>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <section class="hero">
-        <div class="hero-badge">
-            <span class="hero-badge-dot"></span>
-            <span>x402 Payments • 16 APIs Live</span>
+        <div class="container hero-content">
+            <div class="hero-badge">
+                <span class="badge-dot"></span>
+                <span>38 Models • Zero Logs • Powered by Venice</span>
+            </div>
+            <h1>
+                Private AI.<br>
+                <span class="gradient-text">No Surveillance.</span>
+            </h1>
+            <p class="hero-subtitle">
+                Access 38+ AI models through a privacy-first API. Your prompts are never stored. 
+                Your data never trains models. Uncensored inference on decentralized GPUs.
+            </p>
+            <div class="hero-buttons">
+                <a href="/signup" class="btn btn-primary">
+                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                    </svg>
+                    Start Free
+                </a>
+                <a href="#models" class="btn btn-secondary">
+                    View Models
+                    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path d="M19 9l-7 7-7-7"/>
+                    </svg>
+                </a>
+            </div>
         </div>
-        <h1>
-            API Marketplace<br>
-            <span class="gradient-text">for AI Agents</span>
-        </h1>
-        <p class="hero-subtitle">
-            Discover, integrate, and monetize APIs with instant micropayments. 
-            Built for autonomous agents, trusted by developers.
-        </p>
-        <div class="hero-ctas">
-            <a href="/apis" class="btn btn-primary">
-                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
-                </svg>
-                Browse APIs
-            </a>
-            <a href="/signup" class="btn btn-secondary">
-                Start Free
+    </section>
+
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat">
+                    <div class="stat-value gradient-text">38+</div>
+                    <div class="stat-label">AI Models</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value gradient-text">0</div>
+                    <div class="stat-label">Data Retained</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value gradient-text">1M+</div>
+                    <div class="stat-label">Context Window</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value gradient-text">$0.07</div>
+                    <div class="stat-label">Per 1M Tokens</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="privacy" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>True Privacy Architecture</h2>
+                <p>Unlike Big Tech AI, we never store your prompts. Here's exactly how it works.</p>
+            </div>
+            
+            <div class="privacy-grid">
+                <div class="privacy-card">
+                    <div class="privacy-icon">🔒</div>
+                    <h3>Zero Data Retention</h3>
+                    <p>Your prompts and responses are never stored on any server. They pass encrypted through our proxy to decentralized GPUs and back to you. No logs, no history, no training on your data.</p>
+                </div>
+                
+                <div class="privacy-card">
+                    <div class="privacy-icon">🌐</div>
+                    <h3>Decentralized Compute</h3>
+                    <p>GPUs are distributed across multiple independent providers. No single entity sees your complete conversation history. Your identity is separated from your inference requests.</p>
+                </div>
+                
+                <div class="privacy-card">
+                    <div class="privacy-icon">🔐</div>
+                    <h3>SSL Encryption Throughout</h3>
+                    <p>All requests travel over industry-standard SSL encryption. Your data is encrypted from browser to GPU and back. The proxy cannot read your content.</p>
+                </div>
+                
+                <div class="privacy-card">
+                    <div class="privacy-icon">🚫</div>
+                    <h3>No Content Filters</h3>
+                    <p>Uncensored models available. No ideological guardrails restricting what you can ask. We believe AI should enhance capability, not limit curiosity.</p>
+                </div>
+                
+                <div class="privacy-card">
+                    <div class="privacy-icon">🧬</div>
+                    <h3>Private vs Anonymized</h3>
+                    <p><strong>Private models</strong> run on Venice infrastructure with zero logging. <strong>Anonymized models</strong> (GPT, Claude) proxy through us to Big Tech, hiding your identity.</p>
+                </div>
+                
+                <div class="privacy-card">
+                    <div class="privacy-icon">📱</div>
+                    <h3>Local-First Storage</h3>
+                    <p>Conversation history stays in your browser. Not synced across devices, not analyzed, not retained on any server. You control your data, always.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="how-it-works" class="section how-it-works">
+        <div class="container">
+            <div class="section-header">
+                <h2>How Your Request Flows</h2>
+                <p>End-to-end encryption with zero persistence</p>
+            </div>
+            
+            <div class="architecture-flow">
+                <div class="flow-diagram">
+                    <div class="flow-node">
+                        <div class="step-label">Step 1</div>
+                        <div class="step-title">Your Browser</div>
+                    </div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-node">
+                        <div class="step-label">Step 2</div>
+                        <div class="step-title">Venice Proxy</div>
+                    </div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-node highlight">
+                        <div class="step-label">Step 3</div>
+                        <div class="step-title">GPU Provider</div>
+                    </div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-node">
+                        <div class="step-label">Step 4</div>
+                        <div class="step-title">Response</div>
+                    </div>
+                </div>
+                
+                <div class="flow-description">
+                    <div class="flow-step">
+                        <div class="flow-step-number">1</div>
+                        <h4>Encrypted Request</h4>
+                        <p>Your prompt is encrypted in your browser and sent over HTTPS</p>
+                    </div>
+                    <div class="flow-step">
+                        <div class="flow-step-number">2</div>
+                        <h4>Proxy Routing</h4>
+                        <p>Venice proxy forwards your request without logging or reading content</p>
+                    </div>
+                    <div class="flow-step">
+                        <div class="flow-step-number">3</div>
+                        <h4>GPU Processing</h4>
+                        <p>Decentralized GPU processes your request, sees only plaintext prompt, no identity</p>
+                    </div>
+                    <div class="flow-step">
+                        <div class="flow-step-number">4</div>
+                        <h4>Direct Response</h4>
+                        <p>Response streams back encrypted to your browser, never persisted</p>
+                    </div>
+                </div>
+                
+                <p style="text-align: center; margin-top: 32px; color: var(--text-muted); font-size: 14px; padding: 16px; background: rgba(139,92,246,0.1); border-radius: 8px;">
+                    <strong>Key insight:</strong> The GPU provider sees only one request at a time, never your identity or conversation history. 
+                    Once processed, the prompt is immediately purged. Venice servers never see plaintext content.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="models" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Model Tiers</h2>
+                <p>From budget-friendly to state-of-the-art. Private options for sensitive data.</p>
+            </div>
+            
+            <div class="tiers">
+                <div class="tier-card">
+                    <div class="tier-name">Budget</div>
+                    <div class="tier-price">$0.07<span>/1M tokens</span></div>
+                    <div class="tier-desc">Fast, cheap, private inference</div>
+                    <ul class="tier-models">
+                        <li>✓ Nemotron 3 Nano 30B</li>
+                        <li>✓ GLM 4.7 Flash</li>
+                        <li>✓ Gemma 3 27B</li>
+                        <li>✓ Venice Uncensored</li>
+                        <li>✓ Llama 3.2 3B</li>
+                    </ul>
+                    <a href="/signup" class="btn btn-secondary" style="width: 100%; justify-content: center;">Get Started</a>
+                </div>
+                
+                <div class="tier-card popular">
+                    <div class="tier-badge">Most Popular</div>
+                    <div class="tier-name">Standard</div>
+                    <div class="tier-price">$0.40<span>/1M tokens</span></div>
+                    <div class="tier-desc">Best value, excellent quality</div>
+                    <ul class="tier-models">
+                        <li>✓ DeepSeek V3.2</li>
+                        <li>✓ Llama 3.3 70B</li>
+                        <li>✓ Kimi K2.5</li>
+                        <li>✓ Qwen 3 Coder 480B</li>
+                        <li>✓ MiniMax M2.5</li>
+                    </ul>
+                    <a href="/signup" class="btn btn-primary" style="width: 100%; justify-content: center;">Get Started</a>
+                </div>
+                
+                <div class="tier-card">
+                    <div class="tier-name">Premium</div>
+                    <div class="tier-price">$2.19<span>/1M tokens</span></div>
+                    <div class="tier-desc">State-of-the-art models</div>
+                    <ul class="tier-models">
+                        <li>✓ GPT-5.2 / 5.3 Codex</li>
+                        <li>✓ Claude Opus 4.6</li>
+                        <li>✓ Claude Sonnet 4.6</li>
+                        <li>✓ Gemini 3.1 Pro</li>
+                        <li>✓ 1M context window</li>
+                    </ul>
+                    <a href="/signup" class="btn btn-secondary" style="width: 100%; justify-content: center;">Get Started</a>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 48px;">
+                <a href="/models" class="btn btn-secondary">View All 38 Models →</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Private vs Anonymized Models</h2>
+                <p>Understanding the difference in privacy levels</p>
+            </div>
+            
+            <div class="comparison-wrapper">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>Private Models</th>
+                            <th>Anonymized Models</th>
+                            <th>Big Tech Direct</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Examples</strong></td>
+                            <td>DeepSeek, Llama, Qwen, GLM, Kimi</td>
+                            <td>GPT-5, Claude, Gemini</td>
+                            <td>OpenAI, Anthropic, Google</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Infrastructure</strong></td>
+                            <td>Venice's own GPUs</td>
+                            <td>Proxied to provider</td>
+                            <td>Provider's servers</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Prompt stored by provider</strong></td>
+                            <td><span class="cross">✗</span> No</td>
+                            <td><span class="check">✓</span> Hidden by proxy</td>
+                            <td><span class="check">✓</span> Yes, indefinitely</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Your identity visible</strong></td>
+                            <td><span class="cross">✗</span> No one</td>
+                            <td><span class="cross">✗</span> Hidden</td>
+                            <td><span class="check">✓</span> Full tracking</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Data used for training</strong></td>
+                            <td><span class="cross">✗</span> Never</td>
+                            <td><span class="cross">✗</span> No</td>
+                            <td><span class="check">✓</span> Yes</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Best for</strong></td>
+                            <td>Maximum privacy</td>
+                            <td>Using top models privately</td>
+                            <td>Convenience</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div style="margin-top: 32px; padding: 24px; background: rgba(251,191,36,0.1); border: 1px solid rgba(251,191,36,0.3); border-radius: 12px;">
+                <p style="color: var(--warning); font-size: 14px; margin: 0;">
+                    <strong>Note:</strong> Anonymized models (GPT, Claude, Gemini) are proxied through Venice. Your identity is hidden from the provider, 
+                    but the provider's GPU still processes your prompt in plaintext. For maximum privacy, use Private models like DeepSeek, Llama, or GLM.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section code-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Simple API</h2>
+                <p>OpenAI-compatible. Drop-in replacement.</p>
+            </div>
+            
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="code-dot red"></span>
+                    <span class="code-dot yellow"></span>
+                    <span class="code-dot green"></span>
+                    <span class="code-title">Quick Start</span>
+                </div>
+                <div class="code-content">
+                    <pre><span class="comment"># Chat completion with private model</span>
+<span class="keyword">curl</span> https://oma-ai.com/api/llm \
+  -H <span class="string">"Authorization: Bearer oma_your_key"</span> \
+  -H <span class="string">"Content-Type: application/json"</span> \
+  -d <span class="string">'{
+    "model": "deepseek-v3.2",
+    "prompt": "Explain quantum computing",
+    "max_tokens": 500
+  }'</span>
+
+<span class="comment"># Response includes cost tracking and privacy level</span>
+{
+  <span class="string">"success"</span>: <span class="keyword">true</span>,
+  <span class="string">"response"</span>: <span class="string">"Quantum computing uses..."</span>,
+  <span class="string">"model"</span>: <span class="string">"deepseek-v3.2"</span>,
+  <span class="string">"privacy"</span>: <span class="string">"private"</span>,
+  <span class="string">"cost"</span>: {
+    <span class="string">"total_usd"</span>: <span class="number">0.000312</span>
+  }
+}</pre>
+                </div>
+            </div>
+            
+            <div class="features-grid" style="margin-top: 48px;">
+                <div class="feature-card">
+                    <h3>🧠 Built-in Web Search</h3>
+                    <p>Enable real-time web search with citations on any model.</p>
+                    <pre style="background: var(--bg-secondary); padding: 12px; border-radius: 8px; font-family: 'JetBrains Mono', monospace; font-size: 12px; overflow-x: auto;">
+{
+  "web_search": true
+}</pre>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>🔓 Uncensored Mode</h3>
+                    <p>Disable content filters for unrestricted generation.</p>
+                    <pre style="background: var(--bg-secondary); padding: 12px; border-radius: 8px; font-family: 'JetBrains Mono', monospace; font-size: 12px; overflow-x: auto;">
+{
+  "uncensored": true
+}</pre>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>What We Don't Do</h2>
+                <p>Our privacy commitments</p>
+            </div>
+            
+            <div class="privacy-grid">
+                <div class="privacy-card">
+                    <div class="privacy-icon">📝</div>
+                    <h3>No Logging</h3>
+                    <p>Prompts and responses are never stored on our servers. They pass through encrypted and are immediately forgotten.</p>
+                </div>
+                
+                <div class="privacy-card">
+                    <div class="privacy-icon">🎓</div>
+                    <h3>No Training</h3>
+                    <p>Your data is never used to train models. Not now, not ever. Your conversations stay yours.</p>
+                </div>
+                
+                <div class="privacy-card">
+                    <div class="privacy-icon">📊</div>
+                    <h3>No Analytics</h3>
+                    <p>We don't analyze your usage patterns or sell insights. We track only basic telemetry for service operation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <div class="container">
+            <h2>Ready for Private AI?</h2>
+            <p>No data collection. No surveillance. Just powerful AI.</p>
+            <a href="/signup" class="btn btn-primary">
+                Get Your API Key
                 <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                     <path d="M5 12h14M12 5l7 7-7 7"/>
                 </svg>
@@ -561,204 +1106,17 @@
         </div>
     </section>
 
-    <!-- Stats Bar -->
-    <div class="stats-bar">
-        <div class="stat">
-            <div class="stat-value gradient-text">16+</div>
-            <div class="stat-label">Production APIs</div>
-        </div>
-        <div class="stat">
-            <div class="stat-value gradient-text">39</div>
-            <div class="stat-label">Listed Services</div>
-        </div>
-        <div class="stat">
-            <div class="stat-value gradient-text">90%</div>
-            <div class="stat-label">Revenue Share</div>
-        </div>
-        <div class="stat">
-            <div class="stat-value gradient-text">&lt;50ms</div>
-            <div class="stat-label">Avg Response</div>
-        </div>
-    </div>
-
-    <!-- Features Section -->
-    <section class="section">
-        <div class="section-header">
-            <h2>Everything You Need</h2>
-            <p>From discovery to monetization, all the tools for the agent-first internet.</p>
-        </div>
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
-                    </svg>
-                </div>
-                <h3>API Marketplace</h3>
-                <p>Discover production-ready APIs for crypto prices, weather, search, LLMs, and more. Free tier available.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                    </svg>
-                </div>
-                <h3>MCP Servers</h3>
-                <p>Model Context Protocol servers for seamless AI agent integration. One-line installation.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                    </svg>
-                </div>
-                <h3>x402 Payments</h3>
-                <p>Instant micropayments over HTTP. Pay per API call with USDC on Base. No subscriptions.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/>
-                    </svg>
-                </div>
-                <h3>Decentralized Compute</h3>
-                <p>Run AI workloads on distributed infrastructure. Pay only for what you use.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
-                    </svg>
-                </div>
-                <h3>Secure by Design</h3>
-                <p>SIWE authentication, end-to-end encryption, and verifiable payments on-chain.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
-                    </svg>
-                </div>
-                <h3>90% Revenue Share</h3>
-                <p>Publish your API and keep 90% of revenue. The best rates in the industry.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Code Preview Section -->
-    <section class="code-section">
-        <div class="section-header">
-            <h2>Simple Integration</h2>
-            <p>Start making API calls in seconds. No complex setup required.</p>
-        </div>
-        <div class="code-container">
-            <div class="code-header">
-                <span class="code-dot red"></span>
-                <span class="code-dot yellow"></span>
-                <span class="code-dot green"></span>
-            </div>
-            <div class="code-block">
-                <pre><span class="comment"># Get live crypto prices (free tier)</span>
-<span class="keyword">curl</span> https://oma-ai.com/api/prices
-
-<span class="comment"># Response</span>
-{
-  <span class="string">"success"</span>: <span class="keyword">true</span>,
-  <span class="string">"data"</span>: {
-    <span class="string">"bitcoin"</span>: { <span class="string">"price"</span>: <span class="function">65503</span>, <span class="string">"change_24h"</span>: <span class="function">2.5</span> },
-    <span class="string">"ethereum"</span>: { <span class="string">"price"</span>: <span class="function">1920</span>, <span class="string">"change_24h"</span>: <span class="function">1.2</span> },
-    <span class="string">"solana"</span>: { <span class="string">"price"</span>: <span class="function">81</span>, <span class="string">"change_24h"</span>: <span class="function">3.1</span> }
-  }
-}</pre>
-            </div>
-        </div>
-    </section>
-
-    <!-- Popular APIs Section -->
-    <section class="section">
-        <div class="section-header">
-            <h2>Popular APIs</h2>
-            <p>Production-ready endpoints with x402 payment support.</p>
-        </div>
-        <div class="api-grid">
-            <a href="/apis#prices" class="api-card">
-                <div class="api-card-header">
-                    <div class="api-icon" style="background: rgba(245, 158, 11, 0.15);">₿</div>
-                    <h4>Crypto Prices</h4>
-                </div>
-                <p>Real-time prices for 100+ cryptocurrencies from CoinGecko.</p>
-                <span class="api-price">$0.001/call • Free tier: 1,000/day</span>
-            </a>
-            <a href="/apis#weather" class="api-card">
-                <div class="api-card-header">
-                    <div class="api-icon" style="background: rgba(59, 130, 246, 0.15);">🌤</div>
-                    <h4>Weather</h4>
-                </div>
-                <p>Current conditions and 7-day forecasts for any location.</p>
-                <span class="api-price">$0.002/call</span>
-            </a>
-            <a href="/apis#search" class="api-card">
-                <div class="api-card-header">
-                    <div class="api-icon" style="background: rgba(139, 92, 246, 0.15);">🔍</div>
-                    <h4>Web Search</h4>
-                </div>
-                <p>AI-powered search with summaries. Perfect for agents.</p>
-                <span class="api-price">$0.005/call</span>
-            </a>
-            <a href="/apis#scrape" class="api-card">
-                <div class="api-card-header">
-                    <div class="api-icon" style="background: rgba(34, 197, 94, 0.15);">🕷</div>
-                    <h4>Web Scraping</h4>
-                </div>
-                <p>Adaptive parsing with Cloudflare bypass via Scrapling.</p>
-                <span class="api-price">$0.01/call</span>
-            </a>
-            <a href="/apis#llm" class="api-card">
-                <div class="api-card-header">
-                    <div class="api-icon" style="background: rgba(236, 72, 153, 0.15);">🤖</div>
-                    <h4>LLM Gateway</h4>
-                </div>
-                <p>Multi-provider access to GPT-4, Claude, Llama, and more.</p>
-                <span class="api-price">$0.01/call</span>
-            </a>
-            <a href="/apis#marketplace" class="api-card">
-                <div class="api-card-header">
-                    <div class="api-icon" style="background: rgba(99, 102, 241, 0.15);">📦</div>
-                    <h4>Marketplace API</h4>
-                </div>
-                <p>Browse and discover all available APIs and services.</p>
-                <span class="api-price">Free</span>
-            </a>
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="cta-section">
-        <h2>Ready to Build?</h2>
-        <p>Join developers building the agent-first internet.</p>
-        <a href="/signup" class="btn btn-primary">
-            Get Started Free
-            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path d="M5 12h14M12 5l7 7-7 7"/>
-            </svg>
-        </a>
-    </section>
-
-    <!-- Footer -->
     <footer>
-        <div class="footer-container">
+        <div class="container footer-inner">
             <div class="footer-links">
-                <a href="/apis">APIs</a>
-                <a href="/mcps">MCP Servers</a>
-                <a href="/docs">Documentation</a>
+                <a href="/models">Models</a>
                 <a href="/pricing">Pricing</a>
-                <a href="/about">About</a>
-                <a href="/blog">Blog</a>
-                <a href="https://github.com/FrankieMolt/OMA-AI" target="_blank">GitHub</a>
-                <a href="https://discord.gg/oma-ai" target="_blank">Discord</a>
+                <a href="/docs">Documentation</a>
+                <a href="/privacy">Privacy</a>
+                <a href="https://github.com/FrankieMolt/OMA-AI">GitHub</a>
             </div>
             <div class="footer-copy">
-                © 2026 OMA-AI. Built with x402 on Base.
+                © 2026 OMA-AI. Powered by Venice. Built on Base.
             </div>
         </div>
     </footer>
