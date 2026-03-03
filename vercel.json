@@ -2,6 +2,8 @@
   "public": true,
   "cleanUrls": true,
   "trailingSlash": false,
+  "buildCommand": null,
+  "outputDirectory": "public",
   "headers": [
     {
       "source": "/api/(.*)",
@@ -52,6 +54,10 @@
     { "source": "/integrations", "destination": "/integrations.html" },
     { "source": "/keys", "destination": "/keys.html" },
     { "source": "/tasks", "destination": "/tasks.html" },
-    { "source": "/status", "destination": "/status.html" }
+    { "source": "/status", "destination": "/status.html" },
+    { "source": "/models", "destination": "/models.html" },
+    { "source": "/chat", "destination": "/chat.html" },
+    { "source": "/images", "destination": "/images.html" },
+    { "source": "/mining", "destination": "/mining.html" }
   ]
 }
