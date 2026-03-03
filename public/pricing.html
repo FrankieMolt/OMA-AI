@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pricing | OMA-AI</title>
-    <meta name="description" content="Simple, transparent pricing for OMA-AI API. Pay only for what you use.">
+    <link rel="canonical" href="https://oma-ai.com/pricing">
+    <title>Pricing | OMA-AI - Crypto-First AI Platform</title>
+    <meta name="description" content="Pay with crypto. No credit card required. USDC, x402, OMA tokens. Earn credits by mining.">
+    
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     
@@ -16,10 +18,10 @@
             --border: rgba(255,255,255,0.06);
             --text-primary: #f5f5f7;
             --text-secondary: #9ca3af;
-            --text-muted: #6b7280;
             --accent: #8b5cf6;
             --accent-light: #a78bfa;
             --success: #22c55e;
+            --warning: #f59e0b;
         }
         
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -28,27 +30,23 @@
             font-family: 'Inter', -apple-system, sans-serif;
             background: var(--bg-primary);
             color: var(--text-primary);
-            line-height: 1.6;
+            min-height: 100vh;
         }
-        
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
         
         nav {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            z-index: 100;
+            height: 64px;
             background: rgba(3,3,5,0.9);
             backdrop-filter: blur(16px);
             border-bottom: 1px solid var(--border);
-        }
-        
-        .nav-inner {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            height: 64px;
+            padding: 0 24px;
+            z-index: 100;
         }
         
         .logo {
@@ -71,40 +69,62 @@
             font-size: 12px;
         }
         
-        .nav-links { display: flex; align-items: center; gap: 32px; }
-        .nav-link { color: var(--text-secondary); text-decoration: none; font-size: 14px; font-weight: 500; }
+        .nav-links { display: flex; align-items: center; gap: 24px; }
+        .nav-link { color: var(--text-secondary); text-decoration: none; font-size: 14px; }
         .nav-link:hover { color: var(--text-primary); }
-        .nav-btn { padding: 8px 16px; background: var(--accent); border-radius: 8px; color: white; text-decoration: none; font-size: 14px; font-weight: 600; }
+        .nav-link.active { color: var(--accent); }
         
-        .page-header {
-            padding: 120px 0 48px;
-            text-align: center;
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 100px 24px 60px;
         }
         
-        .page-header h1 {
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        h1 {
             font-size: 48px;
             font-weight: 800;
             margin-bottom: 16px;
+            background: linear-gradient(135deg, #f5f5f7 0%, #a78bfa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
         
-        .page-header p {
-            font-size: 18px;
+        .subtitle {
             color: var(--text-secondary);
-            max-width: 600px;
-            margin: 0 auto;
+            font-size: 20px;
+            margin-bottom: 24px;
         }
         
+        .crypto-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: rgba(34,197,94,0.1);
+            border: 1px solid rgba(34,197,94,0.3);
+            border-radius: 100px;
+            color: var(--success);
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        /* Pricing Grid */
         .pricing-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 24px;
-            margin-bottom: 64px;
+            margin-bottom: 60px;
         }
         
         .pricing-card {
             background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: 16px;
+            border-radius: 20px;
             padding: 32px;
             position: relative;
             transition: all 0.3s;
@@ -115,421 +135,567 @@
             transform: translateY(-4px);
         }
         
-        .pricing-card.popular {
+        .pricing-card.featured {
             border-color: var(--accent);
             background: linear-gradient(180deg, rgba(139,92,246,0.1) 0%, var(--bg-card) 100%);
         }
         
-        .popular-badge {
+        .featured-badge {
             position: absolute;
             top: -12px;
             left: 50%;
             transform: translateX(-50%);
-            background: var(--accent);
             padding: 4px 16px;
+            background: var(--accent);
             border-radius: 100px;
             font-size: 12px;
             font-weight: 600;
         }
         
-        .tier-name {
+        .plan-name {
             font-size: 24px;
             font-weight: 700;
             margin-bottom: 8px;
         }
         
-        .tier-price {
+        .plan-price {
             font-size: 48px;
             font-weight: 800;
             margin-bottom: 4px;
         }
         
-        .tier-price span {
-            font-size: 16px;
-            color: var(--text-muted);
+        .plan-price span {
+            font-size: 18px;
             font-weight: 400;
+            color: var(--text-secondary);
         }
         
-        .tier-desc {
-            color: var(--text-muted);
+        .plan-crypto {
+            font-family: 'JetBrains Mono', monospace;
             font-size: 14px;
+            color: var(--success);
             margin-bottom: 24px;
-            min-height: 40px;
         }
         
-        .tier-features {
+        .plan-features {
             list-style: none;
             margin-bottom: 24px;
         }
         
-        .tier-features li {
+        .plan-features li {
+            padding: 8px 0;
+            color: var(--text-secondary);
             display: flex;
             align-items: center;
-            gap: 8px;
-            padding: 10px 0;
-            border-bottom: 1px solid var(--border);
+            gap: 12px;
+        }
+        
+        .plan-features li::before {
+            content: '✓';
+            color: var(--success);
+            font-weight: 600;
+        }
+        
+        .plan-btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .plan-btn.primary {
+            background: var(--accent);
+            color: white;
+        }
+        
+        .plan-btn.primary:hover {
+            background: var(--accent-light);
+        }
+        
+        .plan-btn.secondary {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+        
+        .plan-btn.secondary:hover {
+            border-color: var(--accent);
+        }
+        
+        /* Mining Section */
+        .mining-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 48px;
+            margin-bottom: 60px;
+            text-align: center;
+        }
+        
+        .mining-title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+        
+        .mining-subtitle {
+            color: var(--text-secondary);
+            font-size: 18px;
+            margin-bottom: 32px;
+        }
+        
+        .earnings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+        
+        .earnings-card {
+            background: var(--bg-secondary);
+            border-radius: 16px;
+            padding: 24px;
+            text-align: center;
+        }
+        
+        .earnings-icon {
+            font-size: 40px;
+            margin-bottom: 12px;
+        }
+        
+        .earnings-hardware {
+            font-size: 16px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+        
+        .earnings-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--success);
+        }
+        
+        .earnings-period {
             font-size: 14px;
             color: var(--text-secondary);
         }
         
-        .tier-features li:last-child {
-            border-bottom: none;
+        /* Payment Methods */
+        .payment-section {
+            margin-bottom: 60px;
         }
         
-        .check { color: var(--success); }
-        
-        .btn {
-            display: block;
-            width: 100%;
-            padding: 14px 24px;
-            border-radius: 10px;
-            font-size: 15px;
-            font-weight: 600;
-            text-decoration: none;
-            text-align: center;
-            transition: all 0.2s;
-        }
-        
-        .btn-primary {
-            background: linear-gradient(135deg, #8b5cf6, #6366f1);
-            color: white;
-        }
-        
-        .btn-secondary {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border);
-            color: var(--text-primary);
-        }
-        
-        .btn:hover {
-            transform: translateY(-2px);
-        }
-        
-        .section {
-            padding: 64px 0;
-        }
-        
-        .section h2 {
-            font-size: 32px;
-            font-weight: 800;
-            margin-bottom: 16px;
+        .section-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 24px;
             text-align: center;
         }
         
-        .section p {
-            text-align: center;
-            color: var(--text-secondary);
-            max-width: 600px;
-            margin: 0 auto 48px;
-        }
-        
-        .faq-grid {
+        .payment-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 24px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        
+        .payment-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+            text-align: center;
+        }
+        
+        .payment-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+        
+        .payment-name {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .payment-desc {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+        
+        .payment-address {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            background: var(--bg-secondary);
+            padding: 8px 12px;
+            border-radius: 8px;
+            word-break: break-all;
+        }
+        
+        /* FAQ */
+        .faq-section {
+            max-width: 800px;
+            margin: 0 auto;
         }
         
         .faq-item {
             background: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: 12px;
-            padding: 24px;
+            margin-bottom: 12px;
+            overflow: hidden;
         }
         
-        .faq-item h3 {
-            font-size: 16px;
+        .faq-question {
+            padding: 20px 24px;
             font-weight: 600;
-            margin-bottom: 8px;
-        }
-        
-        .faq-item p {
-            text-align: left;
-            font-size: 14px;
-            color: var(--text-muted);
-            margin: 0;
-        }
-        
-        .calculator {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 40px;
-            margin-bottom: 64px;
-        }
-        
-        .calculator h3 {
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 24px;
-            text-align: center;
-        }
-        
-        .calc-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 24px;
-            margin-bottom: 24px;
-        }
-        
-        .calc-field label {
-            display: block;
-            font-size: 12px;
-            color: var(--text-muted);
-            margin-bottom: 8px;
-            text-transform: uppercase;
-        }
-        
-        .calc-field input,
-        .calc-field select {
-            width: 100%;
-            padding: 12px 16px;
-            background: var(--bg-secondary);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            color: var(--text-primary);
-            font-size: 16px;
-        }
-        
-        .calc-field input:focus,
-        .calc-field select:focus {
-            outline: none;
-            border-color: var(--accent);
-        }
-        
-        .calc-result {
-            text-align: center;
-            padding: 24px;
-            background: rgba(139,92,246,0.1);
-            border-radius: 12px;
-        }
-        
-        .calc-result-label {
-            font-size: 14px;
-            color: var(--text-muted);
-            margin-bottom: 8px;
-        }
-        
-        .calc-result-value {
-            font-size: 36px;
-            font-weight: 800;
-        }
-        
-        footer {
-            border-top: 1px solid var(--border);
-            padding: 48px 0;
-            background: var(--bg-secondary);
-        }
-        
-        .footer-inner {
+            cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
         
-        .footer-links {
-            display: flex;
-            gap: 32px;
+        .faq-answer {
+            padding: 0 24px 20px;
+            color: var(--text-secondary);
+            display: none;
         }
         
-        .footer-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 14px;
+        .faq-item.open .faq-answer {
+            display: block;
         }
         
-        .footer-links a:hover { color: var(--text-primary); }
-        
-        @media (max-width: 1024px) {
-            .pricing-grid { grid-template-columns: 1fr; }
-            .faq-grid { grid-template-columns: 1fr; }
-            .calc-row { grid-template-columns: 1fr; }
+        .faq-item.open .faq-question::after {
+            content: '−';
         }
+        
+        .faq-question::after {
+            content: '+';
+            font-size: 20px;
+            color: var(--accent);
+        }
+        
+        /* Comparison */
+        .comparison-section {
+            margin-bottom: 60px;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--bg-card);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+        
+        .comparison-table th,
+        .comparison-table td {
+            padding: 16px 20px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .comparison-table th {
+            background: var(--bg-secondary);
+            font-weight: 600;
+        }
+        
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .check { color: var(--success); }
+        .cross { color: #ef4444; }
         
         @media (max-width: 768px) {
-            .nav-links { display: none; }
-            .footer-inner { flex-direction: column; gap: 24px; text-align: center; }
+            h1 { font-size: 32px; }
+            .pricing-grid { grid-template-columns: 1fr; }
+            .mining-section { padding: 32px 24px; }
         }
     </style>
 </head>
 <body>
     <nav>
-        <div class="container nav-inner">
-            <a href="/" class="logo">
-                <div class="logo-icon">OMA</div>
-                <span style="font-weight: 700; font-size: 18px;">OMA-AI</span>
-            </a>
-            <div class="nav-links">
-                <a href="/" class="nav-link">Home</a>
-                <a href="/models" class="nav-link">Models</a>
-                <a href="/pricing" class="nav-link" style="color: var(--accent-light);">Pricing</a>
-                <a href="/docs" class="nav-link">Docs</a>
-                <a href="/dashboard" class="nav-btn">Get API Key</a>
-            </div>
+        <a href="/" class="logo">
+            <div class="logo-icon">OMA</div>
+            <span class="logo-text">OMA-AI</span>
+        </a>
+        <div class="nav-links">
+            <a href="/chat.html" class="nav-link">Chat</a>
+            <a href="/images.html" class="nav-link">Images</a>
+            <a href="/models.html" class="nav-link">Models</a>
+            <a href="/pricing.html" class="nav-link active">Pricing</a>
+            <a href="/mining.html" class="nav-link">⛏️ Mine</a>
         </div>
     </nav>
-
-    <div class="page-header">
-        <div class="container">
-            <h1>Simple, Transparent Pricing</h1>
-            <p>Pay only for what you use. No subscriptions, no hidden fees. Every response shows exact cost.</p>
+    
+    <main class="container">
+        <div class="header">
+            <h1>💰 Crypto-First Pricing</h1>
+            <p class="subtitle">No credit card. No KYC. Pay with USDC, x402, or OMA.</p>
+            <div class="crypto-badge">
+                🔐 100% Crypto Payments • Base Network
+            </div>
         </div>
-    </div>
-
-    <div class="container">
+        
         <div class="pricing-grid">
+            <!-- Free Tier -->
             <div class="pricing-card">
-                <div class="tier-name">Budget</div>
-                <div class="tier-price">$0.07<span>/1M tokens</span></div>
-                <div class="tier-desc">Fast, cheap, private inference for simple tasks</div>
-                <ul class="tier-features">
-                    <li><span class="check">✓</span> Nemotron 3 Nano 30B</li>
-                    <li><span class="check">✓</span> GLM 4.7 Flash</li>
-                    <li><span class="check">✓</span> Gemma 3 27B</li>
-                    <li><span class="check">✓</span> Venice Uncensored</li>
-                    <li><span class="check">✓</span> Llama 3.2 3B</li>
-                    <li><span class="check">✓</span> Qwen 3 235B</li>
+                <div class="plan-name">Free</div>
+                <div class="plan-price">$0 <span>/ month</span></div>
+                <div class="plan-crypto">0 USDC • Just connect wallet</div>
+                <ul class="plan-features">
+                    <li>500 credits/month ($0.50 value)</li>
+                    <li>Basic text models</li>
+                    <li>10 images/month</li>
+                    <li>Community support</li>
+                    <li>No credit card required</li>
                 </ul>
-                <a href="/signup" class="btn btn-secondary">Get Started</a>
+                <button class="plan-btn secondary" onclick="window.location.href='/signup.html'">
+                    Get Started Free
+                </button>
             </div>
             
-            <div class="pricing-card popular">
-                <div class="popular-badge">Most Popular</div>
-                <div class="tier-name">Standard</div>
-                <div class="tier-price">$0.40<span>/1M tokens</span></div>
-                <div class="tier-desc">Best value, excellent quality for production use</div>
-                <ul class="tier-features">
-                    <li><span class="check">✓</span> DeepSeek V3.2</li>
-                    <li><span class="check">✓</span> Llama 3.3 70B</li>
-                    <li><span class="check">✓</span> Kimi K2.5</li>
-                    <li><span class="check">✓</span> Qwen 3 Coder 480B</li>
-                    <li><span class="check">✓</span> MiniMax M2.5</li>
-                    <li><span class="check">✓</span> 256K context window</li>
+            <!-- Starter Tier -->
+            <div class="pricing-card">
+                <div class="plan-name">Starter</div>
+                <div class="plan-price">$10 <span>/ month</span></div>
+                <div class="plan-crypto">10 USDC/month • ~33 OMA</div>
+                <ul class="plan-features">
+                    <li>15,000 credits/month ($15 value)</li>
+                    <li>All text models</li>
+                    <li>500 images/month</li>
+                    <li>Audio TTS (100K chars)</li>
+                    <li>Email support</li>
                 </ul>
-                <a href="/signup" class="btn btn-primary">Get Started</a>
+                <button class="plan-btn secondary" onclick="payWithCrypto('starter')">
+                    Pay 10 USDC
+                </button>
             </div>
             
-            <div class="pricing-card">
-                <div class="tier-name">Premium</div>
-                <div class="tier-price">$2.19<span>/1M tokens</span></div>
-                <div class="tier-desc">State-of-the-art models with maximum capability</div>
-                <ul class="tier-features">
-                    <li><span class="check">✓</span> GPT-5.2 / 5.3 Codex</li>
-                    <li><span class="check">✓</span> Claude Opus 4.6</li>
-                    <li><span class="check">✓</span> Claude Sonnet 4.6</li>
-                    <li><span class="check">✓</span> Gemini 3.1 Pro</li>
-                    <li><span class="check">✓</span> 1M context window</li>
-                    <li><span class="check">✓</span> Expert-level analysis</li>
+            <!-- Pro Tier - Featured -->
+            <div class="pricing-card featured">
+                <div class="featured-badge">MOST POPULAR</div>
+                <div class="plan-name">Pro</div>
+                <div class="plan-price">$29 <span>/ month</span></div>
+                <div class="plan-crypto">29 USDC/month • ~97 OMA</div>
+                <ul class="plan-features">
+                    <li>50,000 credits/month ($50 value)</li>
+                    <li>All models + priority access</li>
+                    <li>2,000 images/month</li>
+                    <li>Video generation</li>
+                    <li>API access</li>
+                    <li>Priority support</li>
                 </ul>
-                <a href="/signup" class="btn btn-secondary">Get Started</a>
+                <button class="plan-btn primary" onclick="payWithCrypto('pro')">
+                    Pay 29 USDC
+                </button>
+            </div>
+            
+            <!-- Enterprise Tier -->
+            <div class="pricing-card">
+                <div class="plan-name">Enterprise</div>
+                <div class="plan-price">$99 <span>/ month</span></div>
+                <div class="plan-crypto">99 USDC/month • ~330 OMA</div>
+                <ul class="plan-features">
+                    <li>200,000 credits/month ($200 value)</li>
+                    <li>Dedicated compute nodes</li>
+                    <li>Unlimited images</li>
+                    <li>Custom model fine-tuning</li>
+                    <li>SLA guarantee</li>
+                    <li>Dedicated support</li>
+                </ul>
+                <button class="plan-btn secondary" onclick="payWithCrypto('enterprise')">
+                    Pay 99 USDC
+                </button>
             </div>
         </div>
         
-        <div class="calculator">
-            <h3>Cost Calculator</h3>
-            <div class="calc-row">
-                <div class="calc-field">
-                    <label>Model Tier</label>
-                    <select id="calc-tier">
-                        <option value="0.07">Budget ($0.07/1M input)</option>
-                        <option value="0.40" selected>Standard ($0.40/1M input)</option>
-                        <option value="2.19">Premium ($2.19/1M input)</option>
-                    </select>
-                </div>
-                <div class="calc-field">
-                    <label>Input Tokens</label>
-                    <input type="number" id="calc-input" value="1000" min="0">
-                </div>
-                <div class="calc-field">
-                    <label>Output Tokens</label>
-                    <input type="number" id="calc-output" value="500" min="0">
-                </div>
-            </div>
-            <div class="calc-result">
-                <div class="calc-result-label">Estimated Cost</div>
-                <div class="calc-result-value" id="calc-total">$0.00065</div>
-            </div>
-        </div>
-    </div>
-
-    <div class="section">
-        <div class="container">
-            <h2>Frequently Asked Questions</h2>
-            <p>Common questions about OMA-AI pricing</p>
+        <!-- Mining Section -->
+        <div class="mining-section">
+            <h2 class="mining-title">⛏️ Or Earn Credits by Mining</h2>
+            <p class="mining-subtitle">Run AI models on your hardware. Earn USDC. No upfront payment needed.</p>
             
-            <div class="faq-grid">
-                <div class="faq-item">
-                    <h3>How is pricing calculated?</h3>
-                    <p>Input and output tokens are priced separately. Input tokens are what you send, output tokens are what the model generates. Price is per 1 million tokens.</p>
+            <div class="earnings-grid">
+                <div class="earnings-card">
+                    <div class="earnings-icon">💻</div>
+                    <div class="earnings-hardware">CPU (8 cores)</div>
+                    <div class="earnings-value">$10-30</div>
+                    <div class="earnings-period">per month</div>
                 </div>
-                
-                <div class="faq-item">
-                    <h3>What's a token?</h3>
-                    <p>A token is roughly 4 characters or 0.75 words in English. 1,000 tokens ≈ 750 words. Our API shows exact token counts in every response.</p>
+                <div class="earnings-card">
+                    <div class="earnings-icon">🎮</div>
+                    <div class="earnings-hardware">RTX 3060</div>
+                    <div class="earnings-value">$50-90</div>
+                    <div class="earnings-period">per month</div>
                 </div>
-                
-                <div class="faq-item">
-                    <h3>Are there any hidden fees?</h3>
-                    <p>No. You only pay for tokens used. No subscription fees, no minimums, no surprise charges. Every response includes exact cost.</p>
+                <div class="earnings-card">
+                    <div class="earnings-icon">🚀</div>
+                    <div class="earnings-hardware">RTX 4090</div>
+                    <div class="earnings-value">$200-300</div>
+                    <div class="earnings-period">per month</div>
                 </div>
-                
-                <div class="faq-item">
-                    <h3>How do I pay?</h3>
-                    <p>We support x402 micropayments on Base and Solana networks. Add credits to your account and pay as you go.</p>
+            </div>
+            
+            <button class="plan-btn primary" onclick="window.location.href='/mining.html'">
+                Start Mining →
+            </button>
+        </div>
+        
+        <!-- Payment Methods -->
+        <div class="payment-section">
+            <h2 class="section-title">💳 Payment Methods</h2>
+            <div class="payment-grid">
+                <div class="payment-card">
+                    <div class="payment-icon">💵</div>
+                    <div class="payment-name">USDC</div>
+                    <div class="payment-desc">Stablecoin on Base. Instant confirmation.</div>
+                    <div class="payment-address">Base Network • USDC</div>
                 </div>
-                
-                <div class="faq-item">
-                    <h3>Why are Premium models more expensive?</h3>
-                    <p>Premium models (GPT-5, Claude Opus) require licensing fees to OpenAI and Anthropic. We proxy these through Venice to hide your identity.</p>
+                <div class="payment-card">
+                    <div class="payment-icon">⚡</div>
+                    <div class="payment-name">x402 Protocol</div>
+                    <div class="payment-desc">Micropayments. Pay per API call.</div>
+                    <div class="payment-address">HTTP 402 • Crypto-native</div>
                 </div>
-                
-                <div class="faq-item">
-                    <h3>Can I switch models mid-conversation?</h3>
-                    <p>Yes! Each API call is independent. Use cheap models for simple tasks and premium models for complex ones to optimize costs.</p>
+                <div class="payment-card">
+                    <div class="payment-icon">🪙</div>
+                    <div class="payment-name">OMA Token</div>
+                    <div class="payment-desc">Governance token. 20% discount.</div>
+                    <div class="payment-address">Base • ERC-20</div>
                 </div>
             </div>
         </div>
-    </div>
-
-    <footer>
-        <div class="container footer-inner">
-            <div class="footer-links">
-                <a href="/">Home</a>
-                <a href="/models">Models</a>
-                <a href="/pricing">Pricing</a>
-                <a href="/docs">Docs</a>
-                <a href="https://github.com/FrankieMolt/OMA-AI">GitHub</a>
+        
+        <!-- Comparison -->
+        <div class="comparison-section">
+            <h2 class="section-title">📊 OMA-AI vs Others</h2>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>OMA-AI</th>
+                        <th>Venice AI</th>
+                        <th>OpenAI</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Crypto Payments</td>
+                        <td class="check">✓ Yes</td>
+                        <td class="check">✓ Yes</td>
+                        <td class="cross">✗ No</td>
+                    </tr>
+                    <tr>
+                        <td>Earn by Mining</td>
+                        <td class="check">✓ Yes</td>
+                        <td class="cross">✗ No</td>
+                        <td class="cross">✗ No</td>
+                    </tr>
+                    <tr>
+                        <td>No KYC</td>
+                        <td class="check">✓ Yes</td>
+                        <td class="check">✓ Yes</td>
+                        <td class="cross">✗ No</td>
+                    </tr>
+                    <tr>
+                        <td>Uncensored Models</td>
+                        <td class="check">✓ Yes</td>
+                        <td class="check">✓ Yes</td>
+                        <td class="cross">✗ No</td>
+                    </tr>
+                    <tr>
+                        <td>x402 Support</td>
+                        <td class="check">✓ Yes</td>
+                        <td class="cross">✗ No</td>
+                        <td class="cross">✗ No</td>
+                    </tr>
+                    <tr>
+                        <td>Decentralized</td>
+                        <td class="check">✓ Yes</td>
+                        <td class="cross">✗ No</td>
+                        <td class="cross">✗ No</td>
+                    </tr>
+                    <tr>
+                        <td>Price (per 1M tokens)</td>
+                        <td>$0.15</td>
+                        <td>$0.20</td>
+                        <td>$0.50</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- FAQ -->
+        <div class="faq-section">
+            <h2 class="section-title">❓ FAQ</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">Why crypto-only payments?</div>
+                <div class="faq-answer">
+                    Privacy and decentralization. No credit card = no personal data. No bank records. 
+                    Plus, crypto enables true micropayments via x402 protocol.
+                </div>
             </div>
-            <div style="color: var(--text-muted); font-size: 14px;">
-                © 2026 OMA-AI. Powered by Venice.
+            
+            <div class="faq-item">
+                <div class="faq-question">What is x402?</div>
+                <div class="faq-answer">
+                    x402 is a crypto-native payment protocol. It uses HTTP 402 status codes to request 
+                    payment before serving API responses. Perfect for AI micropayments.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">How do I get USDC?</div>
+                <div class="faq-answer">
+                    Buy USDC on any major exchange (Coinbase, Binance, Kraken) and withdraw to your 
+                    Base network wallet. Or earn it by mining on OMA-AI!
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">What's the OMA token?</div>
+                <div class="faq-answer">
+                    OMA is our governance token. Holders get 20% discount on all services, 
+                    voting rights on platform decisions, and a share of protocol revenue.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Can I really earn by mining?</div>
+                <div class="faq-answer">
+                    Yes! Install our miner, run AI models on your GPU, and earn 50% of inference fees.
+                    Weekly USDC payouts to your wallet. Minimum $10.
+                </div>
             </div>
         </div>
-    </footer>
-
+    </main>
+    
     <script>
-        const tierPrices = {
-            '0.07': { input: 0.07, output: 0.50 },
-            '0.40': { input: 0.40, output: 1.00 },
-            '2.19': { input: 2.19, output: 17.50 }
-        };
+        // FAQ toggle
+        document.querySelectorAll('.faq-question').forEach(q => {
+            q.addEventListener('click', () => {
+                q.parentElement.classList.toggle('open');
+            });
+        });
         
-        function calculateCost() {
-            const tier = document.getElementById('calc-tier').value;
-            const inputTokens = parseInt(document.getElementById('calc-input').value) || 0;
-            const outputTokens = parseInt(document.getElementById('calc-output').value) || 0;
+        // Crypto payment
+        function payWithCrypto(plan) {
+            const amounts = {
+                'starter': '10',
+                'pro': '29',
+                'enterprise': '99'
+            };
             
-            const prices = tierPrices[tier];
-            const inputCost = (inputTokens / 1000000) * prices.input;
-            const outputCost = (outputTokens / 1000000) * prices.output;
-            const total = inputCost + outputCost;
-            
-            document.getElementById('calc-total').textContent = '$' + total.toFixed(6);
+            // In production, this would open a payment modal
+            alert(`🚧 Demo Mode\n\nIn production, this would:\n\n1. Connect your wallet\n2. Request ${amounts[plan]} USDC\n3. Send to OMA-AI treasury\n4. Credit your account\n\nFor now, connect your wallet in the dashboard.`);
+            window.location.href = '/dashboard.html';
         }
-        
-        document.getElementById('calc-tier').addEventListener('change', calculateCost);
-        document.getElementById('calc-input').addEventListener('input', calculateCost);
-        document.getElementById('calc-output').addEventListener('input', calculateCost);
-        
-        calculateCost();
     </script>
 </body>
 </html>

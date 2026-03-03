@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="https://oma-ai.com/images">
+    <title>Image Generation | OMA-AI</title>
+    <meta name="description" content="Generate stunning AI images with Flux, Nano Banana, and more. Private, uncensored, affordable.">
+    
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-primary: #030305;
+            --bg-secondary: #0a0a0f;
+            --bg-card: #0f0f15;
+            --border: rgba(255,255,255,0.06);
+            --text-primary: #f5f5f7;
+            --text-secondary: #9ca3af;
+            --accent: #8b5cf6;
+            --accent-light: #a78bfa;
+            --success: #22c55e;
+        }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+        }
+        
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 64px;
+            background: rgba(3,3,5,0.9);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 24px;
+            z-index: 100;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--text-primary);
+        }
+        
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, #8b5cf6, #6366f1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 12px;
+        }
+        
+        .logo-text { font-weight: 700; font-size: 18px; }
+        
+        .nav-links { display: flex; align-items: center; gap: 24px; }
+        .nav-link { color: var(--text-secondary); text-decoration: none; font-size: 14px; }
+        .nav-link:hover { color: var(--text-primary); }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 100px 24px 60px;
+        }
+        
+        h1 {
+            font-size: 36px;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, #f5f5f7 0%, #a78bfa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .subtitle {
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+        }
+        
+        .generator {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+        
+        @media (max-width: 900px) {
+            .generator { grid-template-columns: 1fr; }
+        }
+        
+        .input-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+        }
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        
+        .prompt-input {
+            width: 100%;
+            min-height: 120px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px;
+            color: var(--text-primary);
+            font-size: 15px;
+            font-family: inherit;
+            resize: vertical;
+            margin-bottom: 20px;
+        }
+        
+        .prompt-input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+        
+        .options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+        
+        .option-group label {
+            display: block;
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+        
+        .option-group select,
+        .option-group input {
+            width: 100%;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 10px 12px;
+            color: var(--text-primary);
+            font-size: 14px;
+        }
+        
+        .generate-btn {
+            width: 100%;
+            padding: 14px;
+            background: var(--accent);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .generate-btn:hover {
+            background: var(--accent-light);
+        }
+        
+        .generate-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .output-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .image-output {
+            flex: 1;
+            min-height: 300px;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+            overflow: hidden;
+        }
+        
+        .image-output img {
+            max-width: 100%;
+            max-height: 400px;
+            border-radius: 12px;
+        }
+        
+        .placeholder {
+            text-align: center;
+            color: var(--text-secondary);
+        }
+        
+        .placeholder-icon {
+            font-size: 48px;
+            margin-bottom: 12px;
+        }
+        
+        .image-actions {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .action-btn {
+            flex: 1;
+            padding: 10px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .action-btn:hover {
+            border-color: var(--accent);
+        }
+        
+        /* Model Cards */
+        .models-section {
+            margin-top: 60px;
+        }
+        
+        .models-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        
+        .model-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+            transition: all 0.3s;
+        }
+        
+        .model-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+        }
+        
+        .model-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--accent), #6366f1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 16px;
+        }
+        
+        .model-name {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .model-desc {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+        }
+        
+        .model-price {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--success);
+        }
+        
+        .model-price span {
+            font-size: 14px;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+        
+        /* Gallery */
+        .gallery {
+            margin-top: 60px;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 16px;
+        }
+        
+        .gallery-item {
+            aspect-ratio: 1;
+            background: var(--bg-card);
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .credits-info {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 16px;
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .credits-label {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+        
+        .credits-value {
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        .credits-value span {
+            color: var(--success);
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="/" class="logo">
+            <div class="logo-icon">OMA</div>
+            <span class="logo-text">OMA-AI</span>
+        </a>
+        <div class="nav-links">
+            <a href="/chat.html" class="nav-link">Chat</a>
+            <a href="/images.html" class="nav-link" style="color: var(--accent);">Images</a>
+            <a href="/models.html" class="nav-link">Models</a>
+            <a href="/pricing.html" class="nav-link">Pricing</a>
+            <a href="/mining.html" class="nav-link">⛏️ Mine</a>
+        </div>
+    </nav>
+    
+    <main class="container">
+        <h1>🎨 Image Generation</h1>
+        <p class="subtitle">Create stunning AI art with private, uncensored models</p>
+        
+        <div class="generator">
+            <div class="input-section">
+                <h2 class="section-title">Prompt</h2>
+                <textarea class="prompt-input" id="prompt" placeholder="Describe the image you want to create...
+
+Example: A serene Japanese garden at sunset, cherry blossoms falling, koi pond reflection, photorealistic, 4K"></textarea>
+                
+                <div class="options">
+                    <div class="option-group">
+                        <label>Model</label>
+                        <select id="model">
+                            <option value="flux-2-pro">Flux 2 Pro (Best Quality)</option>
+                            <option value="nano-banana-pro">Nano Banana Pro (Photoreal)</option>
+                            <option value="venice-sd35">Venice SD35 (Budget)</option>
+                            <option value="chroma">Chroma (Artistic)</option>
+                            <option value="wai-Illustrious">Anime (WAI)</option>
+                        </select>
+                    </div>
+                    <div class="option-group">
+                        <label>Size</label>
+                        <select id="size">
+                            <option value="1024x1024">1024x1024 (Square)</option>
+                            <option value="1024x768">1024x768 (Landscape)</option>
+                            <option value="768x1024">768x1024 (Portrait)</option>
+                            <option value="512x512">512x512 (Fast)</option>
+                        </select>
+                    </div>
+                    <div class="option-group">
+                        <label>Count</label>
+                        <select id="count">
+                            <option value="1">1 image</option>
+                            <option value="2">2 images</option>
+                            <option value="4">4 images</option>
+                        </select>
+                    </div>
+                    <div class="option-group">
+                        <label>Style</label>
+                        <select id="style">
+                            <option value="auto">Auto</option>
+                            <option value="photorealistic">Photorealistic</option>
+                            <option value="artistic">Artistic</option>
+                            <option value="anime">Anime</option>
+                            <option value="3d">3D Render</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="credits-info">
+                    <span class="credits-label">Cost estimate:</span>
+                    <span class="credits-value"><span id="cost">3</span> credits ($0.03)</span>
+                </div>
+                
+                <button class="generate-btn" id="generate-btn" onclick="generateImage()">
+                    🎨 Generate Image
+                </button>
+            </div>
+            
+            <div class="output-section">
+                <h2 class="section-title">Output</h2>
+                <div class="image-output" id="output">
+                    <div class="placeholder">
+                        <div class="placeholder-icon">🖼️</div>
+                        <p>Your generated image will appear here</p>
+                    </div>
+                </div>
+                <div class="image-actions">
+                    <button class="action-btn" onclick="downloadImage()">⬇️ Download</button>
+                    <button class="action-btn" onclick="upscaleImage()">⬆️ Upscale</button>
+                    <button class="action-btn" onclick="copyPrompt()">📋 Copy Prompt</button>
+                </div>
+            </div>
+        </div>
+        
+        <section class="models-section">
+            <h2 class="section-title">Available Models</h2>
+            <div class="models-grid">
+                <div class="model-card">
+                    <div class="model-icon">🔥</div>
+                    <div class="model-name">Flux 2 Pro</div>
+                    <div class="model-desc">Best quality, fast generation, versatile styles</div>
+                    <div class="model-price">$0.04 <span>/ image</span></div>
+                </div>
+                <div class="model-card">
+                    <div class="model-icon">🍌</div>
+                    <div class="model-name">Nano Banana Pro</div>
+                    <div class="model-desc">Photorealistic, up to 4K resolution</div>
+                    <div class="model-price">$0.18 <span>/ image</span></div>
+                </div>
+                <div class="model-card">
+                    <div class="model-icon">🎨</div>
+                    <div class="model-name">Chroma</div>
+                    <div class="model-desc">Artistic styles, vibrant colors</div>
+                    <div class="model-price">$0.01 <span>/ image</span></div>
+                </div>
+                <div class="model-card">
+                    <div class="model-icon">🌸</div>
+                    <div class="model-name">Anime (WAI)</div>
+                    <div class="model-desc">Anime and illustration styles</div>
+                    <div class="model-price">$0.01 <span>/ image</span></div>
+                </div>
+                <div class="model-card">
+                    <div class="model-icon">✨</div>
+                    <div class="model-name">Venice SD35</div>
+                    <div class="model-desc">Budget-friendly, good quality</div>
+                    <div class="model-price">$0.01 <span>/ image</span></div>
+                </div>
+                <div class="model-card">
+                    <div class="model-icon">📸</div>
+                    <div class="model-name">Recraft V4 Pro</div>
+                    <div class="model-desc">Professional product shots</div>
+                    <div class="model-price">$0.29 <span>/ image</span></div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="gallery">
+            <h2 class="section-title">Example Gallery</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                    <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:48px;">🌌</div>
+                </div>
+                <div class="gallery-item" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                    <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:48px;">🌸</div>
+                </div>
+                <div class="gallery-item" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                    <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:48px;">🏖️</div>
+                </div>
+                <div class="gallery-item" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
+                    <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:48px;">🌲</div>
+                </div>
+                <div class="gallery-item" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                    <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:48px;">🌅</div>
+                </div>
+                <div class="gallery-item" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">
+                    <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:48px;">🏠</div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <script>
+        // Update cost estimate
+        document.getElementById('model').addEventListener('change', updateCost);
+        document.getElementById('count').addEventListener('change', updateCost);
+        
+        function updateCost() {
+            const model = document.getElementById('model').value;
+            const count = parseInt(document.getElementById('count').value);
+            const costs = {
+                'flux-2-pro': 4,
+                'nano-banana-pro': 18,
+                'venice-sd35': 1,
+                'chroma': 1,
+                'wai-Illustrious': 1
+            };
+            const cost = (costs[model] || 1) * count;
+            document.getElementById('cost').textContent = cost;
+        }
+        
+        async function generateImage() {
+            const prompt = document.getElementById('prompt').value.trim();
+            if (!prompt) {
+                alert('Please enter a prompt');
+                return;
+            }
+            
+            const btn = document.getElementById('generate-btn');
+            btn.disabled = true;
+            btn.textContent = '⏳ Generating...';
+            
+            const output = document.getElementById('output');
+            output.innerHTML = '<div class="placeholder"><div class="placeholder-icon">⏳</div><p>Generating your image...</p></div>';
+            
+            // Simulate generation
+            await new Promise(r => setTimeout(r, 2000));
+            
+            // Show placeholder result
+            const colors = ['#667eea', '#f093fb', '#4facfe', '#43e97b', '#fa709a'];
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            
+            output.innerHTML = `
+                <div style="width:100%;height:100%;background:linear-gradient(135deg, ${randomColor} 0%, #764ba2 100%);display:flex;align-items:center;justify-content:center;flex-direction:column;">
+                    <div style="font-size:80px;margin-bottom:16px;">🎨</div>
+                    <p style="color:white;text-align:center;padding:0 20px;">Demo Mode<br>Add API key for real images</p>
+                </div>
+            `;
+            
+            btn.disabled = false;
+            btn.textContent = '🎨 Generate Image';
+        }
+        
+        function downloadImage() {
+            alert('Download requires API key configuration');
+        }
+        
+        function upscaleImage() {
+            alert('Upscaling requires API key configuration');
+        }
+        
+        function copyPrompt() {
+            const prompt = document.getElementById('prompt').value;
+            navigator.clipboard.writeText(prompt);
+            alert('Prompt copied!');
+        }
+    </script>
+</body>
+</html>

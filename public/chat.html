@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="https://oma-ai.com/chat">
+    <title>Chat | OMA-AI - Private AI Chat</title>
+    <meta name="description" content="Chat with 50+ AI models privately. No data retention. Uncensored options available.">
+    
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-primary: #030305;
+            --bg-secondary: #0a0a0f;
+            --bg-card: #0f0f15;
+            --bg-input: #0a0a0f;
+            --border: rgba(255,255,255,0.06);
+            --text-primary: #f5f5f7;
+            --text-secondary: #9ca3af;
+            --accent: #8b5cf6;
+            --accent-light: #a78bfa;
+            --success: #22c55e;
+            --user-bg: #1a1a2e;
+            --ai-bg: #0f0f15;
+        }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: rgba(3,3,5,0.9);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 24px;
+            z-index: 100;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--text-primary);
+        }
+        
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #8b5cf6, #6366f1);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 10px;
+        }
+        
+        .logo-text { font-weight: 700; font-size: 16px; }
+        
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .credits-display {
+            background: var(--bg-card);
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+        
+        .credits-display span { color: var(--success); font-weight: 600; }
+        
+        /* Model Selector */
+        .model-selector {
+            position: fixed;
+            top: 60px;
+            left: 0;
+            right: 0;
+            height: 50px;
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            padding: 0 24px;
+            gap: 12px;
+            z-index: 90;
+        }
+        
+        .model-selector select {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 8px 12px;
+            color: var(--text-primary);
+            font-size: 14px;
+            min-width: 200px;
+        }
+        
+        .model-info {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+        
+        /* Chat Area */
+        .chat-container {
+            flex: 1;
+            overflow-y: auto;
+            padding: 130px 24px 100px;
+            max-width: 900px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        
+        .message {
+            margin-bottom: 24px;
+            padding: 16px;
+            border-radius: 12px;
+            max-width: 85%;
+        }
+        
+        .message.user {
+            background: var(--user-bg);
+            margin-left: auto;
+        }
+        
+        .message.ai {
+            background: var(--ai-card);
+            border: 1px solid var(--border);
+        }
+        
+        .message-header {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .message-content {
+            line-height: 1.7;
+            white-space: pre-wrap;
+        }
+        
+        .message-content code {
+            background: #000;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+        }
+        
+        .message-content pre {
+            background: #000;
+            padding: 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 12px 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+        }
+        
+        /* Input Area */
+        .input-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(3,3,5,0.95);
+            backdrop-filter: blur(16px);
+            border-top: 1px solid var(--border);
+            padding: 16px 24px;
+        }
+        
+        .input-wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            gap: 12px;
+        }
+        
+        .input-wrapper textarea {
+            flex: 1;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 12px 16px;
+            color: var(--text-primary);
+            font-size: 15px;
+            font-family: inherit;
+            resize: none;
+            min-height: 50px;
+            max-height: 150px;
+        }
+        
+        .input-wrapper textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+        
+        .send-btn {
+            background: var(--accent);
+            border: none;
+            border-radius: 12px;
+            padding: 0 24px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .send-btn:hover {
+            background: var(--accent-light);
+        }
+        
+        .send-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        /* Welcome Screen */
+        .welcome {
+            text-align: center;
+            padding: 60px 24px;
+        }
+        
+        .welcome h1 {
+            font-size: 32px;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, #f5f5f7 0%, #a78bfa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .welcome p {
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+        }
+        
+        .suggestions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .suggestion {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: left;
+        }
+        
+        .suggestion:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+        
+        .suggestion-title {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        
+        .suggestion-desc {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+        
+        /* Loading */
+        .typing {
+            display: flex;
+            gap: 4px;
+            padding: 8px 0;
+        }
+        
+        .typing span {
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+            animation: bounce 1.4s infinite ease-in-out;
+        }
+        
+        .typing span:nth-child(1) { animation-delay: -0.32s; }
+        .typing span:nth-child(2) { animation-delay: -0.16s; }
+        
+        @keyframes bounce {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .chat-container { padding: 120px 16px 90px; }
+            .message { max-width: 95%; }
+            .suggestions { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="/" class="logo">
+            <div class="logo-icon">OMA</div>
+            <span class="logo-text">OMA-AI Chat</span>
+        </a>
+        <div class="header-right">
+            <div class="credits-display">
+                Credits: <span id="credits">1000</span> ($1.00)
+            </div>
+            <a href="/dashboard.html" style="color: var(--text-secondary); text-decoration: none; font-size: 14px;">Dashboard</a>
+        </div>
+    </header>
+    
+    <div class="model-selector">
+        <select id="model-select">
+            <option value="venice-uncensored">Venice Uncensored (Private)</option>
+            <option value="zai-org-glm-4.7">GLM 4.7 (Reasoning)</option>
+            <option value="deepseek-v3.2">DeepSeek V3.2 (Value)</option>
+            <option value="qwen3-4b">Qwen 3 4B (Fast)</option>
+            <option value="llama-3.2-3b">Llama 3.2 3B (Open)</option>
+        </select>
+        <span class="model-info" id="model-info">Uncensored • Private • $0.20/$0.90 per 1M tokens</span>
+    </div>
+    
+    <main class="chat-container" id="chat-container">
+        <div class="welcome" id="welcome">
+            <h1>Chat with Private AI</h1>
+            <p>No data retention. Uncensored options. Earn credits by mining.</p>
+            <div class="suggestions">
+                <div class="suggestion" onclick="sendSuggestion('Explain quantum computing in simple terms')">
+                    <div class="suggestion-title">💡 Explain a concept</div>
+                    <div class="suggestion-desc">Quantum computing explained simply</div>
+                </div>
+                <div class="suggestion" onclick="sendSuggestion('Write a Python function to merge two sorted lists')">
+                    <div class="suggestion-title">💻 Write code</div>
+                    <div class="suggestion-desc">Merge sorted lists in Python</div>
+                </div>
+                <div class="suggestion" onclick="sendSuggestion('What are the best practices for API security?')">
+                    <div class="suggestion-title">🔒 Security advice</div>
+                    <div class="suggestion-desc">API security best practices</div>
+                </div>
+                <div class="suggestion" onclick="sendSuggestion('Create a business plan for a SaaS startup')">
+                    <div class="suggestion-title">📊 Business plan</div>
+                    <div class="suggestion-desc">SaaS startup business plan</div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <div class="input-container">
+        <div class="input-wrapper">
+            <textarea 
+                id="message-input" 
+                placeholder="Type your message..." 
+                rows="1"
+                onkeydown="handleKeyDown(event)"
+            ></textarea>
+            <button class="send-btn" id="send-btn" onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+    
+    <script>
+        const API_BASE = 'https://api.oma-ai.com/v1';
+        const DEMO_API_KEY = 'demo-key-' + Math.random().toString(36).substr(2, 9);
+        
+        let messages = [];
+        let credits = 1000;
+        
+        const modelInfo = {
+            'venice-uncensored': 'Uncensored • Private • $0.20/$0.90 per 1M tokens',
+            'zai-org-glm-4.7': 'Reasoning • Private • $0.55/$2.65 per 1M tokens',
+            'deepseek-v3.2': 'Value • Private • $0.40/$1.00 per 1M tokens',
+            'qwen3-4b': 'Fast • Private • $0.15/$0.60 per 1M tokens',
+            'llama-3.2-3b': 'Open • Private • $0.15/$0.60 per 1M tokens'
+        };
+        
+        document.getElementById('model-select').addEventListener('change', (e) => {
+            document.getElementById('model-info').textContent = modelInfo[e.target.value];
+        });
+        
+        function handleKeyDown(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
+        }
+        
+        function sendSuggestion(text) {
+            document.getElementById('message-input').value = text;
+            sendMessage();
+        }
+        
+        async function sendMessage() {
+            const input = document.getElementById('message-input');
+            const text = input.value.trim();
+            if (!text) return;
+            
+            // Hide welcome
+            document.getElementById('welcome').style.display = 'none';
+            
+            // Add user message
+            addMessage('user', text);
+            input.value = '';
+            
+            // Show typing
+            const typingEl = addTyping();
+            
+            try {
+                const model = document.getElementById('model-select').value;
+                messages.push({ role: 'user', content: text });
+                
+                // Simulate API call (in production, this would be real)
+                await new Promise(r => setTimeout(r, 1500));
+                
+                const response = generateDemoResponse(text, model);
+                messages.push({ role: 'assistant', content: response });
+                
+                // Remove typing and add response
+                typingEl.remove();
+                addMessage('ai', response);
+                
+                // Deduct credits (demo)
+                credits -= Math.ceil(text.length / 100);
+                updateCredits();
+                
+            } catch (error) {
+                typingEl.remove();
+                addMessage('ai', 'Error: ' + error.message);
+            }
+        }
+        
+        function generateDemoResponse(text, model) {
+            const responses = {
+                'venice-uncensored': `I understand you're asking about "${text.substring(0, 50)}..."\n\nAs an uncensored model, I can provide frank, unfiltered responses. Let me give you a direct answer:\n\n**Key Points:**\n1. This is a demo response\n2. In production, this would use the Venice API\n3. Your data stays private - no logging\n\nWould you like me to elaborate on any aspect?`,
+                'zai-org-glm-4.7': `Analyzing your query: "${text.substring(0, 50)}..."\n\n<thinking>\nLet me break this down systematically:\n- First, I'll identify the core question\n- Then explore relevant context\n- Finally, synthesize a comprehensive answer\n</thinking>\n\n**Analysis:**\n\nThis is a demonstration of GLM 4.7's reasoning capabilities. In production, this would connect to the actual API for real responses.\n\n**Recommendation:**\nStart with the fundamentals and build from there.`,
+                'deepseek-v3.2': `You asked: "${text.substring(0, 50)}..."\n\nHere's a concise response:\n\n✅ Main point: This is a demo\n✅ Your privacy is protected\n✅ No data retention\n\nFor real responses, add your Venice API key to the configuration.`,
+                'qwen3-4b': `Quick answer to: "${text.substring(0, 50)}..."\n\nThis is a fast, efficient model. Demo mode active.\n\nKey takeaway: Add API key for real responses.`,
+                'llama-3.2-3b': `Response to: "${text.substring(0, 50)}..."\n\nThis is Llama 3.2 3B - a capable open model. Demo mode.\n\nTip: Configure your API key for production use.`
+            };
+            
+            return responses[model] || responses['venice-uncensored'];
+        }
+        
+        function addMessage(role, content) {
+            const container = document.getElementById('chat-container');
+            const div = document.createElement('div');
+            div.className = `message ${role}`;
+            
+            const header = role === 'user' ? 'You' : 'OMA-AI';
+            const time = new Date().toLocaleTimeString();
+            
+            div.innerHTML = `
+                <div class="message-header">
+                    <strong>${header}</strong>
+                    <span>${time}</span>
+                </div>
+                <div class="message-content">${formatContent(content)}</div>
+            `;
+            
+            container.appendChild(div);
+            container.scrollTop = container.scrollHeight;
+        }
+        
+        function addTyping() {
+            const container = document.getElementById('chat-container');
+            const div = document.createElement('div');
+            div.className = 'message ai';
+            div.innerHTML = `
+                <div class="message-header"><strong>OMA-AI</strong></div>
+                <div class="typing"><span></span><span></span><span></span></div>
+            `;
+            container.appendChild(div);
+            container.scrollTop = container.scrollHeight;
+            return div;
+        }
+        
+        function formatContent(text) {
+            // Basic markdown-like formatting
+            return text
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                .replace(/`([^`]+)`/g, '<code>$1</code>')
+                .replace(/<thinking>/g, '<pre><em>🧠 Thinking:\n')
+                .replace(/<\/thinking>/g, '\n</em></pre>');
+        }
+        
+        function updateCredits() {
+            document.getElementById('credits').textContent = credits;
+        }
+    </script>
+</body>
+</html>
