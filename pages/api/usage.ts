@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { createClient } from '@supabase/supabase-js';
-import { authenticate } from '../lib/auth-middleware';
+import { authenticate } from '../../lib/auth-middleware';
 
 const supabase = createClient(
   process.env.SUPABASE_URL!,

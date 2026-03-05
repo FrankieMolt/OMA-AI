@@ -1,8 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { authenticate } from '../lib/auth-middleware';
-import { rateLimit, trackTokens } from '../lib/rate-limiter';
-import { createPaymentRequirement } from '../lib/x402-enhanced';
-import { calculateCost } from '../lib/pricing';
+import { authenticate } from '../../lib/auth-middleware';
+import { rateLimit, trackTokens } from '../../lib/rate-limiter';
+import { createPaymentRequirement } from '../../lib/x402-enhanced';
+import { calculateCost } from '../../lib/pricing';
 
 /**
  * OMA-AI LLM Endpoint v2
@@ -66,7 +66,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 
     // Process X402 payment
-    const { verifyPayment } = await import('../lib/x402-enhanced');
+    const { verifyPayment } = await import('../../lib/x402-enhanced');
     const verification = await verifyPayment(paymentHeader);
 
     if (!verification.valid) {

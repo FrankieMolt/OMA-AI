@@ -1,5 +1,5 @@
 // Credit deduction middleware for API routes
-import { calculateCreditsNeeded } from './credits';
+import { calculateCreditsNeeded } from '../credits';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 interface CreditCheckResult {

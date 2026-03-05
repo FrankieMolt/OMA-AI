@@ -124,5 +124,5 @@ function getTierLimit(tier: string): number {
     pro: 10000000,     // 10M tokens
     enterprise: 100000000 // 100M tokens
   };
-  return limits[tier] || limits.free;
+  return limits[tier as keyof typeof limits] || limits.free;
 }

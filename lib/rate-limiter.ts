@@ -53,7 +53,7 @@ export async function rateLimit(
     return res.status(401).json({ error: 'Authentication required' });
   }
 
-  const limits = TIER_LIMITS[user.tier] || TIER_LIMITS.free;
+  const limits = TIER_LIMITS[user.tier as keyof typeof TIER_LIMITS] || TIER_LIMITS.free;
   const now = Date.now();
   const minute = 60000;
   const day = 86400000;
@@ -192,14 +192,14 @@ export async function checkTokenBudget(userId: string): Promise<{
  * Get Tier Limits
  */
 export function getTierLimits(tier: string) {
-  return TIER_LIMITS[tier] || TIER_LIMITS.free;
+  return TIER_LIMITS[tier as keyof typeof TIER_LIMITS] || TIER_LIMITS.free;
 }
 
 /**
  * Upgrade Tier
  */
 export async function upgradeTier(userId: string, newTier: string) {
-  const limits = TIER_LIMITS[newTier];
+  const limits = TIER_LIMITS[newTier as keyof typeof TIER_LIMITS];
   
   if (!limits) {
     throw new Error('Invalid tier');

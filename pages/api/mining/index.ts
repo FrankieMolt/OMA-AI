@@ -83,7 +83,7 @@ async function registerMiner(req: NextApiRequest, res: NextApiResponse) {
   // Determine credit rate
   const hardwareType = hardware?.gpu ? 'gpu' : 'cpu';
   const rateKey = `${model}-${hardwareType}`;
-  const creditRate = CREDIT_RATES[rateKey] || 50;
+  const creditRate = CREDIT_RATES[rateKey as keyof typeof CREDIT_RATES] || 50;
   
   return res.json({
     success: true,
@@ -126,7 +126,7 @@ async function minerHeartbeat(req: NextApiRequest, res: NextApiResponse) {
   
   const hardwareType = miner?.hardware?.gpu ? 'gpu' : 'cpu';
   const rateKey = `${miner?.model}-${hardwareType}`;
-  const creditRate = CREDIT_RATES[rateKey] || 50;
+  const creditRate = CREDIT_RATES[rateKey as keyof typeof CREDIT_RATES] || 50;
   const creditsEarned = creditRate / 12; // 5 minutes
   
   // Add credits
