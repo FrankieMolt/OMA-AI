@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Brain, 
@@ -12,7 +13,8 @@ import {
   Sparkles,
   Code2,
   Lock,
-  Coins
+  Coins,
+  Package
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -152,14 +154,14 @@ export function HeroSection() {
             transition={{ delay: 0.3 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
-            <button className="px-8 py-4 bg-primary text-primary-foreground rounded-xl font-semibold text-lg hover:bg-primary/90 transition-all flex items-center gap-2 group">
-              Get Started Free
+            <Link href="/models" className="px-8 py-4 bg-primary text-primary-foreground rounded-xl font-semibold text-lg hover:bg-primary/90 transition-all flex items-center justify-center gap-2 group">
+              Browse Marketplace
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </button>
-            <button className="px-8 py-4 bg-muted hover:bg-muted/80 rounded-xl font-semibold text-lg transition-all flex items-center gap-2">
-              <Code2 className="w-5 h-5" />
-              View Documentation
-            </button>
+            </Link>
+            <Link href="/mcps" className="px-8 py-4 bg-muted hover:bg-muted/80 rounded-xl font-semibold text-lg transition-all flex items-center justify-center gap-2">
+              <Package className="w-5 h-5" />
+              MCP Registry
+            </Link>
           </motion.div>
 
           {/* Stats */}

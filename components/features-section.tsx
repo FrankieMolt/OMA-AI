@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 import { 
   Brain, 
   Search, 
@@ -10,7 +11,8 @@ import {
   Calculator,
   Cloud,
   Database,
-  Zap
+  Zap,
+  ArrowRight
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -147,9 +149,9 @@ export function FeaturesSection() {
             transition={{ delay: 0.5 }}
             className="text-center mt-6"
           >
-            <button className="text-primary hover:underline">
-              View all 38+ models →
-            </button>
+            <Link href="/models" className="text-primary hover:underline inline-flex items-center gap-1">
+              View all 38+ models <ArrowRight className="w-4 h-4" />
+            </Link>
           </motion.div>
         </div>
 

@@ -173,6 +173,7 @@ export function PricingSection() {
             </span>
             <button
               onClick={() => setBillingPeriod(p => p === 'monthly' ? 'yearly' : 'monthly')}
+              aria-label="Toggle billing period"
               className="relative w-14 h-7 bg-primary/20 rounded-full transition-colors"
             >
               <motion.div

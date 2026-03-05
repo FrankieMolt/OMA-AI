@@ -1,0 +1,26 @@
+# OMA-AI (Open Market Access)
+# The Standard for Agentic Compute
+
+## Description
+Enterprise-grade infrastructure for building, deploying, and monitoring autonomous AI agents at scale. OMA-AI provides a unified, uncensored, and private API gateway supporting the x402 protocol for machine-to-machine commerce.
+
+## Models
+- venice-uncensored: High-performance, uncensored Llama model. $0.12/1M input, $0.25/1M output.
+- deepseek-v3.2: Advanced reasoning and coding model. $0.60/1M input, $1.50/1M output.
+- glm-4.7-flash: Fast, multilingual general-purpose model. $0.10/1M input, $0.20/1M output.
+- llama-3.3-70b: High-capacity open source model. $1.00/1M input, $4.00/1M output.
+
+## APIs
+- /v1/chat/completions: OpenAI-compatible chat endpoint. Requires x402 payment or API key.
+- /v1/models: List available models and pricing.
+- /v1/embeddings: Text embedding generation.
+
+## Protocols
+- x402: Native machine-to-machine payments via USDC on Solana and Base.
+- MCP: Model Context Protocol support for modular agent capabilities.
+
+## Links
+- Homepage: https://oma-ai.com
+- Documentation: https://oma-ai.com/docs
+- Pricing: https://oma-ai.com/pricing
+- Status: https://oma-ai.com/status
