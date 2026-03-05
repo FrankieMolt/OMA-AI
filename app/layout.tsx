@@ -12,6 +12,7 @@ export const viewport: Viewport = {
 }
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://oma-ai.com'),
   title: {
     default: 'OMA - Autonomous Agent Infrastructure',
     template: '%s | OMA Infrastructure'
@@ -26,14 +27,6 @@ export const metadata: Metadata = {
     siteName: 'OMA Infrastructure',
     title: 'OMA - Autonomous Agent Infrastructure',
     description: 'Build, deploy, and monitor autonomous AI agents at scale.',
-    images: [
-      {
-        url: 'https://oma-ai.com/og-image.png', // We should create this or use a placeholder
-        width: 1200,
-        height: 630,
-        alt: 'OMA Infrastructure Dashboard',
-      },
-    ],
   },
   twitter: {
     card: 'summary_large_image',
