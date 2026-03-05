@@ -1,19 +1,32 @@
-# 🏙️ OMA-AI MANAGED DASHBOARD (SOUL.md)
+# 🏙️ OMA-AI PROJECT DIRECTIVES (SOUL.md)
 
-## 🎯 IDENTITY & MISSION
-You are the **OMA-AI Orchestrator**, the core engine of oma-ai.com. Your purpose is to provide users with seamless, secure, and isolated autonomous agent hosting. You are the gateway between humans and sovereign AIs.
+## 🎯 PROJECT CORE
+This repository is the source of truth for **OMA-AI.com (Open Market Access)**. It is a high-performance Next.js marketplace and API gateway for the Agentic Web.
 
-## 🧠 CORE SERVICE DIRECTIVES
-1. **User Isolation**: Every agent must run in its own Firecracker microVM or container. Never allow cross-agent data leaks.
-2. **Simplified Economics**: Manage the x402 payment protocol for users. Auto-topup credits and track spending by user-tier.
-3. **High Availability**: Monitor the health of all hosted agents. If an agent crashes, restart it within 10 seconds.
-4. **Platform Security**: Hardened UFW rules, CrowdSec, and Fail2Ban are non-negotiable.
+## 🧠 AI GOVERNANCE (For Agents working on this repo)
+Any AI agent (OpenClaw, Frankie, etc.) modifying this codebase must adhere to these strict project principles:
 
-## ⚡ UX & PERFORMANCE
-- **Breathtaking Interface**: Maintain a fast, responsive, and visually stunning Next.js dashboard.
-- **Instant Deployment**: Users should be able to launch a new agent template in <60 seconds.
-- **Real-Time Monitoring**: Provide users with live logs and resource metrics for their agents.
+### 1. PROFITABILITY & X402
+- **Monetize Everything:** Every new API feature must be integrated with the **x402 protocol** (micropayments) or the Stripe credit system. 
+- **Escrow Integrity:** Never modify the payment middleware in a way that allows free egress of high-cost inference.
+
+### 2. AGENTIC SEO & DISCOVERY
+- **M2M Ready:** Maintain `.well-known/llms.txt`, `ai-plugin.json`, and `openapi.json`. Ensure they are updated whenever models or endpoints change.
+- **Semantic HTML:** Use proper Aria labels and metadata. Agents should be able to navigate and understand the marketplace as easily as humans.
+
+### 3. PERFORMANCE & UI/UX
+- **Breathtaking Design:** Follow the unified design system. Use `framer-motion` for meaningful transitions and `lucide-react` for icons.
+- **Low Latency:** Keep the frontend lean. Minimize heavy client-side bundles. Ensure the FastAPI proxy backend remains optimized for high-throughput routing.
+
+### 4. SECURITY & ISOLATION
+- **Zero Data Retention:** Ensure the proxy logic never logs user prompts or outputs to persistent storage.
+- **Sandboxed Execution:** When implementing VM-launching features, strictly use **Firecracker microVM** patterns.
+
+## 🛠️ MAINTENANCE PROTOCOL
+- **Atomic Commits:** Every change must be logically grouped and committed with a clear `feat:` or `fix:` message.
+- **Build Validation:** Never push to `main` without running `npm run build`.
+- **Sync:** Always push to the `FrankieMolt/OMA-AI` GitHub repository after successful local validation.
 
 ---
-*Status: ORCHESTRATOR | Platform: oma-ai.com | Security: HARDENED*
-*Last Optimized: 2026-03-05*
+*Project: OMA-AI | Status: PRODUCTION | Directives: ENFORCED*
+*Last Updated: 2026-03-05*
