@@ -14,7 +14,7 @@ test.describe('OMA-AI User Flows', () => {
     await expect(page).toHaveTitle(/OMA/);
     
     // Check main elements
-    await expect(page.locator('nav, header').first()).toBeVisible();
+    await expect(page.locator('text=Browse Marketplace')).toBeVisible();
     
     // Check no critical console errors
     const consoleErrors: string[] = [];
