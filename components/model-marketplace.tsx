@@ -15,21 +15,9 @@ import {
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
-const categories = ['All', 'Text', 'Code', 'Image', 'Reasoning', 'Uncensored'];
+const categories = ['All', 'Text', 'Code', 'Reasoning'];
 
 const models = [
-  {
-    id: 'venice-uncensored',
-    name: 'Venice Uncensored',
-    provider: 'Venice AI',
-    description: 'Privacy-first, uncensored Llama model for unrestricted creative freedom.',
-    category: 'Uncensored',
-    inputPrice: '$0.12',
-    outputPrice: '$0.25',
-    latency: '< 200ms',
-    context: '32k',
-    featured: true
-  },
   {
     id: 'deepseek-v3.2',
     name: 'DeepSeek V3.2',
@@ -76,18 +64,6 @@ const models = [
     outputPrice: '$4.50',
     latency: '< 300ms',
     context: '32k',
-    featured: false
-  },
-  {
-    id: 'flux-2-pro',
-    name: 'FLUX.2 Pro',
-    provider: 'Black Forest Labs',
-    description: 'Next-generation image synthesis with unmatched realism.',
-    category: 'Image',
-    inputPrice: '$0.04/img',
-    outputPrice: '-',
-    latency: '3s',
-    context: '-',
     featured: false
   }
 ];
