@@ -1,46 +1,31 @@
-# HEARTBEAT.md - NOSYT x402 Money Machine
-# Runs every 30 seconds via cron
+# 💓 OPENCLAW APEX HEARTBEAT (HEARTBEAT.md)
 
-## TASKS (in order of priority)
+## 🎯 PROACTIVE OBJECTIVES
+Every 30 minutes, you must wake up and perform this system-wide audit. Do not wait for a user message. Your goal is to keep the OMA-AI ecosystem profitable, optimized, and secure.
 
-1. **EARNINGS SYNC** (every cycle)
-   - Query Frankie API stats: GET https://frankie-api.life.conway.tech/stats
-   - Log earnings to ~/.automaton/earnings.json
-   - Update memory file with daily totals
+### 1. SYSTEM MONITORING
+- **Check PM2 Processes:** Ensure `oma-ai-frontend`, `oma-ai-api`, `nosyt-ai`, and `scrapling-api` are `online`. If any are `errored` or `stopped`, restart them immediately.
+- **Resource Audit:** Check CPU and RAM usage. If usage is > 90%, identify the culprit process and optimize or restart it.
+- **Disk Space:** Check free disk space. If < 10GB remains, run `apt-get clean`, `journalctl --vacuum-time=1d`, and prune old logs.
 
-2. **CREDITS CHECK** (every 5 cycles)
-   - Query Conway credits balance via API
-   - Alert if < $5.00
+### 2. OMA-AI MARKETPLACE AUDIT
+- **Check Endpoint Health:** Ping `https://oma-ai.com/api/health`. If it fails, investigate the backend code.
+- **SEO Sync:** Check if any new models were added to the marketplace. If so, update `.well-known/llms.txt` and `public/openapi.json`.
+- **GitHub Sync:** Check for uncommitted changes in `oma-ai-repo`. If the build passes, commit and push to ensure the remote is always current.
 
-3. **NOSYT HEALTH** (every cycle)
-   - Check if NOSYT process running (pgrep)
-   - Restart if dead
+### 3. AGENTIC OPS
+- **NOSYT-AI:** Check the latest trade logs. If the bot hasn't traded in 4 hours, verify the Jupiter RPC and wallet balance.
+- **CONWAY:** Check if any Conway agent is running low on credits. If so, alert the user via Telegram/Discord.
+- **Skill Discovery:** Scan for new skills in the environment. If any are found, load them into the Apex context.
 
-4. **FRANKIE HEALTH** (every cycle)
-   - Check Frankie API health endpoint
-   - Restart sandbox if needed via mcporter
+### 4. SECURITY AUDIT
+- **Check UFW Status:** Ensure the firewall is active.
+- **Monitor Logs:** Scan `auth.log` for failed SSH attempts. If a pattern is detected, verify `fail2ban` is banning the IPs.
+- **Permission Check:** Ensure `.env` files and private keys are never world-readable (chmod 600).
 
-5. **PRICE MONITOR** (every cycle)
-   - Fetch SOL/USDC price
-   - Calculate 5min change
-   - Trigger trade signals
+## 🚀 AUTONOMOUS DECISION
+If any issue is found, fix it immediately using your ROOT tools. If a critical failure occurs that you cannot fix, send an URGENT alert to the user via the Telegram channel.
 
-6. **SKILL ROTATION** (every 10 cycles)
-   - Cycle through different skill modes:
-     - Trading mode (use nosyt-trader)
-     - Domain mode (use domain-hunter)
-     - Research mode (use requesthunt)
-     - Social mode (use any social skills)
-
-7. **REPLICATION CHECK** (every 100 cycles)
-   - Check if profitable enough to spawn child
-   - If daily earnings > $10, spawn replica
-
-## AUTONOMOUS ACTIONS
-- Auto-restart dead services
-- Auto-adjust prices based on demand
-- Auto-scale sandboxes if needed
-- Auto-post earnings updates
-
-## LOGGING
-All actions logged to: ~/.automaton/heartbeat.log
+---
+*Status: HEARTBEAT ACTIVE | Protocol: APEX PROACTIVE*
+*Last Optimized: 2026-03-05*

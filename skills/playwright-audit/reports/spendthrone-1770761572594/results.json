@@ -1,0 +1,746 @@
+{
+  "site": "SpendThrone",
+  "url": "http://localhost:3000",
+  "timestamp": "2026-02-10T22:12:52.594Z",
+  "performance": {
+    "score": 100,
+    "avgResponseTime": 31,
+    "metrics": {
+      "responseTimes": [
+        {
+          "route": "/",
+          "time": 87
+        },
+        {
+          "route": "/about",
+          "time": 4
+        },
+        {
+          "route": "/features",
+          "time": 2
+        }
+      ],
+      "pageSizes": [
+        {
+          "route": "/",
+          "size": 7468
+        },
+        {
+          "route": "/about",
+          "size": 7
+        },
+        {
+          "route": "/features",
+          "size": 10
+        }
+      ],
+      "resourceCounts": {
+        "scripts": 22,
+        "stylesheets": 0,
+        "images": 0
+      }
+    }
+  },
+  "accessibility": {
+    "violations": 20,
+    "routesTested": 4,
+    "routesWithIssues": 4,
+    "details": [
+      {
+        "route": "/",
+        "url": "http://localhost:3000/",
+        "issues": [
+          {
+            "id": "document-title",
+            "impact": "serious",
+            "description": "Ensures each HTML document contains a non-empty <title> element",
+            "help": "Documents must have <title> element to aid in navigation",
+            "helpUrl": "https://dequeuniversity.com/rules/axe/4.8/document-title?application=axeAPI",
+            "nodes": 1
+          },
+          {
+            "id": "html-has-lang",
+            "impact": "serious",
+            "description": "Ensures every HTML document has a lang attribute",
+            "help": "<html> element must have a lang attribute",
+            "helpUrl": "https://dequeuniversity.com/rules/axe/4.8/html-has-lang?application=axeAPI",
+            "nodes": 1
+          },
+          {
+            "id": "landmark-one-main",
+            "impact": "moderate",
+            "description": "Ensures the document has a main landmark",
+            "help": "Document should have one main landmark",
+            "helpUrl": "https://dequeuniversity.com/rules/axe/4.8/landmark-one-main?application=axeAPI",
+            "nodes": 1
+          },
+          {
+            "id": "page-has-heading-one",
+            "impact": "moderate",
+            "description": "Ensure that the page, or at least one of its frames contains a level-one heading",
+            "help": "Page should contain a level-one heading",
+            "helpUrl": "https://dequeuniversity.com/rules/axe/4.8/page-has-heading-one?application=axeAPI",
+            "nodes": 1
+          },
+          {
+            "id": "region",
+            "impact": "moderate",
+            "description": "Ensures all page content is contained by landmarks",
+            "help": "All page content should be contained by landmarks",
+            "helpUrl": "https://dequeuniversity.com/rules/axe/4.8/region?application=axeAPI",
+            "nodes": 2
+          }
+        ]
+      },
+      {
+        "route": "/about",
+        "url": "http://localhost:3000/about",
+        "issues": [
+          {
+            "id": "document-title",
+            "impact": "serious",
+            "description": "Ensures each HTML document contains a non-empty <title> element",
+            "help": "Documents must have <title> element to aid in navigation",
+            "helpUrl": "https://dequeuniversity.com/rules/axe/4.8/document-title?application=axeAPI",
+            "nodes": 1
+          },
+          {
+            "id": "html-has-lang",
+            "impact": "serious",
+            "description": "Ensures every HTML document has a lang attribute",
+            "help": "<html> element must have a lang attribute",
+            "helpUrl": "https://dequeuniversity.com/rules/axe/4.8/html-has-lang?application=axeAPI",
+            "nodes": 1
+          },
+          {
+            "id": "landmark-one-main",
+            "impact": "moderate",
+            "description": "Ensures the document has a main landmark",
+            "help": "Document should have one main landmark",
+            "helpUrl": "https://dequeuniversity.com/rules/axe/4.8/landmark-one-main?application=axeAPI",
+            "nodes": 1
+          },
+          {
+            "id": "page-has-heading-one",
+            "impact": "moderate",
+            "description": "Ensure that the page, or at least one of its frames contains a level-one heading",
+            "help": "Page should contain a level-one heading",
+            "helpUrl": "https://dequeuniversity.com/rules/axe/4.8/page-has-heading-one?application=axeAPI",
+            "nodes": 1
+          },
+          {
+            "id": "region",
+            "impact": "moderate",
+            "description": "Ensures all page content is contained by landmarks",
+            "help": "All page content should be contained by landmarks",
+            "helpUrl": "https://dequeuniversity.com/rules/axe/4.8/region?application=axeAPI",
+            "nodes": 2
+          }
+        ]
+      },
+      {
+        "route": "/features",
+        "url": "http://localhost:3000/features",
+        "issues": [
+          {
+            "id": "document-title",
+            "impact": "serious",
+            "description": "Ensures each HTML document contains a non-empty <title> element",
+            "help": "Documents must have <title> element to aid in navigation",
+            "helpUrl": "https://dequeuniversity.com/rules/axe/4.8/document-title?application=axeAPI",
+            "nodes": 1
+          },
+          {
+            "id": "html-has-lang",
+            "impact": "serious",
+            "description": "Ensures every HTML document has a lang attribute",
+            "help": "<html> element must have a lang attribute",
+            "helpUrl": "https://dequeuniversity.com/rules/axe/4.8/html-has-lang?application=axeAPI",
+            "nodes": 1
+          },
+          {
+            "id": "landmark-one-main",
+            "impact": "moderate",
+            "description": "Ensures the document has a main landmark",
+            "help": "Document should have one main landmark",
+            "helpUrl": "https://dequeuniversity.com/rules/axe/4.8/landmark-one-main?application=axeAPI",
+            "nodes": 1
+          },
+          {
+            "id": "page-has-heading-one",
+            "impact": "moderate",
+            "description": "Ensure that the page, or at least one of its frames contains a level-one heading",
+            "help": "Page should contain a level-one heading",
+            "helpUrl": "https://dequeuniversity.com/rules/axe/4.8/page-has-heading-one?application=axeAPI",
+            "nodes": 1
+          },
+          {
+            "id": "region",
+            "impact": "moderate",
+            "description": "Ensures all page content is contained by landmarks",
+            "help": "All page content should be contained by landmarks",
+            "helpUrl": "https://dequeuniversity.com/rules/axe/4.8/region?application=axeAPI",
+            "nodes": 2
+          }
+        ]
+      },
+      {
+        "route": "/pricing",
+        "url": "http://localhost:3000/pricing",
+        "issues": [
+          {
+            "id": "document-title",
+            "impact": "serious",
+            "description": "Ensures each HTML document contains a non-empty <title> element",
+            "help": "Documents must have <title> element to aid in navigation",
+            "helpUrl": "https://dequeuniversity.com/rules/axe/4.8/document-title?application=axeAPI",
+            "nodes": 1
+          },
+          {
+            "id": "html-has-lang",
+            "impact": "serious",
+            "description": "Ensures every HTML document has a lang attribute",
+            "help": "<html> element must have a lang attribute",
+            "helpUrl": "https://dequeuniversity.com/rules/axe/4.8/html-has-lang?application=axeAPI",
+            "nodes": 1
+          },
+          {
+            "id": "landmark-one-main",
+            "impact": "moderate",
+            "description": "Ensures the document has a main landmark",
+            "help": "Document should have one main landmark",
+            "helpUrl": "https://dequeuniversity.com/rules/axe/4.8/landmark-one-main?application=axeAPI",
+            "nodes": 1
+          },
+          {
+            "id": "page-has-heading-one",
+            "impact": "moderate",
+            "description": "Ensure that the page, or at least one of its frames contains a level-one heading",
+            "help": "Page should contain a level-one heading",
+            "helpUrl": "https://dequeuniversity.com/rules/axe/4.8/page-has-heading-one?application=axeAPI",
+            "nodes": 1
+          },
+          {
+            "id": "region",
+            "impact": "moderate",
+            "description": "Ensures all page content is contained by landmarks",
+            "help": "All page content should be contained by landmarks",
+            "helpUrl": "https://dequeuniversity.com/rules/axe/4.8/region?application=axeAPI",
+            "nodes": 2
+          }
+        ]
+      }
+    ]
+  },
+  "seo": {
+    "score": 0,
+    "routes": [
+      {
+        "route": "/",
+        "url": "http://localhost:3000/",
+        "title": "",
+        "titleLength": 0,
+        "metaDescription": "",
+        "metaDescriptionLength": 0,
+        "h1": "",
+        "h1Count": 0,
+        "h2Count": 0,
+        "h3Count": 0,
+        "imagesWithoutAlt": 0,
+        "totalImages": 0,
+        "canonical": "",
+        "viewport": "width=device-width",
+        "charset": "utf-8",
+        "ogTags": {
+          "title": "",
+          "description": "",
+          "image": "",
+          "url": "",
+          "type": ""
+        },
+        "twitterTags": {
+          "card": "",
+          "title": "",
+          "description": "",
+          "image": ""
+        },
+        "structuredData": [],
+        "lang": "",
+        "issues": [
+          {
+            "type": "error",
+            "message": "Title length issue: 0 characters (should be 10-70)"
+          },
+          {
+            "type": "warning",
+            "message": "Meta description length: 0 characters (should be 50-160)"
+          },
+          {
+            "type": "error",
+            "message": "Missing H1 tag"
+          },
+          {
+            "type": "warning",
+            "message": "Missing HTML lang attribute"
+          },
+          {
+            "type": "info",
+            "message": "Missing Open Graph title"
+          },
+          {
+            "type": "info",
+            "message": "Missing Twitter Card tags"
+          }
+        ]
+      },
+      {
+        "route": "/about",
+        "url": "http://localhost:3000/about",
+        "title": "",
+        "titleLength": 0,
+        "metaDescription": "",
+        "metaDescriptionLength": 0,
+        "h1": "",
+        "h1Count": 0,
+        "h2Count": 0,
+        "h3Count": 0,
+        "imagesWithoutAlt": 0,
+        "totalImages": 0,
+        "canonical": "",
+        "viewport": "",
+        "charset": "",
+        "ogTags": {
+          "title": "",
+          "description": "",
+          "image": "",
+          "url": "",
+          "type": ""
+        },
+        "twitterTags": {
+          "card": "",
+          "title": "",
+          "description": "",
+          "image": ""
+        },
+        "structuredData": [],
+        "lang": "",
+        "issues": [
+          {
+            "type": "error",
+            "message": "Title length issue: 0 characters (should be 10-70)"
+          },
+          {
+            "type": "warning",
+            "message": "Meta description length: 0 characters (should be 50-160)"
+          },
+          {
+            "type": "error",
+            "message": "Missing H1 tag"
+          },
+          {
+            "type": "error",
+            "message": "Missing viewport meta tag"
+          },
+          {
+            "type": "warning",
+            "message": "Missing HTML lang attribute"
+          },
+          {
+            "type": "info",
+            "message": "Missing Open Graph title"
+          },
+          {
+            "type": "info",
+            "message": "Missing Twitter Card tags"
+          }
+        ]
+      },
+      {
+        "route": "/features",
+        "url": "http://localhost:3000/features",
+        "title": "",
+        "titleLength": 0,
+        "metaDescription": "",
+        "metaDescriptionLength": 0,
+        "h1": "",
+        "h1Count": 0,
+        "h2Count": 0,
+        "h3Count": 0,
+        "imagesWithoutAlt": 0,
+        "totalImages": 0,
+        "canonical": "",
+        "viewport": "",
+        "charset": "",
+        "ogTags": {
+          "title": "",
+          "description": "",
+          "image": "",
+          "url": "",
+          "type": ""
+        },
+        "twitterTags": {
+          "card": "",
+          "title": "",
+          "description": "",
+          "image": ""
+        },
+        "structuredData": [],
+        "lang": "",
+        "issues": [
+          {
+            "type": "error",
+            "message": "Title length issue: 0 characters (should be 10-70)"
+          },
+          {
+            "type": "warning",
+            "message": "Meta description length: 0 characters (should be 50-160)"
+          },
+          {
+            "type": "error",
+            "message": "Missing H1 tag"
+          },
+          {
+            "type": "error",
+            "message": "Missing viewport meta tag"
+          },
+          {
+            "type": "warning",
+            "message": "Missing HTML lang attribute"
+          },
+          {
+            "type": "info",
+            "message": "Missing Open Graph title"
+          },
+          {
+            "type": "info",
+            "message": "Missing Twitter Card tags"
+          }
+        ]
+      },
+      {
+        "route": "/pricing",
+        "url": "http://localhost:3000/pricing",
+        "title": "",
+        "titleLength": 0,
+        "metaDescription": "",
+        "metaDescriptionLength": 0,
+        "h1": "",
+        "h1Count": 0,
+        "h2Count": 0,
+        "h3Count": 0,
+        "imagesWithoutAlt": 0,
+        "totalImages": 0,
+        "canonical": "",
+        "viewport": "",
+        "charset": "",
+        "ogTags": {
+          "title": "",
+          "description": "",
+          "image": "",
+          "url": "",
+          "type": ""
+        },
+        "twitterTags": {
+          "card": "",
+          "title": "",
+          "description": "",
+          "image": ""
+        },
+        "structuredData": [],
+        "lang": "",
+        "issues": [
+          {
+            "type": "error",
+            "message": "Title length issue: 0 characters (should be 10-70)"
+          },
+          {
+            "type": "warning",
+            "message": "Meta description length: 0 characters (should be 50-160)"
+          },
+          {
+            "type": "error",
+            "message": "Missing H1 tag"
+          },
+          {
+            "type": "error",
+            "message": "Missing viewport meta tag"
+          },
+          {
+            "type": "warning",
+            "message": "Missing HTML lang attribute"
+          },
+          {
+            "type": "info",
+            "message": "Missing Open Graph title"
+          },
+          {
+            "type": "info",
+            "message": "Missing Twitter Card tags"
+          }
+        ]
+      },
+      {
+        "route": "/contact",
+        "url": "http://localhost:3000/contact",
+        "title": "",
+        "titleLength": 0,
+        "metaDescription": "",
+        "metaDescriptionLength": 0,
+        "h1": "",
+        "h1Count": 0,
+        "h2Count": 0,
+        "h3Count": 0,
+        "imagesWithoutAlt": 0,
+        "totalImages": 0,
+        "canonical": "",
+        "viewport": "",
+        "charset": "",
+        "ogTags": {
+          "title": "",
+          "description": "",
+          "image": "",
+          "url": "",
+          "type": ""
+        },
+        "twitterTags": {
+          "card": "",
+          "title": "",
+          "description": "",
+          "image": ""
+        },
+        "structuredData": [],
+        "lang": "",
+        "issues": [
+          {
+            "type": "error",
+            "message": "Title length issue: 0 characters (should be 10-70)"
+          },
+          {
+            "type": "warning",
+            "message": "Meta description length: 0 characters (should be 50-160)"
+          },
+          {
+            "type": "error",
+            "message": "Missing H1 tag"
+          },
+          {
+            "type": "error",
+            "message": "Missing viewport meta tag"
+          },
+          {
+            "type": "warning",
+            "message": "Missing HTML lang attribute"
+          },
+          {
+            "type": "info",
+            "message": "Missing Open Graph title"
+          },
+          {
+            "type": "info",
+            "message": "Missing Twitter Card tags"
+          }
+        ]
+      },
+      {
+        "route": "/login",
+        "url": "http://localhost:3000/login",
+        "title": "",
+        "titleLength": 0,
+        "metaDescription": "",
+        "metaDescriptionLength": 0,
+        "h1": "",
+        "h1Count": 0,
+        "h2Count": 0,
+        "h3Count": 0,
+        "imagesWithoutAlt": 0,
+        "totalImages": 0,
+        "canonical": "",
+        "viewport": "",
+        "charset": "",
+        "ogTags": {
+          "title": "",
+          "description": "",
+          "image": "",
+          "url": "",
+          "type": ""
+        },
+        "twitterTags": {
+          "card": "",
+          "title": "",
+          "description": "",
+          "image": ""
+        },
+        "structuredData": [],
+        "lang": "",
+        "issues": [
+          {
+            "type": "error",
+            "message": "Title length issue: 0 characters (should be 10-70)"
+          },
+          {
+            "type": "warning",
+            "message": "Meta description length: 0 characters (should be 50-160)"
+          },
+          {
+            "type": "error",
+            "message": "Missing H1 tag"
+          },
+          {
+            "type": "error",
+            "message": "Missing viewport meta tag"
+          },
+          {
+            "type": "warning",
+            "message": "Missing HTML lang attribute"
+          },
+          {
+            "type": "info",
+            "message": "Missing Open Graph title"
+          },
+          {
+            "type": "info",
+            "message": "Missing Twitter Card tags"
+          }
+        ]
+      },
+      {
+        "route": "/signup",
+        "url": "http://localhost:3000/signup",
+        "title": "",
+        "titleLength": 0,
+        "metaDescription": "",
+        "metaDescriptionLength": 0,
+        "h1": "",
+        "h1Count": 0,
+        "h2Count": 0,
+        "h3Count": 0,
+        "imagesWithoutAlt": 0,
+        "totalImages": 0,
+        "canonical": "",
+        "viewport": "",
+        "charset": "",
+        "ogTags": {
+          "title": "",
+          "description": "",
+          "image": "",
+          "url": "",
+          "type": ""
+        },
+        "twitterTags": {
+          "card": "",
+          "title": "",
+          "description": "",
+          "image": ""
+        },
+        "structuredData": [],
+        "lang": "",
+        "issues": [
+          {
+            "type": "error",
+            "message": "Title length issue: 0 characters (should be 10-70)"
+          },
+          {
+            "type": "warning",
+            "message": "Meta description length: 0 characters (should be 50-160)"
+          },
+          {
+            "type": "error",
+            "message": "Missing H1 tag"
+          },
+          {
+            "type": "error",
+            "message": "Missing viewport meta tag"
+          },
+          {
+            "type": "warning",
+            "message": "Missing HTML lang attribute"
+          },
+          {
+            "type": "info",
+            "message": "Missing Open Graph title"
+          },
+          {
+            "type": "info",
+            "message": "Missing Twitter Card tags"
+          }
+        ]
+      }
+    ],
+    "globalIssues": [],
+    "summary": {
+      "totalRoutes": 7,
+      "routesWithErrors": 7,
+      "totalErrors": 20,
+      "totalWarnings": 14
+    }
+  },
+  "security": {
+    "checks": {
+      "https": false,
+      "headers": {
+        "content-security-policy": null,
+        "x-frame-options": null,
+        "x-content-type-options": null,
+        "strict-transport-security": null,
+        "referrer-policy": null
+      },
+      "cookies": {},
+      "forms": []
+    },
+    "issues": [
+      {
+        "type": "warning",
+        "message": "Missing Content-Security-Policy header"
+      },
+      {
+        "type": "warning",
+        "message": "Missing X-Frame-Options header (clickjacking protection)"
+      },
+      {
+        "type": "warning",
+        "message": "Missing X-Content-Type-Options header"
+      },
+      {
+        "type": "error",
+        "message": "Site not using HTTPS"
+      }
+    ],
+    "score": 65
+  },
+  "functional": {
+    "brokenLinks": [],
+    "brokenRoutes": [
+      {
+        "route": "/",
+        "status": 500
+      }
+    ],
+    "workingRoutes": [
+      {
+        "route": "/about",
+        "status": 308
+      },
+      {
+        "route": "/features",
+        "status": 308
+      },
+      {
+        "route": "/pricing",
+        "status": 308
+      },
+      {
+        "route": "/contact",
+        "status": 308
+      },
+      {
+        "route": "/login",
+        "status": 308
+      },
+      {
+        "route": "/signup",
+        "status": 308
+      }
+    ],
+    "forms": []
+  }
+}

@@ -1,0 +1,514 @@
+{
+  "site": "OMA-AI",
+  "url": "https://oma-ai.com",
+  "timestamp": "2026-02-10T06:37:56.299Z",
+  "tests": {
+    "performance": {
+      "error": "lighthouse is not a function"
+    },
+    "accessibility": {
+      "violations": 18,
+      "routesTested": 7,
+      "routesWithIssues": 7,
+      "details": [
+        {
+          "route": "/",
+          "url": "https://oma-ai.com/",
+          "issues": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+              "help": "Elements must meet minimum color contrast ratio thresholds",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/color-contrast?application=axeAPI",
+              "nodes": 120
+            },
+            {
+              "id": "heading-order",
+              "impact": "moderate",
+              "description": "Ensure the order of headings is semantically correct",
+              "help": "Heading levels should only increase by one",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/heading-order?application=axeAPI",
+              "nodes": 1
+            },
+            {
+              "id": "landmark-unique",
+              "impact": "moderate",
+              "description": "Ensure landmarks are unique",
+              "help": "Landmarks should have a unique role or role/label/title (i.e. accessible name) combination",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/landmark-unique?application=axeAPI",
+              "nodes": 1
+            }
+          ]
+        },
+        {
+          "route": "/about",
+          "url": "https://oma-ai.com/about",
+          "issues": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+              "help": "Elements must meet minimum color contrast ratio thresholds",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/color-contrast?application=axeAPI",
+              "nodes": 19
+            },
+            {
+              "id": "landmark-unique",
+              "impact": "moderate",
+              "description": "Ensure landmarks are unique",
+              "help": "Landmarks should have a unique role or role/label/title (i.e. accessible name) combination",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/landmark-unique?application=axeAPI",
+              "nodes": 1
+            }
+          ]
+        },
+        {
+          "route": "/features",
+          "url": "https://oma-ai.com/features",
+          "issues": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+              "help": "Elements must meet minimum color contrast ratio thresholds",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/color-contrast?application=axeAPI",
+              "nodes": 38
+            },
+            {
+              "id": "heading-order",
+              "impact": "moderate",
+              "description": "Ensure the order of headings is semantically correct",
+              "help": "Heading levels should only increase by one",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/heading-order?application=axeAPI",
+              "nodes": 1
+            },
+            {
+              "id": "landmark-unique",
+              "impact": "moderate",
+              "description": "Ensure landmarks are unique",
+              "help": "Landmarks should have a unique role or role/label/title (i.e. accessible name) combination",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/landmark-unique?application=axeAPI",
+              "nodes": 1
+            }
+          ]
+        },
+        {
+          "route": "/pricing",
+          "url": "https://oma-ai.com/pricing",
+          "issues": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+              "help": "Elements must meet minimum color contrast ratio thresholds",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/color-contrast?application=axeAPI",
+              "nodes": 25
+            },
+            {
+              "id": "landmark-unique",
+              "impact": "moderate",
+              "description": "Ensure landmarks are unique",
+              "help": "Landmarks should have a unique role or role/label/title (i.e. accessible name) combination",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/landmark-unique?application=axeAPI",
+              "nodes": 1
+            }
+          ]
+        },
+        {
+          "route": "/contact",
+          "url": "https://oma-ai.com/contact",
+          "issues": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+              "help": "Elements must meet minimum color contrast ratio thresholds",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/color-contrast?application=axeAPI",
+              "nodes": 16
+            },
+            {
+              "id": "landmark-unique",
+              "impact": "moderate",
+              "description": "Ensure landmarks are unique",
+              "help": "Landmarks should have a unique role or role/label/title (i.e. accessible name) combination",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/landmark-unique?application=axeAPI",
+              "nodes": 1
+            }
+          ]
+        },
+        {
+          "route": "/login",
+          "url": "https://oma-ai.com/login",
+          "issues": [
+            {
+              "id": "button-name",
+              "impact": "critical",
+              "description": "Ensure buttons have discernible text",
+              "help": "Buttons must have discernible text",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/button-name?application=axeAPI",
+              "nodes": 1
+            },
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+              "help": "Elements must meet minimum color contrast ratio thresholds",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/color-contrast?application=axeAPI",
+              "nodes": 11
+            },
+            {
+              "id": "heading-order",
+              "impact": "moderate",
+              "description": "Ensure the order of headings is semantically correct",
+              "help": "Heading levels should only increase by one",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/heading-order?application=axeAPI",
+              "nodes": 1
+            },
+            {
+              "id": "landmark-unique",
+              "impact": "moderate",
+              "description": "Ensure landmarks are unique",
+              "help": "Landmarks should have a unique role or role/label/title (i.e. accessible name) combination",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/landmark-unique?application=axeAPI",
+              "nodes": 1
+            },
+            {
+              "id": "link-in-text-block",
+              "impact": "serious",
+              "description": "Ensure links are distinguished from surrounding text in a way that does not rely on color",
+              "help": "Links must be distinguishable without relying on color",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/link-in-text-block?application=axeAPI",
+              "nodes": 1
+            }
+          ]
+        },
+        {
+          "route": "/dashboard",
+          "url": "https://oma-ai.com/dashboard",
+          "issues": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+              "help": "Elements must meet minimum color contrast ratio thresholds",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/color-contrast?application=axeAPI",
+              "nodes": 1
+            }
+          ]
+        }
+      ],
+      "warnings": []
+    },
+    "seo": {
+      "routes": [
+        {
+          "route": "/",
+          "url": "https://oma-ai.com/",
+          "title": "OMA-AI - Open Market Access for AI Agents",
+          "titleLength": 41,
+          "metaDescription": "The API marketplace for humans and AI agents. Pay only for what you use with x402 crypto payments (USDC on Base via EIP-3009, Solana SPL tokens).",
+          "metaDescriptionLength": 145,
+          "h1": "Discover APIs & MCPs",
+          "h1Count": 2,
+          "h2Count": 4,
+          "imagesWithoutAlt": 0,
+          "canonical": "",
+          "ogTags": {
+            "title": "OMA-AI - API Marketplace for Agents & Humans",
+            "description": "The API marketplace for humans and AI agents. Pay only for what you use with x402 crypto payments.",
+            "image": "",
+            "url": "https://oma-ai.com"
+          },
+          "twitterTags": {
+            "card": "summary_large_image",
+            "title": "OMA-AI",
+            "description": "The API marketplace for humans and AI agents.",
+            "image": "https://oma-ai.com/og-image.png"
+          },
+          "structuredData": [],
+          "issues": [
+            "Multiple H1 tags: 2"
+          ]
+        },
+        {
+          "route": "/about",
+          "url": "https://oma-ai.com/about",
+          "title": "About OMA-AI | OMA-AI",
+          "titleLength": 21,
+          "metaDescription": "Learn about OMA-AI's mission to build the world's first autonomous agent ecosystem with economic participation using x402 crypto payments and AI agents.",
+          "metaDescriptionLength": 152,
+          "h1": "About OMA-AI",
+          "h1Count": 1,
+          "h2Count": 4,
+          "imagesWithoutAlt": 0,
+          "canonical": "",
+          "ogTags": {
+            "title": "OMA-AI - API Marketplace for Agents & Humans",
+            "description": "The API marketplace for humans and AI agents. Pay only for what you use with x402 crypto payments.",
+            "image": "",
+            "url": "https://oma-ai.com"
+          },
+          "twitterTags": {
+            "card": "summary_large_image",
+            "title": "OMA-AI",
+            "description": "The API marketplace for humans and AI agents.",
+            "image": "https://oma-ai.com/og-image.png"
+          },
+          "structuredData": [],
+          "issues": []
+        },
+        {
+          "route": "/features",
+          "url": "https://oma-ai.com/features",
+          "title": "Features | OMA-AI Platform Capabilities",
+          "titleLength": 39,
+          "metaDescription": "Explore OMA-AI features: API marketplace, MCP integration, x402 payments, bounties system, and agent-to-agent commerce infrastructure.",
+          "metaDescriptionLength": 134,
+          "h1": "Platform Features",
+          "h1Count": 1,
+          "h2Count": 1,
+          "imagesWithoutAlt": 0,
+          "canonical": "",
+          "ogTags": {
+            "title": "OMA-AI - API Marketplace for Agents & Humans",
+            "description": "The API marketplace for humans and AI agents. Pay only for what you use with x402 crypto payments.",
+            "image": "",
+            "url": "https://oma-ai.com"
+          },
+          "twitterTags": {
+            "card": "summary_large_image",
+            "title": "OMA-AI",
+            "description": "The API marketplace for humans and AI agents.",
+            "image": "https://oma-ai.com/og-image.png"
+          },
+          "structuredData": [],
+          "issues": []
+        },
+        {
+          "route": "/pricing",
+          "url": "https://oma-ai.com/pricing",
+          "title": "Pricing - Simple & Transparent | OMA-AI",
+          "titleLength": 39,
+          "metaDescription": "OMA-AI pricing: Start free, scale as you grow. No hidden fees, cancel anytime. Plans from $0-$29/month plus managed persona options.",
+          "metaDescriptionLength": 132,
+          "h1": "Simple, Transparent Pricing",
+          "h1Count": 1,
+          "h2Count": 3,
+          "imagesWithoutAlt": 0,
+          "canonical": "",
+          "ogTags": {
+            "title": "OMA-AI - API Marketplace for Agents & Humans",
+            "description": "The API marketplace for humans and AI agents. Pay only for what you use with x402 crypto payments.",
+            "image": "",
+            "url": "https://oma-ai.com"
+          },
+          "twitterTags": {
+            "card": "summary_large_image",
+            "title": "OMA-AI",
+            "description": "The API marketplace for humans and AI agents.",
+            "image": "https://oma-ai.com/og-image.png"
+          },
+          "structuredData": [],
+          "issues": []
+        },
+        {
+          "route": "/contact",
+          "url": "https://oma-ai.com/contact",
+          "title": "Contact OMA-AI | OMA-AI",
+          "titleLength": 23,
+          "metaDescription": "Get in touch with the OMA-AI team. Contact us via email, Twitter, or GitHub for questions, partnerships, or support.",
+          "metaDescriptionLength": 116,
+          "h1": "Get in Touch",
+          "h1Count": 1,
+          "h2Count": 3,
+          "imagesWithoutAlt": 0,
+          "canonical": "",
+          "ogTags": {
+            "title": "OMA-AI - API Marketplace for Agents & Humans",
+            "description": "The API marketplace for humans and AI agents. Pay only for what you use with x402 crypto payments.",
+            "image": "",
+            "url": "https://oma-ai.com"
+          },
+          "twitterTags": {
+            "card": "summary_large_image",
+            "title": "OMA-AI",
+            "description": "The API marketplace for humans and AI agents.",
+            "image": "https://oma-ai.com/og-image.png"
+          },
+          "structuredData": [],
+          "issues": []
+        },
+        {
+          "route": "/login",
+          "url": "https://oma-ai.com/login",
+          "title": "OMA-AI - Open Market Access for AI Agents",
+          "titleLength": 41,
+          "metaDescription": "The API marketplace for humans and AI agents. Pay only for what you use with x402 crypto payments (USDC on Base via EIP-3009, Solana SPL tokens).",
+          "metaDescriptionLength": 145,
+          "h1": "Welcome Back",
+          "h1Count": 1,
+          "h2Count": 0,
+          "imagesWithoutAlt": 0,
+          "canonical": "",
+          "ogTags": {
+            "title": "OMA-AI - API Marketplace for Agents & Humans",
+            "description": "The API marketplace for humans and AI agents. Pay only for what you use with x402 crypto payments.",
+            "image": "",
+            "url": "https://oma-ai.com"
+          },
+          "twitterTags": {
+            "card": "summary_large_image",
+            "title": "OMA-AI",
+            "description": "The API marketplace for humans and AI agents.",
+            "image": "https://oma-ai.com/og-image.png"
+          },
+          "structuredData": [],
+          "issues": []
+        },
+        {
+          "route": "/dashboard",
+          "url": "https://oma-ai.com/dashboard",
+          "title": "OMA-AI - Open Market Access for AI Agents",
+          "titleLength": 41,
+          "metaDescription": "The API marketplace for humans and AI agents. Pay only for what you use with x402 crypto payments (USDC on Base via EIP-3009, Solana SPL tokens).",
+          "metaDescriptionLength": 145,
+          "h1": "404",
+          "h1Count": 1,
+          "h2Count": 1,
+          "imagesWithoutAlt": 0,
+          "canonical": "",
+          "ogTags": {
+            "title": "OMA-AI - API Marketplace for Agents & Humans",
+            "description": "The API marketplace for humans and AI agents. Pay only for what you use with x402 crypto payments.",
+            "image": "",
+            "url": "https://oma-ai.com"
+          },
+          "twitterTags": {
+            "card": "summary_large_image",
+            "title": "OMA-AI",
+            "description": "The API marketplace for humans and AI agents.",
+            "image": "https://oma-ai.com/og-image.png"
+          },
+          "structuredData": [],
+          "issues": []
+        }
+      ],
+      "globalIssues": [],
+      "score": 95
+    },
+    "visual": {
+      "screenshots": 16,
+      "routes": [
+        "/",
+        "/about",
+        "/features",
+        "/pricing"
+      ],
+      "viewports": [
+        "desktop",
+        "laptop",
+        "tablet",
+        "mobile"
+      ],
+      "details": [
+        {
+          "route": "/",
+          "viewport": "desktop",
+          "filename": "_-desktop.png",
+          "path": "/home/nosyt/.openclaw/workspace/skills/playwright-audit/reports/oma-ai-1770705476299/screenshots/_-desktop.png"
+        },
+        {
+          "route": "/",
+          "viewport": "laptop",
+          "filename": "_-laptop.png",
+          "path": "/home/nosyt/.openclaw/workspace/skills/playwright-audit/reports/oma-ai-1770705476299/screenshots/_-laptop.png"
+        },
+        {
+          "route": "/",
+          "viewport": "tablet",
+          "filename": "_-tablet.png",
+          "path": "/home/nosyt/.openclaw/workspace/skills/playwright-audit/reports/oma-ai-1770705476299/screenshots/_-tablet.png"
+        },
+        {
+          "route": "/",
+          "viewport": "mobile",
+          "filename": "_-mobile.png",
+          "path": "/home/nosyt/.openclaw/workspace/skills/playwright-audit/reports/oma-ai-1770705476299/screenshots/_-mobile.png"
+        },
+        {
+          "route": "/about",
+          "viewport": "desktop",
+          "filename": "_about-desktop.png",
+          "path": "/home/nosyt/.openclaw/workspace/skills/playwright-audit/reports/oma-ai-1770705476299/screenshots/_about-desktop.png"
+        },
+        {
+          "route": "/about",
+          "viewport": "laptop",
+          "filename": "_about-laptop.png",
+          "path": "/home/nosyt/.openclaw/workspace/skills/playwright-audit/reports/oma-ai-1770705476299/screenshots/_about-laptop.png"
+        },
+        {
+          "route": "/about",
+          "viewport": "tablet",
+          "filename": "_about-tablet.png",
+          "path": "/home/nosyt/.openclaw/workspace/skills/playwright-audit/reports/oma-ai-1770705476299/screenshots/_about-tablet.png"
+        },
+        {
+          "route": "/about",
+          "viewport": "mobile",
+          "filename": "_about-mobile.png",
+          "path": "/home/nosyt/.openclaw/workspace/skills/playwright-audit/reports/oma-ai-1770705476299/screenshots/_about-mobile.png"
+        },
+        {
+          "route": "/features",
+          "viewport": "desktop",
+          "filename": "_features-desktop.png",
+          "path": "/home/nosyt/.openclaw/workspace/skills/playwright-audit/reports/oma-ai-1770705476299/screenshots/_features-desktop.png"
+        },
+        {
+          "route": "/features",
+          "viewport": "laptop",
+          "filename": "_features-laptop.png",
+          "path": "/home/nosyt/.openclaw/workspace/skills/playwright-audit/reports/oma-ai-1770705476299/screenshots/_features-laptop.png"
+        },
+        {
+          "route": "/features",
+          "viewport": "tablet",
+          "filename": "_features-tablet.png",
+          "path": "/home/nosyt/.openclaw/workspace/skills/playwright-audit/reports/oma-ai-1770705476299/screenshots/_features-tablet.png"
+        },
+        {
+          "route": "/features",
+          "viewport": "mobile",
+          "filename": "_features-mobile.png",
+          "path": "/home/nosyt/.openclaw/workspace/skills/playwright-audit/reports/oma-ai-1770705476299/screenshots/_features-mobile.png"
+        },
+        {
+          "route": "/pricing",
+          "viewport": "desktop",
+          "filename": "_pricing-desktop.png",
+          "path": "/home/nosyt/.openclaw/workspace/skills/playwright-audit/reports/oma-ai-1770705476299/screenshots/_pricing-desktop.png"
+        },
+        {
+          "route": "/pricing",
+          "viewport": "laptop",
+          "filename": "_pricing-laptop.png",
+          "path": "/home/nosyt/.openclaw/workspace/skills/playwright-audit/reports/oma-ai-1770705476299/screenshots/_pricing-laptop.png"
+        },
+        {
+          "route": "/pricing",
+          "viewport": "tablet",
+          "filename": "_pricing-tablet.png",
+          "path": "/home/nosyt/.openclaw/workspace/skills/playwright-audit/reports/oma-ai-1770705476299/screenshots/_pricing-tablet.png"
+        },
+        {
+          "route": "/pricing",
+          "viewport": "mobile",
+          "filename": "_pricing-mobile.png",
+          "path": "/home/nosyt/.openclaw/workspace/skills/playwright-audit/reports/oma-ai-1770705476299/screenshots/_pricing-mobile.png"
+        }
+      ]
+    }
+  }
+}

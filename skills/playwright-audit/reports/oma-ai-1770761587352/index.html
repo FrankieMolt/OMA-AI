@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Audit Report - OMA-AI</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { 
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+      color: #e2e8f0;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+    .container { max-width: 1400px; margin: 0 auto; padding: 2rem; }
+    header { 
+      background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+      padding: 3rem;
+      border-radius: 20px;
+      margin-bottom: 2rem;
+      box-shadow: 0 25px 50px -12px rgba(99, 102, 241, 0.25);
+    }
+    h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+    .subtitle { opacity: 0.9; font-size: 1.1rem; }
+    .timestamp { opacity: 0.7; margin-top: 0.5rem; }
+    .grade-display {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      font-size: 3rem;
+      font-weight: bold;
+      margin: 1rem 0;
+      border: 4px solid;
+    }
+    .grade-a { background: rgba(34, 197, 94, 0.2); border-color: #22c55e; color: #22c55e; }
+    .grade-b { background: rgba(59, 130, 246, 0.2); border-color: #3b82f6; color: #3b82f6; }
+    .grade-c { background: rgba(245, 158, 11, 0.2); border-color: #f59e0b; color: #f59e0b; }
+    .grade-d, .grade-f { background: rgba(239, 68, 68, 0.2); border-color: #ef4444; color: #ef4444; }
+    .score-grid { 
+      display: grid; 
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+    .score-card {
+      background: rgba(30, 41, 59, 0.8);
+      backdrop-filter: blur(10px);
+      padding: 2rem;
+      border-radius: 16px;
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: transform 0.2s;
+    }
+    .score-card:hover { transform: translateY(-4px); }
+    .score-card h3 { color: #94a3b8; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1rem; }
+    .score-value { font-size: 3.5rem; font-weight: bold; }
+    .score-excellent { color: #22c55e; }
+    .score-good { color: #3b82f6; }
+    .score-fair { color: #f59e0b; }
+    .score-poor { color: #ef4444; }
+    .section { 
+      background: rgba(30, 41, 59, 0.6);
+      backdrop-filter: blur(10px);
+      padding: 2rem;
+      border-radius: 16px;
+      margin-bottom: 1.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .section h2 { 
+      color: #60a5fa; 
+      margin-bottom: 1.5rem; 
+      display: flex; 
+      align-items: center; 
+      gap: 0.75rem;
+      font-size: 1.5rem;
+    }
+    .issues { margin-top: 1rem; }
+    .issue { 
+      background: rgba(15, 23, 42, 0.8);
+      padding: 1rem 1.25rem;
+      border-radius: 10px;
+      margin-bottom: 0.75rem;
+      border-left: 4px solid;
+    }
+    .issue-error { border-left-color: #ef4444; }
+    .issue-warning { border-left-color: #f59e0b; }
+    .issue-info { border-left-color: #3b82f6; }
+    .issue strong { color: #f8fafc; display: block; margin-bottom: 0.25rem; }
+    .issue p { color: #94a3b8; font-size: 0.9rem; }
+    .metric { 
+      display: flex; 
+      justify-content: space-between;
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .metric:last-child { border-bottom: none; }
+    table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+    th, td { padding: 1rem; text-align: left; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+    th { color: #94a3b8; font-weight: 600; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1px; }
+    .badge {
+      display: inline-block;
+      padding: 0.375rem 1rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    .badge-success { background: rgba(34, 197, 94, 0.2); color: #22c55e; }
+    .badge-warning { background: rgba(245, 158, 11, 0.2); color: #f59e0b; }
+    .badge-error { background: rgba(239, 68, 68, 0.2); color: #ef4444; }
+    .badge-info { background: rgba(59, 130, 246, 0.2); color: #3b82f6; }
+    .recommendations {
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.2) 0%, rgba(139, 92, 246, 0.2) 100%);
+      border: 1px solid rgba(139, 92, 246, 0.3);
+    }
+    .recommendations h2 { color: #a78bfa; }
+    .rec-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1rem;
+      background: rgba(15, 23, 42, 0.5);
+      border-radius: 10px;
+      margin-bottom: 0.75rem;
+    }
+    .rec-priority {
+      padding: 0.25rem 0.75rem;
+      border-radius: 6px;
+      font-size: 0.7rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .priority-p0 { background: #ef4444; color: white; }
+    .priority-p1 { background: #f59e0b; color: white; }
+    .priority-p2 { background: #3b82f6; color: white; }
+    footer { text-align: center; margin-top: 3rem; opacity: 0.6; padding: 2rem; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🔍 OMA-AI Audit Report</h1>
+      <p class="subtitle">AI-powered automation platform</p>
+      <p class="subtitle">http://localhost:3001</p>
+      <p class="timestamp">Generated: 2/10/2026, 10:13:17 PM</p>
+      
+      <div style="display: flex; align-items: center; gap: 2rem; margin-top: 1.5rem;">
+        <div class="grade-display grade-f">
+          F
+        </div>
+        <div>
+          <h2 style="margin: 0;">Overall Score: 57/100</h2>
+          <p class="subtitle">Combined performance, SEO, and security metrics</p>
+        </div>
+      </div>
+    </header>
+
+    <div class="score-grid">
+      <div class="score-card">
+        <h3>Performance</h3>
+        <div class="score-value score-excellent">90</div>
+        <p style="margin-top: 0.5rem; color: #94a3b8;">Avg response: 942ms</p>
+      </div>
+      <div class="score-card">
+        <h3>Accessibility</h3>
+        <div class="score-value score-excellent">0</div>
+        <p style="margin-top: 0.5rem; color: #94a3b8;">violations found</p>
+      </div>
+      <div class="score-card">
+        <h3>SEO Score</h3>
+        <div class="score-value score-poor">0</div>
+        <p style="margin-top: 0.5rem; color: #94a3b8;">14 errors, 14 warnings</p>
+      </div>
+      <div class="score-card">
+        <h3>Security</h3>
+        <div class="score-value score-good">80</div>
+        <p style="margin-top: 0.5rem; color: #94a3b8;">1 critical issues</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>📊 Performance Metrics</h2>
+      <div class="metric">
+        <span>Average Response Time</span>
+        <span class="score-good">942ms</span>
+      </div>
+      <div class="metric">
+        <span>External Scripts</span>
+        <span>66</span>
+      </div>
+      <div class="metric">
+        <span>Stylesheets</span>
+        <span>0</span>
+      </div>
+      <div class="metric">
+        <span>Images</span>
+        <span>0</span>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>♿ Accessibility Issues</h2>
+      <p class="badge badge-success">✅ No accessibility violations found!</p>
+    </div>
+
+    <div class="section">
+      <h2>🔍 SEO Analysis</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Route</th>
+            <th>Title</th>
+            <th>Meta Description</th>
+            <th>H1 Count</th>
+            <th>Issues</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+            <tr>
+              <td>/</td>
+              <td><span class="badge badge-warning">0 chars</span></td>
+              <td><span class="badge badge-warning">0 chars</span></td>
+              <td><span class="badge badge-error">0</span></td>
+              <td>6</td>
+            </tr>
+          
+            <tr>
+              <td>/about</td>
+              <td><span class="badge badge-warning">0 chars</span></td>
+              <td><span class="badge badge-warning">0 chars</span></td>
+              <td><span class="badge badge-error">0</span></td>
+              <td>6</td>
+            </tr>
+          
+            <tr>
+              <td>/features</td>
+              <td><span class="badge badge-warning">0 chars</span></td>
+              <td><span class="badge badge-warning">0 chars</span></td>
+              <td><span class="badge badge-error">0</span></td>
+              <td>6</td>
+            </tr>
+          
+            <tr>
+              <td>/pricing</td>
+              <td><span class="badge badge-warning">0 chars</span></td>
+              <td><span class="badge badge-warning">0 chars</span></td>
+              <td><span class="badge badge-error">0</span></td>
+              <td>6</td>
+            </tr>
+          
+            <tr>
+              <td>/contact</td>
+              <td><span class="badge badge-warning">0 chars</span></td>
+              <td><span class="badge badge-warning">0 chars</span></td>
+              <td><span class="badge badge-error">0</span></td>
+              <td>6</td>
+            </tr>
+          
+            <tr>
+              <td>/login</td>
+              <td><span class="badge badge-warning">0 chars</span></td>
+              <td><span class="badge badge-warning">0 chars</span></td>
+              <td><span class="badge badge-error">0</span></td>
+              <td>6</td>
+            </tr>
+          
+            <tr>
+              <td>/dashboard</td>
+              <td><span class="badge badge-warning">0 chars</span></td>
+              <td><span class="badge badge-warning">0 chars</span></td>
+              <td><span class="badge badge-error">0</span></td>
+              <td>6</td>
+            </tr>
+          
+        </tbody>
+      </table>
+      
+        <div class="issues" style="margin-top: 1.5rem;">
+          <h3 style="margin-bottom: 1rem; color: #f8fafc;">Critical SEO Issues</h3>
+          
+              <div class="issue issue-error">
+                <strong>/</strong>
+                <p>Title length issue: 0 characters (should be 10-70)</p>
+              </div>
+            
+              <div class="issue issue-error">
+                <strong>/</strong>
+                <p>Missing H1 tag</p>
+              </div>
+            
+              <div class="issue issue-error">
+                <strong>/about</strong>
+                <p>Title length issue: 0 characters (should be 10-70)</p>
+              </div>
+            
+              <div class="issue issue-error">
+                <strong>/about</strong>
+                <p>Missing H1 tag</p>
+              </div>
+            
+              <div class="issue issue-error">
+                <strong>/features</strong>
+                <p>Title length issue: 0 characters (should be 10-70)</p>
+              </div>
+            
+              <div class="issue issue-error">
+                <strong>/features</strong>
+                <p>Missing H1 tag</p>
+              </div>
+            
+              <div class="issue issue-error">
+                <strong>/pricing</strong>
+                <p>Title length issue: 0 characters (should be 10-70)</p>
+              </div>
+            
+              <div class="issue issue-error">
+                <strong>/pricing</strong>
+                <p>Missing H1 tag</p>
+              </div>
+            
+              <div class="issue issue-error">
+                <strong>/contact</strong>
+                <p>Title length issue: 0 characters (should be 10-70)</p>
+              </div>
+            
+              <div class="issue issue-error">
+                <strong>/contact</strong>
+                <p>Missing H1 tag</p>
+              </div>
+            
+              <div class="issue issue-error">
+                <strong>/login</strong>
+                <p>Title length issue: 0 characters (should be 10-70)</p>
+              </div>
+            
+              <div class="issue issue-error">
+                <strong>/login</strong>
+                <p>Missing H1 tag</p>
+              </div>
+            
+              <div class="issue issue-error">
+                <strong>/dashboard</strong>
+                <p>Title length issue: 0 characters (should be 10-70)</p>
+              </div>
+            
+              <div class="issue issue-error">
+                <strong>/dashboard</strong>
+                <p>Missing H1 tag</p>
+              </div>
+            
+        </div>
+      
+    </div>
+
+    <div class="section">
+      <h2>🔒 Security Analysis</h2>
+      <div class="issues">
+          
+            <div class="issue issue-error">
+              <strong>ERROR</strong>
+              <p>Site not using HTTPS</p>
+            </div>
+          
+        </div>
+      <div style="margin-top: 1.5rem;">
+        <h3 style="margin-bottom: 1rem; color: #94a3b8;">Security Headers</h3>
+        
+          <div class="metric">
+            <span>content-security-policy</span>
+            <span class="badge badge-success">Present</span>
+          </div>
+        
+          <div class="metric">
+            <span>x-frame-options</span>
+            <span class="badge badge-success">Present</span>
+          </div>
+        
+          <div class="metric">
+            <span>x-content-type-options</span>
+            <span class="badge badge-success">Present</span>
+          </div>
+        
+          <div class="metric">
+            <span>strict-transport-security</span>
+            <span class="badge badge-success">Present</span>
+          </div>
+        
+          <div class="metric">
+            <span>referrer-policy</span>
+            <span class="badge badge-success">Present</span>
+          </div>
+        
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>✅ Functional Tests</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+        <div style="text-align: center; padding: 1.5rem; background: rgba(34, 197, 94, 0.1); border-radius: 10px;">
+          <div style="font-size: 2rem; font-weight: bold; color: #22c55e;">0</div>
+          <div style="color: #94a3b8;">Working Routes</div>
+        </div>
+        <div style="text-align: center; padding: 1.5rem; background: rgba(239, 68, 68, 0.1); border-radius: 10px;">
+          <div style="font-size: 2rem; font-weight: bold; color: #ef4444;">7</div>
+          <div style="color: #94a3b8;">Broken Routes</div>
+        </div>
+      </div>
+      
+        <div class="issues" style="margin-top: 1.5rem;">
+          <h3 style="margin-bottom: 1rem;">Broken Routes</h3>
+          
+            <div class="issue issue-error">
+              <strong>/</strong>
+              <p>Status: 500</p>
+            </div>
+          
+            <div class="issue issue-error">
+              <strong>/about</strong>
+              <p>Status: 500</p>
+            </div>
+          
+            <div class="issue issue-error">
+              <strong>/features</strong>
+              <p>Status: 500</p>
+            </div>
+          
+            <div class="issue issue-error">
+              <strong>/pricing</strong>
+              <p>Status: 500</p>
+            </div>
+          
+            <div class="issue issue-error">
+              <strong>/contact</strong>
+              <p>Status: 500</p>
+            </div>
+          
+            <div class="issue issue-error">
+              <strong>/login</strong>
+              <p>Status: 500</p>
+            </div>
+          
+            <div class="issue issue-error">
+              <strong>/dashboard</strong>
+              <p>Status: 500</p>
+            </div>
+          
+        </div>
+      
+    </div>
+
+    <div class="section recommendations">
+      <h2>💡 Top Recommendations</h2>
+      
+        <div class="rec-item">
+          <span class="rec-priority priority-p0">P0</span>
+          <div>
+            <strong style="color: #f8fafc;">Add H1 Tags to All Pages</strong>
+            <p style="color: #94a3b8; margin-top: 0.25rem;">Every page should have exactly one H1 tag describing the main content</p>
+          </div>
+        </div>
+      
+        <div class="rec-item">
+          <span class="rec-priority priority-p0">P0</span>
+          <div>
+            <strong style="color: #f8fafc;">Enable HTTPS</strong>
+            <p style="color: #94a3b8; margin-top: 0.25rem;">Configure SSL/TLS certificates and redirect HTTP to HTTPS</p>
+          </div>
+        </div>
+      
+        <div class="rec-item">
+          <span class="rec-priority priority-p2">P2</span>
+          <div>
+            <strong style="color: #f8fafc;">Add Open Graph Meta Tags</strong>
+            <p style="color: #94a3b8; margin-top: 0.25rem;">Implement og:title, og:description, og:image for better social media sharing</p>
+          </div>
+        </div>
+      
+        <div class="rec-item">
+          <span class="rec-priority priority-p2">P2</span>
+          <div>
+            <strong style="color: #f8fafc;">Implement Structured Data</strong>
+            <p style="color: #94a3b8; margin-top: 0.25rem;">Add JSON-LD schema markup for better search engine understanding</p>
+          </div>
+        </div>
+      
+    </div>
+
+    <footer>
+      <p>Generated by Comprehensive Site Audit System</p>
+      <p style="margin-top: 0.5rem; font-size: 0.875rem;">2026-02-10T22:13:17.217Z</p>
+    </footer>
+  </div>
+</body>
+</html>
