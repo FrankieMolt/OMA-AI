@@ -57,7 +57,7 @@ export function WalletConnect() {
           </div>
           
           <button className="w-full py-3 bg-muted hover:bg-muted/80 rounded-xl font-semibold transition-all flex items-center justify-center gap-2">
-            <img src="/metamask.svg" alt="MetaMask" className="w-5 h-5" />
+            <img src="/metamask.svg" alt="MetaMask Logo" width={20} height={20} className="w-5 h-5" />
             Connect MetaMask
           </button>
         </div>

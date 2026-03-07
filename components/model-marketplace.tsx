@@ -86,6 +86,7 @@ export function ModelMarketplace() {
         <div className="relative w-full md:w-96">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
           <input
+            aria-label="Search models"
             type="text"
             placeholder="Search models..."
             value={searchQuery}
@@ -171,7 +172,7 @@ export function ModelMarketplace() {
                 <Coins className="w-4 h-4" />
                 Pay with x402
               </button>
-              <button className="px-3 py-2.5 bg-muted hover:bg-muted/80 rounded-xl transition-all">
+              <button aria-label="View model details" className="px-3 py-2.5 bg-muted hover:bg-muted/80 rounded-xl transition-all">
                 <ExternalLink className="w-4 h-4" />
               </button>
             </div>

@@ -11,9 +11,9 @@ export default function LoginPage() {
   return (
     <main className="min-h-screen bg-zinc-950 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <h2 className="mt-6 text-center text-3xl font-extrabold text-white">
+        <h1 className="mt-6 text-center text-3xl font-extrabold text-white">
           Sign in to your account
-        </h2>
+        </h1>
         <p className="mt-2 text-center text-sm text-zinc-400">
           Or{' '}
           <Link href="/signup" className="font-medium text-primary hover:underline">
@@ -84,7 +84,7 @@ export default function LoginPage() {
               </div>
 
               <div className="text-sm">
-                <a href="/forgot-password" className="font-medium text-primary hover:underline">
+                <a href="#" className="font-medium text-primary hover:underline">
                   Forgot your password?
                 </a>
               </div>

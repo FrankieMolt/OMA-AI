@@ -84,6 +84,7 @@ export default function McpRegistryPage() {
       <div className="relative mb-8">
         <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
         <input
+          aria-label="Search MCP servers"
           type="text"
           placeholder="Search MCP servers (e.g. GitHub, Slack, Postgres)..."
           value={searchQuery}
