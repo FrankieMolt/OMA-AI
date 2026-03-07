@@ -1,149 +1,203 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="/styles.css">
-    <link rel="stylesheet" href="/styles-enhanced.css">
+    <link rel="canonical" href="https://oma-ai.com/status.html">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="canonical" href="https://oma-ai.com/status">
-    <title>Status - OMA-AI | System Status</title>
-    <meta name="description" content="OMA-AI system status and uptime monitoring.">
-    <link rel="stylesheet" href="/quick-wins.css">
-<style>
-        body { font-family: 'Inter', sans-serif; background: #09090b; color: #fafafa; }
-        .gradient { background: linear-gradient(135deg, #6366f1, #8b5cf6, #d946ef); }
+    <title>OMA-AI Status | Live System Health</title>
+    <meta http-equiv="refresh" content="30">
+    <style>
+        :root {
+            --bg: #09090b;
+            --card: #18181b;
+            --border: rgba(255,255,255,0.1);
+            --text: #fafafa;
+            --muted: #71717a;
+            --green: #22c55e;
+            --yellow: #f59e0b;
+            --red: #ef4444;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            padding: 24px;
+            line-height: 1.6;
+        }
+        .container { max-width: 1200px; margin: 0 auto; }
+        h1 { font-size: 28px; margin-bottom: 8px; }
+        .updated { color: var(--muted); font-size: 14px; margin-bottom: 24px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-bottom: 24px; }
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+        }
+        .card h2 { font-size: 14px; color: var(--muted); margin-bottom: 12px; text-transform: uppercase; }
+        .status { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+        .dot { width: 10px; height: 10px; border-radius: 50%; }
+        .dot.green { background: var(--green); }
+        .dot.yellow { background: var(--yellow); }
+        .dot.red { background: var(--red); }
+        .value { font-size: 32px; font-weight: 700; }
+        .sub { color: var(--muted); font-size: 14px; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid var(--border); }
+        th { color: var(--muted); font-weight: 500; font-size: 12px; text-transform: uppercase; }
+        .tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        .tag.green { background: rgba(34,197,94,0.2); color: var(--green); }
+        .tag.yellow { background: rgba(245,158,11,0.2); color: var(--yellow); }
+        .tag.red { background: rgba(239,68,68,0.2); color: var(--red); }
+        .endpoint { font-family: monospace; font-size: 13px; color: var(--muted); }
     </style>
-<link rel="stylesheet" href="/design-system.css">
-<link rel="stylesheet" href="/responsive.css">
 </head>
-<body class="min-h-screen">
-    <nav class="fixed top-0 left-0 right-0 z-50 bg-zinc-950/90 backdrop-blur-xl border-b border-white/5">
-        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-            <a href="/" class="flex items-center gap-3">
-                <div class="w-10 h-10 gradient rounded-xl flex items-center justify-center font-bold">OMA</div>
-                <span class="text-xl font-bold">Open Market Access</span>
-            </a>
-            <div class="flex items-center gap-4">
-                <a href="/status" class="text-violet-400">Status</a>
-                <a href="/docs" class="text-zinc-400 hover:text-white">Docs</a>
+<body>
+    <div class="container">
+        <h1>OMA-AI System Status</h1>
+        <p class="updated">Last updated: <span id="timestamp">Loading...</span></p>
+        
+        <div class="grid">
+            <div class="card">
+                <h2>API Gateway</h2>
+                <div class="status">
+                    <span class="dot green"></span>
+                    <span>Operational</span>
+                </div>
+                <div class="value">14</div>
+                <p class="sub">Models Available</p>
+            </div>
+            
+            <div class="card">
+                <h2>Miners</h2>
+                <div class="status">
+                    <span class="dot yellow"></span>
+                    <span>Recruiting</span>
+                </div>
+                <div class="value" id="miners">1</div>
+                <p class="sub">Active Miners</p>
+            </div>
+            
+            <div class="card">
+                <h2>Credits System</h2>
+                <div class="status">
+                    <span class="dot green"></span>
+                    <span>Active</span>
+                </div>
+                <div class="value">$0.001</div>
+                <p class="sub">Per Credit</p>
+            </div>
+            
+            <div class="card">
+                <h2>Trading Bot</h2>
+                <div class="status">
+                    <span class="dot yellow"></span>
+                    <span>Paused</span>
+                </div>
+                <div class="value">$22.65</div>
+                <p class="sub">Portfolio Value</p>
             </div>
         </div>
-    </nav>
-
-    <main class="pt-24 pb-16 px-4">
-        <div class="max-w-4xl mx-auto">
-            <div class="text-center mb-12">
-                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-500/10 border border-green-500/20 mb-6">
-                    <span class="w-3 h-3 rounded-full bg-green-400 animate-pulse"></span>
-                    <span class="text-sm text-green-300">All Systems Operational</span>
-                </div>
-                <h1 class="text-5xl font-bold mb-4">System Status</h1>
-                <p class="text-xl text-zinc-400">Real-time monitoring of OMA-AI platform services.</p>
-            </div>
-
-            <!-- Overall Status -->
-            <div class="glass rounded-2xl p-8 border border-green-500/30 mb-8">
-                <div class="grid md:grid-cols-4 gap-6 text-center">
-                    <div>
-                        <div class="text-4xl font-bold text-green-400">99.9%</div>
-                        <div class="text-zinc-500 text-sm mt-1">Uptime (30d)</div>
-                    </div>
-                    <div>
-                        <div class="text-4xl font-bold text-violet-400">12</div>
-                        <div class="text-zinc-500 text-sm mt-1">API Endpoints</div>
-                    </div>
-                    <div>
-                        <div class="text-4xl font-bold text-blue-400">45ms</div>
-                        <div class="text-zinc-500 text-sm mt-1">Avg Response</div>
-                    </div>
-                    <div>
-                        <div class="text-4xl font-bold text-orange-400">0</div>
-                        <div class="text-zinc-500 text-sm mt-1">Incidents (30d)</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Service Status -->
-            <div class="glass rounded-2xl p-6 border border-white/5 mb-8">
-                <h2 class="text-xl font-bold mb-6">API Services</h2>
-                <div class="space-y-4">
-                    <div class="flex items-center justify-between p-4 bg-zinc-900 rounded-xl">
-                        <div class="flex items-center gap-4">
-                            <span class="text-green-400 text-xl">✅</span>
-                            <div>
-                                <div class="font-semibold">Price API</div>
-                                <div class="text-zinc-500 text-sm">Crypto prices from CoinGecko</div>
-                            </div>
-                        </div>
-                        <span class="text-green-400 text-sm">Operational</span>
-                    </div>
-                    <div class="flex items-center justify-between p-4 bg-zinc-900 rounded-xl">
-                        <div class="flex items-center gap-4">
-                            <span class="text-green-400 text-xl">✅</span>
-                            <div>
-                                <div class="font-semibold">Weather API</div>
-                                <div class="text-zinc-500 text-sm">7-day forecasts</div>
-                            </div>
-                        </div>
-                        <span class="text-green-400 text-sm">Operational</span>
-                    </div>
-                    <div class="flex items-center justify-between p-4 bg-zinc-900 rounded-xl">
-                        <div class="flex items-center gap-4">
-                            <span class="text-green-400 text-xl">✅</span>
-                            <div>
-                                <div class="font-semibold">Search API</div>
-                                <div class="text-zinc-500 text-sm">Web search via Brave</div>
-                            </div>
-                        </div>
-                        <span class="text-green-400 text-sm">Operational</span>
-                    </div>
-                    <div class="flex items-center justify-between p-4 bg-zinc-900 rounded-xl">
-                        <div class="flex items-center gap-4">
-                            <span class="text-green-400 text-xl">✅</span>
-                            <div>
-                                <div class="font-semibold">LLM API</div>
-                                <div class="text-zinc-500 text-sm">Text generation</div>
-                            </div>
-                        </div>
-                        <span class="text-green-400 text-sm">Operational</span>
-                    </div>
-                    <div class="flex items-center justify-between p-4 bg-zinc-900 rounded-xl">
-                        <div class="flex items-center gap-4">
-                            <span class="text-green-400 text-xl">✅</span>
-                            <div>
-                                <div class="font-semibold">Compute API</div>
-                                <div class="text-zinc-500 text-sm">Akash deployment</div>
-                            </div>
-                        </div>
-                        <span class="text-green-400 text-sm">Operational</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- API Key -->
-            <div class="glass rounded-2xl p-6 border border-white/5">
-                <h2 class="text-xl font-bold mb-4">Check Status via API</h2>
-                <p class="text-zinc-400 mb-4">You can also check status programmatically:</p>
-                <pre class="bg-zinc-900 p-4 rounded-xl overflow-x-auto"><code class="text-green-400">curl https://oma-ai.com/api/health</code></pre>
-                <div class="mt-4 p-4 bg-zinc-900 rounded-xl">
-                    <div class="text-sm text-zinc-400 mb-2">Response:</div>
-                    <pre class="text-sm"><code class="text-yellow-400">{
-  "success": true,
-  "platform": "OMA-AI",
-  "version": "1.0.0",
-  "endpoints": [
-    {"name": "price", "status": "ok"},
-    {"name": "weather", "status": "ok"},
-    {"name": "search", "status": "ok"},
-    ...
-  ]
-}</code></pre>
-                </div>
-            </div>
+        
+        <div class="card">
+            <h2>API Endpoints</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Endpoint</th>
+                        <th>Status</th>
+                        <th>Response Time</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="endpoint">GET /v1/models</td>
+                        <td><span class="tag green">OK</span></td>
+                        <td>~50ms</td>
+                        <td>14 models listed</td>
+                    </tr>
+                    <tr>
+                        <td class="endpoint">POST /v1/chat/completions</td>
+                        <td><span class="tag yellow">Demo</span></td>
+                        <td>~200ms</td>
+                        <td>Needs Venice API key</td>
+                    </tr>
+                    <tr>
+                        <td class="endpoint">POST /v1/images/generations</td>
+                        <td><span class="tag yellow">Demo</span></td>
+                        <td>~100ms</td>
+                        <td>Placeholder images</td>
+                    </tr>
+                    <tr>
+                        <td class="endpoint">GET /v1/credits</td>
+                        <td><span class="tag green">OK</span></td>
+                        <td>~10ms</td>
+                        <td>1000 free credits</td>
+                    </tr>
+                    <tr>
+                        <td class="endpoint">POST /api/miners/register</td>
+                        <td><span class="tag green">OK</span></td>
+                        <td>~20ms</td>
+                        <td>Accepting miners</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-    </main>
-
-    <link rel="stylesheet" href="/quick-wins.css">
-<style>.glass { background: rgba(255,255,255,0.03); }</style>
+        
+        <div class="card" style="margin-top: 16px;">
+            <h2>What's Needed for Full Production</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Requirement</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Venice API Key</td>
+                        <td><span class="tag red">Missing</span></td>
+                        <td>Add to .env: VENICE_API_KEY=xxx</td>
+                    </tr>
+                    <tr>
+                        <td>SOL for Trading</td>
+                        <td><span class="tag red">0.0009 SOL</span></td>
+                        <td>Fund wallet with 0.5 SOL</td>
+                    </tr>
+                    <tr>
+                        <td>Miners</td>
+                        <td><span class="tag yellow">1 test</span></td>
+                        <td>Launch miner beta program</td>
+                    </tr>
+                    <tr>
+                        <td>Payment Integration</td>
+                        <td><span class="tag yellow">Planned</span></td>
+                        <td>Crypto payments (USDC/OMA)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <script>
+        document.getElementById('timestamp').textContent = new Date().toISOString();
+        
+        // Fetch live miner count
+        fetch('https://api.oma-ai.com/api/miners/stats')
+            .then(r => r.json())
+            .then(data => {
+                document.getElementById('miners').textContent = data.online || 0;
+            })
+            .catch(() => {});
+    </script>
 </body>
 </html>

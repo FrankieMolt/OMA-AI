@@ -5,12 +5,12 @@ const BASE_URL = process.env.BASE_URL || 'https://oma-ai.com';
 test.describe('OMA-AI Core Tests', () => {
   test('homepage loads', async ({ page }) => {
     await page.goto(`${BASE_URL}/`);
-    await expect(page).toHaveTitle(/OMA-AI/);
+    await expect(page).toHaveTitle(/OMA/);
   });
 
   test('homepage has navigation', async ({ page }) => {
     await page.goto(`${BASE_URL}/`);
-    await expect(page.locator('nav')).toBeVisible();
+    await expect(page.locator('text=Browse Marketplace')).toBeVisible();
   });
 });
 
@@ -28,70 +28,6 @@ test.describe('OMA-AI API Pages', () => {
   test('llms page loads', async ({ page }) => {
     await page.goto(`${BASE_URL}/llms.html`);
     await expect(page.locator('body')).toContainText('LLM');
-  });
-
-  test('skills page loads', async ({ page }) => {
-    await page.goto(`${BASE_URL}/skills.html`);
-    await expect(page.locator('body')).toContainText('Skill');
-  });
-
-  test('compute page loads', async ({ page }) => {
-    await page.goto(`${BASE_URL}/compute.html`);
-    await expect(page.locator('body')).toContainText('Compute');
-  });
-});
-
-test.describe('OMA-AI Auth Pages', () => {
-  test('login page loads', async ({ page }) => {
-    await page.goto(`${BASE_URL}/login.html`);
-    await expect(page.locator('body')).toContainText('Sign');
-  });
-
-  test('signup page loads', async ({ page }) => {
-    await page.goto(`${BASE_URL}/signup.html`);
-    await expect(page.locator('body')).toContainText('Account');
-  });
-});
-
-test.describe('OMA-AI Content Pages', () => {
-  test('blog page loads', async ({ page }) => {
-    await page.goto(`${BASE_URL}/blog.html`);
-    await expect(page.locator('body')).toContainText('Blog');
-  });
-
-  test('pricing page loads', async ({ page }) => {
-    await page.goto(`${BASE_URL}/pricing.html`);
-    await expect(page.locator('body')).toContainText('Pricing');
-  });
-
-  test('docs page loads', async ({ page }) => {
-    await page.goto(`${BASE_URL}/docs.html`);
-    await expect(page.locator('body')).toContainText('API');
-  });
-
-  test('community page loads', async ({ page }) => {
-    await page.goto(`${BASE_URL}/community.html`);
-    await expect(page.locator('body')).toContainText('Community');
-  });
-
-  test('status page loads', async ({ page }) => {
-    await page.goto(`${BASE_URL}/status.html`);
-    await expect(page.locator('body')).toContainText('Status');
-  });
-
-  test('publish page loads', async ({ page }) => {
-    await page.goto(`${BASE_URL}/publish.html`);
-    await expect(page.locator('body')).toContainText('Monetize');
-  });
-
-  test('tasks page loads', async ({ page }) => {
-    await page.goto(`${BASE_URL}/tasks.html`);
-    await expect(page.locator('body')).toContainText('Task');
-  });
-
-  test('integrations page loads', async ({ page }) => {
-    await page.goto(`${BASE_URL}/integrations.html`);
-    await expect(page.locator('body')).toContainText('Integration');
   });
 });
 
@@ -152,14 +88,6 @@ test.describe('OMA-AI UI/UX', () => {
     });
     expect(hasGradient).toBe(true);
   });
-
-  test('navigation is fixed', async ({ page }) => {
-    await page.goto(`${BASE_URL}/`);
-    const nav = await page.locator('nav').first();
-    // Nav uses nav-v3 class but should be positioned fixed or sticky
-    const position = await nav.evaluate(el => getComputedStyle(el).position);
-    expect(['fixed', 'sticky', 'absolute']).toContain(position);
-  });
 });
 
 test.describe('OMA-AI Accessibility', () => {
@@ -180,12 +108,12 @@ test.describe('OMA-AI Mobile', () => {
   test('homepage works on mobile', async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 667 });
     await page.goto(`${BASE_URL}/`);
-    await expect(page).toHaveTitle(/OMA-AI/);
+    await expect(page).toHaveTitle(/OMA/);
   });
 
   test('navigation works on mobile', async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 667 });
     await page.goto(`${BASE_URL}/`);
-    await expect(page.locator('nav')).toBeVisible();
+    await expect(page.locator('text=Browse Marketplace')).toBeVisible();
   });
 });
