@@ -3,10 +3,12 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   /* config options here */
   reactCompiler: true,
-  // Force content hashing and disable immutable caching
+  // Disable ETag generation to force browser revalidation
   generateEtags: false,
-  // Ensure consistent builds
-  output: 'standalone',
+  // Disable immutable caching for development
+  compress: true,
+  // Ensure production builds
+  productionBrowserSourceMaps: false,
 };
 
 export default nextConfig;
