@@ -5,8 +5,21 @@
 
 import type { NextApiRequest, NextApiResponse } from 'next';
 
+interface AgentWallet {
+  id: string;
+  agentId: string;
+  walletAddress: string;
+  ensName: string | null;
+  chainId: number;
+  balanceUsdc: number;
+  totalEarned: number;
+  totalSpent: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
 // Mock database for MVP (replace with real Supabase queries)
-const AGENT_WALLETS: Record<string, any> = {};
+const AGENT_WALLETS: Record<string, AgentWallet> = {};
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   res.setHeader('Access-Control-Allow-Origin', '*');

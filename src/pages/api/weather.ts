@@ -1,9 +1,45 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 
+interface ForecastDay {
+  date: string;
+  max_c: number;
+  min_c: number;
+  condition: string;
+}
+
+interface WeatherApiResponse {
+  location?: {
+    name?: string;
+    country?: string;
+  };
+  current?: {
+    temp_c?: number;
+    temp_f?: number;
+    condition?: {
+      text?: string;
+      icon?: string;
+    };
+    wind_kph?: number;
+    humidity?: number;
+  };
+  forecast?: {
+    forecastday?: Array<{
+      date: string;
+      day?: {
+        maxtemp_c?: number;
+        mintemp_c?: number;
+        condition?: {
+          text?: string;
+        };
+      };
+    }>;
+  };
+}
+
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Cache-Control', 'public, max-age=1800');
-  
+
   const { city = 'New York' } = req.query;
   
   try {
@@ -13,7 +49,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     );
     
     if (response.ok) {
-      const data = await response.json();
+      const data: WeatherApiResponse = await response.json();
       return res.json({
         success: true,
         location: data.location?.name,
@@ -26,11 +62,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           wind_kph: data.current?.wind_kph,
           humidity: data.current?.humidity
         },
-        forecast: data.forecast?.forecastday?.map((day: any) => ({
+        forecast: data.forecast?.forecastday?.map((day): ForecastDay => ({
           date: day.date,
-          max_c: day.day?.maxtemp_c,
-          min_c: day.day?.mintemp_c,
-          condition: day.day?.condition?.text
+          max_c: day.day?.maxtemp_c || 0,
+          min_c: day.day?.mintemp_c || 0,
+          condition: day.day?.condition?.text || 'Unknown'
         }))
       });
     }
