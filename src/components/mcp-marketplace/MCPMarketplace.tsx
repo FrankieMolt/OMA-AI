@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { SkillCardSkeleton } from '@/components/loading/Skeletons';
 
 interface MCPSkill {
   id: string;
@@ -237,9 +238,15 @@ export default function MCPMarketplace() {
 
         {/* Loading */}
         {loading ? (
-          <div className="flex items-center justify-center py-12">
-            <div className="text-xl text-gray-400">Loading MCP skills...</div>
-          </div>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+          >
+            {[1, 2, 3, 4, 5, 6].map((i) => (
+              <SkillCardSkeleton key={i} />
+            ))}
+          </motion.div>
         ) : (
           <motion.div
             initial={{ opacity: 0 }}

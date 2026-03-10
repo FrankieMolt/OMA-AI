@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Activity, Filter, ArrowUpRight, ArrowDownRight, CheckCircle, AlertCircle, Clock, ExternalLink } from 'lucide-react';
+import { TransactionCardSkeleton } from '@/components/loading/Skeletons';
 
 interface Transaction {
   id: string;
@@ -245,9 +246,15 @@ export default function TransactionsFeed() {
 
         {/* Loading */}
         {loading ? (
-          <div className="flex items-center justify-center py-12">
-            <div className="text-xl text-gray-400">Loading transactions...</div>
-          </div>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="space-y-3"
+          >
+            {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
+              <TransactionCardSkeleton key={i} />
+            ))}
+          </motion.div>
         ) : transactions.length === 0 ? (
           <div className="flex items-center justify-center py-12">
             <div className="text-gray-400">No transactions found</div>

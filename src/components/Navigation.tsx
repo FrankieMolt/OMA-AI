@@ -18,7 +18,7 @@ export default function Navigation() {
   return (
     <>
       {/* Mobile Menu Button */}
-      <div className="md:hidden fixed top-4 right-4 z-50">
+      <div className="md:hidden fixed top-4 right-4 z-50 p-4">
         <button
           onClick={() => setIsOpen(!isOpen)}
           className="p-2 bg-zinc-900 border border-zinc-800 rounded-lg text-white hover:bg-zinc-800 transition-colors"
