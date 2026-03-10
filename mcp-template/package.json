@@ -1,0 +1,33 @@
+{
+  "name": "oma-mcp-template",
+  "version": "1.0.0",
+  "description": "Template for creating MCP servers for OMA marketplace",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsx watch index.ts",
+    "test": "tsx test.ts"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "oma-marketplace",
+    "ai-agents",
+    "x402"
+  ],
+  "author": "oma-ai",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "zod": "^3.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0",
+    "tsx": "^4.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
