@@ -1,10 +1,12 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { Activity, TrendingUp, TrendingDown, DollarSign, Clock } from 'lucide-react';
+import { cn } from '@/lib/utils';
+import React from 'react';
 
-export function LiveTradingStatus() {
+function LiveTradingStatusInner() {
   const [status, setStatus] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [nextScanEta, setNextScanEta] = useState<number>(60);
@@ -12,14 +14,14 @@ export function LiveTradingStatus() {
   useEffect(() => {
     const fetchStatus = async () => {
       try {
-        const res = await fetch('http://localhost:3008/');
+        const res = await fetch(process.env.NEXT_PUBLIC_TRADING_API_URL || 'http://localhost:3008/');
         if (res.ok) {
           const data = await res.json();
           setStatus(data);
           setNextScanEta(60); // Reset ETA timer
         }
       } catch (err) {
-        console.error('Failed to fetch trading status');
+        // Silent fail - trading status not critical for UX
       } finally {
         setLoading(false);
       }
@@ -40,6 +42,11 @@ export function LiveTradingStatus() {
   }, []);
 
   if (loading || !status) return null;
+
+  // Memoize signals to prevent unnecessary re-renders
+  const signalsMemo = useMemo(() => {
+    return Object.entries(status.signals || {}).map(([symbol, signal]: [string, any]) => ({ symbol, signal }));
+  }, [status.signals]);
 
   return (
     <div className="bg-zinc-900/50 border border-white/10 rounded-2xl p-6 backdrop-blur-sm shadow-2xl">
@@ -89,7 +96,7 @@ export function LiveTradingStatus() {
         <div className="mt-6 border-t border-white/5 pt-4">
           <div className="text-gray-500 text-[9px] uppercase font-black mb-3 tracking-[0.2em] text-center opacity-50">Real-time Alpha Signals</div>
           <div className="flex flex-wrap gap-2 justify-center">
-            {Object.entries(status.signals).map(([symbol, signal]: [string, any]) => (
+            {signalsMemo.map(({ symbol, signal }: any) => (
               <div key={symbol} className={cn(
                 "px-3 py-1.5 rounded-lg border flex items-center gap-2 transition-all",
                 signal === 'BUY' ? "bg-emerald-400/10 border-emerald-400/20" : 
@@ -116,3 +123,8 @@ export function LiveTradingStatus() {
     </div>
   );
 }
+
+export const LiveTradingStatus = React.memo(LiveTradingStatusInner, (prevProps, nextProps) => {
+  // Memoize to prevent unnecessary re-renders
+  return true;
+});

@@ -1,5 +1,8 @@
 // Credit deduction middleware for API routes
 import { calculateCreditsNeeded } from '../credits';
+import { validateApiKey } from '../supabase';
+import { supabase } from '../supabase';
+import { logError, logInfo } from '../logger';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 interface CreditCheckResult {
@@ -40,9 +43,19 @@ export async function checkCredits(
       };
     }
 
-    // TODO: Query database for user's credit balance
-    // const userCredits = await getUserCredits(apiKey);
-    const userCredits = 55000; // Mock
+    // Validate API key and get user info
+    const keyData = await validateApiKey(apiKey);
+    
+    if (!keyData || !keyData.users) {
+      return {
+        allowed: false,
+        creditsNeeded,
+        error: 'Invalid API key or user not found'
+      };
+    }
+
+    const user = keyData.users as any;
+    const userCredits = user.credits || 0;
 
     if (userCredits < creditsNeeded) {
       return {
@@ -58,7 +71,7 @@ export async function checkCredits(
     };
 
   } catch (error: any) {
-    console.error('Credit check error:', error);
+    logError('credits/checkCredits', error);
     return {
       allowed: false,
       creditsNeeded: 0,
@@ -82,18 +95,48 @@ export async function deductCredits(
       return { success: true };
     }
 
-    // TODO: Deduct from database
-    // await deductUserCredits(apiKey, creditsNeeded, requestId);
-    
-    console.log(`[CREDITS] Deducted ${creditsNeeded} credits for ${requestId}`);
+    // Get API key data
+    const keyHash = await hashKey(apiKey);
+    const { data: keyData } = await supabase!
+      .from('api_keys')
+      .select('*, users(*)')
+      .eq('key_hash', keyHash)
+      .eq('is_active', true)
+      .single();
+
+    if (!keyData) {
+      logError('credits/deductCredits', 'Invalid API key');
+      return { success: false };
+    }
+
+    const user = keyData.users as any;
+    const userId = user.id;
+    const currentCredits = user.credits || 0;
+    const usedThisMonth = user.used_this_month || 0;
+
+    // Update user credits
+    const { error } = await supabase!
+      .from('users')
+      .update({
+        credits: currentCredits - creditsNeeded,
+        used_this_month: usedThisMonth + creditsNeeded
+      })
+      .eq('id', userId);
+
+    if (error) {
+      logError('credits/deductCredits', error);
+      return { success: false };
+    }
+
+    logInfo('credits/deductCredits', `Deducted ${creditsNeeded} credits for ${requestId}`);
     
     return { 
       success: true,
-      remainingCredits: 55000 - creditsNeeded // Mock
+      remainingCredits: currentCredits - creditsNeeded
     };
 
   } catch (error: any) {
-    console.error('Credit deduction error:', error);
+    logError('credits/deductCredits', error);
     return { success: false };
   }
 }
@@ -137,4 +180,15 @@ export function withCredits(
     // Execute handler
     await handler(req, res);
   };
+}
+
+/**
+ * Hash API key for storage
+ */
+async function hashKey(key: string): Promise<string> {
+  const encoder = new TextEncoder();
+  const data = encoder.encode(key);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', data.buffer as ArrayBuffer);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
 }

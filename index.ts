@@ -1,7 +1,7 @@
 // OMA-AI TypeScript SDK - Main Entry Point
 
-export { OMAClient } from './lib/client';
-export * from './lib/x402';
+export { OMAClient } from './src/lib/client';
+export * from './src/lib/x402';
 
 // Re-export types
 export interface APIListing {

@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { createClient } from '@supabase/supabase-js';
+import { createHash } from 'crypto';
 
 const supabase = createClient(
   process.env.SUPABASE_URL!,
@@ -53,7 +54,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 
     // Verify password
-    const passwordHash = await hashPassword(password);
+    const passwordHash = hashPassword(password);
     if (passwordHash !== user.password_hash) {
       return res.status(401).json({ 
         error: 'Invalid credentials' 
@@ -148,11 +149,6 @@ function generateSessionToken(userId: string): string {
   return Buffer.from(JSON.stringify(data)).toString('base64');
 }
 
-async function hashPassword(password: string): Promise<string> {
-  const encoder = new TextEncoder();
-  const data = encoder.encode(password);
-  const hash = await crypto.subtle.digest('SHA-256', data);
-  return Array.from(new Uint8Array(hash))
-    .map(b => b.toString(16).padStart(2, '0'))
-    .join('');
+function hashPassword(password: string): string {
+  return createHash('sha256').update(password).digest('hex');
 }

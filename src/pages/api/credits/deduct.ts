@@ -1,29 +1,26 @@
 // Deduct credits after API call
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { calculateCreditsNeeded } from '../../../lib/credits';
-
-// CORS headers
-const corsHeaders = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Methods': 'POST, OPTIONS',
-  'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-API-Key',
-};
+import { handleCORSRequest } from '../../../lib/middleware/cors';
+import { supabase } from '../../../lib/supabase';
+import { createHash } from 'crypto';
+import { logError } from '../../../lib/logger';
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  // CORS
-  Object.entries(corsHeaders).forEach(([key, value]) => {
-    res.setHeader(key, value);
-  });
-
-  if (req.method === 'OPTIONS') {
-    return res.status(200).end();
+  // Handle CORS preflight
+  if (handleCORSRequest(res)) {
+    return;
   }
 
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
+  }
+
+  if (!supabase) {
+    return res.status(500).json({ error: 'Database not configured' });
   }
 
   try {
@@ -43,9 +40,46 @@ export default async function handler(
     // Calculate credits needed
     const creditsNeeded = calculateCreditsNeeded(model, inputTokens, outputTokens);
 
-    // TODO: Check if user has enough credits
-    // TODO: Deduct from database
-    
+    // Get API key data with user info
+    const keyHash = hashKey(apiKey);
+    const { data: keyData, error: keyError } = await supabase
+      .from('api_keys')
+      .select('*, users(*)')
+      .eq('key_hash', keyHash)
+      .eq('is_active', true)
+      .single();
+
+    if (keyError || !keyData) {
+      return res.status(401).json({ error: 'Invalid API key' });
+    }
+
+    const user = keyData.users as any;
+    const userId = user.id;
+    const currentCredits = user.credits || 0;
+
+    // Check if user has enough credits
+    if (currentCredits < creditsNeeded) {
+      return res.status(402).json({
+        error: 'Insufficient credits',
+        required: creditsNeeded,
+        available: currentCredits
+      });
+    }
+
+    // Deduct from database
+    const { error: updateError } = await supabase
+      .from('users')
+      .update({
+        credits: currentCredits - creditsNeeded,
+        used_this_month: (user.used_this_month || 0) + creditsNeeded
+      })
+      .eq('id', userId);
+
+    if (updateError) {
+      logError('credits/deduct', updateError);
+      return res.status(500).json({ error: 'Failed to deduct credits' });
+    }
+
     const deduction = {
       requestId: requestId || `req_${Date.now()}`,
       model,
@@ -53,7 +87,7 @@ export default async function handler(
       outputTokens,
       creditsUsed: creditsNeeded,
       estimatedCost: `$${(creditsNeeded / 1000).toFixed(4)}`,
-      remainingCredits: 42500 - creditsNeeded, // Mock
+      remainingCredits: currentCredits - creditsNeeded,
       timestamp: new Date().toISOString()
     };
 
@@ -63,10 +97,17 @@ export default async function handler(
     });
 
   } catch (error: any) {
-    console.error('Deduction error:', error);
+    logError('credits/deduct', error);
     return res.status(500).json({ 
       error: 'Failed to deduct credits',
       details: error.message 
     });
   }
+}
+
+/**
+ * Hash API key for storage
+ */
+function hashKey(key: string): string {
+  return createHash('sha256').update(key).digest('hex');
 }

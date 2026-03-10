@@ -1,24 +1,16 @@
 // Get user's credit balance
 import type { NextApiRequest, NextApiResponse } from 'next';
-
-// CORS headers
-const corsHeaders = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Methods': 'GET, OPTIONS',
-  'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-API-Key',
-};
+import { validateApiKey } from '../../../lib/supabase';
+import { applyCORS, handleCORSRequest } from '../../../lib/middleware/cors';
+import { logError } from '../../../lib/logger';
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  // CORS
-  Object.entries(corsHeaders).forEach(([key, value]) => {
-    res.setHeader(key, value);
-  });
-
-  if (req.method === 'OPTIONS') {
-    return res.status(200).end();
+  // Handle CORS preflight
+  if (handleCORSRequest(res)) {
+    return;
   }
 
   if (req.method !== 'GET') {
@@ -33,15 +25,26 @@ export default async function handler(
       return res.status(401).json({ error: 'Invalid API key' });
     }
 
-    // TODO: Look up user credits from database
-    // For now, return mock data
+    // Validate API key and get user
+    const keyData = await validateApiKey(apiKey);
     
+    if (!keyData) {
+      return res.status(401).json({ error: 'Invalid API key' });
+    }
+
+    const user = keyData.users as any;
+    
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    // Return user's credit balance
     const balance = {
-      credits: 50000,
-      bonusCredits: 5000,
-      totalCredits: 55000,
-      usedThisMonth: 12500,
-      estimatedCost: '$12.50',
+      credits: user.credits || 0,
+      bonusCredits: user.bonus_credits || 0,
+      totalCredits: (user.credits || 0) + (user.bonus_credits || 0),
+      usedThisMonth: user.used_this_month || 0,
+      estimatedCost: `$${((user.credits || 0) / 1000).toFixed(2)}`,
       expiresAt: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString()
     };
 
@@ -51,7 +54,7 @@ export default async function handler(
     });
 
   } catch (error: any) {
-    console.error('Balance check error:', error);
+    logError('credits/balance', error);
     return res.status(500).json({ 
       error: 'Failed to check balance',
       details: error.message 
