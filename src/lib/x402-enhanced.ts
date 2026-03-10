@@ -1,11 +1,17 @@
 /**
  * OMA-AI X402 Enhanced Payment Integration
  * 
- * Combines X402 micropayments with subscription system
+ * Combines X402 micropayments with automated escrow and facilitator logic
  */
 
 import { ethers } from 'ethers';
 import { getX402Price } from './pricing';
+
+// Verified Treasury Wallets
+export const TREASURY = {
+  base: '0x40AE4455055feeCac30e1EEEcbFE8dBEd77e4eC6',
+  solana: 'DcPfnhNQt98oXhgA7shgXpo2pgTzJMKf6TWuaddqqpSN'
+};
 
 // Networks
 export const NETWORKS = {
@@ -25,15 +31,6 @@ export const NETWORKS = {
     explorer: 'https://solscan.io',
     name: 'Solana',
     icon: '/solana.svg'
-  },
-  sepolia: {
-    chainId: '0x14a34',
-    chainIdDecimal: 84532,
-    rpc: 'https://sepolia.base.org',
-    usdc: '0x...',
-    explorer: 'https://sepolia.basescan.org',
-    name: 'Base Sepolia (Testnet)',
-    icon: '/base.svg'
   }
 } as const;
 
@@ -53,19 +50,24 @@ export function createPaymentRequirement(params: {
   endpoint: string;
   network?: 'base' | 'solana';
   recipient?: string;
+  useEscrow?: boolean;
 }) {
   const price = getX402Price(params.endpoint);
-  const network = NETWORKS[params.network || 'base'];
+  const network = params.network || 'base';
+  const networkConfig = NETWORKS[network];
   
   return {
     'x402-version': 1,
     'scheme': 'erc20',
     'currency': 'USDC',
     'amount': price.toString(),
-    'recipient': params.recipient || process.env.TREASURY_WALLET_BASE,
-    'network': params.network || 'base',
-    'chainId': network.chainId,
-    'description': `API call to ${params.endpoint}`,
+    'recipient': params.recipient || TREASURY[network],
+    'facilitator': TREASURY[network], // OMA-AI acts as facilitator
+    'network': network,
+    'chainId': networkConfig.chainId,
+    'useEscrow': params.useEscrow || price > 10, // Auto-escrow for > $10
+    'description': `Autonomous access to ${params.endpoint}`,
+    'timestamp': Date.now(),
     'expires': Date.now() + 3600000 // 1 hour
   };
 }
@@ -83,38 +85,37 @@ export async function verifyPayment(authHeader: string): Promise<{
   }
 
   try {
-    // Decode authorization (base64 JSON)
-    const payment = JSON.parse(atob(authHeader));
+    // 1. Parse authorization (Bearer or x402 scheme)
+    const [scheme, token] = authHeader.split(' ');
+    const rawData = scheme.toLowerCase() === 'x402' ? token : authHeader;
     
-    // Verify required fields
-    if (!payment.amount || !payment.recipient || !payment.network) {
-      return { valid: false, error: 'Invalid payment format' };
+    // 2. Decode payload
+    const payment = JSON.parse(Buffer.from(rawData, 'base64').toString());
+    
+    // 3. Verify cryptographic proof (EIP-3009 or Solana Sig)
+    // In production, this calls the OMA-AI Facilitator Node
+    const facilitatorUrl = 'https://facilitator.oma-ai.com/v1/verify';
+    
+    // For local dev/demo, we simulate validation
+    if (process.env.NODE_ENV === 'development') {
+      return { valid: true, payment };
     }
-    
-    // Verify with OpenX402 facilitator (production)
-    if (process.env.OPENX402_API_KEY) {
-      const response = await fetch('https://facilitator.openx402.ai/verify', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${process.env.OPENX402_API_KEY}`
-        },
-        body: JSON.stringify({ authorization: authHeader })
-      });
-      
-      if (!response.ok) {
-        return { valid: false, error: 'Payment verification failed' };
-      }
-      
-      const result = await response.json();
-      return { valid: true, payment: result };
+
+    const response = await fetch(facilitatorUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ payload: payment })
+    });
+
+    if (!response.ok) {
+      return { valid: false, error: 'Cryptographic proof invalid' };
     }
-    
-    // Development mode - skip verification
-    return { valid: true, payment };
+
+    const result = await response.json();
+    return { valid: true, payment: result };
     
   } catch (error: any) {
-    return { valid: false, error: error.message };
+    return { valid: false, error: 'Failed to parse x402 header' };
   }
 }
 
@@ -123,47 +124,35 @@ export async function verifyPayment(authHeader: string): Promise<{
  */
 export function withX402Payment(endpoint: string) {
   return async (req: any, res: any, next: Function) => {
-    // Skip in development without payment required
-    if (process.env.NODE_ENV === 'development' && !process.env.REQUIRE_PAYMENT) {
-      return next();
-    }
+    // Bypass for test environments if needed
+    if (process.env.SKIP_PAYMENT === 'true') return next();
     
-    // Check for subscription first
-    const user = req.user;
-    if (user?.tier && user.tier !== 'free') {
-      // User has subscription, skip X402
-      return next();
-    }
+    const paymentHeader = req.headers['x-payment'] || req.headers['authorization'];
     
-    // Check for X402 payment
-    const paymentHeader = req.headers['x-payment'];
-    
-    if (!paymentHeader) {
-      // Return 402 with payment requirement
+    if (!paymentHeader || !paymentHeader.startsWith('x402 ')) {
       const requirement = createPaymentRequirement({ endpoint });
       
       res.setHeader('X-Payment-Required', JSON.stringify(requirement));
+      res.setHeader('Access-Control-Expose-Headers', 'X-Payment-Required');
+      
       return res.status(402).json({
         error: 'Payment Required',
-        code: 'X402_PAYMENT_REQUIRED',
-        payment: requirement,
-        message: `This endpoint requires ${requirement.amount} USDC payment via X402`,
-        docs: 'https://oma-ai.com/docs/x402'
+        code: 'X402_REQUIRED',
+        requirement,
+        message: `Machine-to-machine payment of ${requirement.amount} USDC required.`
       });
     }
     
-    // Verify payment
     const verification = await verifyPayment(paymentHeader);
     
     if (!verification.valid) {
       return res.status(402).json({
-        error: 'Payment Invalid',
-        code: 'X402_PAYMENT_INVALID',
+        error: 'Payment Verification Failed',
+        code: 'X402_INVALID',
         message: verification.error
       });
     }
     
-    // Attach payment to request
     req.payment = verification.payment;
     next();
   };
@@ -180,7 +169,6 @@ export async function getUSDCBalance(
     const net = NETWORKS[network];
     
     if (network === 'solana') {
-      // Use Solana RPC
       const response = await fetch(net.rpc, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -188,11 +176,7 @@ export async function getUSDCBalance(
           jsonrpc: '2.0',
           id: 1,
           method: 'getTokenAccountsByOwner',
-          params: [
-            walletAddress,
-            { mint: net.usdc },
-            { encoding: 'jsonParsed' }
-          ]
+          params: [walletAddress, { mint: net.usdc }, { encoding: 'jsonParsed' }]
         })
       });
       
@@ -200,84 +184,12 @@ export async function getUSDCBalance(
       const balance = result.result?.value?.[0]?.account?.data?.parsed?.info?.tokenAmount?.amount || '0';
       return (parseInt(balance) / 1_000_000).toFixed(2);
     } else {
-      // Use ethers.js for EVM chains
       const provider = new ethers.JsonRpcProvider(net.rpc);
       const usdc = new ethers.Contract(net.usdc, USDC_ABI, provider);
       const balance = await usdc.balanceOf(walletAddress);
       return ethers.formatUnits(balance, 6);
     }
   } catch (error) {
-    console.error('Failed to get balance:', error);
-    return '0';
+    return '0.00';
   }
 }
-
-/**
- * Create payment intent for frontend
- */
-export async function createPaymentIntent(params: {
-  endpoint: string;
-  walletAddress: string;
-  network: 'base' | 'solana';
-}): Promise<{
-  success: boolean;
-  intent?: any;
-  error?: string;
-}> {
-  try {
-    const requirement = createPaymentRequirement({
-      endpoint: params.endpoint,
-      network: params.network
-    });
-    
-    // In production, create intent with OpenX402
-    if (process.env.OPENX402_API_KEY) {
-      const response = await fetch('https://facilitator.openx402.ai/intent', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${process.env.OPENX402_API_KEY}`
-        },
-        body: JSON.stringify({
-          ...requirement,
-          payer: params.walletAddress
-        })
-      });
-      
-      const result = await response.json();
-      return { success: true, intent: result };
-    }
-    
-    // Development - return mock intent
-    return {
-      success: true,
-      intent: {
-        id: `intent_${Date.now()}`,
-        ...requirement,
-        payer: params.walletAddress,
-        status: 'pending'
-      }
-    };
-    
-  } catch (error: any) {
-    return { success: false, error: error.message };
-  }
-}
-
-/**
- * Calculate revenue split (90/10)
- */
-export function calculateRevenueSplit(amount: string | number) {
-  const total = typeof amount === 'string' ? parseFloat(amount) : amount;
-  const platformFee = total * 0.10;
-  const publisherRevenue = total - platformFee;
-  
-  return {
-    total: total.toFixed(6),
-    platformFee: platformFee.toFixed(6),
-    publisherRevenue: publisherRevenue.toFixed(6),
-    split: { platform: 10, publisher: 90 }
-  };
-}
-
-// Removed duplicate export of NETWORKS
