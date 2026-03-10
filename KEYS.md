@@ -88,7 +88,7 @@ Both sandboxes exist and are paid through ~2026-04-01. They will eventually expi
 - **Source:** ~/.automaton/config.json
 
 ### 4. cnwy_k_TeX2sRcOvF3AHYn_9ATYHC-mcrJ3ZH7S
-- **Wallet:** 0x8b0d0f14D1f15420DcE9747A2Aa8E2Cd6551290C
+- **Wallet:** 0x40AE4455055feeCac30e1EEEcbFE8dBEd77e4eC6
 - **Status:** ❌ "Missing or invalid authentication"
 - **Provisioned:** 2026-03-10 04:14 (newly provisioned, then tested)
 - **Source:** None (not saved to config)

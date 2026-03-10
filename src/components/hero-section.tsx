@@ -8,282 +8,103 @@ import {
   Shield, 
   Zap, 
   Wallet, 
-  ChevronRight,
   ArrowRight,
   Sparkles,
-  Code2,
-  Lock,
-  Coins,
-  Package
+  Package,
+  Globe,
+  Terminal,
+  Cpu
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
-const features = [
-  {
-    icon: Brain,
-    title: '38+ AI Models',
-    description: 'Access GPT-5, Claude Opus, Gemini Pro, DeepSeek, and more through one unified API',
-    gradient: 'from-purple-500 to-pink-500'
-  },
-  {
-    icon: Shield,
-    title: 'Privacy-First',
-    description: 'Zero data retention. Your prompts are never stored, logged, or used for training',
-    gradient: 'from-green-500 to-emerald-500'
-  },
-  {
-    icon: Zap,
-    title: 'Lightning Fast',
-    description: 'Global edge deployment with <100ms latency. Stream responses in real-time',
-    gradient: 'from-yellow-500 to-orange-500'
-  },
-  {
-    icon: Wallet,
-    title: 'Web3 Native',
-    description: 'Pay with crypto via X402. Connect wallet and start using AI instantly',
-    gradient: 'from-blue-500 to-cyan-500'
-  }
-];
-
-const codeExamples = [
-  {
-    language: 'bash',
-    code: `# Install OMA-AI CLI
-npm install -g @oma-ai/cli
-
-# Authenticate with wallet
-oma login --wallet
-
-# Start chatting
-oma chat "Explain quantum computing"`
-  },
-  {
-    language: 'typescript',
-    code: `import { OMA } from '@oma-ai/sdk';
-
-const oma = new OMA(process.env.OMA_API_KEY);
-
-const response = await oma.chat({
-  model: 'deepseek-v3.2',
-  messages: [
-    { role: 'user', content: 'Hello!' }
-  ]
-});
-
-console.log(response.content);`
-  },
-  {
-    language: 'python',
-    code: `from oma_ai import OMA
-
-oma = OMA(api_key='oma-...')
-
-response = oma.chat(
-    model='claude-opus-4.6',
-    messages=[{'role': 'user', 'content': 'Hi!'}]
-)
-
-print(response.content)`
-  }
-];
-
-const stats = [
-  { label: 'AI Models', value: '38+' },
-  { label: 'Latency', value: '<100ms' },
-  { label: 'Uptime', value: '99.9%' },
-  { label: 'Users', value: '10K+' }
-];
-
 export function HeroSection() {
-  const [activeExample, setActiveExample] = useState(0);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveExample((prev) => (prev + 1) % codeExamples.length);
-    }, 5000);
-    return () => clearInterval(interval);
+    setMounted(true);
   }, []);
 
+  if (!mounted) return null;
+
   return (
-    <div className="relative overflow-hidden">
-      {/* Animated Background */}
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-transparent" />
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+    <div className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#0a0a0a]">
+      {/* Dynamic Background Grid */}
+      <div className="absolute inset-0 z-0 opacity-20" 
+           style={{ backgroundImage: 'radial-gradient(#ffffff 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
+      
+      <div className="absolute inset-0 z-0">
+        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-purple-900/30 rounded-full blur-[120px] animate-pulse" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-blue-900/30 rounded-full blur-[120px] animate-pulse" style={{ animationDelay: '2s' }} />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 py-20 md:py-32">
-        {/* Main Hero */}
-        <div className="text-center mb-16">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6"
-          >
-            <Sparkles className="w-4 h-4 text-primary" />
-            <span className="text-sm font-medium">Now with X402 micropayments</span>
-          </motion.div>
-
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="text-5xl md:text-7xl font-bold mb-6 leading-tight"
-          >
-            Private AI API
-            <br />
-            <span className="bg-gradient-to-r from-primary via-purple-500 to-pink-500 bg-clip-text text-transparent">
-              Without Compromise
-            </span>
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto"
-          >
-            Access 38+ AI models through one API. Zero data retention. 
-            Pay with crypto or card. Privacy-first, always.
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4"
-          >
-            <Link href="/models" className="px-8 py-4 bg-primary text-primary-foreground rounded-xl font-semibold text-lg hover:bg-primary/90 transition-all flex items-center justify-center gap-2 group">
-              Browse Marketplace
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </Link>
-            <Link href="/mcps" className="px-8 py-4 bg-muted hover:bg-muted/80 rounded-xl font-semibold text-lg transition-all flex items-center justify-center gap-2">
-              <Package className="w-5 h-5" />
-              MCP Registry
-            </Link>
-          </motion.div>
-
-          {/* Stats */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
-            className="flex flex-wrap justify-center gap-8 mt-12"
-          >
-            {stats.map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className="text-3xl font-bold text-foreground">{stat.value}</div>
-                <div className="text-sm text-muted-foreground">{stat.label}</div>
-              </div>
-            ))}
-          </motion.div>
-        </div>
-
-        {/* Features Grid */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 py-20 text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-8 backdrop-blur-md"
+        >
+          <Sparkles className="w-4 h-4 text-purple-400" />
+          <span className="text-sm font-medium text-gray-300">The First Sovereign Agent Infrastructure</span>
+        </motion.div>
+
+        <motion.h1
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+          className="text-6xl md:text-8xl font-black mb-8 tracking-tighter text-white"
+        >
+          OPEN MARKET
+          <br />
+          <span className="bg-gradient-to-r from-purple-400 via-blue-500 to-emerald-400 bg-clip-text text-transparent">
+            ACCESS (OMA)
+          </span>
+        </motion.h1>
+
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="text-xl md:text-2xl text-gray-400 mb-12 max-w-3xl mx-auto font-light leading-relaxed"
+        >
+          Powering the Agentic Web through <strong>x402</strong> protocol. 
+          Autonomous compute, private inference, and machine-to-machine commerce.
+        </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+          className="flex flex-col sm:flex-row items-center justify-center gap-6"
+        >
+          <Link href="/models" className="px-10 py-5 bg-white text-black rounded-2xl font-bold text-xl hover:scale-105 transition-transform flex items-center gap-3">
+            Get Started
+            <ArrowRight className="w-6 h-6" />
+          </Link>
+          <Link href="/mcps" className="px-10 py-5 bg-white/5 text-white border border-white/10 rounded-2xl font-bold text-xl hover:bg-white/10 transition-colors flex items-center gap-3">
+            <Package className="w-6 h-6" />
+            Explore MCPs
+          </Link>
+        </motion.div>
+
+        {/* Live Metrics */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
           transition={{ delay: 0.5 }}
-          className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16"
+          className="mt-24 grid grid-cols-2 md:grid-cols-4 gap-8 border-t border-white/10 pt-12"
         >
-          {features.map((feature, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6 + index * 0.1 }}
-              className="group p-6 rounded-2xl bg-card border border-border hover:border-primary/50 transition-all"
-            >
-              <div className={cn(
-                "w-12 h-12 rounded-xl bg-gradient-to-br flex items-center justify-center mb-4",
-                feature.gradient
-              )}>
-                <feature.icon className="w-6 h-6 text-white" />
-              </div>
-              <h3 className="font-semibold text-lg mb-2">{feature.title}</h3>
-              <p className="text-sm text-muted-foreground">{feature.description}</p>
-            </motion.div>
+          {[
+            { label: 'Active Agents', value: '1,248', icon: Brain },
+            { label: 'x402 TXs', value: '42.5K', icon: Wallet },
+            { label: 'Compute Nodes', value: '156', icon: Cpu },
+            { label: 'Uptime', value: '99.99%', icon: Globe }
+          ].map((stat, i) => (
+            <div key={i} className="flex flex-col items-center gap-2">
+              <stat.icon className="w-5 h-5 text-gray-500" />
+              <div className="text-3xl font-bold text-white">{stat.value}</div>
+              <div className="text-xs uppercase tracking-widest text-gray-500 font-semibold">{stat.label}</div>
+            </div>
           ))}
-        </motion.div>
-
-        {/* Code Examples */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8 }}
-          className="max-w-4xl mx-auto"
-        >
-          <div className="rounded-2xl bg-card border border-border overflow-hidden">
-            {/* Tabs */}
-            <div className="flex border-b border-border">
-              {codeExamples.map((example, index) => (
-                <button
-                  key={index}
-                  onClick={() => setActiveExample(index)}
-                  className={cn(
-                    "px-6 py-3 text-sm font-medium transition-all",
-                    activeExample === index
-                      ? "bg-muted text-foreground border-b-2 border-primary"
-                      : "text-muted-foreground hover:text-foreground"
-                  )}
-                >
-                  {example.language.toUpperCase()}
-                </button>
-              ))}
-            </div>
-
-            {/* Code */}
-            <div className="p-6 bg-black/50">
-              <AnimatePresence mode="wait">
-                <motion.pre
-                  key={activeExample}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  className="text-sm font-mono text-gray-300 overflow-x-auto"
-                >
-                  <code>{codeExamples[activeExample].code}</code>
-                </motion.pre>
-              </AnimatePresence>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* X402 Payment Banner */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1 }}
-          className="mt-16 p-8 rounded-2xl bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-pink-500/10 border border-border"
-        >
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <div className="flex items-center gap-4">
-              <div className="p-4 rounded-xl bg-gradient-to-br from-blue-500 to-purple-500">
-                <Coins className="w-8 h-8 text-white" />
-              </div>
-              <div>
-                <h3 className="text-xl font-bold mb-1">Pay Per Request with X402</h3>
-                <p className="text-muted-foreground">
-                  Connect your wallet and pay only for what you use. No subscription needed.
-                </p>
-              </div>
-            </div>
-            <div className="flex items-center gap-4">
-              <div className="text-center px-6">
-                <div className="text-2xl font-bold">$0.002</div>
-                <div className="text-xs text-muted-foreground">per weather API</div>
-              </div>
-              <div className="text-center px-6">
-                <div className="text-2xl font-bold">$0.01</div>
-                <div className="text-xs text-muted-foreground">per LLM call</div>
-              </div>
-              <button className="px-6 py-3 bg-primary text-primary-foreground rounded-xl font-semibold hover:bg-primary/90 transition-all flex items-center gap-2">
-                <Lock className="w-4 h-4" />
-                Connect Wallet
-              </button>
-            </div>
-          </div>
         </motion.div>
       </div>
     </div>
