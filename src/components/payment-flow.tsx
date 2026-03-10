@@ -1,17 +1,15 @@
 'use client';
 
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { 
-  Wallet, 
   CreditCard, 
   Coins, 
-  Check,
-  AlertCircle,
-  ArrowRight,
-  Loader2,
-  Sparkles,
-  Zap
+  Check, 
+  AlertCircle, 
+  Loader2, 
+  Zap,
+  Crown
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { CREDIT_PACKAGES } from '@/lib/credits';
@@ -31,9 +29,8 @@ export function PaymentFlow({ onSuccess }: PaymentFlowProps) {
   const handlePurchase = async () => {
     setIsProcessing(true);
     setError(null);
-    
+
     try {
-      // Logic for Stripe or x402
       if (method === 'fiat') {
         const response = await fetch('/api/credits/purchase', {
           method: 'POST',
@@ -43,7 +40,6 @@ export function PaymentFlow({ onSuccess }: PaymentFlowProps) {
         const { checkout } = await response.json();
         if (checkout?.url) window.location.href = checkout.url;
       } else {
-        // x402 flow
         alert('x402 Payment Requested. Please sign the transaction in your autonomous wallet.');
         onSuccess?.({ status: 'completed' });
       }
@@ -61,7 +57,6 @@ export function PaymentFlow({ onSuccess }: PaymentFlowProps) {
         <p className="text-gray-500 text-sm font-medium">Select a package to power your agentic fleet.</p>
       </div>
 
-      {/* Payment Method Toggle */}
       <div className="flex gap-2 p-1.5 bg-white/5 rounded-2xl mb-8 border border-white/5">
         <button
           onClick={() => setMethod('x402')}
@@ -89,7 +84,6 @@ export function PaymentFlow({ onSuccess }: PaymentFlowProps) {
         </button>
       </div>
 
-      {/* Package Selection */}
       <div className="grid grid-cols-1 gap-3 mb-8">
         {CREDIT_PACKAGES.slice(0, 3).map((pkg) => (
           <button
