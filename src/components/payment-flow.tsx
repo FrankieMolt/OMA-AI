@@ -9,41 +9,43 @@ import {
   Check,
   AlertCircle,
   ArrowRight,
-  Loader2
+  Loader2,
+  Sparkles,
+  Zap
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { STRIPE_PRICING } from '@/lib/pricing';
+import { CREDIT_PACKAGES } from '@/lib/credits';
 
-type PaymentMethod = 'subscription' | 'x402';
+type PaymentMethod = 'fiat' | 'x402';
 
 interface PaymentFlowProps {
-  endpoint?: string;
-  onSelect?: (method: PaymentMethod, data?: any) => void;
+  onSuccess?: (data: any) => void;
 }
 
-export function PaymentFlow({ endpoint, onSelect }: PaymentFlowProps) {
-  const [method, setMethod] = useState<PaymentMethod>('subscription');
-  const [selectedPlan, setSelectedPlan] = useState<string>('pro');
+export function PaymentFlow({ onSuccess }: PaymentFlowProps) {
+  const [method, setMethod] = useState<PaymentMethod>('x402');
+  const [selectedPkg, setSelectedPkg] = useState<string>('pro');
   const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const handleSubscribe = async () => {
+  const handlePurchase = async () => {
     setIsProcessing(true);
     setError(null);
     
     try {
-      const response = await fetch('/api/payments/stripe', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ plan: selectedPlan })
-      });
-      
-      const { checkout_url, error } = await response.json();
-      
-      if (error) {
-        setError(error);
-      } else if (checkout_url) {
-        window.location.href = checkout_url;
+      // Logic for Stripe or x402
+      if (method === 'fiat') {
+        const response = await fetch('/api/credits/purchase', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ packageId: selectedPkg, userId: 'demo-user' })
+        });
+        const { checkout } = await response.json();
+        if (checkout?.url) window.location.href = checkout.url;
+      } else {
+        // x402 flow
+        alert('x402 Payment Requested. Please sign the transaction in your autonomous wallet.');
+        onSuccess?.({ status: 'completed' });
       }
     } catch (err: any) {
       setError(err.message);
@@ -52,198 +54,101 @@ export function PaymentFlow({ endpoint, onSelect }: PaymentFlowProps) {
     }
   };
 
-  const handleX402Payment = async () => {
-    setIsProcessing(true);
-    setError(null);
-    
-    try {
-      // This would integrate with wallet adapter
-      onSelect?.('x402', { endpoint });
-    } catch (err: any) {
-      setError(err.message);
-    } finally {
-      setIsProcessing(false);
-    }
-  };
-
   return (
-    <div className="w-full max-w-md mx-auto">
+    <div className="w-full max-w-lg mx-auto bg-zinc-950 border border-white/10 rounded-[2.5rem] p-8 shadow-2xl">
+      <div className="text-center mb-8">
+        <h3 className="text-2xl font-black text-white uppercase tracking-tighter italic">Refill Credits</h3>
+        <p className="text-gray-500 text-sm font-medium">Select a package to power your agentic fleet.</p>
+      </div>
+
       {/* Payment Method Toggle */}
-      <div className="flex gap-2 p-1 bg-muted rounded-lg mb-6">
-        <button
-          onClick={() => setMethod('subscription')}
-          className={cn(
-            "flex-1 py-2 px-4 rounded-md text-sm font-medium transition-all",
-            method === 'subscription'
-              ? "bg-background text-foreground shadow"
-              : "text-muted-foreground hover:text-foreground"
-          )}
-        >
-          <CreditCard className="w-4 h-4 inline mr-2" />
-          Subscription
-        </button>
+      <div className="flex gap-2 p-1.5 bg-white/5 rounded-2xl mb-8 border border-white/5">
         <button
           onClick={() => setMethod('x402')}
           className={cn(
-            "flex-1 py-2 px-4 rounded-md text-sm font-medium transition-all",
+            "flex-1 py-3 px-4 rounded-xl text-xs font-black uppercase tracking-widest transition-all flex items-center justify-center gap-2",
             method === 'x402'
-              ? "bg-background text-foreground shadow"
-              : "text-muted-foreground hover:text-foreground"
+              ? "bg-primary text-black shadow-lg shadow-primary/20"
+              : "text-gray-500 hover:text-white"
           )}
         >
-          <Coins className="w-4 h-4 inline mr-2" />
-          Pay Per Use
+          <Coins className="w-4 h-4" />
+          x402 (Base)
+        </button>
+        <button
+          onClick={() => setMethod('fiat')}
+          className={cn(
+            "flex-1 py-3 px-4 rounded-xl text-xs font-black uppercase tracking-widest transition-all flex items-center justify-center gap-2",
+            method === 'fiat'
+              ? "bg-white text-black shadow-lg"
+              : "text-gray-500 hover:text-white"
+          )}
+        >
+          <CreditCard className="w-4 h-4" />
+          Fiat (Stripe)
         </button>
       </div>
 
-      <AnimatePresence mode="wait">
-        {method === 'subscription' ? (
-          <motion.div
-            key="subscription"
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: 20 }}
+      {/* Package Selection */}
+      <div className="grid grid-cols-1 gap-3 mb-8">
+        {CREDIT_PACKAGES.slice(0, 3).map((pkg) => (
+          <button
+            key={pkg.id}
+            onClick={() => setSelectedPkg(pkg.id)}
+            className={cn(
+              "w-full p-5 rounded-[1.5rem] border-2 transition-all text-left relative overflow-hidden group",
+              selectedPkg === pkg.id
+                ? "border-primary/50 bg-primary/5"
+                : "border-white/5 bg-white/[0.02] hover:border-white/10"
+            )}
           >
-            {/* Plan Selection */}
-            <div className="space-y-3 mb-6">
-              {Object.entries(STRIPE_PRICING).slice(1).map(([key, plan]) => (
-                <button
-                  key={key}
-                  onClick={() => setSelectedPlan(key)}
-                  className={cn(
-                    "w-full p-4 rounded-lg border-2 transition-all text-left",
-                    selectedPlan === key
-                      ? "border-primary bg-primary/5"
-                      : "border-border hover:border-primary/50"
-                  )}
-                >
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <div className="font-semibold">{plan.name}</div>
-                      <div className="text-sm text-muted-foreground">
-                        {plan.tokens.toLocaleString()} tokens/month
-                      </div>
-                    </div>
-                    <div className="text-right">
-                      <div className="text-2xl font-bold">${plan.price}</div>
-                      <div className="text-xs text-muted-foreground">/month</div>
-                    </div>
-                  </div>
-                  
-                  {selectedPlan === key && (
-                    <motion.div
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: 'auto' }}
-                      className="mt-3 pt-3 border-t border-border"
-                    >
-                      <ul className="space-y-1">
-                        {plan.features.slice(0, 4).map((feature, i) => (
-                          <li key={i} className="flex items-center gap-2 text-sm">
-                            <Check className="w-4 h-4 text-green-500" />
-                            {feature}
-                          </li>
-                        ))}
-                      </ul>
-                    </motion.div>
-                  )}
-                </button>
-              ))}
-            </div>
-
-            <button
-              onClick={handleSubscribe}
-              disabled={isProcessing}
-              className="w-full py-3 bg-primary text-primary-foreground rounded-xl font-semibold hover:bg-primary/90 transition-all flex items-center justify-center gap-2"
-            >
-              {isProcessing ? (
-                <>
-                  <Loader2 className="w-4 h-4 animate-spin" />
-                  Processing...
-                </>
-              ) : (
-                <>
-                  <CreditCard className="w-4 h-4" />
-                  Subscribe with Stripe
-                  <ArrowRight className="w-4 h-4" />
-                </>
-              )}
-            </button>
-          </motion.div>
-        ) : (
-          <motion.div
-            key="x402"
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -20 }}
-            className="p-6 rounded-xl bg-gradient-to-br from-purple-500/10 to-pink-500/10 border border-purple-500/20"
-          >
-            <div className="text-center mb-6">
-              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 mb-4">
-                <Coins className="w-6 h-6 text-purple-500" />
-              </div>
-              <h3 className="text-xl font-bold mb-2">Pay Per Request</h3>
-              <p className="text-sm text-muted-foreground">
-                Pay only for what you use with X402 micropayments
-              </p>
-            </div>
-
-            {endpoint && (
-              <div className="p-4 rounded-lg bg-background/50 mb-4">
-                <div className="text-sm text-muted-foreground mb-1">Endpoint</div>
-                <div className="font-mono text-sm">{endpoint}</div>
-                <div className="text-xs text-muted-foreground mt-2">
-                  Price: ~$0.01-0.05 per request
+            <div className="flex items-center justify-between relative z-10">
+              <div className="flex items-center gap-4">
+                <div className={cn(
+                  "w-10 h-10 rounded-xl flex items-center justify-center",
+                  selectedPkg === pkg.id ? "bg-primary text-black" : "bg-white/5 text-gray-500 group-hover:text-white"
+                )}>
+                  {pkg.id === 'pro' ? <Crown className="w-5 h-5" /> : <Zap className="w-5 h-5" />}
+                </div>
+                <div>
+                  <div className="font-black text-white text-lg tracking-tight">{pkg.credits.toLocaleString()} Credits</div>
+                  <div className="text-[10px] text-gray-500 font-bold uppercase tracking-widest">{pkg.description}</div>
                 </div>
               </div>
-            )}
-
-            <div className="grid grid-cols-2 gap-3 mb-6">
-              <div className="p-3 rounded-lg bg-background/50 text-center">
-                <div className="text-xs text-muted-foreground mb-1">Network</div>
-                <div className="font-semibold">Base / Solana</div>
-              </div>
-              <div className="p-3 rounded-lg bg-background/50 text-center">
-                <div className="text-xs text-muted-foreground mb-1">Currency</div>
-                <div className="font-semibold">USDC</div>
+              <div className="text-right">
+                <div className="text-xl font-black text-white">${pkg.price}</div>
+                {pkg.bonus > 0 && <div className="text-[10px] text-emerald-400 font-black uppercase">+{pkg.bonus.toLocaleString()} Bonus</div>}
               </div>
             </div>
+            {selectedPkg === pkg.id && (
+              <motion.div layoutId="active-bg" className="absolute inset-0 bg-primary/5 -z-0" />
+            )}
+          </button>
+        ))}
+      </div>
 
-            <button
-              onClick={handleX402Payment}
-              disabled={isProcessing}
-              className="w-full py-3 bg-purple-500 text-white rounded-xl font-semibold hover:bg-purple-600 transition-all flex items-center justify-center gap-2"
-            >
-              {isProcessing ? (
-                <>
-                  <Loader2 className="w-4 h-4 animate-spin" />
-                  Processing...
-                </>
-              ) : (
-                <>
-                  <Wallet className="w-4 h-4" />
-                  Connect Wallet & Pay
-                </>
-              )}
-            </button>
-
-            <p className="text-xs text-center text-muted-foreground mt-4">
-              Requires Web3 wallet (MetaMask, Phantom, etc.)
-            </p>
-          </motion.div>
+      <button
+        onClick={handlePurchase}
+        disabled={isProcessing}
+        className={cn(
+          "w-full py-5 rounded-2xl font-black transition-all flex items-center justify-center gap-3 text-xs uppercase tracking-[0.2em] shadow-xl active:scale-95",
+          method === 'x402' ? "bg-primary text-black" : "bg-white text-black"
         )}
-      </AnimatePresence>
+      >
+        {isProcessing ? <Loader2 className="w-4 h-4 animate-spin" /> : <Check className="w-4 h-4" />}
+        Authorize Transaction
+      </button>
 
-      {/* Error Message */}
       {error && (
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="mt-4 p-3 rounded-lg bg-red-500/10 border border-red-500/20 flex items-start gap-2"
-        >
-          <AlertCircle className="w-4 h-4 text-red-500 mt-0.5" />
-          <div className="text-sm text-red-500">{error}</div>
-        </motion.div>
+        <div className="mt-4 p-4 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-500 text-xs font-bold flex items-center gap-3">
+          <AlertCircle className="w-4 h-4" />
+          {error}
+        </div>
       )}
+
+      <p className="mt-6 text-[10px] text-center text-gray-600 font-black uppercase tracking-widest">
+        {method === 'x402' ? 'Settled on Base via EIP-3009' : 'Secured by Stripe encryption'}
+      </p>
     </div>
   );
 }

@@ -9,317 +9,293 @@ import {
   Check, 
   Sparkles,
   ArrowRight,
-  Wallet
+  Wallet,
+  Coins,
+  ShieldCheck,
+  Globe,
+  ArrowUpRight
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
-const plans = [
-  {
-    id: 'free',
-    name: 'Free',
-    price: 0,
-    description: 'Perfect for trying out',
-    icon: Sparkles,
-    tokens: '100K',
-    requests: '1K',
-    features: [
-      '100K tokens/month',
-      '1K API requests',
-      'Budget models',
-      'Community support',
-      '5 RPM rate limit'
-    ],
-    cta: 'Get Started',
-    popular: false
-  },
+const packages = [
   {
     id: 'starter',
     name: 'Starter',
-    price: 29,
-    description: 'For hobbyists & small projects',
+    credits: '10,000',
+    price: 10,
+    bonus: null,
+    description: 'Perfect for small autonomous tasks',
     icon: Zap,
-    tokens: '1M',
-    requests: '10K',
     features: [
-      '1M tokens/month',
-      '10K API requests',
-      'All budget models',
-      'Email support',
-      '20 RPM rate limit',
-      'Priority queue'
+      '10K total credits',
+      'All 50+ models included',
+      'No expiration date',
+      'Basic support',
+      'x402 protocol enabled'
     ],
-    cta: 'Start Free Trial',
     popular: false
   },
   {
     id: 'pro',
     name: 'Pro',
-    price: 99,
-    description: 'For professionals & teams',
+    credits: '55,000',
+    price: 45,
+    bonus: '+5,000 bonus',
+    description: 'Most popular for agent clusters',
     icon: Crown,
-    tokens: '10M',
-    requests: '100K',
+    popular: true,
     features: [
-      '10M tokens/month',
-      '100K API requests',
-      'All models + premium',
-      'Priority support',
-      '60 RPM rate limit',
-      'Priority queue',
-      'Custom fine-tuning',
-      'Webhooks'
-    ],
-    cta: 'Start Free Trial',
-    popular: true
+      '55K total credits',
+      '5K bonus credits included',
+      'Priority queue access',
+      'Advanced model access',
+      'Standard support'
+    ]
   },
   {
-    id: 'enterprise',
-    name: 'Enterprise',
-    price: 299,
-    description: 'For large-scale applications',
-    icon: Building2,
-    tokens: '100M',
-    requests: '1M',
+    id: 'elite',
+    name: 'Elite',
+    credits: '125,000',
+    price: 95,
+    bonus: '+25,000 bonus',
+    description: 'Best value for production fleets',
+    icon: Sparkles,
+    popular: false,
     features: [
-      '100M tokens/month',
-      '1M API requests',
-      'Unlimited all models',
-      '24/7 phone support',
-      '200 RPM rate limit',
-      'Highest priority',
-      'Custom models',
-      'Dedicated infrastructure',
-      'SLA guarantee',
-      'Custom integrations'
-    ],
-    cta: 'Contact Sales',
-    popular: false
+      '125K total credits',
+      '25K bonus credits included',
+      'Ultra-low latency edge',
+      'Custom fine-tuning hooks',
+      'Priority support'
+    ]
+  },
+  {
+    id: 'sovereign',
+    name: 'Sovereign',
+    credits: '1,000,000+',
+    price: 750,
+    bonus: 'Custom allocation',
+    description: 'Custom infrastructure for enterprise',
+    icon: Building2,
+    popular: false,
+    features: [
+      '1M+ credits per batch',
+      'Dedicated compute nodes',
+      'Zero Data Retention (ZDR)',
+      'Custom SLA guarantees',
+      'Private MCP registry'
+    ]
   }
 ];
 
 export function PricingSection() {
-  const [billingPeriod, setBillingPeriod] = useState<'monthly' | 'yearly'>('monthly');
   const [isConnecting, setIsConnecting] = useState(false);
 
-  const handleSelectPlan = async (planId: string) => {
-    if (planId === 'free') {
-      // Redirect to signup
-      window.location.href = '/api/auth/signup';
-      return;
-    }
-
-    if (planId === 'enterprise') {
-      // Open contact form
+  const handlePurchase = async (pkgId: string) => {
+    if (pkgId === 'sovereign') {
       window.location.href = 'mailto:sales@oma-ai.com';
       return;
     }
 
-    // For paid plans, initiate Stripe checkout
     setIsConnecting(true);
     try {
-      const response = await fetch('/api/payments/stripe', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          plan: planId,
-          billing_period: billingPeriod
-        })
-      });
-      
-      const { checkout_url } = await response.json();
-      if (checkout_url) {
-        window.location.href = checkout_url;
-      }
+      // In a real flow, this would trigger an x402 payment request or Stripe checkout
+      console.log('Initiating purchase for:', pkgId);
+      // For now, redirect to a mock checkout or login
+      window.location.href = '/login';
     } catch (error) {
-      console.error('Failed to start checkout:', error);
+      console.error('Purchase failed:', error);
     } finally {
       setIsConnecting(false);
     }
   };
 
   return (
-    <section className="py-20 px-4">
-      <div className="max-w-7xl mx-auto">
+    <section className="py-32 px-4 relative overflow-hidden bg-[#050505]">
+      <div className="max-w-7xl mx-auto relative z-10">
         {/* Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-20">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-gray-400 text-[10px] font-black mb-8 tracking-[0.2em] uppercase"
+          >
+            <Coins className="w-3 h-3 text-primary" />
+            No Subscriptions. Just Compute.
+          </motion.div>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            className="text-4xl md:text-5xl font-bold mb-4"
+            className="text-5xl md:text-7xl font-black mb-6 tracking-tighter text-white"
           >
-            Simple, Transparent Pricing
+            CREDIT PACKAGES
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-xl text-muted-foreground"
+            className="text-xl text-gray-500 max-w-2xl mx-auto font-medium leading-relaxed"
           >
-            Start free, scale as you grow. No hidden fees.
+            Purchase credits using <strong>USDC on Base</strong> via x402 or standard payment rails. 
+            Credits never expire and scale with your agentic fleet.
           </motion.p>
-
-          {/* Billing Toggle */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="flex items-center justify-center gap-4 mt-8"
-          >
-            <span className={cn(
-              "text-sm",
-              billingPeriod === 'monthly' ? "text-foreground" : "text-muted-foreground"
-            )}>
-              Monthly
-            </span>
-            <button
-              onClick={() => setBillingPeriod(p => p === 'monthly' ? 'yearly' : 'monthly')}
-              aria-label="Toggle billing period"
-              className="relative w-14 h-7 bg-primary/20 rounded-full transition-colors"
-            >
-              <motion.div
-                animate={{ x: billingPeriod === 'yearly' ? 28 : 4 }}
-                className="absolute top-1 w-5 h-5 bg-primary rounded-full"
-              />
-            </button>
-            <span className={cn(
-              "text-sm",
-              billingPeriod === 'yearly' ? "text-foreground" : "text-muted-foreground"
-            )}>
-              Yearly <span className="text-green-500">(Save 20%)</span>
-            </span>
-          </motion.div>
         </div>
 
         {/* Pricing Cards */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {plans.map((plan, index) => (
+          {packages.map((pkg, index) => (
             <motion.div
-              key={plan.id}
-              initial={{ opacity: 0, y: 20 }}
+              key={pkg.id}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
               className={cn(
-                "relative rounded-2xl border p-6 transition-all",
-                plan.popular 
-                  ? "border-primary bg-gradient-to-b from-primary/10 to-transparent scale-105" 
-                  : "border-border bg-card hover:border-primary/50"
+                "relative rounded-[2.5rem] border p-8 transition-all flex flex-col group",
+                pkg.popular 
+                  ? "border-primary/50 bg-zinc-900 shadow-2xl shadow-primary/10 scale-105 z-20" 
+                  : "border-white/5 bg-zinc-950 hover:border-white/10"
               )}
             >
-              {plan.popular && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                  <span className="bg-primary text-primary-foreground text-xs font-semibold px-3 py-1 rounded-full">
-                    Most Popular
+              {pkg.popular && (
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2">
+                  <span className="bg-primary text-black text-[10px] font-black px-4 py-1.5 rounded-full uppercase tracking-widest shadow-xl">
+                    Optimal Value
                   </span>
                 </div>
               )}
 
-              <div className="flex items-center gap-3 mb-4">
+              <div className="mb-10">
                 <div className={cn(
-                  "p-2 rounded-lg",
-                  plan.popular ? "bg-primary text-primary-foreground" : "bg-muted"
+                  "w-14 h-14 rounded-2xl flex items-center justify-center mb-6 transition-all duration-500 group-hover:scale-110 group-hover:rotate-3",
+                  pkg.popular ? "bg-primary text-black shadow-lg shadow-primary/20" : "bg-white/5 text-primary border border-white/10"
                 )}>
-                  <plan.icon className="w-5 h-5" />
+                  <pkg.icon className="w-7 h-7" />
                 </div>
-                <div>
-                  <h3 className="font-semibold text-lg">{plan.name}</h3>
-                  <p className="text-xs text-muted-foreground">{plan.description}</p>
-                </div>
+                <h3 className="text-2xl font-black text-white mb-2 tracking-tight">{pkg.name}</h3>
+                <p className="text-xs text-gray-500 font-bold uppercase tracking-wider">{pkg.description}</p>
               </div>
 
-              <div className="mb-6">
-                <div className="flex items-baseline gap-1">
-                  <span className="text-4xl font-bold">
-                    ${billingPeriod === 'yearly' ? Math.floor(plan.price * 0.8) : plan.price}
+              <div className="mb-10">
+                <div className="flex items-baseline gap-2">
+                  <span className="text-5xl font-black text-white tracking-tighter">
+                    {pkg.credits}
                   </span>
-                  <span className="text-muted-foreground">/mo</span>
+                  <span className="text-gray-600 font-black text-sm uppercase tracking-widest">Credits</span>
                 </div>
-                <div className="flex gap-4 mt-2 text-sm text-muted-foreground">
-                  <span>{plan.tokens} tokens</span>
-                  <span>{plan.requests} requests</span>
+                {pkg.bonus && (
+                  <div className="mt-2 inline-flex items-center gap-1.5 px-2 py-1 rounded bg-emerald-500/10 border border-emerald-500/20">
+                    <Sparkles className="w-3 h-3 text-emerald-400" />
+                    <span className="text-[10px] font-black text-emerald-400 uppercase tracking-tighter">{pkg.bonus}</span>
+                  </div>
+                )}
+                <div className="mt-6 text-2xl font-bold text-gray-400">
+                  ${pkg.price} <span className="text-xs text-gray-600 uppercase tracking-widest">One-time</span>
                 </div>
               </div>
 
-              <ul className="space-y-3 mb-6">
-                {plan.features.map((feature, i) => (
-                  <li key={i} className="flex items-start gap-2 text-sm">
-                    <Check className="w-4 h-4 text-green-500 mt-0.5 shrink-0" />
-                    <span>{feature}</span>
-                  </li>
+              <div className="space-y-4 mb-10 flex-grow">
+                {pkg.features.map((feature, i) => (
+                  <div key={i} className="flex items-start gap-3">
+                    <Check className="w-4 h-4 text-primary shrink-0 mt-0.5" />
+                    <span className="text-sm font-bold text-gray-400 leading-tight group-hover:text-gray-300 transition-colors">{feature}</span>
+                  </div>
                 ))}
-              </ul>
+              </div>
 
               <button
-                onClick={() => handleSelectPlan(plan.id)}
+                onClick={() => handlePurchase(pkg.id)}
                 disabled={isConnecting}
                 className={cn(
-                  "w-full py-3 rounded-lg font-semibold transition-all flex items-center justify-center gap-2",
-                  plan.popular
-                    ? "bg-primary text-primary-foreground hover:bg-primary/90"
-                    : "bg-muted hover:bg-muted/80"
+                  "w-full py-5 rounded-2xl font-black transition-all flex items-center justify-center gap-3 text-xs uppercase tracking-[0.2em] active:scale-95 shadow-xl",
+                  pkg.popular
+                    ? "bg-primary text-black hover:bg-white shadow-primary/20"
+                    : "bg-white/5 text-white border border-white/10 hover:bg-white/10 shadow-white/5"
                 )}
               >
-                {plan.price === 0 ? (
-                  <>
-                    <Wallet className="w-4 h-4" />
-                    {plan.cta}
-                  </>
-                ) : (
-                  <>
-                    {plan.cta}
-                    <ArrowRight className="w-4 h-4" />
-                  </>
-                )}
+                Buy Now
+                <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </button>
             </motion.div>
           ))}
         </div>
 
-        {/* X402 Micropayments Notice */}
+        {/* X402 Micropayments Breakdown */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5 }}
-          className="mt-12 p-6 rounded-xl bg-gradient-to-r from-primary/10 via-secondary/10 to-accent/10 border border-border"
+          className="mt-32 p-12 rounded-[3rem] bg-gradient-to-br from-zinc-900 to-black border border-white/5 relative overflow-hidden group shadow-2xl"
         >
-          <div className="flex items-start gap-4">
-            <div className="p-3 rounded-lg bg-primary/20">
-              <Wallet className="w-6 h-6 text-primary" />
-            </div>
+          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] -mr-64 -mt-64 group-hover:bg-primary/10 transition-all duration-1000" />
+          
+          <div className="grid lg:grid-cols-2 gap-16 items-center relative z-10">
             <div>
-              <h3 className="font-semibold text-lg mb-2">
-                Pay Per Request with X402
+              <div className="w-16 h-16 rounded-[1.25rem] bg-primary/10 border border-primary/20 flex items-center justify-center mb-8 shadow-inner shadow-primary/10">
+                <ShieldCheck className="w-8 h-8 text-primary" />
+              </div>
+              <h3 className="text-4xl font-black text-white mb-6 tracking-tighter uppercase leading-[0.9]">
+                Machine-to-Machine <br />
+                <span className="text-primary font-mono tracking-normal lowercase italic">Micropayments</span>
               </h3>
-              <p className="text-muted-foreground text-sm mb-3">
-                Don't want a subscription? Use X402 micropayments to pay per API call with USDC on Base or Solana. 
-                Perfect for occasional usage or testing.
+              <p className="text-lg text-gray-400 font-medium mb-10 leading-relaxed">
+                OMA-AI pioneered the integration of <strong>x402</strong> for the Agentic Web. 
+                Our protocol allows autonomous wallets to settle invoices in milliseconds without human friction or legacy banking systems.
               </p>
-              <div className="flex gap-4 text-sm">
-                <div className="flex items-center gap-2">
-                  <Check className="w-4 h-4 text-green-500" />
-                  <span>No commitment</span>
+              <div className="grid grid-cols-2 gap-8">
+                <div className="space-y-3">
+                  <div className="text-white font-black text-xl flex items-center gap-3 uppercase tracking-tighter border-l-2 border-primary pl-4">
+                    Base native
+                  </div>
+                  <div className="text-sm text-gray-500 font-bold leading-relaxed">Built on EIP-3009 for the lowest possible transaction fees.</div>
                 </div>
-                <div className="flex items-center gap-2">
-                  <Check className="w-4 h-4 text-green-500" />
-                  <span>Pay only what you use</span>
+                <div className="space-y-3">
+                  <div className="text-white font-black text-xl flex items-center gap-3 uppercase tracking-tighter border-l-2 border-emerald-500 pl-4">
+                    Zero Fees
+                  </div>
+                  <div className="text-sm text-gray-500 font-bold leading-relaxed">Gasless transfers mean 100% of your USDC goes to compute.</div>
                 </div>
-                <div className="flex items-center gap-2">
-                  <Check className="w-4 h-4 text-green-500" />
-                  <span>Instant settlement</span>
+              </div>
+            </div>
+            
+            <div className="bg-black p-10 rounded-[2.5rem] border border-white/10 shadow-3xl relative overflow-hidden">
+              <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:20px_20px]" />
+              <div className="space-y-8 relative z-10">
+                <div className="flex items-center justify-between border-b border-white/5 pb-6">
+                  <div className="flex items-center gap-3">
+                    <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                    <span className="text-[10px] font-black text-gray-500 uppercase tracking-[0.3em]">Protocol Log</span>
+                  </div>
+                  <span className="px-3 py-1 rounded-lg bg-rose-500/10 text-rose-500 text-[10px] font-black uppercase border border-rose-500/20">HTTP 402</span>
+                </div>
+                <div className="font-mono text-xs space-y-3 bg-zinc-950 p-6 rounded-2xl border border-white/5">
+                  <p className="text-primary/60">{"// Initializing x402 Session..."}</p>
+                  <p className="text-blue-400">GET <span className="text-white">/api/v1/inference</span></p>
+                  <p className="text-rose-400">{"HTTP/1.1 402 Payment Required"}</p>
+                  <p className="text-gray-500">{"{"}</p>
+                  <p className="text-gray-300 pl-4">"address": <span className="text-primary">"0x40AE...eCac"</span>,</p>
+                  <p className="text-gray-300 pl-4">"required": <span className="text-yellow-400">"0.07 USDC"</span>,</p>
+                  <p className="text-gray-300 pl-4">"gasless": <span className="text-emerald-400">true</span></p>
+                  <p className="text-gray-500">{"}"}</p>
+                </div>
+                <div className="flex items-center justify-between gap-4 pt-4">
+                  <div className="text-[10px] font-black text-gray-600 uppercase tracking-widest">Network: Base Mainnet</div>
+                  <div className="text-[10px] font-black text-emerald-500 uppercase tracking-widest flex items-center gap-2">
+                    <Check className="w-3 h-3" /> Settled
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </motion.div>
 
-        {/* Enterprise CTA */}
+        {/* Enterprise Footer */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           transition={{ delay: 0.6 }}
-          className="mt-8 text-center"
+          className="mt-20 text-center border-t border-white/5 pt-12"
         >
-          <p className="text-muted-foreground">
-            Need more? <a href="mailto:sales@oma-ai.com" className="text-primary hover:underline">Contact us</a> for custom enterprise solutions.
+          <p className="text-gray-600 font-black text-xs tracking-[0.3em] uppercase">
+            Built for the machine-to-machine economy. <a href="mailto:sales@oma-ai.com" className="text-primary hover:text-white transition-colors underline-offset-8 underline ml-4 decoration-2">Contact OMA Solutions</a>
           </p>
         </motion.div>
       </div>
