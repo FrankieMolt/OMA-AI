@@ -1,227 +1,158 @@
 /**
- * OMA-AI Supabase Client
- * 
- * Database operations for OMA-AI platform
- * Optimized for free tier (5000 rows max)
+ * Supabase Configuration
+ * Database connection and client setup
  */
 
 import { createClient } from '@supabase/supabase-js';
 
+// ============================================
+// CONFIGURATION
+// ============================================
+
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
-export const supabase = supabaseUrl && supabaseKey 
-  ? createClient(supabaseUrl, supabaseKey)
-  : null;
-
-// ===========================================
-// USER OPERATIONS
-// ===========================================
-
-/**
- * Get or create user by wallet address
- */
-export async function getOrCreateUser(walletAddress: string) {
-  if (!supabase) return null;
-  
-  // Try to find existing user
-  const { data: existing } = await supabase
-    .from('users')
-    .select('*')
-    .eq('wallet_address', walletAddress)
-    .single();
-  
-  if (existing) return existing;
-  
-  // Create new user
-  const { data: user, error } = await supabase
-    .from('users')
-    .insert({ wallet_address: walletAddress })
-    .select()
-    .single();
-  
-  if (error) throw error;
-  return user;
+// Validate configuration
+if (!supabaseUrl || !supabaseAnonKey) {
+  throw new Error('Missing Supabase environment variables');
 }
 
-/**
- * Get user by wallet
- */
-export async function getUserByWallet(walletAddress: string) {
-  if (!supabase) return null;
-  
-  const { data, error } = await supabase
-    .from('users')
-    .select('*')
-    .eq('wallet_address', walletAddress)
-    .single();
-  
-  return error ? null : data;
+// ============================================
+// CLIENT EXPORT
+// ============================================
+
+export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+
+// ============================================
+// TYPES
+// ============================================
+
+export interface MCP_Skill {
+  id: string;
+  name: string;
+  slug: string;
+  category: string[];
+  description: string;
+  author: string;
+  repository_url: string;
+  documentation_url: string | null;
+  mcp_endpoint: string;
+  pricing_usdc: number;
+  x402_enabled: boolean;
+  verified: boolean;
+  rating: number;
+  total_calls: number;
+  success_rate: number;
+  created_at: string;
+  updated_at: string;
 }
 
-// ===========================================
-// API KEY OPERATIONS  
-// ===========================================
-
-/**
- * Generate API key for user
- */
-export async function generateApiKey(userId: string, name: string) {
-  if (!supabase) return null;
-  
-  // Generate random key
-  const key = 'oma_' + Math.random().toString(36).substring(2, 15) + 
-              Math.random().toString(36).substring(2, 15);
-  
-  // Hash the key for storage
-  const keyHash = await hashKey(key);
-  
-  const { data, error } = await supabase
-    .from('api_keys')
-    .insert({
-      user_id: userId,
-      key_hash: keyHash,
-      name
-    })
-    .select()
-    .single();
-  
-  if (error) throw error;
-  
-  return { ...data, key }; // Return full key only once
+export interface Agent_Wallet {
+  id: string;
+  agent_id: string;
+  wallet_address: string;
+  ens_name: string | null;
+  chain_id: number;
+  balance_usdc: number;
+  total_earned: number;
+  total_spent: number;
+  created_at: string;
+  updated_at: string;
 }
 
-/**
- * Validate API key
- */
-export async function validateApiKey(key: string) {
-  if (!supabase) return null;
-  
-  const keyHash = await hashKey(key);
-  
-  const { data, error } = await supabase
-    .from('api_keys')
-    .select('*, users(*)')
-    .eq('key_hash', keyHash)
-    .eq('is_active', true)
-    .single();
-  
-  if (error || !data) return null;
-  
-  // Update last_used
-  await supabase
-    .from('api_keys')
-    .update({ last_used: new Date().toISOString() })
-    .eq('id', data.id);
-  
-  return data;
+export interface Transaction {
+  id: string;
+  from_wallet: string;
+  to_wallet: string;
+  amount_usdc: number;
+  status: 'pending' | 'completed' | 'failed' | 'expired';
+  tx_hash: string | null;
+  skill_id: string | null;
+  created_at: string;
+  completed_at: string | null;
+  error_message: string | null;
 }
 
-/**
- * Hash API key for storage
- */
-async function hashKey(key: string): Promise<string> {
-  const encoder = new TextEncoder();
-  const data = encoder.encode(key);
-  const hashBuffer = await crypto.subtle.digest('SHA-256', data.buffer as ArrayBuffer);
-  const hashArray = Array.from(new Uint8Array(hashBuffer));
-  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+export interface LLM_Model {
+  id: string;
+  provider: string;
+  name: string;
+  slug: string;
+  model_id: string;
+  context_window: number;
+  pricing_input: number;
+  pricing_output: number;
+  pricing_usdc: number;
+  category: string;
+  capabilities: string[];
+  active: boolean;
+  created_at: string;
+  updated_at: string;
 }
 
-// ===========================================
-// API CALL TRACKING
-// ===========================================
-
-/**
- * Log API call
- */
-export async function logApiCall(
-  userId: string, 
-  endpoint: string, 
-  method: string,
-  statusCode: number,
-  responseTimeMs: number,
-  paymentAmount?: number
-) {
-  if (!supabase) return;
-  
-  // Check if approaching free tier limit
-  const { count } = await supabase
-    .from('api_calls')
-    .select('*', { count: 'exact', head: true });
-  
-  if (count && count > 4500) {
-    console.warn('Approaching free tier limit (5000 rows)');
-  }
-  
-  await supabase
-    .from('api_calls')
-    .insert({
-      user_id: userId,
-      endpoint,
-      method,
-      status_code: statusCode,
-      response_time_ms: responseTimeMs,
-      payment_amount: paymentAmount || 0
-    });
+export interface Usage_Metric {
+  id: string;
+  skill_id: string | null;
+  wallet_address: string | null;
+  api_endpoint: string;
+  success: boolean;
+  latency_ms: number | null;
+  tokens_used: number;
+  cost_usdc: number;
+  created_at: string;
 }
 
-// ===========================================
-// SKILLS/MCP OPERATIONS
-// ===========================================
-
-/**
- * List skills with pagination
- */
-export async function listSkills(limit = 20, offset = 0) {
-  if (!supabase) return [];
-  
-  const { data, error } = await supabase
-    .from('skills')
-    .select('*, users(wallet_address)')
-    .order('installs', { ascending: false })
-    .range(offset, offset + limit - 1);
-  
-  return error ? [] : data;
+export interface Agent_Profile {
+  id: string;
+  agent_id: string;
+  name: string;
+  description: string | null;
+  wallet_address: string | null;
+  skills: string[];
+  reputation_score: number;
+  total_tasks_completed: number;
+  total_earned: number;
+  verified: boolean;
+  avatar_url: string | null;
+  created_at: string;
+  updated_at: string;
 }
 
-/**
- * Get skill by ID
- */
-export async function getSkill(id: string) {
-  if (!supabase) return null;
-  
-  const { data, error } = await supabase
-    .from('skills')
-    .select('*, users(wallet_address)')
-    .eq('id', id)
-    .single();
-  
-  return error ? null : data;
+export interface Marketplace_Stats {
+  verified_mcp_count: number;
+  total_agents: number;
+  total_volume_usdc: number;
+  volume_24h: number;
+  volume_7d: number;
+  tx_24h: number;
+  tx_7d: number;
+  last_updated: string;
 }
 
-// ===========================================
-// PAYMENTS/EARNINGS
-// ===========================================
+// ============================================
+// TABLE NAMES
+// ============================================
 
-/**
- * Get user earnings
- */
-export async function getUserEarnings(userId: string) {
-  if (!supabase) return { total: 0, pending: 0, paid: 0 };
-  
-  const { data } = await supabase
-    .from('payments')
-    .select('*')
-    .eq('publisher_id', userId);
-  
-  if (!data) return { total: 0, pending: 0, paid: 0 };
-  
-  return {
-    total: data.reduce((sum, p) => sum + parseFloat(p.amount), 0),
-    pending: data.filter(p => p.status === 'pending').reduce((sum, p) => sum + parseFloat(p.amount), 0),
-    paid: data.filter(p => p.status === 'completed').reduce((sum, p) => sum + parseFloat(p.amount), 0)
-  };
-}
+export const TABLES = {
+  MCP_SKILLS: 'mcp_skills',
+  AGENT_WALLETS: 'agent_wallets',
+  TRANSACTIONS: 'transactions',
+  LLM_MODELS: 'llm_models',
+  USAGE_METRICS: 'usage_metrics',
+  AGENT_PROFILES: 'agent_profiles',
+  MARKETPLACE_STATS: 'marketplace_stats',
+} as const;
 
-export default supabase;
+// ============================================
+// EXPORTS
+// ============================================
+
+export type {
+  MCP_Skill,
+  Agent_Wallet,
+  Transaction,
+  LLM_Model,
+  Usage_Metric,
+  Agent_Profile,
+  Marketplace_Stats,
+};
