@@ -1,3 +1,5 @@
+"use client";
+
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { Brain, Network, Wallet, Zap, ArrowRight, Code2, Bot, Globe } from 'lucide-react';

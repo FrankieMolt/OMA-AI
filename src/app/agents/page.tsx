@@ -1,3 +1,5 @@
+"use client";
+
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { TrendingUp, Brain, Check, ArrowRight, Zap, Code2, Users, Star, GitBranch } from 'lucide-react';
