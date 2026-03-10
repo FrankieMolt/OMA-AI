@@ -113,10 +113,10 @@ export function HeroSection() {
           className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
           <Link
-            href="/mcps"
+            href="/agentic-web"
             className="group relative px-8 py-4 bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white rounded-full font-semibold text-base hover:from-violet-500 hover:to-fuchsia-500 transition-all duration-300 flex items-center gap-2.5 glow-violet hover:glow-amber"
           >
-            <span>Try It Free</span>
+            <span>Explore Agentic Web</span>
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </Link>
 
@@ -125,6 +125,20 @@ export function HeroSection() {
             className="px-8 py-4 glass-card text-zinc-300 border border-violet-500/20 rounded-full font-medium text-base hover:border-violet-500/40 hover:bg-violet-500/10 transition-all duration-300"
           >
             Start Building
+          </Link>
+
+          <Link
+            href="/openrouter"
+            className="px-6 py-4 glass-card text-zinc-300/60 border border-zinc-700/50 rounded-full font-medium text-sm hover:border-violet-500/30 hover:bg-violet-500/5 transition-all duration-300"
+          >
+            Models
+          </Link>
+
+          <Link
+            href="/agents"
+            className="px-6 py-4 glass-card text-zinc-300/60 border border-zinc-700/50 rounded-full font-medium text-sm hover:border-emerald-500/30 hover:bg-emerald-500/5 transition-all duration-300"
+          >
+            AI Agents
           </Link>
         </motion.div>
 
