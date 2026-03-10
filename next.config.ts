@@ -9,6 +9,10 @@ const nextConfig: NextConfig = {
   compress: true,
   // Ensure production builds
   productionBrowserSourceMaps: false,
+  // Disable Turbopack to fix module factory error with Framer Motion
+  experimental: {
+    turbo: undefined,  // Explicitly disable Turbopack
+  },
 };
 
 export default nextConfig;
