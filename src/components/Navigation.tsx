@@ -21,7 +21,9 @@ export default function Navigation() {
       <div className="md:hidden fixed top-4 right-4 z-50 p-4">
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="p-2 bg-zinc-900 border border-zinc-800 rounded-lg text-white hover:bg-zinc-800 transition-colors"
+          aria-label={isOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={isOpen}
+          className="p-2 bg-zinc-900 border border-zinc-800 rounded-lg text-white hover:bg-zinc-800 transition-colors focus:outline-none focus:ring-2 focus:ring-green-500"
         >
           {isOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
@@ -32,7 +34,11 @@ export default function Navigation() {
         <div className="container mx-auto px-4 max-w-7xl">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-2">
+            <Link
+              href="/"
+              className="flex items-center gap-2"
+              aria-label="OMA-AI Home"
+            >
               <div className="w-8 h-8 bg-gradient-to-br from-green-500 to-emerald-600 rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-lg">O</span>
               </div>
@@ -47,7 +53,7 @@ export default function Navigation() {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="text-gray-300 hover:text-white transition-colors font-medium"
+                  className="text-gray-300 hover:text-white transition-colors font-medium focus:outline-none focus:ring-2 focus:ring-green-500 rounded px-2 py-1"
                 >
                   {item.name}
                 </Link>

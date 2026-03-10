@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Activity, Filter, ArrowUpRight, ArrowDownRight, CheckCircle, AlertCircle, Clock, ExternalLink } from 'lucide-react';
 import { TransactionCardSkeleton } from '@/components/loading/Skeletons';
+import { TransactionsBreadcrumbs } from '@/components/ui/Breadcrumbs';
 
 interface Transaction {
   id: string;
@@ -133,6 +134,9 @@ export default function TransactionsFeed() {
   return (
     <main className="min-h-screen bg-zinc-950 pt-24 pb-12">
       <div className="container mx-auto px-4 max-w-7xl">
+        {/* Breadcrumbs */}
+        <TransactionsBreadcrumbs />
+
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}

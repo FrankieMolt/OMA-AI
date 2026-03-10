@@ -131,27 +131,31 @@ export default function MCPMarketplace() {
           <div className="grid md:grid-cols-4 gap-4">
             {/* Search */}
             <div className="md:col-span-2">
-              <label className="block text-sm font-medium text-gray-300 mb-2">
+              <label htmlFor="search" className="block text-sm font-medium text-gray-300 mb-2">
                 Search
               </label>
               <input
+                id="search"
                 type="text"
                 placeholder="Search MCP skills..."
+                aria-label="Search MCP skills"
                 value={filters.search}
                 onChange={(e) => setFilters({ ...filters, search: e.target.value })}
-                className="w-full px-4 py-2 bg-zinc-800 border border-zinc-700 rounded-lg text-white placeholder:text-gray-500 focus:outline-none focus:border-zinc-500"
+                className="w-full px-4 py-2 bg-zinc-800 border border-zinc-700 rounded-lg text-white placeholder:text-gray-500 focus:outline-none focus:border-zinc-500 focus:ring-2 focus:ring-green-500"
               />
             </div>
 
             {/* Category */}
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">
+              <label htmlFor="category" className="block text-sm font-medium text-gray-300 mb-2">
                 Category
               </label>
               <select
+                id="category"
                 value={filters.category}
                 onChange={(e) => setFilters({ ...filters, category: e.target.value })}
-                className="w-full px-4 py-2 bg-zinc-800 border border-zinc-700 rounded-lg text-white focus:outline-none focus:border-zinc-500"
+                className="w-full px-4 py-2 bg-zinc-800 border border-zinc-700 rounded-lg text-white focus:outline-none focus:border-zinc-500 focus:ring-2 focus:ring-green-500"
+                aria-label="Filter by category"
               >
                 {categories.map((cat) => (
                   <option key={cat} value={cat}>
@@ -163,13 +167,15 @@ export default function MCPMarketplace() {
 
             {/* Verified */}
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">
+              <label htmlFor="status" className="block text-sm font-medium text-gray-300 mb-2">
                 Status
               </label>
               <select
+                id="status"
                 value={filters.verified}
                 onChange={(e) => setFilters({ ...filters, verified: e.target.value })}
-                className="w-full px-4 py-2 bg-zinc-800 border border-zinc-700 rounded-lg text-white focus:outline-none focus:border-zinc-500"
+                className="w-full px-4 py-2 bg-zinc-800 border border-zinc-700 rounded-lg text-white focus:outline-none focus:border-zinc-500 focus:ring-2 focus:ring-green-500"
+                aria-label="Filter by verification status"
               >
                 <option value="all">All Skills</option>
                 <option value="true">Verified Only</option>
@@ -187,11 +193,12 @@ export default function MCPMarketplace() {
                 <button
                   key={sort}
                   onClick={() => setFilters({ ...filters, sort })}
-                  className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+                  className={`px-4 py-2 rounded-lg font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-green-500 ${
                     filters.sort === sort
                       ? 'bg-zinc-700 text-white'
                       : 'bg-zinc-800 text-gray-300 hover:bg-zinc-700'
                   }`}
+                  aria-label={`Sort by ${sort}`}
                 >
                   {sort.charAt(0).toUpperCase() + sort.slice(1)}
                 </button>
