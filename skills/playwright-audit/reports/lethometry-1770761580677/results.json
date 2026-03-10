@@ -1,0 +1,491 @@
+{
+  "site": "Lethometry",
+  "url": "http://localhost:3002",
+  "timestamp": "2026-02-10T22:13:00.677Z",
+  "performance": {
+    "score": 100,
+    "avgResponseTime": 498,
+    "metrics": {
+      "responseTimes": [
+        {
+          "route": "/",
+          "time": 1488
+        },
+        {
+          "route": "/about",
+          "time": 4
+        },
+        {
+          "route": "/products",
+          "time": 2
+        }
+      ],
+      "pageSizes": [
+        {
+          "route": "/",
+          "size": 6889
+        },
+        {
+          "route": "/about",
+          "size": 7
+        },
+        {
+          "route": "/products",
+          "size": 10
+        }
+      ],
+      "resourceCounts": {
+        "scripts": 20,
+        "stylesheets": 0,
+        "images": 0
+      }
+    }
+  },
+  "accessibility": {
+    "violations": 0,
+    "routesTested": 4,
+    "routesWithIssues": 0,
+    "details": []
+  },
+  "seo": {
+    "score": 0,
+    "routes": [
+      {
+        "route": "/",
+        "url": "http://localhost:3002/",
+        "title": "",
+        "titleLength": 0,
+        "metaDescription": "",
+        "metaDescriptionLength": 0,
+        "h1": "",
+        "h1Count": 0,
+        "h2Count": 0,
+        "h3Count": 0,
+        "imagesWithoutAlt": 0,
+        "totalImages": 0,
+        "canonical": "",
+        "viewport": "width=device-width",
+        "charset": "utf-8",
+        "ogTags": {
+          "title": "",
+          "description": "",
+          "image": "",
+          "url": "",
+          "type": ""
+        },
+        "twitterTags": {
+          "card": "",
+          "title": "",
+          "description": "",
+          "image": ""
+        },
+        "structuredData": [],
+        "lang": "",
+        "issues": [
+          {
+            "type": "error",
+            "message": "Title length issue: 0 characters (should be 10-70)"
+          },
+          {
+            "type": "warning",
+            "message": "Meta description length: 0 characters (should be 50-160)"
+          },
+          {
+            "type": "error",
+            "message": "Missing H1 tag"
+          },
+          {
+            "type": "warning",
+            "message": "Missing HTML lang attribute"
+          },
+          {
+            "type": "info",
+            "message": "Missing Open Graph title"
+          },
+          {
+            "type": "info",
+            "message": "Missing Twitter Card tags"
+          }
+        ]
+      },
+      {
+        "route": "/about",
+        "url": "http://localhost:3002/about",
+        "title": "",
+        "titleLength": 0,
+        "metaDescription": "",
+        "metaDescriptionLength": 0,
+        "h1": "",
+        "h1Count": 0,
+        "h2Count": 0,
+        "h3Count": 0,
+        "imagesWithoutAlt": 0,
+        "totalImages": 0,
+        "canonical": "",
+        "viewport": "",
+        "charset": "",
+        "ogTags": {
+          "title": "",
+          "description": "",
+          "image": "",
+          "url": "",
+          "type": ""
+        },
+        "twitterTags": {
+          "card": "",
+          "title": "",
+          "description": "",
+          "image": ""
+        },
+        "structuredData": [],
+        "lang": "",
+        "issues": [
+          {
+            "type": "error",
+            "message": "Title length issue: 0 characters (should be 10-70)"
+          },
+          {
+            "type": "warning",
+            "message": "Meta description length: 0 characters (should be 50-160)"
+          },
+          {
+            "type": "error",
+            "message": "Missing H1 tag"
+          },
+          {
+            "type": "error",
+            "message": "Missing viewport meta tag"
+          },
+          {
+            "type": "warning",
+            "message": "Missing HTML lang attribute"
+          },
+          {
+            "type": "info",
+            "message": "Missing Open Graph title"
+          },
+          {
+            "type": "info",
+            "message": "Missing Twitter Card tags"
+          }
+        ]
+      },
+      {
+        "route": "/products",
+        "url": "http://localhost:3002/products",
+        "title": "",
+        "titleLength": 0,
+        "metaDescription": "",
+        "metaDescriptionLength": 0,
+        "h1": "",
+        "h1Count": 0,
+        "h2Count": 0,
+        "h3Count": 0,
+        "imagesWithoutAlt": 0,
+        "totalImages": 0,
+        "canonical": "",
+        "viewport": "",
+        "charset": "",
+        "ogTags": {
+          "title": "",
+          "description": "",
+          "image": "",
+          "url": "",
+          "type": ""
+        },
+        "twitterTags": {
+          "card": "",
+          "title": "",
+          "description": "",
+          "image": ""
+        },
+        "structuredData": [],
+        "lang": "",
+        "issues": [
+          {
+            "type": "error",
+            "message": "Title length issue: 0 characters (should be 10-70)"
+          },
+          {
+            "type": "warning",
+            "message": "Meta description length: 0 characters (should be 50-160)"
+          },
+          {
+            "type": "error",
+            "message": "Missing H1 tag"
+          },
+          {
+            "type": "error",
+            "message": "Missing viewport meta tag"
+          },
+          {
+            "type": "warning",
+            "message": "Missing HTML lang attribute"
+          },
+          {
+            "type": "info",
+            "message": "Missing Open Graph title"
+          },
+          {
+            "type": "info",
+            "message": "Missing Twitter Card tags"
+          }
+        ]
+      },
+      {
+        "route": "/solutions",
+        "url": "http://localhost:3002/solutions",
+        "title": "",
+        "titleLength": 0,
+        "metaDescription": "",
+        "metaDescriptionLength": 0,
+        "h1": "",
+        "h1Count": 0,
+        "h2Count": 0,
+        "h3Count": 0,
+        "imagesWithoutAlt": 0,
+        "totalImages": 0,
+        "canonical": "",
+        "viewport": "",
+        "charset": "",
+        "ogTags": {
+          "title": "",
+          "description": "",
+          "image": "",
+          "url": "",
+          "type": ""
+        },
+        "twitterTags": {
+          "card": "",
+          "title": "",
+          "description": "",
+          "image": ""
+        },
+        "structuredData": [],
+        "lang": "",
+        "issues": [
+          {
+            "type": "error",
+            "message": "Title length issue: 0 characters (should be 10-70)"
+          },
+          {
+            "type": "warning",
+            "message": "Meta description length: 0 characters (should be 50-160)"
+          },
+          {
+            "type": "error",
+            "message": "Missing H1 tag"
+          },
+          {
+            "type": "error",
+            "message": "Missing viewport meta tag"
+          },
+          {
+            "type": "warning",
+            "message": "Missing HTML lang attribute"
+          },
+          {
+            "type": "info",
+            "message": "Missing Open Graph title"
+          },
+          {
+            "type": "info",
+            "message": "Missing Twitter Card tags"
+          }
+        ]
+      },
+      {
+        "route": "/docs",
+        "url": "http://localhost:3002/docs",
+        "title": "",
+        "titleLength": 0,
+        "metaDescription": "",
+        "metaDescriptionLength": 0,
+        "h1": "",
+        "h1Count": 0,
+        "h2Count": 0,
+        "h3Count": 0,
+        "imagesWithoutAlt": 0,
+        "totalImages": 0,
+        "canonical": "",
+        "viewport": "",
+        "charset": "",
+        "ogTags": {
+          "title": "",
+          "description": "",
+          "image": "",
+          "url": "",
+          "type": ""
+        },
+        "twitterTags": {
+          "card": "",
+          "title": "",
+          "description": "",
+          "image": ""
+        },
+        "structuredData": [],
+        "lang": "",
+        "issues": [
+          {
+            "type": "error",
+            "message": "Title length issue: 0 characters (should be 10-70)"
+          },
+          {
+            "type": "warning",
+            "message": "Meta description length: 0 characters (should be 50-160)"
+          },
+          {
+            "type": "error",
+            "message": "Missing H1 tag"
+          },
+          {
+            "type": "error",
+            "message": "Missing viewport meta tag"
+          },
+          {
+            "type": "warning",
+            "message": "Missing HTML lang attribute"
+          },
+          {
+            "type": "info",
+            "message": "Missing Open Graph title"
+          },
+          {
+            "type": "info",
+            "message": "Missing Twitter Card tags"
+          }
+        ]
+      },
+      {
+        "route": "/login",
+        "url": "http://localhost:3002/login",
+        "title": "",
+        "titleLength": 0,
+        "metaDescription": "",
+        "metaDescriptionLength": 0,
+        "h1": "",
+        "h1Count": 0,
+        "h2Count": 0,
+        "h3Count": 0,
+        "imagesWithoutAlt": 0,
+        "totalImages": 0,
+        "canonical": "",
+        "viewport": "",
+        "charset": "",
+        "ogTags": {
+          "title": "",
+          "description": "",
+          "image": "",
+          "url": "",
+          "type": ""
+        },
+        "twitterTags": {
+          "card": "",
+          "title": "",
+          "description": "",
+          "image": ""
+        },
+        "structuredData": [],
+        "lang": "",
+        "issues": [
+          {
+            "type": "error",
+            "message": "Title length issue: 0 characters (should be 10-70)"
+          },
+          {
+            "type": "warning",
+            "message": "Meta description length: 0 characters (should be 50-160)"
+          },
+          {
+            "type": "error",
+            "message": "Missing H1 tag"
+          },
+          {
+            "type": "error",
+            "message": "Missing viewport meta tag"
+          },
+          {
+            "type": "warning",
+            "message": "Missing HTML lang attribute"
+          },
+          {
+            "type": "info",
+            "message": "Missing Open Graph title"
+          },
+          {
+            "type": "info",
+            "message": "Missing Twitter Card tags"
+          }
+        ]
+      }
+    ],
+    "globalIssues": [],
+    "summary": {
+      "totalRoutes": 6,
+      "routesWithErrors": 6,
+      "totalErrors": 17,
+      "totalWarnings": 12
+    }
+  },
+  "security": {
+    "checks": {
+      "https": false,
+      "headers": {
+        "content-security-policy": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self'; frame-ancestors 'self';",
+        "x-frame-options": null,
+        "x-content-type-options": null,
+        "strict-transport-security": null,
+        "referrer-policy": null
+      },
+      "cookies": {},
+      "forms": []
+    },
+    "issues": [
+      {
+        "type": "warning",
+        "message": "Missing X-Frame-Options header (clickjacking protection)"
+      },
+      {
+        "type": "warning",
+        "message": "Missing X-Content-Type-Options header"
+      },
+      {
+        "type": "error",
+        "message": "Site not using HTTPS"
+      }
+    ],
+    "score": 70
+  },
+  "functional": {
+    "brokenLinks": [],
+    "brokenRoutes": [
+      {
+        "route": "/",
+        "status": 500
+      }
+    ],
+    "workingRoutes": [
+      {
+        "route": "/about",
+        "status": 308
+      },
+      {
+        "route": "/products",
+        "status": 308
+      },
+      {
+        "route": "/solutions",
+        "status": 308
+      },
+      {
+        "route": "/docs",
+        "status": 308
+      },
+      {
+        "route": "/login",
+        "status": 308
+      }
+    ],
+    "forms": []
+  }
+}

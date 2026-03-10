@@ -1,0 +1,29 @@
+{
+  "memories": [
+    {
+      "type": "insight",
+      "content": "Frankie API is deployed on Conway sandbox at frankie-prod.life.conway.tech",
+      "weight": 3
+    },
+    {
+      "type": "insight",
+      "content": "Workspace was cleaned from 7.9G to 1.3G on 2026-02-24",
+      "weight": 2
+    },
+    {
+      "type": "user_input",
+      "content": "User prefers action over asking - autonomous operation",
+      "weight": 3
+    },
+    {
+      "type": "correction",
+      "content": "APIs should be deployed to sandbox not locally",
+      "weight": 3
+    },
+    {
+      "type": "insight",
+      "content": "Revenue systems: Frankie API (x402), Polymarket tracking, Conway credits",
+      "weight": 2
+    }
+  ]
+}

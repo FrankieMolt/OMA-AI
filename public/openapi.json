@@ -1,0 +1,42 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "OMA-AI API",
+    "description": "Unified gateway for AI inference and agentic compute.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://api.oma-ai.com/v1"
+    }
+  ],
+  "paths": {
+    "/chat/completions": {
+      "post": {
+        "summary": "Create chat completion",
+        "description": "OpenAI-compatible endpoint for text generation.",
+        "operationId": "createChatCompletion",
+        "responses": {
+          "200": {
+            "description": "Successful completion"
+          },
+          "402": {
+            "description": "Payment Required (x402 protocol)"
+          }
+        }
+      }
+    },
+    "/models": {
+      "get": {
+        "summary": "List models",
+        "description": "Retrieve available AI models and their specific pricing.",
+        "operationId": "listModels",
+        "responses": {
+          "200": {
+            "description": "List of models"
+          }
+        }
+      }
+    }
+  }
+}

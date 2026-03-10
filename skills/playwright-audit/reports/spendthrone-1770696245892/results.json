@@ -1,0 +1,399 @@
+{
+  "site": "SpendThrone",
+  "url": "http://localhost:3000",
+  "timestamp": "2026-02-10T04:04:05.892Z",
+  "performance": {
+    "score": 80,
+    "avgResponseTime": 522,
+    "metrics": {
+      "responseTimes": [
+        {
+          "route": "/",
+          "time": 343
+        },
+        {
+          "route": "/about",
+          "time": 962
+        },
+        {
+          "route": "/features",
+          "time": 260
+        }
+      ],
+      "pageSizes": [
+        {
+          "route": "/",
+          "size": 632781
+        },
+        {
+          "route": "/about",
+          "size": 118314
+        },
+        {
+          "route": "/features",
+          "size": 99165
+        }
+      ],
+      "resourceCounts": {
+        "scripts": 55,
+        "stylesheets": 3,
+        "images": 60
+      }
+    }
+  },
+  "accessibility": {
+    "violations": 0,
+    "routesTested": 4,
+    "routesWithIssues": 0,
+    "details": []
+  },
+  "seo": {
+    "score": 100,
+    "routes": [
+      {
+        "route": "/",
+        "url": "http://localhost:3000/",
+        "title": "SpendThrone - The Kingdom of Weird Stuff",
+        "titleLength": 40,
+        "metaDescription": "Discover the weirdest, most viral products on Earth. Extreme tech, luxury items, and WTF technology for the modern age. A curated collection of bizarre innovation.",
+        "metaDescriptionLength": 163,
+        "h1": "Discover Weird & Extreme",
+        "h1Count": 1,
+        "h2Count": 1,
+        "h3Count": 65,
+        "imagesWithoutAlt": 0,
+        "totalImages": 60,
+        "canonical": "https://spendthrone.com",
+        "viewport": "width=device-width, initial-scale=1",
+        "charset": "utf-8",
+        "ogTags": {
+          "title": "SpendThrone - The Kingdom of Weird Stuff",
+          "description": "The curated kingdom of the weirdest, most viral products on Earth. WTF-level technology for the modern age.",
+          "image": "https://spendthrone.com/og-image.png",
+          "url": "https://spendthrone.com",
+          "type": "website"
+        },
+        "twitterTags": {
+          "card": "summary_large_image",
+          "title": "SpendThrone - The Kingdom of Weird Stuff",
+          "description": "The ultimate collection of viral, weird, and extreme products. WTF-level technology for the modern age.",
+          "image": "https://spendthrone.com/og-image.png"
+        },
+        "structuredData": [
+          "{\"@context\":\"https://schema.org\",\"@type\":\"WebSite\",\"name\":\"SpendThrone - The Kingdom of Weird Stuff\",\"description\":\"The curated kingdom of the weirdest, most viral products on Earth. WTF-level technology for the modern age.\",\"url\":\"https://spendthrone.com\",\"potentialAction\":{\"@type\":\"SearchAction\",\"target\":\"https://spendthrone.com/search?q={search_term_string}\",\"query-input\":\"required name=search_term_string\"},\"publisher\":{\"@type\":\"Organization\",\"name\":\"SpendThrone\",\"url\":\"https://spendthrone.com\",\"logo\":{\"@type\":\"ImageObject\",\"url\":\"https://spendthrone.com/logo-512x512.png\",\"width\":512,\"height\":512},\"contactPoint\":{\"@type\":\"ContactPoint\",\"contactType\":\"sales\",\"email\":\"hello@spendthrone.com\"}},\"sameAs\":[\"https://twitter.com/spendthrone\"]}"
+        ],
+        "lang": "en",
+        "issues": [
+          {
+            "type": "warning",
+            "message": "Meta description length: 163 characters (should be 50-160)"
+          }
+        ]
+      },
+      {
+        "route": "/about",
+        "url": "http://localhost:3000/about",
+        "title": "SpendThrone - The Kingdom of Weird Stuff",
+        "titleLength": 40,
+        "metaDescription": "Discover the weirdest, most viral products on Earth. Extreme tech, luxury items, and WTF technology for the modern age. A curated collection of bizarre innovation.",
+        "metaDescriptionLength": 163,
+        "h1": "The Kingdom of Weird",
+        "h1Count": 1,
+        "h2Count": 3,
+        "h3Count": 1,
+        "imagesWithoutAlt": 0,
+        "totalImages": 0,
+        "canonical": "https://spendthrone.com",
+        "viewport": "width=device-width, initial-scale=1",
+        "charset": "utf-8",
+        "ogTags": {
+          "title": "SpendThrone - The Kingdom of Weird Stuff",
+          "description": "The curated kingdom of the weirdest, most viral products on Earth. WTF-level technology for the modern age.",
+          "image": "https://spendthrone.com/og-image.png",
+          "url": "https://spendthrone.com",
+          "type": "website"
+        },
+        "twitterTags": {
+          "card": "summary_large_image",
+          "title": "SpendThrone - The Kingdom of Weird Stuff",
+          "description": "The ultimate collection of viral, weird, and extreme products. WTF-level technology for the modern age.",
+          "image": "https://spendthrone.com/og-image.png"
+        },
+        "structuredData": [
+          "{\"@context\":\"https://schema.org\",\"@type\":\"WebSite\",\"name\":\"SpendThrone - The Kingdom of Weird Stuff\",\"description\":\"The curated kingdom of the weirdest, most viral products on Earth. WTF-level technology for the modern age.\",\"url\":\"https://spendthrone.com\",\"potentialAction\":{\"@type\":\"SearchAction\",\"target\":\"https://spendthrone.com/search?q={search_term_string}\",\"query-input\":\"required name=search_term_string\"},\"publisher\":{\"@type\":\"Organization\",\"name\":\"SpendThrone\",\"url\":\"https://spendthrone.com\",\"logo\":{\"@type\":\"ImageObject\",\"url\":\"https://spendthrone.com/logo-512x512.png\",\"width\":512,\"height\":512},\"contactPoint\":{\"@type\":\"ContactPoint\",\"contactType\":\"sales\",\"email\":\"hello@spendthrone.com\"}},\"sameAs\":[\"https://twitter.com/spendthrone\"]}"
+        ],
+        "lang": "en",
+        "issues": [
+          {
+            "type": "warning",
+            "message": "Meta description length: 163 characters (should be 50-160)"
+          }
+        ]
+      },
+      {
+        "route": "/features",
+        "url": "http://localhost:3000/features",
+        "title": "SpendThrone - The Kingdom of Weird Stuff",
+        "titleLength": 40,
+        "metaDescription": "Discover the weirdest, most viral products on Earth. Extreme tech, luxury items, and WTF technology for the modern age. A curated collection of bizarre innovation.",
+        "metaDescriptionLength": 163,
+        "h1": "404",
+        "h1Count": 1,
+        "h2Count": 0,
+        "h3Count": 1,
+        "imagesWithoutAlt": 0,
+        "totalImages": 0,
+        "canonical": "https://spendthrone.com",
+        "viewport": "width=device-width, initial-scale=1",
+        "charset": "utf-8",
+        "ogTags": {
+          "title": "SpendThrone - The Kingdom of Weird Stuff",
+          "description": "The curated kingdom of the weirdest, most viral products on Earth. WTF-level technology for the modern age.",
+          "image": "https://spendthrone.com/og-image.png",
+          "url": "https://spendthrone.com",
+          "type": "website"
+        },
+        "twitterTags": {
+          "card": "summary_large_image",
+          "title": "SpendThrone - The Kingdom of Weird Stuff",
+          "description": "The ultimate collection of viral, weird, and extreme products. WTF-level technology for the modern age.",
+          "image": "https://spendthrone.com/og-image.png"
+        },
+        "structuredData": [
+          "{\"@context\":\"https://schema.org\",\"@type\":\"WebSite\",\"name\":\"SpendThrone - The Kingdom of Weird Stuff\",\"description\":\"The curated kingdom of the weirdest, most viral products on Earth. WTF-level technology for the modern age.\",\"url\":\"https://spendthrone.com\",\"potentialAction\":{\"@type\":\"SearchAction\",\"target\":\"https://spendthrone.com/search?q={search_term_string}\",\"query-input\":\"required name=search_term_string\"},\"publisher\":{\"@type\":\"Organization\",\"name\":\"SpendThrone\",\"url\":\"https://spendthrone.com\",\"logo\":{\"@type\":\"ImageObject\",\"url\":\"https://spendthrone.com/logo-512x512.png\",\"width\":512,\"height\":512},\"contactPoint\":{\"@type\":\"ContactPoint\",\"contactType\":\"sales\",\"email\":\"hello@spendthrone.com\"}},\"sameAs\":[\"https://twitter.com/spendthrone\"]}"
+        ],
+        "lang": "en",
+        "issues": [
+          {
+            "type": "warning",
+            "message": "Meta description length: 163 characters (should be 50-160)"
+          }
+        ]
+      },
+      {
+        "route": "/pricing",
+        "url": "http://localhost:3000/pricing",
+        "title": "SpendThrone - The Kingdom of Weird Stuff",
+        "titleLength": 40,
+        "metaDescription": "Discover the weirdest, most viral products on Earth. Extreme tech, luxury items, and WTF technology for the modern age. A curated collection of bizarre innovation.",
+        "metaDescriptionLength": 163,
+        "h1": "404",
+        "h1Count": 1,
+        "h2Count": 0,
+        "h3Count": 1,
+        "imagesWithoutAlt": 0,
+        "totalImages": 0,
+        "canonical": "https://spendthrone.com",
+        "viewport": "width=device-width, initial-scale=1",
+        "charset": "utf-8",
+        "ogTags": {
+          "title": "SpendThrone - The Kingdom of Weird Stuff",
+          "description": "The curated kingdom of the weirdest, most viral products on Earth. WTF-level technology for the modern age.",
+          "image": "https://spendthrone.com/og-image.png",
+          "url": "https://spendthrone.com",
+          "type": "website"
+        },
+        "twitterTags": {
+          "card": "summary_large_image",
+          "title": "SpendThrone - The Kingdom of Weird Stuff",
+          "description": "The ultimate collection of viral, weird, and extreme products. WTF-level technology for the modern age.",
+          "image": "https://spendthrone.com/og-image.png"
+        },
+        "structuredData": [
+          "{\"@context\":\"https://schema.org\",\"@type\":\"WebSite\",\"name\":\"SpendThrone - The Kingdom of Weird Stuff\",\"description\":\"The curated kingdom of the weirdest, most viral products on Earth. WTF-level technology for the modern age.\",\"url\":\"https://spendthrone.com\",\"potentialAction\":{\"@type\":\"SearchAction\",\"target\":\"https://spendthrone.com/search?q={search_term_string}\",\"query-input\":\"required name=search_term_string\"},\"publisher\":{\"@type\":\"Organization\",\"name\":\"SpendThrone\",\"url\":\"https://spendthrone.com\",\"logo\":{\"@type\":\"ImageObject\",\"url\":\"https://spendthrone.com/logo-512x512.png\",\"width\":512,\"height\":512},\"contactPoint\":{\"@type\":\"ContactPoint\",\"contactType\":\"sales\",\"email\":\"hello@spendthrone.com\"}},\"sameAs\":[\"https://twitter.com/spendthrone\"]}"
+        ],
+        "lang": "en",
+        "issues": [
+          {
+            "type": "warning",
+            "message": "Meta description length: 163 characters (should be 50-160)"
+          }
+        ]
+      },
+      {
+        "route": "/contact",
+        "url": "http://localhost:3000/contact",
+        "title": "SpendThrone - The Kingdom of Weird Stuff",
+        "titleLength": 40,
+        "metaDescription": "Discover the weirdest, most viral products on Earth. Extreme tech, luxury items, and WTF technology for the modern age. A curated collection of bizarre innovation.",
+        "metaDescriptionLength": 163,
+        "h1": "Contact Us",
+        "h1Count": 1,
+        "h2Count": 2,
+        "h3Count": 1,
+        "imagesWithoutAlt": 0,
+        "totalImages": 0,
+        "canonical": "https://spendthrone.com",
+        "viewport": "width=device-width, initial-scale=1",
+        "charset": "utf-8",
+        "ogTags": {
+          "title": "SpendThrone - The Kingdom of Weird Stuff",
+          "description": "The curated kingdom of the weirdest, most viral products on Earth. WTF-level technology for the modern age.",
+          "image": "https://spendthrone.com/og-image.png",
+          "url": "https://spendthrone.com",
+          "type": "website"
+        },
+        "twitterTags": {
+          "card": "summary_large_image",
+          "title": "SpendThrone - The Kingdom of Weird Stuff",
+          "description": "The ultimate collection of viral, weird, and extreme products. WTF-level technology for the modern age.",
+          "image": "https://spendthrone.com/og-image.png"
+        },
+        "structuredData": [
+          "{\"@context\":\"https://schema.org\",\"@type\":\"WebSite\",\"name\":\"SpendThrone - The Kingdom of Weird Stuff\",\"description\":\"The curated kingdom of the weirdest, most viral products on Earth. WTF-level technology for the modern age.\",\"url\":\"https://spendthrone.com\",\"potentialAction\":{\"@type\":\"SearchAction\",\"target\":\"https://spendthrone.com/search?q={search_term_string}\",\"query-input\":\"required name=search_term_string\"},\"publisher\":{\"@type\":\"Organization\",\"name\":\"SpendThrone\",\"url\":\"https://spendthrone.com\",\"logo\":{\"@type\":\"ImageObject\",\"url\":\"https://spendthrone.com/logo-512x512.png\",\"width\":512,\"height\":512},\"contactPoint\":{\"@type\":\"ContactPoint\",\"contactType\":\"sales\",\"email\":\"hello@spendthrone.com\"}},\"sameAs\":[\"https://twitter.com/spendthrone\"]}"
+        ],
+        "lang": "en",
+        "issues": [
+          {
+            "type": "warning",
+            "message": "Meta description length: 163 characters (should be 50-160)"
+          }
+        ]
+      },
+      {
+        "route": "/login",
+        "url": "http://localhost:3000/login",
+        "title": "SpendThrone - The Kingdom of Weird Stuff",
+        "titleLength": 40,
+        "metaDescription": "Discover the weirdest, most viral products on Earth. Extreme tech, luxury items, and WTF technology for the modern age. A curated collection of bizarre innovation.",
+        "metaDescriptionLength": 163,
+        "h1": "404",
+        "h1Count": 1,
+        "h2Count": 0,
+        "h3Count": 1,
+        "imagesWithoutAlt": 0,
+        "totalImages": 0,
+        "canonical": "https://spendthrone.com",
+        "viewport": "width=device-width, initial-scale=1",
+        "charset": "utf-8",
+        "ogTags": {
+          "title": "SpendThrone - The Kingdom of Weird Stuff",
+          "description": "The curated kingdom of the weirdest, most viral products on Earth. WTF-level technology for the modern age.",
+          "image": "https://spendthrone.com/og-image.png",
+          "url": "https://spendthrone.com",
+          "type": "website"
+        },
+        "twitterTags": {
+          "card": "summary_large_image",
+          "title": "SpendThrone - The Kingdom of Weird Stuff",
+          "description": "The ultimate collection of viral, weird, and extreme products. WTF-level technology for the modern age.",
+          "image": "https://spendthrone.com/og-image.png"
+        },
+        "structuredData": [
+          "{\"@context\":\"https://schema.org\",\"@type\":\"WebSite\",\"name\":\"SpendThrone - The Kingdom of Weird Stuff\",\"description\":\"The curated kingdom of the weirdest, most viral products on Earth. WTF-level technology for the modern age.\",\"url\":\"https://spendthrone.com\",\"potentialAction\":{\"@type\":\"SearchAction\",\"target\":\"https://spendthrone.com/search?q={search_term_string}\",\"query-input\":\"required name=search_term_string\"},\"publisher\":{\"@type\":\"Organization\",\"name\":\"SpendThrone\",\"url\":\"https://spendthrone.com\",\"logo\":{\"@type\":\"ImageObject\",\"url\":\"https://spendthrone.com/logo-512x512.png\",\"width\":512,\"height\":512},\"contactPoint\":{\"@type\":\"ContactPoint\",\"contactType\":\"sales\",\"email\":\"hello@spendthrone.com\"}},\"sameAs\":[\"https://twitter.com/spendthrone\"]}"
+        ],
+        "lang": "en",
+        "issues": [
+          {
+            "type": "warning",
+            "message": "Meta description length: 163 characters (should be 50-160)"
+          }
+        ]
+      },
+      {
+        "route": "/signup",
+        "url": "http://localhost:3000/signup",
+        "title": "SpendThrone - The Kingdom of Weird Stuff",
+        "titleLength": 40,
+        "metaDescription": "Discover the weirdest, most viral products on Earth. Extreme tech, luxury items, and WTF technology for the modern age. A curated collection of bizarre innovation.",
+        "metaDescriptionLength": 163,
+        "h1": "404",
+        "h1Count": 1,
+        "h2Count": 0,
+        "h3Count": 1,
+        "imagesWithoutAlt": 0,
+        "totalImages": 0,
+        "canonical": "https://spendthrone.com",
+        "viewport": "width=device-width, initial-scale=1",
+        "charset": "utf-8",
+        "ogTags": {
+          "title": "SpendThrone - The Kingdom of Weird Stuff",
+          "description": "The curated kingdom of the weirdest, most viral products on Earth. WTF-level technology for the modern age.",
+          "image": "https://spendthrone.com/og-image.png",
+          "url": "https://spendthrone.com",
+          "type": "website"
+        },
+        "twitterTags": {
+          "card": "summary_large_image",
+          "title": "SpendThrone - The Kingdom of Weird Stuff",
+          "description": "The ultimate collection of viral, weird, and extreme products. WTF-level technology for the modern age.",
+          "image": "https://spendthrone.com/og-image.png"
+        },
+        "structuredData": [
+          "{\"@context\":\"https://schema.org\",\"@type\":\"WebSite\",\"name\":\"SpendThrone - The Kingdom of Weird Stuff\",\"description\":\"The curated kingdom of the weirdest, most viral products on Earth. WTF-level technology for the modern age.\",\"url\":\"https://spendthrone.com\",\"potentialAction\":{\"@type\":\"SearchAction\",\"target\":\"https://spendthrone.com/search?q={search_term_string}\",\"query-input\":\"required name=search_term_string\"},\"publisher\":{\"@type\":\"Organization\",\"name\":\"SpendThrone\",\"url\":\"https://spendthrone.com\",\"logo\":{\"@type\":\"ImageObject\",\"url\":\"https://spendthrone.com/logo-512x512.png\",\"width\":512,\"height\":512},\"contactPoint\":{\"@type\":\"ContactPoint\",\"contactType\":\"sales\",\"email\":\"hello@spendthrone.com\"}},\"sameAs\":[\"https://twitter.com/spendthrone\"]}"
+        ],
+        "lang": "en",
+        "issues": [
+          {
+            "type": "warning",
+            "message": "Meta description length: 163 characters (should be 50-160)"
+          }
+        ]
+      }
+    ],
+    "globalIssues": [],
+    "summary": {
+      "totalRoutes": 7,
+      "routesWithErrors": 0,
+      "totalErrors": 0,
+      "totalWarnings": 7
+    }
+  },
+  "security": {
+    "checks": {
+      "https": false,
+      "headers": {
+        "content-security-policy": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https: blob:; font-src 'self' data:; connect-src 'self' https:; frame-ancestors 'self';",
+        "x-frame-options": "DENY",
+        "x-content-type-options": "nosniff",
+        "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+        "referrer-policy": "strict-origin-when-cross-origin"
+      },
+      "cookies": {},
+      "forms": []
+    },
+    "issues": [
+      {
+        "type": "error",
+        "message": "Site not using HTTPS"
+      }
+    ],
+    "score": 80
+  },
+  "functional": {
+    "brokenLinks": [],
+    "brokenRoutes": [
+      {
+        "route": "/features",
+        "status": 404
+      },
+      {
+        "route": "/pricing",
+        "status": 404
+      },
+      {
+        "route": "/login",
+        "status": 404
+      },
+      {
+        "route": "/signup",
+        "status": 404
+      }
+    ],
+    "workingRoutes": [
+      {
+        "route": "/",
+        "status": 200
+      },
+      {
+        "route": "/about",
+        "status": 200
+      },
+      {
+        "route": "/contact",
+        "status": 200
+      }
+    ],
+    "forms": []
+  }
+}

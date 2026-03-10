@@ -1,0 +1,28 @@
+{
+  "lastRun": "2026-02-18T00:02:18+00:00",
+  "testResults": {
+    "passed": "12",
+    "failed": "2",
+    "total": 14
+  },
+  "lastDeployment": null,
+  "issuesFound": [],
+  "improvementsMade": [],
+  "sites": {
+    "oma-ai": {
+      "status": "ready",
+      "lastBuild": null,
+      "score": 75
+    },
+    "spendthrone": {
+      "status": "needs-deploy",
+      "lastBuild": null,
+      "score": 76
+    },
+    "lethometry": {
+      "status": "needs-deploy",
+      "lastBuild": null,
+      "score": 79
+    }
+  }
+}

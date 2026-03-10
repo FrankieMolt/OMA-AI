@@ -1,0 +1,132 @@
+{
+  "version": "1.0.0",
+  "last_updated": "2026-03-03",
+  "skills": [
+    {
+      "name": "audit-website",
+      "category": "security",
+      "description": "Audit websites for SEO, performance, security, and 15+ issue categories with 230+ rules using squirrelscan CLI",
+      "location": "~/.agents/skills/audit-website/SKILL.md",
+      "emoji": "🔍"
+    },
+    {
+      "name": "browser",
+      "category": "automation",
+      "description": "CamoFox browser - Anti-detection browser for AI agents. Bypasses Cloudflare, uses accessibility snapshots",
+      "location": "~/.openclaw/skills/browser/SKILL.md",
+      "emoji": "🦊"
+    },
+    {
+      "name": "bsv",
+      "category": "finance",
+      "description": "Check BSV balance, send BSV, and receive BSV (show address)",
+      "location": "~/.openclaw/workspace/skills/bsv-wallet/SKILL.md",
+      "emoji": "💰"
+    },
+    {
+      "name": "clawhub",
+      "category": "tools",
+      "description": "Search, install, update, and publish agent skills from clawhub.com",
+      "location": "~/.npm-global/lib/node_modules/openclaw/skills/clawhub/SKILL.md",
+      "emoji": "📦"
+    },
+    {
+      "name": "discord",
+      "category": "social",
+      "description": "Discord bot integration for NOSYT. Access all channels, send messages, join voice calls",
+      "location": "~/.openclaw/skills/discord/SKILL.md",
+      "emoji": "💬"
+    },
+    {
+      "name": "gemini",
+      "category": "ai",
+      "description": "Gemini CLI for one-shot Q&A, summaries, and generation",
+      "location": "~/.npm-global/lib/node_modules/openclaw/skills/gemini/SKILL.md",
+      "emoji": "💎"
+    },
+    {
+      "name": "gh-issues",
+      "category": "development",
+      "description": "Fetch GitHub issues, spawn sub-agents to implement fixes and open PRs, monitor and address review comments",
+      "location": "~/.npm-global/lib/node_modules/openclaw/skills/gh-issues/SKILL.md",
+      "emoji": "🐙"
+    },
+    {
+      "name": "github",
+      "category": "development",
+      "description": "GitHub operations via gh CLI: issues, PRs, CI runs, code review, API queries",
+      "location": "~/.npm-global/lib/node_modules/openclaw/skills/github/SKILL.md",
+      "emoji": "🐙"
+    },
+    {
+      "name": "healthcheck",
+      "category": "security",
+      "description": "Host security hardening and risk-tolerance configuration for OpenClaw deployments",
+      "location": "~/.npm-global/lib/node_modules/openclaw/skills/healthcheck/SKILL.md",
+      "emoji": "🛡️"
+    },
+    {
+      "name": "here-now",
+      "category": "deployment",
+      "description": "Publish files and folders to the web instantly. Outputs a live URL at <slug>.here.now",
+      "location": "~/.openclaw/skills/here-now/SKILL.md",
+      "emoji": "🚀"
+    },
+    {
+      "name": "mcp-builder",
+      "category": "development",
+      "description": "Guide for creating high-quality MCP (Model Context Protocol) servers for AI integration",
+      "location": "~/.agents/skills/mcp-builder/SKILL.md",
+      "emoji": "🔧"
+    },
+    {
+      "name": "nosyt-trader",
+      "category": "finance",
+      "description": "Autonomous crypto trading bot for Base network. Fetches SOL/USDC prices, executes buy/sell based on signals",
+      "location": "~/.agents/skills/nosyt-trader/nosyt-trader/nosyt-trader/nosyt-trader/nosyt-trader/nosyt-trader/nosyt-trader/nosyt-trader/nosyt-trader/nosyt-trader/nosyt-trader/nosyt-trader/nosyt-trader/nosyt-trader/nosyt-trader/nosyt-trader/nosyt-trader/nosyt-trader/nosyt-trader/nosyt-trader/nosyt-trader/nosyt-trader/nosyt-trader/nosyt-trader/nosyt-trader/nosyt-trader/SKILL.md",
+      "emoji": "📈"
+    },
+    {
+      "name": "presearch-search",
+      "category": "search",
+      "description": "Production-ready decentralized search for AI agents. Privacy-first, uncensored web search via distributed node infrastructure",
+      "location": "~/.openclaw/skills/presearch/SKILL.md",
+      "emoji": "🔎"
+    },
+    {
+      "name": "session-logs",
+      "category": "tools",
+      "description": "Search and analyze your own session logs (older/parent conversations) using jq",
+      "location": "~/.npm-global/lib/node_modules/openclaw/skills/session-logs/SKILL.md",
+      "emoji": "📜"
+    },
+    {
+      "name": "skill-creator",
+      "category": "development",
+      "description": "Create or update AgentSkills. Use when designing, structuring, or packaging skills with scripts, references, and assets",
+      "location": "~/.npm-global/lib/node_modules/openclaw/skills/skill-creator/SKILL.md",
+      "emoji": "⚡"
+    },
+    {
+      "name": "tmux",
+      "category": "automation",
+      "description": "Remote-control tmux sessions for interactive CLIs by sending keystrokes and scraping pane output",
+      "location": "~/.npm-global/lib/node_modules/openclaw/skills/tmux/SKILL.md",
+      "emoji": "🖥️"
+    },
+    {
+      "name": "video-frames",
+      "category": "media",
+      "description": "Extract frames or short clips from videos using ffmpeg",
+      "location": "~/.npm-global/lib/node_modules/openclaw/skills/video-frames/SKILL.md",
+      "emoji": "🎬"
+    },
+    {
+      "name": "weather",
+      "category": "data",
+      "description": "Get current weather and forecasts via wttr.in or Open-Meteo",
+      "location": "~/.npm-global/lib/node_modules/openclaw/skills/weather/SKILL.md",
+      "emoji": "🌤️"
+    }
+  ]
+}

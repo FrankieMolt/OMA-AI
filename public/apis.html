@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APIs | OMA-AI - The AI Agent Marketplace</title>
+    <meta name="description" content="Browse APIs for AI agents. Pay per call with x402 micropayments on Base network. Crypto, weather, search, LLM, and more. Free tier available.">
+    <meta name="keywords" content="AI APIs, MCP servers, x402 payments, crypto API, LLM API, AI agent tools">
+    <meta property="og:title" content="API Marketplace - OMA-AI">
+    <meta property="og:description" content="Discover and integrate APIs for AI agents. Instant x402 micropayments.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://oma-ai.com/apis">
+    <meta property="og:image" content="https://oma-ai.com/og-image.png">
+    <link rel="canonical" href="https://oma-ai.com/apis">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #09090b; color: #fafafa; }
+        .gradient { background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%); }
+        .card { transition: all 0.3s ease; }
+        .card:hover { transform: translateY(-4px); border-color: rgba(139,92,246,0.4); }
+        .tag { font-size: 11px; padding: 3px 10px; border-radius: 9999px; font-weight: 500; }
+        .glass { background: rgba(255,255,255,0.03); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.06); }
+    </style>
+</head>
+<body class="min-h-screen">
+    <main class="min-h-screen">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-zinc-950/90 backdrop-blur-xl border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+            <a href="/" class="flex items-center gap-3">
+                <div class="w-10 h-10 gradient rounded-xl flex items-center justify-center text-lg font-bold">OMA</div>
+                <span class="text-xl font-bold hidden sm:block">Open Market Access</span>
+            </a>
+            <div class="flex items-center gap-4">
+                <a href="/apis" class="text-violet-400 font-medium" aria-current="page">APIs</a>
+                <a href="/mcps" class="text-zinc-400 hover:text-white">MCPs</a>
+                <a href="/compute" class="text-zinc-400 hover:text-white">Compute</a>
+                <a href="/dashboard" class="text-zinc-400 hover:text-white">Dashboard</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero with Search -->
+    <section class="pt-32 pb-16 px-4">
+        <div class="max-w-7xl mx-auto text-center">
+            <h1 class="text-5xl font-bold mb-6">API Marketplace</h1>
+            <p class="text-xl text-zinc-400 mb-8 max-w-2xl mx-auto">
+                Discover and integrate APIs for AI agents. Pay per call with instant x402 micropayments on Base network.
+            </p>
+            
+            <!-- Search Bar (Primary CTA) -->
+            <div class="max-w-2xl mx-auto mb-8">
+                <div class="relative">
+                    <input 
+                        type="search" 
+                        id="api-search"
+                        placeholder="Search APIs by name, category, or feature..."
+                        class="w-full px-6 py-4 pl-14 bg-zinc-900 border border-zinc-700 rounded-2xl text-white placeholder-zinc-500 focus:outline-none focus:border-violet-500 focus:ring-2 focus:ring-violet-500/20 transition-all"
+                        aria-label="Search APIs"
+                    >
+                    <svg class="absolute left-5 top-1/2 transform -translate-y-1/2 w-5 h-5 text-zinc-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                    </svg>
+                </div>
+                
+                <!-- Popular Searches -->
+                <div class="mt-4 flex flex-wrap justify-center gap-2 text-sm">
+                    <span class="text-zinc-500">Popular:</span>
+                    <button class="text-violet-400 hover:text-violet-300 transition-colors" onclick="document.getElementById('api-search').value='crypto'">Crypto</button>
+                    <span class="text-zinc-600">•</span>
+                    <button class="text-violet-400 hover:text-violet-300 transition-colors" onclick="document.getElementById('api-search').value='weather'">Weather</button>
+                    <span class="text-zinc-600">•</span>
+                    <button class="text-violet-400 hover:text-violet-300 transition-colors" onclick="document.getElementById('api-search').value='LLM'">LLM</button>
+                    <span class="text-zinc-600">•</span>
+                    <button class="text-violet-400 hover:text-violet-300 transition-colors" onclick="document.getElementById('api-search').value='search'">Search</button>
+                </div>
+            </div>
+            
+            <div class="flex items-center justify-center gap-4">
+                <a href="#browse" class="gradient px-6 py-3 rounded-xl font-semibold">Browse APIs</a>
+                <a href="#submit" class="px-6 py-3 rounded-xl border border-zinc-700 hover:border-violet-500">List Your API</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories -->
+    <section class="py-8 px-4">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-wrap justify-center gap-3" role="tablist" aria-label="API categories">
+                <button class="tag bg-violet-500/20 text-violet-300 border border-violet-500/30" role="tab" aria-selected="true">All</button>
+                <button class="tag bg-zinc-800 text-zinc-400 border border-zinc-700" role="tab" aria-selected="false">Crypto</button>
+                <button class="tag bg-zinc-800 text-zinc-400 border border-zinc-700" role="tab" aria-selected="false">LLM</button>
+                <button class="tag bg-zinc-800 text-zinc-400 border border-zinc-700" role="tab" aria-selected="false">Data</button>
+                <button class="tag bg-zinc-800 text-zinc-400 border border-zinc-700" role="tab" aria-selected="false">Search</button>
+                <button class="tag bg-zinc-800 text-zinc-400 border border-zinc-700" role="tab" aria-selected="false">Weather</button>
+                <button class="tag bg-zinc-800 text-zinc-400 border border-zinc-700" role="tab" aria-selected="false">Finance</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- API Grid -->
+    <section id="browse" class="py-16 px-4">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="api-grid">
+                <!-- API Card 1: Crypto Prices -->
+                <article class="card glass rounded-2xl p-6 border border-white/5" data-category="crypto">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center">
+                                <svg class="w-6 h-6 text-blue-400"><use href="/icons.svg#icon-crypto"/></svg>
+                            </div>
+                            <div>
+                                <h2 class="font-semibold text-lg">Crypto Prices</h2>
+                                <span class="text-xs text-zinc-500">Real-time data</span>
+                            </div>
+                        </div>
+                        <span class="text-xs px-2 py-1 bg-green-500/20 text-green-400 rounded-full">Popular</span>
+                    </div>
+                    <p class="text-zinc-400 text-sm mb-4">Live cryptocurrency prices from CoinGecko. BTC, ETH, SOL and 100+ more.</p>
+                    
+                    <!-- Ratings & Stats -->
+                    <div class="flex items-center gap-4 mb-4 text-sm">
+                        <div class="flex items-center gap-1" aria-label="4.8 out of 5 stars">
+                            <svg class="w-4 h-4 text-yellow-400"><use href="/icons.svg#icon-star"/></svg>
+                            <span class="text-zinc-400">4.8</span>
+                        </div>
+                        <span class="text-zinc-600">•</span>
+                        <span class="text-zinc-400">2.4k calls/day</span>
+                        <span class="text-zinc-600">•</span>
+                        <span class="text-zinc-400">42ms avg</span>
+                    </div>
+                    
+                    <div class="flex items-center justify-between">
+                        <span class="text-violet-400 font-semibold">$0.001/call</span>
+                        <a href="/api/prices" class="px-4 py-2 text-sm bg-violet-500/20 text-violet-300 rounded-lg hover:bg-violet-500/30 transition-colors inline-flex items-center gap-2" target="_blank" rel="noopener">
+                            <span>View Docs</span>
+                            <svg class="w-4 h-4"><use href="/icons.svg#icon-external"/></svg>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- API Card 2: Weather -->
+                <article class="card glass rounded-2xl p-6 border border-white/5">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 bg-green-500/20 rounded-xl flex items-center justify-center"><svg class="w-6 h-6 text-green-400"><use href="/icons.svg#icon-weather"/></svg></div>
+                        <div>
+                            <h2 class="font-semibold text-lg">Weather</h2>
+                            <span class="text-xs text-zinc-500">Global forecast</span>
+                        </div>
+                    </div>
+                    <p class="text-zinc-400 text-sm mb-4">Weather forecasts for any location. Current conditions and 7-day forecast.</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-violet-400 font-semibold">$0.002/call</span>
+                        <a href="/api/weather?city=London" class="text-sm text-zinc-400 hover:text-white" target="_blank" rel="noopener"> <span>Docs</span> <svg class="w-4 h-4 inline"><use href="/icons.svg#icon-external"/></svg></a>
+                    </div>
+                </article>
+
+                <!-- API Card 3: Web Search -->
+                <article class="card glass rounded-2xl p-6 border border-white/5" data-category="search">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 bg-purple-500/20 rounded-xl flex items-center justify-center"><svg class="w-6 h-6 text-purple-400"><use href="/icons.svg#icon-search"/></svg></div>
+                        <div>
+                            <h2 class="font-semibold text-lg">Web Search</h2>
+                            <span class="text-xs text-zinc-500">AI-powered</span>
+                        </div>
+                    </div>
+                    <p class="text-zinc-400 text-sm mb-4">AI-powered web search. Get relevant results for any query.</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-violet-400 font-semibold">$0.005/call</span>
+                        <a href="/api/search?q=bitcoin" class="text-sm text-zinc-400 hover:text-white" target="_blank" rel="noopener"> <span>Docs</span> <svg class="w-4 h-4 inline"><use href="/icons.svg#icon-external"/></svg></a>
+                    </div>
+                </article>
+
+                <!-- API Card 4: LLM Gateway -->
+                <article class="card glass rounded-2xl p-6 border border-white/5" data-category="llm">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 bg-orange-500/20 rounded-xl flex items-center justify-center"><svg class="w-6 h-6 text-orange-400"><use href="/icons.svg#icon-llm"/></svg></div>
+                        <div>
+                            <h2 class="font-semibold text-lg">LLM Gateway</h2>
+                            <span class="text-xs text-zinc-500">Multi-provider</span>
+                        </div>
+                    </div>
+                    <p class="text-zinc-400 text-sm mb-4">Access GPT-4, Claude, Llama and more through unified API. 90% revenue share.</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-violet-400 font-semibold">$0.01/call</span>
+                        <a href="/api/llm?prompt=Hello" class="text-sm text-zinc-400 hover:text-white" target="_blank" rel="noopener"> <span>Docs</span> <svg class="w-4 h-4 inline"><use href="/icons.svg#icon-external"/></svg></a>
+                    </div>
+                </article>
+
+                <!-- API Card 5: Web Scraper -->
+                <article class="card glass rounded-2xl p-6 border border-white/5" data-category="data">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 bg-red-500/20 rounded-xl flex items-center justify-center "><svg class="w-6 h-6"><use href="/icons.svg#icon-database"/></svg></div>
+                        <div>
+                            <h2 class="font-semibold text-lg">Web Scraper</h2>
+                            <span class="text-xs text-zinc-500">HTML parsing</span>
+                        </div>
+                    </div>
+                    <p class="text-zinc-400 text-sm mb-4">Extract data from any website. Fast, reliable HTML parsing.</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-violet-400 font-semibold">$0.003/call</span>
+                        <a href="/api/search?q=example" class="text-sm text-zinc-400 hover:text-white" target="_blank" rel="noopener"> <span>Docs</span> <svg class="w-4 h-4 inline"><use href="/icons.svg#icon-external"/></svg></a>
+                    </div>
+                </article>
+
+                <!-- API Card 6: Premium Prices -->
+                <article class="card glass rounded-2xl p-6 border border-white/5" data-category="crypto">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 bg-cyan-500/20 rounded-xl flex items-center justify-center"><svg class="w-6 h-6 text-cyan-400"><use href="/icons.svg#icon-dollar"/></svg></div>
+                        <div>
+                            <h2 class="font-semibold text-lg">Premium Prices</h2>
+                            <span class="text-xs text-zinc-500">Extended data</span>
+                        </div>
+                    </div>
+                    <p class="text-zinc-400 text-sm mb-4">Extended crypto data with market cap, volume, and analytics.</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-violet-400 font-semibold">$0.001/call</span>
+                        <a href="/api/prices" class="text-sm text-zinc-400 hover:text-white" target="_blank" rel="noopener"> <span>Docs</span> <svg class="w-4 h-4 inline"><use href="/icons.svg#icon-external"/></svg></a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Submit API -->
+    <section id="submit" class="py-16 px-4 bg-zinc-900/50">
+        <div class="max-w-3xl mx-auto text-center">
+            <h2 class="text-3xl font-bold mb-4">List Your API</h2>
+            <p class="text-zinc-400 mb-8">
+                Monetize your API in minutes. Set your price, get paid via x402 micropayments.
+            </p>
+            <div class="glass rounded-2xl p-8 border border-white/5 text-left">
+                <h3 class="font-semibold mb-4">Submit Your API</h3>
+                <form class="space-y-4" action="/api/apis/submit" method="POST">
+                    <div>
+                        <label for="api-name" class="block text-sm text-zinc-400 mb-1">API Name</label>
+                        <input type="text" id="api-name" name="name" class="w-full px-4 py-2 bg-zinc-800 border border-zinc-700 rounded-lg focus:border-violet-500 focus:outline-none" placeholder="My API" required>
+                    </div>
+                    <div>
+                        <label for="api-url" class="block text-sm text-zinc-400 mb-1">Endpoint URL</label>
+                        <input type="url" id="api-url" name="endpoint" class="w-full px-4 py-2 bg-zinc-800 border border-zinc-700 rounded-lg focus:border-violet-500 focus:outline-none" placeholder="https://api.example.com" required>
+                    </div>
+                    <div>
+                        <label for="api-price" class="block text-sm text-zinc-400 mb-1">Price per call (USDC)</label>
+                        <input type="number" id="api-price" name="price" step="0.001" min="0.001" class="w-full px-4 py-2 bg-zinc-800 border border-zinc-700 rounded-lg focus:border-violet-500 focus:outline-none" placeholder="0.001" required>
+                    </div>
+                    <button type="submit" class="gradient w-full py-3 rounded-lg font-semibold hover:opacity-90 transition-opacity">Submit API</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/5 py-12 px-4">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-4 gap-8">
+            <div>
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-10 h-10 gradient rounded-xl flex items-center justify-center text-lg font-bold">OMA</div>
+                    <span class="text-xl font-bold">OMA-AI</span>
+                </div>
+                <p class="text-zinc-500 text-sm">The premier API marketplace for AI agents with x402 micropayments.</p>
+            </div>
+            <div>
+                <h4 class="font-semibold mb-4">Platform</h4>
+                <ul class="space-y-2 text-sm text-zinc-400">
+                    <li><a href="/apis" class="hover:text-white">APIs</a></li>
+                    <li><a href="/mcps" class="hover:text-white">MCP Servers</a></li>
+                    <li><a href="/compute" class="hover:text-white">Compute</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-semibold mb-4">Resources</h4>
+                <ul class="space-y-2 text-sm text-zinc-400">
+                    <li><a href="/docs" class="hover:text-white">Documentation</a></li>
+                    <li><a href="/about" class="hover:text-white">About</a></li>
+                    <li><a href="https://github.com/FrankieMolt" class="hover:text-white" target="_blank" rel="noopener">GitHub</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-semibold mb-4">Legal</h4>
+                <ul class="space-y-2 text-sm text-zinc-400">
+                    <li><a href="/privacy" class="hover:text-white">Privacy</a></li>
+                    <li><a href="/terms" class="hover:text-white">Terms</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto mt-8 pt-8 border-t border-white/5 text-center text-zinc-500 text-sm">
+            © 2026 OMA-AI. Built with x402 on Base. Open Source.
+        </div>
+    </footer>
+</main>
+
+<!-- Search & Filter Functionality -->
+<script>
+    // Search functionality
+    const searchInput = document.getElementById('api-search');
+    const apiCards = document.querySelectorAll('#api-grid article');
+    const categoryButtons = document.querySelectorAll('[role="tab"]');
+
+    // Real-time search
+    searchInput?.addEventListener('input', (e) => {
+        const searchTerm = e.target.value.toLowerCase();
+        
+        apiCards.forEach(card => {
+            const title = card.querySelector('h2').textContent.toLowerCase();
+            const description = card.querySelector('p').textContent.toLowerCase();
+            const category = card.dataset.category || '';
+            
+            const matches = title.includes(searchTerm) || 
+                           description.includes(searchTerm) || 
+                           category.includes(searchTerm);
+            
+            card.style.display = matches ? 'block' : 'none';
+        });
+    });
+
+    // Category filtering
+    categoryButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            // Update active state
+            categoryButtons.forEach(btn => {
+                btn.classList.remove('bg-violet-500/20', 'text-violet-300', 'border-violet-500/30');
+                btn.classList.add('bg-zinc-800', 'text-zinc-400', 'border-zinc-700');
+                btn.setAttribute('aria-selected', 'false');
+            });
+            
+            button.classList.remove('bg-zinc-800', 'text-zinc-400', 'border-zinc-700');
+            button.classList.add('bg-violet-500/20', 'text-violet-300', 'border-violet-500/30');
+            button.setAttribute('aria-selected', 'true');
+
+            // Filter cards
+            const category = button.textContent.toLowerCase().trim();
+            
+            apiCards.forEach(card => {
+                if (category === 'all') {
+                    card.style.display = 'block';
+                } else {
+                    const cardCategory = card.dataset.category || '';
+                    card.style.display = cardCategory.includes(category) ? 'block' : 'none';
+            });
+        });
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+# Block .html versions to prevent duplicate content
+Disallow: /*.html$
+
+# Sitemap
+Sitemap: https://oma-ai.com/sitemap.xml
+
+# Crawl-delay
+Crawl-delay: 1

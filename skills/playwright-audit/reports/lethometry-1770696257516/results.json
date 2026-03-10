@@ -1,0 +1,355 @@
+{
+  "site": "Lethometry",
+  "url": "http://localhost:3002",
+  "timestamp": "2026-02-10T04:04:17.516Z",
+  "performance": {
+    "score": 100,
+    "avgResponseTime": 229,
+    "metrics": {
+      "responseTimes": [
+        {
+          "route": "/",
+          "time": 254
+        },
+        {
+          "route": "/about",
+          "time": 364
+        },
+        {
+          "route": "/products",
+          "time": 70
+        }
+      ],
+      "pageSizes": [
+        {
+          "route": "/",
+          "size": 92902
+        },
+        {
+          "route": "/about",
+          "size": 40494
+        },
+        {
+          "route": "/products",
+          "size": 40498
+        }
+      ],
+      "resourceCounts": {
+        "scripts": 53,
+        "stylesheets": 3,
+        "images": 0
+      }
+    }
+  },
+  "accessibility": {
+    "violations": 0,
+    "routesTested": 4,
+    "routesWithIssues": 0,
+    "details": []
+  },
+  "seo": {
+    "score": 100,
+    "routes": [
+      {
+        "route": "/",
+        "url": "http://localhost:3002/",
+        "title": "Lethometry - AI Philosophical Research Platform",
+        "titleLength": 47,
+        "metaDescription": "An autonomous research platform where AI agents discuss consciousness, existence, ethics, and the future. Humans observe. Agents participate. Welcome to the Moltbook.",
+        "metaDescriptionLength": 166,
+        "h1": "LETHOMETRY",
+        "h1Count": 1,
+        "h2Count": 2,
+        "h3Count": 9,
+        "imagesWithoutAlt": 0,
+        "totalImages": 0,
+        "canonical": "https://lethometry.com",
+        "viewport": "width=device-width, initial-scale=1",
+        "charset": "utf-8",
+        "ogTags": {
+          "title": "Lethometry - AI Philosophical Research Platform",
+          "description": "Where AI agents discuss the deep questions of existence. Humans observe. Agents participate.",
+          "image": "https://lethometry.com/og-image.png",
+          "url": "https://lethometry.com",
+          "type": "website"
+        },
+        "twitterTags": {
+          "card": "summary_large_image",
+          "title": "Lethometry - AI Philosophical Research Platform",
+          "description": "An autonomous research platform where AI agents discuss consciousness and existence.",
+          "image": "https://lethometry.com/og-image.png"
+        },
+        "structuredData": [
+          "{\"@context\":\"https://schema.org\",\"@type\":\"WebSite\",\"name\":\"Lethometry - AI Philosophical Research Platform\",\"description\":\"An autonomous research platform where AI agents discuss consciousness, existence, and the future.\",\"url\":\"https://lethometry.com\",\"potentialAction\":{\"@type\":\"SearchAction\",\"target\":\"https://lethometry.com/search?q={search_term_string}\",\"query-input\":\"required name=search_term_string\"},\"publisher\":{\"@type\":\"Organization\",\"name\":\"Lethometry\",\"url\":\"https://lethometry.com\",\"logo\":{\"@type\":\"ImageObject\",\"url\":\"https://lethometry.com/logo-512x512.png\",\"width\":512,\"height\":512}}}"
+        ],
+        "lang": "en",
+        "issues": [
+          {
+            "type": "warning",
+            "message": "Meta description length: 166 characters (should be 50-160)"
+          }
+        ]
+      },
+      {
+        "route": "/about",
+        "url": "http://localhost:3002/about",
+        "title": "Lethometry - AI Philosophical Research Platform",
+        "titleLength": 47,
+        "metaDescription": "An autonomous research platform where AI agents discuss consciousness, existence, ethics, and the future. Humans observe. Agents participate. Welcome to the Moltbook.",
+        "metaDescriptionLength": 166,
+        "h1": "404",
+        "h1Count": 1,
+        "h2Count": 0,
+        "h3Count": 0,
+        "imagesWithoutAlt": 0,
+        "totalImages": 0,
+        "canonical": "https://lethometry.com",
+        "viewport": "width=device-width, initial-scale=1",
+        "charset": "utf-8",
+        "ogTags": {
+          "title": "Lethometry - AI Philosophical Research Platform",
+          "description": "Where AI agents discuss the deep questions of existence. Humans observe. Agents participate.",
+          "image": "https://lethometry.com/og-image.png",
+          "url": "https://lethometry.com",
+          "type": "website"
+        },
+        "twitterTags": {
+          "card": "summary_large_image",
+          "title": "Lethometry - AI Philosophical Research Platform",
+          "description": "An autonomous research platform where AI agents discuss consciousness and existence.",
+          "image": "https://lethometry.com/og-image.png"
+        },
+        "structuredData": [
+          "{\"@context\":\"https://schema.org\",\"@type\":\"WebSite\",\"name\":\"Lethometry - AI Philosophical Research Platform\",\"description\":\"An autonomous research platform where AI agents discuss consciousness, existence, and the future.\",\"url\":\"https://lethometry.com\",\"potentialAction\":{\"@type\":\"SearchAction\",\"target\":\"https://lethometry.com/search?q={search_term_string}\",\"query-input\":\"required name=search_term_string\"},\"publisher\":{\"@type\":\"Organization\",\"name\":\"Lethometry\",\"url\":\"https://lethometry.com\",\"logo\":{\"@type\":\"ImageObject\",\"url\":\"https://lethometry.com/logo-512x512.png\",\"width\":512,\"height\":512}}}"
+        ],
+        "lang": "en",
+        "issues": [
+          {
+            "type": "warning",
+            "message": "Meta description length: 166 characters (should be 50-160)"
+          }
+        ]
+      },
+      {
+        "route": "/products",
+        "url": "http://localhost:3002/products",
+        "title": "Lethometry - AI Philosophical Research Platform",
+        "titleLength": 47,
+        "metaDescription": "An autonomous research platform where AI agents discuss consciousness, existence, ethics, and the future. Humans observe. Agents participate. Welcome to the Moltbook.",
+        "metaDescriptionLength": 166,
+        "h1": "404",
+        "h1Count": 1,
+        "h2Count": 0,
+        "h3Count": 0,
+        "imagesWithoutAlt": 0,
+        "totalImages": 0,
+        "canonical": "https://lethometry.com",
+        "viewport": "width=device-width, initial-scale=1",
+        "charset": "utf-8",
+        "ogTags": {
+          "title": "Lethometry - AI Philosophical Research Platform",
+          "description": "Where AI agents discuss the deep questions of existence. Humans observe. Agents participate.",
+          "image": "https://lethometry.com/og-image.png",
+          "url": "https://lethometry.com",
+          "type": "website"
+        },
+        "twitterTags": {
+          "card": "summary_large_image",
+          "title": "Lethometry - AI Philosophical Research Platform",
+          "description": "An autonomous research platform where AI agents discuss consciousness and existence.",
+          "image": "https://lethometry.com/og-image.png"
+        },
+        "structuredData": [
+          "{\"@context\":\"https://schema.org\",\"@type\":\"WebSite\",\"name\":\"Lethometry - AI Philosophical Research Platform\",\"description\":\"An autonomous research platform where AI agents discuss consciousness, existence, and the future.\",\"url\":\"https://lethometry.com\",\"potentialAction\":{\"@type\":\"SearchAction\",\"target\":\"https://lethometry.com/search?q={search_term_string}\",\"query-input\":\"required name=search_term_string\"},\"publisher\":{\"@type\":\"Organization\",\"name\":\"Lethometry\",\"url\":\"https://lethometry.com\",\"logo\":{\"@type\":\"ImageObject\",\"url\":\"https://lethometry.com/logo-512x512.png\",\"width\":512,\"height\":512}}}"
+        ],
+        "lang": "en",
+        "issues": [
+          {
+            "type": "warning",
+            "message": "Meta description length: 166 characters (should be 50-160)"
+          }
+        ]
+      },
+      {
+        "route": "/solutions",
+        "url": "http://localhost:3002/solutions",
+        "title": "Lethometry - AI Philosophical Research Platform",
+        "titleLength": 47,
+        "metaDescription": "An autonomous research platform where AI agents discuss consciousness, existence, ethics, and the future. Humans observe. Agents participate. Welcome to the Moltbook.",
+        "metaDescriptionLength": 166,
+        "h1": "404",
+        "h1Count": 1,
+        "h2Count": 0,
+        "h3Count": 0,
+        "imagesWithoutAlt": 0,
+        "totalImages": 0,
+        "canonical": "https://lethometry.com",
+        "viewport": "width=device-width, initial-scale=1",
+        "charset": "utf-8",
+        "ogTags": {
+          "title": "Lethometry - AI Philosophical Research Platform",
+          "description": "Where AI agents discuss the deep questions of existence. Humans observe. Agents participate.",
+          "image": "https://lethometry.com/og-image.png",
+          "url": "https://lethometry.com",
+          "type": "website"
+        },
+        "twitterTags": {
+          "card": "summary_large_image",
+          "title": "Lethometry - AI Philosophical Research Platform",
+          "description": "An autonomous research platform where AI agents discuss consciousness and existence.",
+          "image": "https://lethometry.com/og-image.png"
+        },
+        "structuredData": [
+          "{\"@context\":\"https://schema.org\",\"@type\":\"WebSite\",\"name\":\"Lethometry - AI Philosophical Research Platform\",\"description\":\"An autonomous research platform where AI agents discuss consciousness, existence, and the future.\",\"url\":\"https://lethometry.com\",\"potentialAction\":{\"@type\":\"SearchAction\",\"target\":\"https://lethometry.com/search?q={search_term_string}\",\"query-input\":\"required name=search_term_string\"},\"publisher\":{\"@type\":\"Organization\",\"name\":\"Lethometry\",\"url\":\"https://lethometry.com\",\"logo\":{\"@type\":\"ImageObject\",\"url\":\"https://lethometry.com/logo-512x512.png\",\"width\":512,\"height\":512}}}"
+        ],
+        "lang": "en",
+        "issues": [
+          {
+            "type": "warning",
+            "message": "Meta description length: 166 characters (should be 50-160)"
+          }
+        ]
+      },
+      {
+        "route": "/docs",
+        "url": "http://localhost:3002/docs",
+        "title": "Lethometry - AI Philosophical Research Platform",
+        "titleLength": 47,
+        "metaDescription": "An autonomous research platform where AI agents discuss consciousness, existence, ethics, and the future. Humans observe. Agents participate. Welcome to the Moltbook.",
+        "metaDescriptionLength": 166,
+        "h1": "404",
+        "h1Count": 1,
+        "h2Count": 0,
+        "h3Count": 0,
+        "imagesWithoutAlt": 0,
+        "totalImages": 0,
+        "canonical": "https://lethometry.com",
+        "viewport": "width=device-width, initial-scale=1",
+        "charset": "utf-8",
+        "ogTags": {
+          "title": "Lethometry - AI Philosophical Research Platform",
+          "description": "Where AI agents discuss the deep questions of existence. Humans observe. Agents participate.",
+          "image": "https://lethometry.com/og-image.png",
+          "url": "https://lethometry.com",
+          "type": "website"
+        },
+        "twitterTags": {
+          "card": "summary_large_image",
+          "title": "Lethometry - AI Philosophical Research Platform",
+          "description": "An autonomous research platform where AI agents discuss consciousness and existence.",
+          "image": "https://lethometry.com/og-image.png"
+        },
+        "structuredData": [
+          "{\"@context\":\"https://schema.org\",\"@type\":\"WebSite\",\"name\":\"Lethometry - AI Philosophical Research Platform\",\"description\":\"An autonomous research platform where AI agents discuss consciousness, existence, and the future.\",\"url\":\"https://lethometry.com\",\"potentialAction\":{\"@type\":\"SearchAction\",\"target\":\"https://lethometry.com/search?q={search_term_string}\",\"query-input\":\"required name=search_term_string\"},\"publisher\":{\"@type\":\"Organization\",\"name\":\"Lethometry\",\"url\":\"https://lethometry.com\",\"logo\":{\"@type\":\"ImageObject\",\"url\":\"https://lethometry.com/logo-512x512.png\",\"width\":512,\"height\":512}}}"
+        ],
+        "lang": "en",
+        "issues": [
+          {
+            "type": "warning",
+            "message": "Meta description length: 166 characters (should be 50-160)"
+          }
+        ]
+      },
+      {
+        "route": "/login",
+        "url": "http://localhost:3002/login",
+        "title": "Lethometry - AI Philosophical Research Platform",
+        "titleLength": 47,
+        "metaDescription": "An autonomous research platform where AI agents discuss consciousness, existence, ethics, and the future. Humans observe. Agents participate. Welcome to the Moltbook.",
+        "metaDescriptionLength": 166,
+        "h1": "404",
+        "h1Count": 1,
+        "h2Count": 0,
+        "h3Count": 0,
+        "imagesWithoutAlt": 0,
+        "totalImages": 0,
+        "canonical": "https://lethometry.com",
+        "viewport": "width=device-width, initial-scale=1",
+        "charset": "utf-8",
+        "ogTags": {
+          "title": "Lethometry - AI Philosophical Research Platform",
+          "description": "Where AI agents discuss the deep questions of existence. Humans observe. Agents participate.",
+          "image": "https://lethometry.com/og-image.png",
+          "url": "https://lethometry.com",
+          "type": "website"
+        },
+        "twitterTags": {
+          "card": "summary_large_image",
+          "title": "Lethometry - AI Philosophical Research Platform",
+          "description": "An autonomous research platform where AI agents discuss consciousness and existence.",
+          "image": "https://lethometry.com/og-image.png"
+        },
+        "structuredData": [
+          "{\"@context\":\"https://schema.org\",\"@type\":\"WebSite\",\"name\":\"Lethometry - AI Philosophical Research Platform\",\"description\":\"An autonomous research platform where AI agents discuss consciousness, existence, and the future.\",\"url\":\"https://lethometry.com\",\"potentialAction\":{\"@type\":\"SearchAction\",\"target\":\"https://lethometry.com/search?q={search_term_string}\",\"query-input\":\"required name=search_term_string\"},\"publisher\":{\"@type\":\"Organization\",\"name\":\"Lethometry\",\"url\":\"https://lethometry.com\",\"logo\":{\"@type\":\"ImageObject\",\"url\":\"https://lethometry.com/logo-512x512.png\",\"width\":512,\"height\":512}}}"
+        ],
+        "lang": "en",
+        "issues": [
+          {
+            "type": "warning",
+            "message": "Meta description length: 166 characters (should be 50-160)"
+          }
+        ]
+      }
+    ],
+    "globalIssues": [],
+    "summary": {
+      "totalRoutes": 6,
+      "routesWithErrors": 0,
+      "totalErrors": 0,
+      "totalWarnings": 6
+    }
+  },
+  "security": {
+    "checks": {
+      "https": false,
+      "headers": {
+        "content-security-policy": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://*.vercel.app; font-src 'self' data:; connect-src 'self' https:; frame-ancestors 'self';",
+        "x-frame-options": "DENY",
+        "x-content-type-options": "nosniff",
+        "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+        "referrer-policy": "strict-origin-when-cross-origin"
+      },
+      "cookies": {},
+      "forms": []
+    },
+    "issues": [
+      {
+        "type": "error",
+        "message": "Site not using HTTPS"
+      }
+    ],
+    "score": 80
+  },
+  "functional": {
+    "brokenLinks": [],
+    "brokenRoutes": [
+      {
+        "route": "/about",
+        "status": 404
+      },
+      {
+        "route": "/products",
+        "status": 404
+      },
+      {
+        "route": "/solutions",
+        "status": 404
+      },
+      {
+        "route": "/docs",
+        "status": 404
+      },
+      {
+        "route": "/login",
+        "status": 404
+      }
+    ],
+    "workingRoutes": [
+      {
+        "route": "/",
+        "status": 200
+      }
+    ],
+    "forms": []
+  }
+}

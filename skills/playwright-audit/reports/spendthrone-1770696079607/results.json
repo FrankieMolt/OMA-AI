@@ -1,0 +1,96 @@
+{
+  "site": "SpendThrone",
+  "url": "http://localhost:3000",
+  "timestamp": "2026-02-10T04:01:19.607Z",
+  "tests": {
+    "performance": {
+      "error": "lighthouse is not a function"
+    },
+    "accessibility": {
+      "violations": 0,
+      "routesTested": 7,
+      "routesWithIssues": 0,
+      "details": [],
+      "warnings": [
+        {
+          "route": "/",
+          "error": "page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/\nCall log:\n  - navigating to \"http://localhost:3000/\", waiting until \"networkidle\"\n"
+        },
+        {
+          "route": "/about",
+          "error": "page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/about\nCall log:\n  - navigating to \"http://localhost:3000/about\", waiting until \"networkidle\"\n"
+        },
+        {
+          "route": "/features",
+          "error": "page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/features\nCall log:\n  - navigating to \"http://localhost:3000/features\", waiting until \"networkidle\"\n"
+        },
+        {
+          "route": "/pricing",
+          "error": "page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/pricing\nCall log:\n  - navigating to \"http://localhost:3000/pricing\", waiting until \"networkidle\"\n"
+        },
+        {
+          "route": "/contact",
+          "error": "page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/contact\nCall log:\n  - navigating to \"http://localhost:3000/contact\", waiting until \"networkidle\"\n"
+        },
+        {
+          "route": "/login",
+          "error": "page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/login\nCall log:\n  - navigating to \"http://localhost:3000/login\", waiting until \"networkidle\"\n"
+        },
+        {
+          "route": "/signup",
+          "error": "page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/signup\nCall log:\n  - navigating to \"http://localhost:3000/signup\", waiting until \"networkidle\"\n"
+        }
+      ]
+    },
+    "seo": {
+      "routes": [],
+      "globalIssues": [
+        {
+          "route": "/",
+          "error": "page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/\nCall log:\n  - navigating to \"http://localhost:3000/\", waiting until \"networkidle\"\n"
+        },
+        {
+          "route": "/about",
+          "error": "page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/about\nCall log:\n  - navigating to \"http://localhost:3000/about\", waiting until \"networkidle\"\n"
+        },
+        {
+          "route": "/features",
+          "error": "page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/features\nCall log:\n  - navigating to \"http://localhost:3000/features\", waiting until \"networkidle\"\n"
+        },
+        {
+          "route": "/pricing",
+          "error": "page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/pricing\nCall log:\n  - navigating to \"http://localhost:3000/pricing\", waiting until \"networkidle\"\n"
+        },
+        {
+          "route": "/contact",
+          "error": "page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/contact\nCall log:\n  - navigating to \"http://localhost:3000/contact\", waiting until \"networkidle\"\n"
+        },
+        {
+          "route": "/login",
+          "error": "page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/login\nCall log:\n  - navigating to \"http://localhost:3000/login\", waiting until \"networkidle\"\n"
+        },
+        {
+          "route": "/signup",
+          "error": "page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/signup\nCall log:\n  - navigating to \"http://localhost:3000/signup\", waiting until \"networkidle\"\n"
+        }
+      ],
+      "score": 100
+    },
+    "visual": {
+      "screenshots": 0,
+      "routes": [
+        "/",
+        "/about",
+        "/features",
+        "/pricing"
+      ],
+      "viewports": [
+        "desktop",
+        "laptop",
+        "tablet",
+        "mobile"
+      ],
+      "details": []
+    }
+  }
+}

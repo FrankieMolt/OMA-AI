@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compute | OMA-AI - Decentralized Cloud for AI Agents</title>
+    <meta name="description" content="Deploy AI agents on decentralized cloud with Akash Network. Up to 80% cheaper than AWS. GPU, CPU, and HPC instances with x402 payments.">
+    <meta property="og:title" content="Compute - OMA-AI">
+    <meta property="og:description" content="Deploy AI agents on Akash decentralized cloud - 80% cheaper than AWS">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://oma-ai.com/compute">
+    <meta property="og:image" content="https://oma-ai.com/og-image.png">
+    <link rel="canonical" href="https://oma-ai.com/compute">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
+    
+    
+<style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #09090b; color: #fafafa; }
+        .gradient { background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%); }
+    </style>
+
+  <link rel="stylesheet" href="/design-system.css">
+<link rel="stylesheet" href="/responsive.css">
+</head>
+<body class="min-h-screen">
+    <main class="min-h-screen">
+    <!-- Nav -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-zinc-950/90 backdrop-blur-xl border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+            <a href="/" class="flex items-center gap-3">
+                <div class="w-10 h-10 gradient rounded-xl flex items-center justify-center text-lg font-bold">OMA</div>
+                <span class="text-xl font-bold hidden sm:block">Open Market Access</span>
+            </a>
+            <div class="flex items-center gap-4">
+                <a href="/apis" class="text-zinc-400 hover:text-white">APIs</a>
+                <a href="/mcps" class="text-zinc-400 hover:text-white">MCPs</a>
+                <a href="/compute" class="text-violet-400 font-medium">Compute</a>
+                <a href="/dashboard" class="text-zinc-400 hover:text-white">Dashboard</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="pt-32 pb-16 px-4">
+        <div class="max-w-7xl mx-auto text-center">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-500/10 border border-green-500/20 mb-8">
+                <span class="w-2 h-2 rounded-full bg-green-400"></span>
+                <span class="text-sm text-green-300">Powered by Akash Network</span>
+            </div>
+            <h1 class="text-5xl font-bold mb-6">Decentralized Compute</h1>
+            <p class="text-xl text-zinc-400 mb-8 max-w-2xl mx-auto">
+                Deploy AI agents on decentralized cloud. Up to 80% cheaper than AWS. 
+                GPU instances, Linux servers, and more - all payable with x402.
+            </p>
+            <div class="flex items-center justify-center gap-4">
+                <a href="#deploy" class="gradient px-6 py-3 rounded-xl font-semibold">Deploy Now</a>
+                <a href="#docs" class="px-6 py-3 rounded-xl border border-zinc-700 hover:border-violet-500">Documentation</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Comparison -->
+    <section class="py-16 px-4">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-12">Up to 80% Cheaper than AWS</h2>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="glass rounded-2xl p-6 border border-white/5">
+                    <h3 class="text-lg font-semibold mb-2">CPU Instance</h3>
+                    <p class="text-zinc-400 text-sm mb-4">2 vCPU, 4GB RAM</p>
+                    <div class="text-3xl font-bold mb-4">$5.40<span class="text-lg text-zinc-500">/month</span></div>
+                    <div class="text-green-400 text-sm">vs $36.48 on AWS</div>
+                </div>
+                <div class="glass rounded-2xl p-6 border border-violet-500/30">
+                    <div class="flex items-center justify-between mb-2">
+                        <h3 class="text-lg font-semibold">GPU Instance</h3>
+                        <span class="text-xs bg-violet-500 text-white px-2 py-1 rounded">Popular</span>
+                    </div>
+                    <p class="text-zinc-400 text-sm mb-4">1x RTX A4000, 16GB VRAM</p>
+                    <div class="text-3xl font-bold mb-4">$45<span class="text-lg text-zinc-500">/month</span></div>
+                    <div class="text-green-400 text-sm">vs $300+ on AWS</div>
+                </div>
+                <div class="glass rounded-2xl p-6 border border-white/5">
+                    <h3 class="text-lg font-semibold mb-2">HPC Instance</h3>
+                    <p class="text-zinc-400 text-sm mb-4">4x A100 GPU, 128GB RAM</p>
+                    <div class="text-3xl font-bold mb-4">$180<span class="text-lg text-zinc-500">/month</span></div>
+                    <div class="text-green-400 text-sm">vs $1200+ on AWS</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="py-16 px-4 bg-zinc-900/50">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-12">Everything You Need</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="text-center p-6">
+                    <div class="text-4xl mb-4">🚀</div>
+                    <h3 class="font-semibold mb-2">One-Click Deploy</h3>
+                    <p class="text-zinc-400 text-sm">Deploy OpenClaw agents with a single click</p>
+                </div>
+                <div class="text-center p-6">
+                    <div class="text-4xl mb-4"><svg class="w-6 h-6"><use href="/icons.svg#icon-shield"/></svg></div>
+                    <h3 class="font-semibold mb-2">Sovereign</h3>
+                    <p class="text-zinc-400 text-sm">Your agents, your keys, your infrastructure</p>
+                </div>
+                <div class="text-center p-6">
+                    <div class="text-4xl mb-4"><svg class="w-6 h-6"><use href="/icons.svg#icon-wallet"/></svg></div>
+                    <h3 class="font-semibold mb-2">x402 Payments</h3>
+                    <p class="text-zinc-400 text-sm">Pay per hour with USDC on Base</p>
+                </div>
+                <div class="text-center p-6">
+                    <div class="text-4xl mb-4">🌍</div>
+                    <h3 class="font-semibold mb-2">Global</h3>
+                    <p class="text-zinc-400 text-sm">Servers worldwide, low latency</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Deploy Section -->
+    <section id="deploy" class="py-16 px-4">
+        <div class="max-w-3xl mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-8">Deploy Your Agent</h2>
+            <div class="glass rounded-2xl p-8 border border-white/5">
+                <form class="space-y-6">
+                    <div>
+                        <label for="template-select" class="block text-sm text-zinc-400 mb-2">Select Template</label>
+                        <select id="template-select" name="template" class="w-full px-4 py-3 bg-zinc-800 border border-zinc-700 rounded-lg focus:border-violet-500 focus:outline-none">
+                            <option value="basic">OpenClaw Agent - Basic</option>
+                            <option value="advanced">OpenClaw Agent - Advanced</option>
+                            <option value="custom">Custom Docker Container</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm text-zinc-400 mb-2">Instance Type</label>
+                        <div class="grid grid-cols-3 gap-3">
+                            <button type="button" class="p-3 rounded-lg border border-violet-500 bg-violet-500/10 text-center">
+                                <div class="font-semibold">CPU</div>
+                                <div class="text-xs text-zinc-500">$5.40/mo</div>
+                            </button>
+                            <button type="button" class="p-3 rounded-lg border border-zinc-700 bg-zinc-800 text-center">
+                                <div class="font-semibold">GPU</div>
+                                <div class="text-xs text-zinc-500">$45/mo</div>
+                            </button>
+                            <button type="button" class="p-3 rounded-lg border border-zinc-700 bg-zinc-800 text-center">
+                                <div class="font-semibold">HPC</div>
+                                <div class="text-xs text-zinc-500">$180/mo</div>
+                            </button>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="env-vars" class="block text-sm text-zinc-400 mb-2">Environment Variables</label>
+                        <textarea id="env-vars" name="env_vars" class="w-full px-4 py-3 bg-zinc-800 border border-zinc-700 rounded-lg font-mono text-sm focus:border-violet-500 focus:outline-none" rows="3" placeholder="OPENCLAW_KEY=..."></textarea>
+                    </div>
+                    <button type="submit" class="gradient w-full py-4 rounded-xl font-semibold text-lg">
+                        Deploy with x402
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Docs Link -->
+    <section id="docs" class="py-16 px-4 bg-zinc-900/50">
+        <div class="max-w-7xl mx-auto text-center">
+            <h2 class="text-3xl font-bold mb-4">OpenClaw Integration</h2>
+            <p class="text-zinc-400 mb-8 max-w-2xl mx-auto">
+                OpenClaw is the open-source self-hosted AI agent for WhatsApp, Telegram, Discord & 50+ integrations. 
+                Deploy on Akash with x402 payments - 80% cheaper than AWS.
+            </p>
+            <div class="grid md:grid-cols-3 gap-6 mb-8">
+                <div class="glass rounded-2xl p-6 border border-white/5">
+                    <div class="text-3xl mb-3">🦞</div>
+                    <h3 class="font-semibold">13,000+ MCP Servers</h3>
+                    <p class="text-zinc-400 text-sm">OpenClaw supports MCP standard</p>
+                </div>
+                <div class="glass rounded-2xl p-6 border border-white/5">
+                    <div class="text-3xl mb-3">💬</div>
+                    <h3 class="font-semibold">50+ Integrations</h3>
+                    <p class="text-zinc-400 text-sm">WhatsApp, Telegram, Discord</p>
+                </div>
+                <div class="glass rounded-2xl p-6 border border-white/5">
+                    <div class="text-3xl mb-3">🔗</div>
+                    <h3 class="font-semibold">MCP Server</h3>
+                    <p class="text-zinc-400 text-sm">freema/openclaw-mcp on GitHub</p>
+                </div>
+            </div>
+            <a href="https://github.com/freema/openclaw-mcp" class="inline-block px-6 py-3 rounded-xl border border-zinc-700 hover:border-violet-500">
+                View OpenClaw MCP <svg class="w-4 h-4 inline"><use href="/icons.svg#icon-arrow-right"/></svg></a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/5 py-12 px-4">
+        <div class="max-w-7xl mx-auto text-center">
+            <div class="flex justify-center gap-4 text-sm mb-4">
+                <a href="/apis" class="text-zinc-400 hover:text-white">APIs</a>
+                <a href="/mcps" class="text-zinc-400 hover:text-white">MCPs</a>
+                <a href="/pricing" class="text-zinc-400 hover:text-white">Pricing</a>
+                <a href="/blog" class="text-zinc-400 hover:text-white">Blog</a>
+                <a href="/about" class="text-zinc-400 hover:text-white">About</a>
+                <a href="/contact" class="text-zinc-400 hover:text-white">Contact</a>
+            </div>
+            <p class="text-zinc-500 text-sm">© 2026 OMA-AI. Powered by Akash Network. 80% cheaper than AWS.</p>
+            <div class="mt-4 text-sm"><a href="/privacy" class="text-zinc-500 hover:text-white">Privacy</a> • <a href="/terms" class="text-zinc-500 hover:text-white">Terms</a></div>
+        </div>
+    </footer>
+</main>
+</body>
+</html>
