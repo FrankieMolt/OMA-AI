@@ -1,5 +1,6 @@
 'use client';
 
+// Cache busting: v3.0 - forcing new chunk hash
 import { useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
