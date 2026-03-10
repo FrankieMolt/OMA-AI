@@ -138,9 +138,3 @@ export function getPaymentReceiver(
   const opts = { ...DEFAULT_OPTIONS, ...options };
   return opts.paymentReceiver || DEFAULT_OPTIONS.paymentReceiver!;
 }
-
-// ============================================
-// EXPORTS
-// ============================================
-
-export type { X402MiddlewareOptions };

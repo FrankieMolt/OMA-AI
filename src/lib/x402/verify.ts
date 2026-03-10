@@ -4,7 +4,7 @@
  * EIP-712 typed data signing verification
  */
 
-import { verifyTypedData, getAddress, type Address } from 'viem';
+import { recoverTypedDataAddress, getAddress, type Address } from 'viem';
 
 // ============================================
 // CONFIGURATION
@@ -16,8 +16,8 @@ export const X402_CONFIG = {
   CHAIN_ID: 8453, // Base network
 
   // Minimum payment amounts (in USDC, 6 decimals)
-  MIN_PAYMENT: 1000000n, // 1 USDC
-  DEFAULT_PAYMENT: 2000000n, // 2 USDC
+  MIN_PAYMENT: 1000000, // 1 USDC
+  DEFAULT_PAYMENT: 2000000, // 2 USDC
 
   // Payment verification
   MAX_PAYMENT_AGE: 300000, // 5 minutes in milliseconds
@@ -132,9 +132,8 @@ export async function verifyPayment(
     // Parse signature
     const { r, s, v } = parseSignature(signature);
 
-    // Verify typed data
-    const recoveredAddress = await verifyTypedData({
-      address: request.from,
+    // Recover address from signature
+    const recoveredAddress = await recoverTypedDataAddress({
       domain: DOMAIN,
       types: TYPES,
       primaryType: 'Payment',
@@ -150,7 +149,10 @@ export async function verifyPayment(
     });
 
     // Verify recovered address matches sender
-    if (getAddress(recoveredAddress) !== getAddress(request.from)) {
+    const senderAddress = getAddress(request.from as `0x${string}`);
+    const recoveredAddr = getAddress(recoveredAddress as `0x${string}`);
+    
+    if (recoveredAddr !== senderAddress) {
       return {
         valid: false,
         from: request.from,
@@ -416,4 +418,3 @@ export function paymentRequiredResponse(details: {
 // ============================================
 
 export { DOMAIN, TYPES };
-export type { PaymentRequest, PaymentSignature, VerifiedPayment };

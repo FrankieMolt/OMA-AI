@@ -109,6 +109,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       const aVal = a[sortBy as keyof typeof a];
       const bVal = b[sortBy as keyof typeof b];
 
+      // Handle null/undefined values
+      if (aVal === null || aVal === undefined) return 1;
+      if (bVal === null || bVal === undefined) return -1;
+
       if (aVal < bVal) return sortOrder === 'desc' ? 1 : -1;
       if (aVal > bVal) return sortOrder === 'desc' ? -1 : 1;
       return 0;
