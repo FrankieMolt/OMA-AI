@@ -1,13 +1,8 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
+import { NextResponse } from 'next/server';
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Cache-Control', 'no-cache');
-
-  // Test all endpoints (internal calls don't need x402 payment)
+export async function GET() {
   const baseUrl = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000';
-  
-  // For health checks, we test if endpoints respond (not if they require payment)
+
   const endpoints = [
     { name: 'price', url: `${baseUrl}/api/price` },
     { name: 'prices', url: `${baseUrl}/api/prices` },
@@ -21,20 +16,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     endpoints.map(async (ep) => {
       try {
         const response = await fetch(ep.url, {
-          headers: {
-            'User-Agent': 'OMA-AI-HealthCheck/1.0'
-          }
+          headers: { 'User-Agent': 'OMA-AI-HealthCheck/1.0' }
         });
-        // 402 (Payment Required) means endpoint is working but needs x402 payment
-        // 401 (Unauthorized) means endpoint exists but needs auth
-        // 200 means working
         const isWorking = response.status === 200 || response.status === 402 || response.status === 401;
-        return { 
-          name: ep.name, 
-          status: isWorking ? 'ok' : 'error', 
+        return {
+          name: ep.name,
+          status: isWorking ? 'ok' : 'error',
           code: response.status,
-          message: response.status === 402 ? 'x402 payment required' : 
-                   response.status === 401 ? 'auth required' : 
+          message: response.status === 402 ? 'x402 payment required' :
+                   response.status === 401 ? 'auth required' :
                    response.status === 200 ? 'working' : 'error'
         };
       } catch (e) {
@@ -43,10 +33,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     })
   );
 
-  // Platform is healthy if all endpoints respond (even if they require payment)
   const allOk = results.every(r => r.status === 'ok');
-
-  res.json({
+  const response = NextResponse.json({
     success: allOk,
     platform: 'OMA-AI',
     version: '1.0.0',
@@ -65,4 +53,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       treasury: '0x40AE4455055feeCac30e1EEEcbFE8dBEd77e4eC6'
     }
   });
+  response.headers.set('Access-Control-Allow-Origin', '*');
+  response.headers.set('Cache-Control', 'no-cache');
+  return response;
 }
