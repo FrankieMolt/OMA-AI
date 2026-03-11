@@ -72,7 +72,7 @@ function LiveTradingStatusInner() {
         <div className="bg-gradient-to-br from-white/5 to-transparent rounded-xl p-4 border border-white/5 group hover:border-emerald-500/20 transition-colors">
           <div className="text-gray-500 text-[10px] mb-1 uppercase font-black tracking-tighter">Portfolio Balance</div>
           <div className="text-2xl font-black text-white flex items-center gap-1 group-hover:text-emerald-400 transition-colors">
-            {status.solBalance?.toFixed(4)} <span className="text-gray-500 text-sm font-bold tracking-normal">SOL</span>
+            {(status.solBalance as number | undefined)?.toFixed(4) || '0.0000'} <span className="text-gray-500 text-sm font-bold tracking-normal">SOL</span>
           </div>
         </div>
 
