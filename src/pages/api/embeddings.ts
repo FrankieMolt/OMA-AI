@@ -52,11 +52,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       dimensions: 384,
       note: 'Using fallback embedding due to API limit'
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
     // Return fallback on error
     return res.json({
       success: true,
-      embedding: new Array(384).fill(0).map((_, i) => Math.random() - 0.5),
+      embedding: new Array(384).fill(0).map(() => Math.random() - 0.5),
       model: 'error-fallback',
       dimensions: 384
     });

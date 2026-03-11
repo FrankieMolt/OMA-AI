@@ -1,11 +1,30 @@
 /**
  * OMA-AI x402 Payment Middleware
- * 
+ *
  * Complete x402 implementation for Base & Solana
  * Uses OpenX402 facilitator protocol
  */
 
 import { ethers } from 'ethers';
+import type { NextApiRequest, NextApiResponse } from 'next';
+
+interface PaymentAuth {
+  amount: string | number;
+  recipient: string;
+  network: string;
+  signature?: string;
+  transactionHash?: string;
+}
+
+interface PaymentRequirement {
+  amount: string;
+  description: string;
+  currency: string;
+  network: string;
+  facilitator?: string;
+}
+
+type NextHandler = () => void | Promise<void>;
 
 // Networks supported
 export const NETWORKS = {
@@ -68,7 +87,7 @@ export function createPaymentRequirement(params: {
 export async function verifyPayment(authHeader: string): Promise<{
   valid: boolean;
   error?: string;
-  payment?: any;
+  payment?: PaymentAuth;
 }> {
   if (!authHeader) {
     return { valid: false, error: 'No payment header' };
@@ -76,7 +95,7 @@ export async function verifyPayment(authHeader: string): Promise<{
 
   try {
     // Decode the authorization (base64 JSON)
-    const payment = JSON.parse(atob(authHeader));
+    const payment: PaymentAuth = JSON.parse(atob(authHeader));
     
     // Verify required fields
     if (!payment.amount || !payment.recipient || !payment.network) {
@@ -100,8 +119,9 @@ export async function verifyPayment(authHeader: string): Promise<{
     }
     
     return { valid: true, payment };
-  } catch (error: any) {
-    return { valid: false, error: error.message };
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    return { valid: false, error: errorMessage };
   }
 }
 
@@ -109,15 +129,15 @@ export async function verifyPayment(authHeader: string): Promise<{
  * x402 middleware for API routes
  */
 export function withPayment(amount: string, description: string) {
-  return async (req: any, res: any, next: Function) => {
+  return async (req: NextApiRequest, res: NextApiResponse, next: NextHandler) => {
     // Skip in development without payment required
     if (process.env.NODE_ENV === 'development' && !process.env.REQUIRE_PAYMENT) {
       return next();
     }
-    
+
     const paymentHeader = req.headers['x-payment'];
     const verification = await verifyPayment(paymentHeader);
-    
+
     if (!verification.valid) {
       // Return 402 with payment requirement
       res.setHeader('X-Payment-Required', JSON.stringify(
@@ -128,9 +148,9 @@ export function withPayment(amount: string, description: string) {
         payment: createPaymentRequirement({ amount, description })
       });
     }
-    
+
     // Attach payment to request for logging
-    req.payment = verification.payment;
+    (req as any).payment = verification.payment;
     next();
   };
 }

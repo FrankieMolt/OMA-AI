@@ -53,7 +53,7 @@ export default async function handler(
       return res.status(401).json({ error: 'Invalid API key' });
     }
 
-    const user = keyData.users as any;
+    const user = keyData.users as { id: string; credits: number };
     const userId = user.id;
     const currentCredits = user.credits || 0;
 

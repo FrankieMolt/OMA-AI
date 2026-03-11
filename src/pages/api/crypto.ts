@@ -3,6 +3,21 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 // Primary: CoinGecko (free, reliable)
 const COINGECKO_API = 'https://api.coingecko.com/api/v3';
 
+interface CoinGeckoData {
+  usd: number;
+  usd_market_cap?: number;
+  usd_24h_vol?: number;
+  usd_24h_change?: number;
+}
+
+interface CryptoPrice {
+  price: number;
+  mcap: number;
+  volume: number;
+  change_24h: number;
+  symbol: string;
+}
+
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Cache-Control', 'public, max-age=60');
@@ -20,16 +35,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       throw new Error(`CoinGecko error: ${response.status}`);
     }
 
-    const data = await response.json();
-    
+    const data: Record<string, CoinGeckoData> = await response.json();
+
     // Transform to our format
-    const prices: Record<string, any> = {};
-    Object.entries(data).forEach(([id, values]: [string, any]) => {
+    const prices: Record<string, CryptoPrice> = {};
+    Object.entries(data).forEach(([id, values]) => {
       prices[id] = {
         price: values.usd,
         mcap: values.usd_market_cap || 0,
         volume: values.usd_24h_vol || 0,
-        change_24h: values.usd_24h_change,
+        change_24h: values.usd_24h_change || 0,
         symbol: id.toUpperCase()
       };
     });
@@ -40,7 +55,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       source: 'coingecko',
       timestamp: Date.now()
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
     // Fallback to mock data if API fails
     res.json({
       success: true,

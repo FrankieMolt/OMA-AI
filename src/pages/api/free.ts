@@ -268,10 +268,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       timestamp: Date.now(),
     });
     
-  } catch (error: any) {
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
     return res.status(500).json({
       success: false,
-      error: error.message,
+      error: errorMessage,
       action,
     });
   }
