@@ -5,18 +5,35 @@
 
 import type { NextApiRequest, NextApiResponse } from 'next';
 
+interface RegisterMCPSkillRequest {
+  name: string;
+  slug: string;
+  category: string | string[];
+  description: string;
+  author: string;
+  repository_url?: string;
+  documentation_url?: string;
+  mcp_endpoint: string;
+  pricing_usdc?: number;
+  x402_enabled?: boolean;
+}
+
 interface MCPSkill {
   id: string;
   name: string;
   slug: string;
-  category: string;
+  category: string | string[];
   description: string;
   author: string;
-  repository_url: string;
-  documentation_url: string;
+  repository_url: string | null;
+  documentation_url: string | null;
   mcp_endpoint: string;
   pricing_usdc: number;
   x402_enabled: boolean;
+  verified: boolean;
+  rating: number;
+  total_calls: number;
+  success_rate: number;
   created_at: string;
   updated_at: string;
 }
@@ -32,6 +49,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   try {
+    const body = req.body as RegisterMCPSkillRequest;
     const {
       name,
       slug,
@@ -43,7 +61,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       mcp_endpoint,
       pricing_usdc,
       x402_enabled,
-    } = req.body;
+    } = body;
 
     // Validate required fields
     if (!name || !slug || !category || !description || !author || !mcp_endpoint) {
