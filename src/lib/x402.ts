@@ -26,6 +26,10 @@ interface PaymentRequirement {
 
 type NextHandler = () => void | Promise<void>;
 
+interface PaymentRequest extends NextApiRequest {
+  payment?: PaymentAuth;
+}
+
 // Networks supported
 export const NETWORKS = {
   base: {
@@ -129,7 +133,7 @@ export async function verifyPayment(authHeader: string): Promise<{
  * x402 middleware for API routes
  */
 export function withPayment(amount: string, description: string) {
-  return async (req: NextApiRequest, res: NextApiResponse, next: NextHandler) => {
+  return async (req: PaymentRequest, res: NextApiResponse, next: NextHandler) => {
     // Skip in development without payment required
     if (process.env.NODE_ENV === 'development' && !process.env.REQUIRE_PAYMENT) {
       return next();
@@ -150,7 +154,7 @@ export function withPayment(amount: string, description: string) {
     }
 
     // Attach payment to request for logging
-    (req as any).payment = verification.payment;
+    req.payment = verification.payment;
     next();
   };
 }
