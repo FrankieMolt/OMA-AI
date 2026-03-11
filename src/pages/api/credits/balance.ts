@@ -32,7 +32,7 @@ export default async function handler(
       return res.status(401).json({ error: 'Invalid API key' });
     }
 
-    const user = keyData.users as any;
+    const user = keyData.users as { credits: number; bonus_credits: number; used_this_month: number };
     
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
@@ -53,11 +53,12 @@ export default async function handler(
       balance
     });
 
-  } catch (error: any) {
+  } catch (error: unknown) {
     logError('credits/balance', error);
-    return res.status(500).json({ 
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    return res.status(500).json({
       error: 'Failed to check balance',
-      details: error.message 
+      details: errorMessage
     });
   }
 }

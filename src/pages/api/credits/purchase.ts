@@ -62,11 +62,12 @@ export default async function handler(
       checkout: checkoutSession
     });
 
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Purchase error:', error);
-    return res.status(500).json({ 
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    return res.status(500).json({
       error: 'Failed to create checkout session',
-      details: error.message 
+      details: errorMessage
     });
   }
 }

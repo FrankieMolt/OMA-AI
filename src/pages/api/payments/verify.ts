@@ -10,8 +10,18 @@ import {
   type VerifiedPayment,
 } from '@/lib/x402/verify';
 
+interface PaymentRecord {
+  paymentId: string;
+  from: string;
+  to: string;
+  amount: number;
+  skillId: string;
+  verified: boolean;
+  timestamp: string;
+}
+
 // Mock payment records for MVP (replace with real database)
-const PAYMENT_RECORDS: Record<string, any> = {};
+const PAYMENT_RECORDS: Record<string, PaymentRecord> = {};
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   res.setHeader('Access-Control-Allow-Origin', '*');

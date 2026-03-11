@@ -3,8 +3,29 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 // Real crypto data from CoinGecko (free, no API key needed for basic use)
 const COINGECKO_API = 'https://api.coingecko.com/api/v3';
 
+interface CoinMarket {
+  id: string;
+  current_price: number;
+  market_cap: number;
+  total_volume: number;
+  price_change_percentage_24h: number;
+  market_cap_rank: number;
+  symbol: string;
+}
+
+interface PriceData {
+  [coinId: string]: {
+    price: number;
+    mcap: number;
+    volume: number;
+    change_24h: number;
+    rank: number;
+    symbol: string;
+  };
+}
+
 // In-memory cache
-let priceCache: { data: any; timestamp: number } = { data: null, timestamp: 0 };
+let priceCache: { data: PriceData | null; timestamp: number } = { data: null, timestamp: 0 };
 const CACHE_TTL = 30000; // 30 seconds
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -39,11 +60,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       throw new Error(`CoinGecko error: ${response.status}`);
     }
 
-    const markets = await response.json();
-    
+    const markets: CoinMarket[] = await response.json();
+
     // Transform to simpler format
-    const data: any = {};
-    markets.forEach((coin: any) => {
+    const data: PriceData = {};
+    markets.forEach((coin) => {
       data[coin.id] = {
         price: coin.current_price,
         mcap: coin.market_cap,
@@ -63,9 +84,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       timestamp: now
     });
 
-  } catch (error: any) {
-    console.error('Price API error:', error.message);
-    
+  } catch (error: unknown) {
+    console.error('Price API error:', error);
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+
     // Return cached data if available, even if stale
     if (priceCache.data) {
       return res.json({
@@ -74,14 +96,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         cached: true,
         stale: true,
         timestamp: priceCache.timestamp,
-        error: error.message
+        error: errorMessage
       });
     }
 
     return res.status(500).json({
       success: false,
       error: 'Failed to fetch prices',
-      message: error.message
+      message: errorMessage
     });
   }
 }

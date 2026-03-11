@@ -5,6 +5,19 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: '2026-02-25.clover'
 });
 
+interface StripeSubscription {
+  id: string;
+  status: string;
+  current_period_end: number;
+  items: {
+    data: Array<{
+      price: {
+        nickname: string | null;
+      };
+    }>;
+  };
+}
+
 /**
  * OMA-AI Stripe Payment Integration
  * 
@@ -189,10 +202,10 @@ async function getSubscriptionStatus(req: NextApiRequest, res: NextApiResponse) 
 
     return res.status(200).json({
       success: true,
-      subscriptions: subscriptions.data.map(sub => ({
+      subscriptions: subscriptions.data.map((sub): { id: string; status: string; current_period_end: number; plan: string } => ({
         id: sub.id,
         status: sub.status,
-        current_period_end: (sub as any).current_period_end,
+        current_period_end: (sub as StripeSubscription).current_period_end,
         plan: sub.items.data[0]?.price.nickname || 'Unknown'
       }))
     });

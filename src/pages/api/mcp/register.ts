@@ -5,8 +5,24 @@
 
 import type { NextApiRequest, NextApiResponse } from 'next';
 
+interface MCPSkill {
+  id: string;
+  name: string;
+  slug: string;
+  category: string;
+  description: string;
+  author: string;
+  repository_url: string;
+  documentation_url: string;
+  mcp_endpoint: string;
+  pricing_usdc: number;
+  x402_enabled: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
 // Mock database for MVP (replace with real Supabase queries)
-const MCP_SKILLS: Record<string, any> = {};
+const MCP_SKILLS: Record<string, MCPSkill> = {};
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   res.setHeader('Access-Control-Allow-Origin', '*');

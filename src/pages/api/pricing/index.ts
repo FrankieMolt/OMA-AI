@@ -123,8 +123,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           },
         });
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Pricing API error:', error);
-    return res.status(500).json({ error: error.message });
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    return res.status(500).json({ error: errorMessage });
   }
 }

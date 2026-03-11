@@ -2,10 +2,22 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 
 /**
  * OMA-AI Unified LLM Gateway
- * 
+ *
  * Routes requests to Venice AI (primary) or OpenRouter (fallback)
  * Handles rate limiting, billing, and markup pricing
  */
+
+interface Message {
+  role: string;
+  content: string;
+}
+
+interface APIOptions {
+  max_tokens?: number;
+  temperature?: number;
+  web_search?: boolean;
+  uncensored?: boolean;
+}
 
 // Redis for rate limiting (use Upstash in production)
 const RATE_LIMIT_ENABLED = process.env.RATE_LIMIT_ENABLED === 'true';
@@ -120,7 +132,7 @@ function checkRateLimit(userId: string, tier: keyof typeof USER_TIERS): { allowe
   return { allowed: true, remaining: limits.rpm - entry.count, resetIn: entry.resetAt - now };
 }
 
-async function callVeniceAPI(model: string, messages: any[], options: any) {
+async function callVeniceAPI(model: string, messages: Message[], options: APIOptions) {
   const veniceModelId = VENICE_MODELS[model] || model;
   
   const response = await fetch(`${VENICE_API_URL}/chat/completions`, {
@@ -148,7 +160,7 @@ async function callVeniceAPI(model: string, messages: any[], options: any) {
   return response.json();
 }
 
-async function callOpenRouterAPI(model: string, messages: any[], options: any) {
+async function callOpenRouterAPI(model: string, messages: Message[], options: APIOptions) {
   const orModelId = OPENROUTER_MODELS[model] || model;
   
   const response = await fetch(`${OPENROUTER_API_URL}/chat/completions`, {
@@ -307,10 +319,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         tier: userAccount.tier,
       },
     });
-    
-  } catch (error: any) {
+
+  } catch (error: unknown) {
     // Fallback to other provider on failure
-    console.error(`${provider} error:`, error.message);
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    console.error(`${provider} error:`, errorMessage);
     
     // Try fallback provider
     const fallbackProvider = provider === 'venice' ? 'openrouter' : 'venice';
@@ -345,11 +358,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         },
       });
       
-    } catch (fallbackError: any) {
+    } catch (fallbackError: unknown) {
+      const fallbackErrorMessage = fallbackError instanceof Error ? fallbackError.message : 'Unknown error';
       return res.status(503).json({
         error: 'Both providers failed',
-        primary_error: error.message,
-        fallback_error: fallbackError.message,
+        primary_error: errorMessage,
+        fallback_error: fallbackErrorMessage,
       });
     }
   }

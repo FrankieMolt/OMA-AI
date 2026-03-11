@@ -96,11 +96,12 @@ export default async function handler(
       deduction
     });
 
-  } catch (error: any) {
+  } catch (error: unknown) {
     logError('credits/deduct', error);
-    return res.status(500).json({ 
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    return res.status(500).json({
       error: 'Failed to deduct credits',
-      details: error.message 
+      details: errorMessage
     });
   }
 }

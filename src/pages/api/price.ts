@@ -5,7 +5,19 @@ const APIS = {
   coincap: 'https://api.coincap.io/v2'
 };
 
-let cache: { data: any, time: number } = { data: null, time: 0 };
+interface PriceData {
+  btc: { price: number | undefined; change_24h: number | undefined };
+  eth: { price: number | undefined; change_24h: number | undefined };
+  sol: { price: number | undefined; change_24h: number | undefined };
+  source: string;
+}
+
+interface CacheData {
+  data: PriceData | { error: string } | null;
+  time: number;
+}
+
+let cache: CacheData = { data: null, time: 0 };
 
 async function fetchPrices() {
   const now = Date.now();

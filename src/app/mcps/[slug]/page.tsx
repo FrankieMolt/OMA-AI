@@ -4,29 +4,26 @@ import Navigation from '@/components/Navigation';
 import { Footer } from '@/components/footer';
 
 interface PageProps {
-  params: {
-    slug: string;
-  };
+  params: Promise<{ slug: string }>;
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  // Note: In production, you'd fetch the skill data here
-  // For now, using generic metadata
+  const { slug } = await params;
   return {
     title: `MCP Skill Detail | OMA-AI`,
-    description: `View details for MCP skill: ${params.slug}`,
-    keywords: ['MCP', 'Model Context Protocol', params.slug],
+    description: `View details for MCP skill: ${slug}`,
+    keywords: ['MCP', 'Model Context Protocol', slug],
   };
 }
 
-export default function MCPSkillDetailPage({ params }: PageProps) {
+export default async function MCPSkillPage({ params }: PageProps) {
+  const { slug } = await params;
+  
   return (
-    <>
+    <main className="min-h-screen bg-zinc-950">
       <Navigation />
-      <main className="min-h-screen bg-zinc-950 pt-16">
-        <MCPSkillDetail slug={params.slug} />
-      </main>
+      <MCPSkillDetail slug={slug} />
       <Footer />
-    </>
+    </main>
   );
 }

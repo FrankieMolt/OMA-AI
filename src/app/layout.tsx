@@ -5,7 +5,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next'
 import { Analytics } from '@vercel/analytics/next'
 import { Footer } from '@/components/footer'
 import { Providers } from '@/components/providers'
-import { ErrorBoundary } from '@/components/ErrorBoundary'
+import { ErrorBoundary } from '@/components/error-boundary'
 import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
