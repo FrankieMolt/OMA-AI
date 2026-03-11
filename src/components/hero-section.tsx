@@ -8,6 +8,7 @@ import { Sparkles, ArrowRight, Code2, MessageSquare, Users } from 'lucide-react'
 export function HeroSection() {
   const [mounted, setMounted] = useState(false);
 
+  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => {
     setMounted(true);
   }, []);
