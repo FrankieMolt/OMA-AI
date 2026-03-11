@@ -49,7 +49,9 @@ export class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoun
             </h1>
             
             <p className="text-gray-400 mb-6">
-              {this.state.error?.message || 'An unexpected error occurred. Please try again.'}
+              {this.state.error?.message?.includes('module factory') 
+    ? 'Failed to load required modules. Please refresh the page.' 
+    : this.state.error?.message || 'An unexpected error occurred. Please try again.'}
             </p>
             
             <button
