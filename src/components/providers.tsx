@@ -9,8 +9,8 @@ import { clusterApiUrl } from '@solana/web3.js';
 import '@solana/wallet-adapter-react-ui/styles.css';
 
 // Wagmi / Base
-import { http, createConfig, WagmiProvider } from 'wagmi';
-import { base } from 'wagmi/chains';
+import { http, createConfig, WagmiProvider, injected } from 'wagmi';
+import { base, baseSepolia } from 'wagmi/chains';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const queryClient = new QueryClient({
@@ -23,10 +23,14 @@ const queryClient = new QueryClient({
 });
 
 export const wagmiConfig = createConfig({
-  chains: [base],
+  chains: [base, baseSepolia],
   transports: {
     [base.id]: http(),
+    [baseSepolia.id]: http(),
   },
+  connectors: [
+    injected(),
+  ],
 });
 
 function WalletProviders({ children }: { children: React.ReactNode }) {
