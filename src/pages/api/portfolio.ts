@@ -200,7 +200,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     };
 
     // Get transactions for this wallet (filter by address)
-    let transactions = MOCK_TRANSACTIONS.filter(
+    const transactions = MOCK_TRANSACTIONS.filter(
       (tx) =>
         tx.fromWallet.toLowerCase().includes(wallet.toLowerCase()) ||
         tx.toWallet.toLowerCase().includes(wallet.toLowerCase())
@@ -221,7 +221,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
       .filter(tx => tx.status === 'completed' && tx.skillId)
       .reduce((acc, tx) => {
         if (!acc[tx.skillId!]) {
-          acc[tx.skillId!] = { calls: 0, cost: 0, name: tx.skillName || tx.skillId };
+          acc[tx.skillId!] = { calls: 0, cost: 0, name: tx.skillName || tx.skillId || 'Unknown' };
         }
         acc[tx.skillId!].calls += 1;
         acc[tx.skillId!].cost += tx.amountUsdc;

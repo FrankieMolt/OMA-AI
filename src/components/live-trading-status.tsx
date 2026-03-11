@@ -86,7 +86,7 @@ function LiveTradingStatusInner() {
         <div className="bg-gradient-to-br from-white/5 to-transparent rounded-xl p-4 border border-white/5 group hover:border-purple-500/20 transition-colors">
           <div className="text-gray-500 text-[10px] mb-1 uppercase font-black tracking-tighter">Win Rate (24h)</div>
           <div className="text-2xl font-black text-white group-hover:text-purple-400 transition-colors">
-            {(status.dailyTrades as number | undefined) > 0 ? '68.4%' : 'CALC...'}
+            {((status.dailyTrades as number | undefined) ?? 0) > 0 ? '68.4%' : 'CALC...'}
           </div>
         </div>
       </div>
