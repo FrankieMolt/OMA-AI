@@ -14,7 +14,7 @@ export function WalletConnect() {
   // Base (EVM)
   const { address: evmAddress, isConnected: evmConnected } = useAccount();
   const { disconnect: evmDisconnect } = useDisconnect();
-  const { connect: evmConnect, connectors } = useConnect();
+  const { connect, connectors } = useConnect();
   
   const [copied, setCopied] = useState(false);
   const [mounted, setMounted] = useState(false);
@@ -32,6 +32,13 @@ export function WalletConnect() {
       navigator.clipboard.writeText(activeAddress);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
+    }
+  };
+
+  const handleEvmConnect = () => {
+    const injectedConnector = connectors.find(c => c.type === 'injected') || connectors[0];
+    if (injectedConnector) {
+      connect({ connector: injectedConnector });
     }
   };
 
@@ -71,7 +78,7 @@ export function WalletConnect() {
           </div>
           
           <button 
-            onClick={() => evmConnect({ connector: connectors[0] })}
+            onClick={handleEvmConnect}
             className="w-full py-4 bg-white/5 hover:bg-white/10 text-white border border-white/10 rounded-2xl font-black text-xs uppercase tracking-[0.2em] transition-all flex items-center justify-center gap-3 active:scale-95"
           >
             <ShieldCheck className="w-4 h-4 text-primary" />
