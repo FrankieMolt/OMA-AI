@@ -28,9 +28,9 @@ export default function AgenticWebContent() {
                 Agentic Web
               </h1>
             </div>
-            <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-              AI doesn't have to wait for your input anymore. Agents can navigate, interact, and complete complex tasks independently.
-            </p>
+<p className="text-xl text-gray-400 max-w-3xl mx-auto">
+  AI doesn&apos;t have to wait for your input anymore. Agents can navigate, interact, and complete complex tasks independently.
+</p>
           </motion.div>
 
           {/* Key Concepts */}

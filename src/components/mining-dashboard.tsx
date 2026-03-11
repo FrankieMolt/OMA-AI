@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Activity, DollarSign, Zap, Users, TrendingUp, Clock } from 'lucide-react';
+import { Activity, DollarSign, Zap, TrendingUp } from 'lucide-react';
 
 /**
  * OMA-AI Mining Dashboard
- * 
+ *
  * Real-time earnings tracker for miners
  */
 
@@ -17,25 +17,15 @@ export default function MiningDashboard() {
     uptime: 0,
     rank: 0,
   });
-  
-  const [minerStatus, setMinerStatus] = useState('offline');
-  const [recentTransactions, setRecentTransactions] = useState([]);
-  
-  useEffect(() => {
-    // Fetch miner stats
-    fetchMinerStats();
-    
-    // Update every 30 seconds
-    const interval = setInterval(fetchMinerStats, 30000);
-    
-    return () => clearInterval(interval);
-  }, []);
-  
+
+  const [minerStatus] = useState('offline');
+  const [recentTransactions, setRecentTransactions] = useState<unknown[]>([]);
+
   const fetchMinerStats = async () => {
     try {
       const response = await fetch('/api/mining/earnings?miner_id=YOUR_MINER_ID');
       const data = await response.json();
-      
+
       if (data.success) {
         setStats({
           totalCredits: data.total_credits,
@@ -51,6 +41,14 @@ export default function MiningDashboard() {
       console.error('Failed to fetch stats:', error);
     }
   };
+
+  useEffect(() => {
+    fetchMinerStats();
+
+    const interval = setInterval(fetchMinerStats, 30000);
+
+    return () => clearInterval(interval);
+  }, []);
   
   const usdValue = (stats.totalCredits * 0.001).toFixed(2);
   
@@ -91,7 +89,7 @@ export default function MiningDashboard() {
             <span className="text-xs bg-blue-700/50 px-2 py-1 rounded">+{stats.hourlyRate}/hr</span>
           </div>
           <div className="text-3xl font-bold mb-1">{stats.todayCredits.toLocaleString()}</div>
-          <div className="text-sm text-gray-400">Today's Earnings</div>
+          <div className="text-sm text-gray-400">Today&apos;s Earnings</div>
           <div className="text-sm text-blue-400 mt-2">≈ ${(stats.todayCredits * 0.001).toFixed(3)} today</div>
         </motion.div>
         

@@ -1,8 +1,8 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
-import { Activity, Filter, ArrowUpRight, ArrowDownRight, CheckCircle, AlertCircle, Clock, ExternalLink } from 'lucide-react';
+import { Activity, Filter, ArrowUpRight, CheckCircle, AlertCircle, Clock, ExternalLink } from 'lucide-react';
 import { TransactionCardSkeleton } from '@/components/loading/Skeletons';
 import { TransactionsBreadcrumbs } from '@/components/ui/Breadcrumbs';
 
@@ -37,19 +37,14 @@ export default function TransactionsFeed() {
     wallet: '',
     sort: 'date' as string,
   });
-  const [page, setPage] = useState(1);
 
-  useEffect(() => {
-    fetchTransactions();
-  }, [page, filters]);
-
-  const fetchTransactions = async () => {
+  const fetchTransactions = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
 
       const params = new URLSearchParams({
-        page: page.toString(),
+        page: '1',
         limit: '50',
         ...(filters.status !== 'all' && { status: filters.status }),
         ...(filters.wallet && { wallet: filters.wallet }),
@@ -60,19 +55,22 @@ export default function TransactionsFeed() {
       const response = await fetch(`/api/transactions/list?${params}`);
       const data = await response.json();
 
-      if (data.success) {
-        setTransactions(data.data);
-        setStats(data.stats);
+      if (data?.success) {
+        setTransactions(data?.data ?? []);
+        setStats(data?.stats ?? null);
       } else {
         setError('Failed to load transactions');
       }
-    } catch (err) {
+    } catch {
       setError('Error loading transactions');
-      console.error(err);
     } finally {
       setLoading(false);
     }
-  };
+  }, [filters]);
+
+  useEffect(() => {
+    fetchTransactions();
+  }, [fetchTransactions]);
 
   const getStatusIcon = (status: string) => {
     switch (status) {
@@ -153,7 +151,7 @@ export default function TransactionsFeed() {
                 Real-time x402 payment transactions on OMA marketplace
               </p>
             </div>
-            <button className="flex items-center gap-2 px-4 py-2 bg-zinc-900 border border-zinc-800 rounded-lg text-gray-300 hover:text-white transition-colors">
+            <button type="button" className="flex items-center gap-2 px-4 py-2 bg-zinc-900 border border-zinc-800 rounded-lg text-gray-300 hover:text-white transition-colors">
               <Activity size={16} />
               Live
               <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
@@ -265,19 +263,16 @@ export default function TransactionsFeed() {
           </div>
         ) : (
           <div className="space-y-3">
-            {transactions.map((tx, index) => (
+            {transactions.map((tx) => (
               <motion.div
                 key={tx.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.02 }}
                 className="p-4 bg-zinc-900 border border-zinc-800 rounded-xl hover:border-zinc-700 transition-colors"
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-4">
-                    <div className={`p-2 rounded-lg ${
-                      tx.skill_id ? 'bg-green-900/30' : 'bg-zinc-800'
-                    }`}>
+                    <div className={`p-2 rounded-lg ${tx.skill_id ? 'bg-green-900/30' : 'bg-zinc-800'}`}>
                       <Activity size={20} className="text-green-400" />
                     </div>
                     <div>
@@ -304,6 +299,7 @@ export default function TransactionsFeed() {
                     </div>
                     {tx.tx_hash && (
                       <button
+                        type="button"
                         onClick={() => openEtherscan(tx.tx_hash!)}
                         className="mt-2 flex items-center justify-end gap-1 text-sm text-green-400 hover:text-green-300 transition-colors"
                       >

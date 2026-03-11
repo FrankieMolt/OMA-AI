@@ -142,13 +142,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         hasNextPage: offset + limitNum < total,
         hasPrevPage: pageNum > 1,
       },
-      statistics: {
-        totalVolume,
-        pendingVolume,
-        completedCount: transactions.filter((tx) => tx.status === 'completed').length,
-        pendingCount: transactions.filter((tx) => tx.status === 'pending').length,
-        failedCount: transactions.filter((tx) => tx.status === 'failed').length,
-      },
+  stats: {
+    total_transactions: transactions.length,
+    total_volume: totalVolume,
+    volume_24h: totalVolume,
+    success_rate: total > 0 ? (transactions.filter((tx) => tx.status === 'completed').length / total) * 100 : 0,
+  },
     });
   } catch (error) {
     console.error('Error fetching transactions:', error);

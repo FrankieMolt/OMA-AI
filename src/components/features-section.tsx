@@ -2,23 +2,20 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import {
-  Brain,
-  Search,
-  Code2,
-  Image,
-  FileText,
-  Calculator,
-  Cloud,
-  Database,
-  Zap,
-  ArrowRight,
-  Bot,
-  Wallet,
-  Shield,
-  Gauge,
-  MessageCircle,
-  Sparkles
+import { 
+  Brain, 
+  Search, 
+  Code2, 
+  Image, 
+  FileText, 
+  Calculator, 
+  Cloud, 
+  Database, 
+  Zap, 
+  ArrowRight, 
+  Wallet, 
+  Shield, 
+  Gauge 
 } from 'lucide-react';
 
 const models = [

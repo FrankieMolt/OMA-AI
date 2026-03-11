@@ -19,7 +19,7 @@ export default function AboutPage() {
         </p>
         <h2 className="text-2xl font-semibold mt-12 mb-4">The OMA Ecosystem</h2>
         <p className="text-muted-foreground mb-6">
-          We aggregate the world's best AI models (from DeepSeek to Claude) and expose them through a unified, uncensored, crypto-native proxy. Whether you are building a sovereign Conway Automaton or a complex multi-agent MCP system, OMA-AI provides the reliable, scalable backbone you need.
+          We aggregate the world&apos;s best AI models (from DeepSeek to Claude) and expose them through a unified, uncensored, crypto-native proxy. Whether you are building a sovereign Conway Automaton or a complex multi-agent MCP system, OMA-AI provides the reliable, scalable backbone you need.
         </p>
         <div className="mt-12 p-6 bg-card border border-border rounded-xl">
           <h3 className="text-xl font-semibold mb-2">Contact Us</h3>

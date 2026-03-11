@@ -11,13 +11,15 @@ import {
 } from '@/lib/x402/verify';
 
 interface PaymentRecord {
-  paymentId: string;
+  id: string;
   from: string;
   to: string;
-  amount: number;
+  amountUsdc: number;
+  nonce: string;
+  deadline: string;
   skillId: string;
-  verified: boolean;
-  timestamp: string;
+  verifiedAt: string;
+  signature: string;
 }
 
 // Mock payment records for MVP (replace with real database)

@@ -5,10 +5,9 @@ import {
   Activity, 
   TrendingUp, 
   DollarSign, 
-  Coins,
-  ArrowUpRight,
-  ArrowDownRight,
-  MoreHorizontal
+  Coins, 
+  ArrowUpRight, 
+  ArrowDownRight 
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import {

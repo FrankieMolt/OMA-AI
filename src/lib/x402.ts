@@ -139,8 +139,8 @@ export function withPayment(amount: string, description: string) {
       return next();
     }
 
-    const paymentHeader = req.headers['x-payment'];
-    const verification = await verifyPayment(paymentHeader);
+const paymentHeader = req.headers['x-payment'];
+const verification = await verifyPayment(Array.isArray(paymentHeader) ? paymentHeader[0] : paymentHeader || '');
 
     if (!verification.valid) {
       // Return 402 with payment requirement

@@ -2,28 +2,10 @@
 
 import { motion } from 'framer-motion';
 import { useWallet } from '@solana/wallet-adapter-react';
-import { 
-  WalletMultiButton,
-  WalletDisconnectButton 
-} from '@solana/wallet-adapter-react-ui';
-import { 
-  useAccount, 
-  useDisconnect, 
-  useConnect,
-  useBalance
-} from 'wagmi';
-import { 
-  Wallet as WalletIcon, 
-  Copy, 
-  Check, 
-  ExternalLink,
-  Coins,
-  ArrowRight,
-  ShieldCheck,
-  Zap
-} from 'lucide-react';
+import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
+import { useAccount, useDisconnect, useConnect } from 'wagmi';
+import { Wallet as WalletIcon, Copy, Check, Coins, ArrowRight, ShieldCheck, Zap } from 'lucide-react';
 import { useState, useEffect } from 'react';
-import { cn } from '@/lib/utils';
 
 export function WalletConnect() {
   // Solana

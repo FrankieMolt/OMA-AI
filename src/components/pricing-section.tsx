@@ -3,16 +3,13 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { 
-  Zap, 
-  Crown, 
-  Building2, 
-  Check, 
+  Zap,
+  Crown,
+  Building2,
+  Check,
   Sparkles,
-  ArrowRight,
-  Wallet,
   Coins,
   ShieldCheck,
-  Globe,
   ArrowUpRight
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -271,9 +268,9 @@ export function PricingSection() {
                   <p className="text-blue-400">GET <span className="text-white">/api/v1/inference</span></p>
                   <p className="text-rose-400">{"HTTP/1.1 402 Payment Required"}</p>
                   <p className="text-gray-500">{"{"}</p>
-                  <p className="text-gray-300 pl-4">"address": <span className="text-primary">"0x40AE...eCac"</span>,</p>
-                  <p className="text-gray-300 pl-4">"required": <span className="text-yellow-400">"0.07 USDC"</span>,</p>
-                  <p className="text-gray-300 pl-4">"gasless": <span className="text-emerald-400">true</span></p>
+<p className="text-gray-300 pl-4">&quot;address&quot;: <span className="text-primary">&quot;0x40AE...eCac&quot;</span>,</p>
+<p className="text-gray-300 pl-4">&quot;required&quot;: <span className="text-yellow-400">&quot;0.07 USDC&quot;</span>,</p>
+<p className="text-gray-300 pl-4">&quot;gasless&quot;: <span className="text-emerald-400">true</span></p>
                   <p className="text-gray-500">{"}"}</p>
                 </div>
                 <div className="flex items-center justify-between gap-4 pt-4">

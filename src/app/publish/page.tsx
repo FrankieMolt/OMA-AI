@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'Publish',
@@ -21,9 +22,9 @@ export default function PublishPage() {
           <p className="text-zinc-400 max-w-md mx-auto mb-8">
             Our self-serve publishing portal is currently in private beta. If you are a developer with an existing MCP server, apply for early access below.
           </p>
-          <a href="/contact" className="inline-block px-8 py-4 bg-primary text-white rounded-xl font-bold hover:bg-primary/90 transition-colors">
-            Apply for Early Access
-          </a>
+<Link href="/contact" className="inline-block px-8 py-4 bg-primary text-white rounded-xl font-bold hover:bg-primary/90 transition-colors">
+  Apply for Early Access
+</Link>
         </div>
       </div>
     </main>

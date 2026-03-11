@@ -200,15 +200,15 @@ async function getSubscriptionStatus(req: NextApiRequest, res: NextApiResponse) 
       status: 'active'
     });
 
-    return res.status(200).json({
-      success: true,
-      subscriptions: subscriptions.data.map((sub): { id: string; status: string; current_period_end: number; plan: string } => ({
-        id: sub.id,
-        status: sub.status,
-        current_period_end: (sub as StripeSubscription).current_period_end,
-        plan: sub.items.data[0]?.price.nickname || 'Unknown'
-      }))
-    });
+return res.status(200).json({
+  success: true,
+  subscriptions: subscriptions.data.map((sub): { id: string; status: string; current_period_end: number; plan: string } => ({
+    id: sub.id,
+    status: sub.status,
+    current_period_end: (sub as unknown as StripeSubscription).current_period_end,
+    plan: sub.items.data[0]?.price.nickname || 'Unknown'
+  }))
+});
 
   } catch (error) {
     console.error('Subscription status error:', error);

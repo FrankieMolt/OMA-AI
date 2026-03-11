@@ -4,17 +4,14 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { 
   Search, 
-  Filter, 
   ExternalLink, 
   Shield, 
-  Zap, 
-  Brain,
-  MessageSquare,
-  Cpu,
-  Coins,
-  Lock,
-  ZapOff,
-  Sparkles
+  Brain, 
+  MessageSquare, 
+  Cpu, 
+  Coins, 
+  ZapOff, 
+  Sparkles 
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 

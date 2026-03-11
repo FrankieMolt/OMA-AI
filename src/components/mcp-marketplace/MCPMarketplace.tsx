@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { SkillCardSkeleton } from '@/components/loading/Skeletons';
 
@@ -32,19 +32,14 @@ export default function MCPMarketplace() {
     search: '' as string,
     sort: 'rating' as string,
   });
-  const [page, setPage] = useState(1);
 
-  useEffect(() => {
-    fetchSkills();
-  }, [page, filters]);
-
-  const fetchSkills = async () => {
+  const fetchSkills = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
 
       const params = new URLSearchParams({
-        page: page.toString(),
+        page: '1',
         limit: '20',
         ...(filters.category !== 'all' && { category: filters.category }),
         ...(filters.verified !== 'all' && { verified: filters.verified }),
@@ -60,13 +55,16 @@ export default function MCPMarketplace() {
       } else {
         setError('Failed to fetch MCP skills');
       }
-    } catch (err) {
+    } catch {
       setError('Error fetching MCP skills');
-      console.error(err);
     } finally {
       setLoading(false);
     }
-  };
+  }, [filters]);
+
+  useEffect(() => {
+    fetchSkills();
+  }, [fetchSkills]);
 
   const categories = [
     'all',
@@ -321,10 +319,10 @@ export default function MCPMarketplace() {
 
                 {/* Actions */}
                 <div className="mt-4 flex gap-2">
-                  <button className="flex-1 px-4 py-2 bg-zinc-800 text-white rounded-lg hover:bg-zinc-700 transition-colors font-medium">
+                  <button type="button" className="flex-1 px-4 py-2 bg-zinc-800 text-white rounded-lg hover:bg-zinc-700 transition-colors font-medium">
                     View Details
                   </button>
-                  <button className="flex-1 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-medium">
+                  <button type="button" className="flex-1 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-medium">
                     Install
                   </button>
                 </div>

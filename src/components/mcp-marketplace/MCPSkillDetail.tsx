@@ -1,7 +1,8 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 import { ArrowUpRight, Star, CheckCircle, Clock, Zap } from 'lucide-react';
 
 interface MCPSkill {
@@ -29,11 +30,7 @@ export default function MCPSkillDetail({ slug }: { slug: string }) {
   const [error, setError] = useState<string | null>(null);
   const [installing, setInstalling] = useState(false);
 
-  useEffect(() => {
-    fetchSkill();
-  }, [slug]);
-
-  const fetchSkill = async () => {
+  const fetchSkill = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
@@ -46,26 +43,27 @@ export default function MCPSkillDetail({ slug }: { slug: string }) {
       } else {
         setError('Skill not found');
       }
-    } catch (err) {
+    } catch {
       setError('Error fetching skill details');
-      console.error(err);
     } finally {
       setLoading(false);
     }
-  };
+  }, [slug]);
+
+  useEffect(() => {
+    fetchSkill();
+  }, [fetchSkill]);
 
   const handleInstall = async () => {
     try {
       setInstalling(true);
 
-      // Copy installation command to clipboard
       const installCmd = `npm install oma-${skill?.slug}`;
       await navigator.clipboard.writeText(installCmd);
 
-      // Show success message
       alert(`Installation command copied to clipboard:\n${installCmd}\n\nPaste in your terminal to install!`);
-    } catch (err) {
-      console.error('Failed to copy to clipboard:', err);
+    } catch {
+      console.error('Failed to copy to clipboard:');
     } finally {
       setInstalling(false);
     }
@@ -125,12 +123,12 @@ export default function MCPSkillDetail({ slug }: { slug: string }) {
           animate={{ opacity: 1, y: 0 }}
           className="mb-6"
         >
-          <a
+          <Link
             href="/mcps"
             className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
           >
             ← Back to Marketplace
-          </a>
+          </Link>
         </motion.div>
 
         {/* Header */}
@@ -268,6 +266,7 @@ export default function MCPSkillDetail({ slug }: { slug: string }) {
                 Install
               </h3>
               <button
+                type="button"
                 onClick={handleInstall}
                 disabled={installing}
                 className="w-full px-4 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"

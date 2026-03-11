@@ -32,7 +32,6 @@ export default function WalletManagement() {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [page, setPage] = useState(1);
 
   useEffect(() => {
     // Check for wallet in localStorage

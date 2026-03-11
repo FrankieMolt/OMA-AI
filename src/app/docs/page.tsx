@@ -1,15 +1,12 @@
 import { Metadata } from 'next';
-import Link from 'next/link';
 import { 
   Book, 
   Terminal, 
   Shield, 
-  Zap, 
   Coins, 
-  Globe, 
-  Code,
-  ArrowRight,
-  ChevronRight
+  Code, 
+  ArrowRight, 
+  ChevronRight 
 } from 'lucide-react';
 
 export const metadata: Metadata = {

@@ -19,7 +19,7 @@ export default function TermsPage() {
 
         <h2 className="text-2xl font-semibold mt-8 mb-4">2. Description of Service</h2>
         <p className="text-muted-foreground mb-4">
-          OMA-AI provides API access to various Large Language Models (LLMs), tools, and MCP servers. The service is provided "as is" and "as available".
+          OMA-AI provides API access to various Large Language Models (LLMs), tools, and MCP servers. The service is provided &quot;as is&quot; and &quot;as available&quot;.
         </p>
 
         <h2 className="text-2xl font-semibold mt-8 mb-4">3. x402 Protocol & Payments</h2>

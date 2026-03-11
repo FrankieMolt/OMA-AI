@@ -1,15 +1,19 @@
 'use client';
 
 import { useState, useEffect, useMemo } from 'react';
-import { motion } from 'framer-motion';
-import { Activity, TrendingUp, TrendingDown, DollarSign, Clock } from 'lucide-react';
+import { Activity, TrendingUp, TrendingDown, Clock } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import React from 'react';
 
 function LiveTradingStatusInner() {
-  const [status, setStatus] = useState<any>(null);
+  const [status, setStatus] = useState<Record<string, unknown> | null>(null);
   const [loading, setLoading] = useState(true);
   const [nextScanEta, setNextScanEta] = useState<number>(60);
+
+  const signalsMemo = useMemo(() => {
+    if (!status) return [];
+    return Object.entries(status.signals || {}).map(([symbol, signal]: [string, unknown]) => ({ symbol, signal }));
+  }, [status]);
 
   useEffect(() => {
     const fetchStatus = async () => {
@@ -20,7 +24,7 @@ function LiveTradingStatusInner() {
           setStatus(data);
           setNextScanEta(60); // Reset ETA timer
         }
-      } catch (err) {
+      } catch {
         // Silent fail - trading status not critical for UX
       } finally {
         setLoading(false);
@@ -29,7 +33,7 @@ function LiveTradingStatusInner() {
 
     fetchStatus();
     const statusInterval = setInterval(fetchStatus, 60000);
-    
+
     // ETA Countdown timer
     const etaInterval = setInterval(() => {
       setNextScanEta((prev) => (prev > 0 ? prev - 1 : 60));
@@ -42,11 +46,6 @@ function LiveTradingStatusInner() {
   }, []);
 
   if (loading || !status) return null;
-
-  // Memoize signals to prevent unnecessary re-renders
-  const signalsMemo = useMemo(() => {
-    return Object.entries(status.signals || {}).map(([symbol, signal]: [string, any]) => ({ symbol, signal }));
-  }, [status.signals]);
 
   return (
     <div className="bg-zinc-900/50 border border-white/10 rounded-2xl p-6 backdrop-blur-sm shadow-2xl">
@@ -96,11 +95,11 @@ function LiveTradingStatusInner() {
         <div className="mt-6 border-t border-white/5 pt-4">
           <div className="text-gray-500 text-[9px] uppercase font-black mb-3 tracking-[0.2em] text-center opacity-50">Real-time Alpha Signals</div>
           <div className="flex flex-wrap gap-2 justify-center">
-            {signalsMemo.map(({ symbol, signal }: any) => (
+            {signalsMemo.map(({ symbol, signal }: { symbol: string; signal: unknown }) => (
               <div key={symbol} className={cn(
                 "px-3 py-1.5 rounded-lg border flex items-center gap-2 transition-all",
-                signal === 'BUY' ? "bg-emerald-400/10 border-emerald-400/20" : 
-                signal === 'SELL' ? "bg-rose-400/10 border-rose-400/20" : 
+                signal === 'BUY' ? "bg-emerald-400/10 border-emerald-400/20" :
+                signal === 'SELL' ? "bg-rose-400/10 border-rose-400/20" :
                 "bg-black/40 border-white/5"
               )}>
                 <span className="text-xs font-black text-gray-300 tracking-tight">{symbol}</span>
@@ -124,7 +123,4 @@ function LiveTradingStatusInner() {
   );
 }
 
-export const LiveTradingStatus = React.memo(LiveTradingStatusInner, (prevProps, nextProps) => {
-  // Memoize to prevent unnecessary re-renders
-  return true;
-});
+export const LiveTradingStatus = React.memo(LiveTradingStatusInner);

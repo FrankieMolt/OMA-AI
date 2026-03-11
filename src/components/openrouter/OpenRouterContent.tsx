@@ -1,8 +1,7 @@
 "use client";
 
 import { motion } from 'framer-motion';
-import Link from 'next/link';
-import { Database, DollarSign, TrendingUp, Check, ArrowRight, Zap, Globe } from 'lucide-react';
+import { Database, DollarSign, TrendingUp, ArrowRight, Zap, Globe } from 'lucide-react';
 
 const models = [
   { name: 'GPT-5.2', provider: 'OpenAI', tier: 'premium', inputPrice: 0.05, outputPrice: 0.15, context: '1M' },
