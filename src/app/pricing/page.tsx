@@ -3,7 +3,7 @@ import { PricingSection } from '@/components/pricing-section';
 
 export const metadata: Metadata = {
   title: 'Pricing',
-  description: 'Simple, transparent pricing for OMA-AI. Pay per token, no subscriptions. Earn free credits by mining.',
+  description: 'Simple, transparent pricing for OMA-AI. Pay per token, no subscriptions. x402-powered payments on Base.',
 };
 
 export default function PricingPage() {
