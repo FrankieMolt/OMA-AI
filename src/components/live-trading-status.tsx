@@ -12,7 +12,7 @@ function LiveTradingStatusInner() {
 
   const signalsMemo = useMemo(() => {
     if (!status) return [];
-    return Object.entries(status.signals || {}).map(([symbol, signal]: [string, unknown]) => ({ symbol, signal }));
+    return Object.entries((status.signals as Record<string, unknown>) || {}).map(([symbol, signal]: [string, unknown]) => ({ symbol, signal }));
   }, [status]);
 
   useEffect(() => {
@@ -79,19 +79,19 @@ function LiveTradingStatusInner() {
         <div className="bg-gradient-to-br from-white/5 to-transparent rounded-xl p-4 border border-white/5 group hover:border-blue-500/20 transition-colors">
           <div className="text-gray-500 text-[10px] mb-1 uppercase font-black tracking-tighter">Active Positions</div>
           <div className="text-2xl font-black text-white group-hover:text-blue-400 transition-colors">
-            {Object.keys(status.positions || {}).length}
+            {Object.keys((status.positions as Record<string, unknown>) || {}).length}
           </div>
         </div>
 
         <div className="bg-gradient-to-br from-white/5 to-transparent rounded-xl p-4 border border-white/5 group hover:border-purple-500/20 transition-colors">
           <div className="text-gray-500 text-[10px] mb-1 uppercase font-black tracking-tighter">Win Rate (24h)</div>
           <div className="text-2xl font-black text-white group-hover:text-purple-400 transition-colors">
-            {status.dailyTrades > 0 ? '68.4%' : 'CALC...'}
+            {(status.dailyTrades as number | undefined) > 0 ? '68.4%' : 'CALC...'}
           </div>
         </div>
       </div>
 
-      {Object.keys(status.signals || {}).length > 0 && (
+      {Object.keys((status.signals as Record<string, unknown>) || {}).length > 0 && (
         <div className="mt-6 border-t border-white/5 pt-4">
           <div className="text-gray-500 text-[9px] uppercase font-black mb-3 tracking-[0.2em] text-center opacity-50">Real-time Alpha Signals</div>
           <div className="flex flex-wrap gap-2 justify-center">
