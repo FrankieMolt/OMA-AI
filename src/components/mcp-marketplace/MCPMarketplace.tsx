@@ -1,8 +1,11 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import { motion } from 'framer-motion';
-import { SkillCardSkeleton } from '@/components/loading/Skeletons';
+import { GlassCard } from '@/components/ui/GlassCard';
+import { Badge } from '@/components/ui/Badge';
+import { CardSkeleton, InlineLoader } from '@/components/ui/Loading';
+import { Search, Filter, SortAsc, Star, ExternalLink, Download, CheckCircle2, AlertCircle } from 'lucide-react';
 
 interface MCPSkill {
   id: string;
@@ -24,14 +27,16 @@ interface MCPSkill {
 
 export default function MCPMarketplace() {
   const [skills, setSkills] = useState<MCPSkill[]>([]);
+  const [filteredSkills, setFilteredSkills] = useState<MCPSkill[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [filters, setFilters] = useState({
-    category: 'all' as string,
-    verified: 'all' as string,
-    search: '' as string,
-    sort: 'rating' as string,
-  });
+  const [search, setSearch] = useState('');
+  const [category, setCategory] = useState('all' as string);
+  const [verified, setVerified] = useState('all' as string);
+  const [sortBy, setSortBy] = useState('rating' as string);
+  const [page, setPage] = useState(1);
+  const [totalSkills, setTotalSkills] = useState(0);
+  const skillsPerPage = 12;
 
   const fetchSkills = useCallback(async () => {
     try {
@@ -39,12 +44,8 @@ export default function MCPMarketplace() {
       setError(null);
 
       const params = new URLSearchParams({
-        page: '1',
-        limit: '20',
-        ...(filters.category !== 'all' && { category: filters.category }),
-        ...(filters.verified !== 'all' && { verified: filters.verified }),
-        ...(filters.search && { search: filters.search }),
-        sort: filters.sort,
+        page: page.toString(),
+        limit: (skillsPerPage * 3).toString(),
       });
 
       const response = await fetch(`/api/mcp/list?${params}`);
@@ -52,6 +53,7 @@ export default function MCPMarketplace() {
 
       if (data.success) {
         setSkills(data.data);
+        setTotalSkills(data.total || data.data.length);
       } else {
         setError('Failed to fetch MCP skills');
       }
@@ -60,39 +62,91 @@ export default function MCPMarketplace() {
     } finally {
       setLoading(false);
     }
-  }, [filters]);
+  }, [page]);
 
   useEffect(() => {
     fetchSkills();
   }, [fetchSkills]);
 
+  // Filter and sort skills
+  const processedSkills = useMemo(() => {
+    let result = [...skills];
+
+    // Filter by search
+    if (search) {
+      const searchLower = search.toLowerCase();
+      result = result.filter(skill =>
+        skill.name.toLowerCase().includes(searchLower) ||
+        skill.description.toLowerCase().includes(searchLower) ||
+        skill.category.some(cat => cat.toLowerCase().includes(searchLower))
+      );
+    }
+
+    // Filter by category
+    if (category !== 'all') {
+      result = result.filter(skill => skill.category.includes(category));
+    }
+
+    // Filter by verified status
+    if (verified === 'true') {
+      result = result.filter(skill => skill.verified);
+    } else if (verified === 'false') {
+      result = result.filter(skill => !skill.verified);
+    }
+
+    // Sort skills
+    switch (sortBy) {
+      case 'rating':
+        result.sort((a, b) => b.rating - a.rating);
+        break;
+      case 'calls':
+        result.sort((a, b) => b.total_calls - a.total_calls);
+        break;
+      case 'price':
+        result.sort((a, b) => a.pricing_usdc - b.pricing_usdc);
+        break;
+      case 'newest':
+        result.sort((a, b) => b.id.localeCompare(a.id));
+        break;
+    }
+
+    return result;
+  }, [skills, search, category, verified, sortBy]);
+
+  // Paginate
+  const paginatedSkills = useMemo(() => {
+    const startIndex = (page - 1) * skillsPerPage;
+    const endIndex = startIndex + skillsPerPage;
+    setFilteredSkills(processedSkills.slice(startIndex, endIndex));
+    return processedSkills;
+  }, [processedSkills, page, skillsPerPage]);
+
+  const totalPages = Math.ceil(filteredSkills.length / skillsPerPage);
+
   const categories = [
     'all',
-    'search',
+    'data',
+    'ai-ml',
+    'finance',
+    'social',
+    'communication',
+    'utility',
+    'development',
     'storage',
-    'memory',
-    'ai',
-    'learning',
-    'dev',
-    'blockchain',
+    'analytics',
     'security',
-    'weather',
   ];
 
   const renderStars = (rating: number) => {
+    const roundedRating = Math.round(rating);
     return (
       <div className="flex items-center gap-1">
         {[1, 2, 3, 4, 5].map((star) => (
-          <span
+          <Star
             key={star}
-            className={
-              star <= Math.round(rating)
-                ? 'text-yellow-400'
-                : 'text-gray-600'
-            }
-          >
-            ★
-          </span>
+            size={16}
+            className={star <= roundedRating ? 'fill-yellow-400 text-yellow-400' : 'text-gray-600'}
+          />
         ))}
         <span className="ml-2 text-sm text-gray-400">
           {rating.toFixed(1)}
@@ -101,8 +155,20 @@ export default function MCPMarketplace() {
     );
   };
 
+  const handlePageChange = (newPage: number) => {
+    setPage(newPage);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const stats = useMemo(() => ({
+    total: skills.length,
+    verified: skills.filter(s => s.verified).length,
+    avgPrice: skills.length > 0 ? skills.reduce((sum, s) => sum + s.pricing_usdc, 0) / skills.length : 0,
+    avgRating: skills.length > 0 ? skills.reduce((sum, s) => sum + s.rating, 0) / skills.length : 0,
+  }), [skills]);
+
   return (
-    <main className="min-h-screen bg-zinc-950 pt-24 pb-12">
+    <main className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 pt-24 pb-12">
       <div className="container mx-auto px-4 max-w-7xl">
         {/* Header */}
         <motion.div
@@ -113,34 +179,65 @@ export default function MCPMarketplace() {
           <h1 className="text-5xl font-bold text-white mb-4">
             MCP Marketplace
           </h1>
-          <p className="text-xl text-muted-foreground max-w-3xl">
-            Discover and integrate MCP (Model Context Protocol) tools for AI agents.
-            Monetize your tools with x402 payments.
+          <p className="text-xl text-gray-300 max-w-3xl leading-relaxed">
+            Discover and integrate <strong className="text-white">MCP (Model Context Protocol)</strong> tools for AI agents.
+            Monetize your tools with x402 gasless payments.
           </p>
         </motion.div>
 
-        {/* Filters */}
+        {/* Stats */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="mb-8 p-6 bg-zinc-900 border border-zinc-800 rounded-2xl"
+          className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8"
         >
+          <GlassCard className="p-6 text-center hover">
+            <div className="text-3xl font-bold text-white mb-1">{stats.total}</div>
+            <div className="text-sm text-gray-400">Total Skills</div>
+          </GlassCard>
+          <GlassCard className="p-6 text-center hover">
+            <div className="text-3xl font-bold text-green-400 mb-1">{stats.verified}</div>
+            <div className="text-sm text-gray-400">Verified</div>
+          </GlassCard>
+          <GlassCard className="p-6 text-center hover">
+            <div className="text-3xl font-bold text-yellow-400 mb-1">
+              ${stats.avgPrice.toFixed(4)}
+            </div>
+            <div className="text-sm text-gray-400">Avg Price</div>
+          </GlassCard>
+          <GlassCard className="p-6 text-center hover">
+            <div className="text-3xl font-bold text-yellow-400 mb-1">
+              {stats.avgRating.toFixed(1)}★
+            </div>
+            <div className="text-sm text-gray-400">Avg Rating</div>
+          </GlassCard>
+        </motion.div>
+
+        {/* Filters */}
+        <GlassCard className="p-6 mb-8">
+          <div className="flex items-center gap-2 mb-4">
+            <Filter className="w-5 h-5 text-purple-300" />
+            <h2 className="text-lg font-semibold text-white">Filters</h2>
+          </div>
           <div className="grid md:grid-cols-4 gap-4">
             {/* Search */}
             <div className="md:col-span-2">
               <label htmlFor="search" className="block text-sm font-medium text-gray-300 mb-2">
                 Search
               </label>
-              <input
-                id="search"
-                type="text"
-                placeholder="Search MCP skills..."
-                aria-label="Search MCP skills"
-                value={filters.search}
-                onChange={(e) => setFilters({ ...filters, search: e.target.value })}
-                className="w-full px-4 py-2 bg-zinc-800 border border-zinc-700 rounded-lg text-white placeholder:text-gray-500 focus:outline-none focus:border-zinc-500 focus:ring-2 focus:ring-green-500"
-              />
+              <div className="relative">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
+                <input
+                  id="search"
+                  type="text"
+                  placeholder="Search MCP skills..."
+                  aria-label="Search MCP skills"
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  className="w-full pl-10 pr-4 py-2.5 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder:text-gray-500 focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all"
+                />
+              </div>
             </div>
 
             {/* Category */}
@@ -150,14 +247,14 @@ export default function MCPMarketplace() {
               </label>
               <select
                 id="category"
-                value={filters.category}
-                onChange={(e) => setFilters({ ...filters, category: e.target.value })}
-                className="w-full px-4 py-2 bg-zinc-800 border border-zinc-700 rounded-lg text-white focus:outline-none focus:border-zinc-500 focus:ring-2 focus:ring-green-500"
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+                className="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all"
                 aria-label="Filter by category"
               >
                 {categories.map((cat) => (
                   <option key={cat} value={cat}>
-                    {cat.charAt(0).toUpperCase() + cat.slice(1)}
+                    {cat === 'all' ? 'All Categories' : cat.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
                   </option>
                 ))}
               </select>
@@ -170,9 +267,9 @@ export default function MCPMarketplace() {
               </label>
               <select
                 id="status"
-                value={filters.verified}
-                onChange={(e) => setFilters({ ...filters, verified: e.target.value })}
-                className="w-full px-4 py-2 bg-zinc-800 border border-zinc-700 rounded-lg text-white focus:outline-none focus:border-zinc-500 focus:ring-2 focus:ring-green-500"
+                value={verified}
+                onChange={(e) => setVerified(e.target.value)}
+                className="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all"
                 aria-label="Filter by verification status"
               >
                 <option value="all">All Skills</option>
@@ -180,156 +277,261 @@ export default function MCPMarketplace() {
                 <option value="false">Unverified Only</option>
               </select>
             </div>
-          </div>
 
-          <div className="mt-4">
-            <label className="block text-sm font-medium text-gray-300 mb-2">
-              Sort By
-            </label>
-            <div className="flex gap-2">
-              {['rating', 'calls', 'price', 'newest'].map((sort) => (
-                <button
-                  key={sort}
-                  onClick={() => setFilters({ ...filters, sort })}
-                  className={`px-4 py-2 rounded-lg font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-green-500 ${
-                    filters.sort === sort
-                      ? 'bg-zinc-700 text-white'
-                      : 'bg-zinc-800 text-gray-300 hover:bg-zinc-700'
-                  }`}
-                  aria-label={`Sort by ${sort}`}
-                >
-                  {sort.charAt(0).toUpperCase() + sort.slice(1)}
-                </button>
-              ))}
+            {/* Sort */}
+            <div>
+              <label className="block text-sm font-medium text-gray-300 mb-2">
+                Sort By
+              </label>
+              <div className="flex gap-2">
+                {['rating', 'calls', 'price', 'newest'].map((sort) => (
+                  <button
+                    key={sort}
+                    onClick={() => setSortBy(sort)}
+                    className={`flex-1 px-4 py-2.5 rounded-lg font-medium transition-all focus:outline-none focus:ring-2 focus:ring-purple-500/20 ${
+                      sortBy === sort
+                        ? 'bg-purple-600 text-white shadow-lg'
+                        : 'bg-slate-800 text-gray-300 hover:bg-slate-700 hover:text-white'
+                    }`}
+                    aria-label={`Sort by ${sort}`}
+                  >
+                    <SortAsc className="w-4 h-4" />
+                    {sort.charAt(0).toUpperCase() + sort.slice(1)}
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
-        </motion.div>
+        </GlassCard>
 
-        {/* Stats */}
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="grid md:grid-cols-4 gap-4 mb-8"
-        >
-          <div className="p-4 bg-zinc-900 border border-zinc-800 rounded-xl">
-            <div className="text-2xl font-bold text-white">6</div>
-            <div className="text-sm text-gray-400">Total Skills</div>
-          </div>
-          <div className="p-4 bg-zinc-900 border border-zinc-800 rounded-xl">
-            <div className="text-2xl font-bold text-green-400">4</div>
-            <div className="text-sm text-gray-400">Verified</div>
-          </div>
-          <div className="p-4 bg-zinc-900 border border-zinc-800 rounded-xl">
-            <div className="text-2xl font-bold text-yellow-400">$0.002</div>
-            <div className="text-sm text-gray-400">Avg Price</div>
-          </div>
-          <div className="p-4 bg-zinc-900 border border-zinc-800 rounded-xl">
-            <div className="text-2xl font-bold text-yellow-400">4.2</div>
-            <div className="text-sm text-gray-400">Avg Rating</div>
-          </div>
-        </motion.div>
+        {/* Results Count */}
+        <div className="flex items-center justify-between mb-6">
+          <p className="text-gray-300">
+            Showing <strong className="text-white">{paginatedSkills.length}</strong> of{' '}
+            <strong className="text-white">{filteredSkills.length}</strong> skills
+          </p>
+          {loading && <InlineLoader text="Updating..." />}
+        </div>
 
         {/* Error */}
         {error && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="mb-6 p-4 bg-red-900/20 border border-red-800 rounded-xl text-red-400"
+            className="mb-6"
           >
-            {error}
+            <GlassCard className="p-6 bg-red-900/20 border-red-700/50">
+              <div className="flex gap-3">
+                <AlertCircle className="w-6 h-6 text-red-400 flex-shrink-0" />
+                <div className="text-red-100">
+                  <p className="font-semibold mb-1">Error Loading Skills</p>
+                  <p className="text-sm">{error}</p>
+                  <button
+                    onClick={fetchSkills}
+                    className="mt-3 px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-sm font-medium rounded-lg transition-colors"
+                  >
+                    Retry
+                  </button>
+                </div>
+              </div>
+            </GlassCard>
           </motion.div>
         )}
 
-        {/* Loading */}
-        {loading ? (
+        {/* No Results */}
+        {!loading && paginatedSkills.length === 0 && (
+          <GlassCard className="p-12 text-center">
+            <div className="w-16 h-16 bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-4">
+              <Search className="w-8 h-8 text-gray-500" />
+            </div>
+            <h3 className="text-2xl font-bold text-white mb-2">No Skills Found</h3>
+            <p className="text-gray-300 mb-4">
+              {search ? `No results for "${search}"` : 'No skills match your filters.'}
+            </p>
+            <button
+              onClick={() => {
+                setSearch('');
+                setCategory('all');
+                setVerified('all');
+              }}
+              className="px-6 py-2.5 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-lg transition-colors"
+            >
+              Clear Filters
+            </button>
+          </GlassCard>
+        )}
+
+        {/* Loading Skeletons */}
+        {loading && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
           >
             {[1, 2, 3, 4, 5, 6].map((i) => (
-              <SkillCardSkeleton key={i} />
+              <CardSkeleton key={i} />
             ))}
           </motion.div>
-        ) : (
+        )}
+
+        {/* Skills Grid */}
+        {!loading && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
           >
-            {skills.map((skill, index) => (
+            {paginatedSkills.map((skill) => (
               <motion.div
                 key={skill.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.05 }}
-                className="p-6 bg-zinc-900 border border-zinc-800 rounded-2xl hover:border-zinc-700 transition-colors"
+                transition={{ delay: (skill.id.length % 6) * 0.05 }}
               >
-                {/* Header */}
-                <div className="flex items-start justify-between mb-3">
-                  <div className="flex-1">
-                    <h3 className="text-xl font-bold text-white mb-1">
-                      {skill.name}
-                    </h3>
-                    <div className="flex items-center gap-2 mb-2">
-                      {skill.verified && (
-                        <span className="px-2 py-1 bg-green-900/30 text-green-400 text-xs rounded-full">
-                          ✓ Verified
-                        </span>
-                      )}
-                      <span className="text-gray-400 text-sm">
-                        @{skill.author}
-                      </span>
+                <GlassCard className="p-6 h-full hover flex flex-col">
+                  {/* Header */}
+                  <div className="flex items-start justify-between mb-4">
+                    <div className="flex-1">
+                      <h3 className="text-xl font-bold text-white mb-2 hover:text-purple-300 transition-colors">
+                        {skill.name}
+                      </h3>
+                      <div className="flex items-center gap-2 mb-2">
+                        {skill.verified && (
+                          <Badge variant="success" className="gap-1">
+                            <CheckCircle2 size={14} />
+                            Verified
+                          </Badge>
+                        )}
+                        <span className="text-gray-400 text-sm">by @{skill.author}</span>
+                      </div>
+                    </div>
+                    {renderStars(skill.rating)}
+                  </div>
+
+                  {/* Description */}
+                  <p className="text-gray-300 mb-4 flex-1 line-clamp-3 leading-relaxed">
+                    {skill.description}
+                  </p>
+
+                  {/* Categories */}
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {skill.category.map((cat) => (
+                      <Badge key={cat} variant="default">
+                        {cat.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
+                      </Badge>
+                    ))}
+                  </div>
+
+                  {/* Pricing & Stats */}
+                  <div className="flex items-center justify-between pt-4 border-t border-slate-700">
+                    <div>
+                      <div className="text-2xl font-bold text-white mb-1">
+                        ${skill.pricing_usdc.toFixed(4)}
+                      </div>
+                      <div className="text-xs text-gray-400">per call</div>
+                    </div>
+                    <div className="text-right">
+                      <div className="text-sm text-gray-400">
+                        {skill.total_calls.toLocaleString()} calls
+                      </div>
+                      <div className={`text-sm font-medium ${skill.success_rate >= 95 ? 'text-green-400' : skill.success_rate >= 80 ? 'text-yellow-400' : 'text-red-400'}`}>
+                        {skill.success_rate.toFixed(1)}% success
+                      </div>
                     </div>
                   </div>
-                  {renderStars(skill.rating)}
-                </div>
 
-                {/* Description */}
-                <p className="text-gray-300 mb-4 line-clamp-3">
-                  {skill.description}
-                </p>
-
-                {/* Categories */}
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {skill.category.map((cat) => (
-                    <span
-                      key={cat}
-                      className="px-2 py-1 bg-zinc-800 text-zinc-300 text-xs rounded-full"
+                  {/* Actions */}
+                  <div className="mt-4 flex gap-3">
+                    <a
+                      href={`/mcps/${skill.slug}`}
+                      className="flex-1 px-4 py-2.5 bg-slate-700 hover:bg-slate-600 text-white text-center font-medium rounded-lg transition-colors"
                     >
-                      {cat}
-                    </span>
-                  ))}
-                </div>
-
-                {/* Pricing & Stats */}
-                <div className="flex items-center justify-between pt-4 border-t border-zinc-800">
-                  <div>
-                    <div className="text-lg font-bold text-white">
-                      ${skill.pricing_usdc.toFixed(4)}
-                    </div>
-                    <div className="text-xs text-gray-400">per call</div>
+                      View Details
+                    </a>
+                    {skill.repository_url && (
+                      <a
+                        href={skill.repository_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-4 py-2.5 bg-slate-800 hover:bg-slate-700 text-white font-medium rounded-lg transition-colors flex items-center gap-2"
+                      >
+                        <ExternalLink size={16} />
+                        Code
+                      </a>
+                    )}
+                    <button className="px-4 py-2.5 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg transition-colors flex items-center gap-2">
+                      <Download size={16} />
+                      Install
+                    </button>
                   </div>
-                  <div className="text-right text-sm text-gray-400">
-                    <div>{skill.total_calls.toLocaleString()} calls</div>
-                    <div>{skill.success_rate.toFixed(1)}% success</div>
-                  </div>
-                </div>
-
-                {/* Actions */}
-                <div className="mt-4 flex gap-2">
-                  <button type="button" className="flex-1 px-4 py-2 bg-zinc-800 text-white rounded-lg hover:bg-zinc-700 transition-colors font-medium">
-                    View Details
-                  </button>
-                  <button type="button" className="flex-1 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-medium">
-                    Install
-                  </button>
-                </div>
+                </GlassCard>
               </motion.div>
             ))}
           </motion.div>
         )}
+
+        {/* Pagination */}
+        {!loading && totalPages > 1 && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mt-12 flex items-center justify-center gap-2"
+          >
+            <button
+              onClick={() => handlePageChange(page - 1)}
+              disabled={page === 1}
+              className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              Previous
+            </button>
+            
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNum) => (
+              <button
+                key={pageNum}
+                onClick={() => handlePageChange(pageNum)}
+                className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+                  page === pageNum
+                    ? 'bg-purple-600 text-white'
+                    : 'bg-slate-800 hover:bg-slate-700 text-white'
+                }`}
+              >
+                {pageNum}
+              </button>
+            ))}
+            
+            <button
+              onClick={() => handlePageChange(page + 1)}
+              disabled={page === totalPages}
+              className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              Next
+            </button>
+          </motion.div>
+        )}
+
+        {/* CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="mt-16"
+        >
+          <GlassCard className="p-12 text-center bg-gradient-to-br from-purple-900/50 to-fuchsia-900/50 border-purple-700/50">
+            <h2 className="text-3xl font-bold text-white mb-4">
+              Want to Publish Your MCP?
+            </h2>
+            <p className="text-xl text-purple-100 mb-8 max-w-2xl mx-auto leading-relaxed">
+              Join thousands of developers monetizing their AI tools on OMA-AI.
+              Keep 95% of your earnings with x402 gasless payments.
+            </p>
+            <a
+              href="/publish"
+              className="inline-flex items-center gap-2 px-8 py-3 bg-white hover:bg-gray-100 text-purple-600 font-bold rounded-lg transition-colors"
+            >
+              <Download size={20} />
+              Publish Your MCP
+            </a>
+          </GlassCard>
+        </motion.div>
       </div>
     </main>
   );
