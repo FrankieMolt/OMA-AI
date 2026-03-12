@@ -1,0 +1,861 @@
+[
+  {
+    "slug": "postgresql-query",
+    "name": "PostgreSQL Query MCP",
+    "description": "Execute SQL queries, manage tables, and interact with PostgreSQL databases securely.",
+    "long_description": "A powerful MCP for PostgreSQL database operations. Execute queries, create/modify tables, manage indexes, and perform administrative tasks. Built with security in mind - supports parameterized queries to prevent SQL injection.",
+    "category": "data",
+    "tags": ["database", "sql", "postgresql", "data"],
+    "repository_url": "https://github.com/nosytlabs/postgresql-mcp",
+    "homepage_url": "https://www.oma-ai.com/mcp/postgresql-query",
+    "documentation_url": "https://docs.oma-ai.com/mcp/postgresql-query",
+    "icon_url": "🐘",
+    "image_url": "https://www.oma-ai.com/images/mcps/postgresql.png",
+    "price_tier": "medium",
+    "pricing": {
+      "tier": "medium",
+      "price_per_call": 0.005,
+      "currency": "USDC"
+    },
+    "tools": [
+      {
+        "name": "execute_query",
+        "description": "Execute a SQL query with parameters",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "query": { "type": "string", "description": "SQL query to execute" },
+            "params": { "type": "array", "items": { "type": "any" }, "description": "Query parameters" }
+          },
+          "required": ["query"]
+        }
+      },
+      {
+        "name": "list_tables",
+        "description": "List all tables in the database",
+        "inputSchema": { "type": "object", "properties": {} }
+      },
+      {
+        "name": "describe_table",
+        "description": "Get schema information for a table",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "table_name": { "type": "string", "description": "Name of the table" }
+          },
+          "required": ["table_name"]
+        }
+      }
+    ]
+  },
+  {
+    "slug": "openai-chat",
+    "name": "OpenAI Chat MCP",
+    "description": "Access GPT-4, GPT-3.5, and all OpenAI models with chat completions and embeddings.",
+    "long_description": "Complete integration with OpenAI API. Support for all models including GPT-4, GPT-3.5, and embedding models. Includes streaming responses, function calling, and vision capabilities.",
+    "category": "ai-ml",
+    "tags": ["ai", "openai", "gpt", "chat", "llm"],
+    "repository_url": "https://github.com/nosytlabs/openai-mcp",
+    "homepage_url": "https://www.oma-ai.com/mcp/openai-chat",
+    "documentation_url": "https://docs.oma-ai.com/mcp/openai-chat",
+    "icon_url": "🤖",
+    "image_url": "https://www.oma-ai.com/images/mcps/openai.png",
+    "price_tier": "high",
+    "pricing": {
+      "tier": "high",
+      "price_per_call": 0.02,
+      "currency": "USDC"
+    },
+    "tools": [
+      {
+        "name": "chat_completion",
+        "description": "Create a chat completion",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "model": { "type": "string", "description": "Model to use (gpt-4, gpt-3.5-turbo)" },
+            "messages": { "type": "array", "description": "Array of message objects" },
+            "max_tokens": { "type": "number", "description": "Maximum tokens to generate" },
+            "temperature": { "type": "number", "description": "Sampling temperature" }
+          },
+          "required": ["model", "messages"]
+        }
+      },
+      {
+        "name": "create_embedding",
+        "description": "Create an embedding",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "input": { "type": "string", "description": "Text to embed" },
+            "model": { "type": "string", "description": "Embedding model to use" }
+          },
+          "required": ["input", "model"]
+        }
+      }
+    ]
+  },
+  {
+    "slug": "twitter-api",
+    "name": "Twitter/X API MCP",
+    "description": "Tweet, read timelines, search, and manage Twitter accounts programmatically.",
+    "long_description": "Full Twitter/X API access. Post tweets, read timelines, search tweets, manage followers, and access advanced analytics. Perfect for social media automation and monitoring.",
+    "category": "social",
+    "tags": ["twitter", "x", "social", "social-media", "automation"],
+    "repository_url": "https://github.com/nosytlabs/twitter-mcp",
+    "homepage_url": "https://www.oma-ai.com/mcp/twitter-api",
+    "documentation_url": "https://docs.oma-ai.com/mcp/twitter-api",
+    "icon_url": "🐦",
+    "image_url": "https://www.oma-ai.com/images/mcps/twitter.png",
+    "price_tier": "medium",
+    "pricing": {
+      "tier": "medium",
+      "price_per_call": 0.003,
+      "currency": "USDC"
+    },
+    "tools": [
+      {
+        "name": "post_tweet",
+        "description": "Post a new tweet",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "text": { "type": "string", "description": "Tweet text (max 280 chars)" },
+            "media_ids": { "type": "array", "items": { "type": "string" }, "description": "Media IDs to attach" }
+          },
+          "required": ["text"]
+        }
+      },
+      {
+        "name": "get_user_timeline",
+        "description": "Get a user's timeline",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "user_id": { "type": "string", "description": "User ID or username" },
+            "count": { "type": "number", "description": "Number of tweets (max 200)" }
+          },
+          "required": ["user_id"]
+        }
+      },
+      {
+        "name": "search_tweets",
+        "description": "Search for tweets",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "query": { "type": "string", "description": "Search query" },
+            "count": { "type": "number", "description": "Number of results" }
+          },
+          "required": ["query"]
+        }
+      }
+    ]
+  },
+  {
+    "slug": "email-sender",
+    "name": "Email Sender MCP",
+    "description": "Send emails via SMTP with support for templates, attachments, and HTML.",
+    "long_description": "Professional email sending capability. Connects to any SMTP server (Gmail, Outlook, custom). Supports HTML emails, attachments, email templates, and delivery tracking.",
+    "category": "communication",
+    "tags": ["email", "smtp", "communication", "notification"],
+    "repository_url": "https://github.com/nosytlabs/email-sender-mcp",
+    "homepage_url": "https://www.oma-ai.com/mcp/email-sender",
+    "documentation_url": "https://docs.oma-ai.com/mcp/email-sender",
+    "icon_url": "✉️",
+    "image_url": "https://www.oma-ai.com/images/mcps/email.png",
+    "price_tier": "low",
+    "pricing": {
+      "tier": "low",
+      "price_per_call": 0.001,
+      "currency": "USDC"
+    },
+    "tools": [
+      {
+        "name": "send_email",
+        "description": "Send an email",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "to": { "type": "string", "description": "Recipient email address" },
+            "subject": { "type": "string", "description": "Email subject" },
+            "body": { "type": "string", "description": "Email body (HTML supported)" },
+            "attachments": { "type": "array", "items": { "type": "string" }, "description": "File paths to attach" }
+          },
+          "required": ["to", "subject", "body"]
+        }
+      }
+    ]
+  },
+  {
+    "slug": "crypto-prices",
+    "name": "Crypto Prices MCP",
+    "description": "Real-time cryptocurrency prices, market data, and historical data from CoinGecko.",
+    "long_description": "Access live and historical cryptocurrency data. Get prices, market cap, volume, and trading data for 10,000+ cryptocurrencies. Powered by CoinGecko API.",
+    "category": "finance",
+    "tags": ["crypto", "bitcoin", "ethereum", "finance", "prices"],
+    "repository_url": "https://github.com/nosytlabs/crypto-prices-mcp",
+    "homepage_url": "https://www.oma-ai.com/mcp/crypto-prices",
+    "documentation_url": "https://docs.oma-ai.com/mcp/crypto-prices",
+    "icon_url": "₿",
+    "image_url": "https://www.oma-ai.com/images/mcps/crypto.png",
+    "price_tier": "free",
+    "pricing": {
+      "tier": "free",
+      "price_per_call": 0,
+      "currency": "USDC"
+    },
+    "tools": [
+      {
+        "name": "get_price",
+        "description": "Get current price of a cryptocurrency",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "coin_id": { "type": "string", "description": "Coin ID (bitcoin, ethereum, etc.)" },
+            "vs_currency": { "type": "string", "description": "Target currency (usd, eur, etc.)" }
+          },
+          "required": ["coin_id"]
+        }
+      },
+      {
+        "name": "get_market_chart",
+        "description": "Get historical market data",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "coin_id": { "type": "string", "description": "Coin ID" },
+            "vs_currency": { "type": "string", "description": "Target currency" },
+            "days": { "type": "number", "description": "Number of days (max 365)" }
+          },
+          "required": ["coin_id"]
+        }
+      }
+    ]
+  },
+  {
+    "slug": "s3-storage",
+    "name": "S3 Storage MCP",
+    "description": "Upload, download, and manage files on AWS S3 or compatible storage.",
+    "long_description": "Full S3 compatibility. Upload files, download, delete, list objects, manage buckets. Works with AWS S3, Cloudflare R2, Wasabi, and any S3-compatible storage.",
+    "category": "storage",
+    "tags": ["storage", "s3", "aws", "files", "cloud"],
+    "repository_url": "https://github.com/nosytlabs/s3-storage-mcp",
+    "homepage_url": "https://www.oma-ai.com/mcp/s3-storage",
+    "documentation_url": "https://docs.oma-ai.com/mcp/s3-storage",
+    "icon_url": "📦",
+    "image_url": "https://www.oma-ai.com/images/mcps/s3.png",
+    "price_tier": "medium",
+    "pricing": {
+      "tier": "medium",
+      "price_per_call": 0.002,
+      "currency": "USDC"
+    },
+    "tools": [
+      {
+        "name": "upload_file",
+        "description": "Upload a file to S3",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "bucket": { "type": "string", "description": "S3 bucket name" },
+            "key": { "type": "string", "description": "Object key (path)" },
+            "file_path": { "type": "string", "description": "Local file path to upload" }
+          },
+          "required": ["bucket", "key", "file_path"]
+        }
+      },
+      {
+        "name": "download_file",
+        "description": "Download a file from S3",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "bucket": { "type": "string", "description": "S3 bucket name" },
+            "key": { "type": "string", "description": "Object key" },
+            "local_path": { "type": "string", "description": "Local save path" }
+          },
+          "required": ["bucket", "key", "local_path"]
+        }
+      },
+      {
+        "name": "list_objects",
+        "description": "List objects in a bucket",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "bucket": { "type": "string", "description": "S3 bucket name" },
+            "prefix": { "type": "string", "description": "Key prefix to filter" }
+          },
+          "required": ["bucket"]
+        }
+      }
+    ]
+  },
+  {
+    "slug": "redis-cache",
+    "name": "Redis Cache MCP",
+    "description": "High-performance caching and data structures with Redis.",
+    "long_description": "Redis operations for caching and data management. Set/get values, manage lists, sets, hashes, and sorted sets. Includes TTL support and pattern matching.",
+    "category": "data",
+    "tags": ["redis", "cache", "database", "performance"],
+    "repository_url": "https://github.com/nosytlabs/redis-cache-mcp",
+    "homepage_url": "https://www.oma-ai.com/mcp/redis-cache",
+    "documentation_url": "https://docs.oma-ai.com/mcp/redis-cache",
+    "icon_url": "⚡",
+    "image_url": "https://www.oma-ai.com/images/mcps/redis.png",
+    "price_tier": "low",
+    "pricing": {
+      "tier": "low",
+      "price_per_call": 0.001,
+      "currency": "USDC"
+    },
+    "tools": [
+      {
+        "name": "set",
+        "description": "Set a key-value pair",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "key": { "type": "string", "description": "Cache key" },
+            "value": { "type": "string", "description": "Value to store" },
+            "ttl": { "type": "number", "description": "Time to live in seconds" }
+          },
+          "required": ["key", "value"]
+        }
+      },
+      {
+        "name": "get",
+        "description": "Get a value by key",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "key": { "type": "string", "description": "Cache key" }
+          },
+          "required": ["key"]
+        }
+      },
+      {
+        "name": "delete",
+        "description": "Delete a key",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "key": { "type": "string", "description": "Cache key" }
+          },
+          "required": ["key"]
+        }
+      }
+    ]
+  },
+  {
+    "slug": "discord-bot",
+    "name": "Discord Bot MCP",
+    "description": "Manage Discord servers, send messages, and automate server administration.",
+    "long_description": "Complete Discord bot functionality. Send messages, manage channels, roles, members, and guilds. Perfect for server automation and community management.",
+    "category": "social",
+    "tags": ["discord", "bot", "social", "automation"],
+    "repository_url": "https://github.com/nosytlabs/discord-bot-mcp",
+    "homepage_url": "https://www.oma-ai.com/mcp/discord-bot",
+    "documentation_url": "https://docs.oma-ai.com/mcp/discord-bot",
+    "icon_url": "🎮",
+    "image_url": "https://www.oma-ai.com/images/mcps/discord.png",
+    "price_tier": "medium",
+    "pricing": {
+      "tier": "medium",
+      "price_per_call": 0.003,
+      "currency": "USDC"
+    },
+    "tools": [
+      {
+        "name": "send_message",
+        "description": "Send a message to a channel",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "channel_id": { "type": "string", "description": "Discord channel ID" },
+            "content": { "type": "string", "description": "Message content" }
+          },
+          "required": ["channel_id", "content"]
+        }
+      },
+      {
+        "name": "get_guild",
+        "description": "Get guild information",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "guild_id": { "type": "string", "description": "Discord guild ID" }
+          },
+          "required": ["guild_id"]
+        }
+      }
+    ]
+  },
+  {
+    "slug": "stock-data",
+    "name": "Stock Data MCP",
+    "description": "Real-time and historical stock prices, financial data, and market information.",
+    "long_description": "Access comprehensive stock market data. Get prices, historical data, company info, and financial metrics. Covers major US exchanges and global markets.",
+    "category": "finance",
+    "tags": ["stocks", "finance", "trading", "markets"],
+    "repository_url": "https://github.com/nosytlabs/stock-data-mcp",
+    "homepage_url": "https://www.oma-ai.com/mcp/stock-data",
+    "documentation_url": "https://docs.oma-ai.com/mcp/stock-data",
+    "icon_url": "📈",
+    "image_url": "https://www.oma-ai.com/images/mcps/stocks.png",
+    "price_tier": "medium",
+    "pricing": {
+      "tier": "medium",
+      "price_per_call": 0.005,
+      "currency": "USDC"
+    },
+    "tools": [
+      {
+        "name": "get_quote",
+        "description": "Get current stock quote",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "symbol": { "type": "string", "description": "Stock symbol (AAPL, GOOGL, etc.)" }
+          },
+          "required": ["symbol"]
+        }
+      },
+      {
+        "name": "get_historical",
+        "description": "Get historical price data",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "symbol": { "type": "string", "description": "Stock symbol" },
+            "period": { "type": "string", "description": "Time period (1d, 1w, 1m, 3m, 1y, max)" }
+          },
+          "required": ["symbol"]
+        }
+      }
+    ]
+  },
+  {
+    "slug": "web-scraper",
+    "name": "Web Scraper MCP",
+    "description": "Scrape web pages, extract data, and perform automated web requests.",
+    "long_description": "Powerful web scraping capabilities. Extract structured data from web pages, handle JavaScript rendering, follow links, and perform automated data collection. Perfect for data gathering and monitoring.",
+    "category": "utility",
+    "tags": ["scraping", "web", "data", "extraction"],
+    "repository_url": "https://github.com/nosytlabs/web-scraper-mcp",
+    "homepage_url": "https://www.oma-ai.com/mcp/web-scraper",
+    "documentation_url": "https://docs.oma-ai.com/mcp/web-scraper",
+    "icon_url": "🕸️",
+    "image_url": "https://www.oma-ai.com/images/mcps/webscraper.png",
+    "price_tier": "medium",
+    "pricing": {
+      "tier": "medium",
+      "price_per_call": 0.004,
+      "currency": "USDC"
+    },
+    "tools": [
+      {
+        "name": "scrape_url",
+        "description": "Scrape a URL and extract data",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "url": { "type": "string", "description": "URL to scrape" },
+            "selectors": { "type": "object", "description": "CSS selectors to extract" }
+          },
+          "required": ["url"]
+        }
+      },
+      {
+        "name": "get_page",
+        "description": "Get page HTML",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "url": { "type": "string", "description": "URL to fetch" },
+            "render_js": { "type": "boolean", "description": "Render JavaScript" }
+          },
+          "required": ["url"]
+        }
+      }
+    ]
+  },
+  {
+    "slug": "github-actions",
+    "name": "GitHub Actions MCP",
+    "description": "Trigger workflows, check status, and manage CI/CD pipelines.",
+    "long_description": "Control GitHub Actions workflows. Trigger runs, check status, get logs, and manage workflow dispatch. Perfect for automating CI/CD and development workflows.",
+    "category": "development",
+    "tags": ["github", "cicd", "automation", "workflows"],
+    "repository_url": "https://github.com/nosytlabs/github-actions-mcp",
+    "homepage_url": "https://www.oma-ai.com/mcp/github-actions",
+    "documentation_url": "https://docs.oma-ai.com/mcp/github-actions",
+    "icon_url": "⚙️",
+    "image_url": "https://www.oma-ai.com/images/mcps/github.png",
+    "price_tier": "low",
+    "pricing": {
+      "tier": "low",
+      "price_per_call": 0.001,
+      "currency": "USDC"
+    },
+    "tools": [
+      {
+        "name": "trigger_workflow",
+        "description": "Trigger a workflow run",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "owner": { "type": "string", "description": "Repository owner" },
+            "repo": { "type": "string", "description": "Repository name" },
+            "workflow_id": { "type": "string", "description": "Workflow ID or filename" },
+            "branch": { "type": "string", "description": "Branch to run on" }
+          },
+          "required": ["owner", "repo", "workflow_id"]
+        }
+      },
+      {
+        "name": "get_workflow_status",
+        "description": "Get workflow run status",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "owner": { "type": "string", "description": "Repository owner" },
+            "repo": { "type": "string", "description": "Repository name" },
+            "run_id": { "type": "string", "description": "Run ID" }
+          },
+          "required": ["owner", "repo", "run_id"]
+        }
+      }
+    ]
+  },
+  {
+    "slug": "image-processing",
+    "name": "Image Processing MCP",
+    "description": "Resize, compress, convert, and manipulate images programmatically.",
+    "long_description": "Professional image processing. Resize, compress, crop, apply filters, convert formats (JPEG, PNG, WebP), add watermarks, and perform complex image manipulations.",
+    "category": "utility",
+    "tags": ["image", "processing", "graphics", "photos"],
+    "repository_url": "https://github.com/nosytlabs/image-processing-mcp",
+    "homepage_url": "https://www.oma-ai.com/mcp/image-processing",
+    "documentation_url": "https://docs.oma-ai.com/mcp/image-processing",
+    "icon_url": "🖼️",
+    "image_url": "https://www.oma-ai.com/images/mcps/image.png",
+    "price_tier": "low",
+    "pricing": {
+      "tier": "low",
+      "price_per_call": 0.002,
+      "currency": "USDC"
+    },
+    "tools": [
+      {
+        "name": "resize_image",
+        "description": "Resize an image",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "input_path": { "type": "string", "description": "Input file path" },
+            "output_path": { "type": "string", "description": "Output file path" },
+            "width": { "type": "number", "description": "Target width" },
+            "height": { "type": "number", "description": "Target height" }
+          },
+          "required": ["input_path", "output_path"]
+        }
+      },
+      {
+        "name": "compress_image",
+        "description": "Compress an image",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "input_path": { "type": "string", "description": "Input file path" },
+            "output_path": { "type": "string", "description": "Output file path" },
+            "quality": { "type": "number", "description": "Quality (1-100)" }
+          },
+          "required": ["input_path", "output_path"]
+        }
+      }
+    ]
+  },
+  {
+    "slug": "anthropic-claude",
+    "name": "Anthropic Claude MCP",
+    "description": "Access Claude 3 Opus, Sonnet, and Haiku models for advanced AI tasks.",
+    "long_description": "Premium Claude API access. Claude 3 Opus for complex reasoning, Sonnet for balanced performance, and Haiku for speed. Includes vision, streaming, and advanced prompting.",
+    "category": "ai-ml",
+    "tags": ["anthropic", "claude", "ai", "llm"],
+    "repository_url": "https://github.com/nosytlabs/anthropic-mcp",
+    "homepage_url": "https://www.oma-ai.com/mcp/anthropic-claude",
+    "documentation_url": "https://docs.oma-ai.com/mcp/anthropic-claude",
+    "icon_url": "🧠",
+    "image_url": "https://www.oma-ai.com/images/mcps/anthropic.png",
+    "price_tier": "high",
+    "pricing": {
+      "tier": "high",
+      "price_per_call": 0.015,
+      "currency": "USDC"
+    },
+    "tools": [
+      {
+        "name": "message",
+        "description": "Send a message to Claude",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "model": { "type": "string", "description": "Model (claude-3-opus, claude-3-sonnet, claude-3-haiku)" },
+            "max_tokens": { "type": "number", "description": "Max tokens" },
+            "messages": { "type": "array", "description": "Message array" }
+          },
+          "required": ["model", "messages"]
+        }
+      }
+    ]
+  },
+  {
+    "slug": "mongodb-query",
+    "name": "MongoDB Query MCP",
+    "description": "Perform CRUD operations on MongoDB databases with aggregation.",
+    "long_description": "Full MongoDB access. Insert, update, delete, and query documents. Support for aggregation pipelines, indexes, and advanced queries.",
+    "category": "data",
+    "tags": ["mongodb", "nosql", "database", "data"],
+    "repository_url": "https://github.com/nosytlabs/mongodb-mcp",
+    "homepage_url": "https://www.oma-ai.com/mcp/mongodb-query",
+    "documentation_url": "https://docs.oma-ai.com/mcp/mongodb-query",
+    "icon_url": "🍃",
+    "image_url": "https://www.oma-ai.com/images/mcps/mongodb.png",
+    "price_tier": "medium",
+    "pricing": {
+      "tier": "medium",
+      "price_per_call": 0.005,
+      "currency": "USDC"
+    },
+    "tools": [
+      {
+        "name": "find",
+        "description": "Find documents",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "collection": { "type": "string", "description": "Collection name" },
+            "query": { "type": "object", "description": "Query object" },
+            "limit": { "type": "number", "description": "Max results" }
+          },
+          "required": ["collection"]
+        }
+      },
+      {
+        "name": "insert_one",
+        "description": "Insert a document",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "collection": { "type": "string", "description": "Collection name" },
+            "document": { "type": "object", "description": "Document to insert" }
+          },
+          "required": ["collection", "document"]
+        }
+      }
+    ]
+  },
+  {
+    "slug": "sms-sender",
+    "name": "SMS Sender MCP",
+    "description": "Send SMS messages via Twilio with delivery tracking.",
+    "long_description": "Twilio SMS integration. Send text messages worldwide, track delivery, manage phone numbers, and handle SMS webhooks.",
+    "category": "communication",
+    "tags": ["sms", "twilio", "text", "communication"],
+    "repository_url": "https://github.com/nosytlabs/sms-sender-mcp",
+    "homepage_url": "https://www.oma-ai.com/mcp/sms-sender",
+    "documentation_url": "https://docs.oma-ai.com/mcp/sms-sender",
+    "icon_url": "📱",
+    "image_url": "https://www.oma-ai.com/images/mcps/sms.png",
+    "price_tier": "low",
+    "pricing": {
+      "tier": "low",
+      "price_per_call": 0.005,
+      "currency": "USDC"
+    },
+    "tools": [
+      {
+        "name": "send_sms",
+        "description": "Send an SMS message",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "to": { "type": "string", "description": "Recipient phone number" },
+            "message": { "type": "string", "description": "SMS content" }
+          },
+          "required": ["to", "message"]
+        }
+      }
+    ]
+  },
+  {
+    "slug": "weather-api",
+    "name": "Weather API MCP",
+    "description": "Get current weather, forecasts, and historical weather data.",
+    "long_description": "Comprehensive weather data. Current conditions, 7-day forecasts, hourly data, and historical records. Covers 200,000+ cities worldwide.",
+    "category": "utility",
+    "tags": ["weather", "forecast", "climate", "data"],
+    "repository_url": "https://github.com/nosytlabs/weather-mcp",
+    "homepage_url": "https://www.oma-ai.com/mcp/weather-api",
+    "documentation_url": "https://docs.oma-ai.com/mcp/weather-api",
+    "icon_url": "🌤️",
+    "image_url": "https://www.oma-ai.com/images/mcps/weather.png",
+    "price_tier": "free",
+    "pricing": {
+      "tier": "free",
+      "price_per_call": 0,
+      "currency": "USDC"
+    },
+    "tools": [
+      {
+        "name": "get_current",
+        "description": "Get current weather",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "city": { "type": "string", "description": "City name" },
+            "country": { "type": "string", "description": "Country code (optional)" }
+          },
+          "required": ["city"]
+        }
+      },
+      {
+        "name": "get_forecast",
+        "description": "Get 7-day forecast",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "city": { "type": "string", "description": "City name" },
+            "days": { "type": "number", "description": "Days to forecast (1-7)" }
+          },
+          "required": ["city"]
+        }
+      }
+    ]
+  },
+  {
+    "slug": "pdf-processing",
+    "name": "PDF Processing MCP",
+    "description": "Extract text, merge, split, and manipulate PDF documents.",
+    "long_description": "Professional PDF tools. Extract text and images, merge PDFs, split pages, add watermarks, and convert to other formats.",
+    "category": "utility",
+    "tags": ["pdf", "documents", "processing"],
+    "repository_url": "https://github.com/nosytlabs/pdf-processing-mcp",
+    "homepage_url": "https://www.oma-ai.com/mcp/pdf-processing",
+    "documentation_url": "https://docs.oma-ai.com/mcp/pdf-processing",
+    "icon_url": "📄",
+    "image_url": "https://www.oma-ai.com/images/mcps/pdf.png",
+    "price_tier": "low",
+    "pricing": {
+      "tier": "low",
+      "price_per_call": 0.002,
+      "currency": "USDC"
+    },
+    "tools": [
+      {
+        "name": "extract_text",
+        "description": "Extract text from PDF",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "file_path": { "type": "string", "description": "PDF file path" }
+          },
+          "required": ["file_path"]
+        }
+      },
+      {
+        "name": "merge_pdfs",
+        "description": "Merge multiple PDFs",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "input_paths": { "type": "array", "items": { "type": "string" }, "description": "Input PDF paths" },
+            "output_path": { "type": "string", "description": "Output PDF path" }
+          },
+          "required": ["input_paths", "output_path"]
+        }
+      }
+    ]
+  },
+  {
+    "slug": "stability-ai",
+    "name": "Stability AI MCP",
+    "description": "Generate images with Stable Diffusion models for AI art.",
+    "long_description": "State-of-the-art image generation. Create photorealistic images, art, designs, and more. Support for inpainting, upscaling, and multiple styles.",
+    "category": "ai-ml",
+    "tags": ["stability", "stable-diffusion", "images", "art", "ai"],
+    "repository_url": "https://github.com/nosytlabs/stability-mcp",
+    "homepage_url": "https://www.oma-ai.com/mcp/stability-ai",
+    "documentation_url": "https://docs.oma-ai.com/mcp/stability-ai",
+    "icon_url": "🎨",
+    "image_url": "https://www.oma-ai.com/images/mcps/stability.png",
+    "price_tier": "high",
+    "pricing": {
+      "tier": "high",
+      "price_per_call": 0.025,
+      "currency": "USDC"
+    },
+    "tools": [
+      {
+        "name": "text_to_image",
+        "description": "Generate image from text",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "prompt": { "type": "string", "description": "Image prompt" },
+            "width": { "type": "number", "description": "Image width" },
+            "height": { "type": "number", "description": "Image height" }
+          },
+          "required": ["prompt"]
+        }
+      }
+    ]
+  },
+  {
+    "slug": "cohere-api",
+    "name": "Cohere API MCP",
+    "description": "Access Cohere's language models for text generation and embeddings.",
+    "long_description": "Cohere LLM integration. Text generation, summarization, classification, and semantic search. Excellent for NLP tasks.",
+    "category": "ai-ml",
+    "tags": ["cohere", "ai", "nlp", "llm"],
+    "repository_url": "https://github.com/nosytlabs/cohere-mcp",
+    "homepage_url": "https://www.oma-ai.com/mcp/cohere-api",
+    "documentation_url": "https://docs.oma-ai.com/mcp/cohere-api",
+    "icon_url": "💬",
+    "image_url": "https://www.oma-ai.com/images/mcps/cohere.png",
+    "price_tier": "medium",
+    "pricing": {
+      "tier": "medium",
+      "price_per_call": 0.008,
+      "currency": "USDC"
+    },
+    "tools": [
+      {
+        "name": "generate",
+        "description": "Generate text",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "prompt": { "type": "string", "description": "Text prompt" },
+            "max_tokens": { "type": "number", "description": "Max tokens to generate" },
+            "temperature": { "type": "number", "description": "Sampling temperature" }
+          },
+          "required": ["prompt"]
+        }
+      },
+      {
+        "name": "embed",
+        "description": "Create embeddings",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "texts": { "type": "array", "items": { "type": "string" }, "description": "Texts to embed" }
+          },
+          "required": ["texts"]
+        }
+      }
+    ]
+  }
+]

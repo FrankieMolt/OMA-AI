@@ -1,130 +1,106 @@
-import { NextResponse } from 'next/server';
-
-const MCP_SKILLS = [
-  {
-    id: '1',
-    name: 'Exa Web Search',
-    slug: 'exa-web-search',
-    category: ['search', 'ai'],
-    description: 'High-quality semantic web search with AI-optimized query rewriting.',
-    author: 'oma-ai',
-    pricing_usdc: 0.0005,
-    x402_enabled: true,
-    verified: true,
-    rating: 4.5,
-    total_calls: 100,
-    success_rate: 98.5
-  },
-  {
-    id: '2',
-    name: 'ByteOver Memory',
-    slug: 'byteover',
-    category: ['storage', 'memory', 'ai'],
-    description: 'Persistent agent context storage with semantic search and auto-curation.',
-    author: 'oma-ai',
-    pricing_usdc: 0.001,
-    x402_enabled: true,
-    verified: true,
-    rating: 4.8,
-    total_calls: 150,
-    success_rate: 99.2
-  },
-  {
-    id: '3',
-    name: 'Self-Improving Agent',
-    slug: 'self-improving-agent',
-    category: ['ai', 'learning'],
-    description: 'AI agents that learn from outputs and optimize future responses.',
-    author: 'oma-ai',
-    pricing_usdc: 0.002,
-    x402_enabled: true,
-    verified: false,
-    rating: 4.2,
-    total_calls: 50,
-    success_rate: 95
-  },
-  {
-    id: '4',
-    name: 'GitHub Repo Manager',
-    slug: 'github-repo-manager',
-    category: ['dev', 'github'],
-    description: 'GitHub repository management, code review, and CI monitoring.',
-    author: 'oma-ai',
-    pricing_usdc: 0.0015,
-    x402_enabled: true,
-    verified: true,
-    rating: 4.0,
-    total_calls: 200,
-    success_rate: 97
-  },
-  {
-    id: '5',
-    name: 'Weather Forecaster',
-    slug: 'weather-forecaster',
-    category: ['weather', 'data'],
-    description: '7-day weather forecasts with precipitation and temperature data.',
-    author: 'oma-ai',
-    pricing_usdc: 0.001,
-    x402_enabled: true,
-    verified: true,
-    rating: 4.1,
-    total_calls: 300,
-    success_rate: 99.5
-  },
-  {
-    id: '6',
-    name: 'Smart Contract Auditor',
-    slug: 'smart-contract-auditor',
-    category: ['blockchain', 'security'],
-    description: 'AI-powered smart contract security analysis and vulnerability detection.',
-    author: 'oma-ai',
-    pricing_usdc: 0.005,
-    x402_enabled: true,
-    verified: false,
-    rating: 3.8,
-    total_calls: 25,
-    success_rate: 92
-  }
-];
+import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(request: Request) {
+  // Check if Supabase is configured
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
+    return NextResponse.json(
+      {
+        success: false,
+        error: 'Supabase not configured',
+        message: 'Please set NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY environment variables',
+        data: [],
+        pagination: { page: 1, limit: 20, total: 0, totalPages: 0, hasNextPage: false, hasPrevPage: false },
+        filters: { categories: [], verifiedSkillsCount: 0, totalSkills: 0 },
+      },
+      { status: 503 }
+    );
+  }
+
+  const { createClient } = await import('@supabase/supabase-js');
+  const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL,
+    process.env.SUPABASE_SERVICE_ROLE_KEY
+  );
+
   const { searchParams } = new URL(request.url);
   const page = parseInt(searchParams.get('page') || '1');
   const limit = parseInt(searchParams.get('limit') || '20');
   const category = searchParams.get('category') || 'all';
   const verified = searchParams.get('verified') === 'true';
+  const author = searchParams.get('author') || '';
+  const search = searchParams.get('search') || '';
 
-  let filtered = MCP_SKILLS;
+  // Build query
+  let query = supabase
+    .from('mcp_servers')
+    .select('*', { count: 'exact' })
+    .eq('status', 'active');
 
+  // Apply filters
   if (category !== 'all') {
-    filtered = filtered.filter(skill => skill.category.includes(category));
+    query = query.eq('category', category);
   }
 
   if (verified) {
-    filtered = filtered.filter(skill => skill.verified);
+    query = query.eq('verified', true);
   }
 
-  const start = (page - 1) * limit;
-  const paginated = filtered.slice(start, start + limit);
+  if (author) {
+    query = query.eq('author', author);
+  }
+
+  if (search) {
+    query = query.or(`name.ilike.%${search}%,description.ilike.%${search}%`);
+  }
+
+  // Pagination
+  const from = (page - 1) * limit;
+  const to = from + limit - 1;
+
+  query = query
+    .order('rating', { ascending: false })
+    .range(from, to);
+
+  const { data, error, count } = await query;
+
+  if (error) {
+    console.error('Error fetching MCP servers:', error);
+    return NextResponse.json(
+      { error: 'Failed to fetch MCP servers', details: error.message },
+      { status: 500 }
+    );
+  }
+
+  // Get unique categories for filters
+  const { data: categoriesData } = await supabase
+    .from('mcp_servers')
+    .select('category')
+    .eq('status', 'active');
+
+  const categories = Array.from(new Set(
+    (categoriesData || []).map((m: any) => m.category)
+  ));
 
   const response = NextResponse.json({
     success: true,
-    data: paginated,
+    data: data || [],
     pagination: {
       page,
       limit,
-      total: filtered.length,
-      totalPages: Math.ceil(filtered.length / limit),
-      hasNextPage: start + limit < filtered.length,
-      hasPrevPage: page > 1
+      total: count || 0,
+      totalPages: Math.ceil((count || 0) / limit),
+      hasNextPage: from + limit < (count || 0),
+      hasPrevPage: page > 1,
     },
     filters: {
-      categories: ['ai', 'blockchain', 'data', 'dev', 'learning', 'memory', 'search', 'security', 'storage', 'weather'],
-      verifiedSkillsCount: MCP_SKILLS.filter(s => s.verified).length,
-      totalSkills: MCP_SKILLS.length
-    }
+      categories: categories.sort(),
+      verifiedSkillsCount: (data || []).filter((s: any) => s.verified).length,
+      totalSkills: count || 0,
+    },
   });
+
   response.headers.set('Access-Control-Allow-Origin', '*');
   response.headers.set('Cache-Control', 'public, max-age=300');
+
   return response;
 }

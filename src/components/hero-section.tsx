@@ -78,7 +78,7 @@ export function HeroSection() {
           <span className="block text-zinc-100">OpenMarketAccess</span>
           <span className="block mt-2">
             <span className="bg-gradient-to-r from-violet-300 via-fuchsia-300 to-amber-300 bg-clip-text text-transparent">
-              AI Agent Infrastructure
+              The Premier MCP Marketplace
             </span>
           </span>
         </motion.h1>
