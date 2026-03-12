@@ -54,16 +54,9 @@ export async function POST(request: Request) {
 
     emailStorage.push(submission);
 
-    // Log for debugging
-    console.log('[Contact Form] New submission:', {
-      id: submission.id,
-      name: body.name,
-      email: body.email,
-      category: body.category,
-      timestamp: submission.timestamp
-    });
-
-    // TODO: Send email via service
+    // TODO: Integrate email service (Resend, SendGrid, AWS SES)
+    // Email config needed: SMTP or API keys from environment variables
+    // Current implementation: In-memory storage (for demo purposes)
     // Example with Resend:
     // await resend.emails.send({
     //   from: 'OMA-Ai Support <support@oma-ai.com>',
