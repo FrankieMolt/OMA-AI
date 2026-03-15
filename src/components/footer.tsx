@@ -1,7 +1,8 @@
+import { memo } from 'react';
 import Link from 'next/link';
 import { Brain, Github, Twitter, Mail } from 'lucide-react';
 
-export function Footer() {
+export const Footer = memo(function Footer() {
   return (
     <footer className="border-t border-violet-500/10 bg-[#0a0a14] py-16 mt-20">
       <div className="max-w-7xl mx-auto px-6">
@@ -70,4 +71,4 @@ export function Footer() {
       </div>
     </footer>
   );
-}
+});

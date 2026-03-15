@@ -1,7 +1,5 @@
 import { Metadata } from 'next';
 import MCPMarketplace from '@/components/mcp-marketplace/MCPMarketplace';
-import Navigation from '@/components/Navigation';
-import { Footer } from '@/components/footer';
 
 export const metadata: Metadata = {
   title: 'MCP Marketplace | OMA-AI',
@@ -11,12 +9,8 @@ export const metadata: Metadata = {
 
 export default function MCPMarketplacePage() {
   return (
-    <>
-      <Navigation />
-      <main className="min-h-screen bg-zinc-950 pt-16">
-        <MCPMarketplace />
-      </main>
-      <Footer />
-    </>
+    <main className="min-h-screen bg-zinc-950 pt-16">
+      <MCPMarketplace />
+    </main>
   );
 }

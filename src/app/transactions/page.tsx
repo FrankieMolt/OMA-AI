@@ -1,7 +1,5 @@
 import { Metadata } from 'next';
 import TransactionsFeed from '@/components/transactions/TransactionsFeed';
-import Navigation from '@/components/Navigation';
-import { Footer } from '@/components/footer';
 
 export const metadata: Metadata = {
   title: 'Transactions | OMA-AI',
@@ -11,12 +9,8 @@ export const metadata: Metadata = {
 
 export default function TransactionsPage() {
   return (
-    <>
-      <Navigation />
-      <main className="min-h-screen bg-zinc-950 pt-16">
-        <TransactionsFeed />
-      </main>
-      <Footer />
-    </>
+    <main className="min-h-screen bg-zinc-950 pt-16">
+      <TransactionsFeed />
+    </main>
   );
 }

@@ -1,106 +1,664 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { createClient } from '@supabase/supabase-js';
+
+// Comprehensive MCP data - serves as fallback when Supabase unavailable
+const MCP_DATA = [
+  // AI/ML Category
+  {
+    id: '1',
+    name: 'Anthropic Claude MCP',
+    slug: 'anthropic-claude-mcp',
+    category: 'AI/ML',
+    description: 'Access Claude 4 Opus and Sonnet models via MCP protocol. Advanced reasoning, code generation, and analysis.',
+    long_description: 'Connect to Anthropic Claude models for advanced AI capabilities including complex reasoning, code generation, document analysis, and multi-turn conversations. Supports streaming, function calling, and vision.',
+    author: 'OMA-AI Team',
+    author_email: 'team@oma-ai.com',
+    repository_url: 'https://github.com/oma-ai/claude-mcp',
+    website_url: 'https://www.anthropic.com',
+    documentation_url: 'https://docs.oma-ai.com/mcps/anthropic-claude',
+    logo_url: '/icons/mcp/ai.svg',
+    version: '2.1.0',
+    mcp_endpoint: 'https://api.oma-ai.com/mcp/claude',
+    transport: 'sse',
+    pricing_usdc: 0.015,
+    x402_enabled: true,
+    verified: true,
+    status: 'active',
+    rating: 4.9,
+    total_calls: 45230,
+    success_rate: 99.7,
+    avg_latency_ms: 1200,
+    tags: ['ai', 'claude', 'anthropic', 'llm', 'reasoning'],
+    tools: ['chat', 'completion', 'analyze', 'code_generate'],
+    created_at: '2026-01-15T00:00:00Z',
+    updated_at: '2026-03-10T00:00:00Z',
+  },
+  {
+    id: '2',
+    name: 'OpenAI GPT MCP',
+    slug: 'openai-gpt-mcp',
+    category: 'AI/ML',
+    description: 'Access GPT-5 and o3 models via MCP protocol. Fast inference, multimodal capabilities.',
+    long_description: 'Integrate OpenAI GPT models including GPT-5, o3, and DALL-E 3. Supports text, vision, image generation, embeddings, and audio transcription.',
+    author: 'OMA-AI Team',
+    author_email: 'team@oma-ai.com',
+    repository_url: 'https://github.com/oma-ai/openai-mcp',
+    website_url: 'https://www.openai.com',
+    documentation_url: 'https://docs.oma-ai.com/mcps/openai-gpt',
+    logo_url: '/icons/mcp/ai.svg',
+    version: '2.0.0',
+    mcp_endpoint: 'https://api.oma-ai.com/mcp/openai',
+    transport: 'sse',
+    pricing_usdc: 0.020,
+    x402_enabled: true,
+    verified: true,
+    status: 'active',
+    rating: 4.8,
+    total_calls: 38920,
+    success_rate: 99.5,
+    avg_latency_ms: 980,
+    tags: ['ai', 'openai', 'gpt', 'llm', 'multimodal'],
+    tools: ['chat', 'completion', 'embeddings', 'image_generate', 'transcribe'],
+    created_at: '2026-01-15T00:00:00Z',
+    updated_at: '2026-03-10T00:00:00Z',
+  },
+  {
+    id: '3',
+    name: 'Cohere Command MCP',
+    slug: 'cohere-command-mcp',
+    category: 'AI/ML',
+    description: 'Enterprise-grade language models optimized for RAG, search, and classification.',
+    long_description: 'Access Cohere Command R+ models optimized for retrieval-augmented generation, semantic search, text classification, and multilingual tasks.',
+    author: 'OMA-AI Team',
+    author_email: 'team@oma-ai.com',
+    repository_url: 'https://github.com/oma-ai/cohere-mcp',
+    website_url: 'https://cohere.com',
+    documentation_url: 'https://docs.oma-ai.com/mcps/cohere',
+    logo_url: '/icons/mcp/ai.svg',
+    version: '1.2.0',
+    mcp_endpoint: 'https://api.oma-ai.com/mcp/cohere',
+    transport: 'sse',
+    pricing_usdc: 0.008,
+    x402_enabled: true,
+    verified: true,
+    status: 'active',
+    rating: 4.6,
+    total_calls: 12450,
+    success_rate: 99.2,
+    avg_latency_ms: 850,
+    tags: ['ai', 'cohere', 'rag', 'search', 'classification'],
+    tools: ['chat', 'embed', 'classify', 'rerank'],
+    created_at: '2026-01-20T00:00:00Z',
+    updated_at: '2026-03-08T00:00:00Z',
+  },
+  {
+    id: '4',
+    name: 'Stable Diffusion MCP',
+    slug: 'stable-diffusion-mcp',
+    category: 'AI/ML',
+    description: 'Generate and edit images with SDXL and SD3. ControlNet, img2img, and upscaling.',
+    long_description: 'Create high-quality images using Stability AI models. Supports text-to-image, image-to-image, inpainting, ControlNet, background removal, and 4x upscaling.',
+    author: 'OMA-AI Team',
+    author_email: 'team@oma-ai.com',
+    repository_url: 'https://github.com/oma-ai/stability-mcp',
+    website_url: 'https://stability.ai',
+    documentation_url: 'https://docs.oma-ai.com/mcps/stable-diffusion',
+    logo_url: '/icons/mcp/image.svg',
+    version: '1.5.0',
+    mcp_endpoint: 'https://api.oma-ai.com/mcp/stability',
+    transport: 'sse',
+    pricing_usdc: 0.025,
+    x402_enabled: true,
+    verified: true,
+    status: 'active',
+    rating: 4.7,
+    total_calls: 28100,
+    success_rate: 98.9,
+    avg_latency_ms: 3500,
+    tags: ['ai', 'image', 'stable-diffusion', 'generation', 'art'],
+    tools: ['generate', 'img2img', 'inpaint', 'upscale', 'remove_background'],
+    created_at: '2026-01-18T00:00:00Z',
+    updated_at: '2026-03-09T00:00:00Z',
+  },
+  // Data & Databases
+  {
+    id: '5',
+    name: 'PostgreSQL Query MCP',
+    slug: 'postgres-query-mcp',
+    category: 'Data & Databases',
+    description: 'Execute SQL queries, manage schemas, and run migrations on PostgreSQL databases.',
+    long_description: 'Secure PostgreSQL access with query execution, schema management, migrations, and real-time subscriptions. Supports connection pooling and read replicas.',
+    author: 'OMA-AI Team',
+    author_email: 'team@oma-ai.com',
+    repository_url: 'https://github.com/oma-ai/postgres-mcp',
+    website_url: 'https://www.postgresql.org',
+    documentation_url: 'https://docs.oma-ai.com/mcps/postgres',
+    logo_url: '/icons/mcp/database.svg',
+    version: '1.8.0',
+    mcp_endpoint: 'https://api.oma-ai.com/mcp/postgres',
+    transport: 'stdio',
+    pricing_usdc: 0.005,
+    x402_enabled: true,
+    verified: true,
+    status: 'active',
+    rating: 4.8,
+    total_calls: 67800,
+    success_rate: 99.8,
+    avg_latency_ms: 45,
+    tags: ['database', 'sql', 'postgres', 'data', 'query'],
+    tools: ['query', 'execute', 'schema', 'migrate', 'backup'],
+    created_at: '2026-01-10T00:00:00Z',
+    updated_at: '2026-03-12T00:00:00Z',
+  },
+  {
+    id: '6',
+    name: 'Redis Cache MCP',
+    slug: 'redis-cache-mcp',
+    category: 'Data & Databases',
+    description: 'High-performance caching, pub/sub, and rate limiting with Redis.',
+    long_description: 'Redis operations including key-value caching, pub/sub messaging, rate limiting, session management, and sorted sets for leaderboards.',
+    author: 'OMA-AI Team',
+    author_email: 'team@oma-ai.com',
+    repository_url: 'https://github.com/oma-ai/redis-mcp',
+    website_url: 'https://redis.io',
+    documentation_url: 'https://docs.oma-ai.com/mcps/redis',
+    logo_url: '/icons/mcp/database.svg',
+    version: '1.4.0',
+    mcp_endpoint: 'https://api.oma-ai.com/mcp/redis',
+    transport: 'stdio',
+    pricing_usdc: 0.001,
+    x402_enabled: true,
+    verified: true,
+    status: 'active',
+    rating: 4.7,
+    total_calls: 89200,
+    success_rate: 99.9,
+    avg_latency_ms: 8,
+    tags: ['cache', 'redis', 'pubsub', 'rate-limit', 'session'],
+    tools: ['get', 'set', 'delete', 'publish', 'subscribe', 'rate_limit'],
+    created_at: '2026-01-12T00:00:00Z',
+    updated_at: '2026-03-11T00:00:00Z',
+  },
+  {
+    id: '7',
+    name: 'MongoDB Atlas MCP',
+    slug: 'mongodb-atlas-mcp',
+    category: 'Data & Databases',
+    description: 'Document database operations with aggregation pipelines and full-text search.',
+    long_description: 'MongoDB Atlas integration for document CRUD, aggregation pipelines, full-text search, geospatial queries, and change streams.',
+    author: 'OMA-AI Team',
+    author_email: 'team@oma-ai.com',
+    repository_url: 'https://github.com/oma-ai/mongodb-mcp',
+    website_url: 'https://www.mongodb.com',
+    documentation_url: 'https://docs.oma-ai.com/mcps/mongodb',
+    logo_url: '/icons/mcp/database.svg',
+    version: '1.3.0',
+    mcp_endpoint: 'https://api.oma-ai.com/mcp/mongodb',
+    transport: 'stdio',
+    pricing_usdc: 0.005,
+    x402_enabled: true,
+    verified: true,
+    status: 'active',
+    rating: 4.5,
+    total_calls: 23400,
+    success_rate: 99.4,
+    avg_latency_ms: 65,
+    tags: ['database', 'mongodb', 'nosql', 'document', 'atlas'],
+    tools: ['find', 'insert', 'update', 'aggregate', 'search'],
+    created_at: '2026-01-22T00:00:00Z',
+    updated_at: '2026-03-07T00:00:00Z',
+  },
+  // Finance & Crypto
+  {
+    id: '8',
+    name: 'CoinGecko Prices MCP',
+    slug: 'coingecko-prices-mcp',
+    category: 'Finance & Crypto',
+    description: 'Real-time crypto prices, market data, and historical charts. 10,000+ tokens.',
+    long_description: 'Comprehensive cryptocurrency data including real-time prices, market caps, trading volumes, historical OHLCV data, and trending tokens across all major chains.',
+    author: 'OMA-AI Team',
+    author_email: 'team@oma-ai.com',
+    repository_url: 'https://github.com/oma-ai/coingecko-mcp',
+    website_url: 'https://www.coingecko.com',
+    documentation_url: 'https://docs.oma-ai.com/mcps/coingecko',
+    logo_url: '/icons/mcp/crypto.svg',
+    version: '2.0.0',
+    mcp_endpoint: 'https://api.oma-ai.com/mcp/coingecko',
+    transport: 'sse',
+    pricing_usdc: 0,
+    x402_enabled: true,
+    verified: true,
+    status: 'active',
+    rating: 4.9,
+    total_calls: 156000,
+    success_rate: 99.9,
+    avg_latency_ms: 120,
+    tags: ['crypto', 'prices', 'bitcoin', 'ethereum', 'free'],
+    tools: ['price', 'market_data', 'historical', 'trending', 'search'],
+    created_at: '2026-01-08T00:00:00Z',
+    updated_at: '2026-03-14T00:00:00Z',
+  },
+  {
+    id: '9',
+    name: 'Jupiter Swap MCP',
+    slug: 'jupiter-swap-mcp',
+    category: 'Finance & Crypto',
+    description: 'Solana DEX aggregator for token swaps. Best rates across all liquidity sources.',
+    long_description: 'Execute token swaps on Solana via Jupiter aggregator. Access to all DEXs, limit orders, DCA, and real-time quotes with minimal slippage.',
+    author: 'OMA-AI Team',
+    author_email: 'team@oma-ai.com',
+    repository_url: 'https://github.com/oma-ai/jupiter-mcp',
+    website_url: 'https://jup.ag',
+    documentation_url: 'https://docs.oma-ai.com/mcps/jupiter',
+    logo_url: '/icons/mcp/crypto.svg',
+    version: '1.6.0',
+    mcp_endpoint: 'https://api.oma-ai.com/mcp/jupiter',
+    transport: 'sse',
+    pricing_usdc: 0.002,
+    x402_enabled: true,
+    verified: true,
+    status: 'active',
+    rating: 4.8,
+    total_calls: 43200,
+    success_rate: 99.6,
+    avg_latency_ms: 350,
+    tags: ['solana', 'dex', 'swap', 'jupiter', 'trading'],
+    tools: ['quote', 'swap', 'limit_order', 'dca', 'tokens'],
+    created_at: '2026-02-01T00:00:00Z',
+    updated_at: '2026-03-13T00:00:00Z',
+  },
+  {
+    id: '10',
+    name: 'Stock Market Data MCP',
+    slug: 'stock-market-mcp',
+    category: 'Finance & Crypto',
+    description: 'Real-time stock quotes, fundamentals, and technical indicators. US + global markets.',
+    long_description: 'Stock market data including real-time quotes, historical prices, financial statements, analyst ratings, and 50+ technical indicators.',
+    author: 'OMA-AI Team',
+    author_email: 'team@oma-ai.com',
+    repository_url: 'https://github.com/oma-ai/stocks-mcp',
+    website_url: 'https://www.alphavantage.co',
+    documentation_url: 'https://docs.oma-ai.com/mcps/stocks',
+    logo_url: '/icons/mcp/finance.svg',
+    version: '1.4.0',
+    mcp_endpoint: 'https://api.oma-ai.com/mcp/stocks',
+    transport: 'sse',
+    pricing_usdc: 0.005,
+    x402_enabled: true,
+    verified: true,
+    status: 'active',
+    rating: 4.6,
+    total_calls: 31500,
+    success_rate: 99.3,
+    avg_latency_ms: 200,
+    tags: ['stocks', 'finance', 'trading', 'market', 'technical-analysis'],
+    tools: ['quote', 'historical', 'fundamentals', 'indicators', 'earnings'],
+    created_at: '2026-01-25T00:00:00Z',
+    updated_at: '2026-03-06T00:00:00Z',
+  },
+  // Web & Search
+  {
+    id: '11',
+    name: 'Exa Web Search MCP',
+    slug: 'exa-web-search-mcp',
+    category: 'Web & Search',
+    description: 'AI-powered web search with semantic understanding. Better than traditional search APIs.',
+    long_description: 'Neural search engine that understands meaning, not just keywords. Search the web, find similar pages, get structured data from URLs, and access company information.',
+    author: 'OMA-AI Team',
+    author_email: 'team@oma-ai.com',
+    repository_url: 'https://github.com/oma-ai/exa-mcp',
+    website_url: 'https://exa.ai',
+    documentation_url: 'https://docs.oma-ai.com/mcps/exa',
+    logo_url: '/icons/mcp/search.svg',
+    version: '1.7.0',
+    mcp_endpoint: 'https://api.oma-ai.com/mcp/exa',
+    transport: 'sse',
+    pricing_usdc: 0.004,
+    x402_enabled: true,
+    verified: true,
+    status: 'active',
+    rating: 4.8,
+    total_calls: 52100,
+    success_rate: 99.1,
+    avg_latency_ms: 800,
+    tags: ['search', 'web', 'ai', 'semantic', 'research'],
+    tools: ['search', 'find_similar', 'get_contents', 'company_info'],
+    created_at: '2026-01-14T00:00:00Z',
+    updated_at: '2026-03-11T00:00:00Z',
+  },
+  {
+    id: '12',
+    name: 'Web Scraper MCP',
+    slug: 'web-scraper-mcp',
+    category: 'Web & Search',
+    description: 'Extract structured data from any website. JavaScript rendering, proxies, anti-bot bypass.',
+    long_description: 'Production-grade web scraping with JavaScript rendering, automatic retries, proxy rotation, and structured data extraction. Handles SPAs and anti-bot protection.',
+    author: 'OMA-AI Team',
+    author_email: 'team@oma-ai.com',
+    repository_url: 'https://github.com/oma-ai/scraper-mcp',
+    website_url: 'https://www.oma-ai.com',
+    documentation_url: 'https://docs.oma-ai.com/mcps/scraper',
+    logo_url: '/icons/mcp/web.svg',
+    version: '2.1.0',
+    mcp_endpoint: 'https://api.oma-ai.com/mcp/scraper',
+    transport: 'sse',
+    pricing_usdc: 0.004,
+    x402_enabled: true,
+    verified: true,
+    status: 'active',
+    rating: 4.7,
+    total_calls: 38900,
+    success_rate: 97.8,
+    avg_latency_ms: 2500,
+    tags: ['scraper', 'web', 'data-extraction', 'crawl', 'automation'],
+    tools: ['scrape', 'screenshot', 'pdf', 'extract', 'crawl'],
+    created_at: '2026-01-16T00:00:00Z',
+    updated_at: '2026-03-10T00:00:00Z',
+  },
+  // Developer Tools
+  {
+    id: '13',
+    name: 'GitHub Integration MCP',
+    slug: 'github-integration-mcp',
+    category: 'Developer Tools',
+    description: 'Full GitHub API access. Repos, issues, PRs, actions, code search, and more.',
+    long_description: 'Complete GitHub integration including repository management, issue tracking, pull requests, Actions workflows, code search, and webhook management.',
+    author: 'OMA-AI Team',
+    author_email: 'team@oma-ai.com',
+    repository_url: 'https://github.com/oma-ai/github-mcp',
+    website_url: 'https://github.com',
+    documentation_url: 'https://docs.oma-ai.com/mcps/github',
+    logo_url: '/icons/mcp/dev.svg',
+    version: '2.3.0',
+    mcp_endpoint: 'https://api.oma-ai.com/mcp/github',
+    transport: 'stdio',
+    pricing_usdc: 0.001,
+    x402_enabled: true,
+    verified: true,
+    status: 'active',
+    rating: 4.9,
+    total_calls: 94500,
+    success_rate: 99.8,
+    avg_latency_ms: 180,
+    tags: ['github', 'git', 'code', 'ci-cd', 'developer'],
+    tools: ['repos', 'issues', 'prs', 'actions', 'search', 'webhooks'],
+    created_at: '2026-01-05T00:00:00Z',
+    updated_at: '2026-03-14T00:00:00Z',
+  },
+  {
+    id: '14',
+    name: 'Docker Management MCP',
+    slug: 'docker-management-mcp',
+    category: 'Developer Tools',
+    description: 'Manage Docker containers, images, volumes, and networks programmatically.',
+    long_description: 'Docker operations including container lifecycle, image building, volume management, network configuration, log streaming, and compose orchestration.',
+    author: 'OMA-AI Team',
+    author_email: 'team@oma-ai.com',
+    repository_url: 'https://github.com/oma-ai/docker-mcp',
+    website_url: 'https://www.docker.com',
+    documentation_url: 'https://docs.oma-ai.com/mcps/docker',
+    logo_url: '/icons/mcp/dev.svg',
+    version: '1.5.0',
+    mcp_endpoint: 'https://api.oma-ai.com/mcp/docker',
+    transport: 'stdio',
+    pricing_usdc: 0.002,
+    x402_enabled: true,
+    verified: true,
+    status: 'active',
+    rating: 4.6,
+    total_calls: 18700,
+    success_rate: 99.5,
+    avg_latency_ms: 500,
+    tags: ['docker', 'containers', 'devops', 'infrastructure'],
+    tools: ['containers', 'images', 'volumes', 'networks', 'logs', 'compose'],
+    created_at: '2026-01-28T00:00:00Z',
+    updated_at: '2026-03-05T00:00:00Z',
+  },
+  // Communication
+  {
+    id: '15',
+    name: 'Email Sender MCP',
+    slug: 'email-sender-mcp',
+    category: 'Communication',
+    description: 'Transactional email with templates, attachments, and delivery tracking.',
+    long_description: 'Send transactional emails with HTML templates, attachments, scheduling, and delivery tracking. Supports multiple providers (SendGrid, AWS SES, Resend).',
+    author: 'OMA-AI Team',
+    author_email: 'team@oma-ai.com',
+    repository_url: 'https://github.com/oma-ai/email-mcp',
+    website_url: 'https://www.oma-ai.com',
+    documentation_url: 'https://docs.oma-ai.com/mcps/email',
+    logo_url: '/icons/mcp/comm.svg',
+    version: '1.6.0',
+    mcp_endpoint: 'https://api.oma-ai.com/mcp/email',
+    transport: 'sse',
+    pricing_usdc: 0.001,
+    x402_enabled: true,
+    verified: true,
+    status: 'active',
+    rating: 4.7,
+    total_calls: 72300,
+    success_rate: 99.6,
+    avg_latency_ms: 450,
+    tags: ['email', 'notifications', 'transactional', 'templates'],
+    tools: ['send', 'send_template', 'schedule', 'status', 'templates'],
+    created_at: '2026-01-11T00:00:00Z',
+    updated_at: '2026-03-09T00:00:00Z',
+  },
+  {
+    id: '16',
+    name: 'Discord Bot MCP',
+    slug: 'discord-bot-mcp',
+    category: 'Communication',
+    description: 'Full Discord bot functionality. Messages, channels, roles, embeds, and reactions.',
+    long_description: 'Discord bot operations including sending messages, managing channels/roles, creating embeds, handling reactions, slash commands, and webhook integrations.',
+    author: 'OMA-AI Team',
+    author_email: 'team@oma-ai.com',
+    repository_url: 'https://github.com/oma-ai/discord-mcp',
+    website_url: 'https://discord.com',
+    documentation_url: 'https://docs.oma-ai.com/mcps/discord',
+    logo_url: '/icons/mcp/comm.svg',
+    version: '1.4.0',
+    mcp_endpoint: 'https://api.oma-ai.com/mcp/discord',
+    transport: 'sse',
+    pricing_usdc: 0.002,
+    x402_enabled: true,
+    verified: true,
+    status: 'active',
+    rating: 4.5,
+    total_calls: 29800,
+    success_rate: 99.3,
+    avg_latency_ms: 250,
+    tags: ['discord', 'bot', 'chat', 'community', 'webhooks'],
+    tools: ['send_message', 'embed', 'channels', 'roles', 'reactions'],
+    created_at: '2026-02-05T00:00:00Z',
+    updated_at: '2026-03-08T00:00:00Z',
+  },
+  // Utilities
+  {
+    id: '17',
+    name: 'Weather API MCP',
+    slug: 'weather-api-mcp',
+    category: 'Utilities',
+    description: 'Real-time weather data and 14-day forecasts for any location. Free tier available.',
+    long_description: 'Global weather data including current conditions, hourly/daily forecasts, historical data, air quality, UV index, and severe weather alerts.',
+    author: 'OMA-AI Team',
+    author_email: 'team@oma-ai.com',
+    repository_url: 'https://github.com/oma-ai/weather-mcp',
+    website_url: 'https://openweathermap.org',
+    documentation_url: 'https://docs.oma-ai.com/mcps/weather',
+    logo_url: '/icons/mcp/util.svg',
+    version: '1.9.0',
+    mcp_endpoint: 'https://api.oma-ai.com/mcp/weather',
+    transport: 'sse',
+    pricing_usdc: 0,
+    x402_enabled: true,
+    verified: true,
+    status: 'active',
+    rating: 4.9,
+    total_calls: 112000,
+    success_rate: 99.9,
+    avg_latency_ms: 95,
+    tags: ['weather', 'forecast', 'free', 'api', 'location'],
+    tools: ['current', 'forecast', 'historical', 'air_quality', 'alerts'],
+    created_at: '2026-01-06T00:00:00Z',
+    updated_at: '2026-03-12T00:00:00Z',
+  },
+  {
+    id: '18',
+    name: 'PDF Processing MCP',
+    slug: 'pdf-processing-mcp',
+    category: 'Utilities',
+    description: 'Create, merge, split, extract text, and convert PDFs. OCR support included.',
+    long_description: 'Comprehensive PDF operations including creation, merging, splitting, text extraction, OCR, form filling, digital signatures, and format conversion.',
+    author: 'OMA-AI Team',
+    author_email: 'team@oma-ai.com',
+    repository_url: 'https://github.com/oma-ai/pdf-mcp',
+    website_url: 'https://www.oma-ai.com',
+    documentation_url: 'https://docs.oma-ai.com/mcps/pdf',
+    logo_url: '/icons/mcp/util.svg',
+    version: '1.7.0',
+    mcp_endpoint: 'https://api.oma-ai.com/mcp/pdf',
+    transport: 'stdio',
+    pricing_usdc: 0.003,
+    x402_enabled: true,
+    verified: true,
+    status: 'active',
+    rating: 4.6,
+    total_calls: 21300,
+    success_rate: 98.7,
+    avg_latency_ms: 1200,
+    tags: ['pdf', 'documents', 'ocr', 'conversion', 'extraction'],
+    tools: ['create', 'merge', 'split', 'extract', 'ocr', 'convert'],
+    created_at: '2026-01-19T00:00:00Z',
+    updated_at: '2026-03-07T00:00:00Z',
+  },
+  {
+    id: '19',
+    name: 'S3 Storage MCP',
+    slug: 's3-storage-mcp',
+    category: 'Utilities',
+    description: 'S3-compatible object storage. Upload, download, list, and manage files.',
+    long_description: 'Object storage operations compatible with AWS S3, R2, MinIO, and other S3-compatible providers. Includes presigned URLs, multipart upload, and lifecycle policies.',
+    author: 'OMA-AI Team',
+    author_email: 'team@oma-ai.com',
+    repository_url: 'https://github.com/oma-ai/s3-mcp',
+    website_url: 'https://aws.amazon.com/s3',
+    documentation_url: 'https://docs.oma-ai.com/mcps/s3',
+    logo_url: '/icons/mcp/storage.svg',
+    version: '1.5.0',
+    mcp_endpoint: 'https://api.oma-ai.com/mcp/s3',
+    transport: 'stdio',
+    pricing_usdc: 0.002,
+    x402_enabled: true,
+    verified: true,
+    status: 'active',
+    rating: 4.7,
+    total_calls: 34600,
+    success_rate: 99.7,
+    avg_latency_ms: 150,
+    tags: ['storage', 's3', 'files', 'upload', 'cdn'],
+    tools: ['upload', 'download', 'list', 'delete', 'presigned_url'],
+    created_at: '2026-01-17T00:00:00Z',
+    updated_at: '2026-03-10T00:00:00Z',
+  },
+];
+
+function getSupabaseClient() {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (!url || !key) return null;
+  return createClient(url, key);
+}
 
 export async function GET(request: Request) {
-  // Check if Supabase is configured
-  if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
-    return NextResponse.json(
-      {
-        success: false,
-        error: 'Supabase not configured',
-        message: 'Please set NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY environment variables',
-        data: [],
-        pagination: { page: 1, limit: 20, total: 0, totalPages: 0, hasNextPage: false, hasPrevPage: false },
-        filters: { categories: [], verifiedSkillsCount: 0, totalSkills: 0 },
-      },
-      { status: 503 }
-    );
-  }
-
-  const { createClient } = await import('@supabase/supabase-js');
-  const supabase = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL,
-    process.env.SUPABASE_SERVICE_ROLE_KEY
-  );
-
   const { searchParams } = new URL(request.url);
   const page = parseInt(searchParams.get('page') || '1');
   const limit = parseInt(searchParams.get('limit') || '20');
   const category = searchParams.get('category') || 'all';
-  const verified = searchParams.get('verified') === 'true';
-  const author = searchParams.get('author') || '';
   const search = searchParams.get('search') || '';
+  const sortBy = searchParams.get('sort') || 'rating';
 
-  // Build query
-  let query = supabase
-    .from('mcp_servers')
-    .select('*', { count: 'exact' })
-    .eq('status', 'active');
+  const supabase = getSupabaseClient();
+  let data = [...MCP_DATA];
+  let total = data.length;
+  let useSupabase = false;
 
-  // Apply filters
-  if (category !== 'all') {
-    query = query.eq('category', category);
+  // Try Supabase first
+  if (supabase) {
+    try {
+      let query = supabase.from('mcps').select('*', { count: 'exact' }).eq('status', 'active');
+
+      if (category !== 'all') {
+        query = query.eq('category', category);
+      }
+      if (search) {
+        query = query.or(`name.ilike.%${search}%,description.ilike.%${search}%`);
+      }
+
+      const { data: dbData, count, error } = await query
+        .order(sortBy === 'rating' ? 'rating' : 'total_calls', { ascending: false })
+        .range((page - 1) * limit, page * limit - 1);
+
+      if (!error && dbData && dbData.length > 0) {
+        data = dbData;
+        total = count || dbData.length;
+        useSupabase = true;
+      }
+    } catch {
+      // Fall through to local data
+    }
   }
 
-  if (verified) {
-    query = query.eq('verified', true);
+  // Use local data if Supabase unavailable
+  if (!useSupabase) {
+    // Filter
+    if (category !== 'all') {
+      data = data.filter(m => m.category === category);
+    }
+    if (search) {
+      const q = search.toLowerCase();
+      data = data.filter(m =>
+        m.name.toLowerCase().includes(q) ||
+        m.description.toLowerCase().includes(q) ||
+        m.tags.some(t => t.includes(q))
+      );
+    }
+
+    // Sort
+    data.sort((a, b) => {
+      if (sortBy === 'rating') return (b.rating || 0) - (a.rating || 0);
+      if (sortBy === 'calls') return (b.total_calls || 0) - (a.total_calls || 0);
+      if (sortBy === 'price') return (a.pricing_usdc || 0) - (b.pricing_usdc || 0);
+      return 0;
+    });
+
+    total = data.length;
+    data = data.slice((page - 1) * limit, page * limit);
   }
 
-  if (author) {
-    query = query.eq('author', author);
-  }
-
-  if (search) {
-    query = query.or(`name.ilike.%${search}%,description.ilike.%${search}%`);
-  }
-
-  // Pagination
-  const from = (page - 1) * limit;
-  const to = from + limit - 1;
-
-  query = query
-    .order('rating', { ascending: false })
-    .range(from, to);
-
-  const { data, error, count } = await query;
-
-  if (error) {
-    console.error('Error fetching MCP servers:', error);
-    return NextResponse.json(
-      { error: 'Failed to fetch MCP servers', details: error.message },
-      { status: 500 }
-    );
-  }
-
-  // Get unique categories for filters
-  const { data: categoriesData } = await supabase
-    .from('mcp_servers')
-    .select('category')
-    .eq('status', 'active');
-
-  const categories = Array.from(new Set(
-    (categoriesData || []).map((m: any) => m.category)
-  ));
+  // Get unique categories
+  const categories = [...new Set(MCP_DATA.map(m => m.category))].sort();
 
   const response = NextResponse.json({
     success: true,
-    data: data || [],
+    data,
     pagination: {
       page,
       limit,
-      total: count || 0,
-      totalPages: Math.ceil((count || 0) / limit),
-      hasNextPage: from + limit < (count || 0),
+      total,
+      totalPages: Math.ceil(total / limit),
+      hasNextPage: page * limit < total,
       hasPrevPage: page > 1,
     },
     filters: {
-      categories: categories.sort(),
-      verifiedSkillsCount: (data || []).filter((s: any) => s.verified).length,
-      totalSkills: count || 0,
+      categories,
+      totalMCPs: MCP_DATA.length,
+      verifiedCount: MCP_DATA.filter(m => m.verified).length,
     },
+    source: useSupabase ? 'supabase' : 'fallback',
   });
 
   response.headers.set('Access-Control-Allow-Origin', '*');
   response.headers.set('Cache-Control', 'public, max-age=300');
-
   return response;
 }

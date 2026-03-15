@@ -4,6 +4,7 @@ import Script from 'next/script'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { Analytics } from '@vercel/analytics/next'
 import { Footer } from '@/components/footer'
+import Navigation from '@/components/Navigation'
 import { Providers } from '@/components/providers'
 import { ErrorBoundary } from '@/components/error-boundary'
 import './globals.css'
@@ -24,6 +25,10 @@ export const metadata: Metadata = {
   description: 'Enterprise-grade infrastructure for building, deploying, and monitoring autonomous AI agents at scale. The standard for agentic compute.',
   keywords: ['autonomous agents', 'AI infrastructure', 'agent orchestration', 'enterprise AI', 'x402 protocol'],
   authors: [{ name: 'OMA Systems' }],
+  icons: {
+    icon: '/icon-192.svg',
+    apple: '/icon-512.svg',
+  },
   openGraph: {
     type: 'website',
     locale: 'en_US',
@@ -31,6 +36,14 @@ export const metadata: Metadata = {
     siteName: 'OMA Infrastructure',
     title: 'OMA - Autonomous Agent Infrastructure',
     description: 'Build, deploy, and monitor autonomous AI agents at scale.',
+    images: [
+      {
+        url: '/icon-512.svg',
+        width: 512,
+        height: 512,
+        alt: 'OMA Infrastructure Logo',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
@@ -57,6 +70,7 @@ export default function RootLayout({
       <body className={`${inter.className} bg-zinc-950 text-zinc-50 antialiased selection:bg-zinc-800`}>
         <ErrorBoundary>
           <Providers>
+            <Navigation />
             {children}
             <Footer />
           </Providers>

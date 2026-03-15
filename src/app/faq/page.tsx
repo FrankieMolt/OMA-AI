@@ -392,7 +392,7 @@ In payment prompts, select which wallet to use (if both are connected). Default 
 **Error Responses:**
 All errors return structured JSON:
 \`\`\`json
-{
+{ id: "18",
   "success": false,
   "error": "Error message",
   "code": 400,

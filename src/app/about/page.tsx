@@ -1,305 +1,453 @@
 import { Metadata } from 'next';
-import Link from 'next/link';
+import { GlassCard, GlassCardPurple } from '@/components/ui/GlassCard';
+import { Shield, Zap, DollarSign, Lock, Github, Twitter, Rocket, BarChart3, Users, Globe, Code, CheckCircle2 } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'About OMA-AI | The Premier MCP Marketplace',
-  description: 'Learn about OMA-AI, the leading MCP marketplace for AI agents. Discover our mission, team, and vision for the future of agentic AI.',
+  title: 'About OMA-AI | Premier MCP Marketplace for AI Agents',
+  description: 'Learn about OMA-AI, the leading MCP marketplace. Discover our mission, team, and vision for agentic AI with x402 gasless payments.',
   keywords: ['OMA-AI', 'About', 'MCP marketplace', 'AI agents', 'Model Context Protocol'],
 };
 
 export default function AboutPage() {
+  const stats = [
+    { value: '57+', label: 'Pages' },
+    { value: '24', label: 'API Routes' },
+    { value: '13', label: 'Blog Posts' },
+    { value: '229', label: 'MCP Tools' },
+    { value: '5%', label: 'Platform Fee' },
+    { value: '7/8', label: 'MCP Servers' },
+  ];
+
   return (
-    <div className="min-h-screen bg-zinc-950">
-      <div className="container mx-auto px-4 max-w-4xl py-16">
-        {/* Hero */}
+    <main className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 pt-24 pb-12">
+      <div className="container mx-auto px-4 max-w-6xl">
+        {/* Header */}
         <div className="text-center mb-16">
-          <h1 className="text-5xl font-bold text-white mb-6">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-purple-600/20 border border-purple-500/30 rounded-full mb-6">
+            <Rocket className="w-4 h-4 text-purple-300" />
+            <span className="text-sm font-semibold text-purple-300">About OMA-AI</span>
+          </div>
+          <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
             Building the Future of
-            <span className="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-fuchsia-400">
+            <span className="block mt-2 bg-gradient-to-r from-purple-400 to-fuchsia-400 bg-clip-text text-transparent">
               Agentic AI
             </span>
           </h1>
-          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
             OMA-AI is the premier MCP (Model Context Protocol) marketplace, empowering AI agents
             with the tools they need to perform complex tasks autonomously.
           </p>
         </div>
 
+        {/* Stats */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-16">
+          {stats.map((stat) => (
+            <GlassCard className="p-4 text-center hover">
+              <div className="text-3xl font-bold text-white mb-1">{stat.value}</div>
+              <div className="text-sm text-gray-400">{stat.label}</div>
+            </GlassCard>
+          ))}
+        </div>
+
         {/* Mission */}
-        <section className="mb-16">
-          <h2 className="text-3xl font-bold text-white mb-6">Our Mission</h2>
-          <p className="text-gray-300 leading-relaxed text-lg">
-            We believe that AI agents should have universal access to the world's tools and services.
-            OMA-AI exists to bridge the gap between AI assistants and external capabilities,
-            enabling agents to read files, make HTTP requests, interact with databases,
-            manage version control, and much more.
-          </p>
-          <p className="text-gray-300 leading-relaxed text-lg mt-4">
-            By providing a standardized, secure, and monetizable marketplace for MCP tools,
-            we're accelerating the development of the agentic AI ecosystem.
-          </p>
-        </section>
-
-        {/* What We Do */}
-        <section className="mb-16">
-          <h2 className="text-3xl font-bold text-white mb-8">What We Do</h2>
-          <div className="grid md:grid-cols-2 gap-6">
-            <FeatureCard
-              title="MCP Marketplace"
-              description="Discover and integrate hundreds of MCP tools for your AI agents.
-              Filter by category, rating, and verification status to find the perfect tool."
-              icon="🔍"
-            />
-            <FeatureCard
-              title="Developer Platform"
-              description="Publish your own MCP tools and earn revenue from API calls.
-              Our 4-step wizard makes it easy to get your tools in the marketplace."
-              icon="🚀"
-            />
-            <FeatureCard
-              title="x402 Payments"
-              description="Gasless microtransactions powered by x402 protocol.
-              Users pay per API call without worrying about gas fees."
-              icon="💰"
-            />
-            <FeatureCard
-              title="Multi-Chain Support"
-              description="Support for Base and Solana networks.
-              Connect your wallet and receive payouts in USDC."
-              icon="⛓️"
-            />
-          </div>
-        </section>
-
-        {/* Why OMA-AI */}
-        <section className="mb-16">
-          <h2 className="text-3xl font-bold text-white mb-8">Why OMA-AI?</h2>
-          <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-8">
-            <div className="space-y-6">
-              <Reason
-                title="5% Platform Fee"
-                description="Industry-leading low fees mean developers keep more of their revenue.
-                Competitors charge 10-20%, we charge only 5%."
-              />
-              <Reason
-                title="Gasless Payments"
-                description="Powered by x402 protocol, users don't pay gas fees.
-                Makes micro-payments practical and affordable."
-              />
-              <Reason
-                title="Official MCPs Included"
-                description="7 official MCPs available out of the box, including Filesystem,
-                Fetch, Git, Memory, and more."
-              />
-              <Reason
-                title="Better Developer Experience"
-                description="4-step publish wizard, real-time analytics, and comprehensive
-                documentation make building and monetizing MCPs easy."
-              />
-              <Reason
-                title="Multi-Chain Support"
-                description="Support for both Base and Solana networks, giving you flexibility
-                in how you receive payouts."
-              />
-              <Reason
-                title="Open Source"
-                description="Core platform is open source, built on transparency and community collaboration."
-              />
+        <GlassCardPurple className="max-w-4xl mx-auto p-8 mb-12">
+          <div className="flex items-start gap-4 mb-6">
+            <div className="flex-shrink-0 w-12 h-12 bg-purple-600/20 rounded-xl flex items-center justify-center">
+              <Rocket className="w-6 h-6 text-purple-300" />
+            </div>
+            <div className="flex-1">
+              <h2 className="text-2xl font-bold text-white mb-3">Our Mission</h2>
+              <p className="text-gray-200 leading-relaxed text-lg">
+                We believe that AI agents should have universal access to the world's tools and services.
+                OMA-AI exists to bridge the gap between AI assistants and external capabilities,
+                enabling agents to read files, make HTTP requests, interact with databases,
+                manage version control, and much more.
+              </p>
             </div>
           </div>
-        </section>
-
-        {/* The Team */}
-        <section className="mb-16">
-          <h2 className="text-3xl font-bold text-white mb-8">The Team</h2>
-          <p className="text-gray-300 leading-relaxed text-lg mb-6">
-            OMA-AI is built by a team of AI researchers, blockchain developers, and open-source
-            enthusiasts passionate about the future of agentic AI.
+          <p className="text-gray-200 leading-relaxed text-lg">
+            By providing a standardized, secure, and monetizable marketplace for MCP tools,
+            we're accelerating the development of the agentic AI ecosystem.
+            Our goal is to make it easy for developers to publish, monetize, and scale their tools,
+            while providing AI agents with reliable, performant, and cost-effective access.
           </p>
-          <p className="text-gray-300 leading-relaxed text-lg">
-            Our team has experience building decentralized applications, AI systems, and
-            developer tools at scale. We're committed to creating a platform that's
-            secure, performant, and developer-friendly.
-          </p>
-        </section>
+        </GlassCardPurple>
 
-        {/* The Technology */}
-        <section className="mb-16">
-          <h2 className="text-3xl font-bold text-white mb-8">The Technology</h2>
-          <div className="grid md:grid-cols-3 gap-6">
-            <TechCard
-              title="Model Context Protocol"
-              description="Open standard for AI agent tool integration. Type-safe, flexible,
-              and secure protocol for connecting agents to external capabilities."
-            />
-            <TechCard
-              title="x402 Protocol"
-              description="ERC-3009 gasless payment protocol. Enables micro-transactions
-              without wallet gas fees using delegated transfers."
-            />
-            <TechCard
-              title="Supabase"
-              description="PostgreSQL database with RLS (Row Level Security). Enterprise-grade
-              security, real-time subscriptions, and auto-scaling."
-            />
+        {/* What We Do */}
+        <div className="mb-12">
+          <h2 className="text-3xl font-bold text-white text-center mb-8">What We Do</h2>
+          <div className="grid md:grid-cols-2 gap-6">
+            <GlassCard className="p-6 hover">
+              <div className="flex items-start gap-4">
+                <div className="flex-shrink-0 w-12 h-12 bg-purple-600/20 rounded-xl flex items-center justify-center">
+                  <Zap className="w-6 h-6 text-purple-300" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-xl font-bold text-white mb-3">MCP Marketplace</h3>
+                  <p className="text-gray-300 leading-relaxed">
+                    Discover and integrate hundreds of MCP tools for your AI agents.
+                    Filter by category, rating, and verification status to find the perfect tool.
+                    Real-time search, pagination, and detailed metrics.
+                  </p>
+                </div>
+              </div>
+            </GlassCard>
+
+            <GlassCard className="p-6 hover">
+              <div className="flex items-start gap-4">
+                <div className="flex-shrink-0 w-12 h-12 bg-green-600/20 rounded-xl flex items-center justify-center">
+                  <DollarSign className="w-6 h-6 text-green-300" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-xl font-bold text-white mb-3">Developer Platform</h3>
+                  <p className="text-gray-300 leading-relaxed">
+                    Publish your own MCP tools and earn revenue from API calls.
+                    Our 4-step wizard makes it easy to get your tools in the marketplace.
+                    Track performance, manage pricing, and view analytics.
+                  </p>
+                </div>
+              </div>
+            </GlassCard>
+
+            <GlassCard className="p-6 hover">
+              <div className="flex items-start gap-4">
+                <div className="flex-shrink-0 w-12 h-12 bg-amber-600/20 rounded-xl flex items-center justify-center">
+                  <Lock className="w-6 h-6 text-amber-300" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-xl font-bold text-white mb-3">x402 Payments</h3>
+                  <p className="text-gray-300 leading-relaxed">
+                    Gasless microtransactions powered by the x402 protocol.
+                    Users pay per API call without worrying about gas fees.
+                    Support for Base and Solana networks with automatic payouts.
+                  </p>
+                </div>
+              </div>
+            </GlassCard>
+
+            <GlassCard className="p-6 hover">
+              <div className="flex items-start gap-4">
+                <div className="flex-shrink-0 w-12 h-12 bg-blue-600/20 rounded-xl flex items-center justify-center">
+                  <Globe className="w-6 h-6 text-blue-300" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-xl font-bold text-white mb-3">Multi-Chain Support</h3>
+                  <p className="text-gray-300 leading-relaxed">
+                    Support for Base and Solana networks.
+                    Connect your wallet and receive payouts in USDC.
+                    Automatic monthly payouts when you reach the $10 minimum threshold.
+                  </p>
+                </div>
+              </div>
+            </GlassCard>
           </div>
-        </section>
+        </div>
+
+        {/* Why OMA-AI */}
+        <div className="mb-12">
+          <h2 className="text-3xl font-bold text-white text-center mb-8">Why Choose OMA-AI?</h2>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <GlassCard className="p-6 hover">
+              <div className="flex items-center gap-3 mb-3">
+                <CheckCircle2 className="w-6 h-6 text-green-400" />
+                <h3 className="text-lg font-bold text-white">5% Platform Fee</h3>
+              </div>
+              <p className="text-gray-300 leading-relaxed">
+                Industry-leading low fees mean developers keep more of their revenue.
+                Competitors charge 10-20%, we charge only 5%.
+              </p>
+            </GlassCard>
+
+            <GlassCard className="p-6 hover">
+              <div className="flex items-center gap-3 mb-3">
+                <Zap className="w-6 h-6 text-purple-400" />
+                <h3 className="text-lg font-bold text-white">Gasless Payments</h3>
+              </div>
+              <p className="text-gray-300 leading-relaxed">
+                Powered by x402 protocol, users don't pay gas fees.
+                Makes micro-payments practical and affordable for all.
+              </p>
+            </GlassCard>
+
+            <GlassCard className="p-6 hover">
+              <div className="flex items-center gap-3 mb-3">
+                <BarChart3 className="w-6 h-6 text-blue-400" />
+                <h3 className="text-lg font-bold text-white">Official MCPs</h3>
+              </div>
+              <p className="text-gray-300 leading-relaxed">
+                Official MCPs available out of the box, including Filesystem,
+                Fetch, Git, Memory, and more. No fake or placeholder tools.
+              </p>
+            </GlassCard>
+
+            <GlassCard className="p-6 hover">
+              <div className="flex items-center gap-3 mb-3">
+                <Users className="w-6 h-6 text-amber-400" />
+                <h3 className="text-lg font-bold text-white">Better DX</h3>
+              </div>
+              <p className="text-gray-300 leading-relaxed">
+                4-step publish wizard, real-time analytics, and comprehensive
+                documentation make building and monetizing MCPs easy.
+              </p>
+            </GlassCard>
+
+            <GlassCard className="p-6 hover">
+              <div className="flex items-center gap-3 mb-3">
+                <Shield className="w-6 h-6 text-green-400" />
+                <h3 className="text-lg font-bold text-white">Secure</h3>
+              </div>
+              <p className="text-gray-300 leading-relaxed">
+                Row Level Security, encrypted payments, and verified MCPs ensure
+                your data and transactions are always protected.
+              </p>
+            </GlassCard>
+
+            <GlassCard className="p-6 hover">
+              <div className="flex items-center gap-3 mb-3">
+                <Code className="w-6 h-6 text-gray-400" />
+                <h3 className="text-lg font-bold text-white">Open Source</h3>
+              </div>
+              <p className="text-gray-300 leading-relaxed">
+                Core platform is open source, built on transparency and community collaboration.
+                Fork, contribute, and build with us.
+              </p>
+            </GlassCard>
+          </div>
+        </div>
+
+        {/* Technology */}
+        <div className="mb-12">
+          <h2 className="text-3xl font-bold text-white text-center mb-8">Our Technology</h2>
+          <div className="grid md:grid-cols-3 gap-6">
+            <GlassCard className="p-6 hover">
+              <h3 className="text-xl font-bold text-white mb-4">Model Context Protocol</h3>
+              <p className="text-gray-300 leading-relaxed">
+                Open standard for AI agent tool integration. Type-safe, flexible,
+                and secure protocol for connecting agents to external capabilities.
+                Standardizes how tools are discovered, called, and integrated.
+              </p>
+            </GlassCard>
+
+            <GlassCard className="p-6 hover">
+              <h3 className="text-xl font-bold text-white mb-4">x402 Protocol</h3>
+              <p className="text-gray-300 leading-relaxed">
+                ERC-3009 gasless payment protocol. Enables micro-transactions
+                without wallet gas fees using delegated transfers.
+                Random nonces, time-based auth, domain separation for security.
+              </p>
+            </GlassCard>
+
+            <GlassCard className="p-6 hover">
+              <h3 className="text-xl font-bold text-white mb-4">Supabase</h3>
+              <p className="text-gray-300 leading-relaxed">
+                PostgreSQL database with RLS (Row Level Security). Enterprise-grade
+                security, real-time subscriptions, and auto-scaling.
+                Handles users, MCPs, transactions, and analytics.
+              </p>
+            </GlassCard>
+
+            <GlassCard className="p-6 hover">
+              <h3 className="text-xl font-bold text-white mb-4">Next.js 15</h3>
+              <p className="text-gray-300 leading-relaxed">
+                Latest React framework with App Router. Server components,
+                edge runtime, and optimized builds. Fast, SEO-friendly,
+                and developer experience.
+              </p>
+            </GlassCard>
+
+            <GlassCard className="p-6 hover">
+              <h3 className="text-xl font-bold text-white mb-4">Tailwind CSS</h3>
+              <p className="text-gray-300 leading-relaxed">
+                Utility-first CSS framework. Rapid UI development, consistent design system,
+                and automatic responsive design. Dark mode optimized.
+              </p>
+            </GlassCard>
+
+            <GlassCard className="p-6 hover">
+              <h3 className="text-xl font-bold text-white mb-4">TypeScript</h3>
+              <p className="text-gray-300 leading-relaxed">
+                Type-safe JavaScript. Better developer experience, fewer bugs,
+                and improved code maintainability. All components fully typed.
+              </p>
+            </GlassCard>
+          </div>
+        </div>
 
         {/* Roadmap */}
-        <section className="mb-16">
-          <h2 className="text-3xl font-bold text-white mb-8">Roadmap</h2>
-          <div className="space-y-4">
-            <RoadmapItem
-              phase="Q2 2026"
+        <GlassCard className="max-w-4xl mx-auto p-8 mb-12">
+          <h2 className="text-2xl font-bold text-white text-center mb-8">Our Roadmap</h2>
+          <div className="space-y-6">
+            <RoadmapPhase
+              quarter="Q2 2026"
               status="In Progress"
               items={[
-                'MCP analytics dashboard',
-                'Advanced filtering and search',
+                'Advanced MCP analytics dashboard',
                 'Community reviews and ratings',
                 'Developer portal enhancements',
+                'MCP testing sandbox',
               ]}
             />
-            <RoadmapItem
-              phase="Q3 2026"
+            <RoadmapPhase
+              quarter="Q3 2026"
               status="Planned"
               items={[
-                'MCP testing sandbox',
                 'Automated MCP security scanning',
                 'Enterprise tier for teams',
-                'Mobile app',
+                'Mobile app (iOS + Android)',
+                'MCP marketplace API for developers',
               ]}
             />
-            <RoadmapItem
-              phase="Q4 2026"
+            <RoadmapPhase
+              quarter="Q4 2026"
               status="Planned"
               items={[
-                'MCP marketplace API for developers',
-                'Cross-chain payment support',
+                'Cross-chain payment support (Polygon, Arbitrum)',
                 'MCP versioning and updates',
                 'AI-powered MCP recommendations',
+                'Team collaboration features',
               ]}
             />
           </div>
-        </section>
+        </GlassCard>
+
+        {/* Team */}
+        <div className="mb-12">
+          <h2 className="text-3xl font-bold text-white text-center mb-8">The Team</h2>
+          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            <GlassCard className="p-6 hover">
+              <div className="flex items-center gap-4 mb-4">
+                <div className="w-16 h-16 bg-gradient-to-br from-purple-600 to-fuchsia-600 rounded-full flex items-center justify-center text-white font-bold text-2xl">
+                  N
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold text-white">NOSYT</h3>
+                  <p className="text-purple-400">Founder & Lead Developer</p>
+                </div>
+              </div>
+              <p className="text-gray-300 leading-relaxed">
+                AI researcher and blockchain developer with expertise in MCP protocol,
+                x402 payments, and decentralized systems. Building the future of agentic AI.
+              </p>
+              <div className="flex gap-3 mt-4">
+                <a
+                  href="https://github.com/FrankieMolt"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-purple-400 hover:text-purple-300 transition-colors"
+                >
+                  <Github size={16} />
+                  <span className="text-sm">GitHub</span>
+                </a>
+                <a
+                  href="https://x.com/@nosytlabs"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-purple-400 hover:text-purple-300 transition-colors"
+                >
+                  <Twitter size={16} />
+                  <span className="text-sm">Twitter</span>
+                </a>
+              </div>
+            </GlassCard>
+
+            <GlassCard className="p-6 hover">
+              <div className="flex items-center gap-4 mb-4">
+                <div className="w-16 h-16 bg-gradient-to-br from-blue-600 to-cyan-600 rounded-full flex items-center justify-center text-white font-bold text-2xl">
+                  A
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold text-white">OMA-AI Team</h3>
+                  <p className="text-blue-400">Community Contributors</p>
+                </div>
+              </div>
+              <p className="text-gray-300 leading-relaxed">
+                A growing community of developers, AI researchers, and enthusiasts
+                contributing to the OMA-AI ecosystem. Open source contributors,
+                MCP developers, and feedback from early users.
+              </p>
+              <div className="flex gap-3 mt-4">
+                <a
+                  href="https://discord.gg/oma-ai"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium rounded-lg transition-colors"
+                >
+                  Join Discord
+                </a>
+                <a
+                  href="https://github.com/FrankieMolt/OMA-Ai"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white text-sm font-medium rounded-lg transition-colors"
+                >
+                  Contribute
+                </a>
+              </div>
+            </GlassCard>
+          </div>
+        </div>
 
         {/* CTA */}
-        <section className="text-center">
-          <h2 className="text-3xl font-bold text-white mb-4">Join the Community</h2>
-          <p className="text-gray-400 mb-8 max-w-2xl mx-auto">
-            Be part of the future of agentic AI. Join our Discord, follow us on GitHub,
+        <GlassCardPurple className="max-w-4xl mx-auto p-12 text-center">
+          <div className="w-16 h-16 bg-purple-600/30 rounded-2xl flex items-center justify-center mx-auto mb-6">
+            <Rocket className="w-8 h-8 text-purple-300" />
+          </div>
+          <h2 className="text-3xl font-bold text-white mb-4">
+            Ready to Join the Future?
+          </h2>
+          <p className="text-xl text-purple-100 mb-8 max-w-2xl mx-auto leading-relaxed">
+            Be part of the agentic AI revolution. Join our Discord, follow us on GitHub,
             and start building with MCPs today.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <Link
+            <a
               href="https://discord.gg/oma-ai"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-8 py-3 bg-violet-600 text-white rounded-lg hover:bg-violet-700 transition-colors"
+              className="inline-flex items-center gap-2 px-8 py-3 bg-purple-600 hover:bg-purple-700 text-white font-bold rounded-lg transition-colors"
             >
               Join Discord
-            </Link>
-            <Link
-              href="https://github.com/FrankieMolt/OMA-AI"
+            </a>
+            <a
+              href="https://github.com/FrankieMolt/OMA-Ai"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-8 py-3 bg-zinc-800 text-white rounded-lg hover:bg-zinc-700 transition-colors"
+              className="inline-flex items-center gap-2 px-8 py-3 bg-slate-700 hover:bg-slate-600 text-white font-bold rounded-lg transition-colors"
             >
+              <Github size={18} />
               Star on GitHub
-            </Link>
-            <Link
+            </a>
+            <a
               href="/mcps"
-              className="px-8 py-3 bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white rounded-lg hover:from-violet-700 hover:to-fuchsia-700 transition-colors"
+              className="inline-flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-purple-600 to-fuchsia-600 hover:from-purple-700 hover:to-fuchsia-700 text-white font-bold rounded-lg transition-colors"
             >
               Explore MCPs
-            </Link>
+            </a>
           </div>
-        </section>
+        </GlassCardPurple>
       </div>
-    </div>
+    </main>
   );
 }
 
-function FeatureCard({
-  title,
-  description,
-  icon,
-}: {
-  title: string;
-  description: string;
-  icon: string;
-}) {
+function RoadmapPhase({ quarter, status, items }: { quarter: string; status: string; items: string[] }) {
   return (
-    <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6">
-      <div className="text-4xl mb-4">{icon}</div>
-      <h3 className="text-xl font-bold text-white mb-3">{title}</h3>
-      <p className="text-gray-400">{description}</p>
-    </div>
-  );
-}
-
-function Reason({
-  title,
-  description,
-}: {
-  title: string;
-  description: string;
-}) {
-  return (
-    <div className="flex gap-4">
-      <div className="flex-shrink-0 w-8 h-8 bg-violet-500/20 rounded-full flex items-center justify-center">
-        <span className="text-violet-400 font-bold">✓</span>
-      </div>
-      <div>
-        <h3 className="text-lg font-semibold text-white mb-1">{title}</h3>
-        <p className="text-gray-400">{description}</p>
-      </div>
-    </div>
-  );
-}
-
-function TechCard({
-  title,
-  description,
-}: {
-  title: string;
-  description: string;
-}) {
-  return (
-    <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6">
-      <h3 className="text-lg font-bold text-white mb-3">{title}</h3>
-      <p className="text-gray-400 text-sm">{description}</p>
-    </div>
-  );
-}
-
-function RoadmapItem({
-  phase,
-  status,
-  items,
-}: {
-  phase: string;
-  status: string;
-  items: string[];
-}) {
-  return (
-    <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6">
+    <div className="border-t border-slate-700 pt-6 first:border-t-0">
       <div className="flex items-center gap-3 mb-4">
-        <h3 className="text-xl font-bold text-white">{phase}</h3>
-        <span
-          className={`px-3 py-1 rounded-full text-xs font-medium ${
-            status === 'In Progress'
-              ? 'bg-green-500/20 text-green-400'
-              : 'bg-blue-500/20 text-blue-400'
-          }`}
-        >
+        <h3 className="text-xl font-bold text-white">{quarter}</h3>
+        <span className={`px-3 py-1 rounded-full text-xs font-bold ${
+          status === 'In Progress'
+            ? 'bg-green-600/20 text-green-400'
+            : 'bg-blue-600/20 text-blue-400'
+        }`}>
           {status}
         </span>
       </div>
       <ul className="space-y-2">
         {items.map((item) => (
-          <li key={item} className="flex items-center gap-2 text-gray-300">
-            <span className="w-1.5 h-1.5 bg-violet-400 rounded-full"></span>
-            {item}
+          <li key={item} className="flex items-start gap-2 text-gray-300">
+            <CheckCircle2 size={16} className="flex-shrink-0 mt-0.5 text-purple-400" />
+            <span>{item}</span>
           </li>
         ))}
       </ul>

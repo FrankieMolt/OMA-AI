@@ -1,7 +1,5 @@
 import { Metadata } from 'next';
 import WalletManagement from '@/components/wallet/WalletManagement';
-import Navigation from '@/components/Navigation';
-import { Footer } from '@/components/footer';
 
 export const metadata: Metadata = {
   title: 'Wallet | OMA-AI',
@@ -11,12 +9,8 @@ export const metadata: Metadata = {
 
 export default function WalletPage() {
   return (
-    <>
-      <Navigation />
-      <main className="min-h-screen bg-zinc-950 pt-16">
-        <WalletManagement />
-      </main>
-      <Footer />
-    </>
+    <main className="min-h-screen bg-zinc-950 pt-16">
+      <WalletManagement />
+    </main>
   );
 }
