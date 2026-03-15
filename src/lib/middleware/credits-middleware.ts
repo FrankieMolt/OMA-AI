@@ -1,7 +1,6 @@
 // Credit deduction middleware for API routes
 import { calculateCreditsNeeded } from '../credits';
-import { validateApiKey } from '../supabase';
-import { supabase } from '../supabase';
+import { validateApiKey, supabase } from '../supabase/client';
 import { logError, logInfo } from '../logger';
 import type { NextApiRequest, NextApiResponse } from 'next';
 

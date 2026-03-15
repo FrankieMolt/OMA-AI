@@ -609,3 +609,14 @@ export interface Database {
     }
   }
 }
+
+// API key validation (stub - needs DB implementation)
+export async function validateApiKey(apiKey: string) {
+  return {
+    users: {
+      credits: 1000,
+      bonus_credits: 100,
+      used_this_month: 50,
+    }
+  };
+}

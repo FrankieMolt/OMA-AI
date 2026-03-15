@@ -5,7 +5,6 @@
  */
 
 export { OMAClient } from './client';
-export * from './x402';
 
 // Types
 export interface APIListing {
