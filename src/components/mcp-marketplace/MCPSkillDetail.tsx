@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { ArrowUpRight, Star, CheckCircle, Clock, Zap } from 'lucide-react';
+import { getCategoryIcon, getCategoryColors } from '@/lib/category-icons';
 
 interface MCPSkill {
   id: string;
@@ -138,21 +139,33 @@ export default function MCPSkillDetail({ slug }: { slug: string }) {
           transition={{ delay: 0.1 }}
         >
           <div className="flex items-start justify-between mb-6">
-            <div className="flex-1">
-              <div className="flex items-center gap-3 mb-3">
-                <h1 className="text-4xl font-bold text-white">
-                  {skill.name}
-                </h1>
-                {skill.verified && (
-                  <span className="inline-flex items-center gap-1 px-3 py-1 bg-green-900/30 text-green-400 text-sm rounded-full">
-                    <CheckCircle size={14} />
-                    Verified
-                  </span>
-                )}
+            <div className="flex items-start gap-4 flex-1">
+              {(() => {
+                const cat = skill.category?.[0] || 'Utilities';
+                const Icon = getCategoryIcon(cat);
+                const colors = getCategoryColors(cat);
+                return (
+                  <div className={`p-3 rounded-2xl ${colors.bg} ${colors.text} border ${colors.border} shrink-0`}>
+                    <Icon size={32} />
+                  </div>
+                );
+              })()}
+              <div>
+                <div className="flex items-center gap-3 mb-3">
+                  <h1 className="text-4xl font-bold text-white">
+                    {skill.name}
+                  </h1>
+                  {skill.verified && (
+                    <span className="inline-flex items-center gap-1 px-3 py-1 bg-green-900/30 text-green-400 text-sm rounded-full">
+                      <CheckCircle size={14} />
+                      Verified
+                    </span>
+                  )}
+                </div>
+                <p className="text-lg text-gray-400">
+                  @{skill.author}
+                </p>
               </div>
-              <p className="text-lg text-gray-400">
-                @{skill.author}
-              </p>
             </div>
             {renderStars(skill.rating)}
           </div>
@@ -193,14 +206,17 @@ export default function MCPSkillDetail({ slug }: { slug: string }) {
                 Categories
               </h2>
               <div className="flex flex-wrap gap-2">
-                {skill.category.map((cat) => (
-                  <span
-                    key={cat}
-                    className="px-3 py-1 bg-zinc-800 text-zinc-300 rounded-full text-sm"
-                  >
-                    {cat}
-                  </span>
-                ))}
+                {skill.category.map((cat) => {
+                  const colors = getCategoryColors(cat);
+                  return (
+                    <span
+                      key={cat}
+                      className={`px-3 py-1 ${colors.bg} ${colors.text} border ${colors.border} rounded-full text-sm`}
+                    >
+                      {cat}
+                    </span>
+                  );
+                })}
               </div>
             </motion.div>
 

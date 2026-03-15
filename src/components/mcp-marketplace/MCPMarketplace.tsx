@@ -6,6 +6,7 @@ import { GlassCard } from '@/components/ui/GlassCard';
 import { Badge } from '@/components/ui/Badge';
 import { CardSkeleton, InlineLoader } from '@/components/ui/Loading';
 import { Search, Filter, SortAsc, Star, ExternalLink, Download, CheckCircle2, AlertCircle } from 'lucide-react';
+import { getCategoryIcon, getCategoryColors } from '@/lib/category-icons';
 
 interface MCPSkill {
   id: string;
@@ -389,20 +390,32 @@ export default function MCPMarketplace() {
                 transition={{ delay: (skill.id.length % 6) * 0.05 }}
               >
                 <GlassCard className="p-6 h-full hover flex flex-col">
-                  {/* Header */}
+                  {/* Category Icon + Header */}
                   <div className="flex items-start justify-between mb-4">
-                    <div className="flex-1">
-                      <h3 className="text-xl font-bold text-white mb-2 hover:text-purple-300 transition-colors">
-                        {skill.name}
-                      </h3>
-                      <div className="flex items-center gap-2 mb-2">
-                        {skill.verified && (
-                          <Badge variant="success" className="gap-1">
-                            <CheckCircle2 size={14} />
-                            Verified
-                          </Badge>
-                        )}
-                        <span className="text-gray-400 text-sm">by @{skill.author}</span>
+                    <div className="flex items-start gap-3 flex-1">
+                      {(() => {
+                        const cat = skill.category?.[0] || 'Utilities';
+                        const Icon = getCategoryIcon(cat);
+                        const colors = getCategoryColors(cat);
+                        return (
+                          <div className={`p-2.5 rounded-xl ${colors.bg} ${colors.text} border ${colors.border} shrink-0`}>
+                            <Icon size={22} />
+                          </div>
+                        );
+                      })()}
+                      <div>
+                        <h3 className="text-xl font-bold text-white mb-2 hover:text-purple-300 transition-colors">
+                          {skill.name}
+                        </h3>
+                        <div className="flex items-center gap-2 mb-2">
+                          {skill.verified && (
+                            <Badge variant="success" className="gap-1">
+                              <CheckCircle2 size={14} />
+                              Verified
+                            </Badge>
+                          )}
+                          <span className="text-gray-400 text-sm">by @{skill.author}</span>
+                        </div>
                       </div>
                     </div>
                     {renderStars(skill.rating)}
@@ -415,11 +428,14 @@ export default function MCPMarketplace() {
 
                   {/* Categories */}
                   <div className="flex flex-wrap gap-2 mb-4">
-                    {skill.category.map((cat) => (
-                      <Badge key={cat} variant="default">
-                        {cat.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
-                      </Badge>
-                    ))}
+                    {skill.category.map((cat) => {
+                      const colors = getCategoryColors(cat);
+                      return (
+                        <Badge key={cat} className={`${colors.bg} ${colors.text} ${colors.border} border`}>
+                          {cat.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
+                        </Badge>
+                      );
+                    })}
                   </div>
 
                   {/* Pricing & Stats */}
