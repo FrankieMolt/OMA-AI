@@ -53,7 +53,14 @@ export default function MCPMarketplace() {
       const data = await response.json();
 
       if (data.success) {
-        setSkills(data.data);
+        setSkills(data.data.map((skill: any) => ({ 
+          ...skill, 
+          category: Array.isArray(skill.category) 
+            ? skill.category 
+            : skill.category 
+              ? [skill.category] 
+              : ['Utilities']
+        })));
         setTotalSkills(data.total || data.data.length);
       } else {
         setError('Failed to fetch MCP skills');
@@ -79,7 +86,7 @@ export default function MCPMarketplace() {
       result = result.filter(skill =>
         skill.name.toLowerCase().includes(searchLower) ||
         skill.description.toLowerCase().includes(searchLower) ||
-        skill.category.some(cat => cat.toLowerCase().includes(searchLower))
+        (skill.category || []).some(cat => cat.toLowerCase().includes(searchLower))
       );
     }
 
@@ -428,7 +435,7 @@ export default function MCPMarketplace() {
 
                   {/* Categories */}
                   <div className="flex flex-wrap gap-2 mb-4">
-                    {skill.category.map((cat) => {
+                    {(skill.category || ['Utilities']).map((cat) => {
                       const colors = getCategoryColors(cat);
                       return (
                         <Badge key={cat} className={`${colors.bg} ${colors.text} ${colors.border} border`}>
