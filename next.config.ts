@@ -14,6 +14,21 @@ const nextConfig: NextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  // Redirects for common URL variations
+  async redirects() {
+    return [
+      {
+        source: '/mcp',
+        destination: '/mcps',
+        permanent: true, // 308 redirect
+      },
+      {
+        source: '/register',
+        destination: '/signup',
+        permanent: true, // 308 redirect
+      },
+    ];
+  },
 };
 
 export default nextConfig;

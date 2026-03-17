@@ -6,12 +6,12 @@ import { PricingSection } from '@/components/pricing-section';
 import { LiveTradingStatus } from '@/components/live-trading-status';
 
 export const metadata: Metadata = {
-  title: 'OMA-AI | OpenMarketAccess - Autonomous Agent Infrastructure',
-  description: 'Build and deploy AI agents with x402 payments, MCP integrations, and decentralized agent economy on Base network.',
-  keywords: ['OMA-AI', 'MCP', 'Model Context Protocol', 'x402', 'AI agents', 'Base', 'USDC'],
+  title: 'OMA-AI | Premier MCP Marketplace with x402 Gasless Payments',
+  description: 'Discover, deploy, and monetize AI agents with 19+ verified MCP servers. Gasless x402 payments on Base network - no API keys, no subscriptions.',
+  keywords: ['OMA-AI', 'MCP', 'Model Context Protocol', 'x402', 'AI agents', 'Base', 'USDC', 'gasless payments', 'agent economy'],
   openGraph: {
-    title: 'OMA-AI | OpenMarketAccess',
-    description: 'Build and deploy AI agents with x402 payments and MCP integrations',
+    title: 'OMA-AI | Premier MCP Marketplace with x402 Gasless Payments',
+    description: 'Discover, deploy, and monetize AI agents with 19+ verified MCP servers. Gasless x402 payments on Base network - no API keys, no subscriptions.',
     type: 'website',
     url: 'https://oma-ai.com',
   },

@@ -20,52 +20,61 @@ const endpoints = [
   {
     icon: Search,
     name: 'Web Search',
-    description: 'Get real-time answers with AI-powered search',
-    price: 'From $0.005',
+    description: 'AI-powered semantic search that understands context, not just keywords',
+    price: 'From $0.004',
     gradient: 'from-cyan-500/20 to-blue-500/20'
   },
   {
     icon: FileText,
     name: 'Embeddings',
-    description: 'Understand text at scale with vector embeddings',
-    price: 'From $0.01',
+    description: 'High-dimensional vector embeddings for RAG, search, and similarity tasks',
+    price: 'From $0.008',
     gradient: 'from-amber-500/20 to-orange-500/20'
   },
   {
     icon: Calculator,
     name: 'Live Crypto',
-    description: 'Real-time cryptocurrency prices & data',
+    description: 'Real-time prices, market data, and trading pairs for 10,000+ cryptocurrencies',
     price: 'FREE',
     gradient: 'from-green-500/20 to-emerald-500/20'
   },
   {
     icon: Cloud,
     name: 'Weather',
-    description: 'Accurate forecasts for any location worldwide',
-    price: 'From $0.002',
+    description: 'Global weather data with forecasts, historical data, and severe weather alerts',
+    price: 'From $0.0015',
     gradient: 'from-sky-500/20 to-blue-500/20'
   },
   {
     icon: Database,
     name: 'MCP Marketplace',
-    description: 'Discover and use AI-powered skills for agents',
+    description: 'Access 19+ MCP servers including AI models, databases, and developer tools',
     price: 'From $0.001',
     gradient: 'from-indigo-500/20 to-violet-500/20'
   },
   {
     icon: Cpu,
     name: 'Compute Providers',
-    description: 'Deploy agents on Akash, AWS, and more',
-    price: 'From $4.50',
+    description: 'Deploy agents on decentralized networks like Akash and traditional clouds',
+    price: 'From $4.50/hour',
     gradient: 'from-pink-500/20 to-rose-500/20'
+  },
+  {
+    icon: Zap,
+    name: 'x402 Payments',
+    description: 'Gasless micropayments on Base network for true agent-to-agent commerce',
+    price: 'FREE protocol',
+    gradient: 'from-purple-500/20 to-fuchsia-500/20'
   }
 ];
 
 const benefits = [
-  { icon: Zap, title: 'Lightning Fast', description: 'Lightning-fast responses worldwide' },
-  { icon: Shield, title: 'Privacy First', description: 'Your data stays yours—always' },
-  { icon: Wallet, title: 'Simple Pricing', description: 'Pay only for what you use' },
-  { icon: Gauge, title: '99.99% Uptime', description: 'Reliable when you need it most' },
+  { icon: Zap, title: 'Gasless Payments', description: 'x402 protocol enables feeless micropayments on Base network' },
+  { icon: Shield, title: 'Enterprise Security', description: 'SOC 2 compliant with end-to-end encryption and audit logs' },
+  { icon: Wallet, title: 'Transparent Pricing', description: 'Pay-per-use pricing with no hidden fees or subscriptions' },
+  { icon: Gauge, title: '99.9% Uptime', description: 'Globally distributed infrastructure with automatic failover' },
+  { icon: Database, title: '19+ MCPs', description: 'Growing marketplace of verified MCP servers for all use cases' },
+  { icon: Zap, title: 'Instant Deployment', description: 'Deploy AI agents in seconds with pre-configured templates' }
 ];
 
 export function FeaturesSection() {

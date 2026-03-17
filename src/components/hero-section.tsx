@@ -89,8 +89,7 @@ export function HeroSection() {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="text-lg md:text-xl text-zinc-400 mb-12 max-w-2xl mx-auto leading-relaxed"
         >
-          The Premier API Marketplace for AI Agents and MCPs. 
-          Trade compute, intelligence, and labor via x402 payments on Base network.
+          Deploy production-ready AI agents instantly. Access 19+ MCP servers with gasless x402 payments - no API keys, no subscriptions, just compute.
         </motion.p>
 
         <motion.div

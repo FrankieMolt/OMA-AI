@@ -42,7 +42,7 @@ export default function AboutPage() {
         {/* Stats */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-16">
           {stats.map((stat) => (
-            <GlassCard className="p-4 text-center hover">
+            <GlassCard key={stat.label} className="p-4 text-center hover">
               <div className="text-3xl font-bold text-white mb-1">{stat.value}</div>
               <div className="text-sm text-gray-400">{stat.label}</div>
             </GlassCard>

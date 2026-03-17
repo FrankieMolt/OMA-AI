@@ -43,61 +43,28 @@ export async function generateStaticParams() {
   return slugs.map(slug => ({ slug }));
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function CodeBlock({ className, children }: { className?: string; children?: any }) {
+  const isInline = !className;
+  if (isInline) {
+    return <code className="bg-slate-800 px-2 py-1 rounded text-purple-300 text-sm font-mono">{children}</code>;
+  }
+  return <code className={`block bg-slate-800 p-4 rounded-lg text-sm font-mono overflow-x-auto ${className || ''}`}>{children}</code>;
+}
+
 export default async function BlogPost({ params }: { params: Promise<{ slug: string }> }) {
   const resolvedParams = await params;
-  let content: React.ReactNode;
+  let markdownContent = '';
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let metadata: any = {};
   let notFound = false;
 
   try {
     const filePath = path.join(BLOG_DIR, `${resolvedParams.slug}.md`);
     const fileContent = fs.readFileSync(filePath, 'utf-8');
-    const { data, content: markdownContent } = matter(fileContent);
-    
-    metadata = data;
-    content = (
-      <div className="prose prose-invert prose-lg max-w-none">
-        <ReactMarkdown
-          components={{
-            h1: ({ children }) => <h1 className="text-4xl font-bold text-white mb-6">{children}</h1>,
-            h2: ({ children }) => <h2 className="text-3xl font-semibold text-white mt-12 mb-4">{children}</h2>,
-            h3: ({ children }) => <h3 className="text-2xl font-semibold text-purple-300 mt-8 mb-3">{children}</h3>,
-            p: ({ children }) => <p className="text-gray-300 leading-relaxed mb-6">{children}</p>,
-            ul: ({ children }) => <ul className="list-disc list-inside text-gray-300 mb-6 space-y-2">{children}</ul>,
-            ol: ({ children }) => <ol className="list-decimal list-inside text-gray-300 mb-6 space-y-2">{children}</ol>,
-            li: ({ children }) => <li className="pl-2">{children}</li>,
-            code: ({ className, children }: any) => {
-              const isInline = !className;
-              if (isInline) {
-                return <code className="bg-slate-800 px-2 py-1 rounded text-purple-300 text-sm font-mono">{children}</code>;
-              }
-              return <code className={`block bg-slate-800 p-4 rounded-lg text-sm font-mono overflow-x-auto ${className}`}>{children}</code>;
-            },
-            pre: ({ children }) => <pre className="bg-slate-800 p-4 rounded-lg overflow-x-auto mb-6 border border-slate-700">{children}</pre>,
-            blockquote: ({ children }) => (
-              <blockquote className="border-l-4 border-purple-500 pl-4 italic text-gray-400 my-6">{children}</blockquote>
-            ),
-            a: ({ href, children }) => (
-              <a href={href} className="text-purple-400 hover:text-purple-300 underline transition-colors" target="_blank" rel="noopener noreferrer">
-                {children}
-              </a>
-            ),
-            table: ({ children }) => (
-              <div className="overflow-x-auto mb-6">
-                <table className="min-w-full border border-slate-700 rounded-lg">{children}</table>
-              </div>
-            ),
-            thead: ({ children }) => <thead className="bg-slate-800">{children}</thead>,
-            tbody: ({ children }) => <tbody className="divide-y divide-slate-700">{children}</tbody>,
-            th: ({ children }) => <th className="px-4 py-3 text-left text-white font-semibold">{children}</th>,
-            td: ({ children }) => <td className="px-4 py-3 text-gray-300">{children}</td>,
-          }}
-        >
-          {markdownContent}
-        </ReactMarkdown>
-      );
-    </div>
-    );
+    const parsed = matter(fileContent);
+    metadata = parsed.data;
+    markdownContent = parsed.content;
   } catch {
     notFound = true;
   }
@@ -171,7 +138,40 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
 
         {/* Article Content */}
         <div className="bg-slate-800/50 rounded-xl p-8 border border-slate-700">
-          {content}
+          <div className="prose prose-invert prose-lg max-w-none">
+            <ReactMarkdown
+              components={{
+                h1: ({ children }) => <h1 className="text-4xl font-bold text-white mb-6">{children}</h1>,
+                h2: ({ children }) => <h2 className="text-3xl font-semibold text-white mt-12 mb-4">{children}</h2>,
+                h3: ({ children }) => <h3 className="text-2xl font-semibold text-purple-300 mt-8 mb-3">{children}</h3>,
+                p: ({ children }) => <p className="text-gray-300 leading-relaxed mb-6">{children}</p>,
+                ul: ({ children }) => <ul className="list-disc list-inside text-gray-300 mb-6 space-y-2">{children}</ul>,
+                ol: ({ children }) => <ol className="list-decimal list-inside text-gray-300 mb-6 space-y-2">{children}</ol>,
+                li: ({ children }) => <li className="pl-2">{children}</li>,
+                code: CodeBlock,
+                pre: ({ children }) => <pre className="bg-slate-800 p-4 rounded-lg overflow-x-auto mb-6 border border-slate-700">{children}</pre>,
+                blockquote: ({ children }) => (
+                  <blockquote className="border-l-4 border-purple-500 pl-4 italic text-gray-400 my-6">{children}</blockquote>
+                ),
+                a: ({ href, children }) => (
+                  <a href={href} className="text-purple-400 hover:text-purple-300 underline transition-colors" target="_blank" rel="noopener noreferrer">
+                    {children}
+                  </a>
+                ),
+                table: ({ children }) => (
+                  <div className="overflow-x-auto mb-6">
+                    <table className="min-w-full border border-slate-700 rounded-lg">{children}</table>
+                  </div>
+                ),
+                thead: ({ children }) => <thead className="bg-slate-800">{children}</thead>,
+                tbody: ({ children }) => <tbody className="divide-y divide-slate-700">{children}</tbody>,
+                th: ({ children }) => <th className="px-4 py-3 text-left text-white font-semibold">{children}</th>,
+                td: ({ children }) => <td className="px-4 py-3 text-gray-300">{children}</td>,
+              }}
+            >
+              {markdownContent}
+            </ReactMarkdown>
+          </div>
         </div>
 
         {/* Article Footer */}
