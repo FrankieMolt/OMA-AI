@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import MCPMarketplace from '@/components/mcp-marketplace/MCPMarketplace';
 
 export const metadata: Metadata = {
-  title: 'MCP Marketplace | OMA-AI',
+  title: 'MCP Marketplace',
   description: 'Discover and integrate MCP (Model Context Protocol) tools for AI agents. Monetize your tools with x402 payments.',
   keywords: ['MCP', 'Model Context Protocol', 'AI agents', 'x402', 'marketplace'],
 };

@@ -18,13 +18,13 @@ export const Footer = memo(function Footer() {
               Build powerful AI applications with ease. Access all major language models through one simple API.
             </p>
             <div className="flex items-center gap-4">
-              <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-lg glass-card flex items-center justify-center text-zinc-400 hover:text-white hover:border-violet-500/30 transition-all">
+              <a href="https://github.com/FrankieMolt/OMA-AI" target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="w-10 h-10 rounded-lg glass-card flex items-center justify-center text-zinc-400 hover:text-white hover:border-violet-500/30 transition-all focus:outline-none focus:ring-2 focus:ring-violet-500">
                 <Github className="w-5 h-5" />
               </a>
-              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-lg glass-card flex items-center justify-center text-zinc-400 hover:text-white hover:border-violet-500/30 transition-all">
+              <a href="https://twitter.com/OMA_AI" target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="w-10 h-10 rounded-lg glass-card flex items-center justify-center text-zinc-400 hover:text-white hover:border-violet-500/30 transition-all focus:outline-none focus:ring-2 focus:ring-violet-500">
                 <Twitter className="w-5 h-5" />
               </a>
-              <a href="mailto:hello@oma-ai.com" className="w-10 h-10 rounded-lg glass-card flex items-center justify-center text-zinc-400 hover:text-white hover:border-violet-500/30 transition-all">
+              <a href="mailto:hello@oma-ai.com" aria-label="Email" className="w-10 h-10 rounded-lg glass-card flex items-center justify-center text-zinc-400 hover:text-white hover:border-violet-500/30 transition-all focus:outline-none focus:ring-2 focus:ring-violet-500">
                 <Mail className="w-5 h-5" />
               </a>
             </div>
@@ -33,38 +33,37 @@ export const Footer = memo(function Footer() {
           <div>
             <h4 className="font-semibold text-white mb-5">Product</h4>
             <ul className="space-y-3">
-              <li><Link href="/models" className="text-zinc-400 hover:text-violet-400 transition-colors text-sm">AI Models</Link></li>
-              <li><Link href="/pricing" className="text-zinc-400 hover:text-violet-400 transition-colors text-sm">Pricing</Link></li>
-              <li><Link href="/mcps" className="text-zinc-400 hover:text-violet-400 transition-colors text-sm">MCP Registry</Link></li>
-              <li><Link href="/status" className="text-zinc-400 hover:text-violet-400 transition-colors text-sm">System Status</Link></li>
+              <li><Link href="/models" className="text-zinc-400 hover:text-violet-400 transition-colors text-sm focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2 focus:ring-offset-[#0a0a14] rounded px-1">AI Models</Link></li>
+              <li><Link href="/pricing" className="text-zinc-400 hover:text-violet-400 transition-colors text-sm focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2 focus:ring-offset-[#0a0a14] rounded px-1">Pricing</Link></li>
+              <li><Link href="/mcps" className="text-zinc-400 hover:text-violet-400 transition-colors text-sm focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2 focus:ring-offset-[#0a0a14] rounded px-1">MCP Registry</Link></li>
             </ul>
           </div>
 
           <div>
             <h4 className="font-semibold text-white mb-5">Resources</h4>
             <ul className="space-y-3">
-              <li><Link href="/docs" className="text-zinc-400 hover:text-violet-400 transition-colors text-sm">Documentation</Link></li>
-              <li><Link href="/docs/api" className="text-zinc-400 hover:text-violet-400 transition-colors text-sm">API Reference</Link></li>
-              <li><Link href="/docs/guides" className="text-zinc-400 hover:text-violet-400 transition-colors text-sm">Guides</Link></li>
-              <li><Link href="/blog" className="text-zinc-400 hover:text-violet-400 transition-colors text-sm">Blog</Link></li>
+              <li><Link href="/docs" className="text-zinc-400 hover:text-violet-400 transition-colors text-sm focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2 focus:ring-offset-[#0a0a14] rounded px-1">Documentation</Link></li>
+              <li><Link href="/docs/api" className="text-zinc-400 hover:text-violet-400 transition-colors text-sm focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2 focus:ring-offset-[#0a0a14] rounded px-1">API Reference</Link></li>
+              <li><Link href="/docs/guides" className="text-zinc-400 hover:text-violet-400 transition-colors text-sm focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2 focus:ring-offset-[#0a0a14] rounded px-1">Guides</Link></li>
+              <li><Link href="/blog" className="text-zinc-400 hover:text-violet-400 transition-colors text-sm focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2 focus:ring-offset-[#0a0a14] rounded px-1">Blog</Link></li>
             </ul>
           </div>
 
           <div>
             <h4 className="font-semibold text-white mb-5">Company</h4>
             <ul className="space-y-3">
-              <li><Link href="/about" className="text-zinc-400 hover:text-violet-400 transition-colors text-sm">About</Link></li>
-              <li><Link href="/careers" className="text-zinc-400 hover:text-violet-400 transition-colors text-sm">Careers</Link></li>
-              <li><Link href="/privacy" className="text-zinc-400 hover:text-violet-400 transition-colors text-sm">Privacy Policy</Link></li>
-              <li><Link href="/terms" className="text-zinc-400 hover:text-violet-400 transition-colors text-sm">Terms of Service</Link></li>
+              <li><Link href="/about" className="text-zinc-400 hover:text-violet-400 transition-colors text-sm focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2 focus:ring-offset-[#0a0a14] rounded px-1">About</Link></li>
+              <li><Link href="/careers" className="text-zinc-400 hover:text-violet-400 transition-colors text-sm focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2 focus:ring-offset-[#0a0a14] rounded px-1">Careers</Link></li>
+              <li><Link href="/privacy" className="text-zinc-400 hover:text-violet-400 transition-colors text-sm focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2 focus:ring-offset-[#0a0a14] rounded px-1">Privacy Policy</Link></li>
+              <li><Link href="/terms" className="text-zinc-400 hover:text-violet-400 transition-colors text-sm focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2 focus:ring-offset-[#0a0a14] rounded px-1">Terms of Service</Link></li>
             </ul>
           </div>
         </div>
 
         <div className="max-w-7xl mx-auto mt-14 pt-8 border-t border-violet-500/10 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-zinc-500">© 2026 OMA-AI. All rights reserved.</p>
-          <div className="flex items-center gap-2 text-sm text-zinc-500">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+          <p className="text-sm text-zinc-400">© 2026 OMA-AI. All rights reserved.</p>
+          <div className="flex items-center gap-2 text-sm text-zinc-400">
+            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" aria-hidden="true" />
             All systems operational
           </div>
         </div>

@@ -4,7 +4,7 @@ import { Book, Code, Database, Zap, FileText, MessageCircle, ArrowRight, Externa
 import { GlassCard, GlassCardPurple } from '@/components/ui/GlassCard';
 
 export const metadata: Metadata = {
-  title: 'Documentation | OMA-AI - Premier MCP Marketplace',
+  title: 'Documentation',
   description: 'Comprehensive documentation for OMA-AI. Learn to build, publish, and monetize MCPs with x402 gasless payments.',
 };
 

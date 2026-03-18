@@ -17,7 +17,6 @@ export function HeroSection() {
 
   return (
     <div className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#12121f]">
-      <div className="noise-overlay" />
       
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#1e1e3f] via-[#12121f] to-[#0a0a14] opacity-90" />
@@ -100,14 +99,14 @@ export function HeroSection() {
         >
           <Link
             href="/mcps"
-            className="inline-flex items-center gap-2 bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white px-8 py-4 rounded-full font-semibold text-lg hover:from-violet-700 hover:to-fuchsia-700 transition-all"
+            className="inline-flex items-center gap-2 bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white px-8 py-4 rounded-full font-semibold text-lg hover:from-violet-700 hover:to-fuchsia-700 transition-all focus:outline-none focus:ring-2 focus:ring-violet-400 focus:ring-offset-2 focus:ring-offset-[#12121f]"
           >
             Explore MCP Marketplace
             <ArrowRight className="w-5 h-5" />
           </Link>
           <Link
             href="/pricing"
-            className="inline-flex items-center gap-2 glass-card text-violet-300 px-8 py-4 rounded-full font-semibold text-lg hover:bg-violet-500/10 transition-all border border-violet-500/20"
+            className="inline-flex items-center gap-2 glass-card text-violet-300 px-8 py-4 rounded-full font-semibold text-lg hover:bg-violet-500/10 transition-all border border-violet-500/20 focus:outline-none focus:ring-2 focus:ring-violet-400 focus:ring-offset-2 focus:ring-offset-[#12121f]"
           >
             View Pricing
           </Link>

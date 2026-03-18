@@ -1,6 +1,9 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #8b5cf6;
+  --color-primary-foreground: #ffffff;
+}
 
 :root {
   --foreground-rgb: 245, 243, 255;
@@ -12,9 +15,7 @@
 }
 
 * {
-  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 300ms;
+  box-sizing: border-box;
 }
 
 body {

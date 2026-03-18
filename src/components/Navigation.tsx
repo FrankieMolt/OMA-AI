@@ -23,7 +23,7 @@ export default function Navigation() {
           onClick={() => setIsOpen(!isOpen)}
           aria-label={isOpen ? 'Close menu' : 'Open menu'}
           aria-expanded={isOpen}
-          className="p-2 bg-zinc-900 border border-zinc-800 rounded-lg text-white hover:bg-zinc-800 transition-colors focus:outline-none focus:ring-2 focus:ring-green-500"
+          className="p-2 bg-zinc-900 border border-zinc-800 rounded-lg text-white hover:bg-zinc-800 transition-colors focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:ring-offset-zinc-900"
         >
           {isOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
@@ -53,7 +53,7 @@ export default function Navigation() {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="text-gray-300 hover:text-white transition-colors font-medium focus:outline-none focus:ring-2 focus:ring-green-500 rounded px-2 py-1"
+                  className="text-gray-300 hover:text-white transition-colors font-medium focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:ring-offset-zinc-900 rounded px-2 py-1"
                 >
                   {item.name}
                 </Link>
@@ -64,7 +64,7 @@ export default function Navigation() {
             <div className="hidden md:flex">
               <Link
                 href="/mcps"
-                className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-medium"
+                className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-medium focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2 focus:ring-offset-zinc-900"
               >
                 Explore MCPs
               </Link>
@@ -83,7 +83,7 @@ export default function Navigation() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="block px-4 py-2 text-gray-300 hover:text-white hover:bg-zinc-800 rounded-lg transition-colors"
+                className="block px-4 py-2 text-gray-300 hover:text-white hover:bg-zinc-800 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-green-500"
                 onClick={() => setIsOpen(false)}
               >
                 {item.name}
@@ -91,7 +91,7 @@ export default function Navigation() {
             ))}
             <Link
               href="/mcps"
-              className="block px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-medium text-center"
+              className="block px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-medium text-center focus:outline-none focus:ring-2 focus:ring-green-400"
               onClick={() => setIsOpen(false)}
             >
               Explore MCPs

@@ -66,12 +66,89 @@ export default function RootLayout({
     <html lang="en" className="dark">
       <head>
         <Script src="/x402.js" strategy="beforeInteractive" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@graph": [
+                {
+                  "@type": "Organization",
+                  "@id": "https://oma-ai.com/#organization",
+                  "name": "OMA-AI",
+                  "url": "https://oma-ai.com",
+                  "logo": {
+                    "@type": "ImageObject",
+                    "url": "https://oma-ai.com/icon-512.svg",
+                    "width": 512,
+                    "height": 512
+                  },
+                  "sameAs": [
+                    "https://github.com/FrankieMolt/OMA-AI",
+                    "https://discord.gg/oma-ai"
+                  ]
+                },
+                {
+                  "@type": "WebSite",
+                  "@id": "https://oma-ai.com/#website",
+                  "url": "https://oma-ai.com",
+                  "name": "OMA-AI",
+                  "description": "Premier MCP Marketplace with x402 Gasless Payments",
+                  "publisher": {
+                    "@id": "https://oma-ai.com/#organization"
+                  }
+                },
+                {
+                  "@type": "WebApplication",
+                  "@id": "https://oma-ai.com/#webapp",
+                  "name": "OMA-AI MCP Marketplace",
+                  "url": "https://oma-ai.com",
+                  "description": "Discover, deploy, and monetize AI agents with the premier MCP Marketplace. Access 19+ verified MCP servers with gasless x402 payments on Base network.",
+                  "applicationCategory": "DeveloperApplication",
+                  "operatingSystem": "Any",
+                  "offers": {
+                    "@type": "Offer",
+                    "price": "0",
+                    "priceCurrency": "USD"
+                  }
+                },
+                {
+                  "@type": "BreadcrumbList",
+                  "@id": "https://oma-ai.com/#breadcrumb",
+                  "itemListElement": [
+                    {
+                      "@type": "ListItem",
+                      "position": 1,
+                      "name": "Home",
+                      "item": "https://oma-ai.com"
+                    },
+                    {
+                      "@type": "ListItem",
+                      "position": 2,
+                      "name": "Marketplace",
+                      "item": "https://oma-ai.com/marketplace"
+                    },
+                    {
+                      "@type": "ListItem",
+                      "position": 3,
+                      "name": "Publish",
+                      "item": "https://oma-ai.com/publish"
+                    }
+                  ]
+                }
+              ]
+            })
+          }}
+        />
       </head>
       <body className={`${inter.className} bg-zinc-950 text-zinc-50 antialiased selection:bg-zinc-800`}>
+        <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:bg-green-600 focus:text-white focus:px-4 focus:py-2 focus:rounded-lg focus:font-medium">
+          Skip to main content
+        </a>
         <ErrorBoundary>
           <Providers>
             <Navigation />
-            {children}
+            <main id="main-content">{children}</main>
             <Footer />
           </Providers>
         </ErrorBoundary>
