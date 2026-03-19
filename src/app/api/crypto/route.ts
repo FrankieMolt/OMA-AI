@@ -16,6 +16,6 @@ export async function GET(request: Request) {
     last_updated: new Date().toISOString()
   });
   response.headers.set('Access-Control-Allow-Origin', '*');
-  response.headers.set('Cache-Control', 'public, max-age=60');
+  response.headers.set('Cache-Control', 'public, max-age=60, stale-while-revalidate=300');
   return response;
 }

@@ -31,7 +31,7 @@ export async function GET(
 
     if (error || !mcp) {
       return NextResponse.json(
-        { error: 'MCP server not found' },
+        { success: false, error: 'MCP server not found' },
         { status: 404 }
       );
     }
@@ -62,7 +62,7 @@ export async function GET(
   } catch (error) {
     console.error('Error fetching MCP server:', error);
     return NextResponse.json(
-      { error: 'Internal server error' },
+      { success: false, error: 'Internal server error' },
       { status: 500 }
     );
   }
@@ -78,7 +78,7 @@ export async function DELETE(
     // Check if Supabase is configured
     if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
       return NextResponse.json(
-        { error: 'Supabase not configured' },
+        { success: false, error: 'Supabase not configured' },
         { status: 503 }
       );
     }
@@ -97,20 +97,20 @@ export async function DELETE(
 
     if (error) {
       return NextResponse.json(
-        { error: 'Failed to delete MCP server', details: error.message },
+        { success: false, error: 'Failed to delete MCP server', details: error.message },
         { status: 500 }
       );
     }
 
     return NextResponse.json({
       success: true,
-      message: 'MCP server deleted successfully',
+      data: { message: 'MCP server deleted successfully' },
     });
 
   } catch (error) {
     console.error('Error deleting MCP server:', error);
     return NextResponse.json(
-      { error: 'Internal server error' },
+      { success: false, error: 'Internal server error' },
       { status: 500 }
     );
   }

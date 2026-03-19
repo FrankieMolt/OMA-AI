@@ -26,17 +26,19 @@ export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const type = searchParams.get("type") || "all";
 
-  const result: Record<string, unknown> = {
-    timestamp: new Date().toISOString(),
-  };
+  const joke = jokes[Math.floor(Math.random() * jokes.length)];
+  const quote = quotes[Math.floor(Math.random() * quotes.length)];
 
-  if (type === "joke" || type === "all") {
-    result.joke = jokes[Math.floor(Math.random() * jokes.length)];
+  if (type === "joke") {
+    return NextResponse.json({ success: true, data: { joke, timestamp: new Date().toISOString() } });
+  }
+  
+  if (type === "quote") {
+    return NextResponse.json({ success: true, data: { quote, timestamp: new Date().toISOString() } });
   }
 
-  if (type === "quote" || type === "all") {
-    result.quote = quotes[Math.floor(Math.random() * quotes.length)];
-  }
-
-  return NextResponse.json(result);
+  return NextResponse.json({ 
+    success: true, 
+    data: { joke, quote, timestamp: new Date().toISOString() } 
+  });
 }

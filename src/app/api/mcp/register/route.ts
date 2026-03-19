@@ -27,7 +27,7 @@ export async function POST(request: Request) {
     const missing = required.filter(field => !body[field]);
     if (missing.length > 0) {
       return NextResponse.json(
-        { error: `Missing required fields: ${missing.join(', ')}` },
+        { success: false, error: `Missing required fields: ${missing.join(', ')}` },
         { status: 400 }
       );
     }
@@ -35,7 +35,7 @@ export async function POST(request: Request) {
     // Validate transport
     if (!['stdio', 'sse', 'websocket'].includes(body.transport)) {
       return NextResponse.json(
-        { error: 'Invalid transport. Must be stdio, sse, or websocket' },
+        { success: false, error: 'Invalid transport. Must be stdio, sse, or websocket' },
         { status: 400 }
       );
     }
@@ -43,7 +43,7 @@ export async function POST(request: Request) {
     // Validate pricing
     if (body.pricing_usdc < 0) {
       return NextResponse.json(
-        { error: 'Pricing must be non-negative' },
+        { success: false, error: 'Pricing must be non-negative' },
         { status: 400 }
       );
     }
@@ -57,7 +57,7 @@ export async function POST(request: Request) {
 
     if (existing) {
       return NextResponse.json(
-        { error: 'MCP server with this slug already exists' },
+        { success: false, error: 'MCP server with this slug already exists' },
         { status: 409 }
       );
     }
@@ -91,7 +91,7 @@ export async function POST(request: Request) {
 
     if (error) {
       return NextResponse.json(
-        { error: 'Failed to register MCP server', details: error.message },
+        { success: false, error: 'Failed to register MCP server', details: error.message },
         { status: 500 }
       );
     }
@@ -129,7 +129,7 @@ export async function POST(request: Request) {
   } catch (error) {
     console.error('Error registering MCP server:', error);
     return NextResponse.json(
-      { error: 'Internal server error' },
+      { success: false, error: 'Internal server error' },
       { status: 500 }
     );
   }
@@ -198,7 +198,7 @@ export async function GET(request: Request) {
 
   if (error) {
     return NextResponse.json(
-      { error: 'Failed to fetch MCP servers', details: error.message },
+      { success: false, error: 'Failed to fetch MCP servers', details: error.message },
       { status: 500 }
     );
   }

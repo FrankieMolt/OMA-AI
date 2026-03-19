@@ -577,6 +577,7 @@ export async function GET(request: Request) {
   const category = searchParams.get('category') || 'all';
   const search = searchParams.get('search') || '';
   const sortBy = searchParams.get('sort') || 'rating';
+  const verified = searchParams.get('verified');
 
   const supabase = getSupabaseClient();
   let data = [...MCP_DATA];
@@ -594,9 +595,14 @@ export async function GET(request: Request) {
       if (search) {
         query = query.or(`name.ilike.%${search}%,description.ilike.%${search}%`);
       }
+      if (verified === 'true') {
+        query = query.eq('verified', true);
+      } else if (verified === 'false') {
+        query = query.eq('verified', false);
+      }
 
       const { data: dbData, count, error } = await query
-        .order(sortBy === 'rating' ? 'rating' : 'total_calls', { ascending: false })
+        .order(sortBy === 'rating' ? 'rating' : sortBy === 'calls' ? 'total_calls' : 'created_at', { ascending: false })
         .range((page - 1) * limit, page * limit - 1);
 
       if (!error && dbData && dbData.length > 0) {
@@ -623,12 +629,18 @@ export async function GET(request: Request) {
         m.tags.some(t => t.includes(q))
       );
     }
+    if (verified === 'true') {
+      data = data.filter(m => m.verified === true);
+    } else if (verified === 'false') {
+      data = data.filter(m => m.verified === false);
+    }
 
     // Sort
     data.sort((a, b) => {
       if (sortBy === 'rating') return (b.rating || 0) - (a.rating || 0);
       if (sortBy === 'calls') return (b.total_calls || 0) - (a.total_calls || 0);
       if (sortBy === 'price') return (a.pricing_usdc || 0) - (b.pricing_usdc || 0);
+      if (sortBy === 'newest') return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
       return 0;
     });
 

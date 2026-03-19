@@ -8,7 +8,7 @@ export async function GET(request: Request) {
 
     if (!userId) {
       return NextResponse.json(
-        { error: 'User ID required' },
+        { success: false, error: 'User ID required' },
         { status: 400 }
       );
     }
@@ -22,7 +22,7 @@ export async function GET(request: Request) {
 
     if (userError || !user) {
       return NextResponse.json(
-        { error: 'User not found' },
+        { success: false, error: 'User not found' },
         { status: 404 }
       );
     }
@@ -91,7 +91,7 @@ export async function GET(request: Request) {
   } catch (error) {
     console.error('[Usage API] Error:', error);
     return NextResponse.json(
-      { error: 'Failed to fetch usage data' },
+      { success: false, error: 'Failed to fetch usage data' },
       { status: 500 }
     );
   }

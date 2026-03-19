@@ -26,12 +26,12 @@ export async function GET(request: Request) {
       }
     });
     response.headers.set('Access-Control-Allow-Origin', '*');
-    response.headers.set('Cache-Control', 'public, max-age=300');
+    response.headers.set('Cache-Control', 'public, max-age=3600, stale-while-revalidate=86400');
     return response;
   }
 
   return NextResponse.json(
-    { error: 'Invalid action' },
+    { success: false, error: 'Invalid action' },
     { status: 400 }
   );
 }

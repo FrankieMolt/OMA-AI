@@ -13,7 +13,7 @@ export async function POST(request: Request) {
 
     if (missingFields.length > 0) {
       return NextResponse.json(
-        { error: `Missing required fields: ${missingFields.join(', ')}` },
+        { success: false, error: `Missing required fields: ${missingFields.join(', ')}` },
         { status: 400 }
       );
     }
@@ -22,7 +22,7 @@ export async function POST(request: Request) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(body.email)) {
       return NextResponse.json(
-        { error: 'Invalid email address' },
+        { success: false, error: 'Invalid email address' },
         { status: 400 }
       );
     }
@@ -30,7 +30,7 @@ export async function POST(request: Request) {
     // Validate message length
     if (body.message.length < 10 || body.message.length > 5000) {
       return NextResponse.json(
-        { error: 'Message must be between 10 and 5000 characters' },
+        { success: false, error: 'Message must be between 10 and 5000 characters' },
         { status: 400 }
       );
     }
@@ -39,7 +39,7 @@ export async function POST(request: Request) {
     const validCategories = ['general', 'support', 'bug-report', 'feature-request', 'mcp-inquiry', 'business-inquiry'];
     if (!validCategories.includes(body.category)) {
       return NextResponse.json(
-        { error: `Invalid category. Must be one of: ${validCategories.join(', ')}` },
+        { success: false, error: `Invalid category. Must be one of: ${validCategories.join(', ')}` },
         { status: 400 }
       );
     }
@@ -74,7 +74,7 @@ export async function POST(request: Request) {
   } catch (error) {
     console.error('[Contact Form] Error:', error);
     return NextResponse.json(
-      { error: 'Failed to send message. Please try again later.' },
+      { success: false, error: 'Failed to send message. Please try again later.' },
       { status: 500 }
     );
   }

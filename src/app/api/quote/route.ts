@@ -12,5 +12,8 @@ const quotes = [
 
 export async function GET() {
   const quote = quotes[Math.floor(Math.random() * quotes.length)];
-  return NextResponse.json({ quote, timestamp: new Date().toISOString() });
+  return NextResponse.json({ 
+    success: true, 
+    data: { quote, timestamp: new Date().toISOString() } 
+  });
 }
