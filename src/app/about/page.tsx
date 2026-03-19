@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import Link from 'next/link';
 import { GlassCard, GlassCardPurple } from '@/components/ui/GlassCard';
 import { Shield, Zap, DollarSign, Lock, Github, Twitter, Rocket, BarChart3, Users, Globe, Code, CheckCircle2 } from 'lucide-react';
 
@@ -417,12 +418,12 @@ export default function AboutPage() {
               <Github size={18} />
               Star on GitHub
             </a>
-            <a
+            <Link
               href="/mcps"
               className="inline-flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-purple-600 to-fuchsia-600 hover:from-purple-700 hover:to-fuchsia-700 text-white font-bold rounded-lg transition-colors"
             >
               Explore MCPs
-            </a>
+            </Link>
           </div>
         </GlassCardPurple>
       </div>

@@ -65,7 +65,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <head>
-        <Script src="/x402.js" strategy="beforeInteractive" />
+        <Script src="/x402.js" strategy="lazyOnload" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

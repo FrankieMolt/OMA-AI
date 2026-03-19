@@ -134,9 +134,9 @@ export function FeaturesSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h3 className="text-3xl font-bold text-white mb-8">
+          <h2 className="text-3xl font-bold text-white mb-8">
             Why Choose OMA-AI?
-          </h3>
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {benefits.map((benefit, index) => {
               const Icon = benefit.icon;
@@ -151,9 +151,9 @@ export function FeaturesSection() {
                   <div className="inline-flex p-4 bg-gradient-to-br from-purple-500/20 to-blue-500/20 rounded-full mb-4">
                     <Icon className="w-8 h-8 text-purple-400" />
                   </div>
-                  <h4 className="text-lg font-semibold text-white mb-2">
+                  <h3 className="text-lg font-semibold text-white mb-2">
                     {benefit.title}
-                  </h4>
+                  </h3>
                   <p className="text-gray-400 text-sm">
                     {benefit.description}
                   </p>

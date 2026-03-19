@@ -18,7 +18,12 @@ function LiveTradingStatusInner() {
   useEffect(() => {
     const fetchStatus = async () => {
       try {
-        const res = await fetch(process.env.NEXT_PUBLIC_TRADING_API_URL || 'http://localhost:3008/');
+        const apiUrl = process.env.NEXT_PUBLIC_TRADING_API_URL;
+        if (!apiUrl) {
+          setLoading(false);
+          return;
+        }
+        const res = await fetch(apiUrl);
         if (res.ok) {
           const data = await res.json();
           setStatus(data);
@@ -55,7 +60,7 @@ function LiveTradingStatusInner() {
             <Activity className="w-5 h-5 text-emerald-400" />
             <span className="absolute inset-0 w-5 h-5 bg-emerald-400/20 rounded-full animate-ping" />
           </div>
-          <h3 className="text-lg font-bold text-white tracking-tight">Agentic Alpha Stream</h3>
+          <h2 className="text-lg font-bold text-white tracking-tight">Agentic Alpha Stream</h2>
         </div>
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-1.5 text-[10px] font-mono text-emerald-400 bg-emerald-400/5 px-2 py-1 rounded-md border border-emerald-400/10">

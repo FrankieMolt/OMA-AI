@@ -1,31 +1,64 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
-  // Note: reactCompiler is a Next.js 16.x feature, not available in 15.x
-  // Enable via environment variable if needed: NEXT_REACT_COMPILER=true
   // Disable ETag generation to force browser revalidation
   generateEtags: false,
-  // Disable immutable caching for development
+  
+  // Compression
   compress: true,
-  // Ensure production builds
+  
+  // Production settings
+  poweredByHeader: false,
   productionBrowserSourceMaps: false,
-  // Ignore ESLint warnings during build (100+ warnings blocking deployment)
+  
+  // ESLint (warnings shouldn't block build)
   eslint: {
     ignoreDuringBuilds: true,
   },
-  // Redirects for common URL variations
+  
+  // Image optimizations
+  images: {
+    formats: ['image/avif', 'image/webp'],
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    minimumCacheTTL: 60,
+    remotePatterns: [
+      { protocol: 'https', hostname: 'images.unsplash.com' },
+      { protocol: 'https', hostname: 'picsum.photos' },
+      { protocol: 'https', hostname: 'avatars.githubusercontent.com' },
+    ],
+  },
+  
+  // Redirects
   async redirects() {
     return [
+      { source: '/mcp', destination: '/mcps', permanent: true },
+      { source: '/register', destination: '/signup', permanent: true },
+    ];
+  },
+  
+  // Headers for caching
+  async headers() {
+    return [
       {
-        source: '/mcp',
-        destination: '/mcps',
-        permanent: true, // 308 redirect
+        source: '/(.*)',
+        headers: [
+          { key: 'X-Content-Type-Options', value: 'nosniff' },
+          { key: 'X-Frame-Options', value: 'DENY' },
+          { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
+        ],
       },
       {
-        source: '/register',
-        destination: '/signup',
-        permanent: true, // 308 redirect
+        source: '/_next/static/(.*)',
+        headers: [
+          { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
+        ],
+      },
+      {
+        source: '/(.*).(jpg|jpeg|png|webp|avif|svg|ico)',
+        headers: [
+          { key: 'Cache-Control', value: 'public, max-age=86400, stale-while-revalidate=604800' },
+        ],
       },
     ];
   },
