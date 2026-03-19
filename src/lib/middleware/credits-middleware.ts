@@ -1,8 +1,7 @@
-// Credit deduction middleware for API routes
+import { NextRequest, NextResponse } from 'next/server';
 import { calculateCreditsNeeded } from '../credits';
-import { validateApiKey, supabase } from '../supabase/client';
+import { validateApiKey } from '../supabase/client';
 import { logError, logInfo } from '../logger';
-import type { NextApiRequest, NextApiResponse } from 'next';
 
 interface CreditCheckResult {
   allowed: boolean;
@@ -11,13 +10,13 @@ interface CreditCheckResult {
 }
 
 export async function checkCredits(
-  req: NextApiRequest,
+  request: NextRequest,
   model: string,
   estimatedInputTokens: number,
   estimatedOutputTokens: number
 ): Promise<CreditCheckResult> {
   try {
-    const apiKey = req.headers['x-api-key'] as string;
+    const apiKey = request.headers.get('x-api-key');
     
     if (!apiKey || !apiKey.startsWith('oma-')) {
       return {
@@ -94,16 +93,10 @@ export async function deductCredits(
       return { success: true };
     }
 
-    // Get API key data
-    const keyHash = await hashKey(apiKey);
-    const { data: keyData } = await supabase!
-      .from('api_keys')
-      .select('*, users(*)')
-      .eq('key_hash', keyHash)
-      .eq('is_active', true)
-      .single();
-
-    if (!keyData) {
+    // Validate API key and get key data
+    const keyData = await validateApiKey(apiKey);
+    
+    if (!keyData || !keyData.users) {
       logError('credits/deductCredits', 'Invalid API key');
       return { success: false };
     }
@@ -113,8 +106,15 @@ export async function deductCredits(
     const currentCredits = user.credits || 0;
     const usedThisMonth = user.used_this_month || 0;
 
+    // Import supabase here to avoid circular dependencies
+    const { createClient } = await import('@supabase/supabase-js');
+    const supabase = createClient(
+      process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL || '',
+      process.env.SUPABASE_SERVICE_ROLE_KEY || ''
+    );
+
     // Update user credits
-    const { error } = await supabase!
+    const { error } = await supabase
       .from('users')
       .update({
         credits: currentCredits - creditsNeeded,
@@ -141,53 +141,49 @@ export async function deductCredits(
 }
 
 // Wrapper for API routes with automatic credit deduction
-export function withCredits(
-  handler: (req: NextApiRequest, res: NextApiResponse) => Promise<void>,
+export async function withCredits(
+  request: NextRequest,
+  handler: (req: NextRequest, creditsNeeded: number) => Promise<NextResponse>,
   options: {
     modelParam?: string;
-    estimateTokens?: (req: NextApiRequest) => { input: number; output: number };
+    estimateTokens?: (req: NextRequest) => { input: number; output: number };
   } = {}
-) {
-  return async (req: NextApiRequest, res: NextApiResponse) => {
-    // Extract model from request
-    const model = options.modelParam 
-      ? req.body[options.modelParam]
-      : req.body.model;
+): Promise<NextResponse> {
+  // Extract model from request
+  let model: string | null = null;
+  
+  if (options.modelParam && request.method === 'POST') {
+    try {
+      const body = await request.json();
+      model = body[options.modelParam];
+    } catch {}
+  }
+  
+  if (!model) {
+    return NextResponse.json(
+      { error: 'Model not specified' },
+      { status: 400 }
+    );
+  }
 
-    if (!model) {
-      return res.status(400).json({ error: 'Model not specified' });
-    }
+  // Estimate tokens
+  const tokens = options.estimateTokens 
+    ? options.estimateTokens(request)
+    : { input: 500, output: 500 }; // Default estimate
 
-    // Estimate tokens
-    const tokens = options.estimateTokens 
-      ? options.estimateTokens(req)
-      : { input: 500, output: 500 }; // Default estimate
-
-    // Check credits
-    const check = await checkCredits(req, model, tokens.input, tokens.output);
-    
-    if (!check.allowed) {
-      return res.status(402).json({ 
+  // Check credits
+  const check = await checkCredits(request, model, tokens.input, tokens.output);
+  
+  if (!check.allowed) {
+    return NextResponse.json(
+      { 
         error: check.error || 'Insufficient credits',
         creditsNeeded: check.creditsNeeded
-      });
-    }
+      },
+      { status: 402 }
+    );
+  }
 
-    // Add credit info to request
-    (req as any).creditsNeeded = check.creditsNeeded;
-
-    // Execute handler
-    await handler(req, res);
-  };
-}
-
-/**
- * Hash API key for storage
- */
-async function hashKey(key: string): Promise<string> {
-  const encoder = new TextEncoder();
-  const data = encoder.encode(key);
-  const hashBuffer = await crypto.subtle.digest('SHA-256', data.buffer as ArrayBuffer);
-  const hashArray = Array.from(new Uint8Array(hashBuffer));
-  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+  // Execute handler with credits info
+  return handler(request, check.creditsNeeded);
 }

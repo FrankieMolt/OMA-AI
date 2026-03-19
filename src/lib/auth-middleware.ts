@@ -1,42 +1,47 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
+import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 
 const supabase = createClient(
-  process.env.SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_KEY!
+  process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL || '',
+  process.env.SUPABASE_SERVICE_ROLE_KEY || ''
 );
 
 /**
  * Authentication Middleware
  * 
  * Validates API key or session token
- * Attaches user to request
+ * Returns user data on success, 401/403 on failure
  */
 export async function authenticate(
-  req: NextApiRequest,
-  res: NextApiResponse,
-  next: (user: any) => Promise<void>
-) {
+  request: NextRequest
+): Promise<{ user: any; error: NextResponse | null }> {
   try {
     // Check for API key in header
-    const apiKey = req.headers['x-api-key'] as string;
+    const apiKey = request.headers.get('x-api-key');
     
     // Check for session token
-    const authHeader = req.headers['authorization'] as string;
+    const authHeader = request.headers.get('authorization');
     const sessionToken = authHeader?.replace('Bearer ', '');
 
     let user = null;
 
     // API Key auth
     if (apiKey && apiKey.startsWith('oma-')) {
-      const { data, error } = await supabase
-        .from('users')
-        .select('*')
-        .eq('api_key', apiKey)
+      const encoder = new TextEncoder();
+      const data = encoder.encode(apiKey);
+      const hashBuffer = await crypto.subtle.digest('SHA-256', data.buffer as ArrayBuffer);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      const keyHash = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+
+      const { data: keyData, error } = await supabase
+        .from('api_keys')
+        .select('*, users(*)')
+        .eq('key_hash', keyHash)
+        .eq('is_active', true)
         .single();
 
-      if (!error && data) {
-        user = data;
+      if (!error && keyData) {
+        user = keyData.users;
       }
     }
 
@@ -62,31 +67,43 @@ export async function authenticate(
     }
 
     if (!user) {
-      return res.status(401).json({ 
-        error: 'Authentication required',
-        message: 'Provide valid API key (x-api-key header) or session token (Authorization header)'
-      });
+      return { 
+        user: null, 
+        error: NextResponse.json(
+          { 
+            error: 'Authentication required',
+            message: 'Provide valid API key (x-api-key header) or session token (Authorization header)'
+          },
+          { status: 401 }
+        )
+      };
     }
 
-    // Check if user is active
-    if (user.banned_at) {
-      return res.status(403).json({ 
-        error: 'Account suspended',
-        message: 'Contact support@oma-ai.com'
-      });
+    // Check if user is banned
+    if ((user as any).banned_at) {
+      return { 
+        user: null, 
+        error: NextResponse.json(
+          { 
+            error: 'Account suspended',
+            message: 'Contact support@oma-ai.com'
+          },
+          { status: 403 }
+        )
+      };
     }
 
-    // Attach user to request
-    (req as any).user = user;
-
-    // Continue to next handler
-    await next(user);
+    return { user, error: null };
 
   } catch (error) {
     console.error('Auth middleware error:', error);
-    return res.status(500).json({ 
-      error: 'Authentication failed' 
-    });
+    return { 
+      user: null, 
+      error: NextResponse.json(
+        { error: 'Authentication failed' },
+        { status: 500 }
+      )
+    };
   }
 }
 
@@ -96,25 +113,30 @@ export async function authenticate(
  * Attaches user if authenticated, but doesn't require it
  */
 export async function optionalAuth(
-  req: NextApiRequest,
-  res: NextApiResponse,
-  next: (user: any | null) => Promise<void>
-) {
+  request: NextRequest
+): Promise<{ user: any | null }> {
   try {
-    const apiKey = req.headers['x-api-key'] as string;
-    const authHeader = req.headers['authorization'] as string;
+    const apiKey = request.headers.get('x-api-key');
+    const authHeader = request.headers.get('authorization');
     const sessionToken = authHeader?.replace('Bearer ', '');
 
     let user = null;
 
     if (apiKey && apiKey.startsWith('oma-')) {
-      const { data } = await supabase
-        .from('users')
-        .select('*')
-        .eq('api_key', apiKey)
+      const encoder = new TextEncoder();
+      const data = encoder.encode(apiKey);
+      const hashBuffer = await crypto.subtle.digest('SHA-256', data.buffer as ArrayBuffer);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      const keyHash = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+
+      const { data: keyData } = await supabase
+        .from('api_keys')
+        .select('*, users(*)')
+        .eq('key_hash', keyHash)
+        .eq('is_active', true)
         .single();
       
-      if (data) user = data;
+      if (keyData) user = keyData.users;
     }
 
     if (!user && sessionToken) {
@@ -132,11 +154,10 @@ export async function optionalAuth(
       } catch (e) {}
     }
 
-    (req as any).user = user;
-    await next(user);
+    return { user };
 
   } catch (error) {
-    await next(null);
+    return { user: null };
   }
 }
 
@@ -148,29 +169,29 @@ export async function optionalAuth(
 export function requireTier(minTier: string) {
   const tierHierarchy = ['free', 'starter', 'pro', 'enterprise'];
   
-  return async (
-    req: NextApiRequest,
-    res: NextApiResponse,
-    next: () => Promise<void>
-  ) => {
-    const user = (req as any).user;
-
+  return (user: any): NextResponse | null => {
     if (!user) {
-      return res.status(401).json({ error: 'Authentication required' });
+      return NextResponse.json(
+        { error: 'Authentication required' },
+        { status: 401 }
+      );
     }
 
-    const userTierIndex = tierHierarchy.indexOf(user.tier);
+    const userTierIndex = tierHierarchy.indexOf((user as any).tier || 'free');
     const minTierIndex = tierHierarchy.indexOf(minTier);
 
     if (userTierIndex < minTierIndex) {
-      return res.status(403).json({ 
-        error: 'Upgrade required',
-        message: `This feature requires ${minTier} tier or higher`,
-        current_tier: user.tier,
-        required_tier: minTier
-      });
+      return NextResponse.json(
+        { 
+          error: 'Upgrade required',
+          message: `This feature requires ${minTier} tier or higher`,
+          current_tier: (user as any).tier,
+          required_tier: minTier
+        },
+        { status: 403 }
+      );
     }
 
-    await next();
+    return null;
   };
 }

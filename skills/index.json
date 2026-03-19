@@ -79,13 +79,7 @@
       "location": "~/.agents/skills/mcp-builder/SKILL.md",
       "emoji": "🔧"
     },
-    {
-      "name": "nosyt-trader",
-      "category": "finance",
-      "description": "Autonomous crypto trading bot for Base network. Fetches SOL/USDC prices, executes buy/sell based on signals",
-      "location": "~/.agents/skills/nosyt-trader/nosyt-trader/nosyt-trader/nosyt-trader/nosyt-trader/nosyt-trader/nosyt-trader/nosyt-trader/nosyt-trader/nosyt-trader/nosyt-trader/nosyt-trader/nosyt-trader/nosyt-trader/nosyt-trader/nosyt-trader/nosyt-trader/nosyt-trader/nosyt-trader/nosyt-trader/nosyt-trader/nosyt-trader/nosyt-trader/nosyt-trader/nosyt-trader/nosyt-trader/SKILL.md",
-      "emoji": "📈"
-    },
+
     {
       "name": "presearch-search",
       "category": "search",

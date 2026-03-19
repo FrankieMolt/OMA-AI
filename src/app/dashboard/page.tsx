@@ -1,8 +1,14 @@
+import { Metadata } from 'next';
 import { createClient } from '@/lib/supabase/server';
 import { redirect } from 'next/navigation';
 import { WalletConnect } from '@/components/wallet/WalletConnect';
 import Link from 'next/link';
 import { ArrowRight, TrendingUp, Users, Zap, DollarSign, Clock, Settings, LogOut } from 'lucide-react';
+
+export const metadata: Metadata = {
+  title: 'Dashboard | OMA-AI',
+  description: 'Manage your MCP marketplace dashboard, view earnings, and monitor your AI agent integrations.',
+};
 
 export default async function DashboardPage() {
   const supabase = await createClient();

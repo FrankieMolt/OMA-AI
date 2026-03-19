@@ -1,22 +1,34 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Enable strict mode for better React practices
+  reactStrictMode: true,
+
   // Disable ETag generation to force browser revalidation
   generateEtags: false,
-  
+
   // Compression
   compress: true,
-  
+
   // Production settings
   poweredByHeader: false,
   productionBrowserSourceMaps: false,
-  
+
   // ESLint (warnings shouldn't block build)
   eslint: {
     ignoreDuringBuilds: true,
   },
-  
-  // Image optimizations
+
+  // Optimize bundle splitting
+  modularizeImports: {
+    // Tree-shake these heavy libraries
+    'lucide-react': {
+      transform: 'lucide-react/dist/esm/icons/{{member}}',
+      skipDefaultConversion: true,
+    },
+  },
+
+  // Optimize images
   images: {
     formats: ['image/avif', 'image/webp'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],
@@ -26,9 +38,16 @@ const nextConfig: NextConfig = {
       { protocol: 'https', hostname: 'images.unsplash.com' },
       { protocol: 'https', hostname: 'picsum.photos' },
       { protocol: 'https', hostname: 'avatars.githubusercontent.com' },
+      { protocol: 'https', hostname: '**.github.com' },
     ],
   },
-  
+
+  // Experimental optimizations
+  experimental: {
+    // Optimize package imports
+    optimizePackageImports: ['lucide-react', 'framer-motion', 'recharts'],
+  },
+
   // Redirects
   async redirects() {
     return [
@@ -36,7 +55,7 @@ const nextConfig: NextConfig = {
       { source: '/register', destination: '/signup', permanent: true },
     ];
   },
-  
+
   // Headers for caching
   async headers() {
     return [

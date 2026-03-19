@@ -105,33 +105,31 @@ export interface Database {
           updated_at?: string
         }
       }
-      mcps: {
+      mcp_servers: {
         Row: {
           id: string
           slug: string
           name: string
-          description: string | null
-          long_description: string | null
           category: string
-          tags: string[]
-          author_id: string | null
+          description: string
+          long_description: string | null
+          author: string
+          author_email: string | null
           repository_url: string | null
-          homepage_url: string | null
+          website_url: string | null
           documentation_url: string | null
-          image_url: string | null
-          icon_url: string | null
-          price_tier: string
-          pricing: Json
-          tools: Json
-          version: string
+          logo_url: string | null
+          version: string | null
+          mcp_endpoint: string
+          transport: string
+          pricing_usdc: number
+          x402_enabled: boolean
+          verified: boolean
           status: string
-          is_official: boolean
-          is_featured: boolean
-          downloads: number
           rating: number | null
-          review_count: number
-          monthly_active_users: number
           total_calls: number
+          success_rate: number | null
+          tags: string[]
           created_at: string
           updated_at: string
         }
@@ -139,28 +137,26 @@ export interface Database {
           id?: string
           slug: string
           name: string
-          description?: string | null
-          long_description?: string | null
           category: string
-          tags?: string[]
-          author_id?: string | null
+          description: string
+          long_description?: string | null
+          author: string
+          author_email?: string | null
           repository_url?: string | null
-          homepage_url?: string | null
+          website_url?: string | null
           documentation_url?: string | null
-          image_url?: string | null
-          icon_url?: string | null
-          price_tier?: string
-          pricing?: Json
-          tools: Json
-          version?: string
+          logo_url?: string | null
+          version?: string | null
+          mcp_endpoint: string
+          transport: string
+          pricing_usdc?: number
+          x402_enabled?: boolean
+          verified?: boolean
           status?: string
-          is_official?: boolean
-          is_featured?: boolean
-          downloads?: number
           rating?: number | null
-          review_count?: number
-          monthly_active_users?: number
           total_calls?: number
+          success_rate?: number | null
+          tags?: string[]
           created_at?: string
           updated_at?: string
         }
@@ -168,71 +164,124 @@ export interface Database {
           id?: string
           slug?: string
           name?: string
-          description?: string | null
-          long_description?: string | null
           category?: string
-          tags?: string[]
-          author_id?: string | null
+          description?: string
+          long_description?: string | null
+          author?: string
+          author_email?: string | null
           repository_url?: string | null
-          homepage_url?: string | null
+          website_url?: string | null
           documentation_url?: string | null
-          image_url?: string | null
-          icon_url?: string | null
-          price_tier?: string
-          pricing?: Json
-          tools?: Json
-          version?: string
+          logo_url?: string | null
+          version?: string | null
+          mcp_endpoint?: string
+          transport?: string
+          pricing_usdc?: number
+          x402_enabled?: boolean
+          verified?: boolean
           status?: string
-          is_official?: boolean
-          is_featured?: boolean
-          downloads?: number
           rating?: number | null
-          review_count?: number
-          monthly_active_users?: number
           total_calls?: number
+          success_rate?: number | null
+          tags?: string[]
           created_at?: string
           updated_at?: string
         }
       }
-      reviews: {
+      mcp_tools: {
         Row: {
           id: string
-          mcp_id: string
-          user_id: string
-          rating: number
-          title: string | null
-          content: string | null
-          helpful_count: number
-          not_helpful_count: number
-          is_deleted: boolean
+          mcp_server_id: string
+          name: string
+          description: string
+          input_schema: Json
+          pricing_usdc: number
+          total_calls: number
+          success_rate: number | null
           created_at: string
-          updated_at: string
         }
         Insert: {
           id?: string
-          mcp_id: string
-          user_id: string
-          rating: number
-          title?: string | null
-          content?: string | null
-          helpful_count?: number
-          not_helpful_count?: number
-          is_deleted?: boolean
+          mcp_server_id: string
+          name: string
+          description: string
+          input_schema?: Json
+          pricing_usdc?: number
+          total_calls?: number
+          success_rate?: number | null
           created_at?: string
-          updated_at?: string
         }
         Update: {
           id?: string
-          mcp_id?: string
+          mcp_server_id?: string
+          name?: string
+          description?: string
+          input_schema?: Json
+          pricing_usdc?: number
+          total_calls?: number
+          success_rate?: number | null
+          created_at?: string
+        }
+      }
+      mcp_usage: {
+        Row: {
+          id: string
+          mcp_server_id: string
+          mcp_tool_id: string | null
+          user_id: string | null
+          call_success: boolean
+          error_message: string | null
+          response_time_ms: number | null
+          pricing_usdc: number
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          mcp_server_id: string
+          mcp_tool_id?: string | null
+          user_id?: string | null
+          call_success: boolean
+          error_message?: string | null
+          response_time_ms?: number | null
+          pricing_usdc?: number
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          mcp_server_id?: string
+          mcp_tool_id?: string | null
+          user_id?: string | null
+          call_success?: boolean
+          error_message?: string | null
+          response_time_ms?: number | null
+          pricing_usdc?: number
+          created_at?: string
+        }
+      }
+      mcp_reviews: {
+        Row: {
+          id: string
+          mcp_server_id: string
+          user_id: string
+          rating: number
+          review_text: string | null
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          mcp_server_id: string
+          user_id: string
+          rating: number
+          review_text?: string | null
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          mcp_server_id?: string
           user_id?: string
           rating?: number
-          title?: string | null
-          content?: string | null
-          helpful_count?: number
-          not_helpful_count?: number
-          is_deleted?: boolean
+          review_text?: string | null
           created_at?: string
-          updated_at?: string
         }
       }
       transactions: {
@@ -610,13 +659,67 @@ export interface Database {
   }
 }
 
-// API key validation (stub - needs DB implementation)
+// API key validation - queries the api_keys and users tables
 export async function validateApiKey(apiKey: string) {
-  return {
-    users: {
-      credits: 1000,
-      bonus_credits: 100,
-      used_this_month: 50,
+  if (!apiKey || !apiKey.startsWith('oma-')) {
+    return null;
+  }
+
+  try {
+    // Hash the API key to compare with stored hash
+    const encoder = new TextEncoder();
+    const data = encoder.encode(apiKey);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', data.buffer as ArrayBuffer);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    const keyHash = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+
+    const { data: keyData, error: keyError } = await supabase
+      .from('api_keys')
+      .select('*, users(*)')
+      .eq('key_hash', keyHash)
+      .eq('is_active', true)
+      .single();
+
+    if (keyError || !keyData) {
+      return null;
     }
-  };
+
+    // Check if key has expired
+    if (keyData.expires_at && new Date(keyData.expires_at) < new Date()) {
+      return null;
+    }
+
+    // Get user data
+    const user = keyData.users as any;
+    
+    if (!user) {
+      return null;
+    }
+
+    // Update last_used_at
+    await supabase
+      .from('api_keys')
+      .update({ last_used_at: new Date().toISOString() })
+      .eq('id', keyData.id);
+
+    return {
+      api_key: {
+        id: keyData.id,
+        name: keyData.name,
+        scopes: keyData.scopes,
+        rate_limit: keyData.rate_limit,
+      },
+      users: {
+        id: user.id,
+        email: user.email,
+        username: user.username,
+        credits: user.credits || 0,
+        bonus_credits: user.bonus_credits || 0,
+        used_this_month: user.used_this_month || 0,
+      }
+    };
+  } catch (error) {
+    console.error('validateApiKey error:', error);
+    return null;
+  }
 }

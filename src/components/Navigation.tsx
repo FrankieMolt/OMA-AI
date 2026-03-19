@@ -11,8 +11,10 @@ export default function Navigation() {
 
   const navItems = [
     { name: 'MCP Marketplace', href: '/mcps' },
-    { name: 'Publish', href: '/publish' },
+    { name: 'Pricing', href: '/pricing' },
     { name: 'Docs', href: '/docs' },
+    { name: 'Blog', href: '/blog' },
+    { name: 'About', href: '/about' },
   ];
 
   return (

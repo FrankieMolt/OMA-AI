@@ -49,8 +49,6 @@ export default function MCPMarketplace() {
         limit: (skillsPerPage * 3).toString(),
       });
 
-      console.log('[MCPMarketplace] Fetching from:', `/api/mcp/list?${params}`);
-
       const response = await fetch(`/api/mcp/list?${params}`);
       
       if (!response.ok) {
@@ -59,7 +57,7 @@ export default function MCPMarketplace() {
       
       const data = await response.json();
 
-      console.log('[MCPMarketplace] API response:', JSON.stringify({ success: data.success, dataLength: data.data?.length, total: data.total }));
+
 
       if (data.success && Array.isArray(data.data)) {
         const mappedSkills = data.data.map((skill: any) => ({ 
@@ -84,7 +82,7 @@ export default function MCPMarketplace() {
           success_rate: skill.success_rate || 0,
         }));
         
-        console.log('[MCPMarketplace] Setting skills:', mappedSkills.length, 'items');
+
         setSkills(mappedSkills);
         setTotalSkills(data.pagination?.total || data.total || data.data.length);
       } else {
@@ -101,7 +99,6 @@ export default function MCPMarketplace() {
 
   // Fetch on mount and when page changes
   useEffect(() => {
-    console.log('[MCPMarketplace] useEffect running, fetching skills...');
     fetchSkills();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page]); // Only re-fetch when page changes, not when fetchSkills changes
@@ -122,7 +119,9 @@ export default function MCPMarketplace() {
 
     // Filter by category
     if (category !== 'all') {
-      result = result.filter(skill => skill.category.includes(category));
+      result = result.filter(skill => 
+        skill.category && skill.category.includes(category)
+      );
     }
 
     // Filter by verified status
@@ -165,21 +164,18 @@ export default function MCPMarketplace() {
     setFilteredSkills(processedSkills.slice(startIndex, endIndex));
   }, [processedSkills, page, skillsPerPage]);
 
-  const totalPages = Math.ceil(filteredSkills.length / skillsPerPage);
+  const totalPages = Math.ceil(processedSkills.length / skillsPerPage);
 
-  const categories = [
-    'all',
-    'data',
-    'ai-ml',
-    'finance',
-    'social',
-    'communication',
-    'utility',
-    'development',
-    'storage',
-    'analytics',
-    'security',
-  ];
+  // Get unique categories from skills data
+  const categories = useMemo(() => {
+    const cats = new Set<string>(['all']);
+    skills.forEach(skill => {
+      if (skill.category && Array.isArray(skill.category)) {
+        skill.category.forEach(c => cats.add(c));
+      }
+    });
+    return Array.from(cats);
+  }, [skills]);
 
   const renderStars = (rating: number) => {
     const roundedRating = Math.round(rating);
@@ -298,7 +294,7 @@ export default function MCPMarketplace() {
               >
                 {categories.map((cat) => (
                   <option key={cat} value={cat}>
-                    {cat === 'all' ? 'All Categories' : cat.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
+                    {cat === 'all' ? 'All Categories' : cat}
                   </option>
                 ))}
               </select>
@@ -352,7 +348,7 @@ export default function MCPMarketplace() {
         <div className="flex items-center justify-between mb-6">
           <p className="text-gray-300">
             Showing <strong className="text-white">{paginatedSkills.length}</strong> of{' '}
-            <strong className="text-white">{filteredSkills.length}</strong> skills
+            <strong className="text-white">{processedSkills.length}</strong> skills
           </p>
           {loading && <InlineLoader text="Updating..." />}
         </div>
@@ -475,7 +471,7 @@ export default function MCPMarketplace() {
                       const colors = getCategoryColors(cat);
                       return (
                         <Badge key={cat} className={`${colors.bg} ${colors.text} ${colors.border} border`}>
-                          {cat.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
+                          {cat}
                         </Badge>
                       );
                     })}

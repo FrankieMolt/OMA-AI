@@ -586,7 +586,7 @@ export async function GET(request: Request) {
   // Try Supabase first
   if (supabase) {
     try {
-      let query = supabase.from('mcps').select('*', { count: 'exact' }).eq('status', 'active');
+      let query = supabase.from('mcp_servers').select('*', { count: 'exact' }).eq('status', 'active');
 
       if (category !== 'all') {
         query = query.eq('category', category);

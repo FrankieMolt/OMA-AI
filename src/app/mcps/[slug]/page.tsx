@@ -1,7 +1,5 @@
 import { Metadata } from 'next';
 import MCPSkillDetail from '@/components/mcp-marketplace/MCPSkillDetail';
-import Navigation from '@/components/Navigation';
-import { Footer } from '@/components/footer';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -21,9 +19,7 @@ export default async function MCPSkillPage({ params }: PageProps) {
   
   return (
     <main className="min-h-screen bg-zinc-950">
-      <Navigation />
       <MCPSkillDetail slug={slug} />
-      <Footer />
     </main>
   );
 }

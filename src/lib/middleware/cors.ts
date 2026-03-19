@@ -5,33 +5,33 @@
  * Eliminates duplication across 34+ API files
  */
 
-import type { NextApiResponse } from 'next';
-
 export const CORS_HEADERS = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
   'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-API-Key',
 } as const;
 
-export function applyCORS(res: NextApiResponse): void {
+export function applyCORS(response: NextResponse): NextResponse {
+  const newResponse = new NextResponse(response.body, response);
+  
   Object.entries(CORS_HEADERS).forEach(([key, value]) => {
-    res.setHeader(key, value);
+    newResponse.headers.set(key, value);
   });
+  
+  return newResponse;
 }
 
-export function handleCORSRequest(res: NextApiResponse): boolean {
-  if (res.writableEnded) {
-    return false;
-  }
-
-  applyCORS(res);
-
+export function handleCORSRequest(request: Request): Response | null {
   // Handle OPTIONS preflight
-  const { method } = res.req as any;
-  if (method === 'OPTIONS') {
-    res.status(200).end();
-    return true;
+  if (request.method === 'OPTIONS') {
+    return new NextResponse(null, {
+      status: 200,
+      headers: CORS_HEADERS,
+    });
   }
 
-  return false;
+  return null;
 }
+
+// Next.js 15 imports
+import { NextResponse } from 'next/server';
