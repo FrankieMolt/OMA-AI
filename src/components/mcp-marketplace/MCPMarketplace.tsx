@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback, useMemo } from 'react';
+import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { GlassCard } from '@/components/ui/GlassCard';
 import { Badge } from '@/components/ui/Badge';
@@ -49,32 +49,62 @@ export default function MCPMarketplace() {
         limit: (skillsPerPage * 3).toString(),
       });
 
+      console.log('[MCPMarketplace] Fetching from:', `/api/mcp/list?${params}`);
+
       const response = await fetch(`/api/mcp/list?${params}`);
+      
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`);
+      }
+      
       const data = await response.json();
 
-      if (data.success) {
-        setSkills(data.data.map((skill: any) => ({ 
-          ...skill, 
+      console.log('[MCPMarketplace] API response:', JSON.stringify({ success: data.success, dataLength: data.data?.length, total: data.total }));
+
+      if (data.success && Array.isArray(data.data)) {
+        const mappedSkills = data.data.map((skill: any) => ({ 
+          id: skill.id || '',
+          name: skill.name || 'Unknown',
+          slug: skill.slug || skill.id || '',
           category: Array.isArray(skill.category) 
             ? skill.category 
             : skill.category 
               ? [skill.category] 
-              : ['Utilities']
-        })));
-        setTotalSkills(data.total || data.data.length);
+              : ['Utilities'],
+          description: skill.description || '',
+          author: skill.author || 'Unknown',
+          repository_url: skill.repository_url || null,
+          documentation_url: skill.documentation_url || null,
+          mcp_endpoint: skill.mcp_endpoint || '',
+          pricing_usdc: skill.pricing_usdc || 0,
+          x402_enabled: skill.x402_enabled ?? true,
+          verified: skill.verified ?? false,
+          rating: skill.rating || 0,
+          total_calls: skill.total_calls || 0,
+          success_rate: skill.success_rate || 0,
+        }));
+        
+        console.log('[MCPMarketplace] Setting skills:', mappedSkills.length, 'items');
+        setSkills(mappedSkills);
+        setTotalSkills(data.pagination?.total || data.total || data.data.length);
       } else {
+        console.error('[MCPMarketplace] Invalid response:', data);
         setError('Failed to fetch MCP skills');
       }
-    } catch {
-      setError('Error fetching MCP skills');
+    } catch (err) {
+      console.error('[MCPMarketplace] Fetch error:', err);
+      setError(`Error fetching MCP skills: ${err instanceof Error ? err.message : String(err)}`);
     } finally {
       setLoading(false);
     }
-  }, [page]);
+  }, [page, skillsPerPage]);
 
+  // Fetch on mount and when page changes
   useEffect(() => {
+    console.log('[MCPMarketplace] useEffect running, fetching skills...');
     fetchSkills();
-  }, [fetchSkills]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [page]); // Only re-fetch when page changes, not when fetchSkills changes
 
   // Filter and sort skills
   const processedSkills = useMemo(() => {
@@ -125,8 +155,14 @@ export default function MCPMarketplace() {
   const paginatedSkills = useMemo(() => {
     const startIndex = (page - 1) * skillsPerPage;
     const endIndex = startIndex + skillsPerPage;
+    return processedSkills.slice(startIndex, endIndex);
+  }, [processedSkills, page, skillsPerPage]);
+
+  // Update filteredSkills when processedSkills or page changes
+  useEffect(() => {
+    const startIndex = (page - 1) * skillsPerPage;
+    const endIndex = startIndex + skillsPerPage;
     setFilteredSkills(processedSkills.slice(startIndex, endIndex));
-    return processedSkills;
   }, [processedSkills, page, skillsPerPage]);
 
   const totalPages = Math.ceil(filteredSkills.length / skillsPerPage);

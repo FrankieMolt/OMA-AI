@@ -1,6 +1,9 @@
 import { Metadata } from 'next';
 import MCPMarketplace from '@/components/mcp-marketplace/MCPMarketplace';
 
+// Force dynamic rendering
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   title: 'MCP Marketplace',
   description: 'Discover and integrate MCP (Model Context Protocol) tools for AI agents. Monetize your tools with x402 payments.',
