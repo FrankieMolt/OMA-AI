@@ -1,10 +1,10 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
 
 const PUBLIC_DIR = path.join(process.cwd(), 'public');
 
-export async function GET(request: Request) {
+export async function GET(request: NextRequest) {
   const { pathname } = new URL(request.url);
   
   // Remove leading slash

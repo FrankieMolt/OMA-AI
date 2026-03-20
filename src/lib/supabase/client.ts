@@ -110,7 +110,7 @@ export interface Database {
           id: string
           slug: string
           name: string
-          category: string
+          category: string[]
           description: string
           long_description: string | null
           author: string
@@ -137,7 +137,7 @@ export interface Database {
           id?: string
           slug: string
           name: string
-          category: string
+          category: string[]
           description: string
           long_description?: string | null
           author: string
@@ -164,7 +164,7 @@ export interface Database {
           id?: string
           slug?: string
           name?: string
-          category?: string
+          category?: string[]
           description?: string
           long_description?: string | null
           author?: string
