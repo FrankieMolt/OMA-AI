@@ -48,10 +48,8 @@ const nextConfig: NextConfig = {
     optimizePackageImports: ['lucide-react', 'framer-motion', 'recharts'],
   },
 
-  // Fix turbopack root for monorepo detection
-  turbopack: {
-    root: '..',
-  },
+  // Output configuration for Vercel
+  output: 'standalone',
 
   // Redirects
   async redirects() {
