@@ -48,8 +48,7 @@ const nextConfig: NextConfig = {
     optimizePackageImports: ['lucide-react', 'framer-motion', 'recharts'],
   },
 
-  // Output configuration for Vercel
-  output: 'standalone',
+
 
   // Redirects
   async redirects() {
