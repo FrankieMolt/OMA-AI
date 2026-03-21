@@ -48,6 +48,11 @@ const nextConfig: NextConfig = {
     optimizePackageImports: ['lucide-react', 'framer-motion', 'recharts'],
   },
 
+  // Fix turbopack root for monorepo detection
+  turbopack: {
+    root: '..',
+  },
+
   // Redirects
   async redirects() {
     return [
