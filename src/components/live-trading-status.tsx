@@ -18,11 +18,7 @@ function LiveTradingStatusInner() {
   useEffect(() => {
     const fetchStatus = async () => {
       try {
-        const apiUrl = process.env.NEXT_PUBLIC_TRADING_API_URL;
-        if (!apiUrl) {
-          setLoading(false);
-          return;
-        }
+        const apiUrl = '/api/trading/status';
         const res = await fetch(apiUrl);
         if (res.ok) {
           const data = await res.json();
