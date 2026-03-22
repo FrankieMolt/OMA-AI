@@ -775,7 +775,7 @@ function subscribeToLiveMCPUpdates() {
 - [Supabase Docs](https://supabase.com/docs)
 - [Supabase Dashboard](https://app.supabase.com)
 - [PostgreSQL Docs](https://www.postgresql.org/docs/)
-- [OMA-Ai Code](https://github.com/FrankieMolt/OMA-Ai)
+- [OMA-Ai Code](https://github.com/oma-ai)
 - [OMA-Ai API](https://docs.oma-ai.com/api)
 
 ---

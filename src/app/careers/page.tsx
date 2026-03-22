@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function CareersPage() {
   return (
-    <main className="min-h-screen bg-zinc-950">
+    <div className="min-h-screen bg-zinc-950">
       <Navigation />
       <div className="bg-zinc-950 text-zinc-50 py-12 px-4">
         <div className="max-w-4xl mx-auto">
@@ -92,6 +92,6 @@ export default function CareersPage() {
         </div>
       </div>
       <Footer />
-    </main>
+    </div>
   );
 }

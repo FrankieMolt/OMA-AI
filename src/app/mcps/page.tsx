@@ -12,8 +12,8 @@ export const metadata: Metadata = {
 
 export default function MCPMarketplacePage() {
   return (
-    <main className="min-h-screen bg-zinc-950 pt-16">
+    <div className="min-h-screen bg-zinc-950 pt-16">
       <MCPMarketplace />
-    </main>
+    </div>
   );
 }

@@ -206,7 +206,8 @@ export default function PublishPage() {
         </div>
       </header>
 
-      <main className="container mx-auto px-4 max-w-4xl py-8">
+      <div className="container mx-auto px-4 max-w-4xl py-8">
+        <h1 className="text-3xl font-bold text-white mb-6">Publish MCP</h1>
         {message.text && (
           <div
             className={`mb-6 p-4 rounded-lg ${
@@ -356,7 +357,7 @@ export default function PublishPage() {
             </button>
           </div>
         )}
-      </main>
+      </div>
     </div>
   );
 }

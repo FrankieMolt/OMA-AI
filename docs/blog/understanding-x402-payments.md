@@ -831,7 +831,7 @@ You now understand x402 gasless payments! 🎉
 - [x402 Protocol Documentation](https://docs.oma-ai.com/x402)
 - [Base Network Docs](https://docs.base.org)
 - [Solana Docs](https://docs.solana.com)
-- [OMA-AI GitHub](https://github.com/FrankieMolt/OMA-AI)
+- [OMA-AI GitHub](https://github.com/oma-ai)
 
 **Community:**
 - [Discord](https://discord.gg/oma-ai)

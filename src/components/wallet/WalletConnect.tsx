@@ -46,7 +46,7 @@ export function WalletConnect() {
     } catch (error: any) {
       if (error.code === 4001) {
         // User rejected request
-        console.log('User rejected wallet connection');
+        // User rejected wallet connection
       } else {
         console.error('Error connecting wallet:', error);
         alert('Failed to connect wallet');

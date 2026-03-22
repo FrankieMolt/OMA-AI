@@ -567,7 +567,7 @@ Together, we'll make AI agents more powerful, more accessible, and more profitab
 - **Publish Your MCP:** [oma-ai.com/publish](https://www.oma-ai.com/publish)
 - **Documentation:** [docs.oma-ai.com](https://docs.oma-ai.com)
 - **Discord:** [discord.gg/oma-ai](https://discord.gg/oma-ai)
-- **GitHub:** [github.com/FrankieMolt/OMA-Ai](https://github.com/FrankieMolt/OMA-Ai)
+- **GitHub:** [github.com/FrankieMolt/OMA-Ai](https://github.com/oma-ai)
 
 ---
 

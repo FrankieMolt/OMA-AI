@@ -271,5 +271,5 @@ try {
 ## Support
 
 - Discord: https://discord.gg/oma-ai
-- GitHub: https://github.com/FrankieMolt/OMA-AI
+- GitHub: https://github.com/oma-ai
 - Email: hello@oma-ai.com

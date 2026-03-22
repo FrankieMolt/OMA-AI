@@ -20,7 +20,7 @@ export default function AboutPage() {
   ];
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 pt-24 pb-12">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 pt-24 pb-12">
       <div className="container mx-auto px-4 max-w-6xl">
         {/* Header */}
         <div className="text-center mb-16">
@@ -331,7 +331,7 @@ export default function AboutPage() {
               </p>
               <div className="flex gap-3 mt-4">
                 <a
-                  href="https://github.com/FrankieMolt"
+                  href="https://github.com/oma-ai"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 text-purple-400 hover:text-purple-300 transition-colors"
@@ -376,7 +376,7 @@ export default function AboutPage() {
                   Join Discord
                 </a>
                 <a
-                  href="https://github.com/FrankieMolt/OMA-Ai"
+                  href="https://github.com/oma-ai"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white text-sm font-medium rounded-lg transition-colors"
@@ -410,7 +410,7 @@ export default function AboutPage() {
               Join Discord
             </a>
             <a
-              href="https://github.com/FrankieMolt/OMA-Ai"
+              href="https://github.com/oma-ai"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-8 py-3 bg-slate-700 hover:bg-slate-600 text-white font-bold rounded-lg transition-colors"
@@ -427,7 +427,7 @@ export default function AboutPage() {
           </div>
         </GlassCardPurple>
       </div>
-    </main>
+    </div>
   );
 }
 

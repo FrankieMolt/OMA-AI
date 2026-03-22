@@ -84,7 +84,7 @@ export default function RootLayout({
                     "height": 512
                   },
                   "sameAs": [
-                    "https://github.com/FrankieMolt/OMA-AI",
+                    "https://github.com/oma-ai",
                     "https://discord.gg/oma-ai"
                   ]
                 },

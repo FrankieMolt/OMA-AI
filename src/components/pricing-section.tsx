@@ -97,7 +97,7 @@ export function PricingSection() {
     setIsConnecting(true);
     try {
       // In a real flow, this would trigger an x402 payment request or Stripe checkout
-      console.log('Initiating purchase for:', pkgId);
+      // Debug: purchase flow started
       // For now, redirect to a mock checkout or login
       window.location.href = '/login';
     } catch (error) {

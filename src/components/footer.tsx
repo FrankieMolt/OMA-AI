@@ -18,7 +18,7 @@ export const Footer = memo(function Footer() {
               Build powerful AI applications with ease. Access all major language models through one simple API.
             </p>
             <div className="flex items-center gap-4">
-              <a href="https://github.com/FrankieMolt" target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="w-10 h-10 rounded-lg glass-card flex items-center justify-center text-zinc-400 hover:text-white hover:border-violet-500/30 transition-all focus:outline-none focus:ring-2 focus:ring-violet-500">
+              <a href="https://github.com/oma-ai" target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="w-10 h-10 rounded-lg glass-card flex items-center justify-center text-zinc-400 hover:text-white hover:border-violet-500/30 transition-all focus:outline-none focus:ring-2 focus:ring-violet-500">
                 <Github className="w-5 h-5" />
               </a>
               <a href="https://twitter.com/OMA_AI" target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="w-10 h-10 rounded-lg glass-card flex items-center justify-center text-zinc-400 hover:text-white hover:border-violet-500/30 transition-all focus:outline-none focus:ring-2 focus:ring-violet-500">

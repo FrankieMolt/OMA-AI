@@ -185,12 +185,12 @@ $$ LANGUAGE plpgsql;
 
 -- Insert sample MCP skills
 INSERT INTO mcp_skills (name, slug, category, description, author, repository_url, mcp_endpoint, pricing_usdc, x402_enabled, verified, rating, total_calls) VALUES
-  ('Exa Web Search', 'exa-web-search', ARRAY['search', 'ai'], 'High-quality semantic web search with AI-optimized query rewriting', 'oma-ai', 'https://github.com/FrankieMolt/OMA-AI', 'https://oma-ai.com/mcp/exa-web-search', 0.0005, true, true, 4.5, 100),
-  ('ByteOver Memory', 'byteover', ARRAY['storage', 'memory', 'ai'], 'Persistent agent context storage with semantic search and auto-curation', 'oma-ai', 'https://github.com/FrankieMolt/OMA-AI', 'https://oma-ai.com/mcp/byteover', 0.001, true, true, 4.8, 150),
-  ('Self-Improving Agent', 'self-improving-agent', ARRAY['ai', 'learning', 'optimization'], 'AI agents that learn from outputs and optimize future responses', 'oma-ai', 'https://github.com/FrankieMolt/OMA-AI', 'https://oma-ai.com/mcp/self-improving-agent', 0.002, true, false, 4.2, 50),
-  ('GitHub Repo Manager', 'github-repo-manager', ARRAY['dev', 'github'], 'GitHub repository management, code review, and CI monitoring', 'oma-ai', 'https://github.com/FrankieMolt/OMA-AI', 'https://oma-ai.com/mcp/github-repo-manager', 0.0015, true, true, 4.0, 200),
-  ('Smart Contract Auditor', 'smart-contract-auditor', ARRAY['blockchain', 'security', 'dev'], 'AI-powered smart contract security analysis and vulnerability detection', 'oma-ai', 'https://github.com/FrankieMolt/OMA-AI', 'https://oma-ai.com/mcp/smart-contract-auditor', 0.005, true, false, 3.8, 25),
-  ('Weather Forecaster', 'weather-forecaster', ARRAY['weather', 'data'], '7-day weather forecasts with precipitation and temperature data', 'oma-ai', 'https://github.com/FrankieMolt/OMA-AI', 'https://oma-ai.com/mcp/weather-forecaster', 0.001, true, true, 4.1, 300)
+  ('Exa Web Search', 'exa-web-search', ARRAY['search', 'ai'], 'High-quality semantic web search with AI-optimized query rewriting', 'oma-ai', 'https://github.com/oma-ai', 'https://oma-ai.com/mcp/exa-web-search', 0.0005, true, true, 4.5, 100),
+  ('ByteOver Memory', 'byteover', ARRAY['storage', 'memory', 'ai'], 'Persistent agent context storage with semantic search and auto-curation', 'oma-ai', 'https://github.com/oma-ai', 'https://oma-ai.com/mcp/byteover', 0.001, true, true, 4.8, 150),
+  ('Self-Improving Agent', 'self-improving-agent', ARRAY['ai', 'learning', 'optimization'], 'AI agents that learn from outputs and optimize future responses', 'oma-ai', 'https://github.com/oma-ai', 'https://oma-ai.com/mcp/self-improving-agent', 0.002, true, false, 4.2, 50),
+  ('GitHub Repo Manager', 'github-repo-manager', ARRAY['dev', 'github'], 'GitHub repository management, code review, and CI monitoring', 'oma-ai', 'https://github.com/oma-ai', 'https://oma-ai.com/mcp/github-repo-manager', 0.0015, true, true, 4.0, 200),
+  ('Smart Contract Auditor', 'smart-contract-auditor', ARRAY['blockchain', 'security', 'dev'], 'AI-powered smart contract security analysis and vulnerability detection', 'oma-ai', 'https://github.com/oma-ai', 'https://oma-ai.com/mcp/smart-contract-auditor', 0.005, true, false, 3.8, 25),
+  ('Weather Forecaster', 'weather-forecaster', ARRAY['weather', 'data'], '7-day weather forecasts with precipitation and temperature data', 'oma-ai', 'https://github.com/oma-ai', 'https://oma-ai.com/mcp/weather-forecaster', 0.001, true, true, 4.1, 300)
 ON CONFLICT (slug) DO NOTHING;
 
 -- Insert sample LLM models

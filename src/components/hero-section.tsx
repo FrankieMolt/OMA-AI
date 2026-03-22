@@ -15,6 +15,7 @@ export function HeroSection() {
     // Minimal SSR placeholder - prevents layout shift
     return (
       <div className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#12121f]">
+        <h1 className="sr-only">OMA-AI Premier MCP Marketplace</h1>
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#1e1e3f] via-[#12121f] to-[#0a0a14] opacity-90" />
         <div className="relative z-10 max-w-5xl mx-auto px-6 py-32 text-center">
           <div className="h-96 animate-pulse bg-zinc-800/20 rounded-2xl" />

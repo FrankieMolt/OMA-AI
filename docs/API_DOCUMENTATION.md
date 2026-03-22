@@ -378,7 +378,7 @@ curl https://api.oma-ai.com/api/mcp/anthropic-claude-mcp
     "author": {
       "id": "uuid-author",
       "name": "FrankieMolt",
-      "avatar_url": "https://github.com/FrankieMolt.png"
+      "avatar_url": "https://github.com/oma-ai.png"
     },
     "icon_url": "https://api.oma-ai.com/icons/anthropic-claude-mcp.png",
     "image_url": "https://api.oma-ai.com/images/anthropic-claude-mcp.png",
@@ -1389,7 +1389,7 @@ result = oma.call_tool(
 
 - **Documentation:** https://docs.oma-ai.com
 - **API Status:** https://api.oma-ai.com/api/health
-- **GitHub Issues:** https://github.com/FrankieMolt/OMA-Ai/issues
+- **GitHub Issues:** https://github.com/oma-ai/issues
 - **Discord:** https://discord.gg/oma-ai
 - **Email:** support@oma-ai.com
 - **Twitter:** @oma_ai

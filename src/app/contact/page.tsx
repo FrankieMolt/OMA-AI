@@ -229,7 +229,7 @@ export default function Contact() {
                     <span className="group-hover:underline">API Documentation</span>
                   </a>
                   <a
-                    href="https://github.com/FrankieMolt/OMA-Ai/issues"
+                    href="https://github.com/oma-ai/issues"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-3 text-purple-200 hover:text-purple-100 transition-colors group"
@@ -265,7 +265,7 @@ export default function Contact() {
                     <span>Follow on Twitter/X</span>
                   </a>
                   <a
-                    href="https://github.com/FrankieMolt/OMA-Ai"
+                    href="https://github.com/oma-ai"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-3 bg-gray-700 hover:bg-gray-600 text-white px-4 py-3 rounded-lg transition-colors"

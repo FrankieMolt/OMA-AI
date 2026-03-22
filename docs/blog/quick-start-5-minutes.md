@@ -484,7 +484,7 @@ rl.prompt();
 - **OMA-Ai Website:** https://www.oma-ai.com
 - **MCP Marketplace:** https://www.oma-ai.com/mcps
 - **API Documentation:** https://docs.oma-ai.com/api
-- **GitHub Repository:** https://github.com/FrankieMolt/OMA-Ai
+- **GitHub Repository:** https://github.com/oma-ai
 - **Discord Community:** https://discord.gg/oma-ai
 - **Twitter:** @oma_ai
 

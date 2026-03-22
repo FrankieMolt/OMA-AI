@@ -59,7 +59,7 @@ export default function DocsPage() {
   ];
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 pt-24 pb-12">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 pt-24 pb-12">
       <div className="container mx-auto px-4 max-w-7xl">
         {/* Header */}
         <div className="text-center mb-16">
@@ -189,7 +189,7 @@ export default function DocsPage() {
             </a>
 
             <a
-              href="https://github.com/FrankieMolt/OMA-Ai"
+              href="https://github.com/oma-ai"
               target="_blank"
               rel="noopener noreferrer"
               className="GlassCard p-6 hover:cursor-pointer group"
@@ -231,6 +231,6 @@ export default function DocsPage() {
           </GlassCard>
         </div>
       </div>
-    </main>
+    </div>
   );
 }

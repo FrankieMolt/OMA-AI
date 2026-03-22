@@ -79,7 +79,7 @@ export default async function DashboardPage() {
         </div>
       </header>
 
-      <main className="container mx-auto px-4 max-w-7xl py-8">
+      <div className="container mx-auto px-4 max-w-7xl py-8">
         {/* Welcome Section */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-white mb-2">
@@ -254,7 +254,7 @@ export default async function DashboardPage() {
             </div>
           </div>
         </div>
-      </main>
+      </div>
     </div>
   );
 }

@@ -9,8 +9,8 @@ export const metadata: Metadata = {
 
 export default function WalletPage() {
   return (
-    <main className="min-h-screen bg-zinc-950 pt-16">
+    <div className="min-h-screen bg-zinc-950 pt-16">
       <WalletManagement />
-    </main>
+    </div>
   );
 }
