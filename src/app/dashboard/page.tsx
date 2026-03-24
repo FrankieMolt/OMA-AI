@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { ArrowRight, TrendingUp, Users, Zap, DollarSign, Clock, Settings, LogOut } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Dashboard | OMA-AI',
+  title: 'Dashboard',
   description: 'Manage your MCP marketplace dashboard, view earnings, and monitor your AI agent integrations.',
 };
 

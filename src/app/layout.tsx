@@ -18,9 +18,12 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://oma-ai.com'),
+  alternates: {
+    canonical: '/',
+  },
   title: {
     default: 'OMA-AI | MCP Marketplace with x402 Gasless Payments',
-    template: '%s | OMA-AI'
+    template: '%s'
   },
   description: 'Discover, deploy, and monetize AI agents with the premier MCP Marketplace. Access 19+ verified MCP servers with gasless x402 payments on Base network - no API keys, no subscriptions.',
   keywords: ['MCP', 'Model Context Protocol', 'x402', 'AI agents', 'MCP marketplace', 'gasless payments', 'Base network', 'USDC', 'agent economy', 'AI infrastructure'],
@@ -64,7 +67,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark">
-      <head>
+      <body className={`${inter.className} bg-zinc-950 text-zinc-50 antialiased selection:bg-zinc-800`}>
         <Script src="/x402.js" strategy="lazyOnload" />
         <script
           type="application/ld+json"
@@ -77,12 +80,7 @@ export default function RootLayout({
                   "@id": "https://oma-ai.com/#organization",
                   "name": "OMA-AI",
                   "url": "https://oma-ai.com",
-                  "logo": {
-                    "@type": "ImageObject",
-                    "url": "https://oma-ai.com/icon-512.svg",
-                    "width": 512,
-                    "height": 512
-                  },
+                  "logo": "https://oma-ai.com/icon-512.svg",
                   "sameAs": [
                     "https://github.com/oma-ai",
                     "https://discord.gg/oma-ai"
@@ -140,8 +138,6 @@ export default function RootLayout({
             })
           }}
         />
-      </head>
-      <body className={`${inter.className} bg-zinc-950 text-zinc-50 antialiased selection:bg-zinc-800`}>
         <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:bg-green-600 focus:text-white focus:px-4 focus:py-2 focus:rounded-lg focus:font-medium">
           Skip to main content
         </a>

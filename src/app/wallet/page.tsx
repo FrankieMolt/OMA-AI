@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import WalletManagement from '@/components/wallet/WalletManagement';
 
 export const metadata: Metadata = {
-  title: 'Wallet | OMA-AI',
+  title: 'Wallet',
   description: 'Manage your agent wallet and view transaction history. x402 payments on Base network.',
   keywords: ['wallet', 'x402', 'USDC', 'Base', 'payments', 'transactions'],
 };

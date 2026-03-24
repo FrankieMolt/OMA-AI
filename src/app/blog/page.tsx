@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 
 export const metadata: Metadata = {
-  title: 'Blog | OMA-AI',
+  title: 'Blog',
   description: 'Insights, tutorials, and updates from the OMA-AI team',
 };
 

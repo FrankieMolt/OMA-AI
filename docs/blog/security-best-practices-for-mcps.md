@@ -6,7 +6,7 @@ author: OMA-AI Team
 tags: [security, MCP, best practices, vulnerabilities]
 ---
 
-# Security Best Practices for MCPs
+## Security Best Practices for MCPs
 
 Security isn't an afterthought—it's foundational to building trustworthy MCPs. With x402 payments handling real money, user data potentially flowing through your tools, and AI agents relying on your code, security is critical.
 
@@ -962,7 +962,7 @@ Security is an ongoing process, not a one-time task.
 - [NIST Cybersecurity Framework](https://www.nist.gov/cyberframework)
 - [OWASP ZAP](https://www.zaproxy.org/)
 - [Snyk](https://snyk.io/)
-- [OMA-AI Security Guidelines](https://docs.oma-ai.com/security)
+- [OMA-AI Security Guidelines](/docs/security)
 
 ---
 

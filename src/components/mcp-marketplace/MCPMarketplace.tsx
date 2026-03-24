@@ -7,6 +7,7 @@ import { Badge } from '@/components/ui/Badge';
 import { CardSkeleton, InlineLoader } from '@/components/ui/Loading';
 import { Search, Filter, SortAsc, Star, ExternalLink, Download, CheckCircle2, AlertCircle } from 'lucide-react';
 import { getCategoryIcon, getCategoryColors } from '@/lib/category-icons';
+import { getMcpFaviconUrl } from '@/lib/mcp-icons';
 
 interface MCPSkill {
   id: string;
@@ -208,7 +209,7 @@ export default function MCPMarketplace() {
   }), [skills]);
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 pt-24 pb-12">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 pt-24 pb-12">
       <div className="container mx-auto px-4 max-w-7xl">
         {/* Header */}
         <motion.div
@@ -436,9 +437,20 @@ export default function MCPMarketplace() {
                         const cat = skill.category?.[0] || 'Utilities';
                         const Icon = getCategoryIcon(cat);
                         const colors = getCategoryColors(cat);
+                        const faviconUrl = getMcpFaviconUrl(skill.name);
                         return (
-                          <div className={`p-2.5 rounded-xl ${colors.bg} ${colors.text} border ${colors.border} shrink-0`}>
-                            <Icon size={22} />
+                          <div className="relative shrink-0">
+                            <div className={`p-2.5 rounded-xl ${colors.bg} ${colors.text} border ${colors.border}`}>
+                              <Icon size={22} />
+                            </div>
+                            {faviconUrl && (
+                              <img
+                                src={faviconUrl}
+                                alt=""
+                                className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20"
+                                onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
+                              />
+                            )}
                           </div>
                         );
                       })()}
@@ -588,6 +600,6 @@ export default function MCPMarketplace() {
           </GlassCard>
         </motion.div>
       </div>
-    </main>
+    </div>
   );
 }

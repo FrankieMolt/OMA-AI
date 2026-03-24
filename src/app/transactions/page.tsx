@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import TransactionsFeed from '@/components/transactions/TransactionsFeed';
 
 export const metadata: Metadata = {
-  title: 'Transactions | OMA-AI',
+  title: 'Transactions',
   description: 'Real-time x402 payment transactions on OMA marketplace. View transaction history and payment details.',
   keywords: ['transactions', 'x402', 'payments', 'USDC', 'Base', 'activity'],
 };

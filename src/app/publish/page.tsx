@@ -385,8 +385,7 @@ function Step1({
       <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 space-y-4">
         <div>
           <label className="block text-sm font-bold mb-2 text-gray-300">MCP Name *</label>
-          <input
-            type="text"
+          <input aria-label="My Awesome MCP"             type="text"
             placeholder="My Awesome MCP"
             value={name}
             onChange={(e) => setName(e.target.value)}
@@ -396,8 +395,7 @@ function Step1({
 
         <div>
           <label className="block text-sm font-bold mb-2 text-gray-300">Slug *</label>
-          <input
-            type="text"
+          <input aria-label="my-awesome-mcp"             type="text"
             placeholder="my-awesome-mcp"
             value={slug}
             onChange={(e) => setSlug(e.target.value)}
@@ -408,8 +406,7 @@ function Step1({
 
         <div>
           <label className="block text-sm font-bold mb-2 text-gray-300">Category *</label>
-          <select
-            value={category}
+          <select aria-label="input field"             value={category}
             onChange={(e) => setCategory(e.target.value)}
             className="w-full px-4 py-3 bg-zinc-800 border border-zinc-700 rounded-lg text-white focus:outline-none focus:border-violet-500"
           >
@@ -424,8 +421,7 @@ function Step1({
 
         <div>
           <label className="block text-sm font-bold mb-2 text-gray-300">Short Description *</label>
-          <input
-            type="text"
+          <input aria-label="A brief description (1-2 sentences)"             type="text"
             placeholder="A brief description (1-2 sentences)"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
@@ -439,8 +435,7 @@ function Step1({
 
         <div>
           <label className="block text-sm font-bold mb-2 text-gray-300">Long Description</label>
-          <textarea
-            placeholder="Detailed description of your MCP, features, and use cases..."
+          <textarea aria-label="Detailed description of your MCP, features, and use cases..."             placeholder="Detailed description of your MCP, features, and use cases..."
             value={longDescription}
             onChange={(e) => setLongDescription(e.target.value)}
             rows={6}
@@ -472,8 +467,7 @@ function Step2({
       <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 space-y-4">
         <div>
           <label className="block text-sm font-bold mb-2 text-gray-300">MCP Endpoint *</label>
-          <input
-            type="url"
+          <input aria-label="https://your-domain.com/mcp/sse"             type="url"
             placeholder="https://your-domain.com/mcp/sse"
             value={mcpEndpoint}
             onChange={(e) => setMcpEndpoint(e.target.value)}
@@ -486,8 +480,7 @@ function Step2({
 
         <div>
           <label className="block text-sm font-bold mb-2 text-gray-300">Transport Protocol *</label>
-          <select
-            value={transport}
+          <select aria-label="input field"             value={transport}
             onChange={(e) => setTransport(e.target.value)}
             className="w-full px-4 py-3 bg-zinc-800 border border-zinc-700 rounded-lg text-white focus:outline-none focus:border-violet-500"
           >
@@ -502,8 +495,7 @@ function Step2({
 
         <div>
           <label className="block text-sm font-bold mb-2 text-gray-300">Repository URL</label>
-          <input
-            type="url"
+          <input aria-label="https://github.com/your-username/mcp"             type="url"
             placeholder="https://github.com/your-username/mcp"
             value={repositoryUrl}
             onChange={(e) => setRepositoryUrl(e.target.value)}
@@ -514,8 +506,7 @@ function Step2({
 
         <div>
           <label className="block text-sm font-bold mb-2 text-gray-300">Documentation URL</label>
-          <input
-            type="url"
+          <input aria-label="https://your-docs.com"             type="url"
             placeholder="https://your-docs.com"
             value={documentationUrl}
             onChange={(e) => setDocumentationUrl(e.target.value)}
@@ -560,8 +551,7 @@ function Step3({
             <div className="space-y-4">
               <div>
                 <label className="block text-sm font-bold mb-2 text-gray-300">Tool Name *</label>
-                <input
-                  type="text"
+                <input aria-label="my_tool"                   type="text"
                   placeholder="my_tool"
                   value={tool.name}
                   onChange={(e) => updateTool(index, 'name', e.target.value)}
@@ -571,8 +561,7 @@ function Step3({
 
               <div>
                 <label className="block text-sm font-bold mb-2 text-gray-300">Description</label>
-                <input
-                  type="text"
+                <input aria-label="What this tool does"                   type="text"
                   placeholder="What this tool does"
                   value={tool.description}
                   onChange={(e) => updateTool(index, 'description', e.target.value)}
@@ -584,8 +573,7 @@ function Step3({
                 <label className="block text-sm font-bold mb-2 text-gray-300">
                   Price per Call (USDC)
                 </label>
-                <input
-                  type="number"
+                <input aria-label="0.001"                   type="number"
                   step="0.0001"
                   min="0"
                   placeholder="0.001"
@@ -629,8 +617,7 @@ function Step4({
             <DollarSign className="w-5 h-5 text-green-400" />
             <label className="block text-sm font-bold text-gray-300">Global Pricing (USDC)</label>
           </div>
-          <input
-            type="number"
+          <input aria-label="0.001"             type="number"
             step="0.0001"
             min="0"
             placeholder="0.001"

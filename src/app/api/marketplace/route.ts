@@ -1,4 +1,6 @@
 import { NextResponse } from 'next/server';
+import fs from 'fs';
+import path from 'path';
 
 // Force dynamic rendering
 export const dynamic = 'force-dynamic';
@@ -93,21 +95,34 @@ export async function GET() {
       }
     }
 
-    // Fallback to mock data if Supabase is not available
+    // Fallback to local registry data if Supabase is not available
+    const dbPath = path.join(process.cwd(), 'database', '20-mcps-registration.json');
+    let localMcps = [];
+    if (fs.existsSync(dbPath)) {
+      localMcps = JSON.parse(fs.readFileSync(dbPath, 'utf8'));
+    }
+
+    const categories = Array.from(new Set(localMcps.map((m: any) => m.category || 'Other')));
+    const trending = localMcps.slice(0, 5).map((m: any) => ({
+      id: m.slug,
+      name: m.name,
+      slug: m.slug,
+      category: m.category || 'Other',
+      downloads: 0,
+      rating: 5.0
+    }));
+
     const response = NextResponse.json({
       success: true,
       marketplace: {
-        total_mcp_servers: 229,
-        total_skills: 500,
-        categories: ['AI', 'Trading', 'Web3', 'Tools', 'Data']
+        total_mcp_servers: localMcps.length,
+        total_skills: localMcps.reduce((acc: number, m: any) => acc + (m.tools?.length || 0), 0),
+        categories: categories as string[]
       },
-      trending: [
-        { name: 'Exa Web Search', downloads: 15420, category: 'AI' },
-        { name: 'Solana Payments', downloads: 12000, category: 'Trading' },
-        { name: 'GitHub Integration', downloads: 9800, category: 'Tools' }
-      ],
+      trending,
+      recent: localMcps.slice(0, 10),
       fallback: true,
-      message: 'Using cached data - Supabase not connected'
+      message: 'Using local registry data'
     });
     response.headers.set('Access-Control-Allow-Origin', '*');
     response.headers.set('Cache-Control', 'public, max-age=300');
@@ -116,21 +131,11 @@ export async function GET() {
   } catch (error) {
     console.error('[Marketplace API] Error:', error);
     
-    // Return mock data on error
-    const response = NextResponse.json({
-      success: false,
-      marketplace: {
-        total_mcp_servers: 229,
-        total_skills: 500,
-        categories: ['AI', 'Trading', 'Web3', 'Tools', 'Data']
-      },
-      trending: [
-        { name: 'Exa Web Search', downloads: 15420, category: 'AI' },
-        { name: 'Solana Payments', downloads: 12000, category: 'Trading' },
-        { name: 'GitHub Integration', downloads: 9800, category: 'Tools' }
-      ],
-      error: true
-    });
+    // Return standard error response
+    const response = NextResponse.json(
+      { success: false, error: 'Internal Server Error' },
+      { status: 500 }
+    );
     response.headers.set('Access-Control-Allow-Origin', '*');
     return response;
   }

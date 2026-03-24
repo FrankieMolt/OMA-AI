@@ -15,9 +15,12 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     const { data } = matter(fileContent);
 
     return {
-      title: data.title || 'Blog Post | OMA-AI',
-      description: data.description || data.excerpt || 'Read this blog post on OMA-AI',
+      title: `${data.title} | Blog | OMA-AI`,
+      description: data.description || data.excerpt || `Read about ${data.title} on OMA-AI`,
       keywords: data.keywords || ['OMA-AI', 'Blog', 'MCP'],
+      alternates: {
+        canonical: `https://oma-ai.com/blog/${resolvedParams.slug}`,
+      },
       openGraph: {
         title: data.title,
         description: data.description || data.excerpt,
@@ -29,7 +32,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     };
   } catch {
     return {
-      title: 'Blog Post | OMA-AI',
+      title: 'Blog Post',
     };
   }
 }
@@ -141,7 +144,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
           <div className="prose prose-invert prose-lg max-w-none">
             <ReactMarkdown
               components={{
-                h1: ({ children }) => <h1 className="text-4xl font-bold text-white mb-6">{children}</h1>,
+                h1: ({ children }) => <h2 className="text-4xl font-bold text-white mb-6">{children}</h2>,
                 h2: ({ children }) => <h2 className="text-3xl font-semibold text-white mt-12 mb-4">{children}</h2>,
                 h3: ({ children }) => <h3 className="text-2xl font-semibold text-purple-300 mt-8 mb-3">{children}</h3>,
                 p: ({ children }) => <p className="text-gray-300 leading-relaxed mb-6">{children}</p>,
@@ -238,8 +241,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
             Get the latest MCP tutorials, platform updates, and AI agent insights delivered to your inbox.
           </p>
           <form className="flex gap-4 max-w-md">
-            <input
-              type="email"
+            <input aria-label="your@email.com"               type="email"
               placeholder="your@email.com"
               className="flex-1 px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder:text-gray-500 focus:outline-none focus:border-purple-500"
             />

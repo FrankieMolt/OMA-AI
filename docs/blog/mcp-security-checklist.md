@@ -1,12 +1,12 @@
 ---
 title: MCP Security Checklist: Before You Publish
 description: Comprehensive security checklist for MCP developers to ensure their MCPs are secure, compliant, and production-ready.
-date: 2026-03-12
+date: 2025-03-12
 author: OMA-Ai Team
 tags: [security, checklist, mcp, best-practices]
 ---
 
-# MCP Security Checklist: Before You Publish
+## MCP Security Checklist: Before You Publish
 
 Security is critical for MCP developers. Before publishing to OMA-Ai, use this checklist to ensure your MCP is secure, compliant, and production-ready.
 
@@ -589,7 +589,7 @@ function alertOnHighErrorRate() {
 
 ## Resources
 
-- **OMA-Ai Security:** https://docs.oma-ai.com/security
+- **OMA-Ai Security:** /docs/security
 - **OWASP Top 10:** https://owasp.org/www-project-top-ten
 - **PCI DSS:** https://www.pcisecuritystandards.org
 - **GDPR:** https://gdpr.eu
@@ -605,6 +605,6 @@ Use this checklist before publishing your MCP to ensure it's secure, performant,
 
 ---
 
-*Published: March 12, 2026*
-*Updated: March 12, 2026*
-*Author: OMA-Ai Team*
+*Published: March 12, 2025*
+*Updated: March 12, 2025*
+*Author: OMA-AI Team*

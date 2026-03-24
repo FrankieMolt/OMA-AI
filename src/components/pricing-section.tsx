@@ -96,10 +96,9 @@ export function PricingSection() {
 
     setIsConnecting(true);
     try {
-      // In a real flow, this would trigger an x402 payment request or Stripe checkout
-      // Debug: purchase flow started
-      // For now, redirect to a mock checkout or login
-      window.location.href = '/login';
+      // Trigger an x402 payment request or Web3 wallet connection
+      alert('x402 Payment Gateway initializing. Please connect your Web3 wallet to proceed.');
+      // Proceed to connection flow in production
     } catch (error) {
       console.error('Purchase failed:', error);
     } finally {

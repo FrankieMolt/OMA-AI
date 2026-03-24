@@ -6,7 +6,7 @@ author: OMA-AI Team
 tags: [MCP, AI agents, tools, comparison, 2026]
 ---
 
-# Top 10 MCPs for AI Agents in 2026
+## Top 10 MCPs for AI Agents in 2026
 
 The MCP ecosystem has exploded in 2026, with over 100 production-ready tools now available. As AI agents become more sophisticated, the need for external tools has never been greater.
 
@@ -981,7 +981,7 @@ Ready to use these MCPs in your AI agents?
 ## Resources
 
 - [OMA-AI Marketplace](https://www.oma-ai.com/mcps)
-- [MCP Documentation](https://docs.oma-ai.com/mcp)
+- [MCP Documentation](/docs/mcp)
 - [Build Your Own MCP](https://www.oma-ai.com/blog/building-your-first-mcp)
 - [x402 Payments](https://www.oma-ai.com/blog/understanding-x402-payments)
 - [Discord Community](https://discord.gg/oma-ai)

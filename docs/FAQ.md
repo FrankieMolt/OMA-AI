@@ -346,7 +346,7 @@ X-RateLimit-Reset: 1712345678
 
 **Discord:** [discord.gg/oma-ai](https://discord.gg/oma-ai)
 
-**GitHub:** [github.com/FrankieMolt/OMA-AI](https://github.com/oma-ai)
+**GitHub:** [github.com/oma-ai](https://github.com/oma-ai)
 
 ---
 
@@ -400,10 +400,10 @@ Full policy at [oma-ai.com/privacy](https://www.oma-ai.com/privacy)
 **Contact Us:**
 - Email: support@oma-ai.com
 - Discord: [discord.gg/oma-ai](https://discord.gg/oma-ai.com)
-- GitHub Issues: [github.com/FrankieMolt/OMA-AI/issues](https://github.com/oma-ai/issues)
+- GitHub Issues: [github.com/oma-ai/issues](https://github.com/oma-ai/issues)
 
 **Response Time:** Within 24 hours (business days)
 
 ---
 
-*Last Updated: March 12, 2026*
+*Last Updated: March 12, 2025*

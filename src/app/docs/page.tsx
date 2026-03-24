@@ -4,8 +4,11 @@ import { Book, Code, Database, Zap, FileText, MessageCircle, ArrowRight, Externa
 import { GlassCard, GlassCardPurple } from '@/components/ui/GlassCard';
 
 export const metadata: Metadata = {
-  title: 'Documentation',
-  description: 'Comprehensive documentation for OMA-AI. Learn to build, publish, and monetize MCPs with x402 gasless payments.',
+  title: 'OMA-AI Documentation | MCP Guides & API Reference',
+  description: 'Comprehensive documentation for OMA-AI MCP marketplace. Learn to build, publish, and monetize MCPs with x402 gasless payments on Base network.',
+  alternates: {
+    canonical: 'https://www.oma-ai.com/docs',
+  },
 };
 
 export default function DocsPage() {
@@ -189,7 +192,7 @@ export default function DocsPage() {
             </a>
 
             <a
-              href="https://github.com/oma-ai"
+              href="https://github.com/oma-ai/oma-ai"
               target="_blank"
               rel="noopener noreferrer"
               className="GlassCard p-6 hover:cursor-pointer group"

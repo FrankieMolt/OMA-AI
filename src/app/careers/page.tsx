@@ -3,7 +3,7 @@ import Navigation from '@/components/Navigation';
 import { Footer } from '@/components/footer';
 
 export const metadata: Metadata = {
-  title: 'Careers | OMA-AI',
+  title: 'Careers',
   description: 'Join our team building the future of AI agent infrastructure. Remote positions available for Full Stack, Protocol Engineering, and DevOps.',
 };
 

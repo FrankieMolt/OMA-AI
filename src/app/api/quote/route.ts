@@ -12,8 +12,10 @@ const quotes = [
 
 export async function GET() {
   const quote = quotes[Math.floor(Math.random() * quotes.length)];
-  return NextResponse.json({ 
+  const response = NextResponse.json({ 
     success: true, 
     data: { quote, timestamp: new Date().toISOString() } 
   });
+  response.headers.set('Access-Control-Allow-Origin', '*');
+  return response;
 }

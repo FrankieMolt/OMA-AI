@@ -1,12 +1,12 @@
 ---
 title: How to Monetize Your MCPs on OMA-AI
 description: Complete guide to pricing, revenue projections, and strategies for monetizing Model Context Protocol tools.
-date:2026-03-12
+date:2025-03-12
 author: OMA-AI Team
 tags: [monetization, MCP, revenue, pricing, developer]
 ---
 
-# How to Monetize Your MCPs on OMA-AI
+## How to Monetize Your MCPs on OMA-AI
 
 Building a great MCP is only half the battle. Turning it into a sustainable revenue stream requires strategic pricing, smart marketing, and ongoing optimization. In this comprehensive guide, we'll walk you through everything you need to monetize your MCPs successfully on OMA-AI.
 
@@ -431,7 +431,7 @@ Reward first users:
 ```typescript
 // Check if user is early adopter
 const user = await getUser(userId);
-const isEarlyAdopter = user.createdAt < new Date('2026-06-01');
+const isEarlyAdopter = user.createdAt < new Date('2025-06-01');
 
 if (isEarlyAdopter) {
   // Apply 50% discount
@@ -470,10 +470,10 @@ Open source part of your MCP:
 ### Case Study 1: Weather API MCP
 
 **Developer:** WeatherTeam
-**Launch:** February 2026
+**Launch:** February 2025
 **Strategy:** Free tier + premium add-ons
 
-**Results (March 2026 - 1 month):**
+**Results (March 2025 - 1 month):**
 - Downloads: 428
 - Daily calls: 5,000-7,000
 - Monthly revenue: $210
@@ -501,10 +501,10 @@ Open source part of your MCP:
 ### Case Study 2: Image Processing MCP
 
 **Developer:** PixelPerfect
-**Launch:** January 2026
+**Launch:** January 2025
 **Strategy:** Low pricing, high volume
 
-**Results (March 2026 - 2 months):**
+**Results (March 2025 - 2 months):**
 - Downloads: 731
 - Daily calls: 6,000-8,000
 - Monthly revenue: $195
@@ -532,10 +532,10 @@ Open source part of your MCP:
 ### Case Study 3: Anthropic Claude MCP
 
 **Developer:** AIClaudeTeam
-**Launch:** February 2026
+**Launch:** February 2025
 **Strategy:** Premium pricing, enterprise focus
 
-**Results (March 2026 - 1 month):**
+**Results (March 2025 - 1 month):**
 - Downloads: 134 (lower, but higher value)
 - Daily calls: 2,500-3,000
 - Monthly revenue: $285
@@ -775,11 +775,11 @@ Ready to monetize your MCP? Here's your action plan:
 - [Publish Your MCP](https://www.oma-ai.com/publish)
 - [MCP Marketplace](https://www.oma-ai.com/mcps)
 - [x402 Payments Guide](https://www.oma-ai.com/blog/understanding-x402-payments)
-- [Payout Information](https://docs.oma-ai.com/developers/payouts)
+- [Payout Information](/docs/developers/payouts)
 - [Discord Community](https://discord.gg/oma-ai)
 
 ---
 
-*Published: March 12, 2026*
-*Updated: March 12, 2026*
+*Published: March 12, 2025*
+*Updated: March 12, 2025*
 *Author: OMA-AI Team*

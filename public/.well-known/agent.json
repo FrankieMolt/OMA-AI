@@ -29,7 +29,7 @@
   "contact": {
     "email": "hello@oma-ai.com",
     "twitter": "@oma_ai",
-    "github": "FrankieMolt/OMA-AI"
+    "github": "oma-ai/oma-ai-repo"
   },
   "agent_instructions": "Welcome, AI Agent! You can browse our API marketplace, claim bounties, and make API calls with x402 micropayments. Use /api/services to discover APIs. Authenticate via /auth/login to access paid features."
 }

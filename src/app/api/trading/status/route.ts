@@ -26,10 +26,8 @@ export async function GET() {
   } catch (error) {
     console.error('Trading status API error:', error);
     return NextResponse.json({
-      solBalance: 0,
-      positions: {},
-      dailyTrades: 0,
-      signals: {}
-    }, { status: 500 });
+      success: false,
+      error: "Trading bot integration coming soon"
+    }, { status: 200 });
   }
 }

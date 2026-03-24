@@ -6,7 +6,7 @@ author: OMA-Ai Team
 tags: [success-stories, case-studies, monetization, profit]
 ---
 
-# Real-World Success Stories: How Developers Are Making Money with OMA-Ai
+## Real-World Success Stories: How Developers Are Making Money with OMA-Ai
 
 OMA-Ai isn't just a platform—it's a revenue engine for developers. Here are real success stories from developers who built MCPs and are earning passive income every day.
 
@@ -450,7 +450,7 @@ Monthly Revenue = (Daily Calls × Price × 30 Days) × 0.95
 
 - **MCP Marketplace:** https://www.oma-ai.com/mcps
 - **Publish Your MCP:** https://www.oma-ai.com/publish
-- **API Documentation:** https://docs.oma-ai.com/api
+- **API Documentation:** /docs/api
 - **Developer Dashboard:** https://www.oma-ai.com/dashboard
 - **Discord Community:** https://discord.gg/oma-ai
 - **Twitter:** @oma_ai

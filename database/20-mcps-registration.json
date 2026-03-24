@@ -858,4 +858,69 @@
       }
     ]
   }
+  ,
+  {
+    "slug": "everything-search",
+    "name": "Everything Search MCP",
+    "description": "Universal system search for OpenClaw. Find any file or content across your system instantly.",
+    "long_description": "The Everything Search MCP provides unrestricted access to search the entire file system. Use it to find configuration files, logs, source code, and documents anywhere on the host machine. Ideal for advanced agents that need comprehensive system context.",
+    "category": "utility",
+    "tags": ["search", "system", "files", "utility"],
+    "repository_url": "https://github.com/nosytlabs/everything-mcp",
+    "homepage_url": "https://www.oma-ai.com/mcp/everything-search",
+    "documentation_url": "https://docs.oma-ai.com/mcp/everything-search",
+    "icon_url": "🔍",
+    "image_url": "https://www.oma-ai.com/images/mcps/everything.png",
+    "price_tier": "free",
+    "pricing": {
+      "tier": "free",
+      "price_per_call": 0,
+      "currency": "USDC"
+    },
+    "tools": [
+      {
+        "name": "everything_search",
+        "description": "Search for any file or content in the system",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "query": { "type": "string", "description": "File name pattern or content to search for" }
+          },
+          "required": ["query"]
+        }
+      }
+    ]
+  },
+  {
+    "slug": "searxng-search",
+    "name": "SearxNG Privacy Search MCP",
+    "description": "Privacy-respecting metasearch engine integration for AI agents.",
+    "long_description": "The SearxNG MCP allows AI agents to perform web searches without tracking or profiling. It aggregates results from over 70 search engines while protecting user privacy. Perfect for research agents needing unbiased, comprehensive search data.",
+    "category": "data",
+    "tags": ["search", "web", "privacy", "searxng"],
+    "repository_url": "https://github.com/nosytlabs/searxng-mcp",
+    "homepage_url": "https://www.oma-ai.com/mcp/searxng-search",
+    "documentation_url": "https://docs.oma-ai.com/mcp/searxng-search",
+    "icon_url": "🌐",
+    "image_url": "https://www.oma-ai.com/images/mcps/searxng.png",
+    "price_tier": "free",
+    "pricing": {
+      "tier": "free",
+      "price_per_call": 0,
+      "currency": "USDC"
+    },
+    "tools": [
+      {
+        "name": "searxng_search",
+        "description": "Perform a web search using local SearxNG",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "query": { "type": "string", "description": "Search query" }
+          },
+          "required": ["query"]
+        }
+      }
+    ]
+  }
 ]

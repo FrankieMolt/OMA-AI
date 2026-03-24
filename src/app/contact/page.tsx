@@ -102,7 +102,7 @@ export default function Contact() {
                   <label htmlFor="category" className="block text-sm font-semibold text-purple-200 mb-2">
                     Category <span className="text-red-400 ml-1">*</span>
                   </label>
-                  <select
+                  <select aria-label="Select option"
                     id="category"
                     value={formData.category}
                     onChange={(e) => setFormData({ ...formData, category: e.target.value as any })}
@@ -169,7 +169,7 @@ export default function Contact() {
                   <label htmlFor="message" className="block text-sm font-semibold text-purple-200 mb-2">
                     Message <span className="text-red-400 ml-1">*</span>
                   </label>
-                  <textarea
+                  <textarea aria-label="Message"
                     id="message"
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
@@ -215,7 +215,7 @@ export default function Contact() {
                     <span className="group-hover:underline">Frequently Asked Questions</span>
                   </a>
                   <a
-                    href="/docs/blog/quick-start-5-minutes"
+                    href="/blog/quick-start-5-minutes"
                     className="flex items-center gap-3 text-purple-200 hover:text-purple-100 transition-colors group"
                   >
                     <span className="text-2xl">🚀</span>
@@ -229,7 +229,7 @@ export default function Contact() {
                     <span className="group-hover:underline">API Documentation</span>
                   </a>
                   <a
-                    href="https://github.com/oma-ai/issues"
+                    href="https://github.com/oma-ai/oma-ai/issues"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-3 text-purple-200 hover:text-purple-100 transition-colors group"
@@ -265,7 +265,7 @@ export default function Contact() {
                     <span>Follow on Twitter/X</span>
                   </a>
                   <a
-                    href="https://github.com/oma-ai"
+                    href="https://github.com/oma-ai/oma-ai"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-3 bg-gray-700 hover:bg-gray-600 text-white px-4 py-3 rounded-lg transition-colors"

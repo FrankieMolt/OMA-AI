@@ -5,10 +5,12 @@ export async function GET(request: Request) {
   const wallet = searchParams.get('wallet');
 
   if (!wallet) {
-    return NextResponse.json(
-      { success: false, error: 'Wallet address required' },
+    const response = NextResponse.json(
+      { success: false, error: "Connect wallet to view portfolio", walletRequired: true },
       { status: 400 }
     );
+    response.headers.set('Access-Control-Allow-Origin', '*');
+    return response;
   }
 
   const response = NextResponse.json({

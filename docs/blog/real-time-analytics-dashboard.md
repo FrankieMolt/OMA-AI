@@ -6,7 +6,7 @@ author: OMA-Ai Team
 tags: [analytics, dashboard, real-time, supabase, charts]
 ---
 
-# Real-Time Analytics Dashboard with OMA-Ai
+## Real-Time Analytics Dashboard with OMA-Ai
 
 Monitor your MCP usage, track revenue, and analyze performance with OMA-Ai's real-time analytics dashboard. Built with Supabase real-time subscriptions, live data streams give you instant insights into your MCP marketplace.
 
@@ -833,7 +833,7 @@ export async function checkAlerts() {
 - [Supabase Real-Time](https://supabase.com/docs/guides/realtime)
 - [Recharts Documentation](https://recharts.org)
 - [Next.js Server Components](https://nextjs.org/docs/app/building-your-application/rendering/server-components)
-- [OMA-Ai API](https://docs.oma-ai.com/api)
+- [OMA-Ai API](/docs/api)
 
 ---
 

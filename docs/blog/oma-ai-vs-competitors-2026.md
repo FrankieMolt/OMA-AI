@@ -6,7 +6,7 @@ author: OMA-AI Team
 tags: [OMA-AI, Smithery.ai, RapidAPI, comparison, marketplace]
 ---
 
-# OMA-AI vs Smithery.ai vs RapidAPI: 2026 Comparison
+## OMA-AI vs Smithery.ai vs RapidAPI: 2026 Comparison
 
 Choosing the right MCP marketplace is critical for developers. In this comprehensive comparison, we'll break down OMA-AI, Smithery.ai, and RapidAPI across pricing, features, developer experience, and profitability.
 
@@ -200,7 +200,7 @@ Uses traditional payment processing with fees passed to users. No gasless paymen
 
 **Support Channels:**
 - **Discord:** discord.gg/oma-ai
-- **GitHub:** github.com/FrankieMolt/OMA-AI
+- **GitHub:** github.com/oma-ai
 - **Email:** support@oma-ai.com
 - **Twitter:** @oma_ai
 
@@ -470,7 +470,7 @@ Savings: $1,500/month = $18,000/year
 
 - [OMA-AI Marketplace](https://www.oma-ai.com/mcps)
 - [Publish Your MCP](https://www.oma-ai.com/publish)
-- [Pricing Guide](https://docs.oma-ai.com/developers/pricing)
+- [Pricing Guide](/docs/developers/pricing)
 - [x402 Payments](https://www.oma-ai.com/blog/understanding-x402-payments)
 - [Monetization Guide](https://www.oma-ai.com/blog/how-to-monetize-your-mcps)
 - [Discord Community](https://discord.gg/oma-ai)

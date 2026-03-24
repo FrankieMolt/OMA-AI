@@ -6,7 +6,7 @@ author: OMA-Ai Team
 tags: [roadmap, 2026, future, vision]
 ---
 
-# OMA-Ai 2026 Roadmap
+## OMA-Ai 2026 Roadmap
 
 OMA-Ai is building the premier MCP marketplace for AI agents. Here's our vision for 2026—new features, strategic partnerships, and ambitious growth targets.
 
@@ -565,9 +565,9 @@ Together, we'll make AI agents more powerful, more accessible, and more profitab
 
 - **MCP Marketplace:** [oma-ai.com/mcps](https://www.oma-ai.com/mcps)
 - **Publish Your MCP:** [oma-ai.com/publish](https://www.oma-ai.com/publish)
-- **Documentation:** [docs.oma-ai.com](https://docs.oma-ai.com)
+- **Documentation:** [docs.oma-ai.com](/docs)
 - **Discord:** [discord.gg/oma-ai](https://discord.gg/oma-ai)
-- **GitHub:** [github.com/FrankieMolt/OMA-Ai](https://github.com/oma-ai)
+- **GitHub:** [github.com/oma-ai](https://github.com/oma-ai)
 
 ---
 

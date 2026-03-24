@@ -6,7 +6,7 @@ author: OMA-Ai Team
 tags: [quickstart, tutorial, ai-agent, beginner]
 ---
 
-# Quick Start: Build Your First AI Agent in 5 Minutes
+## Quick Start: Build Your First AI Agent in 5 Minutes
 
 Welcome to OMA-Ai! In this quick start guide, you'll build a fully functional AI agent using our MCP marketplace. No AI experience required—just follow these steps.
 
@@ -483,7 +483,7 @@ rl.prompt();
 
 - **OMA-Ai Website:** https://www.oma-ai.com
 - **MCP Marketplace:** https://www.oma-ai.com/mcps
-- **API Documentation:** https://docs.oma-ai.com/api
+- **API Documentation:** /docs/api
 - **GitHub Repository:** https://github.com/oma-ai
 - **Discord Community:** https://discord.gg/oma-ai
 - **Twitter:** @oma_ai

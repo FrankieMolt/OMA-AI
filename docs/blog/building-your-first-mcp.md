@@ -6,7 +6,7 @@ author: OMA-AI Team
 tags: [MCP, tutorial, development, guide]
 ---
 
-# Building Your First MCP: A Complete Guide
+## Building Your First MCP: A Complete Guide
 
 The Model Context Protocol (MCP) is revolutionizing how AI agents interact with external tools and services. In this comprehensive guide, we'll walk you through building, testing, deploying, and monetizing your first MCP from scratch.
 
@@ -749,7 +749,7 @@ Congratulations on building your first MCP! 🎉
 4. ✅ Monetization enabled with x402
 
 **Continue Learning:**
-- Read [MCP Documentation](https://docs.oma-ai.com/mcp)
+- Read [MCP Documentation](/docs/mcp)
 - Explore [Other MCPs](https://www.oma-ai.com/mcps)
 - Join [Discord Community](https://discord.gg/oma-ai)
 

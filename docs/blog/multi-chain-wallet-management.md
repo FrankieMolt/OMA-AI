@@ -6,7 +6,7 @@ author: OMA-Ai Team
 tags: [wallet, multi-chain, base, solana, x402, payments]
 ---
 
-# Multi-Chain Wallet Management with OMA-Ai
+## Multi-Chain Wallet Management with OMA-Ai
 
 OMA-Ai supports multi-chain wallets (Base + Solana) for seamless, gasless MCP payments. In this guide, you'll learn how to connect wallets, manage balances, and execute x402 gasless transactions across chains.
 
@@ -801,7 +801,7 @@ console.log(`Total Revenue: $${totalRevenue}`);
 - **x402 Protocol:** [x402.org](https://x402.org)
 - **MetaMask:** [metamask.io](https://metamask.io)
 - **Phantom:** [phantom.app](https://phantom.app)
-- **OMA-Ai Documentation:** [docs.oma-ai.com](https://docs.oma-ai.com)
+- **OMA-Ai Documentation:** [docs.oma-ai.com](/docs)
 
 ---
 

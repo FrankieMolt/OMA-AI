@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { ArrowUpRight, Star, CheckCircle, Clock, Zap } from 'lucide-react';
 import { getCategoryIcon, getCategoryColors } from '@/lib/category-icons';
+import { getMcpFaviconUrl } from '@/lib/mcp-icons';
 
 interface MCPSkill {
   id: string;
@@ -144,9 +145,20 @@ export default function MCPSkillDetail({ slug }: { slug: string }) {
                 const cat = skill.category?.[0] || 'Utilities';
                 const Icon = getCategoryIcon(cat);
                 const colors = getCategoryColors(cat);
+                const faviconUrl = getMcpFaviconUrl(skill.name);
                 return (
-                  <div className={`p-3 rounded-2xl ${colors.bg} ${colors.text} border ${colors.border} shrink-0`}>
-                    <Icon size={32} />
+                  <div className="relative shrink-0">
+                    <div className={`p-3 rounded-2xl ${colors.bg} ${colors.text} border ${colors.border}`}>
+                      <Icon size={32} />
+                    </div>
+                    {faviconUrl && (
+                      <img
+                        src={faviconUrl}
+                        alt=""
+                        className="absolute -bottom-1.5 -right-1.5 w-7 h-7 rounded-full bg-white/10 backdrop-blur-sm border border-white/20"
+                        onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
+                      />
+                    )}
                   </div>
                 );
               })()}

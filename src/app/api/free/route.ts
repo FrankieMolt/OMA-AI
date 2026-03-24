@@ -30,15 +30,24 @@ export async function GET(request: Request) {
   const quote = quotes[Math.floor(Math.random() * quotes.length)];
 
   if (type === "joke") {
-    return NextResponse.json({ success: true, data: { joke, timestamp: new Date().toISOString() } });
+    return NextResponse.json({ 
+      success: true, 
+      data: { joke, timestamp: new Date().toISOString() },
+      note: "This API is for testing purposes only"
+    });
   }
   
   if (type === "quote") {
-    return NextResponse.json({ success: true, data: { quote, timestamp: new Date().toISOString() } });
+    return NextResponse.json({ 
+      success: true, 
+      data: { quote, timestamp: new Date().toISOString() },
+      note: "This API is for testing purposes only"
+    });
   }
 
   return NextResponse.json({ 
     success: true, 
-    data: { joke, quote, timestamp: new Date().toISOString() } 
+    data: { joke, quote, timestamp: new Date().toISOString() },
+    note: "This API is for testing purposes only"
   });
 }

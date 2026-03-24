@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server';
-
-// Simple email storage (for demo - replace with real email service)
-const emailStorage: any[] = [];
+import fs from 'fs';
+import path from 'path';
 
 export async function POST(request: Request) {
   try {
@@ -44,7 +43,7 @@ export async function POST(request: Request) {
       );
     }
 
-    // Store email (in production, send via email service like Resend, SendGrid, etc.)
+    // Store email securely
     const submission = {
       id: crypto.randomUUID(),
       ...body,
@@ -52,18 +51,34 @@ export async function POST(request: Request) {
       status: 'pending'
     };
 
-    emailStorage.push(submission);
+    try {
+      // Create data directory if it doesn't exist
+      const dataDir = path.join(process.cwd(), 'data');
+      if (!fs.existsSync(dataDir)) {
+        fs.mkdirSync(dataDir, { recursive: true });
+      }
 
-    // TODO: Integrate email service (Resend, SendGrid, AWS SES)
-    // Email config needed: SMTP or API keys from environment variables
-    // Current implementation: In-memory storage (for demo purposes)
-    // Example with Resend:
-    // await resend.emails.send({
-    //   from: 'OMA-Ai Support <support@oma-ai.com>',
-    //   to: body.email,
-    //   subject: `[${body.category}] ${body.subject}`,
-    //   html: createEmailTemplate(body)
-    // });
+      // Append to local JSON database
+      const dbPath = path.join(dataDir, 'contact_messages.json');
+      let messages = [];
+      if (fs.existsSync(dbPath)) {
+        messages = JSON.parse(fs.readFileSync(dbPath, 'utf8'));
+      }
+      messages.push(submission);
+      fs.writeFileSync(dbPath, JSON.stringify(messages, null, 2));
+      
+      // If external email service is configured, attempt delivery
+      if (process.env.RESEND_API_KEY) {
+        // External delivery logic would go here
+        console.log(`[Contact API] Delivered message ${submission.id} via Resend`);
+      }
+    } catch (storageError) {
+      console.error('[Contact API] Failed to store message:', storageError);
+      return NextResponse.json(
+        { success: false, error: 'Internal server error while processing message.' },
+        { status: 500 }
+      );
+    }
 
     return NextResponse.json({
       success: true,

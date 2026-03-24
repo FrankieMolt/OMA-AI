@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Profile | OMA-AI',
+  title: 'Profile',
   description: 'Manage your OMA-AI profile, account settings, and preferences.',
 };
 

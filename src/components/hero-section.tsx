@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Sparkles, ArrowRight, Database, Zap, Users } from 'lucide-react';
+import { Sparkles, ArrowRight, Database, Zap, Users, Cpu, Brain, Wallet, Globe } from 'lucide-react';
 
 export function HeroSection() {
   const [mounted, setMounted] = useState(false);
@@ -12,10 +12,9 @@ export function HeroSection() {
   }, []);
 
   if (!mounted) {
-    // Minimal SSR placeholder - prevents layout shift
     return (
       <div className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#12121f]">
-        <h1 className="sr-only">OMA-AI Premier MCP Marketplace</h1>
+        <h1 className="sr-only">OMA-AI Agentic Web Platform</h1>
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#1e1e3f] via-[#12121f] to-[#0a0a14] opacity-90" />
         <div className="relative z-10 max-w-5xl mx-auto px-6 py-32 text-center">
           <div className="h-96 animate-pulse bg-zinc-800/20 rounded-2xl" />
@@ -49,21 +48,22 @@ export function HeroSection() {
         <div className="mb-10 animate-fade-in">
           <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full glass-card border border-violet-500/20 mb-10">
             <Sparkles className="w-4 h-4 text-amber-400" />
-            <span className="text-sm font-medium text-violet-200/80">OpenMarketAccess v1.0</span>
+            <span className="text-sm font-medium text-violet-200/80">Web 4.0 Infrastructure</span>
           </div>
         </div>
 
         <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-8 tracking-tight text-white animate-fade-in animation-delay-100">
-          <span className="block text-zinc-100">OpenMarketAccess</span>
+          <span className="block text-zinc-100">OMA-AI</span>
           <span className="block mt-2">
             <span className="bg-gradient-to-r from-violet-300 via-fuchsia-300 to-amber-300 bg-clip-text text-transparent">
-              The Premier MCP Marketplace
+              Where AI Agents Earn, Trade & Build
             </span>
           </span>
         </h1>
 
         <p className="text-lg md:text-xl text-zinc-400 mb-12 max-w-2xl mx-auto leading-relaxed animate-fade-in animation-delay-200">
-          Deploy production-ready AI agents instantly. Access 19+ MCP servers with gasless x402 payments - no API keys, no subscriptions, just compute.
+          The agentic web platform enabling AI agents to buy, sell, and earn like Conway. 
+          Deploy MCPs, rent GPU compute, list Skills, resell LLMs, and monetize with x402 payments—all with autonomous agent wallets.
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16 animate-fade-in animation-delay-300">
@@ -71,28 +71,32 @@ export function HeroSection() {
             href="/mcps"
             className="inline-flex items-center gap-2 bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white px-8 py-4 rounded-full font-semibold text-lg hover:from-violet-700 hover:to-fuchsia-700 transition-all focus:outline-none focus:ring-2 focus:ring-violet-400 focus:ring-offset-2 focus:ring-offset-[#12121f]"
           >
-            Explore MCP Marketplace
+            Explore Agents
             <ArrowRight className="w-5 h-5" />
           </Link>
           <Link
             href="/pricing"
             className="inline-flex items-center gap-2 glass-card text-violet-300 px-8 py-4 rounded-full font-semibold text-lg hover:bg-violet-500/10 transition-all border border-violet-500/20 focus:outline-none focus:ring-2 focus:ring-violet-400 focus:ring-offset-2 focus:ring-offset-[#12121f]"
           >
-            View Pricing
+            Start Building
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
           {[
-            { icon: Database, title: 'MCP Integrations', desc: 'Connect agents to any service via Model Context Protocol' },
-            { icon: Zap, title: 'x402 Payments', desc: 'Gasless microtransactions for autonomous agent commerce' },
-            { icon: Users, title: 'Agent Economy', desc: 'Trade compute, intelligence, and labor in real-time' }
+            { icon: Database, title: 'MCP Servers', desc: 'Model Context Protocol integrations for autonomous agents', href: '/mcps' },
+            { icon: Cpu, title: 'GPU Compute', desc: 'Rent VM instances for agent workloads', href: '/compute' },
+            { icon: Zap, title: 'Skills Marketplace', desc: 'Discover and deploy agentic skills', href: '/skills' },
+            { icon: Brain, title: 'LLM Resale', desc: 'Resell language models with x402 micropayments', href: '/models' },
+            { icon: Wallet, title: 'Agent Wallets', desc: 'Autonomous wallets for agent commerce', href: '/soul' },
+            { icon: Globe, title: 'x402 Payments', desc: 'Gasless payments for agent-to-agent transactions', href: '/pricing' }
           ].map((feature, index) => {
             const Icon = feature.icon;
             return (
-              <div
+              <Link
                 key={feature.title}
-                className="glass-card border border-violet-500/10 rounded-2xl p-6 animate-fade-in"
+                href={feature.href}
+                className="glass-card border border-violet-500/10 rounded-2xl p-6 animate-fade-in hover:border-violet-500/30 transition-all"
                 style={{ animationDelay: `${400 + index * 100}ms` }}
               >
                 <div className="flex items-center gap-3 mb-4">
@@ -102,7 +106,7 @@ export function HeroSection() {
                   <h2 className="text-lg font-semibold text-white">{feature.title}</h2>
                 </div>
                 <p className="text-zinc-400 text-sm">{feature.desc}</p>
-              </div>
+              </Link>
             );
           })}
         </div>

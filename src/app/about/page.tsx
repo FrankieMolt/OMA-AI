@@ -331,7 +331,7 @@ export default function AboutPage() {
               </p>
               <div className="flex gap-3 mt-4">
                 <a
-                  href="https://github.com/oma-ai"
+                  href="https://github.com/oma-ai/oma-ai"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 text-purple-400 hover:text-purple-300 transition-colors"
@@ -376,7 +376,7 @@ export default function AboutPage() {
                   Join Discord
                 </a>
                 <a
-                  href="https://github.com/oma-ai"
+                  href="https://github.com/oma-ai/oma-ai"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white text-sm font-medium rounded-lg transition-colors"
@@ -410,7 +410,7 @@ export default function AboutPage() {
               Join Discord
             </a>
             <a
-              href="https://github.com/oma-ai"
+              href="https://github.com/oma-ai/oma-ai"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-8 py-3 bg-slate-700 hover:bg-slate-600 text-white font-bold rounded-lg transition-colors"

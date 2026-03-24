@@ -124,6 +124,36 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'weekly' as const,
       priority: 0.4,
     },
+    {
+      url: `${baseUrl}/models`,
+      lastModified: new Date('2026-03-12'),
+      changeFrequency: 'weekly' as const,
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/docs/api`,
+      lastModified: new Date('2026-03-12'),
+      changeFrequency: 'weekly' as const,
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/docs/guides`,
+      lastModified: new Date('2026-03-12'),
+      changeFrequency: 'weekly' as const,
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/blog/building-your-first-mcp`,
+      lastModified: new Date('2026-03-12'),
+      changeFrequency: 'monthly' as const,
+      priority: 0.5,
+    },
+    {
+      url: `${baseUrl}/blog/how-to-monetize-your-mcps`,
+      lastModified: new Date('2026-03-12'),
+      changeFrequency: 'monthly' as const,
+      priority: 0.5,
+    },
   ];
 
   return routes;

@@ -6,7 +6,7 @@ author: OMA-AI Team
 tags: [x402, payments, blockchain, Web3]
 ---
 
-# Understanding x402 Gasless Payments
+## Understanding x402 Gasless Payments
 
 Gas fees have been the single biggest barrier to blockchain adoption. Users need ETH/SOL to interact with dApps, creating friction and excluding billions of potential users. The **x402 protocol** solves this by enabling gasless microtransactions on Base and Solana networks.
 
@@ -828,7 +828,7 @@ You now understand x402 gasless payments! 🎉
 - [ ] Deploy to production
 
 **Resources:**
-- [x402 Protocol Documentation](https://docs.oma-ai.com/x402)
+- [x402 Protocol Documentation](/docs/x402)
 - [Base Network Docs](https://docs.base.org)
 - [Solana Docs](https://docs.solana.com)
 - [OMA-AI GitHub](https://github.com/oma-ai)

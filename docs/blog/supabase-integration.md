@@ -6,7 +6,7 @@ author: OMA-Ai Team
 tags: [supabase, database, auth, integration, OMA-Ai]
 ---
 
-# Supabase Integration with OMA-Ai
+## Supabase Integration with OMA-Ai
 
 Supabase is the backbone of OMA-Ai, providing database, authentication, real-time subscriptions, and storage. In this guide, we'll show you how to integrate Supabase with OMA-Ai and use these features in your MCPs.
 
@@ -776,7 +776,7 @@ function subscribeToLiveMCPUpdates() {
 - [Supabase Dashboard](https://app.supabase.com)
 - [PostgreSQL Docs](https://www.postgresql.org/docs/)
 - [OMA-Ai Code](https://github.com/oma-ai)
-- [OMA-Ai API](https://docs.oma-ai.com/api)
+- [OMA-Ai API](/docs/api)
 
 ---
 

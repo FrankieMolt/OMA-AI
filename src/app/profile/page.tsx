@@ -123,8 +123,9 @@ export default function ProfilePage() {
                 )}
               </div>
               <div className="flex-1 max-w-md">
-                <label className="block text-sm font-bold mb-2">Avatar URL</label>
+                <label htmlFor="avatar-url" className="block text-sm font-bold mb-2">Avatar URL</label>
                 <input
+                  id="avatar-url"
                   type="url"
                   placeholder="https://example.com/avatar.jpg"
                   value={avatarUrl}
@@ -144,11 +145,12 @@ export default function ProfilePage() {
 
             <div className="space-y-4">
               <div>
-                <label className="flex items-center gap-2 text-sm font-bold mb-2 text-gray-300">
+                <label htmlFor="display-name" className="flex items-center gap-2 text-sm font-bold mb-2 text-gray-300">
                   <User className="w-4 h-4 text-violet-400" />
                   Display Name
                 </label>
                 <input
+                  id="display-name"
                   type="text"
                   placeholder="Your name"
                   value={name}
@@ -161,11 +163,12 @@ export default function ProfilePage() {
               </div>
 
               <div>
-                <label className="flex items-center gap-2 text-sm font-bold mb-2 text-gray-300">
+                <label htmlFor="profile-email" className="flex items-center gap-2 text-sm font-bold mb-2 text-gray-300">
                   <Mail className="w-4 h-4 text-violet-400" />
                   Email
                 </label>
                 <input
+                  id="profile-email"
                   type="email"
                   value={user?.email || ''}
                   disabled
@@ -177,11 +180,12 @@ export default function ProfilePage() {
               </div>
 
               <div>
-                <label className="flex items-center gap-2 text-sm font-bold mb-2 text-gray-300">
+                <label htmlFor="profile-website" className="flex items-center gap-2 text-sm font-bold mb-2 text-gray-300">
                   <Globe className="w-4 h-4 text-violet-400" />
                   Website
                 </label>
                 <input
+                  id="profile-website"
                   type="url"
                   placeholder="https://your-website.com"
                   value={website}
@@ -198,8 +202,7 @@ export default function ProfilePage() {
           {/* Bio */}
           <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6">
             <h2 className="text-lg font-bold text-white mb-4">Bio</h2>
-            <textarea
-              placeholder="Tell us about yourself..."
+            <textarea aria-label="Tell us about yourself..."               placeholder="Tell us about yourself..."
               value={bio}
               onChange={(e) => setBio(e.target.value)}
               rows={5}
