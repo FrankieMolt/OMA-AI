@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import { GlassCard } from '@/components/ui/GlassCard';
-import { Key, Plus, Copy, Trash2, Eye, EyeOff, Settings, Clock, Activity } from 'lucide-react';
+import { Plus, Copy, Trash2, Settings, Clock, Activity } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'API Keys - OMA-AI Developer Portal',

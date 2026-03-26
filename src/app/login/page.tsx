@@ -17,7 +17,7 @@ export default function LoginPage() {
     setError('');
 
     try {
-      const { data, error: signInError } = await supabase.auth.signInWithPassword({
+      const { error: signInError } = await supabase.auth.signInWithPassword({
         email,
         password,
       });
@@ -28,7 +28,7 @@ export default function LoginPage() {
         // Redirect to dashboard
         window.location.href = '/dashboard';
       }
-    } catch (err) {
+    } catch {
       setError('An error occurred. Please try again.');
     } finally {
       setLoading(false);
@@ -83,7 +83,7 @@ export default function LoginPage() {
         </form>
 
         <p className="mt-6 text-center text-gray-400">
-          Don't have an account?{' '}
+          Don&apos;t have an account?{' '}
           <Link href="/signup" className="text-blue-400 hover:underline">
             Sign up
           </Link>

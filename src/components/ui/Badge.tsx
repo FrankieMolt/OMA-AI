@@ -1,43 +1,23 @@
-import { cn } from '@/lib/utils';
+import { type ReactNode } from 'react';
 
 interface BadgeProps {
-  children: React.ReactNode;
-  variant?: 'default' | 'primary' | 'success' | 'warning' | 'danger' | 'info';
-  size?: 'sm' | 'md' | 'lg';
+  variant?: 'default' | 'success' | 'warning' | 'danger' | 'info';
   className?: string;
+  children: ReactNode;
 }
 
-export function Badge({
-  children,
-  variant = 'default',
-  size = 'md',
-  className
-}: BadgeProps) {
-  const variants = {
-    default: 'bg-slate-700 text-slate-200 border-slate-600',
-    primary: 'bg-purple-600/20 text-purple-300 border-purple-500/30',
-    success: 'bg-green-600/20 text-green-300 border-green-500/30',
-    warning: 'bg-amber-600/20 text-amber-300 border-amber-500/30',
-    danger: 'bg-red-600/20 text-red-300 border-red-500/30',
-    info: 'bg-sky-600/20 text-sky-300 border-sky-500/30',
-  };
+const variantStyles: Record<string, string> = {
+  default: 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-200',
+  success: 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400',
+  warning: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400',
+  danger: 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400',
+  info: 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400',
+};
 
-  const sizes = {
-    sm: 'px-2 py-0.5 text-xs',
-    md: 'px-3 py-1 text-sm',
-    lg: 'px-4 py-1.5 text-base',
-  };
-
+export function Badge({ variant = 'default', className = '', children }: BadgeProps) {
   return (
     <span
-      className={cn(
-        'inline-flex items-center justify-center',
-        'rounded-full font-medium',
-        'border',
-        variants[variant],
-        sizes[size],
-        className
-      )}
+      className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${variantStyles[variant] || variantStyles.default} ${className}`}
     >
       {children}
     </span>

@@ -3,19 +3,6 @@ import { NextResponse } from 'next/server';
 // Free weather APIs - wttr.in doesn't need API key
 const WTTR_API = 'https://wttr.in';
 
-const CITY_COORDS: Record<string, string> = {
-  london: 'London',
-  'new york': 'New+York',
-  tokyo: 'Tokyo',
-  'san francisco': 'San+Francisco',
-  dubai: 'Dubai',
-  singapore: 'Singapore',
-  berlin: 'Berlin',
-  paris: 'Paris',
-  sydney: 'Sydney',
-  miami: 'Miami',
-};
-
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const city = searchParams.get('city') || 'London';
@@ -52,6 +39,7 @@ export async function GET(request: Request) {
     };
     
     const responseJson = NextResponse.json(weatherData);
+    // Intentionally public - weather data is not sensitive
     responseJson.headers.set('Access-Control-Allow-Origin', '*');
     responseJson.headers.set('Cache-Control', 'public, max-age=600');
     return responseJson;
@@ -70,6 +58,7 @@ export async function GET(request: Request) {
       condition: 'Unknown',
       wind_kph: 10
     }, { status: 503 });
+    // Intentionally public - weather data is not sensitive
     responseJson.headers.set('Access-Control-Allow-Origin', '*');
     return responseJson;
   }

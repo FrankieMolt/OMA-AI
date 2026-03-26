@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useMemo, useCallback } from 'react';
-import { Search, Star, Check, X, Download, Share2, Copy, CheckCircle, AlertCircle, ChevronDown, Trash2, Plus, Zap, Clock, Activity, Gauge, Wrench, DollarSign } from 'lucide-react';
+import { Search, Star, Check, X, Download, Share2, CheckCircle, AlertCircle, ChevronDown, Trash2, Plus, Zap, Clock, Activity } from 'lucide-react';
 
 interface MCPSkill {
   id: string;
@@ -22,6 +22,7 @@ interface MCPSkill {
   avg_latency_ms?: number;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 interface CompareMetrics {
   name: string;
   category: string;
@@ -80,6 +81,7 @@ export default function ComparePage() {
       const data = await response.json();
 
       if (data.success && Array.isArray(data.data)) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const mappedSkills = data.data.map((skill: any) => ({ 
           id: skill.id || '',
           name: skill.name || 'Unknown',

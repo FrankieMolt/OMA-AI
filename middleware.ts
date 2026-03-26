@@ -67,7 +67,11 @@ export async function middleware(request: NextRequest) {
   // If no user and trying to access protected route, redirect to login
   // This is a simple example - adjust based on your auth requirements
   const isProtectedRoute = request.nextUrl.pathname.startsWith('/dashboard') ||
-                           request.nextUrl.pathname.startsWith('/settings')
+                           request.nextUrl.pathname.startsWith('/settings') ||
+                           request.nextUrl.pathname.startsWith('/account') ||
+                           request.nextUrl.pathname.startsWith('/profile') ||
+                           request.nextUrl.pathname.startsWith('/transactions') ||
+                           request.nextUrl.pathname.startsWith('/keys')
   
   if (!user && isProtectedRoute) {
     const url = request.nextUrl.clone()

@@ -7,7 +7,7 @@ import Link from 'next/link';
 import {
   Plus,
   Trash2,
-  Save,
+  
   ArrowRight,
   Zap,
   DollarSign,
@@ -164,6 +164,7 @@ export default function PublishPage() {
       } else {
         setMessage({ type: 'error', text: data.error || 'Failed to submit MCP' });
       }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       setMessage({ type: 'error', text: error.message || 'An error occurred' });
     } finally {
@@ -314,7 +315,7 @@ export default function PublishPage() {
             </div>
             <h2 className="text-3xl font-bold text-white mb-4">MCP Submitted!</h2>
             <p className="text-gray-400 mb-8 max-w-md mx-auto">
-              Your MCP has been submitted for review. We'll verify it and make it live in the marketplace.
+              Your MCP has been submitted for review. We&apos;ll verify it and make it live in the marketplace.
             </p>
             <Link
               href="/dashboard"
@@ -374,6 +375,7 @@ function Step1({
   longDescription,
   setLongDescription,
   categories,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
 }: any) {
   return (
     <div className="space-y-6">
@@ -456,6 +458,7 @@ function Step2({
   setRepositoryUrl,
   documentationUrl,
   setDocumentationUrl,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
 }: any) {
   return (
     <div className="space-y-6">
@@ -524,7 +527,7 @@ function Step3({
   updateTool,
   addTool,
   removeTool,
-  globalPricing,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
 }: any) {
   return (
     <div className="space-y-6">
@@ -603,6 +606,7 @@ function Step4({
   setGlobalPricingUsdc,
   x402Enabled,
   setX402Enabled,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
 }: any) {
   return (
     <div className="space-y-6">

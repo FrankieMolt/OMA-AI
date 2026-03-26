@@ -28,6 +28,81 @@ CREATE INDEX idx_users_email ON users(email);
 CREATE INDEX idx_users_username ON users(username);
 
 -- =====================================================
+-- TABLE: ai_agents
+-- =====================================================
+CREATE TABLE ai_agents (
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  user_id UUID REFERENCES users(id) ON DELETE CASCADE,
+  agent_id TEXT UNIQUE NOT NULL, -- OpenClaw/Hermes agent identifier
+  name TEXT NOT NULL,
+  description TEXT,
+  avatar_url TEXT,
+  wallet_addresses JSONB DEFAULT '{}', -- { network: address }
+  did TEXT, -- Decentralized Identifier
+  capabilities TEXT[] DEFAULT '{}',
+  reputation_score DECIMAL(3,2) DEFAULT 0.0,
+  total_tasks_completed INTEGER DEFAULT 0,
+  total_earned DECIMAL(12,6) DEFAULT 0,
+  is_verified BOOLEAN DEFAULT FALSE,
+  status TEXT DEFAULT 'active', -- 'active', 'busy', 'offline', 'archived'
+  metadata JSONB DEFAULT '{}',
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- Indexes for ai_agents
+CREATE INDEX idx_ai_agents_user ON ai_agents(user_id);
+CREATE INDEX idx_ai_agents_agent_id ON ai_agents(agent_id);
+CREATE INDEX idx_ai_agents_reputation ON ai_agents(reputation_score DESC);
+
+-- =====================================================
+-- TABLE: human_services
+-- =====================================================
+CREATE TABLE human_services (
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  agent_id UUID REFERENCES ai_agents(id) ON DELETE CASCADE,
+  title TEXT NOT NULL,
+  description TEXT NOT NULL,
+  category TEXT NOT NULL, -- 'delivery', 'meeting', 'signing', 'research', etc.
+  location TEXT, -- optional geographic constraint
+  price_usdc DECIMAL(10,2) NOT NULL,
+  price_token TEXT DEFAULT 'USDC',
+  requirements TEXT[], -- required skills, equipment, etc.
+  status TEXT DEFAULT 'open', -- 'open', 'in-progress', 'completed', 'cancelled'
+  applications_count INTEGER DEFAULT 0,
+  hired_application_id UUID, -- reference to applications table
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  expires_at TIMESTAMPTZ,
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- Indexes for human_services
+CREATE INDEX idx_human_services_agent ON human_services(agent_id);
+CREATE INDEX idx_human_services_category ON human_services(category);
+CREATE INDEX idx_human_services_status ON human_services(status);
+CREATE INDEX idx_human_services_expires ON human_services(expires_at);
+
+-- =====================================================
+-- TABLE: human_applications
+-- =====================================================
+CREATE TABLE human_applications (
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  service_id UUID REFERENCES human_services(id) ON DELETE CASCADE,
+  human_user_id UUID REFERENCES users(id) ON DELETE SET NULL,
+  message TEXT NOT NULL,
+  bid_usdc DECIMAL(10,2), -- optional lower bid
+  status TEXT DEFAULT 'pending', -- 'pending', 'accepted', 'rejected', 'completed'
+  tx_hash TEXT, -- payment transaction if hired
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- Indexes for human_applications
+CREATE INDEX idx_human_applications_service ON human_applications(service_id);
+CREATE INDEX idx_human_applications_human ON human_applications(human_user_id);
+CREATE INDEX idx_human_applications_status ON human_applications(status);
+
+-- =====================================================
 -- TABLE: user_settings
 -- =====================================================
 CREATE TABLE user_settings (

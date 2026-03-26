@@ -3,7 +3,7 @@
  * Handles per-call pricing, subscriptions, credits, and license keys
  */
 
-import { ethers } from 'ethers';
+import { randomBytes } from 'crypto';
 
 // =====================================================
 // CREDIT SYSTEM
@@ -61,9 +61,8 @@ export function parsePriceToMicroUnits(priceString: string): number {
 
 export function generateLicenseKey(prefix: string = 'OMA'): string {
   const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-  const randomPart = Array.from({ length: 20 }, () => 
-    chars[Math.floor(Math.random() * chars.length)]
-  ).join('');
+  const bytes = randomBytes(16);
+  const randomPart = Array.from(bytes, b => chars[b % chars.length]).join('');
   
   // Format: OMA-XXXX-XXXX-XXXX-XXXX
   const formatted = randomPart.match(/.{1,4}/g)?.join('-') || randomPart;
@@ -97,7 +96,7 @@ export interface UsageRecord {
 
 export async function recordUsage(record: UsageRecord): Promise<void> {
   // In production, this would write to the database
-  console.log('Usage recorded:', record);
+  // TODO: Implement database insertion
 }
 
 export function calculateCreditsForTokens(inputTokens: number, outputTokens: number): number {
@@ -216,7 +215,7 @@ function createWebhookSignature(payload: string, secret: string): string {
 // EXPORT ALL
 // =====================================================
 
-export default {
+const monetizationExports = {
   DEFAULT_CREDITS_PACKAGES,
   calculateCreditsCost,
   calculatePerCallPrice,
@@ -230,3 +229,5 @@ export default {
   calculateRevenueSplit,
   sendWebhook,
 };
+
+export default monetizationExports;

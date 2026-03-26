@@ -47,6 +47,7 @@ export async function rateLimit(
   res: NextApiResponse,
   next: () => Promise<void>
 ) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const user = (req as any).user;
 
   if (!user) {

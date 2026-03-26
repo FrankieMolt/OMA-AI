@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import { GlassCard, GlassCardPurple } from '@/components/ui/GlassCard';
-import { Zap, Shield, Code, DollarSign, Globe, BarChart3, Lock, Database, GitBranch, FileText, Search, Filter, Share2, Sparkles, Users, Rocket, CheckCircle2, TrendingUp, RefreshCw, ExternalLink } from 'lucide-react';
+import { Zap, Code, DollarSign, Globe, BarChart3, Lock, Database, Search, Filter, Sparkles, Users, Rocket, CheckCircle2, RefreshCw, ExternalLink, Shield, TrendingUp } from 'lucide-react';
+import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'Features | OMA-AI - Premier MCP Marketplace',
@@ -139,7 +140,7 @@ export default function FeaturesPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 pt-24 pb-12">
+    <div className="min-h-screen bg-[#0a0a0f] pt-24 pb-12">
       <div className="container mx-auto px-4 max-w-7xl">
         {/* Header */}
         <div className="text-center mb-16">
@@ -162,7 +163,7 @@ export default function FeaturesPage() {
             {features.map((feature, index) => (
               <GlassCard
                 key={index}
-                className={`p-6 hover ${feature.color === 'purple' ? 'border-purple-700/50' : feature.color === 'green' ? 'border-green-700/50' : feature.color === 'blue' ? 'border-blue-700/50' : feature.color === 'amber' ? 'border-amber-700/50' : feature.color === 'indigo' ? 'border-indigo-700/50' : 'border-slate-700/50'}`}
+                className={`p-6 hover ${feature.color === 'purple' ? 'border-purple-700/50' : feature.color === 'green' ? 'border-green-700/50' : feature.color === 'blue' ? 'border-blue-700/50' : feature.color === 'amber' ? 'border-amber-700/50' : feature.color === 'indigo' ? 'border-indigo-700/50' : 'border-zinc-700/50'}`}
               >
                 <div className="flex items-start gap-4 mb-4">
                   <div className={`flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center ${
@@ -171,7 +172,7 @@ export default function FeaturesPage() {
                     feature.color === 'blue' ? 'bg-blue-600/20 text-blue-300' :
                     feature.color === 'amber' ? 'bg-amber-600/20 text-amber-300' :
                     feature.color === 'indigo' ? 'bg-indigo-600/20 text-indigo-300' :
-                    'bg-slate-600/20 text-slate-300'
+                    'bg-zinc-600/20 text-zinc-300'
                   }`}>
                     {feature.icon}
                   </div>
@@ -264,7 +265,7 @@ export default function FeaturesPage() {
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {integration.tools.map((tool) => (
-                    <span key={tool} className="px-3 py-1 bg-slate-700/50 text-gray-300 text-sm rounded-full border border-slate-600">
+                    <span key={tool} className="px-3 py-1 bg-zinc-700/50 text-gray-300 text-sm rounded-full border border-zinc-600">
                       {tool}
                     </span>
                   ))}
@@ -312,20 +313,16 @@ export default function FeaturesPage() {
             Explore all features, browse hundreds of MCPs, or start building your own tools today.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <a
-              href="/mcps"
+            <Link href="/mcps"
               className="inline-flex items-center gap-2 px-8 py-3 bg-purple-600 hover:bg-purple-700 text-white font-bold rounded-lg transition-colors"
-            >
-              <Search size={20} />
-              Browse MCPs
-            </a>
-            <a
-              href="/publish"
-              className="inline-flex items-center gap-2 px-8 py-3 bg-slate-700 hover:bg-slate-600 text-white font-bold rounded-lg transition-colors"
-            >
-              <Code size={20} />
+            ><Search size={20} />
+              Explore Marketplace
+            </Link>
+            <Link href="/publish"
+              className="inline-flex items-center gap-2 px-8 py-3 bg-zinc-700 hover:bg-zinc-600 text-white font-bold rounded-lg transition-colors"
+            ><Code size={20} />
               Publish Your MCP
-            </a>
+            </Link>
           </div>
         </GlassCardPurple>
       </div>

@@ -11,16 +11,16 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   const stats = [
-    { value: '57+', label: 'Pages' },
-    { value: '24', label: 'API Routes' },
+    { value: '19+', label: 'MCP Servers' },
+    { value: '300+', label: 'MCP Tools' },
     { value: '13', label: 'Blog Posts' },
-    { value: '229', label: 'MCP Tools' },
     { value: '5%', label: 'Platform Fee' },
-    { value: '7/8', label: 'MCP Servers' },
+    { value: '24/7', label: 'Uptime' },
+    { value: 'x402', label: 'Payments' },
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 pt-24 pb-12">
+    <div className="min-h-screen bg-[#0a0a0f] pt-24 pb-12">
       <div className="container mx-auto px-4 max-w-6xl">
         {/* Header */}
         <div className="text-center mb-16">
@@ -59,7 +59,7 @@ export default function AboutPage() {
             <div className="flex-1">
               <h2 className="text-2xl font-bold text-white mb-3">Our Mission</h2>
               <p className="text-gray-200 leading-relaxed text-lg">
-                We believe that AI agents should have universal access to the world's tools and services.
+                We believe that AI agents should have universal access to the world&apos;s tools and services.
                 OMA-AI exists to bridge the gap between AI assistants and external capabilities,
                 enabling agents to read files, make HTTP requests, interact with databases,
                 manage version control, and much more.
@@ -68,7 +68,7 @@ export default function AboutPage() {
           </div>
           <p className="text-gray-200 leading-relaxed text-lg">
             By providing a standardized, secure, and monetizable marketplace for MCP tools,
-            we're accelerating the development of the agentic AI ecosystem.
+            we&apos;re accelerating the development of the agentic AI ecosystem.
             Our goal is to make it easy for developers to publish, monetize, and scale their tools,
             while providing AI agents with reliable, performant, and cost-effective access.
           </p>
@@ -165,7 +165,7 @@ export default function AboutPage() {
                 <h3 className="text-lg font-bold text-white">Gasless Payments</h3>
               </div>
               <p className="text-gray-300 leading-relaxed">
-                Powered by x402 protocol, users don't pay gas fees.
+                Powered by x402 protocol, users don&apos;t pay gas fees.
                 Makes micro-payments practical and affordable for all.
               </p>
             </GlassCard>
@@ -330,24 +330,20 @@ export default function AboutPage() {
                 x402 payments, and decentralized systems. Building the future of agentic AI.
               </p>
               <div className="flex gap-3 mt-4">
-                <a
-                  href="https://github.com/oma-ai/oma-ai"
+                <Link href="https://github.com/oma-ai"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 text-purple-400 hover:text-purple-300 transition-colors"
-                >
-                  <Github size={16} />
+                ><Github size={16} />
                   <span className="text-sm">GitHub</span>
-                </a>
-                <a
-                  href="https://x.com/@nosytlabs"
+                </Link>
+                <Link href="https://x.com/@nosytlabs"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 text-purple-400 hover:text-purple-300 transition-colors"
-                >
-                  <Twitter size={16} />
+                ><Twitter size={16} />
                   <span className="text-sm">Twitter</span>
-                </a>
+                </Link>
               </div>
             </GlassCard>
 
@@ -367,22 +363,18 @@ export default function AboutPage() {
                 MCP developers, and feedback from early users.
               </p>
               <div className="flex gap-3 mt-4">
-                <a
-                  href="https://discord.gg/oma-ai"
+                <Link href="https://discord.gg/oma-ai"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium rounded-lg transition-colors"
-                >
-                  Join Discord
-                </a>
-                <a
-                  href="https://github.com/oma-ai/oma-ai"
+                >Join Discord
+                </Link>
+                <Link href="https://github.com/oma-ai"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white text-sm font-medium rounded-lg transition-colors"
-                >
-                  Contribute
-                </a>
+                  className="flex items-center gap-2 px-4 py-2 bg-zinc-700 hover:bg-zinc-600 text-white text-sm font-medium rounded-lg transition-colors"
+                >Contribute
+                </Link>
               </div>
             </GlassCard>
           </div>
@@ -401,28 +393,24 @@ export default function AboutPage() {
             and start building with MCPs today.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <a
-              href="https://discord.gg/oma-ai"
+            <Link href="https://discord.gg/oma-ai"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-8 py-3 bg-purple-600 hover:bg-purple-700 text-white font-bold rounded-lg transition-colors"
-            >
-              Join Discord
-            </a>
-            <a
-              href="https://github.com/oma-ai/oma-ai"
+            >Join Discord
+            </Link>
+            <Link href="https://github.com/oma-ai"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-8 py-3 bg-slate-700 hover:bg-slate-600 text-white font-bold rounded-lg transition-colors"
-            >
-              <Github size={18} />
+              className="inline-flex items-center gap-2 px-8 py-3 bg-zinc-700 hover:bg-zinc-600 text-white font-bold rounded-lg transition-colors"
+            ><Github size={18} />
               Star on GitHub
-            </a>
+            </Link>
             <Link
               href="/mcps"
               className="inline-flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-purple-600 to-fuchsia-600 hover:from-purple-700 hover:to-fuchsia-700 text-white font-bold rounded-lg transition-colors"
             >
-              Explore MCPs
+              Explore Marketplace
             </Link>
           </div>
         </GlassCardPurple>
@@ -433,7 +421,7 @@ export default function AboutPage() {
 
 function RoadmapPhase({ quarter, status, items }: { quarter: string; status: string; items: string[] }) {
   return (
-    <div className="border-t border-slate-700 pt-6 first:border-t-0">
+    <div className="border-t border-zinc-700 pt-6 first:border-t-0">
       <div className="flex items-center gap-3 mb-4">
         <h3 className="text-xl font-bold text-white">{quarter}</h3>
         <span className={`px-3 py-1 rounded-full text-xs font-bold ${

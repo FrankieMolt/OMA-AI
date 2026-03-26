@@ -1,13 +1,19 @@
 'use client';
 
-import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
-import { motion } from 'framer-motion';
+import { useState, useEffect, useCallback, useMemo } from 'react';
+import dynamic from 'next/dynamic';
 import { GlassCard } from '@/components/ui/GlassCard';
 import { Badge } from '@/components/ui/Badge';
 import { CardSkeleton, InlineLoader } from '@/components/ui/Loading';
 import { Search, Filter, SortAsc, Star, ExternalLink, Download, CheckCircle2, AlertCircle } from 'lucide-react';
 import { getCategoryIcon, getCategoryColors } from '@/lib/category-icons';
 import { getMcpFaviconUrl } from '@/lib/mcp-icons';
+import Link from 'next/link';
+
+const MotionDiv = dynamic(
+  () => import('framer-motion').then(m => m.motion.div),
+  { ssr: false }
+);
 
 interface MCPSkill {
   id: string;
@@ -25,11 +31,11 @@ interface MCPSkill {
   rating: number;
   total_calls: number;
   success_rate: number;
+  created_at?: string;
 }
 
 export default function MCPMarketplace() {
   const [skills, setSkills] = useState<MCPSkill[]>([]);
-  const [filteredSkills, setFilteredSkills] = useState<MCPSkill[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [search, setSearch] = useState('');
@@ -37,7 +43,6 @@ export default function MCPMarketplace() {
   const [verified, setVerified] = useState('all' as string);
   const [sortBy, setSortBy] = useState('rating' as string);
   const [page, setPage] = useState(1);
-  const [totalSkills, setTotalSkills] = useState(0);
   const skillsPerPage = 12;
 
   const fetchSkills = useCallback(async () => {
@@ -61,6 +66,7 @@ export default function MCPMarketplace() {
 
 
       if (data.success && Array.isArray(data.data)) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const mappedSkills = data.data.map((skill: any) => ({ 
           id: skill.id || '',
           name: skill.name || 'Unknown',
@@ -85,7 +91,6 @@ export default function MCPMarketplace() {
         
 
         setSkills(mappedSkills);
-        setTotalSkills(data.pagination?.total || data.total || data.data.length);
       } else {
         console.error('[MCPMarketplace] Invalid response:', data);
         setError('Failed to fetch MCP skills');
@@ -144,7 +149,11 @@ export default function MCPMarketplace() {
         result.sort((a, b) => a.pricing_usdc - b.pricing_usdc);
         break;
       case 'newest':
-        result.sort((a, b) => b.id.localeCompare(a.id));
+        result.sort((a, b) => {
+          const aTime = a.created_at ? new Date(a.created_at).getTime() : 0;
+          const bTime = b.created_at ? new Date(b.created_at).getTime() : 0;
+          return bTime - aTime;
+        });
         break;
     }
 
@@ -156,13 +165,6 @@ export default function MCPMarketplace() {
     const startIndex = (page - 1) * skillsPerPage;
     const endIndex = startIndex + skillsPerPage;
     return processedSkills.slice(startIndex, endIndex);
-  }, [processedSkills, page, skillsPerPage]);
-
-  // Update filteredSkills when processedSkills or page changes
-  useEffect(() => {
-    const startIndex = (page - 1) * skillsPerPage;
-    const endIndex = startIndex + skillsPerPage;
-    setFilteredSkills(processedSkills.slice(startIndex, endIndex));
   }, [processedSkills, page, skillsPerPage]);
 
   const totalPages = Math.ceil(processedSkills.length / skillsPerPage);
@@ -203,16 +205,16 @@ export default function MCPMarketplace() {
 
   const stats = useMemo(() => ({
     total: skills.length,
-    verified: skills.filter(s => s.verified).length,
+    x402Enabled: skills.filter(s => s.x402_enabled).length,
     avgPrice: skills.length > 0 ? skills.reduce((sum, s) => sum + s.pricing_usdc, 0) / skills.length : 0,
     avgRating: skills.length > 0 ? skills.reduce((sum, s) => sum + s.rating, 0) / skills.length : 0,
   }), [skills]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 pt-24 pb-12">
+    <div className="min-h-screen bg-[#0a0a0f] pt-24 pb-12">
       <div className="container mx-auto px-4 max-w-7xl">
         {/* Header */}
-        <motion.div
+        <MotionDiv
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           className="mb-12"
@@ -224,28 +226,28 @@ export default function MCPMarketplace() {
             Discover and integrate <strong className="text-white">MCP (Model Context Protocol)</strong> tools for AI agents.
             Monetize your tools with x402 gasless payments.
           </p>
-        </motion.div>
+        </MotionDiv>
 
         {/* Stats */}
-        <motion.div
+        <MotionDiv
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8"
         >
           <GlassCard className="p-6 text-center hover">
             <div className="text-3xl font-bold text-white mb-1">{stats.total}</div>
             <div className="text-sm text-gray-400">Total Skills</div>
           </GlassCard>
           <GlassCard className="p-6 text-center hover">
-            <div className="text-3xl font-bold text-green-400 mb-1">{stats.verified}</div>
-            <div className="text-sm text-gray-400">Verified</div>
+            <div className="text-3xl font-bold text-green-400 mb-1">{stats.x402Enabled}</div>
+            <div className="text-sm text-gray-400">x402 Enabled</div>
           </GlassCard>
           <GlassCard className="p-6 text-center hover">
             <div className="text-3xl font-bold text-yellow-400 mb-1">
               ${stats.avgPrice.toFixed(4)}
             </div>
-            <div className="text-sm text-gray-400">Avg Price</div>
+            <div className="text-sm text-gray-400">Avg Price / call</div>
           </GlassCard>
           <GlassCard className="p-6 text-center hover">
             <div className="text-3xl font-bold text-yellow-400 mb-1">
@@ -253,7 +255,7 @@ export default function MCPMarketplace() {
             </div>
             <div className="text-sm text-gray-400">Avg Rating</div>
           </GlassCard>
-        </motion.div>
+        </MotionDiv>
 
         {/* Filters */}
         <GlassCard className="p-6 mb-8">
@@ -272,11 +274,11 @@ export default function MCPMarketplace() {
                 <input
                   id="search"
                   type="text"
-                  placeholder="Search MCP skills..."
+                  placeholder="Search by name, category, or description..."
                   aria-label="Search MCP skills"
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2.5 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder:text-gray-500 focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all"
+                  className="w-full pl-10 pr-4 py-2.5 bg-zinc-800 border border-zinc-700 rounded-lg text-white placeholder:text-gray-500 focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all"
                 />
               </div>
             </div>
@@ -290,7 +292,7 @@ export default function MCPMarketplace() {
                 id="category"
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
-                className="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all"
+                className="w-full px-4 py-2.5 bg-zinc-800 border border-zinc-700 rounded-lg text-white focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all"
                 aria-label="Filter by category"
               >
                 {categories.map((cat) => (
@@ -310,7 +312,7 @@ export default function MCPMarketplace() {
                 id="status"
                 value={verified}
                 onChange={(e) => setVerified(e.target.value)}
-                className="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all"
+                className="w-full px-4 py-2.5 bg-zinc-800 border border-zinc-700 rounded-lg text-white focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all"
                 aria-label="Filter by verification status"
               >
                 <option value="all">All Skills</option>
@@ -332,7 +334,7 @@ export default function MCPMarketplace() {
                     className={`flex-1 px-4 py-2.5 rounded-lg font-medium transition-all focus:outline-none focus:ring-2 focus:ring-purple-500/20 ${
                       sortBy === sort
                         ? 'bg-purple-600 text-white shadow-lg'
-                        : 'bg-slate-800 text-gray-300 hover:bg-slate-700 hover:text-white'
+                        : 'bg-zinc-800 text-gray-300 hover:bg-zinc-700 hover:text-white'
                     }`}
                     aria-label={`Sort by ${sort}`}
                   >
@@ -347,16 +349,16 @@ export default function MCPMarketplace() {
 
         {/* Results Count */}
         <div className="flex items-center justify-between mb-6">
-          <p className="text-gray-300">
-            Showing <strong className="text-white">{paginatedSkills.length}</strong> of{' '}
-            <strong className="text-white">{processedSkills.length}</strong> skills
+          <p className="text-white font-medium">
+            Showing <strong>{paginatedSkills.length}</strong> of{' '}
+            <strong>{processedSkills.length}</strong> skills
           </p>
           {loading && <InlineLoader text="Updating..." />}
         </div>
 
         {/* Error */}
         {error && (
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             className="mb-6"
@@ -376,13 +378,13 @@ export default function MCPMarketplace() {
                 </div>
               </div>
             </GlassCard>
-          </motion.div>
+          </MotionDiv>
         )}
 
         {/* No Results */}
         {!loading && paginatedSkills.length === 0 && (
           <GlassCard className="p-12 text-center">
-            <div className="w-16 h-16 bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-4">
+            <div className="w-16 h-16 bg-zinc-800 rounded-full flex items-center justify-center mx-auto mb-4">
               <Search className="w-8 h-8 text-gray-500" />
             </div>
             <h3 className="text-2xl font-bold text-white mb-2">No Skills Found</h3>
@@ -404,7 +406,7 @@ export default function MCPMarketplace() {
 
         {/* Loading Skeletons */}
         {loading && (
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
@@ -412,18 +414,18 @@ export default function MCPMarketplace() {
             {[1, 2, 3, 4, 5, 6].map((i) => (
               <CardSkeleton key={i} />
             ))}
-          </motion.div>
+          </MotionDiv>
         )}
 
         {/* Skills Grid */}
         {!loading && (
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
           >
             {paginatedSkills.map((skill) => (
-              <motion.div
+              <MotionDiv
                 key={skill.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -490,7 +492,7 @@ export default function MCPMarketplace() {
                   </div>
 
                   {/* Pricing & Stats */}
-                  <div className="flex items-center justify-between pt-4 border-t border-slate-700">
+                  <div className="flex items-center justify-between pt-4 border-t border-zinc-700">
                     <div>
                       <div className="text-2xl font-bold text-white mb-1">
                         ${skill.pricing_usdc.toFixed(4)}
@@ -509,22 +511,22 @@ export default function MCPMarketplace() {
 
                   {/* Actions */}
                   <div className="mt-4 flex gap-3">
-                    <a
+                    <Link
                       href={`/mcps/${skill.slug}`}
-                      className="flex-1 px-4 py-2.5 bg-slate-700 hover:bg-slate-600 text-white text-center font-medium rounded-lg transition-colors"
+                      className="flex-1 px-4 py-2.5 bg-zinc-700 hover:bg-zinc-600 text-white text-center font-medium rounded-lg transition-colors"
                     >
                       View Details
-                    </a>
+                    </Link>
                     {skill.repository_url && (
-                      <a
+                      <Link
                         href={skill.repository_url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="px-4 py-2.5 bg-slate-800 hover:bg-slate-700 text-white font-medium rounded-lg transition-colors flex items-center gap-2"
+                        className="px-4 py-2.5 bg-zinc-800 hover:bg-zinc-700 text-white font-medium rounded-lg transition-colors flex items-center gap-2"
                       >
                         <ExternalLink size={16} />
                         Code
-                      </a>
+                      </Link>
                     )}
                     <button className="px-4 py-2.5 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg transition-colors flex items-center gap-2">
                       <Download size={16} />
@@ -532,14 +534,14 @@ export default function MCPMarketplace() {
                     </button>
                   </div>
                 </GlassCard>
-              </motion.div>
+              </MotionDiv>
             ))}
-          </motion.div>
+          </MotionDiv>
         )}
 
         {/* Pagination */}
         {!loading && totalPages > 1 && (
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             className="mt-12 flex items-center justify-center gap-2"
@@ -547,7 +549,7 @@ export default function MCPMarketplace() {
             <button
               onClick={() => handlePageChange(page - 1)}
               disabled={page === 1}
-              className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="px-4 py-2 bg-zinc-800 hover:bg-zinc-700 text-white rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Previous
             </button>
@@ -559,7 +561,7 @@ export default function MCPMarketplace() {
                 className={`px-4 py-2 rounded-lg font-medium transition-colors ${
                   page === pageNum
                     ? 'bg-purple-600 text-white'
-                    : 'bg-slate-800 hover:bg-slate-700 text-white'
+                    : 'bg-zinc-800 hover:bg-zinc-700 text-white'
                 }`}
               >
                 {pageNum}
@@ -569,15 +571,15 @@ export default function MCPMarketplace() {
             <button
               onClick={() => handlePageChange(page + 1)}
               disabled={page === totalPages}
-              className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="px-4 py-2 bg-zinc-800 hover:bg-zinc-700 text-white rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Next
             </button>
-          </motion.div>
+          </MotionDiv>
         )}
 
         {/* CTA */}
-        <motion.div
+        <MotionDiv
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className="mt-16"
@@ -590,15 +592,13 @@ export default function MCPMarketplace() {
               Join thousands of developers monetizing their AI tools on OMA-AI.
               Keep 95% of your earnings with x402 gasless payments.
             </p>
-            <a
-              href="/publish"
+            <Link href="/publish"
               className="inline-flex items-center gap-2 px-8 py-3 bg-white hover:bg-gray-100 text-purple-600 font-bold rounded-lg transition-colors"
-            >
-              <Download size={20} />
+            ><Download size={20} />
               Publish Your MCP
-            </a>
+            </Link>
           </GlassCard>
-        </motion.div>
+        </MotionDiv>
       </div>
     </div>
   );

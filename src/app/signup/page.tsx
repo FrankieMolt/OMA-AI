@@ -19,7 +19,7 @@ export default function SignupPage() {
     setError('');
 
     try {
-      const { data, error: signUpError } = await supabase.auth.signUp({
+      const { error: signUpError } = await supabase.auth.signUp({
         email,
         password,
         options: {
@@ -32,7 +32,7 @@ export default function SignupPage() {
       } else {
         setSuccess(true);
       }
-    } catch (err) {
+    } catch {
       setError('An error occurred. Please try again.');
     } finally {
       setLoading(false);

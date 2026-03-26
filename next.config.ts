@@ -7,6 +7,9 @@ const nextConfig: NextConfig = {
   // Disable ETag generation to force browser revalidation
   generateEtags: false,
 
+  // Suppress lockfile warning — bun.lock lives in /home/nosyt/ parent dir
+  outputFileTracingRoot: __dirname,
+
   // Compression
   compress: true,
 
@@ -36,7 +39,6 @@ const nextConfig: NextConfig = {
     minimumCacheTTL: 60,
     remotePatterns: [
       { protocol: 'https', hostname: 'images.unsplash.com' },
-      { protocol: 'https', hostname: 'picsum.photos' },
       { protocol: 'https', hostname: 'avatars.githubusercontent.com' },
       { protocol: 'https', hostname: '**.github.com' },
     ],
@@ -45,7 +47,7 @@ const nextConfig: NextConfig = {
   // Experimental optimizations
   experimental: {
     // Optimize package imports
-    optimizePackageImports: ['lucide-react', 'framer-motion', 'recharts'],
+    optimizePackageImports: ['lucide-react', 'framer-motion'],
   },
 
 

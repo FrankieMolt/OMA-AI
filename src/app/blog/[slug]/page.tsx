@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import fs from 'fs';
+import { readdir, readFile } from 'fs/promises';
 import path from 'path';
 import Link from 'next/link';
 import matter from 'gray-matter';
@@ -11,11 +11,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   try {
     const resolvedParams = await params;
     const filePath = path.join(BLOG_DIR, `${resolvedParams.slug}.md`);
-    const fileContent = fs.readFileSync(filePath, 'utf-8');
+    const fileContent = await readFile(filePath, 'utf-8');
     const { data } = matter(fileContent);
 
     return {
-      title: `${data.title} | Blog | OMA-AI`,
+      title: `${data.title || resolvedParams.slug} | Blog | OMA-AI`,
       description: data.description || data.excerpt || `Read about ${data.title} on OMA-AI`,
       keywords: data.keywords || ['OMA-AI', 'Blog', 'MCP'],
       alternates: {
@@ -25,9 +25,23 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
         title: data.title,
         description: data.description || data.excerpt,
         type: 'article',
-        publishedTime: data.date,
+        publishedTime: data.date ? (typeof data.date === 'string' ? data.date : String(data.date)) : undefined,
         authors: [data.author || 'OMA-AI Team'],
         url: `https://oma-ai.com/blog/${resolvedParams.slug}`,
+        images: [
+          {
+            url: 'https://www.oma-ai.com/og-blog.png',
+            width: 1200,
+            height: 630,
+            alt: data.title,
+          },
+        ],
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: data.title,
+        description: data.description || data.excerpt,
+        images: ['https://www.oma-ai.com/og-blog.png'],
       },
     };
   } catch {
@@ -38,7 +52,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 }
 
 export async function generateStaticParams() {
-  const files = fs.readdirSync(BLOG_DIR);
+  const files = await readdir(BLOG_DIR);
   const slugs = files
     .filter(file => file.endsWith('.md'))
     .map(file => file.replace(/\.md$/, ''));
@@ -50,9 +64,9 @@ export async function generateStaticParams() {
 function CodeBlock({ className, children }: { className?: string; children?: any }) {
   const isInline = !className;
   if (isInline) {
-    return <code className="bg-slate-800 px-2 py-1 rounded text-purple-300 text-sm font-mono">{children}</code>;
+    return <code className="bg-zinc-800 px-2 py-1 rounded text-purple-300 text-sm font-mono">{children}</code>;
   }
-  return <code className={`block bg-slate-800 p-4 rounded-lg text-sm font-mono overflow-x-auto ${className || ''}`}>{children}</code>;
+  return <code className={`block bg-zinc-800 p-4 rounded-lg text-sm font-mono overflow-x-auto ${className || ''}`}>{children}</code>;
 }
 
 export default async function BlogPost({ params }: { params: Promise<{ slug: string }> }) {
@@ -64,7 +78,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
 
   try {
     const filePath = path.join(BLOG_DIR, `${resolvedParams.slug}.md`);
-    const fileContent = fs.readFileSync(filePath, 'utf-8');
+    const fileContent = await readFile(filePath, 'utf-8');
     const parsed = matter(fileContent);
     metadata = parsed.data;
     markdownContent = parsed.content;
@@ -74,7 +88,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
 
   if (notFound) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center">
+      <div className="min-h-screen bg-[#0a0a0f] flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-6xl font-bold text-white mb-4">404</h1>
           <p className="text-xl text-gray-400 mb-8">Blog post not found</p>
@@ -90,9 +104,9 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+    <div className="min-h-screen bg-[#0a0a0f]">
       {/* Header */}
-      <header className="border-b border-slate-800">
+      <header className="border-b border-zinc-800">
         <div className="container mx-auto px-4 py-6">
           <Link href="/blog" className="text-purple-400 hover:text-purple-300 transition-colors">
             ← Back to Blog
@@ -103,7 +117,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
       {/* Article */}
       <article className="container mx-auto px-4 py-16 max-w-4xl">
         {/* Article Header */}
-        <div className="mb-12 pb-8 border-b border-slate-800">
+        <div className="mb-12 pb-8 border-b border-zinc-800">
           <div className="flex items-center gap-2 mb-4">
             <span className="px-3 py-1 bg-purple-600 text-white text-xs font-medium rounded-full">
               {metadata.category || 'Blog Post'}
@@ -140,7 +154,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
         </div>
 
         {/* Article Content */}
-        <div className="bg-slate-800/50 rounded-xl p-8 border border-slate-700">
+        <div className="bg-zinc-800/50 rounded-xl p-8 border border-zinc-700">
           <div className="prose prose-invert prose-lg max-w-none">
             <ReactMarkdown
               components={{
@@ -152,7 +166,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
                 ol: ({ children }) => <ol className="list-decimal list-inside text-gray-300 mb-6 space-y-2">{children}</ol>,
                 li: ({ children }) => <li className="pl-2">{children}</li>,
                 code: CodeBlock,
-                pre: ({ children }) => <pre className="bg-slate-800 p-4 rounded-lg overflow-x-auto mb-6 border border-slate-700">{children}</pre>,
+                pre: ({ children }) => <pre className="bg-zinc-800 p-4 rounded-lg overflow-x-auto mb-6 border border-zinc-700">{children}</pre>,
                 blockquote: ({ children }) => (
                   <blockquote className="border-l-4 border-purple-500 pl-4 italic text-gray-400 my-6">{children}</blockquote>
                 ),
@@ -163,11 +177,11 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
                 ),
                 table: ({ children }) => (
                   <div className="overflow-x-auto mb-6">
-                    <table className="min-w-full border border-slate-700 rounded-lg">{children}</table>
+                    <table className="min-w-full border border-zinc-700 rounded-lg">{children}</table>
                   </div>
                 ),
-                thead: ({ children }) => <thead className="bg-slate-800">{children}</thead>,
-                tbody: ({ children }) => <tbody className="divide-y divide-slate-700">{children}</tbody>,
+                thead: ({ children }) => <thead className="bg-zinc-800">{children}</thead>,
+                tbody: ({ children }) => <tbody className="divide-y divide-zinc-700">{children}</tbody>,
                 th: ({ children }) => <th className="px-4 py-3 text-left text-white font-semibold">{children}</th>,
                 td: ({ children }) => <td className="px-4 py-3 text-gray-300">{children}</td>,
               }}
@@ -178,7 +192,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
         </div>
 
         {/* Article Footer */}
-        <div className="mt-12 pt-8 border-t border-slate-800">
+        <div className="mt-12 pt-8 border-t border-zinc-800">
           <div className="flex justify-between items-center flex-wrap gap-4">
             <div>
               <p className="text-sm text-gray-400 mb-2">Share this post:</p>
@@ -221,7 +235,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
               <Link
                 key={index}
                 href={`/blog/${related}`}
-                className="bg-slate-800 hover:bg-slate-700 rounded-xl p-6 transition-colors border border-slate-700 hover:border-purple-500/50"
+                className="bg-zinc-800 hover:bg-zinc-700 rounded-xl p-6 transition-colors border border-zinc-700 hover:border-purple-500/50"
               >
                 <h3 className="text-lg font-semibold text-white mb-2">
                   {related.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}
@@ -243,7 +257,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
           <form className="flex gap-4 max-w-md">
             <input aria-label="your@email.com"               type="email"
               placeholder="your@email.com"
-              className="flex-1 px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder:text-gray-500 focus:outline-none focus:border-purple-500"
+              className="flex-1 px-4 py-3 bg-zinc-800 border border-zinc-700 rounded-lg text-white placeholder:text-gray-500 focus:outline-none focus:border-purple-500"
             />
             <button
               type="submit"

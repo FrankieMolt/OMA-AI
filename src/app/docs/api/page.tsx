@@ -170,7 +170,7 @@ export default function DocsAPIPage() {
               <div className="bg-zinc-900 rounded p-3 mb-4 text-sm">
                 <div className="text-zinc-400 mb-1"><span className="text-cyan-400">page</span> - Page number (default: 1)</div>
                 <div className="text-zinc-400 mb-1"><span className="text-cyan-400">limit</span> - Items per page (default: 20)</div>
-                <div className="text-zinc-400 mb-1"><span className="text-cyan-400">category</span> - Filter by category (e.g., "AI/ML", "Finance")</div>
+                <div className="text-zinc-400 mb-1"><span className="text-cyan-400">category</span> - Filter by category (e.g., &quot;AI/ML&quot;, &quot;Finance&quot;)</div>
                 <div className="text-zinc-400 mb-1"><span className="text-cyan-400">search</span> - Search by name or description</div>
                 <div className="text-zinc-400 mb-1"><span className="text-cyan-400">sort</span> - Sort by: rating, calls, price, newest</div>
                 <div className="text-zinc-400"><span className="text-cyan-400">verified</span> - true/false filter</div>
@@ -185,7 +185,7 @@ export default function DocsAPIPage() {
       "id": "1",
       "name": "Anthropic Claude MCP",
       "slug": "anthropic-claude-mcp",
-      "category": "AI/ML",
+      "category": &quot;AI/ML&quot;,
       "pricing_usdc": 0.015,
       "x402_enabled": true,
       "verified": true,
@@ -243,7 +243,7 @@ export default function DocsAPIPage() {
 {`{
   "name": "My MCP Server",
   "slug": "my-mcp-server",
-  "category": "AI/ML",
+  "category": &quot;AI/ML&quot;,
   "description": "Short description",
   "long_description": "Full description...",
   "author": "Your Name",
@@ -512,7 +512,7 @@ export default function DocsAPIPage() {
     "total_mcp_servers": 19,
     "total_downloads": 50000,
     "avg_rating": 4.7,
-    "categories": ["AI/ML", "Finance", "Data"]
+    "categories": [&quot;AI/ML&quot;, &quot;Finance&quot;, "Data"]
   },
   "trending": [
     { "name": "Claude MCP", "slug": "claude-mcp", "downloads": 15000 }

@@ -1,30 +1,11 @@
 'use client';
 
-import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Sparkles, ArrowRight, Database, Zap, Users, Cpu, Brain, Wallet, Globe } from 'lucide-react';
+import { Sparkles, ArrowRight, Database, Zap, Cpu, Brain, Wallet, Globe } from 'lucide-react';
 
 export function HeroSection() {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) {
-    return (
-      <div className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#12121f]">
-        <h1 className="sr-only">OMA-AI Agentic Web Platform</h1>
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#1e1e3f] via-[#12121f] to-[#0a0a14] opacity-90" />
-        <div className="relative z-10 max-w-5xl mx-auto px-6 py-32 text-center">
-          <div className="h-96 animate-pulse bg-zinc-800/20 rounded-2xl" />
-        </div>
-      </div>
-    );
-  }
-
   return (
-    <div className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#12121f]">
+    <div className="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-[#0a0a0f]">
       
       {/* Static gradient background - no animation blocking */}
       <div className="absolute inset-0 z-0">
@@ -48,20 +29,20 @@ export function HeroSection() {
         <div className="mb-10 animate-fade-in">
           <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full glass-card border border-violet-500/20 mb-10">
             <Sparkles className="w-4 h-4 text-amber-400" />
-            <span className="text-sm font-medium text-violet-200/80">Web 4.0 Infrastructure</span>
+            <span className="text-sm font-medium text-violet-200/80">MCP Marketplace</span>
           </div>
         </div>
 
         <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-8 tracking-tight text-white animate-fade-in animation-delay-100">
           <span className="block text-zinc-100">OMA-AI</span>
           <span className="block mt-2">
-            <span className="bg-gradient-to-r from-violet-300 via-fuchsia-300 to-amber-300 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-violet-400 via-fuchsia-400 to-pink-400 bg-clip-text text-transparent">
               Where AI Agents Earn, Trade & Build
             </span>
           </span>
         </h1>
 
-        <p className="text-lg md:text-xl text-zinc-400 mb-12 max-w-2xl mx-auto leading-relaxed animate-fade-in animation-delay-200">
+        <p className="text-lg md:text-xl text-zinc-300 mb-12 max-w-2xl mx-auto leading-relaxed animate-fade-in animation-delay-200">
           The agentic web platform enabling AI agents to buy, sell, and earn like Conway. 
           Deploy MCPs, rent GPU compute, list Skills, resell LLMs, and monetize with x402 payments—all with autonomous agent wallets.
         </p>
@@ -69,14 +50,14 @@ export function HeroSection() {
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16 animate-fade-in animation-delay-300">
           <Link
             href="/mcps"
-            className="inline-flex items-center gap-2 bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white px-8 py-4 rounded-full font-semibold text-lg hover:from-violet-700 hover:to-fuchsia-700 transition-all focus:outline-none focus:ring-2 focus:ring-violet-400 focus:ring-offset-2 focus:ring-offset-[#12121f]"
+            className="inline-flex items-center gap-2 bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white px-8 py-4 rounded-full font-semibold text-lg hover:from-violet-500 hover:to-fuchsia-500 hover:shadow-xl hover:shadow-violet-500/25 hover:-translate-y-0.5 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-violet-400 focus:ring-offset-2 focus:ring-offset-[#0a0a0f]"
           >
-            Explore Agents
+            Explore Marketplace
             <ArrowRight className="w-5 h-5" />
           </Link>
           <Link
-            href="/pricing"
-            className="inline-flex items-center gap-2 glass-card text-violet-300 px-8 py-4 rounded-full font-semibold text-lg hover:bg-violet-500/10 transition-all border border-violet-500/20 focus:outline-none focus:ring-2 focus:ring-violet-400 focus:ring-offset-2 focus:ring-offset-[#12121f]"
+            href="/publish"
+            className="inline-flex items-center gap-2 glass-card text-violet-300 px-8 py-4 rounded-full font-semibold text-lg hover:bg-violet-500/10 transition-all border border-violet-500/20 focus:outline-none focus:ring-2 focus:ring-violet-400 focus:ring-offset-2 focus:ring-offset-[#0a0a0f]"
           >
             Start Building
           </Link>
@@ -96,7 +77,7 @@ export function HeroSection() {
               <Link
                 key={feature.title}
                 href={feature.href}
-                className="glass-card border border-violet-500/10 rounded-2xl p-6 animate-fade-in hover:border-violet-500/30 transition-all"
+                className="glass-card border border-violet-500/10 rounded-2xl p-6 animate-fade-in hover:border-violet-500/30 hover:-translate-y-1 hover:shadow-xl hover:shadow-violet-500/10 transition-all duration-200"
                 style={{ animationDelay: `${400 + index * 100}ms` }}
               >
                 <div className="flex items-center gap-3 mb-4">

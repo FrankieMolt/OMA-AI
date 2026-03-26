@@ -7,6 +7,7 @@
 
 const isDevelopment = process.env.NODE_ENV === 'development';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function logError(context: string, error: any): void {
   if (isDevelopment) {
     console.error(`[${context}]`, error);

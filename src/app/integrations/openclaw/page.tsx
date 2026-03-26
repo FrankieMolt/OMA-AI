@@ -1,7 +1,6 @@
 import { Metadata } from 'next';
 import { GlassCard } from '@/components/ui/GlassCard';
-import { Github, Terminal, Box, Zap, Code, ArrowRight, Copy, Check } from 'lucide-react';
-import { useState } from 'react';
+import { Github, Terminal, Box, Zap, Code } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'OpenClaw Integration - OMA-AI MCP Marketplace',

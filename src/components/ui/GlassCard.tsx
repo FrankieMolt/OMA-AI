@@ -10,8 +10,8 @@ export function GlassCard({ children, className, hover = false }: GlassCardProps
   return (
     <div
       className={cn(
-        'backdrop-blur-xl bg-slate-800/50 border border-slate-700/50 rounded-2xl',
-        hover && 'hover:bg-slate-700/50 hover:border-slate-600/50 transition-all duration-300',
+        'backdrop-blur-xl bg-zinc-800/50 border border-zinc-700/50 rounded-2xl',
+        hover && 'hover:bg-zinc-700/50 hover:border-zinc-600/50 transition-all duration-300',
         className
       )}
     >
@@ -24,8 +24,8 @@ export function GlassCardPurple({ children, className, hover = false }: GlassCar
   return (
     <div
       className={cn(
-        'backdrop-blur-xl bg-purple-900/50 border border-purple-700/50 rounded-2xl',
-        hover && 'hover:bg-purple-800/50 hover:border-purple-600/50 transition-all duration-300',
+        'backdrop-blur-xl bg-violet-900/50 border border-violet-700/50 rounded-2xl',
+        hover && 'hover:bg-violet-800/50 hover:border-violet-600/50 transition-all duration-300',
         className
       )}
     >

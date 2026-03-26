@@ -616,7 +616,7 @@ export default function DocsGuidesPage() {
         </div>
 
         <div className="grid gap-6">
-          {filteredGuides.map((guide, idx) => (
+          {filteredGuides.map((guide) => (
             <div
               key={guide.id}
               className="bg-zinc-900 rounded-xl border border-zinc-800 overflow-hidden"

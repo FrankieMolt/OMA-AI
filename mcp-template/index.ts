@@ -205,7 +205,7 @@ async function handleCalculator(args: any) {
 
   // Safe evaluation (for demo - use mathjs in production)
   try {
-    // eslint-disable-next-line no-eval
+     
     const result = eval(expression);
 
     return {

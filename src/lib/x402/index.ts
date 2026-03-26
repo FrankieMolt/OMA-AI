@@ -102,6 +102,7 @@ export function decodePaymentRequirement(encoded: string): PaymentRequirement {
 
 /**
  * Verify x402 payment on Base (EVM)
+ * Parses transaction logs to verify USDC Transfer or TransferWithAuthorization (EIP-3009)
  */
 export async function verifyBasePayment(
   txHash: string,
@@ -122,8 +123,67 @@ export async function verifyBasePayment(
     // Check if transaction was successful
     if (receipt.status !== 1) return false;
     
-    // In production, you'd parse logs to verify USDC transfer
-    // For now, we verify the tx exists and has sufficient value
+    // Parse logs to find USDC Transfer or TransferWithAuthorization events
+    // USDC Transfer event signature: Transfer(address from, address to, uint256 value)
+    const usdcInterface = new ethers.Interface([
+      'event Transfer(address indexed from, address indexed to, uint256 value)',
+      'event TransferWithAuthorization(address from, address to, address token, uint256 value, uint256 validAfter, uint256 validBefore, bytes32 nonce)'
+    ]);
+    
+    let transferFound = false;
+    for (const log of receipt.logs) {
+      try {
+        // Only check logs from the USDC contract
+        if (log.address.toLowerCase() !== net.usdcAddress.toLowerCase()) continue;
+        
+        const parsed = usdcInterface.parseLog({
+          topics: log.topics,
+          data: log.data
+        });
+        
+        if (!parsed) continue;
+        const { name, args } = parsed;
+        
+        if (name === 'Transfer') {
+          const to = args[1];
+          const value = args[2];
+          const decimals = 6; // USDC has 6 decimals
+          const amountUsdc = Number(ethers.formatUnits(value, decimals));
+          
+          if (
+            to &&
+            to.toString().toLowerCase() === recipientAddress.toLowerCase() &&
+            amountUsdc >= expectedAmount
+          ) {
+            transferFound = true;
+            break;
+          }
+        } else if (name === 'TransferWithAuthorization') {
+          const to = args[1];
+          const value = args[3];
+          const decimals = 6;
+          const amountUsdc = Number(ethers.formatUnits(value, decimals));
+          
+          if (
+            to &&
+            to.toString().toLowerCase() === recipientAddress.toLowerCase() &&
+            amountUsdc >= expectedAmount
+          ) {
+            transferFound = true;
+            break;
+          }
+        }
+      } catch {
+        // Skip logs that can't be parsed (non-USDC logs)
+        continue;
+      }
+    }
+    
+    if (!transferFound) {
+      console.warn('[x402] No matching USDC transfer found in transaction logs');
+      return false;
+    }
+    
     return true;
   } catch (error) {
     console.error('Payment verification failed:', error);
@@ -145,7 +205,7 @@ export function isProduction(): boolean {
   return process.env.NODE_ENV === 'production';
 }
 
-export default {
+const x402Exports = {
   NETWORKS,
   parsePrice,
   formatPrice,
@@ -156,3 +216,5 @@ export default {
   getOmAIPaymentAddress,
   isProduction
 };
+
+export default x402Exports;

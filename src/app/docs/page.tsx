@@ -62,7 +62,7 @@ export default function DocsPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 pt-24 pb-12">
+    <div className="min-h-screen bg-[#0a0a0f] pt-24 pb-12">
       <div className="container mx-auto px-4 max-w-7xl">
         {/* Header */}
         <div className="text-center mb-16">
@@ -153,13 +153,11 @@ export default function DocsPage() {
             <p className="text-xl text-purple-100 mb-8 max-w-2xl mx-auto leading-relaxed">
               Explore our complete API documentation with all endpoints, parameters, and examples.
             </p>
-            <a
-              href="/api/docs"
+            <Link href="/api/docs"
               className="inline-flex items-center gap-2 px-8 py-3 bg-white hover:bg-gray-100 text-purple-600 font-bold rounded-lg transition-colors"
-            >
-              View API Docs
+            >View API Docs
               <ExternalLink className="w-5 h-5" />
-            </a>
+            </Link>
           </GlassCardPurple>
         </div>
 
@@ -169,13 +167,11 @@ export default function DocsPage() {
             Join the Community
           </h2>
           <div className="grid md:grid-cols-2 gap-6">
-            <a
-              href="https://discord.gg/oma-ai"
+            <Link href="https://discord.gg/oma-ai"
               target="_blank"
               rel="noopener noreferrer"
               className="GlassCard p-6 hover:cursor-pointer group"
-            >
-              <div className="flex items-center gap-4">
+            ><div className="flex items-center gap-4">
                 <div className="flex-shrink-0 w-12 h-12 bg-indigo-600/20 rounded-lg flex items-center justify-center">
                   <MessageCircle className="w-6 h-6 text-indigo-300" />
                 </div>
@@ -189,15 +185,13 @@ export default function DocsPage() {
                 </div>
                 <ExternalLink className="w-5 h-5 text-gray-400 group-hover:text-indigo-300 transition-colors" />
               </div>
-            </a>
+            </Link>
 
-            <a
-              href="https://github.com/oma-ai/oma-ai"
+            <Link href="https://github.com/oma-ai"
               target="_blank"
               rel="noopener noreferrer"
               className="GlassCard p-6 hover:cursor-pointer group"
-            >
-              <div className="flex items-center gap-4">
+            ><div className="flex items-center gap-4">
                 <div className="flex-shrink-0 w-12 h-12 bg-gray-700/50 rounded-lg flex items-center justify-center">
                   <Code className="w-6 h-6 text-gray-300" />
                 </div>
@@ -211,7 +205,7 @@ export default function DocsPage() {
                 </div>
                 <ExternalLink className="w-5 h-5 text-gray-400 group-hover:text-gray-300 transition-colors" />
               </div>
-            </a>
+            </Link>
           </div>
         </div>
 
@@ -219,18 +213,16 @@ export default function DocsPage() {
         <div className="mt-20 text-center">
           <GlassCard className="max-w-3xl mx-auto p-8">
             <h2 className="text-2xl font-bold text-white mb-4">
-              Can't Find What You Need?
+              Can&apos;t Find What You Need?
             </h2>
             <p className="text-gray-300 mb-6">
               Our team is here to help. Contact us with any questions or feedback.
             </p>
-            <a
-              href="/contact"
+            <Link href="/contact"
               className="inline-flex items-center gap-2 px-8 py-3 bg-purple-600 hover:bg-purple-700 text-white font-bold rounded-lg transition-colors"
-            >
-              <MessageCircle className="w-5 h-5" />
+            ><MessageCircle className="w-5 h-5" />
               Contact Support
-            </a>
+            </Link>
           </GlassCard>
         </div>
       </div>

@@ -828,7 +828,7 @@ You now understand x402 gasless payments! 🎉
 - [ ] Deploy to production
 
 **Resources:**
-- [x402 Protocol Documentation](/docs/x402)
+- [x402 Protocol Documentation](https://www.x402.org)
 - [Base Network Docs](https://docs.base.org)
 - [Solana Docs](https://docs.solana.com)
 - [OMA-AI GitHub](https://github.com/oma-ai)

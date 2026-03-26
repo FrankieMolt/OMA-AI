@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
 
+const FRONTEND_URL = process.env.FRONTEND_URL || 'https://www.oma-ai.com';
+
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const wallet = searchParams.get('wallet');
@@ -9,7 +11,7 @@ export async function GET(request: Request) {
       { success: false, error: "Connect wallet to view portfolio", walletRequired: true },
       { status: 400 }
     );
-    response.headers.set('Access-Control-Allow-Origin', '*');
+    response.headers.set('Access-Control-Allow-Origin', FRONTEND_URL);
     return response;
   }
 
@@ -28,7 +30,7 @@ export async function GET(request: Request) {
       timestamp: Date.now()
     },
   });
-  response.headers.set('Access-Control-Allow-Origin', '*');
+  response.headers.set('Access-Control-Allow-Origin', FRONTEND_URL);
   response.headers.set('Cache-Control', 'no-cache');
   return response;
 }

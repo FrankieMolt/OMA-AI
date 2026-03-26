@@ -27,7 +27,7 @@ export async function GET() {
                    response.status === 401 ? 'auth required' :
                    response.status === 200 ? 'working' : 'error'
         };
-      } catch (e) {
+      } catch {
         return { name: ep.name, status: 'error', code: 0, message: 'connection failed' };
       }
     })

@@ -1,4 +1,5 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
+import type { MCPToolInput } from '@/lib/types';
 
 export async function POST(request: Request) {
   try {
@@ -98,7 +99,7 @@ export async function POST(request: Request) {
 
     // Insert tools if provided
     if (body.tools && Array.isArray(body.tools) && body.tools.length > 0) {
-      const toolsToInsert = body.tools.map((tool: any) => ({
+      const toolsToInsert = body.tools.map((tool: MCPToolInput) => ({
         mcp_server_id: data.id,
         name: tool.name,
         description: tool.description,

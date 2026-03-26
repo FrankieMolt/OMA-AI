@@ -1,11 +1,16 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import { motion } from 'framer-motion';
+import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { ArrowUpRight, Star, CheckCircle, Clock, Zap } from 'lucide-react';
 import { getCategoryIcon, getCategoryColors } from '@/lib/category-icons';
 import { getMcpFaviconUrl } from '@/lib/mcp-icons';
+
+const MotionDiv = dynamic(
+  () => import('framer-motion').then(m => m.motion.div),
+  { ssr: false }
+);
 
 interface MCPSkill {
   id: string;
@@ -120,7 +125,7 @@ export default function MCPSkillDetail({ slug }: { slug: string }) {
     <main className="min-h-screen bg-zinc-950 pt-24 pb-12">
       <div className="container mx-auto px-4 max-w-4xl">
         {/* Back Button */}
-        <motion.div
+        <MotionDiv
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           className="mb-6"
@@ -131,10 +136,10 @@ export default function MCPSkillDetail({ slug }: { slug: string }) {
           >
             ← Back to Marketplace
           </Link>
-        </motion.div>
+        </MotionDiv>
 
         {/* Header */}
-        <motion.div
+        <MotionDiv
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
@@ -181,19 +186,19 @@ export default function MCPSkillDetail({ slug }: { slug: string }) {
             </div>
             {renderStars(skill.rating)}
           </div>
-        </motion.div>
+        </MotionDiv>
 
         {/* Main Content */}
         <div className="grid lg:grid-cols-3 gap-6">
           {/* Left Column - Details */}
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
             className="lg:col-span-2 space-y-6"
           >
             {/* Description */}
-            <motion.div
+            <MotionDiv
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.3 }}
@@ -205,10 +210,10 @@ export default function MCPSkillDetail({ slug }: { slug: string }) {
               <p className="text-gray-300 leading-relaxed">
                 {skill.description}
               </p>
-            </motion.div>
+            </MotionDiv>
 
             {/* Categories */}
-            <motion.div
+            <MotionDiv
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.4 }}
@@ -230,10 +235,10 @@ export default function MCPSkillDetail({ slug }: { slug: string }) {
                   );
                 })}
               </div>
-            </motion.div>
+            </MotionDiv>
 
             {/* MCP Endpoint */}
-            <motion.div
+            <MotionDiv
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5 }}
@@ -245,11 +250,11 @@ export default function MCPSkillDetail({ slug }: { slug: string }) {
               <div className="bg-zinc-950 p-3 rounded-lg font-mono text-sm text-gray-400 break-all">
                 {skill.mcp_endpoint}
               </div>
-            </motion.div>
+            </MotionDiv>
 
             {/* x402 Payment */}
             {skill.x402_enabled && (
-              <motion.div
+              <MotionDiv
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.6 }}
@@ -272,19 +277,19 @@ export default function MCPSkillDetail({ slug }: { slug: string }) {
                     <div>• Automatic payment on each call</div>
                   </div>
                 </div>
-              </motion.div>
+              </MotionDiv>
             )}
-          </motion.div>
+          </MotionDiv>
 
           {/* Right Column - Actions & Stats */}
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.3 }}
             className="space-y-6"
           >
             {/* Install Card */}
-            <motion.div
+            <MotionDiv
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.4 }}
@@ -311,10 +316,10 @@ export default function MCPSkillDetail({ slug }: { slug: string }) {
                   </>
                 )}
               </button>
-            </motion.div>
+            </MotionDiv>
 
             {/* Pricing Card */}
-            <motion.div
+            <MotionDiv
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5 }}
@@ -334,10 +339,10 @@ export default function MCPSkillDetail({ slug }: { slug: string }) {
                   USDC per call
                 </div>
               </div>
-            </motion.div>
+            </MotionDiv>
 
             {/* Stats Card */}
-            <motion.div
+            <MotionDiv
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.6 }}
@@ -366,11 +371,11 @@ export default function MCPSkillDetail({ slug }: { slug: string }) {
                   </span>
                 </div>
               </div>
-            </motion.div>
+            </MotionDiv>
 
             {/* Links */}
             {skill.repository_url && (
-              <motion.div
+              <MotionDiv
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.7 }}
@@ -396,9 +401,9 @@ export default function MCPSkillDetail({ slug }: { slug: string }) {
                     <ArrowUpRight size={16} />
                   </a>
                 )}
-              </motion.div>
+              </MotionDiv>
             )}
-          </motion.div>
+          </MotionDiv>
         </div>
       </div>
     </main>

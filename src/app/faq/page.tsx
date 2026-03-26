@@ -1,11 +1,12 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 
 const faqs = [
   {
-    question: "What is OMA-Ai?",
-    answer: "OMA-Ai is the premier MCP (Model Context Protocol) marketplace, enabling AI agents to discover, integrate, and pay for tools seamlessly. We host 19+ verified MCP servers with x402 gasless payments.",
+    question: "What is OMA-AI?",
+    answer: "OMA-AI is the premier MCP (Model Context Protocol) marketplace, enabling AI agents to discover, integrate, and pay for tools seamlessly. We host 19+ verified MCP servers with x402 gasless payments.",
     category: "General",
   },
   {
@@ -34,7 +35,7 @@ const faqs = [
     category: "Pricing",
   },
   {
-    question: "Is OMA-Ai secure?",
+    question: "Is OMA-AI secure?",
     answer: "Yes! Security is our top priority. We use input validation, rate limiting, encrypted connections, and never store private keys.",
     category: "Security",
   },
@@ -63,7 +64,7 @@ function FAQItem({ faq }: { faq: typeof faqs[0] }) {
 
 export default function FAQ() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+    <div className="min-h-screen bg-[#0a0a0f]">
       <div className="container mx-auto px-4 py-16">
         {/* Header */}
         <div className="text-center mb-16">
@@ -71,7 +72,7 @@ export default function FAQ() {
             Frequently Asked Questions
           </h1>
           <p className="text-xl text-purple-200 max-w-2xl mx-auto">
-            Everything you need to know about OMA-Ai, MCPs, and getting started
+            Everything you need to know about OMA-AI, MCPs, and getting started
           </p>
         </div>
 
@@ -85,23 +86,19 @@ export default function FAQ() {
         {/* CTA */}
         <div className="text-center mt-16">
           <p className="text-lg text-purple-200 mb-6">
-            Still have questions? We're here to help!
+            Still have questions? We&apos;re here to help!
           </p>
           <div className="flex justify-center gap-4 flex-wrap">
-            <a
-              href="https://discord.gg/oma-ai"
+            <Link href="https://discord.gg/oma-ai"
               target="_blank"
               rel="noopener noreferrer"
               className="px-8 py-3 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-lg transition-colors"
-            >
-              Join Discord Community
-            </a>
-            <a
-              href="/contact"
-              className="px-8 py-3 bg-slate-700 hover:bg-slate-600 text-white font-semibold rounded-lg transition-colors"
-            >
-              Contact Support
-            </a>
+            >Join Discord Community
+            </Link>
+            <Link href="/contact"
+              className="px-8 py-3 bg-zinc-700 hover:bg-zinc-600 text-white font-semibold rounded-lg transition-colors"
+            >Contact Support
+            </Link>
           </div>
         </div>
       </div>

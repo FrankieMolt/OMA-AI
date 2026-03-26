@@ -24,7 +24,15 @@ const MCP_PRICING: Record<string, { price: string; network: NetworkName }> = {
 };
 
 // Default recipient wallet (your OMA-AI treasury)
-const TREASURY_WALLET = process.env.OMA_AI_PAYMENT_WALLET || '0x0000000000000000000000000000000000000000';
+const TREASURY_WALLET = process.env.OMA_AI_PAYMENT_WALLET;
+
+function getTreasuryWallet(): string {
+  if (!TREASURY_WALLET) {
+    // Fail fast at runtime — do NOT accept the null address
+    throw new Error('FATAL: OMA_AI_PAYMENT_WALLET env var is not set. Payments would go to 0x0 and be LOST.');
+  }
+  return TREASURY_WALLET;
+}
 
 export async function POST(
   request: NextRequest,
@@ -35,8 +43,8 @@ export async function POST(
   // Get payment from header if present
   const paymentHeader = request.headers.get('X-Payment');
   
-  // Get client IP for rate limiting
-  const clientIP = request.headers.get('x-forwarded-for') || 'unknown';
+  // Get client IP for rate limiting (reserved for future use)
+  // NOTE: clientIP extraction reserved for future rate limiting use
   
   // Check if this MCP exists
   const mcpConfig = MCP_PRICING[slug];
@@ -50,7 +58,7 @@ export async function POST(
   // If payment header present, verify it
   if (paymentHeader) {
     try {
-      const payment = JSON.parse(Buffer.from(paymentHeader, 'base64').toString());
+      // Payment parsing reserved for future payment verification logic
       
       // Verify payment was made
       const expectedAmount = dollarsToMicroUnits(mcpConfig.price);
@@ -61,7 +69,7 @@ export async function POST(
         const verification = await verifyBasePayment(
           txHash,
           expectedAmount,
-          TREASURY_WALLET,
+          getTreasuryWallet(),
           mcpConfig.network
         );
         
@@ -82,7 +90,7 @@ export async function POST(
   
   // No payment - return 402 with payment requirements
   const paymentReq = createPaymentRequirement({
-    recipientAddress: TREASURY_WALLET,
+    recipientAddress: getTreasuryWallet(),
     network: mcpConfig.network,
     price: mcpConfig.price,
     description: `Access to ${slug} MCP`,
@@ -95,8 +103,8 @@ export async function POST(
 /**
  * Handle the actual MCP call after payment verified
  */
-async function handleMCPCall(slug: string, requestData: any) {
-  let result: any;
+async function handleMCPCall(slug: string, requestData: Record<string, unknown>) {
+  let result: Record<string, unknown>;
   
   switch (slug) {
     case 'weather-api':
@@ -178,7 +186,7 @@ export async function GET(
   }
   
   const paymentReq = createPaymentRequirement({
-    recipientAddress: TREASURY_WALLET,
+    recipientAddress: getTreasuryWallet(),
     network: mcpConfig.network,
     price: mcpConfig.price,
     description: `Access to ${slug} MCP`,

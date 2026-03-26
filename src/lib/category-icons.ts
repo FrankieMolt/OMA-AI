@@ -53,17 +53,17 @@ const CATEGORY_COLORS: Record<string, { bg: string; text: string; border: string
     border: 'border-pink-500/30',
   },
   'Utilities': {
-    bg: 'bg-slate-500/20',
-    text: 'text-slate-400',
-    border: 'border-slate-500/30',
+    bg: 'bg-zinc-500/20',
+    text: 'text-zinc-400',
+    border: 'border-zinc-500/30',
   },
 };
 
 const DEFAULT_ICON = Wrench;
 const DEFAULT_COLORS = {
-  bg: 'bg-slate-500/20',
-  text: 'text-slate-400',
-  border: 'border-slate-500/30',
+  bg: 'bg-zinc-500/20',
+  text: 'text-zinc-400',
+  border: 'border-zinc-500/30',
 };
 
 export function getCategoryIcon(category: string): LucideIcon {

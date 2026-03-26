@@ -1,10 +1,29 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
   <defs>
-    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#8b5cf6;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#6366f1;stop-opacity:1" />
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8b5cf6"/>
+      <stop offset="100%" style="stop-color:#d946ef"/>
     </linearGradient>
   </defs>
-  <rect width="100" height="100" rx="20" fill="url(#grad)"/>
-  <text x="50" y="68" font-family="Arial, sans-serif" font-size="36" font-weight="800" fill="white" text-anchor="middle">OMA</text>
+  <rect x="16" y="16" width="480" height="480" rx="96" fill="url(#grad1)"/>
+  <circle cx="256" cy="256" r="40" fill="white" opacity="0.95"/>
+  <circle cx="256" cy="256" r="28" fill="url(#grad1)"/>
+  <line x1="256" y1="256" x2="148" y2="168" stroke="white" stroke-width="6" opacity="0.5"/>
+  <line x1="256" y1="256" x2="364" y2="168" stroke="white" stroke-width="6" opacity="0.5"/>
+  <line x1="256" y1="256" x2="148" y2="344" stroke="white" stroke-width="6" opacity="0.5"/>
+  <line x1="256" y1="256" x2="364" y2="344" stroke="white" stroke-width="6" opacity="0.5"/>
+  <line x1="256" y1="256" x2="256" y2="120" stroke="white" stroke-width="6" opacity="0.5"/>
+  <line x1="256" y1="256" x2="256" y2="392" stroke="white" stroke-width="6" opacity="0.5"/>
+  <line x1="148" y1="168" x2="256" y2="120" stroke="white" stroke-width="4" opacity="0.25"/>
+  <line x1="256" y1="120" x2="364" y2="168" stroke="white" stroke-width="4" opacity="0.25"/>
+  <line x1="364" y1="168" x2="364" y2="344" stroke="white" stroke-width="4" opacity="0.25"/>
+  <line x1="364" y1="344" x2="256" y2="392" stroke="white" stroke-width="4" opacity="0.25"/>
+  <line x1="256" y1="392" x2="148" y2="344" stroke="white" stroke-width="4" opacity="0.25"/>
+  <line x1="148" y1="344" x2="148" y2="168" stroke="white" stroke-width="4" opacity="0.25"/>
+  <circle cx="256" cy="120" r="24" fill="white" opacity="0.9"/>
+  <circle cx="364" cy="168" r="24" fill="white" opacity="0.9"/>
+  <circle cx="364" cy="344" r="24" fill="white" opacity="0.9"/>
+  <circle cx="256" cy="392" r="24" fill="white" opacity="0.9"/>
+  <circle cx="148" cy="344" r="24" fill="white" opacity="0.9"/>
+  <circle cx="148" cy="168" r="24" fill="white" opacity="0.9"/>
 </svg>

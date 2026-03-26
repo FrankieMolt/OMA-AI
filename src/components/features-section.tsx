@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import {
   Search,
@@ -15,6 +15,11 @@ import {
   Database,
   Cpu
 } from 'lucide-react';
+
+const MotionDiv = dynamic(
+  () => import('framer-motion').then(m => m.motion.div),
+  { ssr: false }
+);
 
 const endpoints = [
   {
@@ -79,12 +84,12 @@ const benefits = [
 
 export function FeaturesSection() {
   return (
-    <section className="py-28 px-4 bg-[#12121f] relative">
+    <section className="py-28 px-4 bg-[#0a0a0f] relative">
       {/* Background Effects */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-purple-900/10 to-transparent" />
       
       <div className="max-w-7xl mx-auto relative">
-        <motion.div
+        <MotionDiv
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -96,18 +101,18 @@ export function FeaturesSection() {
           <p className="text-xl text-gray-400 max-w-2xl mx-auto">
             Build, deploy, and monetize AI agents with MCP integrations, x402 payments, and developer APIs
           </p>
-        </motion.div>
+        </MotionDiv>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
           {endpoints.map((endpoint, index) => {
             const Icon = endpoint.icon;
             return (
-              <motion.div
+              <MotionDiv
                 key={endpoint.name}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className={`rounded-2xl p-6 bg-gradient-to-br ${endpoint.gradient} border border-white/10`}
+                className={`rounded-2xl p-6 bg-gradient-to-br ${endpoint.gradient} border border-white/10 hover:-translate-y-1 hover:shadow-xl transition-all duration-200 cursor-pointer`}
               >
                 <div className="flex items-start justify-between mb-4">
                   <div className="p-3 bg-white/10 rounded-lg">
@@ -123,12 +128,12 @@ export function FeaturesSection() {
                 <p className="text-gray-300 text-sm">
                   {endpoint.description}
                 </p>
-              </motion.div>
+              </MotionDiv>
             );
           })}
         </div>
 
-        <motion.div
+        <MotionDiv
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -141,7 +146,7 @@ export function FeaturesSection() {
             {benefits.map((benefit, index) => {
               const Icon = benefit.icon;
               return (
-                <motion.div
+                <MotionDiv
                   key={benefit.title}
                   initial={{ opacity: 0, scale: 0.9 }}
                   whileInView={{ opacity: 1, scale: 1 }}
@@ -157,13 +162,13 @@ export function FeaturesSection() {
                   <p className="text-gray-400 text-sm">
                     {benefit.description}
                   </p>
-                </motion.div>
+                </MotionDiv>
               );
             })}
           </div>
-        </motion.div>
+        </MotionDiv>
 
-        <motion.div
+        <MotionDiv
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -171,12 +176,12 @@ export function FeaturesSection() {
         >
           <Link
             href="/mcps"
-            className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white px-8 py-4 rounded-full font-semibold text-lg hover:from-purple-700 hover:to-blue-700 transition-all focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-offset-2 focus:ring-offset-[#12121f]"
+            className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white px-8 py-4 rounded-full font-semibold text-lg hover:from-purple-700 hover:to-blue-700 transition-all focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-offset-2 focus:ring-offset-[#0a0a0f]"
           >
             Explore MCP Marketplace
             <ArrowRight className="w-5 h-5" />
           </Link>
-        </motion.div>
+        </MotionDiv>
       </div>
     </section>
   );

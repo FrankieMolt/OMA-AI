@@ -11,11 +11,19 @@ const quotes = [
 ];
 
 export async function GET() {
-  const quote = quotes[Math.floor(Math.random() * quotes.length)];
-  const response = NextResponse.json({ 
-    success: true, 
-    data: { quote, timestamp: new Date().toISOString() } 
-  });
-  response.headers.set('Access-Control-Allow-Origin', '*');
-  return response;
+  try {
+    const quote = quotes[Math.floor(Math.random() * quotes.length)];
+    const response = NextResponse.json({ 
+      success: true, 
+      data: { quote, timestamp: new Date().toISOString() } 
+    });
+    response.headers.set('Access-Control-Allow-Origin', '*');
+    return response;
+  } catch (error) {
+    console.error('[GET /api/quote] error:', error instanceof Error ? error.message : String(error));
+    return NextResponse.json(
+      { success: false, error: 'Internal server error' },
+      { status: 500 }
+    );
+  }
 }

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { motion } from 'framer-motion';
+import dynamic from 'next/dynamic';
 import { 
   Zap,
   Crown,
@@ -13,6 +13,19 @@ import {
   ArrowUpRight
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
+
+const MotionDiv = dynamic(
+  () => import('framer-motion').then(m => m.motion.div),
+  { ssr: false }
+);
+const MotionH2 = dynamic(
+  () => import('framer-motion').then(m => m.motion.h2),
+  { ssr: false }
+);
+const MotionP = dynamic(
+  () => import('framer-motion').then(m => m.motion.p),
+  { ssr: false }
+);
 
 const packages = [
   {
@@ -107,26 +120,26 @@ export function PricingSection() {
   };
 
   return (
-    <section className="py-32 px-4 relative overflow-hidden bg-[#050505]">
+    <section className="py-32 px-4 relative overflow-hidden bg-zinc-900/50">
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Header */}
         <div className="text-center mb-20">
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-gray-400 text-[10px] font-black mb-8 tracking-[0.2em] uppercase"
           >
             <Coins className="w-3 h-3 text-primary" />
             No Subscriptions. Just Compute.
-          </motion.div>
-          <motion.h2
+          </MotionDiv>
+          <MotionH2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             className="text-5xl md:text-7xl font-black mb-6 tracking-tighter text-white"
           >
             CREDIT PACKAGES
-          </motion.h2>
-          <motion.p
+          </MotionH2>
+          <MotionP
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
@@ -134,22 +147,22 @@ export function PricingSection() {
           >
             Purchase credits using <strong>USDC on Base</strong> via x402 or standard payment rails. 
             Credits never expire and scale with your agentic fleet.
-          </motion.p>
+          </MotionP>
         </div>
 
         {/* Pricing Cards */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {packages.map((pkg, index) => (
-            <motion.div
+            <MotionDiv
               key={pkg.id}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
               className={cn(
-                "relative rounded-[2.5rem] border p-8 transition-all flex flex-col group",
+                "relative rounded-[2.5rem] border p-8 transition-all duration-300 flex flex-col group",
                 pkg.popular 
-                  ? "border-primary/50 bg-zinc-900 shadow-2xl shadow-primary/10 scale-105 z-20" 
-                  : "border-white/5 bg-zinc-950 hover:border-white/10"
+                  ? "border-primary/50 bg-zinc-900 shadow-2xl shadow-primary/10 scale-105 z-20 hover:shadow-primary/20 hover:border-primary/70" 
+                  : "border-white/5 bg-zinc-950 hover:border-white/20 hover:shadow-xl hover:shadow-black/40 hover:-translate-y-1"
               )}
             >
               {pkg.popular && (
@@ -173,10 +186,10 @@ export function PricingSection() {
 
               <div className="mb-10">
                 <div className="flex items-baseline gap-2">
-                  <span className="text-5xl font-black text-white tracking-tighter">
+                  <span className="text-6xl font-black text-white tracking-tighter leading-none">
                     {pkg.credits}
                   </span>
-                  <span className="text-gray-600 font-black text-sm uppercase tracking-widest">Credits</span>
+                  <span className="text-zinc-500 font-bold text-sm uppercase tracking-widest">Credits</span>
                 </div>
                 {pkg.bonus && (
                   <div className="mt-2 inline-flex items-center gap-1.5 px-2 py-1 rounded bg-emerald-500/10 border border-emerald-500/20">
@@ -191,9 +204,9 @@ export function PricingSection() {
 
               <div className="space-y-4 mb-10 flex-grow">
                 {pkg.features.map((feature, i) => (
-                  <div key={i} className="flex items-start gap-3">
+                  <div key={i} className="flex items-start gap-3 py-1">
                     <Check className="w-4 h-4 text-primary shrink-0 mt-0.5" />
-                    <span className="text-sm font-bold text-gray-400 leading-tight group-hover:text-gray-300 transition-colors">{feature}</span>
+                    <span className="text-sm font-bold text-gray-300 leading-tight group-hover:text-gray-200 transition-colors">{feature}</span>
                   </div>
                 ))}
               </div>
@@ -202,21 +215,21 @@ export function PricingSection() {
                 onClick={() => handlePurchase(pkg.id)}
                 disabled={isConnecting}
                 className={cn(
-                  "w-full py-5 rounded-2xl font-black transition-all flex items-center justify-center gap-3 text-xs uppercase tracking-[0.2em] active:scale-95 shadow-xl",
+                  "w-full py-5 rounded-2xl font-black transition-all duration-200 flex items-center justify-center gap-3 text-xs uppercase tracking-[0.2em] active:scale-95 shadow-xl hover:shadow-2xl hover:-translate-y-0.5",
                   pkg.popular
-                    ? "bg-primary text-black hover:bg-white shadow-primary/20"
-                    : "bg-white/5 text-white border border-white/10 hover:bg-white/10 shadow-white/5"
+                    ? "bg-primary text-black hover:bg-white shadow-primary/20 hover:shadow-primary/40"
+                    : "bg-white/5 text-white border border-white/10 hover:bg-white/10 hover:border-white/20 shadow-white/5"
                 )}
               >
                 Buy Now
                 <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </button>
-            </motion.div>
+            </MotionDiv>
           ))}
         </div>
 
         {/* X402 Micropayments Breakdown */}
-        <motion.div
+        <MotionDiv
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           className="mt-32 p-12 rounded-[3rem] bg-gradient-to-br from-zinc-900 to-black border border-white/5 relative overflow-hidden group shadow-2xl"
@@ -281,10 +294,10 @@ export function PricingSection() {
               </div>
             </div>
           </div>
-        </motion.div>
+        </MotionDiv>
 
         {/* Enterprise Footer */}
-        <motion.div
+        <MotionDiv
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ delay: 0.6 }}
@@ -293,7 +306,7 @@ export function PricingSection() {
           <p className="text-gray-600 font-black text-xs tracking-[0.3em] uppercase">
             Built for the machine-to-machine economy. <a href="mailto:sales@oma-ai.com" className="text-primary hover:text-white transition-colors underline-offset-8 underline ml-4 decoration-2">Contact OMA Solutions</a>
           </p>
-        </motion.div>
+        </MotionDiv>
       </div>
     </section>
   );

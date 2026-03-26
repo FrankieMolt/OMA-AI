@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import { GlassCard, GlassCardPurple } from '@/components/ui/GlassCard';
-import { Star, Quote, ExternalLink, TrendingUp, DollarSign, Users, CheckCircle2, MessageSquare } from 'lucide-react';
+import { Star, Quote, ExternalLink, TrendingUp, DollarSign, Users, MessageSquare } from 'lucide-react';
+import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'Testimonials | OMA-AI - Success Stories from MCP Developers',
@@ -93,7 +94,7 @@ export default function TestimonialsPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 pt-24 pb-12">
+    <div className="min-h-screen bg-[#0a0a0f] pt-24 pb-12">
       <div className="container mx-auto px-4 max-w-7xl">
         {/* Header */}
         <div className="text-center mb-16">
@@ -139,7 +140,7 @@ export default function TestimonialsPage() {
             {categories.map((cat) => (
               <div
                 key={cat.name}
-                className="px-4 py-2 bg-slate-800 border border-slate-700 rounded-full text-gray-300 text-sm"
+                className="px-4 py-2 bg-zinc-800 border border-zinc-700 rounded-full text-gray-300 text-sm"
               >
                 {cat.icon} {cat.name} ({cat.count})
               </div>
@@ -173,26 +174,26 @@ export default function TestimonialsPage() {
                     </div>
                   </div>
 
-                  <div className="bg-slate-800/50 rounded-lg p-4 mb-4">
+                  <div className="bg-zinc-800/50 rounded-lg p-4 mb-4">
                     <div className="flex items-center gap-2 mb-3">
                       <Quote className="w-5 h-5 text-purple-300" />
                       <p className="text-gray-200 italic leading-relaxed">
-                        "{testimonial.story}"
+                        {testimonial.story}
                       </p>
                     </div>
                   </div>
 
                   {/* Stats */}
                   <div className="grid grid-cols-3 gap-4">
-                    <div className="bg-slate-800/50 rounded-lg p-4">
+                    <div className="bg-zinc-800/50 rounded-lg p-4">
                       <p className="text-gray-400 text-sm mb-1">MCP</p>
                       <p className="text-white font-semibold">{testimonial.mcp}</p>
                     </div>
-                    <div className="bg-slate-800/50 rounded-lg p-4">
+                    <div className="bg-zinc-800/50 rounded-lg p-4">
                       <p className="text-gray-400 text-sm mb-1">Category</p>
                       <p className="text-white font-semibold">{testimonial.category}</p>
                     </div>
-                    <div className="bg-slate-800/50 rounded-lg p-4">
+                    <div className="bg-zinc-800/50 rounded-lg p-4">
                       <p className="text-gray-400 text-sm mb-1">Published</p>
                       <p className="text-white font-semibold">{testimonial.stats.published}</p>
                     </div>
@@ -206,7 +207,7 @@ export default function TestimonialsPage() {
                         <div className="text-white font-bold">{testimonial.revenue}</div>
                       </div>
                     </div>
-                    <div className="px-4 py-2 bg-slate-800/50 rounded-lg">
+                    <div className="px-4 py-2 bg-zinc-800/50 rounded-lg">
                       <div className="flex items-center gap-2 text-gray-300">
                         <div className="flex gap-1">
                           {[1, 2, 3, 4, 5].map((star) => (
@@ -232,26 +233,22 @@ export default function TestimonialsPage() {
             Ready to Share Your Story?
           </h2>
           <p className="text-xl text-purple-100 mb-8 max-w-2xl mx-auto leading-relaxed">
-            Have an MCP on OMA-AI? We'd love to feature your success story.
+            Have an MCP on OMA-AI? We&apos;d love to feature your success story.
             Join our community of thriving MCP developers.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <a
-              href="/publish"
+            <Link href="/publish"
               className="inline-flex items-center gap-2 px-8 py-3 bg-purple-600 hover:bg-purple-700 text-white font-bold rounded-lg transition-colors"
-            >
-              <ExternalLink size={20} />
+            ><ExternalLink size={20} />
               Publish Your MCP
-            </a>
-            <a
-              href="https://discord.gg/oma-ai"
+            </Link>
+            <Link href="https://discord.gg/oma-ai"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-8 py-3 bg-slate-700 hover:bg-slate-600 text-white font-bold rounded-lg transition-colors"
-            >
-              <MessageSquare size={20} />
+              className="inline-flex items-center gap-2 px-8 py-3 bg-zinc-700 hover:bg-zinc-600 text-white font-bold rounded-lg transition-colors"
+            ><MessageSquare size={20} />
               Join Discord
-            </a>
+            </Link>
           </div>
         </GlassCardPurple>
       </div>

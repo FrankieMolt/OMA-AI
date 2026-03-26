@@ -45,7 +45,7 @@ export const metadata: Metadata = {
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen bg-zinc-950">
+    <>
       {/* Hero loads immediately - above the fold */}
       <HeroSection />
       
@@ -56,6 +56,6 @@ export default function HomePage() {
       <FeaturesSection />
       <EcosystemSection />
       <PricingSection />
-    </main>
+    </>
   );
 }

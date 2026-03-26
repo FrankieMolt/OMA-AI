@@ -1,6 +1,38 @@
 import { NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
+// MCPServer, MCPCategory imports removed - unused
+
+interface LocalMCP {
+  slug: string;
+  name: string;
+  category: string;
+  description: string;
+  downloads?: number;
+  rating?: number;
+  tools?: Array<{ name: string }>;
+}
+
+interface SupabaseMCP {
+  id: string;
+  name: string;
+  slug: string;
+  category: string;
+  description: string;
+  downloads: number;
+  rating: number;
+  is_official: boolean;
+  is_featured: boolean;
+  pricing: string;
+  status: string;
+}
+
+interface SupabaseCategory {
+  slug: string;
+  name: string;
+  icon: string;
+  sort_order?: number;
+}
 
 // Force dynamic rendering
 export const dynamic = 'force-dynamic';
@@ -8,8 +40,19 @@ export const dynamic = 'force-dynamic';
 const SUPABASE_URL = process.env.SUPABASE_URL || 'http://localhost:54321';
 const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
+// Simple in-memory cache with 30-second TTL to reduce Supabase calls
+const _cache: { data: string | null; ts: number } = { data: null, ts: 0 };
+const CACHE_TTL_MS = 30_000; // 30 seconds
+
 export async function GET() {
   try {
+    // Try cache first
+    if (_cache.data && Date.now() - _cache.ts < CACHE_TTL_MS) {
+      return new NextResponse(_cache.data, {
+        headers: { 'Content-Type': 'application/json', 'X-Cache': 'HIT' },
+      });
+    }
+
     // Try to fetch real data from local Supabase
     if (SUPABASE_SERVICE_ROLE_KEY) {
       const headers = {
@@ -36,13 +79,13 @@ export async function GET() {
 
         // Calculate stats
         const totalMCPs = mcps.length;
-        const totalDownloads = mcps.reduce((sum: number, m: any) => sum + (m.downloads || 0), 0);
-        const avgRating = mcps.filter((m: any) => m.rating > 0).length > 0
-          ? (mcps.reduce((sum: number, m: any) => sum + (m.rating || 0), 0) / mcps.filter((m: any) => m.rating > 0).length).toFixed(1)
+        const totalDownloads = mcps.reduce((sum: number, m: SupabaseMCP) => sum + (m.downloads || 0), 0);
+        const avgRating = mcps.filter((m: SupabaseMCP) => m.rating > 0).length > 0
+          ? (mcps.reduce((sum: number, m: SupabaseMCP) => sum + (m.rating || 0), 0) / mcps.filter((m: SupabaseMCP) => m.rating > 0).length).toFixed(1)
           : '0.0';
 
         // Get trending (top 5 by downloads)
-        const trending = mcps.slice(0, 5).map((m: any) => ({
+        const trending = mcps.slice(0, 5).map((m: SupabaseMCP) => ({
           id: m.id,
           name: m.name,
           slug: m.slug,
@@ -53,7 +96,7 @@ export async function GET() {
 
         // Get categories with counts
         const categoryMap: Record<string, number> = {};
-        mcps.forEach((m: any) => {
+        mcps.forEach((m: SupabaseMCP) => {
           const cat = m.category || 'Other';
           categoryMap[cat] = (categoryMap[cat] || 0) + 1;
         });
@@ -67,12 +110,12 @@ export async function GET() {
             categories: Object.keys(categoryMap),
           },
           trending,
-          categories: categories.map((c: any) => ({
+          categories: categories.map((c: SupabaseCategory) => ({
             slug: c.slug,
             name: c.name,
             icon: c.icon,
           })),
-          recent: mcps.slice(0, 10).map((m: any) => ({
+          recent: mcps.slice(0, 10).map((m: SupabaseMCP) => ({
             id: m.id,
             name: m.name,
             slug: m.slug,
@@ -89,6 +132,9 @@ export async function GET() {
 
         response.headers.set('Access-Control-Allow-Origin', '*');
         response.headers.set('Cache-Control', 'public, max-age=60, stale-while-revalidate=300');
+        // Store in cache before returning
+        const respClone = response.clone();
+        respClone.text().then(text => { _cache.data = text; _cache.ts = Date.now(); });
         return response;
       } else {
         console.error('[Marketplace API] Supabase error:', mcpsRes.status, await mcpsRes.text());
@@ -102,8 +148,8 @@ export async function GET() {
       localMcps = JSON.parse(fs.readFileSync(dbPath, 'utf8'));
     }
 
-    const categories = Array.from(new Set(localMcps.map((m: any) => m.category || 'Other')));
-    const trending = localMcps.slice(0, 5).map((m: any) => ({
+    const categories = Array.from(new Set(localMcps.map((m: LocalMCP) => m.category || 'Other')));
+    const trending = localMcps.slice(0, 5).map((m: LocalMCP) => ({
       id: m.slug,
       name: m.name,
       slug: m.slug,
@@ -116,7 +162,7 @@ export async function GET() {
       success: true,
       marketplace: {
         total_mcp_servers: localMcps.length,
-        total_skills: localMcps.reduce((acc: number, m: any) => acc + (m.tools?.length || 0), 0),
+        total_skills: localMcps.reduce((acc: number, m: LocalMCP) => acc + (m.tools?.length || 0), 0),
         categories: categories as string[]
       },
       trending,

@@ -1,19 +1,38 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
-import { Menu, X, Cpu, Brain, Globe, Wallet, ChevronDown } from 'lucide-react';
+import dynamic from 'next/dynamic';
+import { Menu, X, Wallet, ChevronDown } from 'lucide-react';
+
+const MotionDiv = dynamic(
+  () => import('framer-motion').then(m => m.motion.div),
+  { ssr: false }
+);
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [productsOpen, setProductsOpen] = useState(false);
+  const productsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (productsRef.current && !productsRef.current.contains(e.target as Node)) {
+        setProductsOpen(false);
+      }
+    };
+    if (productsOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+      return () => document.removeEventListener('mousedown', handleClickOutside);
+    }
+  }, [productsOpen]);
 
   const products = [
     { name: 'MCP Marketplace', href: '/mcps', icon: '🔌' },
@@ -23,14 +42,12 @@ export default function Navigation() {
   ];
 
   const navItems = [
-    { 
-      name: 'Products', 
-      href: '#',
-      dropdown: products
-    },
-    { name: 'Pricing', href: '/pricing' },
-    { name: 'Docs', href: '/docs' },
-    { name: 'Blog', href: '/blog' },
+    { name: 'Agents', href: '/agents', dropdown: undefined },
+    { name: 'Services', href: '/services', dropdown: undefined },
+    { name: 'Docs', href: '/docs', dropdown: undefined },
+    { name: 'Pricing', href: '/pricing', dropdown: undefined },
+    { name: 'Blog', href: '/blog', dropdown: undefined },
+    { name: 'Roadmap', href: '/roadmap', dropdown: undefined },
   ];
 
   return (
@@ -52,20 +69,30 @@ export default function Navigation() {
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-gradient-to-br from-green-500 to-emerald-600 rounded-lg flex items-center justify-center">
+              <div className="w-8 h-8 bg-gradient-to-br from-violet-600 to-fuchsia-600 rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-lg">O</span>
               </div>
               <span className="text-xl font-bold text-white hidden sm:block">OMA-AI</span>
             </Link>
 
             {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center gap-1">
+            <div className="hidden md:flex items-center gap-2">
               {/* Products Dropdown */}
-              <div className="relative group">
-                <button className="px-3 py-2 text-gray-300 hover:text-white flex items-center gap-1">
-                  Products <ChevronDown className="w-4 h-4" />
+              <div className="relative" ref={productsRef}>
+                <button
+                  className="px-4 py-2.5 text-gray-300 hover:text-white flex items-center gap-1 rounded-lg hover:bg-zinc-800/50"
+                  aria-expanded={productsOpen}
+                  aria-haspopup="true"
+                  onClick={() => setProductsOpen(!productsOpen)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Escape') setProductsOpen(false);
+                  }}
+                >
+                  Products <ChevronDown className={`w-4 h-4 transition-transform ${productsOpen ? 'rotate-180' : ''}`} />
                 </button>
-                <div className="absolute top-full left-0 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
+                <div
+                  className={`absolute top-full left-0 pt-2 transition-all ${productsOpen ? "opacity-100 visible" : "opacity-0 invisible"}`}
+                >
                   <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-2 shadow-xl min-w-48">
                     {products.map((p) => (
                       <Link key={p.href} href={p.href} className="flex items-center gap-3 px-4 py-3 text-gray-300 hover:text-white hover:bg-zinc-800 rounded-lg">
@@ -78,7 +105,7 @@ export default function Navigation() {
               </div>
               
               {navItems.filter(n => !n.dropdown).map((item) => (
-                <Link key={item.href} href={item.href} className="px-3 py-2 text-gray-300 hover:text-white hover:bg-zinc-800/50 rounded-lg">
+                <Link key={item.href} href={item.href} className="px-4 py-2.5 text-zinc-400 hover:text-white relative after:absolute after:bottom-0 after:left-4 after:right-4 after:h-0.5 after:bg-primary after:scale-x-0 hover:after:scale-x-100 after:transition-transform rounded-lg hover:bg-zinc-800/50 transition-colors">
                   {item.name}
                 </Link>
               ))}
@@ -90,17 +117,18 @@ export default function Navigation() {
                 <Wallet className="w-4 h-4" />
                 Connect
               </Link>
-              <Link href="/mcps" className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 font-medium">
-                Explore MCPs
+              <Link href="/mcps" className="px-5 py-2.5 bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white rounded-lg hover:from-violet-500 hover:to-fuchsia-500 font-medium transition-all">
+                Explore Marketplace
               </Link>
             </div>
           </div>
         </div>
 
         {/* Mobile Menu */}
-        <motion.div
-          initial={{ height: 0, opacity: 0 }}
-          animate={{ height: isOpen ? 'auto' : 0, opacity: isOpen ? 1 : 0 }}
+        <MotionDiv
+          initial={false}
+          animate={{ maxHeight: isOpen ? 600 : 0, opacity: isOpen ? 1 : 0 }}
+          transition={{ duration: 0.25, ease: 'easeInOut' }}
           className="md:hidden overflow-hidden bg-zinc-950 border-b border-zinc-800"
         >
           <div className="container mx-auto px-4 py-4 space-y-2">
@@ -122,11 +150,11 @@ export default function Navigation() {
             <Link href="/wallet" className="flex items-center gap-2 px-4 py-3 text-gray-300 hover:text-white">
               <Wallet className="w-4 h-4" /> Connect Wallet
             </Link>
-            <Link href="/mcps" className="block px-4 py-3 bg-green-600 text-white rounded-lg text-center font-medium" onClick={() => setIsOpen(false)}>
-              Explore MCPs
+            <Link href="/mcps" className="block px-4 py-3 bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white rounded-lg text-center font-medium" onClick={() => setIsOpen(false)}>
+              Explore Marketplace
             </Link>
           </div>
-        </motion.div>
+        </MotionDiv>
       </nav>
     </>
   );

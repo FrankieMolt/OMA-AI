@@ -11,11 +11,10 @@ export function WalletConnect() {
   }, []);
 
   const checkWalletConnection = async () => {
-    if (typeof window !== 'undefined' && (window as any).ethereum) {
+    const ethereum = typeof window !== 'undefined' ? (window as Window & { ethereum?: { request: (req: { method: string }) => Promise<string[]> } }).ethereum : undefined;
+    if (ethereum) {
       try {
-        const accounts = await (window as any).ethereum.request({
-          method: 'eth_accounts',
-        });
+        const accounts = await ethereum.request({ method: 'eth_accounts' });
         if (accounts.length > 0) {
           setAddress(accounts[0]);
         }
@@ -26,7 +25,8 @@ export function WalletConnect() {
   };
 
   const handleConnect = async () => {
-    if (typeof window === 'undefined' || !(window as any).ethereum) {
+    const ethereum = typeof window !== 'undefined' ? (window as Window & { ethereum?: { request: (req: { method: string }) => Promise<string[]> } }).ethereum : undefined;
+    if (!ethereum) {
       alert('Please install MetaMask or another wallet');
       return;
     }
@@ -34,7 +34,7 @@ export function WalletConnect() {
     setLoading(true);
 
     try {
-      const accounts = await (window as any).ethereum.request({
+      const accounts = await ethereum.request({
         method: 'eth_requestAccounts',
       });
 
@@ -43,6 +43,7 @@ export function WalletConnect() {
         // Store in localStorage
         localStorage.setItem('walletAddress', accounts[0]);
       }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       if (error.code === 4001) {
         // User rejected request

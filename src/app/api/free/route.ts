@@ -23,31 +23,39 @@ const quotes = [
 ];
 
 export async function GET(request: Request) {
-  const { searchParams } = new URL(request.url);
-  const type = searchParams.get("type") || "all";
+  try {
+    const { searchParams } = new URL(request.url);
+    const type = searchParams.get("type") || "all";
 
-  const joke = jokes[Math.floor(Math.random() * jokes.length)];
-  const quote = quotes[Math.floor(Math.random() * quotes.length)];
+    const joke = jokes[Math.floor(Math.random() * jokes.length)];
+    const quote = quotes[Math.floor(Math.random() * quotes.length)];
 
-  if (type === "joke") {
+    if (type === "joke") {
+      return NextResponse.json({ 
+        success: true, 
+        data: { joke, timestamp: new Date().toISOString() },
+        note: "This API is for testing purposes only"
+      });
+    }
+    
+    if (type === "quote") {
+      return NextResponse.json({ 
+        success: true, 
+        data: { quote, timestamp: new Date().toISOString() },
+        note: "This API is for testing purposes only"
+      });
+    }
+
     return NextResponse.json({ 
       success: true, 
-      data: { joke, timestamp: new Date().toISOString() },
+      data: { joke, quote, timestamp: new Date().toISOString() },
       note: "This API is for testing purposes only"
     });
+  } catch (error) {
+    console.error('[GET /api/free] error:', error instanceof Error ? error.message : String(error));
+    return NextResponse.json(
+      { success: false, error: 'Internal server error' },
+      { status: 500 }
+    );
   }
-  
-  if (type === "quote") {
-    return NextResponse.json({ 
-      success: true, 
-      data: { quote, timestamp: new Date().toISOString() },
-      note: "This API is for testing purposes only"
-    });
-  }
-
-  return NextResponse.json({ 
-    success: true, 
-    data: { joke, quote, timestamp: new Date().toISOString() },
-    note: "This API is for testing purposes only"
-  });
 }

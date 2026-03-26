@@ -52,6 +52,7 @@ export async function checkCredits(
       };
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const user = keyData.users as any;
     const userCredits = user.credits || 0;
 
@@ -68,6 +69,7 @@ export async function checkCredits(
       creditsNeeded
     };
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     logError('credits/checkCredits', error);
     return {
@@ -101,6 +103,7 @@ export async function deductCredits(
       return { success: false };
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const user = keyData.users as any;
     const userId = user.id;
     const currentCredits = user.credits || 0;
@@ -134,6 +137,7 @@ export async function deductCredits(
       remainingCredits: currentCredits - creditsNeeded
     };
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     logError('credits/deductCredits', error);
     return { success: false };

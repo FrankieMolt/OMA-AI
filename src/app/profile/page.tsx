@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase/client';
 import { WalletConnect } from '@/components/wallet/WalletConnect';
-import { User, Mail, Globe, Image as ImageIcon, Save, LogOut } from 'lucide-react';
+import { User, Mail, Globe, Image as Save, LogOut } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -14,6 +14,7 @@ export default function ProfilePage() {
   const [website, setWebsite] = useState('');
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState({ type: '', text: '' });
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [user, setUser] = useState<any>(null);
 
   useEffect(() => {
@@ -54,6 +55,7 @@ export default function ProfilePage() {
       } else {
         setMessage({ type: 'success', text: 'Profile saved successfully!' });
       }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       setMessage({ type: 'error', text: error.message || 'An error occurred' });
     } finally {

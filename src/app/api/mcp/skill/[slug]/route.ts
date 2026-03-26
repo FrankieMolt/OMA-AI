@@ -229,8 +229,8 @@ export async function GET(
           data: { ...mcp, tools: tools || [] },
         });
       }
-    } catch (error) {
-      console.log('Supabase not available, using fallback data');
+    } catch {
+      // Supabase not available, using fallback data
     }
   }
 

@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import { GlassCard } from '@/components/ui/GlassCard';
-import { Wallet, Zap, CreditCard, Check, ArrowRight, Shield, DollarSign, Box, Sparkles } from 'lucide-react';
+import { Zap, CreditCard, ArrowRight, DollarSign, Box, Sparkles } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Buy Credits - OMA-AI Credits System',

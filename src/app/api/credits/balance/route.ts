@@ -1,5 +1,23 @@
 import { NextResponse } from 'next/server';
-import { supabase } from '@/lib/supabase/client';
+import { supabase, supabaseService } from '@/lib/supabase/client';
+
+// Helper: extract and verify authenticated user from Bearer token
+async function getAuthenticatedUser(request: Request) {
+  const authHeader = request.headers.get('Authorization');
+  if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    return null;
+  }
+  const token = authHeader.slice(7);
+  try {
+    const { data: { user }, error } = await supabaseService.auth.getUser(token);
+    if (error || !user) return null;
+    return user;
+  } catch {
+    return null;
+  }
+}
+
+const FRONTEND_URL = process.env.FRONTEND_URL || 'https://www.oma-ai.com';
 
 export async function GET(request: Request) {
   try {
@@ -7,10 +25,12 @@ export async function GET(request: Request) {
     const userId = searchParams.get('userId');
 
     if (!userId) {
-      return NextResponse.json(
+      const response = NextResponse.json(
         { error: 'User ID required' },
         { status: 400 }
       );
+      response.headers.set('Access-Control-Allow-Origin', FRONTEND_URL);
+      return response;
     }
 
     // Check if user exists
@@ -72,9 +92,18 @@ export async function GET(request: Request) {
   }
 }
 
-// Update balance (for admin use or automatic updates)
+// Update balance (for authenticated users - self or admin)
 export async function POST(request: Request) {
   try {
+    // Auth check: require valid Bearer token
+    const authUser = await getAuthenticatedUser(request);
+    if (!authUser) {
+      return NextResponse.json(
+        { error: 'Unauthorized - valid session required' },
+        { status: 401 }
+      );
+    }
+
     const body = await request.json();
     const { userId, amount, type, description } = body;
 
@@ -94,7 +123,7 @@ export async function POST(request: Request) {
     }
 
     // Get current balance
-    const { data: user, error: fetchError } = await supabase
+    const { data: user, error: fetchError } = await supabaseService
       .from('users')
       .select('credits_balance')
       .eq('id', userId)
@@ -120,7 +149,7 @@ export async function POST(request: Request) {
     }
 
     // Update balance
-    const { data: updatedUser, error: updateError } = await supabase
+    const { error: updateError } = await supabaseService
       .from('users')
       .update({ 
         credits_balance: newBalance,
@@ -139,7 +168,7 @@ export async function POST(request: Request) {
     }
 
     // Log transaction
-    const { error: logError } = await supabase
+    const { error: logError } = await supabaseService
       .from('transactions')
       .insert({
         user_id: userId,

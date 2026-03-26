@@ -70,7 +70,7 @@ export async function POST(request: Request) {
       // If external email service is configured, attempt delivery
       if (process.env.RESEND_API_KEY) {
         // External delivery logic would go here
-        console.log(`[Contact API] Delivered message ${submission.id} via Resend`);
+        // TODO: Implement Resend API delivery
       }
     } catch (storageError) {
       console.error('[Contact API] Failed to store message:', storageError);

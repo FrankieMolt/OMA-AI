@@ -14,6 +14,7 @@ const supabase = createClient(
  */
 export async function authenticate(
   request: NextRequest
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 ): Promise<{ user: any; error: NextResponse | null }> {
   try {
     // Check for API key in header
@@ -61,7 +62,7 @@ export async function authenticate(
             user = data;
           }
         }
-      } catch (e) {
+      } catch {
         // Invalid token
       }
     }
@@ -80,6 +81,7 @@ export async function authenticate(
     }
 
     // Check if user is banned
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     if ((user as any).banned_at) {
       return { 
         user: null, 
@@ -112,9 +114,10 @@ export async function authenticate(
  * 
  * Attaches user if authenticated, but doesn't require it
  */
+ 
 export async function optionalAuth(
   request: NextRequest
-): Promise<{ user: any | null }> {
+): Promise<{ user: any | null }> { // eslint-disable-line @typescript-eslint/no-explicit-any
   try {
     const apiKey = request.headers.get('x-api-key');
     const authHeader = request.headers.get('authorization');
@@ -127,7 +130,7 @@ export async function optionalAuth(
       const data = encoder.encode(apiKey);
       const hashBuffer = await crypto.subtle.digest('SHA-256', data.buffer as ArrayBuffer);
       const hashArray = Array.from(new Uint8Array(hashBuffer));
-      const keyHash = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+      const keyHash = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');  
 
       const { data: keyData } = await supabase
         .from('api_keys')
@@ -151,15 +154,15 @@ export async function optionalAuth(
           
           if (data) user = data;
         }
-      } catch (e) {}
+      } catch {}
     }
 
     return { user };
 
-  } catch (error) {
+  } catch {
     return { user: null };
   }
-}
+}  
 
 /**
  * Require Tier
@@ -169,6 +172,7 @@ export async function optionalAuth(
 export function requireTier(minTier: string) {
   const tierHierarchy = ['free', 'starter', 'pro', 'enterprise'];
   
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return (user: any): NextResponse | null => {
     if (!user) {
       return NextResponse.json(
@@ -177,6 +181,7 @@ export function requireTier(minTier: string) {
       );
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const userTierIndex = tierHierarchy.indexOf((user as any).tier || 'free');
     const minTierIndex = tierHierarchy.indexOf(minTier);
 
@@ -185,6 +190,7 @@ export function requireTier(minTier: string) {
         { 
           error: 'Upgrade required',
           message: `This feature requires ${minTier} tier or higher`,
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           current_tier: (user as any).tier,
           required_tier: minTier
         },

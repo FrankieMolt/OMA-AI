@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -34,7 +35,7 @@ export default function Contact() {
         const data = await response.json();
         setError(data.error || 'Submission failed. Please try again.');
       }
-    } catch (err) {
+    } catch {
       setError('Network error. Please try again later.');
     } finally {
       setSubmitting(false);
@@ -42,7 +43,7 @@ export default function Contact() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+    <div className="min-h-screen bg-[#0a0a0f]">
       <div className="container mx-auto px-4 py-16">
         {/* Header */}
         <div className="text-center mb-16">
@@ -50,7 +51,7 @@ export default function Contact() {
             Contact Us
           </h1>
           <p className="text-xl text-purple-200 max-w-2xl mx-auto">
-            Have questions? Need support? Want to partner? We're here to help!
+            Have questions? Need support? Want to partner? We&apos;re here to help!
           </p>
         </div>
 
@@ -86,7 +87,7 @@ export default function Contact() {
         {!submitted && (
           <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
             {/* Left: Contact Form */}
-            <div className="bg-slate-800 rounded-2xl p-8 shadow-xl">
+            <div className="bg-zinc-800 rounded-2xl p-8 shadow-xl">
               <h2 className="text-2xl font-bold text-white mb-6">
                 Send us a Message
               </h2>
@@ -105,9 +106,10 @@ export default function Contact() {
                   <select aria-label="Select option"
                     id="category"
                     value={formData.category}
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
                     onChange={(e) => setFormData({ ...formData, category: e.target.value as any })}
                     required
-                    className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
+                    className="w-full px-4 py-3 bg-zinc-700 border border-zinc-600 rounded-lg text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
                   >
                     <option value="general">General Inquiry</option>
                     <option value="support">Technical Support</option>
@@ -130,7 +132,7 @@ export default function Contact() {
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       required
                       placeholder="Your name"
-                      className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
+                      className="w-full px-4 py-3 bg-zinc-700 border border-zinc-600 rounded-lg text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
                     />
                   </div>
 
@@ -145,7 +147,7 @@ export default function Contact() {
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       required
                       placeholder="your@email.com"
-                      className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
+                      className="w-full px-4 py-3 bg-zinc-700 border border-zinc-600 rounded-lg text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
                     />
                   </div>
                 </div>
@@ -161,7 +163,7 @@ export default function Contact() {
                     onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                     required
                     placeholder="Brief summary of your message"
-                    className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
+                    className="w-full px-4 py-3 bg-zinc-700 border border-zinc-600 rounded-lg text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
                   />
                 </div>
 
@@ -176,7 +178,7 @@ export default function Contact() {
                     required
                     rows={6}
                     placeholder="Describe your question or issue in detail..."
-                    className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all resize-none"
+                    className="w-full px-4 py-3 bg-zinc-700 border border-zinc-600 rounded-lg text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all resize-none"
                   />
                 </div>
 
@@ -189,7 +191,7 @@ export default function Contact() {
                 </button>
               </form>
 
-              <div className="mt-6 pt-6 border-t border-slate-700">
+              <div className="mt-6 pt-6 border-t border-zinc-700">
                 <p className="text-sm text-purple-300">
                   <span className="font-semibold text-purple-200">Response Time:</span> Typically within 24 hours
                 </p>
@@ -202,127 +204,107 @@ export default function Contact() {
             {/* Right: Contact Info & Resources */}
             <div className="space-y-6">
               {/* Quick Links */}
-              <div className="bg-slate-800 rounded-xl p-6 shadow-lg">
+              <div className="bg-zinc-800 rounded-xl p-6 shadow-lg">
                 <h3 className="text-xl font-bold text-white mb-4">
                   Quick Links
                 </h3>
                 <div className="space-y-3">
-                  <a
-                    href="/faq"
+                  <Link href="/faq"
                     className="flex items-center gap-3 text-purple-200 hover:text-purple-100 transition-colors group"
-                  >
-                    <span className="text-2xl">❓</span>
+                  ><span className="text-2xl">❓</span>
                     <span className="group-hover:underline">Frequently Asked Questions</span>
-                  </a>
-                  <a
-                    href="/blog/quick-start-5-minutes"
+                  </Link>
+                  <Link href="/blog/quick-start-5-minutes"
                     className="flex items-center gap-3 text-purple-200 hover:text-purple-100 transition-colors group"
-                  >
-                    <span className="text-2xl">🚀</span>
+                  ><span className="text-2xl">🚀</span>
                     <span className="group-hover:underline">Quick Start Guide (5 minutes)</span>
-                  </a>
-                  <a
-                    href="/api/docs"
+                  </Link>
+                  <Link href="/api/docs"
                     className="flex items-center gap-3 text-purple-200 hover:text-purple-100 transition-colors group"
-                  >
-                    <span className="text-2xl">📚</span>
+                  ><span className="text-2xl">📚</span>
                     <span className="group-hover:underline">API Documentation</span>
-                  </a>
-                  <a
-                    href="https://github.com/oma-ai/oma-ai/issues"
+                  </Link>
+                  <Link href="https://github.com/oma-ai/issues"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-3 text-purple-200 hover:text-purple-100 transition-colors group"
-                  >
-                    <span className="text-2xl">🐛</span>
+                  ><span className="text-2xl">🐛</span>
                     <span className="group-hover:underline">Report a Bug (GitHub)</span>
-                  </a>
+                  </Link>
                 </div>
               </div>
 
               {/* Community Channels */}
-              <div className="bg-slate-800 rounded-xl p-6 shadow-lg">
+              <div className="bg-zinc-800 rounded-xl p-6 shadow-lg">
                 <h3 className="text-xl font-bold text-white mb-4">
                   Join Our Community
                 </h3>
                 <div className="space-y-3">
-                  <a
-                    href="https://discord.gg/oma-ai"
+                  <Link href="https://discord.gg/oma-ai"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-3 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-3 rounded-lg transition-colors"
-                  >
-                    <span className="text-2xl">💬</span>
+                  ><span className="text-2xl">💬</span>
                     <span>Join Discord Server</span>
-                  </a>
-                  <a
-                    href="https://twitter.com/oma_ai"
+                  </Link>
+                  <Link href="https://twitter.com/oma_ai"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-3 bg-sky-600 hover:bg-sky-700 text-white px-4 py-3 rounded-lg transition-colors"
-                  >
-                    <span className="text-2xl">🐦</span>
+                  ><span className="text-2xl">🐦</span>
                     <span>Follow on Twitter/X</span>
-                  </a>
-                  <a
-                    href="https://github.com/oma-ai/oma-ai"
+                  </Link>
+                  <Link href="https://github.com/oma-ai"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-3 bg-gray-700 hover:bg-gray-600 text-white px-4 py-3 rounded-lg transition-colors"
-                  >
-                    <span className="text-2xl">🐙</span>
+                  ><span className="text-2xl">🐙</span>
                     <span>GitHub Repository</span>
-                  </a>
+                  </Link>
                 </div>
               </div>
 
               {/* MCP Resources */}
-              <div className="bg-slate-800 rounded-xl p-6 shadow-lg">
+              <div className="bg-zinc-800 rounded-xl p-6 shadow-lg">
                 <h3 className="text-xl font-bold text-white mb-4">
                   MCP Resources
                 </h3>
                 <div className="space-y-3">
-                  <a
-                    href="/mcps"
+                  <Link href="/mcps"
                     className="flex items-center gap-3 text-purple-200 hover:text-purple-100 transition-colors group"
-                  >
-                    <span className="text-2xl">📦</span>
+                  ><span className="text-2xl">📦</span>
                     <span className="group-hover:underline">Browse MCP Marketplace</span>
-                  </a>
-                  <a
-                    href="/publish"
+                  </Link>
+                  <Link href="/publish"
                     className="flex items-center gap-3 text-purple-200 hover:text-purple-100 transition-colors group"
-                  >
-                    <span className="text-2xl">📝</span>
+                  ><span className="text-2xl">📝</span>
                     <span className="group-hover:underline">Publish Your MCP</span>
-                  </a>
-                  <a
-                    href="/docs/blog/local-mcp-installation-guides"
+                  </Link>
+                  <Link href="/blog/quick-start-5-minutes"
                     className="flex items-center gap-3 text-purple-200 hover:text-purple-100 transition-colors group"
-                  >
-                    <span className="text-2xl">🔧</span>
+                  ><span className="text-2xl">🔧</span>
                     <span className="group-hover:underline">Install MCPs Locally</span>
-                  </a>
+                  </Link>
                 </div>
               </div>
 
               {/* Developer Support */}
-              <div className="bg-gradient-to-br from-purple-900/50 to-slate-900/50 rounded-xl p-6 shadow-lg border border-purple-700/50">
+              <div className="bg-gradient-to-br from-purple-900/50 to-zinc-900/50 rounded-xl p-6 shadow-lg border border-purple-700/50">
                 <h3 className="text-xl font-bold text-white mb-4">
                   Developer Support
                 </h3>
                 <div className="space-y-3 text-sm text-purple-200">
                   <p>
                     <span className="font-semibold text-purple-100">Documentation:</span>
-                    <a href="/api/docs" className="text-purple-400 hover:text-purple-300 underline ml-1">docs.oma-ai.com</a>
+                    <Link href="/api/docs" className="text-purple-400 hover:text-purple-300 underline ml-1">docs.oma-ai.com</Link>
                   </p>
                   <p>
                     <span className="font-semibold text-purple-100">API Status:</span>
-                    <a href="/api/health" className="text-purple-400 hover:text-purple-300 underline ml-1">status.oma-ai.com</a>
+                    <Link href="/api/health" className="text-purple-400 hover:text-purple-300 underline ml-1">status.oma-ai.com</Link>
                   </p>
                   <p>
                     <span className="font-semibold text-purple-100">Email Support:</span>
-                    <a href="mailto:support@oma-ai.com" className="text-purple-400 hover:text-purple-300 underline ml-1">support@oma-ai.com</a>
+                    <Link href="mailto:support@oma-ai.com" className="text-purple-400 hover:text-purple-300 underline ml-1">support@oma-ai.com</Link>
                   </p>
                   <p>
                     <span className="font-semibold text-purple-100">Response Time:</span>

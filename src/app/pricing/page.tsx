@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
-import { Check, X, Zap, Shield, Star, Server, Cpu, Wallet, Globe, ArrowRight, ExternalLink } from 'lucide-react';
+import { Check, X, Zap, Star, Server, Cpu, Wallet, ArrowRight } from 'lucide-react';
 import { GlassCard, GlassCardPurple } from '@/components/ui/GlassCard';
+import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'Pricing | OMA-AI - Open Market Access',
@@ -201,7 +202,7 @@ const comparisonData = [
 
 export default function PricingPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 pt-24 pb-12">
+    <div className="min-h-screen bg-[#0a0a0f] pt-24 pb-12">
       <div className="container mx-auto px-4 max-w-7xl">
         {/* Header */}
         <div className="text-center mb-16">
@@ -284,11 +285,11 @@ export default function PricingPage() {
                     <span className="text-white font-mono">{tier.outputPrice}</span>
                   </div>
                 </div>
-                <div className="border-t border-slate-700 pt-4">
+                <div className="border-t border-zinc-700 pt-4">
                   <p className="text-xs text-gray-500 mb-2">Models</p>
                   <div className="flex flex-wrap gap-2">
                     {tier.models.map((model) => (
-                      <span key={model} className="px-2 py-1 bg-slate-800 rounded text-xs text-gray-300">
+                      <span key={model} className="px-2 py-1 bg-zinc-800 rounded text-xs text-gray-300">
                         {model}
                       </span>
                     ))}
@@ -358,7 +359,7 @@ export default function PricingPage() {
                   <div className="text-4xl font-bold text-amber-300 mt-2">{plan.price}</div>
                   <p className="text-sm text-gray-400 mt-1">{plan.description}</p>
                 </div>
-                <div className="bg-slate-800/50 rounded-lg p-3 mb-4">
+                <div className="bg-zinc-800/50 rounded-lg p-3 mb-4">
                   <p className="text-xs text-gray-500 mb-1">Compare to</p>
                   <p className="text-sm text-gray-300">{plan.compareTo}</p>
                 </div>
@@ -416,7 +417,7 @@ export default function PricingPage() {
             <div className="overflow-x-auto">
               <table className="w-full min-w-[700px]">
                 <thead>
-                  <tr className="border-b border-slate-700">
+                  <tr className="border-b border-zinc-700">
                     <th className="text-left px-6 py-4 text-gray-400 font-medium">Feature</th>
                     <th className="text-center px-6 py-4">
                       <span className="text-purple-300 font-bold">OMA-AI</span>
@@ -426,7 +427,7 @@ export default function PricingPage() {
                     <th className="text-center px-6 py-4 text-gray-400">OpenAPI</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-700">
+                <tbody className="divide-y divide-zinc-700">
                   {comparisonData.map((row) => (
                     <tr key={row.feature}>
                       <td className="px-6 py-4 text-white font-medium">{row.feature}</td>
@@ -492,7 +493,7 @@ export default function PricingPage() {
               </p>
             </GlassCard>
             <GlassCard className="p-6">
-              <h3 className="text-lg font-semibold text-white mb-2">What's included in GPU compute?</h3>
+              <h3 className="text-lg font-semibold text-white mb-2">What&apos;s included in GPU compute?</h3>
               <p className="text-gray-300 leading-relaxed">
                 Instant access to H100, A100, and RTX 4090 GPUs with 10-20% markup on provider pricing. Includes serverless inference at $0.003/request, auto-scaling, and global CDN delivery.
               </p>
@@ -522,20 +523,16 @@ export default function PricingPage() {
               Build, deploy, and monetize AI agents with the complete OMA-AI platform.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href="/mcps"
+              <Link href="/mcps"
                 className="inline-flex items-center gap-2 px-8 py-3 bg-purple-600 hover:bg-purple-700 text-white font-bold rounded-lg transition-colors"
-              >
-                Browse MCPs
+              >Explore Marketplace
                 <ArrowRight className="w-5 h-5" />
-              </a>
-              <a
-                href="/publish"
-                className="inline-flex items-center gap-2 px-8 py-3 bg-slate-700 hover:bg-slate-600 text-white font-bold rounded-lg transition-colors"
-              >
-                Publish Your MCP
+              </Link>
+              <Link href="/publish"
+                className="inline-flex items-center gap-2 px-8 py-3 bg-zinc-700 hover:bg-zinc-600 text-white font-bold rounded-lg transition-colors"
+              >Publish Your MCP
                 <ArrowRight className="w-5 h-5" />
-              </a>
+              </Link>
             </div>
           </GlassCardPurple>
         </div>

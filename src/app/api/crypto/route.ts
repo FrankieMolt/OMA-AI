@@ -58,6 +58,7 @@ export async function GET(request: Request) {
       last_updated: new Date().toISOString(),
       source: 'coingecko'
     });
+    // Intentionally public - crypto price data is not sensitive
     responseJson.headers.set('Access-Control-Allow-Origin', '*');
     responseJson.headers.set('Cache-Control', 'public, max-age=60, stale-while-revalidate=300');
     return responseJson;
@@ -72,6 +73,7 @@ export async function GET(request: Request) {
       prices: {},
       last_updated: new Date().toISOString()
     }, { status: 503 });
+    // Intentionally public - crypto price data is not sensitive
     responseJson.headers.set('Access-Control-Allow-Origin', '*');
     return responseJson;
   }

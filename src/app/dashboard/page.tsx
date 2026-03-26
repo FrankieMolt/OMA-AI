@@ -50,7 +50,6 @@ export default async function DashboardPage() {
     : 0;
 
   const userName = user.user_metadata?.name || user.email?.split('@')[0] || 'User';
-  const userAvatar = user.user_metadata?.avatar_url || null;
 
   return (
     <div className="min-h-screen bg-zinc-950">
@@ -246,7 +245,7 @@ export default async function DashboardPage() {
             <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6">
               <h2 className="text-lg font-bold text-white mb-4">Quick Links</h2>
               <div className="space-y-2">
-                <QuickLink href="/mcps" icon={Zap}>Browse Marketplace</QuickLink>
+                <QuickLink href="/mcps" icon={Zap}>Explore Marketplace</QuickLink>
                 <QuickLink href="/publish" icon={ArrowRight}>Publish MCP</QuickLink>
                 <QuickLink href="/profile" icon={Settings}>Settings</QuickLink>
                 <QuickLink href="/api/docs" icon={Clock}>API Documentation</QuickLink>
@@ -268,6 +267,7 @@ function StatCard({
 }: {
   title: string;
   value: string | number;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   icon: any;
   color: string;
   bgColor: string;
@@ -291,6 +291,7 @@ function QuickLink({
   children,
 }: {
   href: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   icon: any;
   children: React.ReactNode;
 }) {

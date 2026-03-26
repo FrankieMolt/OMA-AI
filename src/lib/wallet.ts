@@ -30,6 +30,7 @@ export interface WalletInfo {
  */
 export function hasWallet(): boolean {
   if (typeof window === 'undefined') return false;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return !!(window as any).ethereum;
 }
 
@@ -41,10 +42,11 @@ export async function connectWallet(): Promise<WalletInfo> {
     throw new Error('Window not available');
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const ethereum = (window as any).ethereum;
   if (!ethereum) {
     throw new Error('No wallet found. Please install MetaMask or Coinbase Wallet.');
-  }
+  }  
 
   try {
     // Request account access
@@ -60,11 +62,12 @@ export async function connectWallet(): Promise<WalletInfo> {
 
     // Switch to Base if needed
     if (chainId !== 8453) {
-      try {
+      try {  
         await ethereum.request({
           method: 'wallet_switchEthereumChain',
-          params: [{ chainId: BASE_CHAIN_ID }]
+          params: [{ chainId: BASE_CHAIN_ID }]  
         });
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (switchError: any) {
         // Chain not added, prompt to add
         if (switchError.code === 4902) {
@@ -75,17 +78,19 @@ export async function connectWallet(): Promise<WalletInfo> {
 
     return {
       address: accounts[0],
-      chainId,
+      chainId,  
       network: chainId === 8453 ? 'base' : 'unknown'
     };
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     throw new Error(`Failed to connect: ${error.message}`);
   }
 }
-
+  
 /**
  * Add Base network to wallet
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 async function addBaseNetwork(ethereum: any) {
   await ethereum.request({
     method: 'wallet_addEthereumChain',
@@ -104,11 +109,12 @@ async function addBaseNetwork(ethereum: any) {
 }
 
 /**
- * Get USDC balance
+ * Get USDC balance // eslint-disable-line @typescript-eslint/no-explicit-any
  */
 export async function getUSDCBalance(address: string): Promise<string> {
   if (typeof window === 'undefined') return '0';
   
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const ethereum = (window as any).ethereum;
   if (!ethereum) return '0';
 
@@ -125,29 +131,28 @@ export async function getUSDCBalance(address: string): Promise<string> {
   }
 }
 
-/**
+/** // eslint-disable-line @typescript-eslint/no-explicit-any
  * Listen for account changes
  */
 export function onAccountChange(callback: (accounts: string[]) => void) {
   if (typeof window === 'undefined') return;
   
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const ethereum = (window as any).ethereum;
   if (ethereum) {
     ethereum.on('accountsChanged', callback);
   }
 }
-
+  
 /**
  * Listen for chain changes
  */
 export function onChainChange(callback: (chainId: string) => void) {
   if (typeof window === 'undefined') return;
   
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const ethereum = (window as any).ethereum;
   if (ethereum) {
     ethereum.on('chainChanged', callback);
   }
 }
-
-// Simple ethers import for balance check
-import { ethers as ethersLib } from 'ethers';

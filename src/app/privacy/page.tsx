@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import { GlassCard } from '@/components/ui/GlassCard';
 import { Shield, Check, X, ExternalLink, FileText, AlertTriangle } from 'lucide-react';
+import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'Privacy Policy | OMA-AI - Premier MCP Marketplace',
@@ -9,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function PrivacyPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 pt-24 pb-12">
+    <div className="min-h-screen bg-[#0a0a0f] pt-24 pb-12">
       <div className="container mx-auto px-4 max-w-4xl">
         {/* Header */}
         <div className="text-center mb-16">
@@ -57,7 +58,7 @@ export default function PrivacyPage() {
                 <div className="flex gap-3">
                   <AlertTriangle className="w-5 h-5 text-yellow-400 flex-shrink-0" />
                   <div className="text-yellow-100 text-sm">
-                    <strong>What We DON'T Collect:</strong> Private keys, full IP addresses (hashed), precise location, browser fingerprinting, or unnecessary personal data.
+                    <strong>What We DON&apos;T Collect:</strong> Private keys, full IP addresses (hashed), precise location, browser fingerprinting, or unnecessary personal data.
                   </div>
                 </div>
               </GlassCard>
@@ -124,7 +125,7 @@ export default function PrivacyPage() {
                 <li>With your explicit consent (partners, analytics)</li>
               </ul>
               <p className="mt-4">
-                We use <strong className="text-white">aggregated analytics</strong> for insights, which doesn't contain personally identifiable information.
+                We use <strong className="text-white">aggregated analytics</strong> for insights, which doesn&apos;t contain personally identifiable information.
               </p>
             </div>
           </GlassCard>
@@ -209,7 +210,7 @@ export default function PrivacyPage() {
               </p>
               <div className="space-y-2">
                 <p><strong className="text-white">Email:</strong> privacy@oma-ai.com</p>
-                <p><strong className="text-white">Contact Form:</strong> <a href="/contact" className="text-purple-400 hover:text-purple-300 underline">oma-ai.com/contact</a></p>
+                <p><strong className="text-white">Contact Form:</strong> <Link href="/contact" className="text-purple-400 hover:text-purple-300 underline">oma-ai.com/contact</Link></p>
                 <p><strong className="text-white">Response Time:</strong> Within 30 days (GDPR compliant)</p>
               </div>
             </div>

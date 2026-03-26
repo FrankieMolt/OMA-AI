@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import { GlassCard } from '@/components/ui/GlassCard';
-import { Rocket, DollarSign, Check, ArrowRight, Code } from 'lucide-react';
+import { Check } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Publish Your MCP - OMA-AI Marketplace',

@@ -41,6 +41,7 @@ export const isSupabaseConfigured = () => {
 };
 
 // Graceful error handler for Supabase operations
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const handleSupabaseError = (error: any, context: string = 'Supabase operation') => {
   console.error(`[${context}] Error:`, error);
 
@@ -689,7 +690,8 @@ export async function validateApiKey(apiKey: string) {
       return null;
     }
 
-    // Get user data
+    // Get user data // eslint-disable-line @typescript-eslint/no-explicit-any
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const user = keyData.users as any;
     
     if (!user) {

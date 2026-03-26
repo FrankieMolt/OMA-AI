@@ -191,7 +191,7 @@ export async function verifyBasePayment(
   expectedAmount: number,
   recipientAddress: string,
   network: NetworkName = 'base'
-): Promise<{ valid: boolean; tx?: any; error?: string }> {
+): Promise<{ valid: boolean; tx?: any; error?: string }> { // eslint-disable-line @typescript-eslint/no-explicit-any
   const net = NETWORKS[network];
   const provider = new ethers.JsonRpcProvider(net.rpcUrl);
   
@@ -218,7 +218,7 @@ export async function verifyBasePayment(
     // For now, we verify the transaction succeeded
     return { valid: true, tx: receipt };
     
-  } catch (error: any) {
+  } catch (error: any) { // eslint-disable-line @typescript-eslint/no-explicit-any
     return { valid: false, error: error.message };
   }
 }
@@ -305,7 +305,7 @@ export async function verifyFacilitatorPayment(
       confirmed: data.status === 'confirmed',
       txHash: data.tx_hash,
     };
-  } catch (error) {
+  } catch {
     return { confirmed: false };
   }
 }
@@ -341,7 +341,7 @@ export async function getUSDCBalance(
 // DEFAULT EXPORTS
 // =====================================================
 
-export default {
+const x402ServerExports = {
   NETWORKS,
   dollarsToMicroUnits,
   microUnitsToDollars,
@@ -355,3 +355,5 @@ export default {
   getUSDCBalance,
   USDC_ABI,
 };
+
+export default x402ServerExports;

@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import { GlassCard } from '@/components/ui/GlassCard';
 import { Scale, Check, AlertCircle, ExternalLink } from 'lucide-react';
+import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'Terms of Service | OMA-AI - Premier MCP Marketplace',
@@ -9,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function TermsPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 pt-24 pb-12">
+    <div className="min-h-screen bg-[#0a0a0f] pt-24 pb-12">
       <div className="container mx-auto px-4 max-w-4xl">
         {/* Header */}
         <div className="text-center mb-16">
@@ -49,7 +50,7 @@ export default function TermsPage() {
             </div>
             <div className="space-y-3 text-gray-300">
               <p>
-                By accessing or using OMA-Ai ("the Platform"), you agree to be bound by these Terms of Service ("Terms").
+                By accessing or using OMA-Ai (OMA-Ai ("the Platform")quot;the PlatformOMA-Ai ("the Platform")quot;), you agree to be bound by these Terms of Service (these Terms of Service ("Terms")quot;Termsthese Terms of Service ("Terms")quot;).
                 If you do not agree to these Terms, please do not use the Platform.
               </p>
               <p>
@@ -198,7 +199,7 @@ export default function TermsPage() {
                 <strong className="text-white">License to OMA-Ai:</strong> By publishing, you grant OMA-Ai a non-exclusive, royalty-free license to host, display, and distribute your MCPs.
               </p>
               <p>
-                <strong className="text-white">Platform IP:</strong> OMA-Ai's technology, branding, and code remain our exclusive property.
+                <strong className="text-white">Platform IP:</strong> OMA-Ai&apos;s technology, branding, and code remain our exclusive property.
               </p>
               <p>
                 <strong className="text-white">User-Generated Content:</strong> Users retain IP in reviews, feedback, and discussions.
@@ -232,8 +233,8 @@ export default function TermsPage() {
           {/* Limitation of Liability */}
           <GlassCard className="p-8">
             <div className="flex items-start gap-4 mb-4">
-              <div className="flex-shrink-0 w-12 h-12 bg-slate-600/20 rounded-xl flex items-center justify-center">
-                <AlertCircle className="w-6 h-6 text-slate-300" />
+              <div className="flex-shrink-0 w-12 h-12 bg-zinc-600/20 rounded-xl flex items-center justify-center">
+                <AlertCircle className="w-6 h-6 text-zinc-300" />
               </div>
               <div className="flex-1">
                 <h2 className="text-2xl font-bold text-white mb-2">8. Limitation of Liability</h2>
@@ -241,7 +242,7 @@ export default function TermsPage() {
             </div>
             <div className="space-y-3 text-gray-300">
               <p>
-                OMA-Ai is provided "as is" without warranties of any kind, express or implied.
+                OMA-Ai is provided &quot;as is&quot; without warranties of any kind, express or implied.
               </p>
               <p>
                 We are not liable for: (a) MCP functionality or performance, (b) user-developed content, (c) third-party services, or (d) loss of data or revenue.
@@ -268,7 +269,7 @@ export default function TermsPage() {
               </p>
               <div className="space-y-2">
                 <p><strong className="text-white">Email:</strong> legal@oma-ai.com</p>
-                <p><strong className="text-white">Contact Form:</strong> <a href="/contact" className="text-purple-400 hover:text-purple-300 underline">oma-ai.com/contact</a></p>
+                <p><strong className="text-white">Contact Form:</strong> <Link href="/contact" className="text-purple-400 hover:text-purple-300 underline">oma-ai.com/contact</Link></p>
                 <p><strong className="text-white">Response Time:</strong> We will respond to legal inquiries within 30 days.</p>
               </div>
             </div>

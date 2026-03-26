@@ -11,7 +11,7 @@ interface EmbeddingRequest {
 export async function POST(request: Request) {
   try {
     const body: EmbeddingRequest = await request.json();
-    const { text, model = 'sentence-transformers/all-MiniLM-L6-v2' } = body;
+    const { text } = body;
     
     if (!text) {
       return NextResponse.json(
@@ -63,6 +63,7 @@ export async function POST(request: Request) {
       dimensions: simpleEmbedding.length,
       warning: 'Using fallback embedding - configure HUGGING_FACE_TOKEN for real embeddings'
     });
+    // Intentionally public - embeddings are not sensitive user data
     responseJson.headers.set('Access-Control-Allow-Origin', '*');
     responseJson.headers.set('Cache-Control', 'no-cache');
     return responseJson;

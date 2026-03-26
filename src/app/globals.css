@@ -1,9 +1,85 @@
 @import "tailwindcss";
 
-@theme {
-  --color-primary: #8b5cf6;
-  --color-primary-foreground: #ffffff;
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
 }
+
+/* ============================================
+   Tailwind CSS v4 Theme Configuration
+   Migrated from tailwind.config.js
+   ============================================ */
+
+@theme {
+  /* Primary color system */
+  --color-primary: hsl(258.9 89% 66%);
+  --color-primary-foreground: hsl(0 0% 100%);
+
+  /* HSL CSS variable colors (used by shadcn/ui components) */
+  --border: 240 5% 26%;
+  --input: 240 5% 26%;
+  --ring: 258.9 89% 66%;
+  --background: 240 31% 8%;
+  --foreground: 240 33% 96%;
+
+  --primary: 258.9 89% 66%;
+  --primary-foreground: 0 0% 100%;
+
+  --secondary: 240 5% 18%;
+  --secondary-foreground: 240 5% 90%;
+
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 100%;
+
+  --muted: 240 5% 18%;
+  --muted-foreground: 240 5% 55%;
+
+  --accent: 240 5% 18%;
+  --accent-foreground: 240 5% 90%;
+
+  --popover: 240 31% 8%;
+  --popover-foreground: 240 33% 96%;
+
+  --card: 240 29% 10%;
+  --card-foreground: 240 33% 96%;
+
+  /* Memoria brand colors */
+  --memoria-bg-ultra-dark: #0a0a0f;
+  --memoria-bg-card: hsl(240 29% 10% / 0.8);
+  --memoria-bg-surface: hsl(240 29% 8% / 0.6);
+  --memoria-border-muted: hsl(240 5% 20%);
+  --memoria-border-default: hsl(240 5% 30%);
+  --memoria-border-active: hsl(258.9 89% 66%);
+  --memoria-text-hero: #ffffff;
+  --memoria-text-secondary: #a1a1aa;
+  --memoria-text-whisper: #71717a;
+  --memoria-text-meta: #52525b;
+
+  /* Chart colors */
+  --chart-1: 258.9 89% 66%;
+  --chart-2: 168 84% 52%;
+  --chart-3: 38 92% 50%;
+  --chart-4: 258 89% 66%;
+  --chart-5: 258 89% 66%;
+
+  /* Border radius */
+  --radius: 0.625rem;
+
+  /* Font families */
+  --font-sans: 'Inter', var(--font-ibm-plex), sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-heading: 'Space Grotesk', var(--font-space-grotesk), sans-serif;
+
+  /* Custom gradients (not natively in Tailwind) */
+  --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  --gradient-tertiary: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  --gradient-quaternary: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+}
+
+/* ============================================
+   CSS Custom Properties (legacy / inline use)
+   ============================================ */
 
 :root {
   --foreground-rgb: 245, 243, 255;
@@ -20,13 +96,13 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-    180deg,
-    rgb(var(--background-start-rgb)) 0%,
-    rgb(var(--background-end-rgb)) 100%
-  );
+  background: #0a0a0f;
   min-height: 100vh;
 }
+
+/* ============================================
+   Utility Classes
+   ============================================ */
 
 .glass {
   background: rgba(255, 255, 255, 0.04);
@@ -77,6 +153,10 @@ body {
   pointer-events: none;
 }
 
+/* ============================================
+   Animations
+   ============================================ */
+
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
   50% { transform: translateY(-10px); }
@@ -87,32 +167,6 @@ body {
   100% { background-position: 200% 0; }
 }
 
-.animate-float {
-  animation: float 6s ease-in-out infinite;
-}
-
-.animate-shimmer {
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-  background-size: 200% 100%;
-  animation: shimmer 3s infinite;
-}
-
-.noise-overlay {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  opacity: 0.025;
-  z-index: 9999;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-}
-
-/* Hero animations - CSS only for faster initial render */
 @keyframes fade-in {
   from {
     opacity: 0;
@@ -135,6 +189,16 @@ body {
   }
 }
 
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 3s infinite;
+}
+
 .animate-fade-in {
   animation: fade-in 0.6s ease-out forwards;
   opacity: 0;
@@ -149,6 +213,23 @@ body {
 .animate-pulse-slow {
   animation: pulse-slow 12s ease-in-out infinite;
 }
+
+/* ============================================
+   Noise Overlay
+   ============================================ */
+
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.025;
+  z-index: 9999;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* ============================================
+   Scrollbar & Selection
+   ============================================ */
 
 ::-webkit-scrollbar {
   width: 8px;
@@ -170,4 +251,21 @@ body {
 ::selection {
   background: rgba(139, 92, 246, 0.3);
   color: #fff;
+}
+
+/* Focus visible styles */
+*:focus-visible {
+  outline: 2px solid hsl(258.9 89% 66%);
+  outline-offset: 2px;
+}
+
+/* Ensure interactive elements have visible focus */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid hsl(258.9 89% 66%);
+  outline-offset: 2px;
+  border-radius: 4px;
 }

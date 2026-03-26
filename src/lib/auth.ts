@@ -59,6 +59,7 @@ export async function connectWallet(): Promise<{
     throw new Error('Must be called from browser');
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const ethereum = (window as any).ethereum;
   if (!ethereum) {
     throw new Error('No wallet found. Install MetaMask or Coinbase Wallet.');
@@ -92,7 +93,7 @@ export async function connectWallet(): Promise<{
         params: [{ chainId: NETWORKS.base.chainId }]
       });
       network = 'base';
-    } catch (e) {
+    } catch {
       throw new Error('Please switch to Base network');
     }
   }
@@ -165,6 +166,7 @@ export function parseAuthToken(token: string): {
 export async function getWalletInfo() {
   if (typeof window === 'undefined') return null;
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const ethereum = (window as any).ethereum;
   if (!ethereum) return null;
 
@@ -186,6 +188,7 @@ export async function getWalletInfo() {
 export function onAccountChange(callback: (accounts: string[]) => void) {
   if (typeof window === 'undefined') return;
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const ethereum = (window as any).ethereum;
   if (ethereum) {
     ethereum.on('accountsChanged', callback);
@@ -198,6 +201,7 @@ export function onAccountChange(callback: (accounts: string[]) => void) {
 export function onChainChange(callback: (chainId: string) => void) {
   if (typeof window === 'undefined') return;
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const ethereum = (window as any).ethereum;
   if (ethereum) {
     ethereum.on('chainChanged', callback);

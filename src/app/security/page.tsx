@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import { GlassCard, GlassCardPurple } from '@/components/ui/GlassCard';
-import { Shield, Lock, Eye, CheckCircle2, AlertTriangle, RefreshCw, ShieldAlert, Fingerprint, Key, Database, Globe, Zap, FileText, Code, Users } from 'lucide-react';
+import { Shield, Lock, Eye, CheckCircle2, AlertTriangle, RefreshCw, ShieldAlert, Key, Database, Globe, Zap, FileText, Code, Users } from 'lucide-react';
+import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'Security | OMA-AI - Secure MCP Marketplace',
@@ -124,7 +125,7 @@ export default function SecurityPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 pt-24 pb-12">
+    <div className="min-h-screen bg-[#0a0a0f] pt-24 pb-12">
       <div className="container mx-auto px-4 max-w-6xl">
         {/* Header */}
         <div className="text-center mb-16">
@@ -297,7 +298,7 @@ export default function SecurityPage() {
         <div className="mb-16">
           <h2 className="text-3xl font-bold text-white text-center mb-8">Incident Response</h2>
           <div className="grid md:grid-cols-2 gap-6">
-            {incidentResponse.map((phase, index) => (
+            {incidentResponse.map((phase) => (
               <GlassCard key={phase.phase} className="p-6">
                 <div className="flex items-start gap-3 mb-4">
                   <div className="flex-shrink-0 w-10 h-10 bg-amber-600/20 rounded-lg flex items-center justify-center text-amber-300">
@@ -328,14 +329,14 @@ export default function SecurityPage() {
                 Found a Vulnerability?
               </h2>
               <p className="text-red-100 leading-relaxed">
-                Responsible disclosure is encouraged. We'll work with you to fix it quickly.
+                Responsible disclosure is encouraged. We&apos;ll work with you to fix it quickly.
               </p>
             </div>
           </div>
           <div className="space-y-4 text-gray-300">
             <div className="flex items-center gap-2">
               <CheckCircle2 size={16} className="text-green-400" />
-              <span><strong className="text-white">Don't</strong> exploit vulnerabilities</span>
+              <span><strong className="text-white">Don&apos;t</strong> exploit vulnerabilities</span>
             </div>
             <div className="flex items-center gap-2">
               <CheckCircle2 size={16} className="text-green-400" />
@@ -351,18 +352,14 @@ export default function SecurityPage() {
             </div>
           </div>
           <div className="mt-6 flex gap-4">
-            <a
-              href="mailto:security@oma-ai.com"
+            <Link href="mailto:security@oma-ai.com"
               className="flex-1 px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition-colors text-center"
-            >
-              Report Vulnerability
-            </a>
-            <a
-              href="/contact"
-              className="flex-1 px-6 py-3 bg-slate-700 hover:bg-slate-600 text-white font-semibold rounded-lg transition-colors text-center"
-            >
-              General Contact
-            </a>
+            >Report Vulnerability
+            </Link>
+            <Link href="/contact"
+              className="flex-1 px-6 py-3 bg-zinc-700 hover:bg-zinc-600 text-white font-semibold rounded-lg transition-colors text-center"
+            >General Contact
+            </Link>
           </div>
         </GlassCard>
 
@@ -399,16 +396,14 @@ export default function SecurityPage() {
             Trust is Everything
           </h2>
           <p className="text-xl text-purple-100 mb-8 max-w-2xl mx-auto leading-relaxed">
-            Security isn't just technology—it's our commitment to protecting your data,
+            Security isn&apos;t just technology—it&apos;s our commitment to protecting your data,
             revenue, and reputation. Every decision is guided by security-first principles.
           </p>
-          <a
-            href="/docs"
+          <Link href="/docs"
             className="inline-flex items-center gap-2 px-8 py-3 bg-purple-600 hover:bg-purple-700 text-white font-bold rounded-lg transition-colors"
-          >
-            <FileText size={20} />
+          ><FileText size={20} />
             View Documentation
-          </a>
+          </Link>
         </GlassCardPurple>
       </div>
     </div>

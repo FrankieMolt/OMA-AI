@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
-import Script from 'next/script'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { Analytics } from '@vercel/analytics/next'
 import { Footer } from '@/components/footer'
@@ -22,7 +21,7 @@ export const metadata: Metadata = {
     canonical: '/',
   },
   title: {
-    default: 'OMA-AI | MCP Marketplace with x402 Gasless Payments',
+    default: 'OMA-AI | MCP Marketplace with x402 Payments',
     template: '%s'
   },
   description: 'Discover, deploy, and monetize AI agents with the premier MCP Marketplace. Access 19+ verified MCP servers with gasless x402 payments on Base network - no API keys, no subscriptions.',
@@ -37,7 +36,7 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: 'https://oma-ai.com',
     siteName: 'OMA-AI',
-    title: 'OMA-AI | Premier MCP Marketplace with x402 Payments',
+    title: 'OMA-AI | MCP Marketplace with x402 Payments',
     description: 'Discover, deploy, and monetize AI agents with the premier MCP Marketplace. Access 19+ verified MCP servers with gasless x402 payments on Base network.',
     images: [
       {
@@ -68,7 +67,6 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body className={`${inter.className} bg-zinc-950 text-zinc-50 antialiased selection:bg-zinc-800`}>
-        <Script src="/x402.js" strategy="lazyOnload" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -144,7 +142,7 @@ export default function RootLayout({
         <ErrorBoundary>
           <Providers>
             <Navigation />
-            <main id="main-content">{children}</main>
+            <main id="main-content" className="min-h-screen bg-zinc-950">{children}</main>
             <Footer />
           </Providers>
         </ErrorBoundary>
