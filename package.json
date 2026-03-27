@@ -30,7 +30,8 @@
     "tailwind-merge": "^3.5.0",
     "tailwindcss-animate": "^1.0.7",
     "viem": "^2.47.1",
-    "wagmi": "^3.5.0"
+    "wagmi": "^3.5.0",
+    "class-variance-authority": "0.7.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.2.2",

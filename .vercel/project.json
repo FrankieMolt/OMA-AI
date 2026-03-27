@@ -1,1 +1,16 @@
-{"projectId":"prj_KYlc8Vv3czobn0hwICFuIqutzbSc","orgId":"team_o2xBKRJm2RldM5qyhnW2NNAt","projectName":"oma-ai"}
+{
+  "projectId": "prj_9B9CcPuYXD7HLIAiTHnKbejQlIvM",
+  "orgId": "team_o2xBKRJm2RldM5qyhnW2NNAt",
+  "projectName": "oma-ai-repo",
+  "settings": {
+    "createdAt": 1774579965491,
+    "framework": "nextjs",
+    "devCommand": "npm run dev",
+    "installCommand": "npm install",
+    "buildCommand": "npm run build",
+    "outputDirectory": null,
+    "rootDirectory": null,
+    "directoryListing": false,
+    "nodeVersion": "24.x"
+  }
+}
