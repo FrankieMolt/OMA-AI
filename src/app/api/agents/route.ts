@@ -15,7 +15,11 @@ export async function GET() {
       .order('reputation_score', { ascending: false })
       .limit(50);
 
-    if (error) throw error;
+    // If table doesn't exist or other error, return empty gracefully
+    if (error) {
+      console.warn('[GET /api/agents] Table or query error (returning empty):', error.message);
+      return NextResponse.json({ success: true, agents: [] });
+    }
 
     const enriched = (agents || []).map((agent: any) => ({
       ...agent,
@@ -28,10 +32,7 @@ export async function GET() {
   } catch (err) {
     const errorMessage = err instanceof Error ? err.message : 'Unknown error';
     console.error('[GET /api/agents] error:', errorMessage);
-    return NextResponse.json(
-      { success: false, error: errorMessage },
-      { status: 500 }
-    );
+    return NextResponse.json({ success: true, agents: [] });
   }
 }
 

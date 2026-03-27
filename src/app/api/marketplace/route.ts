@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
-// MCPServer, MCPCategory imports removed - unused
 
 interface LocalMCP {
   slug: string;
@@ -37,7 +36,7 @@ interface SupabaseCategory {
 // Force dynamic rendering
 export const dynamic = 'force-dynamic';
 
-const SUPABASE_URL = process.env.SUPABASE_URL || 'http://localhost:54321';
+const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || 'http://localhost:54321';
 const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
 // Simple in-memory cache with 30-second TTL to reduce Supabase calls
@@ -66,16 +65,9 @@ export async function GET() {
         `${SUPABASE_URL}/rest/v1/mcps?select=id,name,slug,category,description,downloads,rating,is_official,is_featured,pricing,status&order=downloads.desc&limit=20`,
         { headers, cache: 'no-store' }
       );
-      
-      // Fetch categories
-      const categoriesRes = await fetch(
-        `${SUPABASE_URL}/rest/v1/mcp_categories?select=*&order=sort_order.asc`,
-        { headers, cache: 'no-store' }
-      );
 
-      if (mcpsRes.ok && categoriesRes.ok) {
+      if (mcpsRes.ok) {
         const mcps = await mcpsRes.json();
-        const categories = await categoriesRes.json();
 
         // Calculate stats
         const totalMCPs = mcps.length;
@@ -94,12 +86,48 @@ export async function GET() {
           rating: m.rating,
         }));
 
-        // Get categories with counts
+        // Derive categories from mcp_servers data
         const categoryMap: Record<string, number> = {};
+        const categoryNames: Record<string, string> = {
+          'productivity': 'Productivity',
+          'development': 'Development',
+          'analytics': 'Analytics',
+          'communication': 'Communication',
+          'security': 'Security',
+          'database': 'Database',
+          'ai': 'AI & ML',
+          'social': 'Social',
+          'ecommerce': 'E-Commerce',
+          'finance': 'Finance',
+          'media': 'Media',
+          'other': 'Other',
+        };
+        const categoryIcons: Record<string, string> = {
+          'productivity': '⚡',
+          'development': '🔧',
+          'analytics': '📊',
+          'communication': '💬',
+          'security': '🔒',
+          'database': '🗄️',
+          'ai': '🤖',
+          'social': '🌐',
+          'ecommerce': '🛒',
+          'finance': '💰',
+          'media': '🎨',
+          'other': '📦',
+        };
         mcps.forEach((m: SupabaseMCP) => {
-          const cat = m.category || 'Other';
+          const cat = m.category || 'other';
           categoryMap[cat] = (categoryMap[cat] || 0) + 1;
         });
+
+        // Build categories array from derived data
+        const categories = Object.entries(categoryMap).map(([slug, count]) => ({
+          slug,
+          name: categoryNames[slug] || slug.charAt(0).toUpperCase() + slug.slice(1),
+          icon: categoryIcons[slug] || '📦',
+          count,
+        })).sort((a, b) => b.count - a.count);
 
         const response = NextResponse.json({
           success: true,
@@ -110,11 +138,7 @@ export async function GET() {
             categories: Object.keys(categoryMap),
           },
           trending,
-          categories: categories.map((c: SupabaseCategory) => ({
-            slug: c.slug,
-            name: c.name,
-            icon: c.icon,
-          })),
+          categories,
           recent: mcps.slice(0, 10).map((m: SupabaseMCP) => ({
             id: m.id,
             name: m.name,
