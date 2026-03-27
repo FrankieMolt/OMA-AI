@@ -32,6 +32,7 @@ interface Tool {
 
 // Built-in tools (work without external APIs)
 const BUILT_IN_TOOLS: Record<string, Tool> = {
+  // Core utilities
   'hello': {
     name: 'hello',
     description: 'Returns a personalized greeting message',
@@ -82,6 +83,31 @@ const BUILT_IN_TOOLS: Record<string, Tool> = {
       properties: { slug: { type: 'string', description: 'MCP slug (e.g. jupiter-swap-mcp)' } },
       required: ['slug'],
     },
+  },
+  // Trading & DeFi tools
+  'solana_price': {
+    name: 'solana_price',
+    description: 'Get current Solana price in USD from Binance',
+    inputSchema: { type: 'object', properties: {} },
+  },
+  'price_check': {
+    name: 'price_check',
+    description: 'Check current crypto prices from Binance',
+    inputSchema: {
+      type: 'object',
+      properties: { symbol: { type: 'string', description: 'Crypto symbol (e.g. BTCUSDT, ETHUSDT, SOLUSDT, BONKUSDT)' } },
+      required: ['symbol'],
+    },
+  },
+  'trending_tokens': {
+    name: 'trending_tokens',
+    description: 'Get trending Solana memecoins from pump.fun',
+    inputSchema: { type: 'object', properties: {} },
+  },
+  'market_stats': {
+    name: 'market_stats',
+    description: 'Get crypto market stats — market cap, volume, BTC dominance',
+    inputSchema: { type: 'object', properties: {} },
   },
 };
 
@@ -194,6 +220,65 @@ async function executeTool(name: string, args: Record<string, unknown>) {
           verified: data.verified,
           documentation: data.documentation_url,
           repository: data.repository_url,
+        };
+      } catch (e) {
+        return { error: String(e) };
+      }
+    }
+
+    case 'solana_price': {
+      try {
+        const res = await fetch('https://api.binance.com/api/v3/ticker/price?symbol=SOLUSDT');
+        const data = await res.json();
+        const price = parseFloat(data.price);
+        return { symbol: 'SOL', price_usd: price, source: 'Binance', timestamp: new Date().toISOString() };
+      } catch (e) {
+        return { error: `Binance error: ${String(e)}` };
+      }
+    }
+
+    case 'price_check': {
+      const symbol = ((args.symbol as string) || '').toUpperCase();
+      if (!symbol) return { error: 'symbol required' };
+      const pair = symbol.includes('USDT') ? symbol : `${symbol}USDT`;
+      try {
+        const res = await fetch(`https://api.binance.com/api/v3/ticker/price?symbol=${pair}`);
+        if (!res.ok) return { error: `Symbol not found: ${symbol}` };
+        const data = await res.json();
+        return { symbol: data.symbol.replace('USDT',''), price_usdt: parseFloat(data.price), pair: data.symbol, source: 'Binance', timestamp: new Date().toISOString() };
+      } catch (e) {
+        return { error: String(e) };
+      }
+    }
+
+    case 'trending_tokens': {
+      try {
+        const res = await fetch('https://api.dexscreener.com/v1/tokens?key=trending&chain=solana&limit=10&sort=volume&order=desc', { headers: { 'Accept': 'application/json' } });
+        if (!res.ok) return { trending: null, error: 'dexscreener API unavailable' };
+        const data = await res.json();
+        const tokens = ((data.pairs || data.data?.pairs || []) as Array<{ baseToken: { name: string; symbol: string }; liquidity: { usd: number }; priceUsd: string }>).slice(0, 5).map(t => ({
+          name: t.baseToken?.name, symbol: t.baseToken?.symbol, liquidity: t.liquidity?.usd ? `$${(t.liquidity.usd/1000).toFixed(0)}K` : 'N/A', price_usd: t.priceUsd,
+        }));
+        return { count: tokens.length, tokens, timestamp: new Date().toISOString(), source: 'DexScreener' };
+      } catch (e) {
+        return { trending: null, error: String(e) };
+      }
+    }
+
+    case 'market_stats': {
+      try {
+        const [globalRes, btcRes] = await Promise.all([
+          fetch('https://api.coingecko.com/api/v3/global'),
+          fetch('https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT'),
+        ]);
+        const global = await globalRes.json().catch(() => null);
+        const btc = await btcRes.json().catch(() => null);
+        return {
+          total_market_cap: global?.data?.total_market_cap?.usd ? `$${(global.data.total_market_cap.usd/1e12).toFixed(2)}T` : 'N/A',
+          btc_dominance: global?.data?.market_cap_percentage?.btc ? `${global.data.market_cap_percentage.btc.toFixed(1)}%` : 'N/A',
+          btc_price: btc?.price ? `$${parseFloat(btc.price).toLocaleString()}` : 'N/A',
+          active_cryptos: global?.data?.active_cryptocurrencies || 'N/A',
+          timestamp: new Date().toISOString(),
         };
       } catch (e) {
         return { error: String(e) };
