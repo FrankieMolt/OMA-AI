@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 
 export async function GET() {
   try {
-    const baseUrl = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000';
+    const baseUrl = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : (process.env.FRONTEND_URL || 'https://www.oma-ai.com');
     const response = await fetch(`${baseUrl}/api/mcp`, {
       headers: { 'User-Agent': 'OMA-AI-API-Proxy/1.0' }
     });

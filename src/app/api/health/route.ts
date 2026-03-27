@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 
 export async function GET() {
-  const baseUrl = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000';
+  const baseUrl = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : (process.env.FRONTEND_URL || 'https://www.oma-ai.com');
 
   const endpoints = [
     { name: 'price', url: `${baseUrl}/api/price` },

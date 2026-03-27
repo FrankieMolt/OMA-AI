@@ -12,7 +12,7 @@ interface SearxngResult {
 
 export const dynamic = 'force-dynamic';
 
-const SEARXNG_URL = process.env.SEARXNG_URL || 'http://localhost:8899';
+const SEARXNG_URL = process.env.SEARXNG_URL || 'http://searxng-local:8899';
 
 /**
  * Fetch search results from SearXNG JSON API (no auth — works when limiter is off).

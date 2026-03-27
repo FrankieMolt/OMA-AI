@@ -6,7 +6,8 @@ export const dynamic = 'force-dynamic';
 
 export async function GET() {
   try {
-    const response = await fetch('http://localhost:3008/api/status', {
+    const tradingBotUrl = process.env.TRADING_BOT_URL || 'http://localhost:3008';
+    const response = await fetch(`${tradingBotUrl}/api/status`, {
       cache: 'no-store',
       headers: {
         'Accept': 'application/json'
