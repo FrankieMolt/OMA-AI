@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic';
 import { GlassCard } from '@/components/ui/GlassCard';
 import { Badge } from '@/components/ui/Badge';
 import { CardSkeleton, InlineLoader } from '@/components/ui/Loading';
-import { Search, Filter, SortAsc, Star, ExternalLink, Download, CheckCircle2, AlertCircle } from 'lucide-react';
+import { Search, Filter, SortAsc, Star, ExternalLink, Download, CheckCircle2, AlertCircle, Zap } from 'lucide-react';
 import { getCategoryIcon, getCategoryColors } from '@/lib/category-icons';
 import { getMcpFaviconUrl } from '@/lib/mcp-icons';
 import Link from 'next/link';
@@ -431,7 +431,7 @@ export default function MCPMarketplace() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: (skill.id.length % 6) * 0.05 }}
               >
-                <GlassCard className="p-6 h-full hover flex flex-col">
+                <GlassCard className={`p-6 h-full hover flex flex-col ${skill.x402_enabled ? 'border-green-500/30 shadow-lg shadow-green-500/10' : ''}`}>
                   {/* Category Icon + Header */}
                   <div className="flex items-start justify-between mb-4">
                     <div className="flex items-start gap-3 flex-1">
@@ -462,13 +462,19 @@ export default function MCPMarketplace() {
                         </h3>
                         <div className="flex items-center gap-2 mb-2">
                           {skill.verified && (
-                            <Badge variant="success" className="gap-1">
-                              <CheckCircle2 size={14} />
+                            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-green-500/20 border border-green-500/40 rounded-full text-green-400 text-xs font-semibold shadow-lg shadow-green-500/20">
+                              <CheckCircle2 size={14} className="fill-green-500/30" />
                               Verified
-                            </Badge>
+                            </span>
                           )}
                           <span className="text-gray-400 text-sm">by @{skill.author}</span>
                         </div>
+                        {skill.x402_enabled && (
+                          <span className="inline-flex items-center gap-1 px-2 py-1 bg-yellow-500/20 border border-yellow-500/40 rounded text-yellow-400 text-xs font-medium">
+                            <Zap size={12} className="fill-yellow-500/40" />
+                            x402
+                          </span>
+                        )}
                       </div>
                     </div>
                     {renderStars(skill.rating)}
@@ -494,10 +500,18 @@ export default function MCPMarketplace() {
                   {/* Pricing & Stats */}
                   <div className="flex items-center justify-between pt-4 border-t border-zinc-700">
                     <div>
-                      <div className="text-2xl font-bold text-white mb-1">
-                        ${skill.pricing_usdc.toFixed(4)}
-                      </div>
-                      <div className="text-xs text-gray-400">per call</div>
+                      {skill.pricing_usdc === 0 ? (
+                        <span className="inline-flex items-center px-3 py-1 bg-green-500/20 border border-green-500/40 rounded-full text-green-400 text-lg font-bold">
+                          FREE
+                        </span>
+                      ) : (
+                        <>
+                          <div className="text-2xl font-bold text-white mb-1">
+                            ${skill.pricing_usdc.toFixed(4)}
+                          </div>
+                          <div className="text-xs text-gray-400">per call</div>
+                        </>
+                      )}
                     </div>
                     <div className="text-right">
                       <div className="text-sm text-gray-400">

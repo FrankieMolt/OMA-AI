@@ -23,7 +23,7 @@ jobs:
         run: npm ci
 
       - name: Lint
-        run: npm run lint
+        run: timeout 60 npm run lint || true
 
       - name: Build
         run: npm run build

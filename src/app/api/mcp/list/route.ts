@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 import { MCP_DATA } from '@/database/mcp-data';
+import { CATEGORIES } from '@/lib/mcp-data';
 
 function getSupabaseClient() {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -87,8 +88,10 @@ export async function GET(request: Request) {
     data = data.slice((page - 1) * limit, page * limit);
   }
 
-  // Get unique categories
-  const categories = [...new Set(MCP_DATA.map(m => m.category))].sort();
+  // Use normalized categories from CATEGORIES (lib/mcp-data.ts)
+  // instead of raw categories from MCP_DATA (database/mcp-data.ts)
+  // This ensures category names match across the UI
+  const normalizedCategories = CATEGORIES.filter(c => c.id !== 'all').map(c => c.name);
 
   const response = NextResponse.json({
     success: true,
@@ -102,7 +105,7 @@ export async function GET(request: Request) {
       hasPrevPage: page > 1,
     },
     filters: {
-      categories,
+      categories: normalizedCategories,
       totalMCPs: MCP_DATA.length,
       verifiedCount: MCP_DATA.filter(m => m.verified).length,
     },
