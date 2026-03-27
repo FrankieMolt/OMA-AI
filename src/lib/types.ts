@@ -84,19 +84,26 @@ export interface MCPTool {
 export interface MCPServer {
   id: string;
   name: string;
+  slug: string;
   category: string;
   description: string;
+  long_description?: string;
   author: string;
+  version?: string;
   mcp_endpoint: string;
   pricing_usdc: number;
   x402_enabled: boolean;
   verified: boolean;
   rating: number;
-  total_calls: number;
-  success_rate: number;
+  total_calls?: number;
+  calls?: number;
+  success_rate?: number;
+  tools_count?: number;
   repository_url?: string;
+  repository?: string;
   documentation_url?: string;
   tools?: MCPTool[];
+  tags?: string[];
 }
 
 // ============ MARKETPLACE TYPES ============
