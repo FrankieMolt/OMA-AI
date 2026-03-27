@@ -1,7 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { MCP_DATA } from '@/database/mcp-data';
+import { createClient } from '@supabase/supabase-js';
 
 export const dynamic = 'force-dynamic';
+
+function getSupabaseClient() {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  if (!url) return null;
+  if (!key) return null;
+  return createClient(url, key);
+}
 
 export async function GET(
   request: NextRequest,
@@ -10,33 +18,53 @@ export async function GET(
   try {
     const { slug } = await params;
 
-    // Look up MCP from the shared MCP_DATA source (same as marketplace)
-    const mcp = MCP_DATA.find(m => m.slug === slug);
+    const supabase = getSupabaseClient();
 
-    if (!mcp) {
-      return NextResponse.json(
-        { success: false, error: 'MCP server not found' },
-        { status: 404 }
-      );
+    if (supabase) {
+      // Query mcp_servers table (same as /api/mcp/list)
+      const { data: mcp, error } = await supabase
+        .from('mcp_servers')
+        .select('*')
+        .eq('slug', slug)
+        .single();
+
+      if (!error && mcp) {
+        return NextResponse.json({
+          success: true,
+          data: {
+            ...mcp,
+            // Normalize category — mcp_servers uses TEXT, UI expects string[]
+            category: Array.isArray(mcp.category)
+              ? mcp.category
+              : mcp.category
+                ? [mcp.category]
+                : ['Utilities'],
+            // Alias fields the UI expects
+            mcp_endpoint: mcp.mcp_endpoint || mcp.endpoint || '',
+            pricing_usdc: Number(mcp.pricing_usdc) || 0,
+            total_calls: mcp.total_calls || mcp.calls || 0,
+            success_rate: Number(mcp.success_rate) || 100,
+            rating: Number(mcp.rating) || 0,
+            x402_enabled: mcp.x402_enabled ?? true,
+            verified: mcp.verified ?? false,
+            author: mcp.author || 'Unknown',
+            tools: mcp.tools || [],
+            tags: mcp.tags || [],
+            website_url: mcp.website_url || null,
+            repository_url: mcp.repository_url || null,
+            documentation_url: mcp.documentation_url || null,
+            version: mcp.version || '1.0.0',
+            created_at: mcp.created_at || new Date().toISOString(),
+            updated_at: mcp.updated_at || new Date().toISOString(),
+          },
+        });
+      }
     }
 
-    return NextResponse.json({
-      success: true,
-      data: {
-        ...mcp,
-        // Normalize category to always be an array for UI compatibility
-        category: Array.isArray(mcp.category) ? mcp.category : mcp.category ? [mcp.category] : ['Utilities'],
-        // Add computed fields the UI expects
-        tools: mcp.tools || [],
-        tags: mcp.tags || [],
-        website_url: mcp.website_url || null,
-        repository_url: mcp.repository_url || null,
-        documentation_url: mcp.documentation_url || null,
-        version: mcp.version || '1.0.0',
-        created_at: mcp.created_at || new Date().toISOString(),
-        updated_at: mcp.updated_at || new Date().toISOString(),
-      },
-    });
+    return NextResponse.json(
+      { success: false, error: 'MCP server not found' },
+      { status: 404 }
+    );
   } catch (error) {
     console.error('[GET /api/mcp/skill]', error);
     return NextResponse.json(
