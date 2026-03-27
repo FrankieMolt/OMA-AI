@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'Pricing | OMA-AI - Open Market Access',
-  description: 'Comprehensive pricing for OMA-AI MCP Marketplace, LLM resale, GPU compute, and OpenClaw hosting.',
+  description: 'OMA-AI pricing: MCP marketplace (free), x402 micropayments (5% fee), GPU compute, and MCP publisher revenue share. No platform fees for self-hosted deployments.',
 };
 
 const coreServices = [
@@ -83,27 +83,27 @@ const gpuCompute = [
   },
 ];
 
-const openclawPlans = [
+const publisherTiers = [
   {
-    name: 'Starter',
-    price: '$19/mo',
-    description: 'Self-hosted with guidance',
-    compareTo: 'VPS $5-20/mo + API setup',
-    features: ['Setup documentation', 'Community Discord', 'Basic monitoring', 'Email support'],
+    name: 'Community',
+    price: 'Free',
+    description: 'Publish free MCPs for the community',
+    compareTo: 'RapidAPI $0-499/mo listing fee',
+    features: ['Free MCP publishing', 'Marketplace listing', 'Basic analytics', 'Community support', 'GitHub OAuth'],
   },
   {
-    name: 'Pro',
-    price: '$39/mo',
-    description: 'Fully managed hosting',
-    compareTo: 'TryOpenClaw $39, RunMyClaw $30',
-    features: ['Managed infrastructure', 'Auto-scaling', 'Priority support', 'Advanced analytics', 'Custom domains'],
+    name: 'Professional',
+    price: '5% fee',
+    description: 'Earn from your MCP expertise',
+    compareTo: 'RapidAPI 20-40% fee',
+    features: ['Priority marketplace placement', 'Advanced analytics', 'Email support', 'Custom pricing', 'Webhook notifications'],
   },
   {
     name: 'Enterprise',
-    price: '$99/mo',
-    description: 'Dedicated infrastructure',
-    compareTo: 'Clawctl $49 (multi-instance)',
-    features: ['Dedicated servers', 'SLA guarantee', '24/7 support', 'Custom integrations', 'On-premise option'],
+    price: 'Custom',
+    description: 'White-label MCP solutions',
+    compareTo: 'Custom build $50k+',
+    features: ['Dedicated MCP infrastructure', 'Custom SLA', '24/7 support', 'White-label option', 'Volume pricing'],
   },
 ];
 
@@ -164,10 +164,10 @@ const comparisonData = [
     openapi: false,
   },
   {
-    feature: 'OpenClaw Hosting',
+    feature: 'Publish MCPs',
     oma: true,
     rapidapi: false,
-    smithery: false,
+    smithery: true,
     openapi: false,
   },
   {
@@ -333,34 +333,34 @@ export default function PricingPage() {
           </div>
         </div>
 
-        {/* OpenClaw Hosting */}
+        {/* MCP Publisher Revenue */}
         <div className="mb-20">
           <div className="flex items-center gap-3 mb-8">
-            <div className="w-12 h-12 bg-amber-600/20 rounded-xl flex items-center justify-center">
-              <Star className="w-6 h-6 text-amber-300" />
+            <div className="w-12 h-12 bg-green-600/20 rounded-xl flex items-center justify-center">
+              <Zap className="w-6 h-6 text-green-300" />
             </div>
             <div>
-              <h2 className="text-3xl font-bold text-white">OpenClaw Hosting</h2>
-              <p className="text-gray-400">Deploy and scale your AI agents</p>
+              <h2 className="text-3xl font-bold text-white">Publish Your MCPs</h2>
+              <p className="text-gray-400">Earn revenue from every AI agent that uses your MCP</p>
             </div>
           </div>
-          <div className="grid md:grid-cols-3 gap-6">
-            {openclawPlans.map((plan) => (
-              <GlassCard key={plan.name} className={`p-6 ${plan.name === 'Pro' ? 'ring-2 ring-purple-500' : ''}`}>
-                {plan.name === 'Pro' && (
+          <div className="grid md:grid-cols-3 gap-6 mb-8">
+            {publisherTiers.map((plan) => (
+              <GlassCard key={plan.name} className={`p-6 ${plan.name === 'Professional' ? 'ring-2 ring-green-500' : ''}`}>
+                {plan.name === 'Professional' && (
                   <div className="text-center mb-2">
-                    <span className="inline-block px-2 py-1 bg-purple-600 rounded text-xs font-semibold text-white">
+                    <span className="inline-block px-2 py-1 bg-green-600 rounded text-xs font-semibold text-white">
                       Most Popular
                     </span>
                   </div>
                 )}
                 <div className="text-center mb-4">
                   <h3 className="text-xl font-bold text-white">{plan.name}</h3>
-                  <div className="text-4xl font-bold text-amber-300 mt-2">{plan.price}</div>
+                  <div className="text-3xl font-bold text-green-300 mt-2">{plan.price}</div>
                   <p className="text-sm text-gray-400 mt-1">{plan.description}</p>
                 </div>
                 <div className="bg-zinc-800/50 rounded-lg p-3 mb-4">
-                  <p className="text-xs text-gray-500 mb-1">Compare to</p>
+                  <p className="text-xs text-gray-500 mb-1">vs competitors</p>
                   <p className="text-sm text-gray-300">{plan.compareTo}</p>
                 </div>
                 <ul className="space-y-2">
@@ -371,8 +371,19 @@ export default function PricingPage() {
                     </li>
                   ))}
                 </ul>
+                <Link href="/publish" className="block mt-4 text-center text-green-400 hover:text-green-300 text-sm font-semibold">
+                  Get Started →
+                </Link>
               </GlassCard>
             ))}
+          </div>
+          {/* Publisher CTA */}
+          <div className="bg-gradient-to-r from-green-900/40 to-emerald-900/40 rounded-2xl p-8 border border-green-500/20 text-center">
+            <h3 className="text-2xl font-bold text-white mb-2">Ready to publish your MCP?</h3>
+            <p className="text-gray-400 mb-4">Join publishers earning real revenue. 90% revenue share, zero upfront cost.</p>
+            <Link href="/publish" className="inline-flex items-center gap-2 bg-green-600 hover:bg-green-500 text-white font-bold px-6 py-3 rounded-lg transition-colors">
+              Start Publishing <ArrowRight className="w-4 h-4" />
+            </Link>
           </div>
         </div>
 
@@ -499,9 +510,9 @@ export default function PricingPage() {
               </p>
             </GlassCard>
             <GlassCard className="p-6">
-              <h3 className="text-lg font-semibold text-white mb-2">Can I self-host OpenClaw?</h3>
+              <h3 className="text-lg font-semibold text-white mb-2">Can I self-host OMA-AI?</h3>
               <p className="text-gray-300 leading-relaxed">
-                Yes! The Starter plan at $19/mo provides documentation and community support for self-hosting. Compare to raw VPS costs of $5-20/mo plus manual API setup.
+                OMA-AI is fully open-source and self-hostable with Coolify, Docker, or any VPS. No platform fees for self-hosted deployments. Only gas fees for on-chain x402 settlements.
               </p>
             </GlassCard>
             <GlassCard className="p-6">
