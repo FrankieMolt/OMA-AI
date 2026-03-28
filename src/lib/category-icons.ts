@@ -6,26 +6,62 @@ import {
   Code2,
   MessageSquare,
   Wrench,
+  Globe,
+  Shield,
+  Terminal,
+  Cloud,
+  Bot,
+  DollarSign,
+  BarChart3,
+  Cpu,
+  Layers,
   type LucideIcon,
 } from 'lucide-react';
 
-// Category → Icon mapping
+// Category → Icon mapping — covers BOTH database/mcp-data.ts AND lib/mcp-data.ts categories
 const CATEGORY_ICONS: Record<string, LucideIcon> = {
+  // Core set
   'AI/ML': Brain,
+  'AI & ML': Brain,
+  'Utilities': Wrench,
+  'Communication': MessageSquare,
+  'Developer Tools': Code2,
+
+  // database/mcp-data.ts categories
+  'Blockchain': Globe,
+  'Search': Search,
+  'DevOps': Cloud,
+  'Infrastructure': Cloud,
+  'Data': Database,
+  'Automation': Terminal,
+  'Finance': DollarSign,
+  'AI Agents': Bot,
+
+  // lib/mcp-data.ts categories
   'Data & Databases': Database,
   'Finance & Crypto': TrendingUp,
   'Web & Search': Search,
-  'Developer Tools': Code2,
-  'Communication': MessageSquare,
-  'Utilities': Wrench,
+  'Research': Search,
+  'Design': Layers,
+  'Development': Code2,
 };
 
-// Category → Color classes
+// Category → Color classes — covers ALL MCP data categories
 const CATEGORY_COLORS: Record<string, { bg: string; text: string; border: string }> = {
   'AI/ML': {
     bg: 'bg-purple-500/20',
     text: 'text-purple-400',
     border: 'border-purple-500/30',
+  },
+  'AI & ML': {
+    bg: 'bg-purple-500/20',
+    text: 'text-purple-400',
+    border: 'border-purple-500/30',
+  },
+  'Blockchain': {
+    bg: 'bg-indigo-500/20',
+    text: 'text-indigo-400',
+    border: 'border-indigo-500/30',
   },
   'Data & Databases': {
     bg: 'bg-blue-500/20',
@@ -37,7 +73,17 @@ const CATEGORY_COLORS: Record<string, { bg: string; text: string; border: string
     text: 'text-green-400',
     border: 'border-green-500/30',
   },
-  'Web & Search': {
+  'Finance': {
+    bg: 'bg-green-500/20',
+    text: 'text-green-400',
+    border: 'border-green-500/30',
+  },
+  'DevOps': {
+    bg: 'bg-cyan-500/20',
+    text: 'text-cyan-400',
+    border: 'border-cyan-500/30',
+  },
+  'Infrastructure': {
     bg: 'bg-cyan-500/20',
     text: 'text-cyan-400',
     border: 'border-cyan-500/30',
@@ -47,10 +93,50 @@ const CATEGORY_COLORS: Record<string, { bg: string; text: string; border: string
     text: 'text-orange-400',
     border: 'border-orange-500/30',
   },
+  'Development': {
+    bg: 'bg-orange-500/20',
+    text: 'text-orange-400',
+    border: 'border-orange-500/30',
+  },
   'Communication': {
     bg: 'bg-pink-500/20',
     text: 'text-pink-400',
     border: 'border-pink-500/30',
+  },
+  'Web & Search': {
+    bg: 'bg-cyan-500/20',
+    text: 'text-cyan-400',
+    border: 'border-cyan-500/30',
+  },
+  'Search': {
+    bg: 'bg-cyan-500/20',
+    text: 'text-cyan-400',
+    border: 'border-cyan-500/30',
+  },
+  'Research': {
+    bg: 'bg-cyan-500/20',
+    text: 'text-cyan-400',
+    border: 'border-cyan-500/30',
+  },
+  'Data': {
+    bg: 'bg-blue-500/20',
+    text: 'text-blue-400',
+    border: 'border-blue-500/30',
+  },
+  'Automation': {
+    bg: 'bg-amber-500/20',
+    text: 'text-amber-400',
+    border: 'border-amber-500/30',
+  },
+  'Design': {
+    bg: 'bg-pink-500/20',
+    text: 'text-pink-400',
+    border: 'border-pink-500/30',
+  },
+  'AI Agents': {
+    bg: 'bg-violet-500/20',
+    text: 'text-violet-400',
+    border: 'border-violet-500/30',
   },
   'Utilities': {
     bg: 'bg-zinc-500/20',

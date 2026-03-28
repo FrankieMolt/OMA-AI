@@ -27,7 +27,7 @@ export function HeroSection() {
 
       <div className="relative z-10 max-w-5xl mx-auto px-6 py-32 text-center">
         <div className="mb-10 animate-fade-in">
-          <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full glass-card border border-violet-500/20 mb-10">
+          <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full backdrop-blur-xl bg-violet-500/10 border border-violet-500/20 mb-10">
             <Sparkles className="w-4 h-4 text-amber-400" />
             <span className="text-sm font-medium text-violet-200/80">MCP Marketplace</span>
           </div>
@@ -50,14 +50,14 @@ export function HeroSection() {
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16 animate-fade-in animation-delay-300">
           <Link
             href="/mcps"
-            className="inline-flex items-center gap-2 bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white px-8 py-4 rounded-full font-semibold text-lg hover:from-violet-500 hover:to-fuchsia-500 hover:shadow-xl hover:shadow-violet-500/25 hover:-translate-y-0.5 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-violet-400 focus:ring-offset-2 focus:ring-offset-[#0a0a0f]"
+            className="inline-flex items-center gap-2 bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white px-8 py-4 rounded-full font-semibold text-lg hover:from-violet-500 hover:to-fuchsia-500 hover:shadow-xl hover:shadow-violet-500/25 hover:-translate-y-0.5 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-violet-400 focus:ring-offset-2 focus:ring-offset-zinc-950"
           >
             Explore Marketplace
             <ArrowRight className="w-5 h-5" />
           </Link>
           <Link
             href="/publish"
-            className="inline-flex items-center gap-2 glass-card text-violet-300 px-8 py-4 rounded-full font-semibold text-lg hover:bg-violet-500/10 transition-all border border-violet-500/20 focus:outline-none focus:ring-2 focus:ring-violet-400 focus:ring-offset-2 focus:ring-offset-[#0a0a0f]"
+            className="inline-flex items-center gap-2 backdrop-blur-xl bg-violet-500/10 border border-violet-500/20 text-violet-300 px-8 py-4 rounded-full font-semibold text-lg hover:bg-violet-500/20 transition-all focus:outline-none focus:ring-2 focus:ring-violet-400 focus:ring-offset-2 focus:ring-offset-zinc-950"
           >
             Start Building
           </Link>

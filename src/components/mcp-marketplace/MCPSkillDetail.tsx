@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
-import { ArrowUpRight, Star, CheckCircle, Clock, Zap, Copy, Terminal, BookOpen } from 'lucide-react';
+import { ArrowUpRight, Star, CheckCircle, Copy, Terminal, BookOpen, ExternalLink, Zap } from 'lucide-react';
 import { getCategoryIcon, getCategoryColors } from '@/lib/category-icons';
 import { getMcpFaviconUrl } from '@/lib/mcp-icons';
 
@@ -35,7 +35,7 @@ export default function MCPSkillDetail({ slug }: { slug: string }) {
   const [skill, setSkill] = useState<MCPSkill | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [installing, setInstalling] = useState(false);
+  const [copiedId, setCopiedId] = useState<string | null>(null);
 
   const fetchSkill = useCallback(async () => {
     try {
@@ -61,18 +61,21 @@ export default function MCPSkillDetail({ slug }: { slug: string }) {
     fetchSkill();
   }, [fetchSkill]);
 
-  const handleInstall = async () => {
+  const copyToClipboard = async (text: string, id: string) => {
     try {
-      setInstalling(true);
-
-      const installCmd = `npm install oma-${skill?.slug}`;
-      await navigator.clipboard.writeText(installCmd);
-
-      alert(`Installation command copied to clipboard:\n${installCmd}\n\nPaste in your terminal to install!`);
+      await navigator.clipboard.writeText(text);
+      setCopiedId(id);
+      setTimeout(() => setCopiedId(null), 2000);
     } catch {
-      console.error('Failed to copy to clipboard:');
-    } finally {
-      setInstalling(false);
+      // Fallback for environments without clipboard API
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textarea);
+      setCopiedId(id);
+      setTimeout(() => setCopiedId(null), 2000);
     }
   };
 
@@ -374,26 +377,85 @@ export default function MCPSkillDetail({ slug }: { slug: string }) {
               className="p-6 bg-zinc-900 border border-zinc-800 rounded-2xl"
             >
               <h3 className="text-lg font-semibold text-white mb-4">
-                Install
+                Connect to OpenClaw
               </h3>
+              <p className="text-sm text-gray-400 mb-4">
+                Add this MCP server to your OpenClaw or Claude Desktop config.
+              </p>
+
+              {/* OpenClaw config block */}
+              <div className="bg-zinc-950 p-3 rounded-lg mb-3">
+                <pre className="text-xs text-green-400 overflow-x-auto whitespace-pre-wrap break-all">{`{
+  "mcp": {
+    "servers": {
+      "${skill.slug}": {
+        "transport": "streamable-http",
+        "url": "${skill.mcp_endpoint}"
+      }
+    }
+  }
+}`}</pre>
+              </div>
               <button
-                type="button"
-                onClick={handleInstall}
-                disabled={installing}
-                className="w-full px-4 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                onClick={() => copyToClipboard(`{
+  "mcp": {
+    "servers": {
+      "${skill.slug}": {
+        "transport": "streamable-http",
+        "url": "${skill.mcp_endpoint}"
+      }
+    }
+  }
+}`, 'openclaw')}
+                className="w-full px-4 py-2.5 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors font-medium flex items-center justify-center gap-2 mb-2"
               >
-                {installing ? (
-                  <>
-                    <Clock size={18} className="animate-spin" />
-                    Installing...
-                  </>
+                {copiedId === 'openclaw' ? (
+                  <><CheckCircle size={16} /> Copied!</>
                 ) : (
-                  <>
-                    <Zap size={18} />
-                    Copy Install Command
-                  </>
+                  <><Copy size={16} /> Copy OpenClaw Config</>
                 )}
               </button>
+
+              {/* Claude Desktop config block */}
+              <div className="bg-zinc-950 p-3 rounded-lg mb-3">
+                <pre className="text-xs text-green-400 overflow-x-auto whitespace-pre-wrap break-all">{`{
+  "mcpServers": {
+    "${skill.slug}": {
+      "command": "npx",
+      "args": ["-y", "@oma-ai/mcp-cli", "${skill.slug}"]
+    }
+  }
+}`}</pre>
+              </div>
+              <button
+                onClick={() => copyToClipboard(`{
+  "mcpServers": {
+    "${skill.slug}": {
+      "command": "npx",
+      "args": ["-y", "@oma-ai/mcp-cli", "${skill.slug}"]
+    }
+  }
+}`, 'claude')}
+                className="w-full px-4 py-2.5 bg-violet-600 hover:bg-violet-700 text-white rounded-lg transition-colors font-medium flex items-center justify-center gap-2"
+              >
+                {copiedId === 'claude' ? (
+                  <><CheckCircle size={16} /> Copied!</>
+                ) : (
+                  <><Copy size={16} /> Copy Claude Desktop Config</>
+                )}
+              </button>
+
+              {skill.documentation_url && (
+                <a
+                  href={skill.documentation_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-3 flex items-center justify-center gap-1.5 text-sm text-gray-400 hover:text-white transition-colors"
+                >
+                  <ExternalLink size={14} />
+                  Full Documentation
+                </a>
+              )}
             </MotionDiv>
 
             {/* Pricing Card */}
