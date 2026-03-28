@@ -105,7 +105,7 @@ export default function Navigation() {
               </div>
               
               {navItems.filter(n => !n.dropdown).map((item) => (
-                <Link key={item.href} href={item.href} className="px-4 py-2.5 text-zinc-400 hover:text-white relative after:absolute after:bottom-0 after:left-4 after:right-4 after:h-0.5 after:bg-primary after:scale-x-0 hover:after:scale-x-100 after:transition-transform rounded-lg hover:bg-zinc-800/50 transition-colors">
+                <Link key={item.href} href={item.href} className="px-4 py-2.5 text-zinc-400 hover:text-white relative after:absolute after:-bottom-px after:left-4 after:right-4 after:h-0.5 after:bg-violet-400 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:origin-left rounded-lg hover:bg-zinc-800/50 transition-colors">
                   {item.name}
                 </Link>
               ))}

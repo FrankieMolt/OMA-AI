@@ -23,7 +23,8 @@ function LiveTradingStatusInner() {
         if (res.ok) {
           const data = await res.json();
           setStatus(data);
-          setNextScanEta(60); // Reset ETA timer
+          // Only reset ETA if it just finished a cycle — avoid jitter on slow fetches
+          setNextScanEta((prev) => (prev <= 1 ? 60 : prev));
         }
       } catch {
         // Silent fail - trading status not critical for UX
