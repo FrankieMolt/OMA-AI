@@ -206,14 +206,12 @@ export function isProduction(): boolean {
 }
 
 const x402Exports = {
-  NETWORKS,
   parsePrice,
   formatPrice,
   createPaymentRequirement,
   encodePaymentRequirement,
   decodePaymentRequirement,
   verifyBasePayment,
-  getOmAIPaymentAddress,
   isProduction
 };
 

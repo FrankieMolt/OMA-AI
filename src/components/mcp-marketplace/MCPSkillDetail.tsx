@@ -1,103 +1,36 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState } from 'react';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
-import { ArrowUpRight, Star, CheckCircle, Copy, Terminal, BookOpen, ExternalLink, Zap } from 'lucide-react';
+import { ArrowUpRight, CheckCircle, Copy, Terminal, BookOpen, ExternalLink, Zap } from 'lucide-react';
 import { getCategoryIcon, getCategoryColors } from '@/lib/category-icons';
 import { getMcpFaviconUrl } from '@/lib/mcp-icons';
+import { StarRating } from '@/components/ui/StarRating';
+import { useMCPSkillDetail } from '@/hooks/useMCPSkillDetail';
 
 const MotionDiv = dynamic(
   () => import('framer-motion').then(m => m.motion.div),
   { ssr: false }
 );
 
-interface MCPSkill {
-  id: string;
-  name: string;
-  slug: string;
-  category: string[];
-  description: string;
-  author: string;
-  repository_url: string | null;
-  documentation_url: string | null;
-  mcp_endpoint: string;
-  pricing_usdc: number;
-  x402_enabled: boolean;
-  verified: boolean;
-  rating: number;
-  total_calls: number;
-  success_rate: number;
-  created_at: string;
-}
-
 export default function MCPSkillDetail({ slug }: { slug: string }) {
-  const [skill, setSkill] = useState<MCPSkill | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const { skill, loading, error } = useMCPSkillDetail(slug);
   const [copiedId, setCopiedId] = useState<string | null>(null);
-
-  const fetchSkill = useCallback(async () => {
-    try {
-      setLoading(true);
-      setError(null);
-
-      const response = await fetch(`/api/mcp/skill/${slug}`);
-      const data = await response.json();
-
-      if (data.success) {
-        setSkill(data.data);
-      } else {
-        setError('Skill not found');
-      }
-    } catch {
-      setError('Error fetching skill details');
-    } finally {
-      setLoading(false);
-    }
-  }, [slug]);
-
-  useEffect(() => {
-    fetchSkill();
-  }, [fetchSkill]);
 
   const copyToClipboard = async (text: string, id: string) => {
     try {
       await navigator.clipboard.writeText(text);
-      setCopiedId(id);
-      setTimeout(() => setCopiedId(null), 2000);
     } catch {
-      // Fallback for environments without clipboard API
       const textarea = document.createElement('textarea');
       textarea.value = text;
       document.body.appendChild(textarea);
       textarea.select();
       document.execCommand('copy');
       document.body.removeChild(textarea);
-      setCopiedId(id);
-      setTimeout(() => setCopiedId(null), 2000);
     }
-  };
-
-  const renderStars = (rating: number) => {
-    return (
-      <div className="flex items-center gap-1">
-        {[1, 2, 3, 4, 5].map((star) => (
-          <Star
-            key={star}
-            size={16}
-            className={
-              star <= Math.round(rating)
-                ? 'fill-yellow-400 text-yellow-400'
-                : 'text-gray-600'
-            }
-          />
-        ))}
-        <span className="ml-2 text-sm text-gray-400">
-          {rating.toFixed(1)}
-        </span>
-      </div>
-    );
+    setCopiedId(id);
+    setTimeout(() => setCopiedId(null), 2000);
   };
 
   if (loading) {
@@ -187,7 +120,11 @@ export default function MCPSkillDetail({ slug }: { slug: string }) {
                 </p>
               </div>
             </div>
-            {renderStars(skill.rating)}
+            {error ? (
+              <span className="text-sm text-red-400">{error}</span>
+            ) : (
+              <StarRating rating={skill.rating} />
+            )}
           </div>
         </MotionDiv>
 

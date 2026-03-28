@@ -725,3 +725,21 @@ export async function validateApiKey(apiKey: string) {
     return null;
   }
 }
+
+/**
+ * Lightweight server-side Supabase client factory for API routes.
+ * Uses SERVICE_ROLE_KEY when available (bypasses RLS), falls back to ANON_KEY.
+ * Returns null if NEXT_PUBLIC_SUPABASE_URL is not set.
+ */
+export function getSupabaseClient() {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const key =
+    process.env.SUPABASE_SERVICE_ROLE_KEY ||
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+  if (!url || !key) return null;
+
+  return createClient(url, key, {
+    auth: { autoRefreshToken: false, persistSession: false },
+  });
+}

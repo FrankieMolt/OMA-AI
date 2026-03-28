@@ -1,27 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createClient } from '@supabase/supabase-js';
+import { getSupabaseClient } from '@/lib/supabase/client';
 
 export const dynamic = 'force-dynamic';
 
-function getSupabaseClient() {
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const key = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-  if (!url) return null;
-  if (!key) return null;
-  return createClient(url, key);
-}
-
 export async function GET(
-  request: NextRequest,
+  _request: NextRequest,
   { params }: { params: Promise<{ slug: string }> }
 ) {
   try {
     const { slug } = await params;
-
     const supabase = getSupabaseClient();
 
     if (supabase) {
-      // Query mcp_servers table (same as /api/mcp/list)
       const { data: mcp, error } = await supabase
         .from('mcp_servers')
         .select('*')
@@ -33,13 +23,11 @@ export async function GET(
           success: true,
           data: {
             ...mcp,
-            // Normalize category — mcp_servers uses TEXT, UI expects string[]
             category: Array.isArray(mcp.category)
               ? mcp.category
               : mcp.category
                 ? [mcp.category]
                 : ['Utilities'],
-            // Alias fields the UI expects
             mcp_endpoint: mcp.mcp_endpoint || mcp.endpoint || '',
             pricing_usdc: Number(mcp.pricing_usdc) || 0,
             total_calls: mcp.total_calls || mcp.calls || 0,

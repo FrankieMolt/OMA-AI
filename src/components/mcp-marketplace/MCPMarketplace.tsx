@@ -1,13 +1,14 @@
 'use client';
 
-import { useState, useEffect, useCallback, useMemo } from 'react';
 import dynamic from 'next/dynamic';
 import { GlassCard } from '@/components/ui/GlassCard';
 import { Badge } from '@/components/ui/Badge';
 import { CardSkeleton, InlineLoader } from '@/components/ui/Loading';
-import { Search, Filter, SortAsc, Star, ExternalLink, Download, CheckCircle2, AlertCircle, Zap } from 'lucide-react';
+import { Search, Filter, SortAsc, ExternalLink, Download, CheckCircle2, AlertCircle, Zap } from 'lucide-react';
 import { getCategoryIcon, getCategoryColors } from '@/lib/category-icons';
 import { getMcpFaviconUrl } from '@/lib/mcp-icons';
+import { StarRating } from '@/components/ui/StarRating';
+import { useMCPMarketplace } from '@/hooks/useMCPMarketplace';
 import Link from 'next/link';
 
 const MotionDiv = dynamic(
@@ -15,200 +16,30 @@ const MotionDiv = dynamic(
   { ssr: false }
 );
 
-interface MCPSkill {
-  id: string;
-  name: string;
-  slug: string;
-  category: string[];
-  description: string;
-  author: string;
-  repository_url: string | null;
-  documentation_url: string | null;
-  mcp_endpoint: string;
-  pricing_usdc: number;
-  x402_enabled: boolean;
-  verified: boolean;
-  rating: number;
-  total_calls: number;
-  success_rate: number;
-  created_at?: string;
-}
-
 export default function MCPMarketplace() {
-  const [skills, setSkills] = useState<MCPSkill[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [search, setSearch] = useState('');
-  const [category, setCategory] = useState('all' as string);
-  const [verified, setVerified] = useState('all' as string);
-  const [sortBy, setSortBy] = useState('rating' as string);
-  const [page, setPage] = useState(1);
-  const skillsPerPage = 12;
-
-  const fetchSkills = useCallback(async () => {
-    try {
-      setLoading(true);
-      setError(null);
-
-      const params = new URLSearchParams({
-        page: page.toString(),
-        limit: (skillsPerPage * 3).toString(),
-      });
-
-      const response = await fetch(`/api/mcp/list?${params}`);
-      
-      if (!response.ok) {
-        throw new Error(`HTTP ${response.status}`);
-      }
-      
-      const data = await response.json();
-
-
-
-      if (data.success && Array.isArray(data.data)) {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const mappedSkills = data.data.map((skill: any) => ({ 
-          id: skill.id || '',
-          name: skill.name || 'Unknown',
-          slug: skill.slug || skill.id || '',
-          category: Array.isArray(skill.category) 
-            ? skill.category 
-            : skill.category 
-              ? [skill.category] 
-              : ['Utilities'],
-          description: skill.description || '',
-          author: skill.author || 'Unknown',
-          repository_url: skill.repository_url || null,
-          documentation_url: skill.documentation_url || null,
-          mcp_endpoint: skill.mcp_endpoint || '',
-          pricing_usdc: skill.pricing_usdc || 0,
-          x402_enabled: skill.x402_enabled ?? true,
-          verified: skill.verified ?? false,
-          rating: skill.rating || 0,
-          total_calls: skill.total_calls || 0,
-          success_rate: skill.success_rate || 0,
-        }));
-        
-
-        setSkills(mappedSkills);
-      } else {
-        console.error('[MCPMarketplace] Invalid response:', data);
-        setError('Failed to fetch MCP skills');
-      }
-    } catch (err) {
-      console.error('[MCPMarketplace] Fetch error:', err);
-      setError(`Error fetching MCP skills: ${err instanceof Error ? err.message : String(err)}`);
-    } finally {
-      setLoading(false);
-    }
-  }, [page, skillsPerPage]);
-
-  // Fetch on mount and when page changes
-  useEffect(() => {
-    fetchSkills();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page]); // Only re-fetch when page changes, not when fetchSkills changes
-
-  // Filter and sort skills
-  const processedSkills = useMemo(() => {
-    let result = [...skills];
-
-    // Filter by search
-    if (search) {
-      const searchLower = search.toLowerCase();
-      result = result.filter(skill =>
-        skill.name.toLowerCase().includes(searchLower) ||
-        skill.description.toLowerCase().includes(searchLower) ||
-        (skill.category || []).some(cat => cat.toLowerCase().includes(searchLower))
-      );
-    }
-
-    // Filter by category
-    if (category !== 'all') {
-      result = result.filter(skill => 
-        skill.category && skill.category.includes(category)
-      );
-    }
-
-    // Filter by verified status
-    if (verified === 'true') {
-      result = result.filter(skill => skill.verified);
-    } else if (verified === 'false') {
-      result = result.filter(skill => !skill.verified);
-    }
-
-    // Sort skills
-    switch (sortBy) {
-      case 'rating':
-        result.sort((a, b) => b.rating - a.rating);
-        break;
-      case 'calls':
-        result.sort((a, b) => b.total_calls - a.total_calls);
-        break;
-      case 'price':
-        result.sort((a, b) => a.pricing_usdc - b.pricing_usdc);
-        break;
-      case 'newest':
-        result.sort((a, b) => {
-          const aTime = a.created_at ? new Date(a.created_at).getTime() : 0;
-          const bTime = b.created_at ? new Date(b.created_at).getTime() : 0;
-          return bTime - aTime;
-        });
-        break;
-    }
-
-    return result;
-  }, [skills, search, category, verified, sortBy]);
-
-  // Paginate
-  const paginatedSkills = useMemo(() => {
-    const startIndex = (page - 1) * skillsPerPage;
-    const endIndex = startIndex + skillsPerPage;
-    return processedSkills.slice(startIndex, endIndex);
-  }, [processedSkills, page, skillsPerPage]);
-
-  const totalPages = Math.ceil(processedSkills.length / skillsPerPage);
-
-  // Get unique categories from skills data
-  const categories = useMemo(() => {
-    const cats = new Set<string>(['all']);
-    skills.forEach(skill => {
-      if (skill.category && Array.isArray(skill.category)) {
-        skill.category.forEach(c => cats.add(c));
-      }
-    });
-    return Array.from(cats);
-  }, [skills]);
-
-  const renderStars = (rating: number) => {
-    const roundedRating = Math.round(rating);
-    return (
-      <div className="flex items-center gap-1">
-        {[1, 2, 3, 4, 5].map((star) => (
-          <Star
-            key={star}
-            size={16}
-            className={star <= roundedRating ? 'fill-yellow-400 text-yellow-400' : 'text-gray-600'}
-          />
-        ))}
-        <span className="ml-2 text-sm text-gray-400">
-          {rating.toFixed(1)}
-        </span>
-      </div>
-    );
-  };
+  const {
+    skills,
+    loading,
+    error,
+    search,
+    setSearch,
+    category,
+    setCategory,
+    verified,
+    setVerified,
+    sortBy,
+    setSortBy,
+    page,
+    setPage,
+    totalPages,
+    categories,
+    stats,
+  } = useMCPMarketplace({ skillsPerPage: 12 });
 
   const handlePageChange = (newPage: number) => {
     setPage(newPage);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
-
-  const stats = useMemo(() => ({
-    total: skills.length,
-    x402Enabled: skills.filter(s => s.x402_enabled).length,
-    avgPrice: skills.length > 0 ? skills.reduce((sum, s) => sum + s.pricing_usdc, 0) / skills.length : 0,
-    avgRating: skills.length > 0 ? skills.reduce((sum, s) => sum + s.rating, 0) / skills.length : 0,
-  }), [skills]);
 
   return (
     <div className="min-h-screen bg-[#0a0a0f] pt-24 pb-12">
@@ -327,7 +158,7 @@ export default function MCPMarketplace() {
                 Sort By
               </label>
               <div className="flex gap-2">
-                {['rating', 'calls', 'price', 'newest'].map((sort) => (
+                {(['rating', 'calls', 'price', 'newest'] as const).map((sort) => (
                   <button
                     key={sort}
                     onClick={() => setSortBy(sort)}
@@ -350,8 +181,8 @@ export default function MCPMarketplace() {
         {/* Results Count */}
         <div className="flex items-center justify-between mb-6">
           <p className="text-white font-medium">
-            Showing <strong>{paginatedSkills.length}</strong> of{' '}
-            <strong>{processedSkills.length}</strong> skills
+            Showing <strong>{skills.length}</strong> of{' '}
+            <strong>{stats.total}</strong> skills
           </p>
           {loading && <InlineLoader text="Updating..." />}
         </div>
@@ -369,12 +200,6 @@ export default function MCPMarketplace() {
                 <div className="text-red-100">
                   <p className="font-semibold mb-1">Error Loading Skills</p>
                   <p className="text-sm">{error}</p>
-                  <button
-                    onClick={fetchSkills}
-                    className="mt-3 px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-sm font-medium rounded-lg transition-colors"
-                  >
-                    Retry
-                  </button>
                 </div>
               </div>
             </GlassCard>
@@ -382,7 +207,7 @@ export default function MCPMarketplace() {
         )}
 
         {/* No Results */}
-        {!loading && paginatedSkills.length === 0 && (
+        {!loading && skills.length === 0 && !error && (
           <GlassCard className="p-12 text-center">
             <div className="w-16 h-16 bg-zinc-800 rounded-full flex items-center justify-center mx-auto mb-4">
               <Search className="w-8 h-8 text-gray-500" />
@@ -411,20 +236,20 @@ export default function MCPMarketplace() {
             animate={{ opacity: 1 }}
             className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
           >
-            {[1, 2, 3, 4, 5, 6].map((i) => (
+            {Array.from({ length: 12 }).map((_, i) => (
               <CardSkeleton key={i} />
             ))}
           </MotionDiv>
         )}
 
         {/* Skills Grid */}
-        {!loading && (
+        {!loading && skills.length > 0 && (
           <MotionDiv
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
           >
-            {paginatedSkills.map((skill) => (
+            {skills.map((skill) => (
               <MotionDiv
                 key={skill.id}
                 initial={{ opacity: 0, y: 20 }}
@@ -477,7 +302,7 @@ export default function MCPMarketplace() {
                         )}
                       </div>
                     </div>
-                    {renderStars(skill.rating)}
+                    <StarRating rating={skill.rating} size={14} />
                   </div>
 
                   {/* Description */}
@@ -567,7 +392,7 @@ export default function MCPMarketplace() {
             >
               Previous
             </button>
-            
+
             {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNum) => (
               <button
                 key={pageNum}
@@ -581,7 +406,7 @@ export default function MCPMarketplace() {
                 {pageNum}
               </button>
             ))}
-            
+
             <button
               onClick={() => handlePageChange(page + 1)}
               disabled={page === totalPages}
