@@ -11,7 +11,7 @@ export default function SkillsPage() {
     <div className="min-h-screen bg-[#0a0a0f] pt-24 pb-16">
       <div className="max-w-5xl mx-auto px-6">
         <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-card border border-violet-500/20 mb-6">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full backdrop-blur-xl bg-violet-500/10 border border-violet-500/20 mb-6">
             <Brain className="w-4 h-4 text-violet-400" />
             <span className="text-sm text-violet-300/80">Skills Marketplace</span>
           </div>
@@ -42,7 +42,7 @@ export default function SkillsPage() {
           ].map((item) => {
             const Icon = item.icon;
             return (
-              <div key={item.title} className="glass-card rounded-2xl p-6">
+              <div key={item.title} className="bg-zinc-900/50 border border-zinc-800 backdrop-blur-xl rounded-2xl p-6">
                 <div className="p-3 bg-violet-500/20 rounded-lg w-fit mb-4">
                   <Icon className="w-6 h-6 text-violet-400" />
                 </div>

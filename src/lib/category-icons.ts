@@ -18,7 +18,7 @@ import {
   type LucideIcon,
 } from 'lucide-react';
 
-// Category → Icon mapping — covers BOTH database/mcp-data.ts AND lib/mcp-data.ts categories
+// Category → Icon mapping — covers all categories from MARKETPLACE_MCPS (lib/mcp-data.ts)
 const CATEGORY_ICONS: Record<string, LucideIcon> = {
   // Core set
   'AI/ML': Brain,
@@ -27,7 +27,7 @@ const CATEGORY_ICONS: Record<string, LucideIcon> = {
   'Communication': MessageSquare,
   'Developer Tools': Code2,
 
-  // database/mcp-data.ts categories
+  // MARKETPLACE_MCPS categories (merged from both original data files)
   'Blockchain': Globe,
   'Search': Search,
   'DevOps': Cloud,

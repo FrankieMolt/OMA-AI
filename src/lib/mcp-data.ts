@@ -21,6 +21,12 @@ export interface MCPServer {
   rating: number;
   calls: number;
   tags: string[];
+  total_calls: number;
+  success_rate: number;
+  repository_url?: string;
+  author_email?: string;
+  logo_url?: string;
+  avg_latency_ms?: number;
 }
 
 export const MARKETPLACE_MCPS: MCPServer[] = [
@@ -369,14 +375,94 @@ export const MARKETPLACE_MCPS: MCPServer[] = [
     rating: 4.9,
     calls: 42105,
     tags: ['search', 'privacy', 'research', 'searxng'],
+    total_calls: 42105,
+    success_rate: 99.7,
+  },
+  {
+    id: 'db-1', name: 'Alpha Vantage MCP', slug: 'alpha-vantage-mcp',
+    description: 'Stock market data, crypto prices, FX rates, and economic indicators.',
+    category: 'Finance', pricing_usdc: 0.006, x402_enabled: true, verified: true,
+    author: 'OMA-AI Team', version: '1.0.0', mcp_endpoint: 'https://api.oma-ai.com/mcp/alpha-vantage',
+    tools_count: 3, rating: 4.2, calls: 14320,
+    tags: ['finance', 'stocks', 'crypto', 'market-data'],
+    total_calls: 14320, success_rate: 99.0,
+  },
+  {
+    id: 'db-2', name: 'Ethereum Web3 MCP', slug: 'ethereum-web3-mcp',
+    description: 'Ethereum and EVM chain access. Wallet balances, contract calls, ENS resolution.',
+    category: 'Blockchain', pricing_usdc: 0.008, x402_enabled: true, verified: true,
+    author: 'OMA-AI Team', version: '1.0.0', mcp_endpoint: 'https://api.oma-ai.com/mcp/ethereum',
+    tools_count: 3, rating: 4.5, calls: 22100,
+    tags: ['ethereum', 'web3', 'evm', 'wallet'],
+    total_calls: 22100, success_rate: 99.4,
+  },
+  {
+    id: 'db-3', name: 'Filesystem MCP', slug: 'filesystem-mcp',
+    description: 'Read, write, and manage files. Glob patterns, syntax highlighting.',
+    category: 'Developer Tools', pricing_usdc: 0.001, x402_enabled: true, verified: true,
+    author: 'OMA-AI Team', version: '1.0.0', mcp_endpoint: 'https://api.oma-ai.com/mcp/filesystem',
+    tools_count: 3, rating: 4.4, calls: 41200,
+    tags: ['filesystem', 'files', 'io', 'developer'],
+    total_calls: 41200, success_rate: 99.6,
+  },
+  {
+    id: 'db-4', name: 'Memory MCP', slug: 'memory-mcp',
+    description: 'Persistent memory store for AI agents. Entity tracking, relationship mapping.',
+    category: 'AI Agents', pricing_usdc: 0.004, x402_enabled: true, verified: true,
+    author: 'OMA-AI Team', version: '1.0.0', mcp_endpoint: 'https://api.oma-ai.com/mcp/memory',
+    tools_count: 3, rating: 4.7, calls: 28760,
+    tags: ['memory', 'ai-agent', 'context', 'persistence'],
+    total_calls: 28760, success_rate: 99.8,
+  },
+  {
+    id: 'db-5', name: 'Sequential Thinking MCP', slug: 'sequential-thinking-mcp',
+    description: 'Structured problem-solving through multi-step reasoning chains.',
+    category: 'AI Agents', pricing_usdc: 0.003, x402_enabled: true, verified: true,
+    author: 'OMA-AI Team', version: '1.0.0', mcp_endpoint: 'https://api.oma-ai.com/mcp/thinking',
+    tools_count: 3, rating: 4.8, calls: 39240,
+    tags: ['thinking', 'reasoning', 'problem-solving'],
+    total_calls: 39240, success_rate: 99.9,
+  },
+  {
+    id: 'db-6', name: 'Slack MCP', slug: 'slack-mcp',
+    description: 'Slack workspace integration. Send messages, manage channels.',
+    category: 'Communication', pricing_usdc: 0.008, x402_enabled: true, verified: true,
+    author: 'OMA-AI Team', version: '1.0.0', mcp_endpoint: 'https://api.oma-ai.com/mcp/slack',
+    tools_count: 2, rating: 4.2, calls: 9870,
+    tags: ['slack', 'messaging', 'chatbot', 'team'],
+    total_calls: 9870, success_rate: 99.3,
+  },
+  {
+    id: 'db-7', name: 'Solana RPC MCP', slug: 'solana-rpc-mcp',
+    description: 'Direct Solana blockchain access via RPC.',
+    category: 'Blockchain', pricing_usdc: 0.005, x402_enabled: true, verified: true,
+    author: 'OMA-AI Team', version: '1.0.0', mcp_endpoint: 'https://api.oma-ai.com/mcp/solana',
+    tools_count: 2, rating: 4.7, calls: 29870,
+    tags: ['solana', 'blockchain', 'rpc', 'defi'],
+    total_calls: 29870, success_rate: 99.8,
+  },
+  {
+    id: 'db-8', name: 'Tavily Search MCP', slug: 'tavily-search-mcp',
+    description: 'Web search and news aggregation. Semantic relevance scoring.',
+    category: 'Search', pricing_usdc: 0.005, x402_enabled: true, verified: true,
+    author: 'OMA-AI Team', version: '1.0.0', mcp_endpoint: 'https://api.oma-ai.com/mcp/tavily',
+    tools_count: 2, rating: 4.4, calls: 34560,
+    tags: ['search', 'web', 'news', 'research'],
+    total_calls: 34560, success_rate: 99.7,
+  },
+  {
+    id: 'db-9', name: 'Weather MCP', slug: 'weather-mcp',
+    description: 'Real-time weather data. Current conditions, forecasts, alerts.',
+    category: 'Utilities', pricing_usdc: 0.002, x402_enabled: true, verified: true,
+    author: 'OMA-AI Team', version: '1.0.0', mcp_endpoint: 'https://api.oma-ai.com/mcp/weather',
+    tools_count: 2, rating: 4.1, calls: 12450,
+    tags: ['weather', 'forecast', 'meteorology'],
+    total_calls: 12450, success_rate: 99.5,
   },
 ];
 
-export const CATEGORIES = [
-  { id: 'all', name: 'All', count: 19 },
-  { id: 'finance-crypto', name: 'Finance & Crypto', count: 4 },
-  { id: 'ai-ml', name: 'AI & ML', count: 4 },
-  { id: 'development', name: 'Development', count: 2 },
+// CATEGORIES removed — use getAllCategories() from @/lib/category-icons instead.
+// CATEGORIES array was redundant and duplicated the category system.
   { id: 'infrastructure', name: 'Infrastructure', count: 3 },
   { id: 'research', name: 'Research', count: 3 },
   { id: 'automation', name: 'Automation', count: 1 },

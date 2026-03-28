@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
-import { MCP_DATA } from '@/database/mcp-data';
-import { CATEGORIES } from '@/lib/mcp-data';
+import { MARKETPLACE_MCPS } from '@/lib/mcp-data';
 import { getSupabaseClient } from '@/lib/supabase/client';
+import { getAllCategories } from '@/lib/category-icons';
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -13,7 +13,7 @@ export async function GET(request: Request) {
   const verified = searchParams.get('verified');
 
   const supabase = getSupabaseClient();
-  let data = [...MCP_DATA];
+  let data = [...MARKETPLACE_MCPS];
   let total = data.length;
   let useSupabase = false;
 
@@ -22,7 +22,6 @@ export async function GET(request: Request) {
     try {
       let query = supabase.from('mcp_servers').select('*', { count: 'exact' });
 
-      // Filter by category (mcp_servers uses TEXT category, not TEXT[])
       if (category !== 'all') {
         query = query.eq('category', category);
       }
@@ -36,7 +35,7 @@ export async function GET(request: Request) {
       }
 
       const { data: dbData, count, error } = await query
-        .order(sortBy === 'rating' ? 'rating' : sortBy === 'calls' ? 'total_calls' : 'created_at', { ascending: false })
+        .order(sortBy === 'rating' ? 'rating' : 'total_calls', { ascending: false })
         .range((page - 1) * limit, page * limit - 1);
 
       if (!error && dbData && dbData.length > 0) {
@@ -51,7 +50,6 @@ export async function GET(request: Request) {
 
   // Use local data if Supabase unavailable
   if (!useSupabase) {
-    // Filter
     if (category !== 'all') {
       data = data.filter(m => m.category === category);
     }
@@ -60,7 +58,7 @@ export async function GET(request: Request) {
       data = data.filter(m =>
         m.name.toLowerCase().includes(q) ||
         m.description.toLowerCase().includes(q) ||
-        (m.tags || []).some(t => t.toLowerCase().includes(q))
+        (m.tags || []).some((t: string) => t.toLowerCase().includes(q))
       );
     }
     if (verified === 'true') {
@@ -69,12 +67,10 @@ export async function GET(request: Request) {
       data = data.filter(m => m.verified === false);
     }
 
-    // Sort
     data.sort((a, b) => {
       if (sortBy === 'rating') return (b.rating || 0) - (a.rating || 0);
       if (sortBy === 'calls') return (b.total_calls || 0) - (a.total_calls || 0);
       if (sortBy === 'price') return (a.pricing_usdc || 0) - (b.pricing_usdc || 0);
-      if (sortBy === 'newest') return (new Date(b.created_at || 0).getTime()) - (new Date(a.created_at || 0).getTime());
       return 0;
     });
 
@@ -82,10 +78,10 @@ export async function GET(request: Request) {
     data = data.slice((page - 1) * limit, page * limit);
   }
 
-  // Use normalized categories from CATEGORIES (lib/mcp-data.ts)
-  // instead of raw categories from MCP_DATA (database/mcp-data.ts)
-  // This ensures category names match across the UI
-  const normalizedCategories = CATEGORIES.filter(c => c.id !== 'all').map(c => c.name);
+  // Use the category-icons system for consistent categories
+  const knownCategories = getAllCategories();
+  const usedCategories = Array.from(new Set(MARKETPLACE_MCPS.map(m => m.category)));
+  const normalizedCategories = usedCategories.filter(c => knownCategories.includes(c) || c !== 'all');
 
   const response = NextResponse.json({
     success: true,
@@ -100,8 +96,8 @@ export async function GET(request: Request) {
     },
     filters: {
       categories: normalizedCategories,
-      totalMCPs: MCP_DATA.length,
-      verifiedCount: MCP_DATA.filter(m => m.verified).length,
+      totalMCPs: MARKETPLACE_MCPS.length,
+      verifiedCount: MARKETPLACE_MCPS.filter(m => m.verified).length,
     },
     source: useSupabase ? 'supabase' : 'fallback',
   });

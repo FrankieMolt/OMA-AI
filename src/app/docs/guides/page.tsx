@@ -272,7 +272,7 @@ const walletFromMnemonic = mnemonicToWallet(
   { chain: ethereum }
 );
 
-console.log("Agent wallet address:", wallet.address);`,
+`,
     icon: "🎫"
   },
   {
