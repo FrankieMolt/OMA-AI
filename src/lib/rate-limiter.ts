@@ -1,10 +1,12 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { createClient } from '@supabase/supabase-js';
 
-const supabase = createClient(
-  process.env.SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_KEY!
-);
+const supabaseUrl = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
+const supabaseKey = process.env.SUPABASE_SERVICE_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+const supabase = supabaseUrl && supabaseKey
+  ? createClient(supabaseUrl, supabaseKey)
+  : null;
 
 // Tier limits
 const TIER_LIMITS = {
@@ -34,13 +36,68 @@ const TIER_LIMITS = {
   }
 };
 
-// In-memory rate limit store (use Redis in production)
-const rateLimitStore = new Map<string, { count: number; resetAt: number }>();
+/**
+ * Supabase-backed rate limit check
+ * Persists across Vercel cold starts and multi-instance deployments
+ */
+async function checkSupabaseRateLimit(
+  userId: string,
+  key: string,
+  limit: number,
+  windowMs: number
+): Promise<{ allowed: boolean; current: number; resetAt: number }> {
+  if (!supabase) {
+    // No Supabase — skip rate limiting (fail open for dev)
+    return { allowed: true, current: 0, resetAt: Date.now() + windowMs };
+  }
+
+  const now = Date.now();
+  const windowStart = Math.floor(now / windowMs) * windowMs;
+  const resetAt = windowStart + windowMs;
+
+  try {
+    const { data, error } = await supabase
+      .from('rate_limits')
+      .select('count')
+      .eq('user_id', userId)
+      .eq('key', key)
+      .eq('window_start', windowStart)
+      .single();
+
+    if (error || !data) {
+      // First request in this window
+      await supabase.from('rate_limits').upsert({
+        user_id: userId,
+        key,
+        window_start: windowStart,
+        count: 1,
+        expires_at: new Date(resetAt).toISOString(),
+      }, { onConflict: 'user_id,key,window_start' });
+      return { allowed: true, current: 1, resetAt };
+    }
+
+    if (data.count >= limit) {
+      return { allowed: false, current: data.count, resetAt };
+    }
+
+    await supabase
+      .from('rate_limits')
+      .update({ count: data.count + 1 })
+      .eq('user_id', userId)
+      .eq('key', key)
+      .eq('window_start', windowStart);
+
+    return { allowed: true, current: data.count + 1, resetAt };
+  } catch {
+    // On error, fail open
+    return { allowed: true, current: 0, resetAt: now + windowMs };
+  }
+}
 
 /**
  * Rate Limit Middleware
- * 
- * Enforces per-minute, per-day, and token limits
+ *
+ * Enforces per-minute, per-day, and token limits via Supabase
  */
 export async function rateLimit(
   req: NextApiRequest,
@@ -56,44 +113,40 @@ export async function rateLimit(
 
   const limits = TIER_LIMITS[user.tier as keyof typeof TIER_LIMITS] || TIER_LIMITS.free;
   const now = Date.now();
-  const minute = 60000;
-  const day = 86400000;
+  const MINUTE = 60_000;
+  const DAY = 86_400_000;
 
   // Check requests per minute
-  const minuteKey = `${user.id}:rpm:${Math.floor(now / minute)}`;
-  const minuteEntry = rateLimitStore.get(minuteKey);
+  const rpmCheck = await checkSupabaseRateLimit(user.id, 'rpm', limits.rpm, MINUTE);
 
-  if (minuteEntry && minuteEntry.count >= limits.rpm) {
-    const resetIn = minuteEntry.resetAt - now;
+  if (!rpmCheck.allowed) {
+    const resetIn = rpmCheck.resetAt - now;
     res.setHeader('X-RateLimit-Limit', limits.rpm.toString());
     res.setHeader('X-RateLimit-Remaining', '0');
     res.setHeader('X-RateLimit-Reset', Math.ceil(resetIn / 1000).toString());
     res.setHeader('Retry-After', Math.ceil(resetIn / 1000).toString());
-
     return res.status(429).json({
       error: 'Rate limit exceeded',
       message: `Max ${limits.rpm} requests per minute`,
       retry_after: Math.ceil(resetIn / 1000),
       tier: user.tier,
-      upgrade_url: 'https://oma-ai.com/pricing'
+      upgrade_url: 'https://oma-ai.com/pricing',
     });
   }
 
   // Check requests per day
-  const dayKey = `${user.id}:rpd:${Math.floor(now / day)}`;
-  const dayEntry = rateLimitStore.get(dayKey);
+  const rpdCheck = await checkSupabaseRateLimit(user.id, 'rpd', limits.rpd, DAY);
 
-  if (dayEntry && dayEntry.count >= limits.rpd) {
-    const resetIn = dayEntry.resetAt - now;
+  if (!rpdCheck.allowed) {
+    const resetIn = rpdCheck.resetAt - now;
     res.setHeader('X-RateLimit-Limit', limits.rpd.toString());
     res.setHeader('X-RateLimit-Remaining', '0');
     res.setHeader('X-RateLimit-Reset', Math.ceil(resetIn / 1000).toString());
-
     return res.status(429).json({
       error: 'Daily limit exceeded',
       message: `Max ${limits.rpd} requests per day`,
       retry_after: Math.ceil(resetIn / 1000),
-      tier: user.tier
+      tier: user.tier,
     });
   }
 
@@ -105,37 +158,14 @@ export async function rateLimit(
       tokens_used: user.tokens_used,
       tokens_limit: user.tokens_limit,
       tier: user.tier,
-      upgrade_url: 'https://oma-ai.com/pricing'
+      upgrade_url: 'https://oma-ai.com/pricing',
     });
   }
 
-  // Increment counters
-  if (!minuteEntry) {
-    rateLimitStore.set(minuteKey, { count: 1, resetAt: now + minute });
-  } else {
-    minuteEntry.count++;
-  }
-
-  if (!dayEntry) {
-    rateLimitStore.set(dayKey, { count: 1, resetAt: now + day });
-  } else {
-    dayEntry.count++;
-  }
-
-  // Clean up old entries (every 100 requests)
-  if (rateLimitStore.size > 10000) {
-    const cutoff = now - (day * 2);
-    for (const [key, entry] of rateLimitStore.entries()) {
-      if (entry.resetAt < cutoff) {
-        rateLimitStore.delete(key);
-      }
-    }
-  }
-
-  // Set headers
-  const remaining = limits.rpm - (minuteEntry?.count || 1);
+  // Set rate limit headers
+  const remainingRpm = Math.max(0, limits.rpm - rpmCheck.current);
   res.setHeader('X-RateLimit-Limit', limits.rpm.toString());
-  res.setHeader('X-RateLimit-Remaining', Math.max(0, remaining).toString());
+  res.setHeader('X-RateLimit-Remaining', remainingRpm.toString());
   res.setHeader('X-RateLimit-Tier', user.tier);
 
   await next();
@@ -147,6 +177,7 @@ export async function rateLimit(
  * Updates user's token count after API call
  */
 export async function trackTokens(userId: string, tokens: number) {
+  if (!supabase) return;
   try {
     await supabase.rpc('increment_token_usage', {
       user_id: userId,
@@ -168,6 +199,7 @@ export async function checkTokenBudget(userId: string): Promise<{
   remaining: number;
   percentage: number;
 }> {
+  if (!supabase) return { used: 0, limit: 0, remaining: 0, percentage: 0 };
   const { data: user } = await supabase
     .from('users')
     .select('tokens_used, tokens_limit')
@@ -200,8 +232,9 @@ export function getTierLimits(tier: string) {
  * Upgrade Tier
  */
 export async function upgradeTier(userId: string, newTier: string) {
+  if (!supabase) throw new Error('Supabase not configured');
   const limits = TIER_LIMITS[newTier as keyof typeof TIER_LIMITS];
-  
+
   if (!limits) {
     throw new Error('Invalid tier');
   }

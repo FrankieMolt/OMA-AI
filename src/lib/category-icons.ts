@@ -7,13 +7,10 @@ import {
   MessageSquare,
   Wrench,
   Globe,
-  Shield,
   Terminal,
   Cloud,
   Bot,
   DollarSign,
-  BarChart3,
-  Cpu,
   Layers,
   type LucideIcon,
 } from 'lucide-react';

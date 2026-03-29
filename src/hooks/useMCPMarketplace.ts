@@ -66,15 +66,15 @@ export function useMCPMarketplace({ skillsPerPage = 12 }: UseMCPMarketplaceOptio
   const [verified, setVerified] = useState('all');
   const [sortBy, setSortBy] = useState('rating');
 
-  // Fetch one extra page so React Query caches the next page
+  // Fetch exactly skillsPerPage items (was fetching 3x causing unnecessary bandwidth)
   const { data, isLoading, error } = useQuery({
     queryKey: ['mcp-skills', page, skillsPerPage],
-    queryFn: () => fetchSkills(page, skillsPerPage * 3),
+    queryFn: () => fetchSkills(page, skillsPerPage),
     staleTime: 5 * 60_000, // 5 minutes — marketplace data doesn't change every second
     gcTime: 10 * 60_000,   // 10 minutes cache
   });
 
-  const skills: MCPSkill[] = data ?? [];
+  const skills = useMemo<MCPSkill[]>(() => data ?? [], [data]);
 
   const processedSkills = useMemo(() => {
     let result = [...skills];

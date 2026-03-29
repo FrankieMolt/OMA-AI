@@ -99,3 +99,31 @@ CREATE INDEX IF NOT EXISTS idx_mcp_servers_slug ON mcp_servers(slug);
 CREATE INDEX IF NOT EXISTS idx_mcp_servers_category ON mcp_servers USING GIN(category);
 CREATE INDEX IF NOT EXISTS idx_mcp_servers_rating ON mcp_servers(rating DESC);
 CREATE INDEX IF NOT EXISTS idx_mcp_servers_price ON mcp_servers(pricing_usdc);
+
+-- ============================================================
+-- STEP 5: Rate limits table (for Supabase-backed rate limiting)
+-- ============================================================
+
+CREATE TABLE IF NOT EXISTS rate_limits (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id TEXT NOT NULL,
+  key TEXT NOT NULL,
+  window_start BIGINT NOT NULL,
+  count INTEGER DEFAULT 1,
+  expires_at TIMESTAMPTZ,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  UNIQUE(user_id, key, window_start)
+);
+
+ALTER TABLE rate_limits ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Service role full" ON rate_limits FOR ALL USING (auth.role() = 'service_role');
+
+CREATE INDEX IF NOT EXISTS idx_rate_limits_user ON rate_limits(user_id, key, window_start);
+
+-- Token usage RPC
+CREATE OR REPLACE FUNCTION increment_token_usage(user_id TEXT, token_count BIGINT)
+RETURNS VOID AS $$
+BEGIN
+  UPDATE users SET used_this_month = used_this_month + token_count WHERE id = user_id;
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
