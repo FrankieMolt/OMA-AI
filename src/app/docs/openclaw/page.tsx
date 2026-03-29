@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import { GlassCard } from '@/components/ui/GlassCard';
 import Link from 'next/link';
-import { Github, Terminal, Box, Zap, Code, BookOpen, ArrowRight, ExternalLink, CheckCircle2 } from 'lucide-react';
+import {  Terminal, Box, Zap, Code, BookOpen, ArrowRight, ExternalLink, CheckCircle2 } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'OpenClaw Integration Guide - OMA-AI Docs',
@@ -29,7 +29,7 @@ export default function OpenClawDocsPage() {
       <div className="container mx-auto px-4 max-w-4xl">
         <div className="mb-12">
           <div className="flex items-center gap-3 mb-4">
-            <Github className="w-8 h-8 text-orange-400" />
+            <Code className="w-8 h-8 text-orange-400" />
             <span className="text-orange-400 font-semibold">OpenClaw Integration</span>
           </div>
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">

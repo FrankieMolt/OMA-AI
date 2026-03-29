@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import Link from 'next/link';
-import { Brain, Github, Twitter, Mail, Zap, Cpu, Globe, Code, BookOpen, MessageSquare, DollarSign } from 'lucide-react';
+import { Brain, X, Mail, Zap, Globe, Code, BookOpen, MessageSquare, DollarSign, Cpu } from 'lucide-react';
 
 export const Footer = memo(function Footer() {
   return (
@@ -20,10 +20,10 @@ export const Footer = memo(function Footer() {
             </p>
             <div className="flex items-center gap-4">
               <a href="https://github.com/FrankieMolt/OMA-AI" target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="w-10 h-10 rounded-lg glass-card flex items-center justify-center text-zinc-400 hover:text-white hover:border-violet-500/30 transition-all">
-                <Github className="w-5 h-5" />
+                <Code className="w-5 h-5" />
               </a>
               <a href="https://twitter.com/OMA_AI" target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="w-10 h-10 rounded-lg glass-card flex items-center justify-center text-zinc-400 hover:text-white hover:border-violet-500/30 transition-all">
-                <Twitter className="w-5 h-5" />
+                <X className="w-5 h-5" />
               </a>
               <a href="https://discord.gg/oma-ai" target="_blank" rel="noopener noreferrer" aria-label="Discord" className="w-10 h-10 rounded-lg glass-card flex items-center justify-center text-zinc-400 hover:text-white hover:border-violet-500/30 transition-all">
                 <MessageSquare className="w-5 h-5" />

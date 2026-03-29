@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { GlassCard, GlassCardPurple } from '@/components/ui/GlassCard';
-import { Shield, Zap, DollarSign, Lock, Github, Twitter, Rocket, BarChart3, Users, Globe, Code, CheckCircle2 } from 'lucide-react';
+import { Zap, DollarSign, Lock, X, Rocket, Users, Globe, Code, CheckCircle2, BarChart3, Shield, Cpu } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'About OMA-AI | Premier MCP Marketplace for AI Agents',
@@ -334,14 +334,14 @@ export default function AboutPage() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 text-purple-400 hover:text-purple-300 transition-colors"
-                ><Github size={16} />
+                ><Code size={16} />
                   <span className="text-sm">GitHub</span>
                 </Link>
                 <Link href="https://x.com/@nosytlabs"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 text-purple-400 hover:text-purple-300 transition-colors"
-                ><Twitter size={16} />
+                ><X size={16} />
                   <span className="text-sm">Twitter</span>
                 </Link>
               </div>
@@ -403,7 +403,7 @@ export default function AboutPage() {
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-8 py-3 bg-zinc-700 hover:bg-zinc-600 text-white font-bold rounded-lg transition-colors"
-            ><Github size={18} />
+            ><Code size={18} />
               Star on GitHub
             </Link>
             <Link

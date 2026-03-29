@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import { GlassCard } from '@/components/ui/GlassCard';
-import { Github, Terminal, Box, Zap, Code } from 'lucide-react';
+import {  Terminal, Box, Zap, Code } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'OpenClaw Integration - OMA-AI MCP Marketplace',
@@ -28,7 +28,7 @@ export default function OpenClawIntegrationPage() {
       <div className="relative overflow-hidden bg-gradient-to-br from-orange-900/50 via-zinc-900 to-zinc-950 py-20">
         <div className="container mx-auto px-4 relative z-10 text-center">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-orange-600/20 border border-orange-500/30 rounded-full mb-6">
-            <Github className="w-4 h-4 text-orange-300" />
+            <Code className="w-4 h-4 text-orange-300" />
             <span className="text-sm font-semibold text-orange-300">OpenClaw Integration</span>
           </div>
           <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">Connect OpenClaw to OMA-AI</h1>
