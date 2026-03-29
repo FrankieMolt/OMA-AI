@@ -206,7 +206,7 @@ export default function DocsAPIPage() {
             <div className="bg-zinc-800 rounded-lg p-6 border border-zinc-700">
               <div className="flex items-center gap-3 mb-4">
                 <span className="px-2 py-1 bg-blue-500/20 text-blue-400 rounded text-sm font-mono">GET</span>
-                <span className="text-white font-mono">/api/mcp/[slug]</span>
+                <span className="text-white font-mono">/api/mcp/skill/[slug]</span>
               </div>
               <p className="text-zinc-400 mb-4">Get detailed information about a specific MCP server.</p>
               

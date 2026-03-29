@@ -163,3 +163,11 @@ export function getCategoryColors(category: string): { bg: string; text: string;
 export function getAllCategories(): string[] {
   return Object.keys(CATEGORY_ICONS);
 }
+
+// CATEGORIES — derived from CATEGORY_ICONS keys for backwards compatibility
+// Used by: /api/marketplace/route.ts
+export const CATEGORIES = Object.keys(CATEGORY_ICONS).map((name) => ({
+  id: name.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
+  name,
+  count: 0, // count is dynamic; set by the caller from MARKETPLACE_MCPS
+}));

@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
-import { MARKETPLACE_MCPS, CATEGORIES } from '@/lib/mcp-data';
+import { MARKETPLACE_MCPS } from '@/lib/mcp-data';
+import { CATEGORIES } from '@/lib/category-icons';
 
 // Force dynamic rendering
 export const dynamic = 'force-dynamic';

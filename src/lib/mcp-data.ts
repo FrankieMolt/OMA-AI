@@ -21,8 +21,8 @@ export interface MCPServer {
   rating: number;
   calls: number;
   tags: string[];
-  total_calls: number;
-  success_rate: number;
+  total_calls?: number;
+  success_rate?: number;
   repository_url?: string;
   author_email?: string;
   logo_url?: string;
@@ -463,10 +463,3 @@ export const MARKETPLACE_MCPS: MCPServer[] = [
 
 // CATEGORIES removed — use getAllCategories() from @/lib/category-icons instead.
 // CATEGORIES array was redundant and duplicated the category system.
-  { id: 'infrastructure', name: 'Infrastructure', count: 3 },
-  { id: 'research', name: 'Research', count: 3 },
-  { id: 'automation', name: 'Automation', count: 1 },
-  { id: 'data', name: 'Data', count: 1 },
-  { id: 'design', name: 'Design', count: 1 },
-  { id: 'communication', name: 'Communication', count: 1 },
-];
