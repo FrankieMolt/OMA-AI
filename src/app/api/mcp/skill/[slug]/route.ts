@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSupabaseClient } from '@/lib/supabase/client';
+import { MARKETPLACE_MCPS } from '@/lib/mcp-data';
 
 export const dynamic = 'force-dynamic';
 
@@ -47,6 +48,12 @@ export async function GET(
           },
         });
       }
+    }
+
+    // Fallback to static MARKETPLACE_MCPS data
+    const staticMcp = MARKETPLACE_MCPS.find((m) => m.slug === slug);
+    if (staticMcp) {
+      return NextResponse.json({ success: true, data: staticMcp });
     }
 
     return NextResponse.json(
