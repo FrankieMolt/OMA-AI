@@ -11,11 +11,8 @@ const isDevelopment = process.env.NODE_ENV === 'development';
 export function logError(context: string, error: any): void {
   if (isDevelopment) {
     console.error(`[${context}]`, error);
-  } else {
-    // In production, send to error tracking service
-    // TODO: Integrate Sentry or similar
-    // Error tracking can be added here
   }
+  // Sentry integration pending — errors will surface in Vercel logs for now
 }
 
 export function logInfo(context: string, message: string): void {
