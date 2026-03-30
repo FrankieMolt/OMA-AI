@@ -3,7 +3,8 @@
  * Supports Base and Solana networks for USDC payments
  */
 
-import { ethers } from 'ethers';
+import { createPublicClient, http, formatUnits } from 'viem';
+import { base, baseSepolia } from 'viem/chains';
 
 // Network configurations
 export const NETWORKS = {
@@ -13,7 +14,7 @@ export const NETWORKS = {
     name: 'Base',
     usdcAddress: '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913',
     rpcUrl: process.env.BASE_RPC_URL || 'https://mainnet.base.org',
-    explorer: 'https://basescan.org'
+    explorer: 'https://basescan.org',
   },
   'base-sepolia': {
     id: 'eip155:84532',
@@ -21,7 +22,7 @@ export const NETWORKS = {
     name: 'Base Sepolia',
     usdcAddress: '0x036CbD538642dc2B78d73D717E2A12D53cD3dD3',
     rpcUrl: process.env.BASE_SEPOLIA_RPC_URL || 'https://sepolia.base.org',
-    explorer: 'https://sepolia.basescan.org'
+    explorer: 'https://sepolia.basescan.org',
   },
   solana: {
     id: 'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp',
@@ -29,8 +30,8 @@ export const NETWORKS = {
     name: 'Solana',
     usdcAddress: 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v',
     rpcUrl: process.env.SOLANA_RPC_URL || 'https://api.mainnet-beta.solana.com',
-    explorer: 'https://solscan.io'
-  }
+    explorer: 'https://solscan.io',
+  },
 } as const;
 
 export type NetworkName = keyof typeof NETWORKS;
@@ -50,6 +51,19 @@ export interface X402Config {
   facilitatorUrl?: string;
   price: string; // e.g., "$0.001"
 }
+
+// USDC ABI — only what we need for log parsing
+const USDC_ABI = [
+  {
+    name: 'Transfer',
+    type: 'event',
+    inputs: [
+      { name: 'from', type: 'address', indexed: true },
+      { name: 'to', type: 'address', indexed: true },
+      { name: 'value', type: 'uint256', indexed: false },
+    ],
+  },
+] as const;
 
 /**
  * Parse price string to micro-units
@@ -75,14 +89,14 @@ export function formatPrice(microUnits: number): string {
 export function createPaymentRequirement(config: X402Config): PaymentRequirement {
   const network = NETWORKS[config.network];
   const amount = parsePrice(config.price);
-  
+
   return {
     scheme: 'exact',
     network: network.id,
     amount: amount.toString(),
     asset: network.usdcAddress,
     recipient: config.recipientAddress,
-    description: `Payment for ${config.price} access`
+    description: `Payment for ${config.price} access`,
   };
 }
 
@@ -102,7 +116,7 @@ export function decodePaymentRequirement(encoded: string): PaymentRequirement {
 
 /**
  * Verify x402 payment on Base (EVM)
- * Parses transaction logs to verify USDC Transfer or TransferWithAuthorization (EIP-3009)
+ * Parses transaction logs to verify USDC Transfer
  */
 export async function verifyBasePayment(
   txHash: string,
@@ -111,80 +125,56 @@ export async function verifyBasePayment(
   network: NetworkName = 'base'
 ): Promise<boolean> {
   const net = NETWORKS[network];
-  const provider = new ethers.JsonRpcProvider(net.rpcUrl);
-  
+
+  if (network === 'solana') {
+    console.warn('[x402] Solana payment verification not yet implemented');
+    return false;
+  }
+
+  const chain = network === 'base-sepolia' ? baseSepolia : base;
+  const client = createPublicClient({
+    chain,
+    transport: http(net.rpcUrl),
+  });
+
   try {
-    const tx = await provider.getTransaction(txHash);
-    if (!tx) return false;
-    
-    const receipt = await provider.getTransactionReceipt(txHash);
-    if (!receipt) return false;
-    
-    // Check if transaction was successful
-    if (receipt.status !== 1) return false;
-    
-    // Parse logs to find USDC Transfer or TransferWithAuthorization events
-    // USDC Transfer event signature: Transfer(address from, address to, uint256 value)
-    const usdcInterface = new ethers.Interface([
-      'event Transfer(address indexed from, address indexed to, uint256 value)',
-      'event TransferWithAuthorization(address from, address to, address token, uint256 value, uint256 validAfter, uint256 validBefore, bytes32 nonce)'
-    ]);
-    
-    let transferFound = false;
+    const receipt = await client.getTransactionReceipt({ hash: txHash as `0x${string}` });
+
+    if (receipt.status !== 'success') return false;
+
+    const recipientLower = recipientAddress.toLowerCase();
+    const usdcLower = net.usdcAddress.toLowerCase();
+
     for (const log of receipt.logs) {
+      if (log.address.toLowerCase() !== usdcLower) continue;
+
       try {
-        // Only check logs from the USDC contract
-        if (log.address.toLowerCase() !== net.usdcAddress.toLowerCase()) continue;
-        
-        const parsed = usdcInterface.parseLog({
-          topics: log.topics,
-          data: log.data
-        });
-        
-        if (!parsed) continue;
-        const { name, args } = parsed;
-        
-        if (name === 'Transfer') {
-          const to = args[1];
-          const value = args[2];
+        if (
+          log.topics[0] ===
+          '0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df35b9d9' // Transfer event signature
+        ) {
+          const toTopic = log.topics[2]; // topics[2] = indexed "to" param
+          if (!toTopic) continue;
+          const valueHex = log.data;
+          const value = BigInt(valueHex);
           const decimals = 6; // USDC has 6 decimals
-          const amountUsdc = Number(ethers.formatUnits(value, decimals));
-          
+          const amountUsdc = Number(formatUnits(value, decimals));
+
+          const toAddress = '0x' + toTopic.slice(2).padStart(40, '0').slice(-40);
           if (
-            to &&
-            to.toString().toLowerCase() === recipientAddress.toLowerCase() &&
+            toAddress.toLowerCase() === recipientLower &&
             amountUsdc >= expectedAmount
           ) {
-            transferFound = true;
-            break;
-          }
-        } else if (name === 'TransferWithAuthorization') {
-          const to = args[1];
-          const value = args[3];
-          const decimals = 6;
-          const amountUsdc = Number(ethers.formatUnits(value, decimals));
-          
-          if (
-            to &&
-            to.toString().toLowerCase() === recipientAddress.toLowerCase() &&
-            amountUsdc >= expectedAmount
-          ) {
-            transferFound = true;
-            break;
+            return true;
           }
         }
       } catch {
-        // Skip logs that can't be parsed (non-USDC logs)
-        continue;
+        continue; // Skip unparseable logs
       }
     }
-    
-    if (!transferFound) {
-      console.warn('[x402] No matching USDC transfer found in transaction logs');
-      return false;
-    }
-    
-    return true;
+
+    console.warn('[x402] No matching USDC transfer found in transaction logs');
+    return false;
   } catch (error) {
     console.error('Payment verification failed:', error);
     return false;
@@ -204,15 +194,3 @@ export function getOmAIPaymentAddress(): string {
 export function isProduction(): boolean {
   return process.env.NODE_ENV === 'production';
 }
-
-const x402Exports = {
-  parsePrice,
-  formatPrice,
-  createPaymentRequirement,
-  encodePaymentRequirement,
-  decodePaymentRequirement,
-  verifyBasePayment,
-  isProduction
-};
-
-export default x402Exports;

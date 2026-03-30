@@ -4,7 +4,8 @@
  * No Stripe - 100% decentralized crypto
  */
 
-import { ethers } from 'ethers';
+import { createPublicClient, http, formatUnits, type Address } from 'viem';
+import { base, baseSepolia } from 'viem/chains';
 
 // =====================================================
 // NETWORK CONFIGURATIONS
@@ -191,35 +192,34 @@ export async function verifyBasePayment(
   expectedAmount: number,
   recipientAddress: string,
   network: NetworkName = 'base'
-): Promise<{ valid: boolean; tx?: any; error?: string }> { // eslint-disable-line @typescript-eslint/no-explicit-any
+): Promise<{ valid: boolean; tx?: unknown; error?: string }> {
   const net = NETWORKS[network];
-  const provider = new ethers.JsonRpcProvider(net.rpcUrl);
-  
+
+  // Solana not yet supported via viem
+  if (network.startsWith('solana')) {
+    return { valid: false, error: 'Solana verification not yet supported via viem' };
+  }
+
+  const client = createPublicClient({
+    chain: network === 'base-sepolia' ? baseSepolia : base,
+    transport: http(net.rpcUrl),
+  });
+
   try {
-    // Wait for transaction confirmation
-    const tx = await provider.waitForTransaction(txHash, 1, 30000); // 30s timeout
-    
-    if (!tx) {
-      return { valid: false, error: 'Transaction not found or not confirmed' };
-    }
-    
-    if (tx.status !== 1) {
+    const receipt = await client.waitForTransactionReceipt({
+      hash: txHash as `0x${string}`,
+      confirmations: 1,
+      timeout: 30_000,
+    });
+
+    if (receipt.status !== 'success') {
       return { valid: false, error: 'Transaction failed' };
     }
-    
-    // Get transaction details to verify USDC transfer
-    const receipt = await provider.getTransactionReceipt(txHash);
-    
-    if (!receipt) {
-      return { valid: false, error: 'Receipt not found' };
-    }
-    
-    // In production, parse logs to verify USDC transfer
-    // For now, we verify the transaction succeeded
+
     return { valid: true, tx: receipt };
-    
-  } catch (error: any) { // eslint-disable-line @typescript-eslint/no-explicit-any
-    return { valid: false, error: error.message };
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : 'Unknown error';
+    return { valid: false, error: message };
   }
 }
 
@@ -330,11 +330,24 @@ export async function getUSDCBalance(
   network: NetworkName = 'base'
 ): Promise<string> {
   const net = NETWORKS[network];
-  const provider = new ethers.JsonRpcProvider(net.rpcUrl);
-  const usdc = new ethers.Contract(net.usdcAddress, USDC_ABI, provider);
-  
-  const balance = await usdc.balanceOf(address);
-  return ethers.formatUnits(balance, 6); // USDC has 6 decimals
+
+  if (network.startsWith('solana')) {
+    return '0'; // Solana not yet supported via viem
+  }
+
+  const client = createPublicClient({
+    chain: network === 'base-sepolia' ? baseSepolia : base,
+    transport: http(net.rpcUrl),
+  });
+
+  const balance = await client.readContract({
+    address: net.usdcAddress as Address,
+    abi: USDC_ABI,
+    functionName: 'balanceOf',
+    args: [address as Address],
+  });
+
+  return formatUnits(balance as bigint, 6); // USDC has 6 decimals
 }
 
 // =====================================================
