@@ -1,15 +1,13 @@
 'use client';
 
 import dynamic from 'next/dynamic';
-import { GlassCard } from '@/components/ui/GlassCard';
-import { Badge } from '@/components/ui/Badge';
-import { CardSkeleton, InlineLoader } from '@/components/ui/Loading';
-import { Search, Filter, SortAsc, ExternalLink, Download, CheckCircle2, AlertCircle, Zap } from 'lucide-react';
-import { getCategoryIcon, getCategoryColors } from '@/lib/category-icons';
-import { getMcpFaviconUrl } from '@/lib/mcp-icons';
-import { StarRating } from '@/components/ui/StarRating';
-import { useMCPMarketplace } from '@/hooks/useMCPMarketplace';
 import Link from 'next/link';
+import { GlassCard } from '@/components/ui/GlassCard';
+import { CardSkeleton, InlineLoader } from '@/components/ui/Loading';
+import { Search, AlertCircle, Download } from 'lucide-react';
+import { useMCPMarketplace } from '@/hooks/useMCPMarketplace';
+import { MarketplaceFilters } from './MarketplaceFilters';
+import { MCPSkillCard } from './MCPSkillCard';
 
 const MotionDiv = dynamic(
   () => import('framer-motion').then(m => m.motion.div),
@@ -66,117 +64,24 @@ export default function MCPMarketplace() {
           transition={{ delay: 0.1 }}
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8"
         >
-          <GlassCard className="p-6 text-center hover">
-            <div className="text-3xl font-bold text-white mb-1">{stats.total}</div>
-            <div className="text-sm text-gray-400">Total Skills</div>
-          </GlassCard>
-          <GlassCard className="p-6 text-center hover">
-            <div className="text-3xl font-bold text-green-400 mb-1">{stats.x402Enabled}</div>
-            <div className="text-sm text-gray-400">x402 Enabled</div>
-          </GlassCard>
-          <GlassCard className="p-6 text-center hover">
-            <div className="text-3xl font-bold text-yellow-400 mb-1">
-              ${stats.avgPrice.toFixed(4)}
-            </div>
-            <div className="text-sm text-gray-400">Avg Price / call</div>
-          </GlassCard>
-          <GlassCard className="p-6 text-center hover">
-            <div className="text-3xl font-bold text-yellow-400 mb-1">
-              {stats.avgRating.toFixed(1)}★
-            </div>
-            <div className="text-sm text-gray-400">Avg Rating</div>
-          </GlassCard>
+          <StatCard value={stats.total.toString()} label="Total Skills" />
+          <StatCard value={stats.x402Enabled.toString()} label="x402 Enabled" valueClass="text-green-400" />
+          <StatCard value={`$${stats.avgPrice.toFixed(4)}`} label="Avg Price / call" valueClass="text-yellow-400" />
+          <StatCard value={`${stats.avgRating.toFixed(1)}★`} label="Avg Rating" valueClass="text-yellow-400" />
         </MotionDiv>
 
         {/* Filters */}
-        <GlassCard className="p-6 mb-8">
-          <div className="flex items-center gap-2 mb-4">
-            <Filter className="w-5 h-5 text-purple-300" />
-            <h2 className="text-lg font-semibold text-white">Filters</h2>
-          </div>
-          <div className="grid md:grid-cols-4 gap-4">
-            {/* Search */}
-            <div className="md:col-span-2">
-              <label htmlFor="search" className="block text-sm font-medium text-gray-300 mb-2">
-                Search
-              </label>
-              <div className="relative">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
-                <input
-                  id="search"
-                  type="text"
-                  placeholder="Search by name, category, or description..."
-                  aria-label="Search MCP skills"
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2.5 bg-zinc-800 border border-zinc-700 rounded-lg text-white placeholder:text-gray-500 focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all"
-                />
-              </div>
-            </div>
-
-            {/* Category */}
-            <div>
-              <label htmlFor="category" className="block text-sm font-medium text-gray-300 mb-2">
-                Category
-              </label>
-              <select
-                id="category"
-                value={category}
-                onChange={(e) => setCategory(e.target.value)}
-                className="w-full px-4 py-2.5 bg-zinc-800 border border-zinc-700 rounded-lg text-white focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all"
-                aria-label="Filter by category"
-              >
-                {categories.map((cat) => (
-                  <option key={cat} value={cat}>
-                    {cat === 'all' ? 'All Categories' : cat}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            {/* Verified */}
-            <div>
-              <label htmlFor="status" className="block text-sm font-medium text-gray-300 mb-2">
-                Status
-              </label>
-              <select
-                id="status"
-                value={verified}
-                onChange={(e) => setVerified(e.target.value)}
-                className="w-full px-4 py-2.5 bg-zinc-800 border border-zinc-700 rounded-lg text-white focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all"
-                aria-label="Filter by verification status"
-              >
-                <option value="all">All Skills</option>
-                <option value="true">Verified Only</option>
-                <option value="false">Unverified Only</option>
-              </select>
-            </div>
-
-            {/* Sort */}
-            <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">
-                Sort By
-              </label>
-              <div className="flex gap-2">
-                {(['rating', 'calls', 'price', 'newest'] as const).map((sort) => (
-                  <button
-                    key={sort}
-                    onClick={() => setSortBy(sort)}
-                    className={`flex-1 px-4 py-2.5 rounded-lg font-medium transition-all focus:outline-none focus:ring-2 focus:ring-purple-500/20 ${
-                      sortBy === sort
-                        ? 'bg-purple-600 text-white shadow-lg'
-                        : 'bg-zinc-800 text-gray-300 hover:bg-zinc-700 hover:text-white'
-                    }`}
-                    aria-label={`Sort by ${sort}`}
-                  >
-                    <SortAsc className="w-4 h-4" />
-                    {sort.charAt(0).toUpperCase() + sort.slice(1)}
-                  </button>
-                ))}
-              </div>
-            </div>
-          </div>
-        </GlassCard>
+        <MarketplaceFilters
+          search={search}
+          setSearch={setSearch}
+          category={category}
+          setCategory={setCategory}
+          verified={verified}
+          setVerified={setVerified}
+          sortBy={sortBy}
+          setSortBy={setSortBy}
+          categories={categories}
+        />
 
         {/* Results Count */}
         <div className="flex items-center justify-between mb-6">
@@ -189,11 +94,7 @@ export default function MCPMarketplace() {
 
         {/* Error */}
         {error && (
-          <MotionDiv
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="mb-6"
-          >
+          <MotionDiv initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="mb-6">
             <GlassCard className="p-6 bg-red-900/20 border-red-700/50">
               <div className="flex gap-3">
                 <AlertCircle className="w-6 h-6 text-red-400 flex-shrink-0" />
@@ -217,11 +118,7 @@ export default function MCPMarketplace() {
               {search ? `No results for "${search}"` : 'No skills match your filters.'}
             </p>
             <button
-              onClick={() => {
-                setSearch('');
-                setCategory('all');
-                setVerified('all');
-              }}
+              onClick={() => { setSearch(''); setCategory('all'); setVerified('all'); }}
               className="px-6 py-2.5 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-lg transition-colors"
             >
               Clear Filters
@@ -250,130 +147,7 @@ export default function MCPMarketplace() {
             className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
           >
             {skills.map((skill) => (
-              <MotionDiv
-                key={skill.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: (skill.id.length % 6) * 0.05 }}
-              >
-                <GlassCard className={`p-6 h-full hover flex flex-col ${skill.x402_enabled ? 'border-green-500/30 shadow-lg shadow-green-500/10' : ''}`}>
-                  {/* Category Icon + Header */}
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="flex items-start gap-3 flex-1">
-                      {(() => {
-                        const cat = skill.category?.[0] || 'Utilities';
-                        const Icon = getCategoryIcon(cat);
-                        const colors = getCategoryColors(cat);
-                        const faviconUrl = getMcpFaviconUrl(skill.name);
-                        return (
-                          <div className="relative shrink-0">
-                            <div className={`p-2.5 rounded-xl ${colors.bg} ${colors.text} border ${colors.border}`}>
-                              <Icon size={22} />
-                            </div>
-                            {faviconUrl && (
-                              <img
-                                src={faviconUrl}
-                                alt=""
-                                className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20"
-                                onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
-                              />
-                            )}
-                          </div>
-                        );
-                      })()}
-                      <div>
-                        <h3 className="text-xl font-bold text-white mb-2 hover:text-purple-300 transition-colors">
-                          {skill.name}
-                        </h3>
-                        <div className="flex items-center gap-2 mb-2">
-                          {skill.verified && (
-                            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-green-500/20 border border-green-500/40 rounded-full text-green-400 text-xs font-semibold shadow-lg shadow-green-500/20">
-                              <CheckCircle2 size={14} className="fill-green-500/30" />
-                              Verified
-                            </span>
-                          )}
-                          <span className="text-gray-400 text-sm">by @{skill.author}</span>
-                        </div>
-                        {skill.x402_enabled && (
-                          <span className="inline-flex items-center gap-1 px-2 py-1 bg-yellow-500/20 border border-yellow-500/40 rounded text-yellow-400 text-xs font-medium">
-                            <Zap size={12} className="fill-yellow-500/40" />
-                            x402
-                          </span>
-                        )}
-                      </div>
-                    </div>
-                    <StarRating rating={skill.rating} size={14} />
-                  </div>
-
-                  {/* Description */}
-                  <p className="text-gray-300 mb-4 flex-1 line-clamp-3 leading-relaxed">
-                    {skill.description}
-                  </p>
-
-                  {/* Categories */}
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {(skill.category || ['Utilities']).map((cat) => {
-                      const colors = getCategoryColors(cat);
-                      return (
-                        <Badge key={cat} className={`${colors.bg} ${colors.text} ${colors.border} border`}>
-                          {cat}
-                        </Badge>
-                      );
-                    })}
-                  </div>
-
-                  {/* Pricing & Stats */}
-                  <div className="flex items-center justify-between pt-4 border-t border-zinc-700">
-                    <div>
-                      {skill.pricing_usdc === 0 ? (
-                        <span className="inline-flex items-center px-3 py-1 bg-green-500/20 border border-green-500/40 rounded-full text-green-400 text-lg font-bold">
-                          FREE
-                        </span>
-                      ) : (
-                        <>
-                          <div className="text-2xl font-bold text-white mb-1">
-                            ${skill.pricing_usdc.toFixed(4)}
-                          </div>
-                          <div className="text-xs text-gray-400">per call</div>
-                        </>
-                      )}
-                    </div>
-                    <div className="text-right">
-                      <div className="text-sm text-gray-400">
-                        {skill.total_calls.toLocaleString()} calls
-                      </div>
-                      <div className={`text-sm font-medium ${skill.success_rate >= 95 ? 'text-green-400' : skill.success_rate >= 80 ? 'text-yellow-400' : 'text-red-400'}`}>
-                        {skill.success_rate.toFixed(1)}% success
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Actions */}
-                  <div className="mt-4 flex gap-3">
-                    <Link
-                      href={`/mcps/${skill.slug}`}
-                      className="flex-1 px-4 py-2.5 bg-zinc-700 hover:bg-zinc-600 text-white text-center font-medium rounded-lg transition-colors"
-                    >
-                      View Details
-                    </Link>
-                    {skill.repository_url && (
-                      <Link
-                        href={skill.repository_url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="px-4 py-2.5 bg-zinc-800 hover:bg-zinc-700 text-white font-medium rounded-lg transition-colors flex items-center gap-2"
-                      >
-                        <ExternalLink size={16} />
-                        Code
-                      </Link>
-                    )}
-                    <button className="px-4 py-2.5 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg transition-colors flex items-center gap-2">
-                      <Download size={16} />
-                      Install
-                    </button>
-                  </div>
-                </GlassCard>
-              </MotionDiv>
+              <MCPSkillCard key={skill.id} skill={skill} />
             ))}
           </MotionDiv>
         )}
@@ -392,21 +166,17 @@ export default function MCPMarketplace() {
             >
               Previous
             </button>
-
             {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNum) => (
               <button
                 key={pageNum}
                 onClick={() => handlePageChange(pageNum)}
                 className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-                  page === pageNum
-                    ? 'bg-purple-600 text-white'
-                    : 'bg-zinc-800 hover:bg-zinc-700 text-white'
+                  page === pageNum ? 'bg-purple-600 text-white' : 'bg-zinc-800 hover:bg-zinc-700 text-white'
                 }`}
               >
                 {pageNum}
               </button>
             ))}
-
             <button
               onClick={() => handlePageChange(page + 1)}
               disabled={page === totalPages}
@@ -433,12 +203,22 @@ export default function MCPMarketplace() {
             </p>
             <Link href="/publish"
               className="inline-flex items-center gap-2 px-8 py-3 bg-white hover:bg-gray-100 text-purple-600 font-bold rounded-lg transition-colors"
-            ><Download size={20} />
+            >
+              <Download size={20} />
               Publish Your MCP
             </Link>
           </GlassCard>
         </MotionDiv>
       </div>
     </div>
+  );
+}
+
+function StatCard({ value, label, valueClass = 'text-white' }: { value: string; label: string; valueClass?: string }) {
+  return (
+    <GlassCard className="p-6 text-center hover">
+      <div className={`text-3xl font-bold mb-1 ${valueClass}`}>{value}</div>
+      <div className="text-sm text-gray-400">{label}</div>
+    </GlassCard>
   );
 }
