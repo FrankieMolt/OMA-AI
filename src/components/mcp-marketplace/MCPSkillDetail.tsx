@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { CheckCircle, Zap } from 'lucide-react';
@@ -67,9 +68,12 @@ export default function MCPSkillDetail({ slug }: { slug: string }) {
                   <Icon size={32} />
                 </div>
                 {faviconUrl && (
-                  <img src={faviconUrl} alt=""
-                    className="absolute -bottom-1.5 -right-1.5 w-7 h-7 rounded-full bg-white/10 backdrop-blur-sm border border-white/20"
+                  <Image src={faviconUrl} alt={`${skill?.name ?? 'MCP'} favicon`}
+                    width={28}
+                    height={28}
+                    className="absolute -bottom-1.5 -right-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20"
                     onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
+                    unoptimized
                   />
                 )}
               </div>

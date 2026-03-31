@@ -64,7 +64,7 @@ function LiveTradingStatusInner() {
             <Clock className="w-3 h-3" />
             NEXT SCAN: {nextScanEta}s
           </div>
-          <div className="text-[10px] font-mono text-gray-500 uppercase tracking-widest bg-white/5 px-2 py-1 rounded-md border border-white/5">
+          <div className="text-[10px] font-mono text-gray-400 uppercase tracking-widest bg-white/5 px-2 py-1 rounded-md border border-white/5">
             Node: nosyt-trader-v16
           </div>
         </div>
@@ -72,21 +72,21 @@ function LiveTradingStatusInner() {
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div className="bg-gradient-to-br from-white/5 to-transparent rounded-xl p-4 border border-white/5 group hover:border-emerald-500/20 transition-colors">
-          <div className="text-gray-500 text-[10px] mb-1 uppercase font-black tracking-tighter">Portfolio Balance</div>
+          <div className="text-gray-400 text-[10px] mb-1 uppercase font-black tracking-tighter">Portfolio Balance</div>
           <div className="text-2xl font-black text-white flex items-center gap-1 group-hover:text-emerald-400 transition-colors">
             {(status.solBalance as number | undefined)?.toFixed(4) || '0.0000'} <span className="text-gray-500 text-sm font-bold tracking-normal">SOL</span>
           </div>
         </div>
 
         <div className="bg-gradient-to-br from-white/5 to-transparent rounded-xl p-4 border border-white/5 group hover:border-blue-500/20 transition-colors">
-          <div className="text-gray-500 text-[10px] mb-1 uppercase font-black tracking-tighter">Active Positions</div>
+          <div className="text-gray-400 text-[10px] mb-1 uppercase font-black tracking-tighter">Active Positions</div>
           <div className="text-2xl font-black text-white group-hover:text-blue-400 transition-colors">
             {Object.keys((status.positions as Record<string, unknown>) || {}).length}
           </div>
         </div>
 
         <div className="bg-gradient-to-br from-white/5 to-transparent rounded-xl p-4 border border-white/5 group hover:border-purple-500/20 transition-colors">
-          <div className="text-gray-500 text-[10px] mb-1 uppercase font-black tracking-tighter">Win Rate (24h)</div>
+          <div className="text-gray-400 text-[10px] mb-1 uppercase font-black tracking-tighter">Win Rate (24h)</div>
           <div className="text-2xl font-black text-white group-hover:text-purple-400 transition-colors">
             {((status.dailyTrades as number | undefined) ?? 0) > 0 ? '68.4%' : 'CALC...'}
           </div>

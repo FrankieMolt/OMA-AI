@@ -99,7 +99,7 @@ export const Footer = memo(function Footer() {
 
         {/* Status */}
         <div className="max-w-7xl mx-auto mt-14 pt-8 border-t border-violet-500/10 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-zinc-400">© 2026 OMA-AI. All rights reserved.</p>
+          <p className="text-sm text-zinc-400">© {new Date().getFullYear()} OMA-AI. All rights reserved.</p>
           <div className="flex items-center gap-6">
             <div className="flex items-center gap-2 text-sm text-zinc-400">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />

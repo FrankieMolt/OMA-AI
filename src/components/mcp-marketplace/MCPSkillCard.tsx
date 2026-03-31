@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import { GlassCard } from '@/components/ui/GlassCard';
@@ -41,11 +42,14 @@ export function MCPSkillCard({ skill }: MCPSkillCardProps) {
               <Icon size={22} />
             </div>
             {faviconUrl && (
-              <img
+              <Image
                 src={faviconUrl}
-                alt=""
-                className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20"
+                alt={`${skill.name} favicon`}
+                width={20}
+                height={20}
+                className="absolute -bottom-1 -right-1 rounded-full bg-white/10 backdrop-blur-sm border border-white/20"
                 onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
+                unoptimized
               />
             )}
             <div>

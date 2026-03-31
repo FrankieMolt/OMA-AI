@@ -162,7 +162,7 @@ export default function MCPMarketplace() {
             <button
               onClick={() => handlePageChange(page - 1)}
               disabled={page === 1}
-              className="px-4 py-2 bg-zinc-800 hover:bg-zinc-700 text-white rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="px-4 py-2.5 bg-zinc-800 hover:bg-zinc-700 text-white rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed min-h-[44px]"
             >
               Previous
             </button>
@@ -170,7 +170,7 @@ export default function MCPMarketplace() {
               <button
                 key={pageNum}
                 onClick={() => handlePageChange(pageNum)}
-                className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+                className={`px-4 py-2.5 min-h-[44px] rounded-lg font-medium transition-colors ${
                   page === pageNum ? 'bg-purple-600 text-white' : 'bg-zinc-800 hover:bg-zinc-700 text-white'
                 }`}
               >
@@ -180,7 +180,7 @@ export default function MCPMarketplace() {
             <button
               onClick={() => handlePageChange(page + 1)}
               disabled={page === totalPages}
-              className="px-4 py-2 bg-zinc-800 hover:bg-zinc-700 text-white rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="px-4 py-2.5 bg-zinc-800 hover:bg-zinc-700 text-white rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed min-h-[44px]"
             >
               Next
             </button>
@@ -202,7 +202,7 @@ export default function MCPMarketplace() {
               Keep 95% of your earnings with x402 gasless payments.
             </p>
             <Link href="/publish"
-              className="inline-flex items-center gap-2 px-8 py-3 bg-white hover:bg-gray-100 text-purple-600 font-bold rounded-lg transition-colors"
+              className="inline-flex items-center gap-2 px-8 py-3 bg-white hover:bg-gray-100 text-purple-600 font-bold rounded-lg transition-colors min-h-[44px]"
             >
               <Download size={20} />
               Publish Your MCP

@@ -57,7 +57,7 @@ export default function Navigation() {
         <button
           onClick={() => setIsOpen(!isOpen)}
           aria-label={isOpen ? 'Close menu' : 'Open menu'}
-          className="p-2 bg-zinc-900/80 backdrop-blur border border-zinc-800 rounded-lg text-white hover:bg-zinc-800"
+          className="p-3 min-w-[44px] min-h-[44px] flex items-center justify-center bg-zinc-900/80 backdrop-blur border border-zinc-800 rounded-lg text-white hover:bg-zinc-800"
         >
           {isOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
