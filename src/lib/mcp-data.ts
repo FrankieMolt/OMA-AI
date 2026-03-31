@@ -1,4 +1,7 @@
-// OMA-AI MCP Marketplace — Real endpoints for publicly accessible MCP servers
+// OMA-AI MCP Marketplace — FALLBACK DATA
+// ⚠️  This file is ONLY used when Supabase is not configured.
+// Primary data source: Supabase `mcp_servers` table (configured via NEXT_PUBLIC_SUPABASE_* env vars).
+// All write operations (/api/mcp/register) require Supabase to be configured.
 export interface MCPServer {
   id: string; name: string; slug: string; description: string;
   long_description?: string; category: string[];

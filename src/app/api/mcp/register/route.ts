@@ -137,25 +137,6 @@ export async function POST(request: Request) {
 }
 
 export async function GET(request: Request) {
-  // Check if Supabase is configured
-  if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
-    return NextResponse.json(
-      {
-        success: false,
-        error: 'Supabase not configured',
-        data: [],
-        pagination: { page: 1, limit: 20, total: 0, totalPages: 0, hasNextPage: false, hasPrevPage: false },
-      },
-      { status: 503 }
-    );
-  }
-
-  const { createClient } = await import('@supabase/supabase-js');
-  const supabase = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL,
-    process.env.SUPABASE_SERVICE_ROLE_KEY
-  );
-
   const { searchParams } = new URL(request.url);
   const page = parseInt(searchParams.get('page') || '1');
   const limit = parseInt(searchParams.get('limit') || '20');
@@ -164,54 +145,72 @@ export async function GET(request: Request) {
   const author = searchParams.get('author') || '';
   const search = searchParams.get('search') || '';
 
-  // Build query
-  let query = supabase
-    .from('mcp_servers')
-    .select('*', { count: 'exact' })
-    .eq('status', 'active');
+  // Try Supabase first
+  const hasSupabase = !!(process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.SUPABASE_SERVICE_ROLE_KEY);
 
-  // Apply filters
-  if (category !== 'all') {
-    query = query.eq('category', category);
+  if (hasSupabase) {
+    const { createClient } = await import('@supabase/supabase-js');
+    const supabase = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.SUPABASE_SERVICE_ROLE_KEY!
+    );
+
+    let query = supabase
+      .from('mcp_servers')
+      .select('*', { count: 'exact' })
+      .eq('status', 'active');
+
+    if (category !== 'all') query = query.eq('category', category);
+    if (verified) query = query.eq('verified', true);
+    if (author) query = query.eq('author', author);
+    if (search) query = query.or(`name.ilike.%${search}%,description.ilike.%${search}%`);
+
+    const from = (page - 1) * limit;
+    query = query.order('created_at', { ascending: false }).range(from, from + limit - 1);
+
+    const { data, error, count } = await query;
+    if (!error && data) {
+      return NextResponse.json({
+        success: true,
+        source: 'database',
+        data,
+        pagination: {
+          page,
+          limit,
+          total: count || 0,
+          totalPages: Math.ceil((count || 0) / limit),
+        },
+      });
+    }
   }
 
-  if (verified) {
-    query = query.eq('verified', true);
-  }
+  // Fallback: return static data from mcp-data.ts
+  const { MARKETPLACE_MCPS } = await import('@/lib/mcp-data');
 
-  if (author) {
-    query = query.eq('author', author);
-  }
-
+  let filtered = MARKETPLACE_MCPS;
+  if (category !== 'all') filtered = filtered.filter(m => m.category.includes(category));
+  if (verified) filtered = filtered.filter(m => m.verified);
+  if (author) filtered = filtered.filter(m => m.author === author);
   if (search) {
-    query = query.or(`name.ilike.%${search}%,description.ilike.%${search}%`);
-  }
-
-  // Pagination
-  const from = (page - 1) * limit;
-  const to = from + limit - 1;
-
-  query = query
-    .order('created_at', { ascending: false })
-    .range(from, to);
-
-  const { data, error, count } = await query;
-
-  if (error) {
-    return NextResponse.json(
-      { success: false, error: 'Failed to fetch MCP servers', details: error.message },
-      { status: 500 }
+    const q = search.toLowerCase();
+    filtered = filtered.filter(m =>
+      m.name.toLowerCase().includes(q) || m.description.toLowerCase().includes(q)
     );
   }
 
+  const total = filtered.length;
+  const paginated = filtered.slice((page - 1) * limit, page * limit);
+
   return NextResponse.json({
     success: true,
-    data: data || [],
+    source: hasSupabase ? 'database' : 'fallback',
+    warning: hasSupabase ? undefined : 'Supabase not configured — serving cached data',
+    data: paginated,
     pagination: {
       page,
       limit,
-      total: count || 0,
-      totalPages: Math.ceil((count || 0) / limit),
+      total,
+      totalPages: Math.ceil(total / limit),
     },
   });
 }
