@@ -1,17 +1,15 @@
 import { NextResponse } from 'next/server';
-import { createClient } from '@supabase/supabase-js';
+import { getSupabaseClient } from '@/lib/supabase/client';
 
 export const dynamic = 'force-dynamic';
 
 // Health check — no self-referential HTTP fetches
 // Checks what actually matters: DB connectivity and data availability
 async function checkSupabase() {
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const key = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-  if (!url || !key) return { status: 'unconfigured', error: 'Supabase env vars missing' };
+  const sb = getSupabaseClient();
+  if (!sb) return { status: 'unconfigured', error: 'Supabase env vars missing' };
 
   try {
-    const sb = createClient(url, key);
     const { data, error } = await sb
       .from('mcp_servers')
       .select('id', { count: 'exact', head: true })

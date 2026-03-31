@@ -3,41 +3,17 @@
 import { useState, useEffect, useMemo, useCallback } from 'react';
 import { Search, Star, Check, X, Download, Share2, CheckCircle, AlertCircle, ChevronDown, Trash2, Plus, Zap, Clock, Activity } from 'lucide-react';
 import type { MCPSkill } from '@/lib/types';
+import {
+  getLatencyDisplay,
+  getRatingColor,
+  getSuccessRateColor,
+} from '@/lib/mcp-utils';
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-interface CompareMetrics {
-  name: string;
-  category: string;
-  pricing: string;
-  rating: number;
-  total_calls: number;
-  success_rate: number;
-  avg_latency: string;
-  features: string[];
-}
-
-function getLatencyDisplay(latency: number | undefined): string {
-  if (!latency) return 'N/A';
-  if (latency < 1000) return `${latency}ms`;
-  return `${(latency / 1000).toFixed(1)}s`;
-}
-
+// compare/page uses /call suffix — keep local for this specific format
 function getPricingDisplay(price: number): string {
   if (price === 0) return 'Free';
   if (price < 1) return `$${price.toFixed(3)}/call`;
   return `$${price.toFixed(2)}/call`;
-}
-
-function getSuccessRateColor(rate: number): string {
-  if (rate >= 99) return 'text-green-400';
-  if (rate >= 95) return 'text-yellow-400';
-  return 'text-red-400';
-}
-
-function getRatingColor(rating: number): string {
-  if (rating >= 4.5) return 'text-green-400';
-  if (rating >= 4.0) return 'text-yellow-400';
-  return 'text-gray-400';
 }
 
 export default function ComparePage() {

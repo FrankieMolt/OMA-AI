@@ -31,7 +31,7 @@ export async function GET() {
     const response = NextResponse.json({
       success: false,
       error: "Trading bot integration coming soon"
-    }, { status: 200 });
+    }, { status: 503 });
     response.headers.set('Access-Control-Allow-Origin', FRONTEND_URL);
     return response;
   }
