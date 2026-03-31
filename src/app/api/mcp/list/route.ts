@@ -64,8 +64,50 @@ export async function GET(request: Request) {
   let total = data.length;
   let useSupabase = false;
 
-  // Try Supabase first
-  if (supabase) {
+  // Try direct REST fetch (more reliable from Vercel than Supabase JS client)
+  const sbUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const sbKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  if (sbUrl && sbKey) {
+    try {
+      const params = new URLSearchParams({ select: '*', count: 'exact' });
+      if (category !== 'all') params.set('category', `eq.${category}`);
+      if (search) params.set('or', `name.ilike.%${search}%,description.ilike.%${search}%`);
+      if (verified === 'true') params.set('verified', 'eq.true');
+      if (tier !== 'all') params.set('tier', `eq.${tier}`);
+      params.set('order', `${sortBy === 'rating' ? 'rating' : 'total_calls'}.desc`);
+      params.set('offset', String((page - 1) * limit));
+      params.set('limit', String(limit));
+
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 20_000);
+
+      const res = await fetch(`${sbUrl}/rest/v1/mcp_servers?${params}`, {
+        headers: {
+          'apikey': sbKey,
+          'Authorization': `Bearer ${sbKey}`,
+          'Content-Type': 'application/json',
+          'Prefer': 'count=exact',
+        },
+        signal: controller.signal,
+      });
+      clearTimeout(timeout);
+
+      if (res.ok) {
+        const dbData = await res.json() as unknown[];
+        const totalStr = res.headers.get('content-range')?.split('/')[1];
+        if (dbData && Array.isArray(dbData) && dbData.length > 0) {
+          data = dbData.map(m => normalizeMCP(m as Record<string, unknown>));
+          total = totalStr ? parseInt(totalStr) : dbData.length;
+          useSupabase = true;
+        }
+      }
+    } catch (e) {
+      console.warn('[mcp/list] Direct REST fallback error:', (e as Error).message);
+    }
+  }
+
+  // Try Supabase JS client as secondary fallback
+  if (!useSupabase && supabase) {
     try {
       let query = supabase.from('mcp_servers').select('*', { count: 'exact' });
 
