@@ -54,26 +54,62 @@ export interface ServiceAgent {
 }
 
 // ============ MCP TYPES ============
+
+/**
+ * Canonical MCP skill interface — single source of truth for all data layers.
+ *
+ * Observed across:
+ *   - types.ts          (base fields)
+ *   - useMCPMarketplace.ts   (+ tier, color)
+ *   - compare/page.tsx        (+ avg_latency_ms)
+ *   - mcp-data.ts             (+ long_description, version, color, tools_count, tools)
+ *
+ * Supabase schema may add more fields; extend here, not locally.
+ */
 export interface MCPSkill {
+  // Identity
   id: string;
   name: string;
   slug: string;
+  // Categorization
   category: string[];
+  tags?: string[];
+  // Descriptions
   description: string;
+  long_description?: string;
+  // Authorship & links
   author: string;
-  repository_url: string | null;
-  documentation_url: string | null;
+  repository_url?: string | null;
+  documentation_url?: string | null;
+  // Endpoint
   mcp_endpoint: string;
+  // Pricing & payments
   pricing_usdc: number;
   x402_enabled: boolean;
+  // Trust & quality
   verified: boolean;
   rating: number;
   total_calls: number;
+  // Alias: legacy field name used in raw mcp-data.ts objects
+  // Remove once Supabase is the only data source
+  calls?: number;
   success_rate: number;
-  created_at?: string;
-  tags?: string[];
+  avg_latency_ms?: number;
   downloads?: number;
+  // Tool metadata
+  tools?: { name: string; description: string }[];
+  /** Number of tools; falls back to tools.length when stored directly in Supabase */
+  tools_count?: number;
+  // Versioning & branding
+  version?: string;
+  color?: string;
+  tier?: 'free' | 'premium';
+  // Timestamps
+  created_at?: string;
 }
+
+/** Alias: MCPServer = MCPSkill (used internally in mcp-data.ts) */
+export type MCPServer = MCPSkill;
 
 export interface MCPTool {
   name: string;

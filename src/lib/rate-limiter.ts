@@ -1,6 +1,18 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { createClient } from '@supabase/supabase-js';
 
+/**
+ * Supabase-backed rate limiting.
+ *
+ * ✅  Uses Supabase `rate_limits` table — safe for multi-instance deployments.
+ *    State is persisted in Postgres, not in-process memory.
+ * ❌  Falls back to pass-through (no limiting) if Supabase is unavailable.
+ *    Plan: add Redis as a fast-path fallback once OMA-AI reaches scale.
+ *
+ * Required Supabase table:
+ *   rate_limits (user_id, key, window_start, count, expires_at)
+ *   PRIMARY KEY (user_id, key, window_start)
+ */
 const supabaseUrl = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseKey = process.env.SUPABASE_SERVICE_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY;
 

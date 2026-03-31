@@ -186,8 +186,9 @@ export async function GET(request: Request) {
 
   // Fallback: return static data from mcp-data.ts
   const { MARKETPLACE_MCPS } = await import('@/lib/mcp-data');
+  const mcps = MARKETPLACE_MCPS as unknown as import('@/lib/types').MCPSkill[];
 
-  let filtered = MARKETPLACE_MCPS;
+  let filtered = mcps;
   if (category !== 'all') filtered = filtered.filter(m => m.category.includes(category));
   if (verified) filtered = filtered.filter(m => m.verified);
   if (author) filtered = filtered.filter(m => m.author === author);

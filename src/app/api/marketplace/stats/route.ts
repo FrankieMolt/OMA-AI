@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { getSupabaseClient } from '@/lib/supabase/client';
 import { MARKETPLACE_MCPS } from '@/lib/mcp-data';
+import type { MCPSkill } from '@/lib/types';
 
 export async function GET() {
   const supabase = getSupabaseClient();
@@ -18,9 +19,10 @@ export async function GET() {
       totalCalls = data.reduce((sum, m) => sum + (m.total_calls || 0), 0);
     }
   } else {
-    // Fallback to static data
-    verifiedMcpCount = MARKETPLACE_MCPS.filter((m) => m.verified).length;
-    totalCalls = MARKETPLACE_MCPS.reduce((sum, m) => sum + m.calls, 0);
+    // Fallback to static data — cast for type-safe field access
+    const mcps = MARKETPLACE_MCPS as unknown as MCPSkill[];
+    verifiedMcpCount = mcps.filter((m) => m.verified).length;
+    totalCalls = mcps.reduce((sum, m) => sum + (m.total_calls ?? m.calls ?? 0), 0);
   }
 
   const response = NextResponse.json({

@@ -1,23 +1,25 @@
 import { NextResponse } from 'next/server';
 import { MARKETPLACE_MCPS } from '@/lib/mcp-data';
 import { CATEGORIES } from '@/lib/category-icons';
+import type { MCPSkill } from '@/lib/types';
 
 // Force dynamic rendering
 export const dynamic = 'force-dynamic';
 
 export async function GET() {
   try {
-    // Build response from static data (always works, no external deps)
-    const mcps = MARKETPLACE_MCPS;
+    // MARKETPLACE_MCPS is typed loosely (Record) to accommodate legacy field names
+    // in the raw data objects. Cast to MCPSkill for type-safe field access.
+    const mcps = MARKETPLACE_MCPS as unknown as MCPSkill[];
     const totalMCPs = mcps.length;
-    const totalTools = mcps.reduce((sum, m) => sum + m.tools_count, 0);
+    const totalTools = mcps.reduce((sum, m) => sum + (m.tools_count ?? 0), 0);
     const avgRating = (
       mcps.filter(m => m.rating > 0).reduce((sum, m) => sum + m.rating, 0) /
       mcps.filter(m => m.rating > 0).length
     ).toFixed(1);
 
     const trending = [...mcps]
-      .sort((a, b) => b.calls - a.calls)
+      .sort((a, b) => (b.calls ?? 0) - (a.calls ?? 0))
       .slice(0, 5)
       .map(m => ({ id: m.id, name: m.name, slug: m.slug, category: m.category, calls: m.calls, rating: m.rating }));
 
@@ -33,7 +35,7 @@ export async function GET() {
       trending,
       recent: mcps.slice(0, 10),
       stats: {
-        total_calls: mcps.reduce((sum, m) => sum + m.calls, 0),
+        total_calls: mcps.reduce((sum, m) => sum + (m.calls ?? 0), 0),
         verified_count: mcps.filter(m => m.verified).length,
         free_count: mcps.filter(m => m.pricing_usdc === 0).length,
         paid_count: mcps.filter(m => m.pricing_usdc > 0).length,

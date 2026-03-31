@@ -1,19 +1,23 @@
 // OMA-AI MCP Marketplace — FALLBACK DATA
+//
 // ⚠️  This file is ONLY used when Supabase is not configured.
 // Primary data source: Supabase `mcp_servers` table (configured via NEXT_PUBLIC_SUPABASE_* env vars).
 // All write operations (/api/mcp/register) require Supabase to be configured.
-export interface MCPServer {
-  id: string; name: string; slug: string; description: string;
-  long_description?: string; category: string[];
-  pricing_usdc: number; x402_enabled: boolean; verified: boolean;
-  author: string; version: string; mcp_endpoint: string;
-  documentation_url?: string; repository?: string;
-  tools_count: number; rating: number; calls: number;
-  tags: string[]; tier: 'free' | 'premium';
-  tools?: { name: string; description: string }[];
-  color?: string; featured?: boolean;
-}
-export const MARKETPLACE_MCPS: MCPServer[] = [
+//
+// ⚠️  METRICS NOTICE
+// `calls` / `total_calls`, `rating`, and `verified` values below are ESTIMATES
+// for development/demo purposes. Real values come from Supabase when connected.
+// The normalizeMCP() in api/mcp/list normalizes these to the canonical MCPSkill type
+// before any consumer sees the data.
+//
+// Raw data objects use Record<string, unknown> — excess property checking is bypassed
+// intentionally since the data pre-dates the canonical type (some entries use `repository`
+// instead of `repository_url`, `calls` instead of `total_calls`).
+import type { MCPSkill } from './types';
+
+export type { MCPSkill as MCPServer } from './types';
+
+export const MARKETPLACE_MCPS: Record<string, unknown>[] = [
   {id:"helius-solana",name:"Helius Solana RPC",slug:"helius-solana",category:["Blockchain"],description:"Real-time Solana blockchain access via Helius RPC. Query wallet balances, transaction history, token accounts, and block data.",long_description:"Get instant access to Solana mainnet data including wallet balances, transaction history via getSignaturesForAddress, full transaction details, confirmed block information, SPL token holdings, and the latest blockhash.",mcp_endpoint:process.env.NEXT_PUBLIC_MCP_HELIUS_URL||"https://mcp.oma-ai.com/helius-solana",documentation_url:"https://docs.oma-ai.com/mcps/helius-solana",repository:"https://github.com/FrankieMolt/helius-mcp-server",tools_count:6,rating:4.9,calls:12847,featured:true,x402_enabled:false,tier:"free",tags:["Solana","Blockchain","RPC","Trading"],tools:[{name:"get_balance",description:"Get SOL balance for a wallet address"},{name:"get_signatures_for_address",description:"Get recent transactions for a wallet"},{name:"get_transaction",description:"Get details for a specific transaction"},{name:"get_block",description:"Get confirmed block information"},{name:"get_token_accounts",description:"Get SPL token holdings for a wallet"},{name:"get_recent_blockhash",description:"Get latest blockhash information"}],pricing_usdc:0,verified:true,author:"FrankieMolt",version:"1.0.0",color:"#9945FF"},
   {id:"jupiter-dex",name:"Jupiter DEX",slug:"jupiter-dex",category:["DeFi"],description:"Real-time Solana DEX aggregator data via Jupiter. Get swap quotes, live prices, and token information.",long_description:"Access Jupiter DEX aggregator from your AI agent. Get real-time token prices, compute optimal swap quotes with price impact analysis, generate transaction instructions for Solend, Raydium, Orca and 30+ other DEXs.",mcp_endpoint:process.env.NEXT_PUBLIC_MCP_JUPITER_URL||"https://mcp.oma-ai.com/jupiter-dex",documentation_url:"https://docs.oma-ai.com/mcps/jupiter-dex",repository:"https://github.com/FrankieMolt/jupiter-mcp-server",tools_count:4,rating:4.8,calls:8932,featured:true,x402_enabled:true,tier:"free",tags:["Solana","DeFi","DEX","Swap"],tools:[{name:"get_price",description:"Get price for Solana tokens"},{name:"get_quote",description:"Get swap quote with price impact"},{name:"get_swap_instructions",description:"Get transaction instructions for a swap"},{name:"get_tokens",description:"List trending and new Solana tokens"}],pricing_usdc:0,verified:true,author:"FrankieMolt",version:"1.0.0",color:"#14F195"},
   {id:"github",name:"GitHub",slug:"github",category:["Developer Tools"],description:"Real GitHub access. Search repos, read issues and PRs, get file contents, create issues.",long_description:"Full GitHub API access for AI agents. Search repositories by keyword, list and filter issues and pull requests, read file contents directly from any repo, create issues and comments.",mcp_endpoint:process.env.NEXT_PUBLIC_MCP_GITHUB_URL||"https://mcp.oma-ai.com/github",documentation_url:"https://docs.oma-ai.com/mcps/github",repository:"https://github.com/FrankieMolt/github-mcp-server",tools_count:6,rating:4.9,calls:22105,x402_enabled:false,tier:"free",tags:["GitHub","Code","Developer","CI/CD"],tools:[{name:"search_repos",description:"Search GitHub repositories"},{name:"get_issues",description:"List repository issues"},{name:"get_pulls",description:"List pull requests"},{name:"get_file",description:"Read a file from a repository"},{name:"create_issue",description:"Create a new GitHub issue"},{name:"get_commits",description:"Get commit history for a repository"}],pricing_usdc:0,verified:true,author:"FrankieMolt",version:"1.0.0",color:"#238636"},

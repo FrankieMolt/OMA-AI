@@ -2,25 +2,7 @@
 
 import { useState, useEffect, useMemo, useCallback } from 'react';
 import { Search, Star, Check, X, Download, Share2, CheckCircle, AlertCircle, ChevronDown, Trash2, Plus, Zap, Clock, Activity } from 'lucide-react';
-
-interface MCPSkill {
-  id: string;
-  name: string;
-  slug: string;
-  category: string[];
-  description: string;
-  author: string;
-  repository_url: string | null;
-  documentation_url: string | null;
-  mcp_endpoint: string;
-  pricing_usdc: number;
-  x402_enabled: boolean;
-  verified: boolean;
-  rating: number;
-  total_calls: number;
-  success_rate: number;
-  avg_latency_ms?: number;
-}
+import type { MCPSkill } from '@/lib/types';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 interface CompareMetrics {
