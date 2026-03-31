@@ -67,5 +67,13 @@ export function getSupabaseClient() {
 
   return createClient(url, key, {
     auth: { autoRefreshToken: false, persistSession: false },
+    global: {
+      fetch: (url, init) =>
+        fetch(url as string, {
+          ...init,
+          // 30s timeout — Vercel serverless cold starts can be slow
+          signal: AbortSignal.timeout(30_000),
+        }),
+    },
   });
 }
