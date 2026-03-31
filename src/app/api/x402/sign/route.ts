@@ -145,7 +145,7 @@ export async function POST(request: NextRequest) {
   try {
     // Validate environment
     const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-    const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+    const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
     const privateKeyBase64 = process.env.X402_SIGNER_PRIVATE_KEY;
 
     if (!supabaseUrl || !serviceRoleKey) {

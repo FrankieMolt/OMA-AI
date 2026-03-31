@@ -64,9 +64,9 @@ export async function GET(request: Request) {
   let total = data.length;
   let useSupabase = false;
 
-  // Try direct REST fetch — more reliable from Vercel serverless than the JS client
+  // Try direct REST fetch — anon key works from Vercel (service role key returns 401)
   const sbUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const sbKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  const sbKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
   if (sbUrl && sbKey) {
     try {
       const searchParams = new URLSearchParams({ select: '*', count: 'exact' });
