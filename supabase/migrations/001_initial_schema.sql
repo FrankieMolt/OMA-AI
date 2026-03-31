@@ -4,8 +4,9 @@
 
 -- ============================================
 -- MCP SKILLS REGISTRY
+-- NOTE: Table named mcp_servers to match api/mcp/list route expectations
 -- ============================================
-CREATE TABLE IF NOT EXISTS mcp_skills (
+CREATE TABLE IF NOT EXISTS mcp_servers (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   name TEXT NOT NULL UNIQUE,
   slug TEXT NOT NULL UNIQUE,
@@ -26,12 +27,12 @@ CREATE TABLE IF NOT EXISTS mcp_skills (
 );
 
 -- Indexes for MCP skills
-CREATE INDEX IF NOT EXISTS idx_mcp_category ON mcp_skills USING GIN(category);
-CREATE INDEX IF NOT EXISTS idx_mcp_rating ON mcp_skills(rating DESC NULLS LAST);
-CREATE INDEX IF NOT EXISTS idx_mcp_total_calls ON mcp_skills(total_calls DESC NULLS LAST);
-CREATE INDEX IF NOT EXISTS idx_mcp_verified ON mcp_skills(verified, rating DESC);
-CREATE INDEX IF NOT EXISTS idx_mcp_pricing ON mcp_skills(pricing_usdc ASC);
-CREATE INDEX IF NOT EXISTS idx_mcp_slug ON mcp_skills(slug);
+CREATE INDEX IF NOT EXISTS idx_mcp_category ON mcp_servers USING GIN(category);
+CREATE INDEX IF NOT EXISTS idx_mcp_rating ON mcp_servers(rating DESC NULLS LAST);
+CREATE INDEX IF NOT EXISTS idx_mcp_total_calls ON mcp_servers(total_calls DESC NULLS LAST);
+CREATE INDEX IF NOT EXISTS idx_mcp_verified ON mcp_servers(verified, rating DESC);
+CREATE INDEX IF NOT EXISTS idx_mcp_pricing ON mcp_servers(pricing_usdc ASC);
+CREATE INDEX IF NOT EXISTS idx_mcp_slug ON mcp_servers(slug);
 
 -- ============================================
 -- AGENT WALLETS
@@ -65,7 +66,7 @@ CREATE TABLE IF NOT EXISTS transactions (
   amount_usdc NUMERIC(18,8) NOT NULL,
   status TEXT NOT NULL DEFAULT 'pending',
   tx_hash TEXT,
-  skill_id UUID REFERENCES mcp_skills(id) ON DELETE SET NULL,
+  skill_id UUID REFERENCES mcp_servers(id) ON DELETE SET NULL,
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
   completed_at TIMESTAMP WITH TIME ZONE,
   error_message TEXT
@@ -114,7 +115,7 @@ CREATE INDEX IF NOT EXISTS idx_llm_active ON llm_models(active, pricing_usdc ASC
 -- ============================================
 CREATE TABLE IF NOT EXISTS usage_metrics (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  skill_id UUID REFERENCES mcp_skills(id) ON DELETE SET NULL,
+  skill_id UUID REFERENCES mcp_servers(id) ON DELETE SET NULL,
   wallet_address TEXT,
   api_endpoint TEXT,
   success BOOLEAN DEFAULT true,
@@ -159,7 +160,7 @@ CREATE INDEX IF NOT EXISTS idx_agent_wallet ON agent_profiles(wallet_address);
 -- ============================================
 CREATE MATERIALIZED VIEW IF NOT EXISTS marketplace_stats AS
 SELECT
-  (SELECT COUNT(*) FROM mcp_skills WHERE verified = true) as verified_mcp_count,
+  (SELECT COUNT(*) FROM mcp_servers WHERE verified = true) as verified_mcp_count,
   (SELECT COUNT(*) FROM agent_wallets) as total_agents,
   (SELECT COALESCE(SUM(amount_usdc), 0) FROM transactions WHERE status = 'completed') as total_volume_usdc,
   (SELECT COALESCE(SUM(amount_usdc), 0) FROM transactions
@@ -184,7 +185,7 @@ $$ LANGUAGE plpgsql;
 -- ============================================
 
 -- Insert sample MCP skills
-INSERT INTO mcp_skills (name, slug, category, description, author, repository_url, mcp_endpoint, pricing_usdc, x402_enabled, verified, rating, total_calls) VALUES
+INSERT INTO mcp_servers (name, slug, category, description, author, repository_url, mcp_endpoint, pricing_usdc, x402_enabled, verified, rating, total_calls) VALUES
   ('Exa Web Search', 'exa-web-search', ARRAY['search', 'ai'], 'High-quality semantic web search with AI-optimized query rewriting', 'oma-ai', 'https://github.com/oma-ai', 'https://oma-ai.com/mcp/exa-web-search', 0.0005, true, true, 4.5, 100),
   ('ByteOver Memory', 'byteover', ARRAY['storage', 'memory', 'ai'], 'Persistent agent context storage with semantic search and auto-curation', 'oma-ai', 'https://github.com/oma-ai', 'https://oma-ai.com/mcp/byteover', 0.001, true, true, 4.8, 150),
   ('Self-Improving Agent', 'self-improving-agent', ARRAY['ai', 'learning', 'optimization'], 'AI agents that learn from outputs and optimize future responses', 'oma-ai', 'https://github.com/oma-ai', 'https://oma-ai.com/mcp/self-improving-agent', 0.002, true, false, 4.2, 50),
@@ -215,7 +216,7 @@ ON CONFLICT (agent_id) DO NOTHING;
 -- Refresh materialized view
 REFRESH MATERIALIZED VIEW marketplace_stats;
 
-COMMENT ON TABLE mcp_skills IS 'Registry of MCP skills available on the marketplace';
+COMMENT ON TABLE mcp_servers IS 'Registry of MCP skills available on the marketplace';
 COMMENT ON TABLE agent_wallets IS 'Agent wallet addresses and balances on Base network';
 COMMENT ON TABLE transactions IS 'Transaction records for x402 payments';
 COMMENT ON TABLE llm_models IS 'Available LLM models with pricing';
