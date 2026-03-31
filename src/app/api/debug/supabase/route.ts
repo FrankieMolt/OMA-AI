@@ -7,7 +7,8 @@ export async function GET() {
   const result: Record<string, unknown> = {
     url: url ? 'SET' : 'MISSING',
     urlValue: url,
-    key: key ? `SET (${key.slice(0, 20)}...)` : 'MISSING',
+    keyPrefix: key ? key.slice(0, 20) : 'MISSING',
+    keyFull: key ?? 'MISSING',
   };
 
   if (url && key) {
@@ -23,12 +24,9 @@ export async function GET() {
       });
       clearTimeout(timeout);
 
+      const body = await res.text();
       result.httpStatus = res.status;
-      result.httpOk = res.ok;
-      result.headers = Object.fromEntries(res.headers.entries());
-      const data = await res.json();
-      result.rowCount = Array.isArray(data) ? data.length : 'not-array';
-      result.firstRow = data[0] ?? null;
+      result.responseBody = body;
     } catch (e) {
       result.fetchError = (e as Error).message;
       result.fetchErrorName = (e as Error).name;
