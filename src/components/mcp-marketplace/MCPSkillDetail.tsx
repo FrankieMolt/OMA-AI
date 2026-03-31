@@ -44,7 +44,6 @@ export default function MCPSkillDetail({ slug }: { slug: string }) {
   }
 
   const cat = skill.category?.[0] || 'Utilities';
-  const Icon = getCategoryIcon(cat);
   const colors = getCategoryColors(cat);
   const faviconUrl = getMcpFaviconUrl(skill.name);
 
@@ -65,7 +64,8 @@ export default function MCPSkillDetail({ slug }: { slug: string }) {
             <div className="flex items-start gap-4 flex-1">
               <div className="relative shrink-0">
                 <div className={`p-3 rounded-2xl ${colors.bg} ${colors.text} border ${colors.border}`}>
-                  <Icon size={32} />
+                  {/* eslint-disable-next-line react-hooks/static-components */}
+                  {(() => { const Icon = getCategoryIcon(cat); return <Icon size={32} />; })()}
                 </div>
                 {faviconUrl && (
                   <Image src={faviconUrl} alt={`${skill?.name ?? 'MCP'} favicon`}

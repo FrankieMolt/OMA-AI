@@ -50,7 +50,7 @@ export default function TermsPage() {
             </div>
             <div className="space-y-3 text-gray-300">
               <p>
-                By accessing or using OMA-Ai (OMA-Ai ("the Platform")quot;the PlatformOMA-Ai ("the Platform")quot;), you agree to be bound by these Terms of Service (these Terms of Service ("Terms")quot;Termsthese Terms of Service ("Terms")quot;).
+                By accessing or using OMA-Ai, you agree to be bound by these Terms of Service.
                 If you do not agree to these Terms, please do not use the Platform.
               </p>
               <p>

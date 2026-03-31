@@ -22,7 +22,6 @@ interface MCPSkillCardProps {
 
 export function MCPSkillCard({ skill }: MCPSkillCardProps) {
   const cat = skill.category?.[0] || 'Utilities';
-  const Icon = getCategoryIcon(cat);
   const colors = getCategoryColors(cat);
   const faviconUrl = getMcpFaviconUrl(skill.name);
 
@@ -39,7 +38,8 @@ export function MCPSkillCard({ skill }: MCPSkillCardProps) {
         <div className="flex items-start justify-between mb-4">
           <div className="flex items-start gap-3 flex-1">
             <div className={`p-2.5 rounded-xl ${colors.bg} ${colors.text} border ${colors.border}`}>
-              <Icon size={22} />
+              {/* eslint-disable-next-line react-hooks/static-components */}
+              {(() => { const Icon = getCategoryIcon(cat); return <Icon size={22} />; })()}
             </div>
             {faviconUrl && (
               <Image

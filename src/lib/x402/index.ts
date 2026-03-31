@@ -52,19 +52,6 @@ export interface X402Config {
   price: string; // e.g., "$0.001"
 }
 
-// USDC ABI — only what we need for log parsing
-const USDC_ABI = [
-  {
-    name: 'Transfer',
-    type: 'event',
-    inputs: [
-      { name: 'from', type: 'address', indexed: true },
-      { name: 'to', type: 'address', indexed: true },
-      { name: 'value', type: 'uint256', indexed: false },
-    ],
-  },
-] as const;
-
 /**
  * Parse price string to micro-units
  * price: "$0.05" => 50000 (micro-units where 1 unit = $0.000001)
