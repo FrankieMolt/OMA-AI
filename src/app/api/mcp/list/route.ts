@@ -102,7 +102,8 @@ export async function GET(request: Request) {
         }
       }
     } catch (e) {
-      console.warn('[mcp/list] REST fetch error:', (e as Error).message);
+      const err = e as Error;
+      console.error('[mcp/list] REST fetch FAILED:', err.name, err.message, 'URL:', sbUrl ? 'SET' : 'MISSING', 'KEY:', sbKey ? 'SET' : 'MISSING');
     }
   }
 
