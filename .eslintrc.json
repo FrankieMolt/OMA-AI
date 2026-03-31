@@ -12,6 +12,7 @@
     "@typescript-eslint/no-unsafe-function-type": "off",
     "react-hooks/exhaustive-deps": "warn",
     "react-hooks/set-state-in-effect": "off",
+    "react-hooks/static-components": "off",
     "prefer-const": "warn"
   }
 }

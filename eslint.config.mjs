@@ -20,6 +20,7 @@ const eslintConfig = defineConfig([
       "@typescript-eslint/no-unsafe-function-type": "warn",
       "@typescript-eslint/no-require-imports": "warn",
       "@next/next/no-img-element": "warn",
+      "react-hooks/static-components": "off",
     },
   },
 ]);

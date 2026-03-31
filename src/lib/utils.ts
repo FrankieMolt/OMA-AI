@@ -1,2 +1,7 @@
-// Backward compat — re-exports from utils/index.ts
-export { cn } from './index';
+// Utilities — keep small and focused
+import { clsx, type ClassValue } from 'clsx';
+import { twMerge } from 'tailwind-merge';
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}

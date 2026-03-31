@@ -1,5 +1,6 @@
 'use client';
 
+import { useMemo } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
@@ -24,7 +25,7 @@ export function MCPSkillCard({ skill }: MCPSkillCardProps) {
   const cat = skill.category?.[0] || 'Utilities';
   const colors = getCategoryColors(cat);
   const faviconUrl = getMcpFaviconUrl(skill.name);
-
+  const CategoryIcon = useMemo(() => getCategoryIcon(cat), [cat]);
   return (
     <MotionDiv
       initial={{ opacity: 0, y: 20 }}
@@ -38,7 +39,7 @@ export function MCPSkillCard({ skill }: MCPSkillCardProps) {
         <div className="flex items-start justify-between mb-4">
           <div className="flex items-start gap-3 flex-1">
             <div className={`p-2.5 rounded-xl ${colors.bg} ${colors.text} border ${colors.border}`}>
-              {(() => { const Icon = getCategoryIcon(cat); return <Icon size={22} />; })()}
+              {CategoryIcon && <CategoryIcon size={22} />}
             </div>
             {faviconUrl && (
               <Image

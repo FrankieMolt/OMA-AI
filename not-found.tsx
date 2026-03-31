@@ -41,8 +41,8 @@ export default function NotFound() {
         </h2>
         
         <p className="text-gray-400 mb-8 max-w-lg mx-auto">
-          The agent you're looking for has completed its mission and moved on. 
-          Or maybe it never existed. Either way, let's get you back on track.
+          The agent you&apos;re looking for has completed its mission and moved on.
+          Or maybe it never existed. Either way, let&apos;s get you back on track.
         </p>
         
         <div className="space-y-4">

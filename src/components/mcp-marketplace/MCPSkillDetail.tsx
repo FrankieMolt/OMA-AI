@@ -1,5 +1,6 @@
 'use client';
 
+import { useMemo } from 'react';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
@@ -18,6 +19,10 @@ const MotionDiv = dynamic(
 
 export default function MCPSkillDetail({ slug }: { slug: string }) {
   const { skill, loading, error } = useMCPSkillDetail(slug);
+
+  // Must be called before any early returns — hook rules require consistent call order
+  const cat = skill?.category?.[0] || 'Utilities';
+  const CategoryIcon = useMemo(() => getCategoryIcon(cat), [cat]);
 
   if (loading) {
     return (
@@ -43,7 +48,6 @@ export default function MCPSkillDetail({ slug }: { slug: string }) {
     );
   }
 
-  const cat = skill.category?.[0] || 'Utilities';
   const colors = getCategoryColors(cat);
   const faviconUrl = getMcpFaviconUrl(skill.name);
 
@@ -64,7 +68,7 @@ export default function MCPSkillDetail({ slug }: { slug: string }) {
             <div className="flex items-start gap-4 flex-1">
               <div className="relative shrink-0">
                 <div className={`p-3 rounded-2xl ${colors.bg} ${colors.text} border ${colors.border}`}>
-                  {(() => { const Icon = getCategoryIcon(cat); return <Icon size={32} />; })()}
+                  {CategoryIcon && <CategoryIcon size={32} />}
                 </div>
                 {faviconUrl && (
                   <Image src={faviconUrl} alt={`${skill?.name ?? 'MCP'} favicon`}
