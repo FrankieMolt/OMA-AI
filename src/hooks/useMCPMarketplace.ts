@@ -17,7 +17,7 @@ export interface MCPSkill {
   rating: number;
   total_calls: number;
   success_rate: number;
-  created_at?: string;
+  created_at?: string; tier?: 'free' | 'premium'; color?: string;
 }
 
 interface UseMCPMarketplaceOptions {
@@ -55,6 +55,8 @@ async function fetchSkills(page: number, limit: number): Promise<MCPSkill[]> {
     rating: Number(skill.rating ?? 0),
     total_calls: Number(skill.total_calls ?? 0),
     success_rate: Number(skill.success_rate ?? 0),
+    tier: (skill.tier as 'free' | 'premium') || 'free',
+    color: (skill.color as string) || undefined,
     created_at: (skill.created_at as string) || undefined,
   }));
 }

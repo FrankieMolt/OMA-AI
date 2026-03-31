@@ -3,6 +3,52 @@ import { MARKETPLACE_MCPS } from '@/lib/mcp-data';
 import { getSupabaseClient } from '@/lib/supabase/client';
 import { getAllCategories } from '@/lib/category-icons';
 
+interface NormalizedMCP {
+  id: string; name: string; slug: string; category: string[];
+  description: string; long_description?: string; author: string;
+  repository?: string; repository_url?: string | null;
+  documentation_url?: string | null; mcp_endpoint: string;
+  pricing_usdc: number; x402_enabled: boolean; verified: boolean;
+  rating: number; calls: number; total_calls: number; success_rate: number;
+  tier: 'free' | 'premium'; color?: string; featured?: boolean;
+  tags: string[]; tools?: { name: string; description: string }[];
+  tools_count: number; version: string; created_at?: string;
+}
+
+function normalizeMCP(m: Record<string, unknown>): NormalizedMCP {
+  const category = Array.isArray(m.category) ? m.category : m.category ? [m.category as string] : ['Utilities'];
+  const tools = Array.isArray(m.tools) ? m.tools as { name: string; description: string }[] : [];
+  const tags = Array.isArray(m.tags) ? m.tags as string[] : [];
+  return {
+    id: String(m.id ?? ''),
+    name: String(m.name ?? ''),
+    slug: String(m.slug ?? m.id ?? ''),
+    category,
+    description: String(m.description ?? ''),
+    long_description: m.long_description as string || m.description as string,
+    author: String(m.author ?? 'Unknown'),
+    repository: m.repository as string || undefined,
+    repository_url: m.repository_url == null ? undefined : String(m.repository_url) as string | null,
+    documentation_url: m.documentation_url as string || null,
+    mcp_endpoint: String(m.mcp_endpoint ?? m.endpoint ?? ''),
+    pricing_usdc: Number(m.pricing_usdc ?? 0),
+    x402_enabled: Boolean(m.x402_enabled ?? false),
+    verified: Boolean(m.verified ?? false),
+    rating: Number(m.rating ?? 0),
+    calls: Number(m.calls ?? m.total_calls ?? 0),
+    total_calls: Number(m.total_calls ?? m.calls ?? 0),
+    success_rate: Number(m.success_rate ?? 100),
+    tier: m.tier === 'premium' ? 'premium' : 'free',
+    color: m.color as string || undefined,
+    featured: Boolean(m.featured ?? false),
+    tags,
+    tools,
+    tools_count: Array.isArray(m.tools) ? m.tools.length : Number(m.tools_count ?? 0),
+    version: String(m.version ?? '1.0.0'),
+    created_at: m.created_at as string || undefined,
+  };
+}
+
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const page = parseInt(searchParams.get('page') || '1');
@@ -11,9 +57,10 @@ export async function GET(request: Request) {
   const search = searchParams.get('search') || '';
   const sortBy = searchParams.get('sort') || 'rating';
   const verified = searchParams.get('verified');
+  const tier = searchParams.get('tier') || 'all';
 
   const supabase = getSupabaseClient();
-  let data = [...MARKETPLACE_MCPS];
+  let data: NormalizedMCP[] = MARKETPLACE_MCPS.map(m => normalizeMCP(m as unknown as Record<string, unknown>));
   let total = data.length;
   let useSupabase = false;
 
@@ -33,13 +80,16 @@ export async function GET(request: Request) {
       } else if (verified === 'false') {
         query = query.eq('verified', false);
       }
+      if (tier !== 'all') {
+        query = query.eq('tier', tier);
+      }
 
       const { data: dbData, count, error } = await query
         .order(sortBy === 'rating' ? 'rating' : 'total_calls', { ascending: false })
         .range((page - 1) * limit, page * limit - 1);
 
       if (!error && dbData && dbData.length > 0) {
-        data = dbData;
+        data = dbData.map(m => normalizeMCP(m as unknown as Record<string, unknown>));
         total = count || dbData.length;
         useSupabase = true;
       }
@@ -51,14 +101,14 @@ export async function GET(request: Request) {
   // Use local data if Supabase unavailable
   if (!useSupabase) {
     if (category !== 'all') {
-      data = data.filter(m => m.category === category);
+      data = data.filter(m => m.category.includes(category));
     }
     if (search) {
       const q = search.toLowerCase();
       data = data.filter(m =>
         m.name.toLowerCase().includes(q) ||
         m.description.toLowerCase().includes(q) ||
-        (m.tags || []).some((t: string) => t.toLowerCase().includes(q))
+        m.tags.some(t => t.toLowerCase().includes(q))
       );
     }
     if (verified === 'true') {
@@ -66,11 +116,14 @@ export async function GET(request: Request) {
     } else if (verified === 'false') {
       data = data.filter(m => m.verified === false);
     }
+    if (tier !== 'all') {
+      data = data.filter(m => m.tier === tier);
+    }
 
     data.sort((a, b) => {
-      if (sortBy === 'rating') return (b.rating || 0) - (a.rating || 0);
-      if (sortBy === 'calls') return (b.total_calls || 0) - (a.total_calls || 0);
-      if (sortBy === 'price') return (a.pricing_usdc || 0) - (b.pricing_usdc || 0);
+      if (sortBy === 'rating') return b.rating - a.rating;
+      if (sortBy === 'calls') return b.total_calls - a.total_calls;
+      if (sortBy === 'price') return a.pricing_usdc - b.pricing_usdc;
       return 0;
     });
 
@@ -80,7 +133,7 @@ export async function GET(request: Request) {
 
   // Use the category-icons system for consistent categories
   const knownCategories = getAllCategories();
-  const usedCategories = Array.from(new Set(MARKETPLACE_MCPS.map(m => m.category)));
+  const usedCategories = Array.from(new Set(MARKETPLACE_MCPS.flatMap(m => m.category as string[])));
   const normalizedCategories = usedCategories.filter(c => knownCategories.includes(c) || c !== 'all');
 
   const response = NextResponse.json({

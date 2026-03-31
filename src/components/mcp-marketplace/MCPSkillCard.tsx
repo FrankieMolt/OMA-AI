@@ -8,7 +8,7 @@ import { Badge } from '@/components/ui/Badge';
 import { StarRating } from '@/components/ui/StarRating';
 import { getCategoryIcon, getCategoryColors } from '@/lib/category-icons';
 import { getMcpFaviconUrl } from '@/lib/mcp-icons';
-import { CheckCircle2, ExternalLink, Download, Zap } from 'lucide-react';
+import { CheckCircle2, ExternalLink, Zap, ChevronRight } from 'lucide-react';
 import type { MCPSkill } from '@/hooks/useMCPMarketplace';
 
 const MotionDiv = dynamic(
@@ -17,7 +17,7 @@ const MotionDiv = dynamic(
 );
 
 interface MCPSkillCardProps {
-  skill: MCPSkill;
+  skill: MCPSkill & { tier?: 'free' | 'premium'; color?: string };
 }
 
 export function MCPSkillCard({ skill }: MCPSkillCardProps) {
@@ -38,7 +38,6 @@ export function MCPSkillCard({ skill }: MCPSkillCardProps) {
         <div className="flex items-start justify-between mb-4">
           <div className="flex items-start gap-3 flex-1">
             <div className={`p-2.5 rounded-xl ${colors.bg} ${colors.text} border ${colors.border}`}>
-              {/* eslint-disable-next-line react-hooks/static-components */}
               {(() => { const Icon = getCategoryIcon(cat); return <Icon size={22} />; })()}
             </div>
             {faviconUrl && (
@@ -56,21 +55,30 @@ export function MCPSkillCard({ skill }: MCPSkillCardProps) {
               <h3 className="text-xl font-bold text-white mb-2 hover:text-purple-300 transition-colors">
                 {skill.name}
               </h3>
-              <div className="flex items-center gap-2 mb-2">
+              <div className="flex items-center gap-2 mb-2 flex-wrap">
+                {skill.tier === 'premium' ? (
+                  <span className="px-2 py-0.5 text-xs bg-amber-500/20 text-amber-400 border border-amber-500/40 rounded-full font-semibold">
+                    Premium
+                  </span>
+                ) : (
+                  <span className="px-2 py-0.5 text-xs bg-green-500/20 text-green-400 border border-green-500/40 rounded-full font-semibold">
+                    Free
+                  </span>
+                )}
                 {skill.verified && (
-                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-green-500/20 border border-green-500/40 rounded-full text-green-400 text-xs font-semibold shadow-lg shadow-green-500/20">
-                    <CheckCircle2 size={14} className="fill-green-500/30" />
+                  <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-green-500/20 border border-green-500/40 rounded-full text-green-400 text-xs font-semibold">
+                    <CheckCircle2 size={12} />
                     Verified
                   </span>
                 )}
-                <span className="text-gray-400 text-sm">by @{skill.author}</span>
+                {skill.x402_enabled && (
+                  <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-yellow-500/20 border border-yellow-500/40 rounded text-yellow-400 text-xs font-medium">
+                    <Zap size={10} className="fill-yellow-500/40" />
+                    x402
+                  </span>
+                )}
               </div>
-              {skill.x402_enabled && (
-                <span className="inline-flex items-center gap-1 px-2 py-1 bg-yellow-500/20 border border-yellow-500/40 rounded text-yellow-400 text-xs font-medium">
-                  <Zap size={12} className="fill-yellow-500/40" />
-                  x402
-                </span>
-              )}
+              <p className="text-xs text-gray-500">by @{skill.author}</p>
             </div>
           </div>
           <StarRating rating={skill.rating} size={14} />
@@ -123,9 +131,9 @@ export function MCPSkillCard({ skill }: MCPSkillCardProps) {
         <div className="mt-4 flex gap-3">
           <Link
             href={`/mcps/${skill.slug}`}
-            className="flex-1 px-4 py-2.5 bg-zinc-700 hover:bg-zinc-600 text-white text-center font-medium rounded-lg transition-colors"
+            className="flex-1 px-4 py-2.5 bg-zinc-700 hover:bg-zinc-600 text-white text-center font-medium rounded-lg transition-colors flex items-center justify-center gap-1.5"
           >
-            View Details
+            View Details <ChevronRight size={14} />
           </Link>
           {skill.repository_url && (
             <Link
@@ -134,14 +142,9 @@ export function MCPSkillCard({ skill }: MCPSkillCardProps) {
               rel="noopener noreferrer"
               className="px-4 py-2.5 bg-zinc-800 hover:bg-zinc-700 text-white font-medium rounded-lg transition-colors flex items-center gap-2"
             >
-              <ExternalLink size={16} />
-              Code
+              <ExternalLink size={14} />
             </Link>
           )}
-          <button className="px-4 py-2.5 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg transition-colors flex items-center gap-2">
-            <Download size={16} />
-            Install
-          </button>
         </div>
       </GlassCard>
     </MotionDiv>

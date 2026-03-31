@@ -1,16 +1,2 @@
-import { Metadata } from 'next';
-import TransactionsFeed from '@/components/transactions/TransactionsFeed';
-
-export const metadata: Metadata = {
-  title: 'Transactions',
-  description: 'Real-time x402 payment transactions on OMA marketplace. View transaction history and payment details.',
-  keywords: ['transactions', 'x402', 'payments', 'USDC', 'Base', 'activity'],
-};
-
-export default function TransactionsPage() {
-  return (
-    <div className="min-h-screen bg-zinc-950 pt-16">
-      <TransactionsFeed />
-    </div>
-  );
-}
+import { ComingSoon } from '@/components/ui/ComingSoon';
+export default function Page() { return <ComingSoon title="Coming Soon" />; }

@@ -43,6 +43,10 @@ export async function GET(
             repository_url: mcp.repository_url || null,
             documentation_url: mcp.documentation_url || null,
             version: mcp.version || '1.0.0',
+            tier: mcp.tier || 'free',
+            color: mcp.color || null,
+            long_description: mcp.long_description || mcp.description || '',
+            featured: mcp.featured ?? false,
             created_at: mcp.created_at || new Date().toISOString(),
             updated_at: mcp.updated_at || new Date().toISOString(),
           },
@@ -53,7 +57,35 @@ export async function GET(
     // Fallback to static MARKETPLACE_MCPS data
     const staticMcp = MARKETPLACE_MCPS.find((m) => m.slug === slug);
     if (staticMcp) {
-      return NextResponse.json({ success: true, data: staticMcp });
+      // Normalize for MCPSkill compatibility
+      return NextResponse.json({
+        success: true,
+        data: {
+          id: staticMcp.id,
+          name: staticMcp.name,
+          slug: staticMcp.slug,
+          category: staticMcp.category,
+          description: staticMcp.description,
+          long_description: staticMcp.long_description || staticMcp.description,
+          author: staticMcp.author,
+          repository_url: staticMcp.repository || null,
+          documentation_url: staticMcp.documentation_url || null,
+          mcp_endpoint: staticMcp.mcp_endpoint,
+          pricing_usdc: staticMcp.pricing_usdc,
+          x402_enabled: staticMcp.x402_enabled,
+          verified: staticMcp.verified,
+          rating: staticMcp.rating,
+          total_calls: staticMcp.calls,
+          success_rate: 100,
+          tier: staticMcp.tier,
+          color: staticMcp.color || null,
+          featured: staticMcp.featured ?? false,
+          tools: staticMcp.tools || [],
+          tags: staticMcp.tags,
+          version: staticMcp.version,
+          created_at: new Date().toISOString(),
+        },
+      });
     }
 
     return NextResponse.json(

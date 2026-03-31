@@ -1,167 +1,252 @@
 'use client';
-
-import dynamic from 'next/dynamic';
-import { ExternalLink, ArrowUpRight, Copy, CheckCircle } from 'lucide-react';
-import { useCopyToClipboard } from '@/hooks/useCopyToClipboard';
-
-const MotionDiv = dynamic(
-  () => import('framer-motion').then(m => m.motion.div),
-  { ssr: false }
-);
+import { useState } from 'react';
+import { GlassCard } from '@/components/ui/GlassCard';
+import { Copy, Check, Terminal, Box, Zap, ExternalLink } from 'lucide-react';
 
 interface MCPInstallCardProps {
-  slug: string;
-  mcp_endpoint: string;
-  pricing_usdc: number;
-  total_calls: number;
-  success_rate: number;
-  rating: number;
-  documentation_url?: string | null;
-  repository_url?: string | null;
+  server: {
+    slug: string;
+    name: string;
+    mcp_endpoint: string;
+    tools_count: number;
+    x402_enabled: boolean;
+    tier: 'free' | 'premium';
+    pricing_usdc: number;
+    documentation_url?: string | null;
+    repository?: string;
+    tools?: { name: string; description: string }[];
+    color?: string | null;
+    rating: number;
+    total_calls: number;
+    success_rate: number;
+  };
 }
 
-export function MCPInstallCard({
-  slug,
-  mcp_endpoint,
-  pricing_usdc,
-  total_calls,
-  success_rate,
-  rating,
-  documentation_url,
-  repository_url,
-}: MCPInstallCardProps) {
-  const { copiedId, copyToClipboard } = useCopyToClipboard();
+const CLIENTS = ['Claude Desktop', 'Cursor', 'OpenClaw'] as const;
+type Client = typeof CLIENTS[number];
 
-  const openclawConfig = JSON.stringify({
-    mcp: {
-      servers: {
-        [slug]: {
-          transport: 'streamable-http',
-          url: mcp_endpoint,
+function generateClaudeDesktopConfig(slug: string, endpoint: string) {
+  return JSON.stringify({
+    mcpServers: {
+      [slug]: {
+        transport: 'streamable-http',
+        url: endpoint,
+        headers: {
+          'User-Agent': 'OMA-AI-MCP/1.0',
         },
       },
     },
   }, null, 2);
+}
 
-  const claudeConfig = JSON.stringify({
+function generateCursorConfig(slug: string, endpoint: string) {
+  return JSON.stringify({
     mcpServers: {
       [slug]: {
-        command: 'npx',
-        args: ['-y', '@oma-ai/mcp-cli', slug],
+        transport: 'streamable-http',
+        url: endpoint,
+        headers: {
+          'User-Agent': 'OMA-AI-MCP/1.0',
+        },
       },
     },
   }, null, 2);
-
-  return (
-    <MotionDiv
-      initial={{ opacity: 0, x: -20 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ delay: 0.3 }}
-      className="space-y-6"
-    >
-      {/* Install Card */}
-      <MotionDiv
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.4 }}
-        className="p-6 bg-zinc-900 border border-zinc-800 rounded-2xl"
-      >
-        <h3 className="text-lg font-semibold text-white mb-4">Connect to OpenClaw</h3>
-        <p className="text-sm text-gray-400 mb-4">
-          Add this MCP server to your OpenClaw or Claude Desktop config.
-        </p>
-
-        {/* OpenClaw config */}
-        <div className="bg-zinc-950 p-3 rounded-lg mb-3">
-          <pre className="text-xs text-green-400 overflow-x-auto whitespace-pre-wrap break-all">
-            {openclawConfig}
-          </pre>
-        </div>
-        <button
-          onClick={() => copyToClipboard(openclawConfig, 'openclaw')}
-          className="w-full px-4 py-2.5 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors font-medium flex items-center justify-center gap-2 mb-2"
-        >
-          {copiedId === 'openclaw' ? <><CheckCircle size={16} /> Copied!</> : <><Copy size={16} /> Copy OpenClaw Config</>}
-        </button>
-
-        {/* Claude Desktop config */}
-        <div className="bg-zinc-950 p-3 rounded-lg mb-3">
-          <pre className="text-xs text-green-400 overflow-x-auto whitespace-pre-wrap break-all">
-            {claudeConfig}
-          </pre>
-        </div>
-        <button
-          onClick={() => copyToClipboard(claudeConfig, 'claude')}
-          className="w-full px-4 py-2.5 bg-violet-600 hover:bg-violet-700 text-white rounded-lg transition-colors font-medium flex items-center justify-center gap-2"
-        >
-          {copiedId === 'claude' ? <><CheckCircle size={16} /> Copied!</> : <><Copy size={16} /> Copy Claude Desktop Config</>}
-        </button>
-
-        {documentation_url && (
-          <a href={documentation_url} target="_blank" rel="noopener noreferrer"
-            className="mt-3 flex items-center justify-center gap-1.5 text-sm text-gray-400 hover:text-white transition-colors">
-            <ExternalLink size={14} />
-            Full Documentation
-          </a>
-        )}
-      </MotionDiv>
-
-      {/* Pricing Card */}
-      <MotionDiv
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.5 }}
-        className="p-6 bg-zinc-900 border border-zinc-800 rounded-2xl"
-      >
-        <h3 className="text-lg font-semibold text-white mb-4">Pricing</h3>
-        <div className="space-y-3">
-          <div className="flex items-baseline justify-between">
-            <span className="text-gray-400">Price</span>
-            <span className="text-3xl font-bold text-white">${pricing_usdc.toFixed(4)}</span>
-          </div>
-          <div className="text-sm text-gray-400">USDC per call</div>
-        </div>
-      </MotionDiv>
-
-      {/* Stats Card */}
-      <MotionDiv
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.6 }}
-        className="p-6 bg-zinc-900 border border-zinc-800 rounded-2xl"
-      >
-        <h3 className="text-lg font-semibold text-white mb-4">Statistics</h3>
-        <div className="space-y-3">
-          <StatRow label="Total Calls" value={total_calls.toLocaleString()} />
-          <StatRow label="Success Rate" value={`${success_rate.toFixed(1)}%`} valueClass="text-green-400" />
-          <StatRow label="Rating" value={`${rating.toFixed(1)} ★`} valueClass="text-yellow-400" />
-        </div>
-      </MotionDiv>
-
-      {/* Links */}
-      {repository_url && (
-        <MotionDiv initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.7 }} className="space-y-2">
-          <a href={repository_url} target="_blank" rel="noopener noreferrer"
-            className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors">
-            <span>Source Code</span><ArrowUpRight size={16} />
-          </a>
-          {documentation_url && (
-            <a href={documentation_url} target="_blank" rel="noopener noreferrer"
-              className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors">
-              <span>Documentation</span><ArrowUpRight size={16} />
-            </a>
-          )}
-        </MotionDiv>
-      )}
-    </MotionDiv>
-  );
 }
 
-function StatRow({ label, value, valueClass = 'text-white' }: { label: string; value: string; valueClass?: string }) {
+function generateOpenClawConfig(slug: string, endpoint: string) {
+  return JSON.stringify({
+    mcpServers: {
+      [slug]: {
+        transport: 'http',
+        url: endpoint,
+        name: slug,
+        enabled: true,
+      },
+    },
+  }, null, 2);
+}
+
+export function MCPInstallCard({ server }: MCPInstallCardProps) {
+  const [selectedClient, setSelectedClient] = useState<Client>('Claude Desktop');
+  const [copied, setCopied] = useState(false);
+  const [activeTab, setActiveTab] = useState<'config' | 'tools'>('config');
+
+  const configs: Record<Client, string> = {
+    'Claude Desktop': generateClaudeDesktopConfig(server.slug, server.mcp_endpoint),
+    'Cursor': generateCursorConfig(server.slug, server.mcp_endpoint),
+    'OpenClaw': generateOpenClawConfig(server.slug, server.mcp_endpoint),
+  };
+
+  const config = configs[selectedClient];
+
+  const copyToClipboard = async () => {
+    await navigator.clipboard.writeText(config);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  const configPathHint: Record<Client, string> = {
+    'Claude Desktop': '~/.config/claude/claude_desktop_config.json',
+    'Cursor': '~/.cursor/settings.json (MCP servers section)',
+    'OpenClaw': '~/.openclaw/openclaw.json (mcpServers section)',
+  };
+
   return (
-    <div className="flex items-center justify-between">
-      <span className="text-gray-400">{label}</span>
-      <span className={`text-xl font-bold ${valueClass}`}>{value}</span>
+    <div className="space-y-4">
+      {/* Connect Card */}
+      <GlassCard className="p-5">
+        <div className="flex items-center gap-3 mb-4">
+          <Box className="w-5 h-5 text-violet-400" />
+          <h3 className="text-base font-semibold text-white">Connect to {server.name}</h3>
+        </div>
+
+        {/* Tier + x402 badges */}
+        <div className="flex flex-wrap gap-2 mb-4">
+          {server.tier === 'premium' ? (
+            <span className="px-2.5 py-1 text-xs bg-amber-500/20 text-amber-400 border border-amber-500/30 rounded-full font-medium">
+              Premium
+            </span>
+          ) : (
+            <span className="px-2.5 py-1 text-xs bg-green-500/20 text-green-400 border border-green-500/30 rounded-full font-medium">
+              Free
+            </span>
+          )}
+          {server.x402_enabled && (
+            <span className="px-2.5 py-1 text-xs bg-yellow-500/20 text-yellow-400 border border-yellow-500/30 rounded-full font-medium flex items-center gap-1">
+              <Zap size={10} className="fill-yellow-400" />
+              x402 Pay-per-call
+            </span>
+          )}
+        </div>
+
+        {/* Client selector tabs */}
+        <div className="flex gap-2 mb-4 flex-wrap">
+          {CLIENTS.map(client => (
+            <button
+              key={client}
+              onClick={() => setSelectedClient(client)}
+              className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-all ${
+                selectedClient === client
+                  ? 'bg-violet-600 text-white'
+                  : 'bg-zinc-700 text-gray-400 hover:text-white hover:bg-zinc-600'
+              }`}
+            >
+              {client}
+            </button>
+          ))}
+        </div>
+
+        {/* Config or Tools tabs */}
+        <div className="flex gap-4 mb-3 border-b border-zinc-700">
+          <button
+            onClick={() => setActiveTab('config')}
+            className={`pb-2 text-xs font-medium transition-colors ${
+              activeTab === 'config'
+                ? 'text-violet-400 border-b-2 border-violet-400'
+                : 'text-gray-500 hover:text-gray-300'
+            }`}
+          >
+            <span className="flex items-center gap-1"><Terminal className="w-3 h-3" /> Config</span>
+          </button>
+          <button
+            onClick={() => setActiveTab('tools')}
+            className={`pb-2 text-xs font-medium transition-colors ${
+              activeTab === 'tools'
+                ? 'text-violet-400 border-b-2 border-violet-400'
+                : 'text-gray-500 hover:text-gray-300'
+            }`}
+          >
+            <span className="flex items-center gap-1"><Box className="w-3 h-3" /> Tools ({server.tools_count})</span>
+          </button>
+        </div>
+
+        {activeTab === 'config' ? (
+          <>
+            {/* Config output */}
+            <div className="bg-zinc-950 p-3 rounded-lg mb-3">
+              <pre className="text-xs text-green-400 overflow-x-auto whitespace-pre-wrap break-all font-mono">
+                {config}
+              </pre>
+            </div>
+
+            {/* Where to put it */}
+            <p className="text-xs text-gray-500 mb-3">
+              Add to: <code className="text-gray-400 bg-zinc-800 px-1.5 py-0.5 rounded">{configPathHint[selectedClient]}</code>
+            </p>
+
+            {/* Copy button */}
+            <button
+              onClick={copyToClipboard}
+              className={`w-full px-4 py-2.5 rounded-lg transition-all font-medium flex items-center justify-center gap-2 text-sm ${
+                copied
+                  ? 'bg-green-600 text-white'
+                  : 'bg-violet-600 hover:bg-violet-700 text-white'
+              }`}
+            >
+              {copied ? <><Check className="w-4 h-4" /> Copied!</> : <><Copy className="w-4 h-4" /> Copy {selectedClient} Config</>}
+            </button>
+          </>
+        ) : (
+          /* Tools list */
+          <div className="space-y-2 max-h-60 overflow-y-auto">
+            {server.tools && server.tools.length > 0 ? (
+              server.tools.map((tool) => (
+                <div key={tool.name} className="bg-zinc-800/50 p-2.5 rounded-lg">
+                  <div className="text-xs font-mono text-violet-400 mb-0.5">{tool.name}</div>
+                  <div className="text-xs text-gray-400">{tool.description}</div>
+                </div>
+              ))
+            ) : (
+              <p className="text-xs text-gray-500">No tools documented yet.</p>
+            )}
+          </div>
+        )}
+      </GlassCard>
+
+      {/* Stats Card */}
+      <GlassCard className="p-5">
+        <h4 className="text-sm font-semibold text-white mb-3">Statistics</h4>
+        <div className="space-y-2">
+          <div className="flex items-center justify-between">
+            <span className="text-xs text-gray-400">Total Calls</span>
+            <span className="text-sm font-bold text-white">{(server.total_calls || 0).toLocaleString()}</span>
+          </div>
+          <div className="flex items-center justify-between">
+            <span className="text-xs text-gray-400">Success Rate</span>
+            <span className="text-sm font-bold text-green-400">{(server.success_rate || 100).toFixed(1)}%</span>
+          </div>
+          <div className="flex items-center justify-between">
+            <span className="text-xs text-gray-400">Rating</span>
+            <span className="text-sm font-bold text-yellow-400">{server.rating.toFixed(1)}</span>
+          </div>
+        </div>
+      </GlassCard>
+
+      {/* Links */}
+      <GlassCard className="p-5 space-y-2">
+        {server.documentation_url && (
+          <a
+            href={server.documentation_url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 text-xs text-gray-400 hover:text-white transition-colors"
+          >
+            <ExternalLink size={12} />
+            Documentation
+          </a>
+        )}
+        {server.repository && (
+          <a
+            href={server.repository}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 text-xs text-gray-400 hover:text-white transition-colors"
+          >
+            <ExternalLink size={12} />
+            Source Code
+          </a>
+        )}
+      </GlassCard>
     </div>
   );
 }
