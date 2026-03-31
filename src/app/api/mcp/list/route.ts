@@ -83,8 +83,8 @@ export async function GET(request: Request) {
 
       const res = await fetch(`${sbUrl}/rest/v1/mcp_servers?${searchParams}`, {
         headers: {
+          // apikey is sufficient for PostgREST anon read — Authorization Bearer causes 401 from some Vercel infra
           'apikey': sbKey,
-          'Authorization': `Bearer ${sbKey}`,
           'Content-Type': 'application/json',
           'Prefer': 'count=exact',
         },

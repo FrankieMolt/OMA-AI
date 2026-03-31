@@ -18,7 +18,6 @@ export async function GET() {
       const res = await fetch(`${url}/rest/v1/mcp_servers?select=id,name&limit=3`, {
         headers: {
           'apikey': key,
-          'Authorization': `Bearer ${key}`,
         },
         signal: controller.signal,
       });
