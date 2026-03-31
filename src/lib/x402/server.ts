@@ -28,7 +28,7 @@ export const NETWORKS = {
     id: 'eip155:84532',
     chainId: 84532,
     name: 'Base Sepolia',
-    usdcAddress: '0x036CbD538642dc2B78d73D717E2A12D53cD3dD3',
+    usdcAddress: '0x036CbD53842c5426634e7929541eC2318f3dCF7e',
     rpcUrl: process.env.BASE_SEPOLIA_RPC_URL || 'https://sepolia.base.org',
     explorer: 'https://sepolia.basescan.org',
     symbol: 'ETH',

@@ -186,7 +186,7 @@ export default function MCPSkillDetail({ slug }: { slug: string }) {
               tier: skill.tier,
               pricing_usdc: skill.pricing_usdc,
               documentation_url: skill.documentation_url,
-              repository: skill.repository_url || undefined,
+              repository_url: skill.repository_url || undefined,
               tools: skill.tools,
               color: skill.color,
               rating: skill.rating,
