@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
     return {
       title: `${data.title || resolvedParams.slug} | Blog | OMA-AI`,
-      description: data.description || data.excerpt || `Read about ${data.title} on OMA-AI`,
+      description: data.description || data.excerpt || `Read about ${data.title || resolvedParams.slug} on OMA-AI`,
       keywords: data.keywords || ['OMA-AI', 'Blog', 'MCP'],
       alternates: {
         canonical: `https://oma-ai.com/blog/${resolvedParams.slug}`,
