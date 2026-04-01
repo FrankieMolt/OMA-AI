@@ -95,6 +95,14 @@ export const MODEL_COSTS: Record<string, ModelCreditCost> = {
     provider: 'Alibaba',
     inputCredits: 1.20,
     outputCredits: 4.80
+  },
+
+  // Google
+  'glm-5v-turbo': {
+    name: 'GLM-5 Vision Turbo',
+    provider: 'Google/Zhipu',
+    inputCredits: 2.00,
+    outputCredits: 8.00
   }
 };
 
