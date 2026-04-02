@@ -6,8 +6,8 @@ import Link from 'next/link';
 import { ArrowRight, TrendingUp, Users, Zap, DollarSign, Clock, Settings, LogOut } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Dashboard',
-  description: 'Manage your MCP marketplace dashboard, view earnings, and monitor your AI agent integrations.',
+  title: 'Dashboard | OMA-AI',
+  description: 'Manage your MCP tools, view analytics, track earnings, and monitor your AI agent integrations from your personal dashboard.',
 };
 
 export default async function DashboardPage() {

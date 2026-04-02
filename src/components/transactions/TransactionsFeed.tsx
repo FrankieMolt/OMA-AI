@@ -130,7 +130,7 @@ export default function TransactionsFeed() {
   };
 
   return (
-    <main className="min-h-screen bg-zinc-950 pt-24 pb-12">
+    <div className="min-h-screen bg-zinc-950 pt-24 pb-12">
       <div className="container mx-auto px-4 max-w-7xl">
         {/* Breadcrumbs */}
         <TransactionsBreadcrumbs />
@@ -314,6 +314,6 @@ export default function TransactionsFeed() {
           </div>
         )}
       </div>
-    </main>
+    </div>
   );
 }

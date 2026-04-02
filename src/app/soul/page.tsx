@@ -3,7 +3,7 @@ import { Wallet, Sparkles, Shield, Zap, Globe } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Agent Wallets | OMA-AI',
-  description: 'Autonomous wallets for AI agents — earn, spend, and transact on-chain.',
+  description: 'Autonomous self-custodial wallets for AI agents. Earn, spend, and transact on-chain with x402 payment integration across Base, Ethereum, and Solana.',
 };
 
 export default function SoulPage() {

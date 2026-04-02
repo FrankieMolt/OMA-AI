@@ -18,8 +18,8 @@ export default async function MCPSkillPage({ params }: PageProps) {
   const { slug } = await params;
   
   return (
-    <main className="min-h-screen bg-zinc-950">
+    <div className="min-h-screen bg-zinc-950">
       <MCPSkillDetail slug={slug} />
-    </main>
+    </div>
   );
 }

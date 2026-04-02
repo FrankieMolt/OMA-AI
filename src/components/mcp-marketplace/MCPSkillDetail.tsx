@@ -26,25 +26,25 @@ export default function MCPSkillDetail({ slug }: { slug: string }) {
 
   if (loading) {
     return (
-      <main className="min-h-screen bg-zinc-950 pt-24 pb-12">
+      <div className="min-h-screen bg-zinc-950 pt-24 pb-12">
         <div className="container mx-auto px-4 max-w-4xl">
           <div className="flex items-center justify-center py-24">
             <div className="text-xl text-gray-400">Loading skill details...</div>
           </div>
         </div>
-      </main>
+      </div>
     );
   }
 
   if (error || !skill) {
     return (
-      <main className="min-h-screen bg-zinc-950 pt-24 pb-12">
+      <div className="min-h-screen bg-zinc-950 pt-24 pb-12">
         <div className="container mx-auto px-4 max-w-4xl">
           <div className="p-8 bg-red-900/20 border border-red-800 rounded-2xl text-red-400">
             {error || 'Skill not found'}
           </div>
         </div>
-      </main>
+      </div>
     );
   }
 
@@ -52,7 +52,7 @@ export default function MCPSkillDetail({ slug }: { slug: string }) {
   const faviconUrl = getMcpFaviconUrl(skill.name);
 
   return (
-    <main className="min-h-screen bg-zinc-950 pt-24 pb-12">
+    <div className="min-h-screen bg-zinc-950 pt-24 pb-12">
       <div className="container mx-auto px-4 max-w-4xl">
         {/* Back Button */}
         <MotionDiv initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="mb-6">
@@ -196,6 +196,6 @@ export default function MCPSkillDetail({ slug }: { slug: string }) {
           </div>
         </div>
       </div>
-    </main>
+    </div>
   );
 }
