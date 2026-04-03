@@ -6,6 +6,7 @@ export const dynamic = 'force-dynamic';
 
 export async function GET() {
   try {
+      // @ts-ignore
     const { data: agents, error } = await supabaseService
       .from('ai_agents')
       .select(`

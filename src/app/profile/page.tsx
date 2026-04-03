@@ -23,6 +23,9 @@ export default function ProfilePage() {
 
   const loadProfile = async () => {
     try {
+      if (!supabase) return;
+      if (!supabase) return;
+
       const { data: { user } } = await supabase.auth.getUser();
       if (user) {
         setUser(user);
@@ -41,6 +44,8 @@ export default function ProfilePage() {
     setMessage({ type: '', text: '' });
 
     try {
+      if (!supabase) return;
+
       const { error } = await supabase.auth.updateUser({
         data: {
           name,

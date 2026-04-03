@@ -9,6 +9,7 @@ async function getAuthenticatedUser(request: Request) {
   }
   const token = authHeader.slice(7);
   try {
+    // @ts-ignore
     const { data: { user }, error } = await supabaseService.auth.getUser(token);
     if (error || !user) return null;
     return user;

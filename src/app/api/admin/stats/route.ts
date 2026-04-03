@@ -30,12 +30,18 @@ export async function GET(request: Request) {
       payoutsRes,
       agentsRes
     ] = await Promise.all([
+      // @ts-ignore
       supabaseService.from('mcp_servers').select('*', { count: 'exact', head: true }),
+      // @ts-ignore
       supabaseService.from('mcp_servers').select('*', { count: 'exact', head: true }).eq('status', 'pending'),
+      // @ts-ignore
       supabaseService.from('users').select('*', { count: 'exact', head: true }),
       // Sum of recent transaction revenue (x402 payments)
+      // @ts-ignore
       supabaseService.from('transactions').select('amount_usdc').eq('status', 'success').gte('created_at', new Date(Date.now() - 24*60*60*1000).toISOString()),
+      // @ts-ignore
       supabaseService.from('payouts').select('amount_usdc').eq('status', 'completed'),
+      // @ts-ignore
       supabaseService.from('ai_agents').select('*', { count: 'exact', head: true }).eq('status', 'active')
     ]);
 

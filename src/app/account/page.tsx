@@ -18,6 +18,10 @@ export default function AccountPage() {
 
   const loadUser = async () => {
     try {
+      if (!supabase) return;
+      if (!supabase) return;
+      if (!supabase) return;
+
       const { data: { user } } = await supabase.auth.getUser();
       if (user) {
         setUser(user);

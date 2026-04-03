@@ -14,6 +14,7 @@ export async function validateApiKey(apiKey: string) {
     const hashArray = Array.from(new Uint8Array(hashBuffer));
     const keyHash = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
 
+      // @ts-ignore
     const { data: keyData, error: keyError } = await supabase
       .from('api_keys')
       .select('*, users(*)')

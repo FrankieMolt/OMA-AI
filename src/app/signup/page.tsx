@@ -19,6 +19,9 @@ export default function SignupPage() {
     setError('');
 
     try {
+      if (!supabase) return;
+      if (!supabase) return;
+
       const { error: signUpError } = await supabase.auth.signUp({
         email,
         password,

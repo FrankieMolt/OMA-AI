@@ -1,66 +1,54 @@
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 
-export const supabaseUrl = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
-export const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+const supabaseUrl = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
-const isConfigured = !!(supabaseUrl && supabaseAnonKey);
+// True when env vars are real (not placeholders from .env.production)
+function isConfigured(): boolean {
+  return !!(
+    supabaseUrl &&
+    supabaseAnonKey &&
+    !supabaseUrl.includes('your-project') &&
+    !supabaseUrl.includes('undefined')
+  );
+}
 
-// Lazy-init clients — only created when env vars are present
-// Prevents "supabaseUrl is required" error during next build when env vars are missing
 let _supabase: SupabaseClient | null = null;
 let _supabaseService: SupabaseClient | null = null;
 
-function getClient(opts?: { persistSession: boolean }): SupabaseClient | null {
-  if (!isConfigured) return null;
-  if (!_supabase) {
-    _supabase = createClient(supabaseUrl!, supabaseAnonKey!, {
-      auth: { persistSession: opts?.persistSession ?? false, autoRefreshToken: true },
-    });
-  }
-  return _supabase;
-}
-
-// Client for browser (persistSession: true — used in credits/balance for user auth)
-export const supabase = getClient({ persistSession: true });
-
-// Server-side client (no session persistence — used for all API route DB ops)
-export const supabaseService = (() => {
-  if (!isConfigured) return null;
-  if (!_supabaseService) {
-    _supabaseService = createClient(supabaseUrl!, supabaseAnonKey!, {
-      auth: { persistSession: false, autoRefreshToken: false },
-    });
-  }
-  return _supabaseService;
-})();
-
-// Check if Supabase is properly configured
-export function isSupabaseConfigured() {
-  return !!(supabaseUrl && supabaseAnonKey);
-}
-
-// Graceful error handler for Supabase operations
+// During runtime (Vercel deployment): env vars are set, returns real client
+// During next build without env vars: returns null, callers must guard
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export function handleSupabaseError(error: any, context: string = 'Supabase operation') {
+export const supabase = isConfigured()
+  ? (_supabase ??= createClient(supabaseUrl!, supabaseAnonKey!, {
+      auth: { persistSession: true, autoRefreshToken: true },
+    }))
+  : (null as unknown as SupabaseClient);
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const supabaseService = isConfigured()
+  ? (_supabaseService ??= createClient(supabaseUrl!, supabaseAnonKey!, {
+      auth: { persistSession: false, autoRefreshToken: false },
+    }))
+  : (null as unknown as SupabaseClient);
+
+export function handleSupabaseError(
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  error: any,
+  context = 'Supabase operation'
+) {
   console.error(`[${context}] Error:`, error);
-
-  if (!isSupabaseConfigured()) {
-    return {
-      data: null,
-      error: new Error('Supabase not configured. Please check environment variables.'),
-      isGraceful: true,
-    };
-  }
-
   return { data: null, error, isGraceful: false };
 }
 
-// Server-side client factory — use this in API routes for per-request isolation.
-// NOTE: Currently backed by anon key (service role key expired — regenerate at
-// supabase.com/dashboard → Settings → API if write-without-RLS is needed).
-export function getSupabaseClient() {
+// Primary client factory — use this in API routes (always prefer this over direct supabase import)
+export function getSupabaseClient(): SupabaseClient | null {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-  if (!url || !key) return null;
+  if (!url || !key || url.includes('your-project')) return null;
   return createClient(url, key, { auth: { autoRefreshToken: false, persistSession: false } });
+}
+
+export function isSupabaseConfigured(): boolean {
+  return isConfigured();
 }

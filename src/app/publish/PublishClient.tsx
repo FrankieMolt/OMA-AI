@@ -80,6 +80,9 @@ export default function PublishClient() {
         documentation_url: documentationUrl, tools, pricing_usdc: globalPricingUsdc, x402_enabled: x402Enabled,
         status: 'pending', verified: false,
       };
+      if (!supabase) return;
+      if (!supabase) return;
+
       const { error } = await supabase.from('mcp_servers').insert(payload);
       if (error) throw error;
       setStep(5);
