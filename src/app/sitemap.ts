@@ -1,155 +1,172 @@
 import { MetadataRoute } from 'next';
+import { getMCPData } from '@/lib/mcp-data';
 
 const baseUrl = 'https://www.oma-ai.com';
-const today = new Date();
+
+// Get MCP data for sitemap
+const mcps = getMCPData();
+
+// Calculate last modified date (use newest MCP update)
+const mcpLastModified = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000); // 7 days ago
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  // Static routes
   const routes: MetadataRoute.Sitemap = [
     {
       url: baseUrl,
-      lastModified: today,
+      lastModified: mcpLastModified,
       changeFrequency: 'daily',
       priority: 1,
     },
     {
       url: `${baseUrl}/agents`,
-      lastModified: today,
+      lastModified: mcpLastModified,
       changeFrequency: 'daily',
       priority: 0.9,
     },
     {
       url: `${baseUrl}/services`,
-      lastModified: today,
+      lastModified: mcpLastModified,
       changeFrequency: 'daily',
       priority: 0.9,
     },
     {
       url: `${baseUrl}/mcps`,
-      lastModified: today,
+      lastModified: mcpLastModified,
       changeFrequency: 'hourly',
       priority: 0.9,
     },
     {
       url: `${baseUrl}/roadmap`,
-      lastModified: today,
+      lastModified: mcpLastModified,
       changeFrequency: 'weekly',
       priority: 0.8,
     },
     {
       url: `${baseUrl}/publish`,
-      lastModified: today,
+      lastModified: mcpLastModified,
       changeFrequency: 'weekly',
       priority: 0.8,
     },
     {
       url: `${baseUrl}/dashboard`,
-      lastModified: today,
+      lastModified: mcpLastModified,
       changeFrequency: 'daily',
       priority: 0.9,
     },
     {
       url: `${baseUrl}/features`,
-      lastModified: today,
+      lastModified: mcpLastModified,
       changeFrequency: 'weekly',
       priority: 0.7,
     },
     {
       url: `${baseUrl}/pricing`,
-      lastModified: today,
+      lastModified: mcpLastModified,
       changeFrequency: 'monthly',
       priority: 0.7,
     },
     {
       url: `${baseUrl}/models`,
-      lastModified: today,
+      lastModified: mcpLastModified,
       changeFrequency: 'weekly',
       priority: 0.7,
     },
     {
       url: `${baseUrl}/about`,
-      lastModified: today,
+      lastModified: mcpLastModified,
       changeFrequency: 'monthly',
       priority: 0.6,
     },
     {
       url: `${baseUrl}/contact`,
-      lastModified: today,
+      lastModified: mcpLastModified,
       changeFrequency: 'monthly',
       priority: 0.6,
     },
     {
       url: `${baseUrl}/faq`,
-      lastModified: today,
+      lastModified: mcpLastModified,
       changeFrequency: 'monthly',
       priority: 0.6,
     },
     {
       url: `${baseUrl}/compare`,
-      lastModified: today,
+      lastModified: mcpLastModified,
       changeFrequency: 'weekly',
       priority: 0.6,
     },
     {
       url: `${baseUrl}/docs`,
-      lastModified: today,
+      lastModified: mcpLastModified,
       changeFrequency: 'weekly',
       priority: 0.7,
     },
     {
       url: `${baseUrl}/docs/api`,
-      lastModified: today,
+      lastModified: mcpLastModified,
       changeFrequency: 'weekly',
       priority: 0.7,
     },
     {
       url: `${baseUrl}/docs/guides`,
-      lastModified: today,
+      lastModified: mcpLastModified,
       changeFrequency: 'weekly',
       priority: 0.6,
     },
     {
       url: `${baseUrl}/blog`,
-      lastModified: today,
+      lastModified: mcpLastModified,
       changeFrequency: 'daily',
       priority: 0.8,
     },
     {
       url: `${baseUrl}/terms`,
-      lastModified: today,
+      lastModified: mcpLastModified,
       changeFrequency: 'yearly',
       priority: 0.3,
     },
     {
       url: `${baseUrl}/privacy`,
-      lastModified: today,
+      lastModified: mcpLastModified,
       changeFrequency: 'yearly',
       priority: 0.3,
     },
     {
       url: `${baseUrl}/security`,
-      lastModified: today,
+      lastModified: mcpLastModified,
       changeFrequency: 'yearly',
       priority: 0.4,
     },
     {
       url: `${baseUrl}/signup`,
-      lastModified: today,
+      lastModified: mcpLastModified,
       changeFrequency: 'monthly',
       priority: 0.5,
     },
     {
       url: `${baseUrl}/login`,
-      lastModified: today,
+      lastModified: mcpLastModified,
       changeFrequency: 'monthly',
       priority: 0.5,
     },
     {
       url: `${baseUrl}/careers`,
-      lastModified: today,
+      lastModified: mcpLastModified,
       changeFrequency: 'weekly',
       priority: 0.5,
     },
   ];
+
+  // Add individual MCP skill pages
+  mcps.forEach((mcp, index) => {
+    routes.push({
+      url: `${baseUrl}/mcps/${mcp.slug}`,
+      lastModified: mcpLastModified,
+      changeFrequency: 'weekly',
+      priority: 0.6,
+    });
+  });
 
   return routes;
 }
