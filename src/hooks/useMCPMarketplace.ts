@@ -1,24 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import { useState, useMemo } from 'react';
+import type { MCPSkill } from '@/lib/types';
 
-export interface MCPSkill {
-  id: string;
-  name: string;
-  slug: string;
-  category: string[];
-  description: string;
-  author: string;
-  repository_url: string | null;
-  documentation_url: string | null;
-  mcp_endpoint: string;
-  pricing_usdc: number;
-  x402_enabled: boolean;
-  verified: boolean;
-  rating: number;
-  total_calls: number;
-  success_rate: number;
-  created_at?: string; tier?: 'free' | 'premium'; color?: string;
-}
+// Re-export for backward compatibility with components importing from this hook
+export type { MCPSkill } from '@/lib/types';
 
 interface UseMCPMarketplaceOptions {
   skillsPerPage?: number;
@@ -29,36 +14,47 @@ async function fetchSkills(page: number, limit: number): Promise<MCPSkill[]> {
     page: String(page),
     limit: String(limit),
   });
-  const response = await fetch(`/api/mcp/list?${params}`);
-  if (!response.ok) throw new Error(`HTTP ${response.status}`);
-  const data = await response.json();
-  if (!data.success || !Array.isArray(data.data)) {
-    throw new Error('Invalid response');
+  // Client-side timeout — if API doesn't respond in 12s, fail fast so skeleton doesn't hang
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 12_000);
+  try {
+    const response = await fetch(`/api/mcp/list?${params}`, {
+      signal: controller.signal,
+    });
+    clearTimeout(timeout);
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    const json = await response.json();
+    if (!json.success || !Array.isArray(json.data)) {
+      throw new Error('Invalid response');
+    }
+    return json.data.map((skill: Record<string, unknown>) => ({
+      id: String(skill.id ?? ''),
+      name: String(skill.name ?? 'Unknown'),
+      slug: String(skill.slug ?? skill.id ?? ''),
+      category: Array.isArray(skill.category)
+        ? skill.category
+        : skill.category
+          ? [skill.category]
+          : ['Utilities'],
+      description: String(skill.description ?? ''),
+      author: String(skill.author ?? 'Unknown'),
+      repository_url: (skill.repository_url as string) || null,
+      documentation_url: (skill.documentation_url as string) || null,
+      mcp_endpoint: String(skill.mcp_endpoint ?? ''),
+      pricing_usdc: Number(skill.pricing_usdc ?? 0),
+      x402_enabled: Boolean(skill.x402_enabled ?? true),
+      verified: Boolean(skill.verified ?? false),
+      rating: Number(skill.rating ?? 0),
+      total_calls: Number(skill.total_calls ?? 0),
+      success_rate: Number(skill.success_rate ?? 0),
+      tier: (skill.tier as 'free' | 'premium') || 'free',
+      color: (skill.color as string) || undefined,
+      created_at: (skill.created_at as string) || undefined,
+    }));
+  } catch (err) {
+    clearTimeout(timeout);
+    throw err;
   }
-  return data.data.map((skill: Record<string, unknown>) => ({
-    id: String(skill.id ?? ''),
-    name: String(skill.name ?? 'Unknown'),
-    slug: String(skill.slug ?? skill.id ?? ''),
-    category: Array.isArray(skill.category)
-      ? skill.category
-      : skill.category
-        ? [skill.category]
-        : ['Utilities'],
-    description: String(skill.description ?? ''),
-    author: String(skill.author ?? 'Unknown'),
-    repository_url: (skill.repository_url as string) || null,
-    documentation_url: (skill.documentation_url as string) || null,
-    mcp_endpoint: String(skill.mcp_endpoint ?? ''),
-    pricing_usdc: Number(skill.pricing_usdc ?? 0),
-    x402_enabled: Boolean(skill.x402_enabled ?? true),
-    verified: Boolean(skill.verified ?? false),
-    rating: Number(skill.rating ?? 0),
-    total_calls: Number(skill.total_calls ?? 0),
-    success_rate: Number(skill.success_rate ?? 0),
-    tier: (skill.tier as 'free' | 'premium') || 'free',
-    color: (skill.color as string) || undefined,
-    created_at: (skill.created_at as string) || undefined,
-  }));
 }
 
 export function useMCPMarketplace({ skillsPerPage = 12 }: UseMCPMarketplaceOptions = {}) {
@@ -68,14 +64,16 @@ export function useMCPMarketplace({ skillsPerPage = 12 }: UseMCPMarketplaceOptio
   const [verified, setVerified] = useState('all');
   const [sortBy, setSortBy] = useState('rating');
 
-  // Fetch exactly skillsPerPage items (was fetching 3x causing unnecessary bandwidth)
   const { data, isLoading, error } = useQuery({
     queryKey: ['mcp-skills', page, skillsPerPage],
     queryFn: () => fetchSkills(page, skillsPerPage),
-    staleTime: 5 * 60_000, // 5 minutes — marketplace data doesn't change every second
-    gcTime: 10 * 60_000,   // 10 minutes cache
+    staleTime: 5 * 60_000,
+    gcTime: 10 * 60_000,
+    retry: 1,
+    refetchOnWindowFocus: false,
   });
 
+  const loading = isLoading;
   const skills = useMemo<MCPSkill[]>(() => data ?? [], [data]);
 
   const processedSkills = useMemo(() => {
@@ -139,7 +137,7 @@ export function useMCPMarketplace({ skillsPerPage = 12 }: UseMCPMarketplaceOptio
   return {
     skills: paginatedSkills,
     allSkills: skills,
-    loading: isLoading,
+    loading,
     error: error ? String(error) : null,
     search,
     setSearch,

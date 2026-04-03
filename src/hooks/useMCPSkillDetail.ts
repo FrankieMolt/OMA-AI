@@ -1,30 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
+import type { MCPSkill } from '@/lib/types';
 
-export interface MCPSkillDetail {
-  id: string;
-  name: string;
-  slug: string;
-  category: string[];
-  description: string;
-  long_description?: string;
-  author: string;
-  repository_url: string | null;
-  documentation_url: string | null;
-  mcp_endpoint: string;
-  pricing_usdc: number;
-  x402_enabled: boolean;
-  verified: boolean;
-  rating: number;
-  total_calls: number;
-  success_rate: number;
-  tier: 'free' | 'premium';
-  color?: string | null;
-  featured?: boolean;
-  tools?: { name: string; description: string }[];
-  tags: string[];
-  version: string;
-  created_at: string;
-}
+// Use canonical MCPSkill type for detail view
+export type MCPSkillDetail = MCPSkill;
+
+// Re-export for backward compatibility
+export type { MCPSkill } from '@/lib/types';
 
 interface UseMCPSkillDetailResult {
   skill: MCPSkillDetail | null;

@@ -5,8 +5,8 @@ export const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
 // Client for browser (persistSession: true — used in credits/balance for user auth)
 export const supabase = createClient(
-  supabaseUrl || 'https://fallback.supabase.co',
-  supabaseAnonKey || 'fallback-anon-key',
+  supabaseUrl!,
+  supabaseAnonKey!,
   {
     auth: { persistSession: true, autoRefreshToken: true },
   }
@@ -14,8 +14,8 @@ export const supabase = createClient(
 
 // Server-side client (no session persistence — used for all API route DB ops)
 export const supabaseService = createClient(
-  supabaseUrl || 'https://fallback.supabase.co',
-  supabaseAnonKey || 'fallback-anon-key',
+  supabaseUrl!,
+  supabaseAnonKey!,
   {
     auth: { persistSession: false, autoRefreshToken: false },
   }

@@ -104,6 +104,7 @@ export interface MCPSkill {
   version?: string;
   color?: string;
   tier?: 'free' | 'premium';
+  featured?: boolean;
   // Timestamps
   created_at?: string;
 }

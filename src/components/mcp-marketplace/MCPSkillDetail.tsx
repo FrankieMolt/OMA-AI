@@ -183,7 +183,7 @@ export default function MCPSkillDetail({ slug }: { slug: string }) {
               mcp_endpoint: skill.mcp_endpoint,
               tools_count: skill.tools?.length || skill.total_calls > 0 ? 1 : 0,
               x402_enabled: skill.x402_enabled,
-              tier: skill.tier,
+              tier: skill.tier ?? 'free',
               pricing_usdc: skill.pricing_usdc,
               documentation_url: skill.documentation_url,
               repository_url: skill.repository_url || undefined,
