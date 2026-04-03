@@ -1,25 +1,38 @@
-import { createClient } from '@supabase/supabase-js';
+import { createClient, SupabaseClient } from '@supabase/supabase-js';
 
 export const supabaseUrl = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
 export const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
-// Client for browser (persistSession: true — used in credits/balance for user auth)
-export const supabase = createClient(
-  supabaseUrl!,
-  supabaseAnonKey!,
-  {
-    auth: { persistSession: true, autoRefreshToken: true },
+const isConfigured = !!(supabaseUrl && supabaseAnonKey);
+
+// Lazy-init clients — only created when env vars are present
+// Prevents "supabaseUrl is required" error during next build when env vars are missing
+let _supabase: SupabaseClient | null = null;
+let _supabaseService: SupabaseClient | null = null;
+
+function getClient(opts?: { persistSession: boolean }): SupabaseClient | null {
+  if (!isConfigured) return null;
+  if (!_supabase) {
+    _supabase = createClient(supabaseUrl!, supabaseAnonKey!, {
+      auth: { persistSession: opts?.persistSession ?? false, autoRefreshToken: true },
+    });
   }
-);
+  return _supabase;
+}
+
+// Client for browser (persistSession: true — used in credits/balance for user auth)
+export const supabase = getClient({ persistSession: true });
 
 // Server-side client (no session persistence — used for all API route DB ops)
-export const supabaseService = createClient(
-  supabaseUrl!,
-  supabaseAnonKey!,
-  {
-    auth: { persistSession: false, autoRefreshToken: false },
+export const supabaseService = (() => {
+  if (!isConfigured) return null;
+  if (!_supabaseService) {
+    _supabaseService = createClient(supabaseUrl!, supabaseAnonKey!, {
+      auth: { persistSession: false, autoRefreshToken: false },
+    });
   }
-);
+  return _supabaseService;
+})();
 
 // Check if Supabase is properly configured
 export function isSupabaseConfigured() {
