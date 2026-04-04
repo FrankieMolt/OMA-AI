@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import type { MCPToolInput } from '@/lib/types';
+import { supabaseService } from '@/lib/supabase/config';
 
 export async function POST(request: Request) {
   try {
@@ -11,11 +12,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const { createClient } = await import('@supabase/supabase-js');
-    const supabase = createClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL,
-      process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-    );
+    const supabase = supabaseService;
 
     const body = await request.json();
 
@@ -149,11 +146,7 @@ export async function GET(request: Request) {
   const hasSupabase = !!(process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
 
   if (hasSupabase) {
-    const { createClient } = await import('@supabase/supabase-js');
-    const supabase = createClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-    );
+    const supabase = supabaseService;
 
     let query = supabase
       .from('mcp_servers')

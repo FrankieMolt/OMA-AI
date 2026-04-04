@@ -12,6 +12,8 @@
  */
 
 import { NextRequest } from 'next/server';
+import { getSupabaseClient } from '@/lib/supabase/config';
+
 
 interface MCPRequest {
   jsonrpc: '2.0';
@@ -160,11 +162,8 @@ async function executeTool(name: string, args: Record<string, unknown>) {
 
     case 'list_mcps': {
       try {
-        const { createClient } = await import('@supabase/supabase-js');
-        const supabase = createClient(
-          process.env.NEXT_PUBLIC_SUPABASE_URL!,
-          process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-        );
+        const supabase = getSupabaseClient();
+        if (!supabase) return { error: 'Database not configured', mcps: [] };
         const { data, error } = await supabase
           .from('mcp_servers')
           .select('name,slug,category,pricing_usdc,x402_enabled,verified')
@@ -191,11 +190,8 @@ async function executeTool(name: string, args: Record<string, unknown>) {
       const query = ((args.query as string) || '').toLowerCase();
       if (!query) return { error: 'query required' };
       try {
-        const { createClient } = await import('@supabase/supabase-js');
-        const supabase = createClient(
-          process.env.NEXT_PUBLIC_SUPABASE_URL!,
-          process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-        );
+        const supabase = getSupabaseClient();
+        if (!supabase) return { error: 'Database not configured' };
         const { data } = await supabase
           .from('mcp_servers')
           .select('name,slug,description,category,pricing_usdc')
@@ -212,11 +208,8 @@ async function executeTool(name: string, args: Record<string, unknown>) {
       const slug = args.slug as string;
       if (!slug) return { error: 'slug required' };
       try {
-        const { createClient } = await import('@supabase/supabase-js');
-        const supabase = createClient(
-          process.env.NEXT_PUBLIC_SUPABASE_URL!,
-          process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-        );
+        const supabase = getSupabaseClient();
+        if (!supabase) return { error: 'Database not configured' };
         const { data } = await supabase
           .from('mcp_servers')
           .select('*')

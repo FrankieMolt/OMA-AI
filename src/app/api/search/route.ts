@@ -13,6 +13,10 @@ interface SearxngResult {
 export const dynamic = 'force-dynamic';
 
 const SEARXNG_URL = process.env.SEARXNG_URL || 'http://searxng-local:8899';
+const SEARCH_CACHE = new Map<string, { data: unknown; ts: number }>();
+const SEARCH_CACHE_TTL_MS = 60_000; // 60 seconds
+
+
 
 /**
  * Fetch search results from SearXNG JSON API (no auth — works when limiter is off).
@@ -92,11 +96,24 @@ async function fetchSearxngHTML(query: string, limit: number): Promise<SearxngRe
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
-  const query = searchParams.get('q');
+  const query = searchParams.get('q') || '';
   const limit = parseInt(searchParams.get('limit') || '10');
 
   if (!query) {
     return NextResponse.json({ success: false, error: 'Query parameter required' }, { status: 400 });
+  }
+
+  // Check in-memory cache first
+  const cacheKey = `${query}:${limit}`;
+  const cached = SEARCH_CACHE.get(cacheKey);
+  if (cached && Date.now() - cached.ts < SEARCH_CACHE_TTL_MS) {
+    const res = NextResponse.json({
+      success: true,
+      cached: true,
+      ...(cached.data as object),
+    });
+    res.headers.set('Cache-Control', 'public, s-maxage=60, stale-while-revalidate=120');
+    return res;
   }
 
   // Try JSON first, then HTML parsing
@@ -113,10 +130,18 @@ export async function GET(request: Request) {
     engine = 'curated';
   }
 
-  return NextResponse.json({
+  const responseData = { query, results, total: results.length, engine };
+
+  // Cache the result
+  SEARCH_CACHE.set(cacheKey, { data: responseData, ts: Date.now() });
+
+  const res = NextResponse.json({
     success: true,
-    data: { query, results, total: results.length, engine },
+    cached: false,
+    data: responseData,
   });
+  res.headers.set('Cache-Control', 'public, s-maxage=60, stale-while-revalidate=120');
+  return res;
 }
 
 function getCuratedFallback(query: string): SearchResult[] {

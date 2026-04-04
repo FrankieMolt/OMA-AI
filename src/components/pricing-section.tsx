@@ -100,6 +100,7 @@ const packages = [
 
 export function PricingSection() {
   const [isConnecting, setIsConnecting] = useState(false);
+  const [message, setMessage] = useState<{ type: 'info' | 'error', text: string } | null>(null);
 
   const handlePurchase = async (pkgId: string) => {
     if (pkgId === 'sovereign') {
@@ -108,20 +109,34 @@ export function PricingSection() {
     }
 
     setIsConnecting(true);
+    setMessage({ type: 'info', text: 'x402 Payment Gateway initializing. Please connect your Web3 wallet to proceed.' });
+    
     try {
       // Trigger an x402 payment request or Web3 wallet connection
-      alert('x402 Payment Gateway initializing. Please connect your Web3 wallet to proceed.');
       // Proceed to connection flow in production
     } catch (error) {
       console.error('Purchase failed:', error);
+      setMessage({ type: 'error', text: 'Payment failed. Please try again.' });
     } finally {
       setIsConnecting(false);
+      setTimeout(() => setMessage(null), 5000);
     }
   };
 
   return (
     <section className="py-32 px-4 relative overflow-hidden bg-zinc-900/50">
       <div className="max-w-7xl mx-auto relative z-10">
+        {/* Message Notification */}
+        {message && (
+          <div className={cn(
+            "mb-6 p-4 rounded-lg border transition-all duration-300",
+            message.type === 'info' ? 'bg-primary/10 border-primary/30 text-primary' : 'bg-red-500/10 border-red-500/30 text-red-400'
+          )}>
+            <div className="flex items-center gap-3">
+              <span className="text-sm font-medium">{message.text}</span>
+            </div>
+          </div>
+        )}
         {/* Header */}
         <div className="text-center mb-20">
           <MotionDiv

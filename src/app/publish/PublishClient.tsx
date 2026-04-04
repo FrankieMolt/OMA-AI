@@ -81,7 +81,6 @@ export default function PublishClient() {
         status: 'pending', verified: false,
       };
       if (!supabase) return;
-      if (!supabase) return;
 
       const { error } = await supabase.from('mcp_servers').insert(payload);
       if (error) throw error;

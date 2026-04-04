@@ -2,6 +2,8 @@
 
 import { GlassCard } from '@/components/ui/GlassCard';
 import { Search, Filter, SortAsc } from 'lucide-react';
+import { useDebounce } from '@/hooks/useDebounce';
+import { useState, useEffect } from 'react';
 
 interface MarketplaceFiltersProps {
   search: string;
@@ -26,14 +28,25 @@ export function MarketplaceFilters({
   setSortBy,
   categories,
 }: MarketplaceFiltersProps) {
+  // Local state for immediate UI feedback
+  const [localSearch, setLocalSearch] = useState(search);
+  
+  // Debounce the search input to prevent excessive filtering
+  const debouncedSearch = useDebounce(localSearch, 300);
+  
+  // Sync debounced value to parent
+  useEffect(() => {
+    setSearch(debouncedSearch);
+  }, [debouncedSearch, setSearch]);
+
   return (
     <GlassCard className="p-6 mb-8">
       <div className="flex items-center gap-2 mb-4">
         <Filter className="w-5 h-5 text-purple-300" />
         <h2 className="text-lg font-semibold text-white">Filters</h2>
       </div>
-      <div className="grid md:grid-cols-4 gap-4">
-        {/* Search */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        {/* Search - debounced */}
         <div className="md:col-span-2">
           <label htmlFor="search" className="block text-sm font-medium text-gray-300 mb-2">
             Search
@@ -45,8 +58,8 @@ export function MarketplaceFilters({
               type="text"
               placeholder="Search by name, category, or description..."
               aria-label="Search MCP skills"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
+              value={localSearch}
+              onChange={(e) => setLocalSearch(e.target.value)}
               className="w-full pl-10 pr-4 py-2.5 bg-zinc-800 border border-zinc-700 rounded-lg text-white placeholder:text-gray-500 focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all"
             />
           </div>
@@ -91,24 +104,25 @@ export function MarketplaceFilters({
         </div>
 
         {/* Sort */}
-        <div>
+        <div className="md:col-span-4 lg:col-span-1">
           <label className="block text-sm font-medium text-gray-300 mb-2">
             Sort By
           </label>
-          <div className="flex gap-2">
+          <div className="grid grid-cols-4 gap-2">
             {(['rating', 'calls', 'price', 'newest'] as const).map((sort) => (
               <button
                 key={sort}
                 onClick={() => setSortBy(sort)}
-                className={`flex-1 px-4 py-2.5 rounded-lg font-medium transition-all focus:outline-none focus:ring-2 focus:ring-purple-500/20 ${
+                className={`flex flex-col items-center justify-center px-2 py-2.5 rounded-lg font-medium transition-all focus:outline-none focus:ring-2 focus:ring-purple-500/20 ${
                   sortBy === sort
                     ? 'bg-purple-600 text-white shadow-lg'
                     : 'bg-zinc-800 text-gray-300 hover:bg-zinc-700 hover:text-white'
                 }`}
                 aria-label={`Sort by ${sort}`}
+                aria-pressed={sortBy === sort}
               >
-                <SortAsc className="w-4 h-4 mx-auto mb-1" />
-                {sort.charAt(0).toUpperCase() + sort.slice(1)}
+                <SortAsc className="w-4 h-4 mb-1" />
+                <span className="text-xs">{sort.charAt(0).toUpperCase() + sort.slice(1)}</span>
               </button>
             ))}
           </div>
