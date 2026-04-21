@@ -40,14 +40,12 @@ export function WalletConnect() {
 
       if (accounts.length > 0) {
         setAddress(accounts[0]);
-        // Store in localStorage
         localStorage.setItem('walletAddress', accounts[0]);
       }
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       if (error.code === 4001) {
         // User rejected request
-        // User rejected wallet connection
       } else {
         console.error('Error connecting wallet:', error);
         alert('Failed to connect wallet');
@@ -64,7 +62,7 @@ export function WalletConnect() {
 
   if (address) {
     return (
-      <div className="flex items-center gap-2 px-4 py-2 bg-green-100 text-green-800 rounded-lg">
+      <div className="flex items-center gap-2 px-4 py-2 bg-zinc-800 text-white rounded-lg border border-zinc-700">
         <div className="w-6 h-6 bg-green-600 rounded-full flex items-center justify-center">
           <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
@@ -75,7 +73,7 @@ export function WalletConnect() {
         </span>
         <button
           onClick={handleDisconnect}
-          className="ml-2 text-green-800 hover:text-green-600"
+          className="ml-2 text-gray-400 hover:text-white transition-colors"
           title="Disconnect"
         >
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
