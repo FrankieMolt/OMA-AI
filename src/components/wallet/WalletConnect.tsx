@@ -63,12 +63,12 @@ export function WalletConnect() {
   if (address) {
     return (
       <div className="flex items-center gap-2 px-4 py-2 bg-zinc-800 text-white rounded-lg border border-zinc-700">
-        <div className="w-6 h-6 bg-green-600 rounded-full flex items-center justify-center">
-          <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+          <svg className="w-4 h-4 text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
           </svg>
         </div>
-        <span className="text-sm font-mono">
+        <span className="text-sm font-mono text-green-400">
           {address.slice(0, 6)}...{address.slice(-4)}
         </span>
         <button
@@ -76,7 +76,7 @@ export function WalletConnect() {
           className="ml-2 text-gray-400 hover:text-white transition-colors"
           title="Disconnect"
         >
-          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-4 h-4" fill="none" stroke="currentColor"  viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
@@ -88,7 +88,7 @@ export function WalletConnect() {
     <button
       onClick={handleConnect}
       disabled={loading}
-      className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors flex items-center gap-2"
+      className="px-4 py-2 bg-zinc-800 text-zinc-400 hover:text-white hover:bg-zinc-700 rounded-lg disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors flex items-center gap-2"
     >
       {loading ? (
         <>
@@ -100,7 +100,7 @@ export function WalletConnect() {
         </>
       ) : (
         <>
-          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-4 h-4" fill="none" stroke="currentColor"  viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v2m-6 4l2 2m0-2l-2 2" />
           </svg>
           Connect Wallet

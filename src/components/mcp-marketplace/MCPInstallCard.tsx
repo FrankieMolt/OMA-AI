@@ -222,8 +222,17 @@ export function MCPInstallCard({ server }: MCPInstallCardProps) {
         </div>
       </GlassCard>
 
-      {/* Links */}
+        {/* Links */}
       <GlassCard className="p-5 space-y-2">
+        <a
+          href="https://docs.openclaw.ai/mcp/servers"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-2 text-xs text-violet-400 hover:text-violet-300 transition-colors font-medium"
+        >
+          <ExternalLink size={12} />
+          Deploy to OpenClaw →
+        </a>
         {server.documentation_url && (
           <a
             href={server.documentation_url}
@@ -246,6 +255,31 @@ export function MCPInstallCard({ server }: MCPInstallCardProps) {
             Source Code
           </a>
         )}
+      </GlassCard>
+
+      {/* OpenClaw Deploy Section */}
+      <GlassCard className="p-5 border-violet-500/30">
+        <div className="flex items-center gap-2 mb-3">
+          <Box className="w-4 h-4 text-violet-400" />
+          <h4 className="text-sm font-semibold text-white">Deploy to OpenClaw</h4>
+        </div>
+        <p className="text-xs text-gray-400 mb-3">
+          Add to your OpenClaw config: <code className="text-violet-300 bg-zinc-800 px-1 py-0.5 rounded">~/.openclaw/openclaw.json</code>
+        </p>
+        <div className="bg-zinc-950 p-3 rounded-lg mb-3">
+          <pre className="text-xs text-green-400 overflow-x-auto whitespace-pre-wrap break-all font-mono">
+            {configs['OpenClaw']}
+          </pre>
+        </div>
+        <a
+          href="https://docs.openclaw.ai/mcp/servers"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center justify-center gap-2 w-full px-4 py-2.5 bg-violet-600 hover:bg-violet-700 text-white text-sm font-medium rounded-lg transition-colors"
+        >
+          <ExternalLink className="w-4 h-4" />
+          View OpenClaw Docs
+        </a>
       </GlassCard>
     </div>
   );

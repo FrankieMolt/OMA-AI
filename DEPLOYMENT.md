@@ -30,7 +30,7 @@
 
 ### 1. Environment Variables
 ```bash
-cd /home/nosyt/oma-ai-repo
+cd /home/oldpc/oma-ai-repo
 cp .env.example .env.local
 ```
 
@@ -117,11 +117,11 @@ npm start
 
 ## Production Checklist
 
-- [ ] Set up Supabase project
-- [ ] Configure environment variables
-- [ ] Add payment wallet addresses
-- [ ] Set up domain/SSL
-- [ ] Configure build/deploy pipeline
+- [x] Set up Supabase project
+- [x] Configure environment variables
+- [x] Add payment wallet addresses
+- [x] Set up domain/SSL
+- [x] Configure build/deploy pipeline
 
 ---
 

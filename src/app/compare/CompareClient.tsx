@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useMemo, useCallback } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { Search, Star, Check, X, Download, Share2, CheckCircle, AlertCircle, ChevronDown, Trash2, Plus, Zap, Clock, Activity } from 'lucide-react';
 import type { MCPSkill } from '@/lib/types';
 import {
@@ -24,6 +25,24 @@ export default function CompareClient() {
   const [search, setSearch] = useState('');
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [copied, setCopied] = useState(false);
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  // Sync from URL on mount
+  useEffect(() => {
+    const mcpParams = searchParams.getAll('mcp');
+    if (mcpParams.length > 0) {
+      setSelectedIds(mcpParams.slice(0, 3));
+    }
+  }, [searchParams]);
+
+  // Sync to URL when selection changes
+  useEffect(() => {
+    const params = new URLSearchParams();
+    selectedIds.forEach(id => params.append('mcp', id));
+    const newUrl = params.toString() ? `?${params.toString()}` : '/compare';
+    router.replace(newUrl, { scroll: false });
+  }, [selectedIds, router]);
 
   const fetchMCPs = useCallback(async () => {
     try {
@@ -142,13 +161,7 @@ export default function CompareClient() {
     URL.revokeObjectURL(url);
   };
 
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const mcpParams = params.getAll('mcp');
-    if (mcpParams.length > 0) {
-      setSelectedIds(mcpParams.slice(0, 3));
-    }
-  }, []);
+
 
   const comparisonMetrics: { label: string; key: keyof typeof bestValues; icon: React.ElementType }[] = [
     { label: 'Rating', key: 'rating', icon: Star },
