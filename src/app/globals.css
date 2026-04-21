@@ -82,6 +82,29 @@ html {
    ============================================ */
 
 :root {
+  /* OMA-AI Brand CSS Variables */
+  --color-primary: #8B5CF6;
+  --color-primary-hover: #7C3AED;
+  --color-success: #14F195;
+  --color-warning: #F59E0B;
+  --color-destructive: #EF4444;
+  --color-bg: #09090B;
+  --color-surface: #18181B;
+  --color-surface-hover: #27272A;
+  --color-border: #27272A;
+  --color-text: #FAFAFA;
+  --color-text-secondary: #A1A1AA;
+  --color-text-muted: #71717A;
+
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+
+  /* Legacy variables */
   --foreground-rgb: 245, 243, 255;
   --background-start-rgb: 18, 18, 35;
   --background-end-rgb: 10, 10, 20;

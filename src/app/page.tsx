@@ -2,8 +2,8 @@ import { Metadata } from 'next';
 import dynamic from 'next/dynamic';
 import { HeroSection } from '@/components/hero-section';
 
-const LiveTradingStatus = dynamic(
-  () => import('@/components/live-trading-status').then(mod => ({ default: mod.LiveTradingStatus })),
+const MarketSignals = dynamic(
+  () => import('@/components/live-trading-status').then(mod => ({ default: mod.MarketSignals })),
   { loading: () => <div className="h-48 animate-pulse bg-zinc-900/50 rounded-2xl" /> }
 );
 const FeaturesSection = dynamic(
@@ -30,7 +30,7 @@ export default function HomePage() {
     <>
       <HeroSection />
       <div className="max-w-7xl mx-auto px-4 -mt-12 relative z-20">
-        <LiveTradingStatus />
+        <MarketSignals />
       </div>
       <FeaturesSection />
       <EcosystemSection />

@@ -6,11 +6,11 @@ import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import { GlassCard } from '@/components/ui/GlassCard';
 import { Badge } from '@/components/ui/Badge';
-import { StarRating } from '@/components/ui/StarRating';
 import { getCategoryIcon, getCategoryColors } from '@/lib/category-icons';
 import { getMcpFaviconUrl } from '@/lib/mcp-icons';
-import { CheckCircle2, ExternalLink, Zap, ChevronRight } from 'lucide-react';
+import { CheckCircle2, ExternalLink, Zap, ChevronRight, GitCompare } from 'lucide-react';
 import type { MCPSkill } from '@/hooks/useMCPMarketplace';
+import { useCompare } from '@/stores/compare-store';
 
 const MotionDiv = dynamic(
   () => import('framer-motion').then(m => m.motion.div),
@@ -22,15 +22,16 @@ interface MCPSkillCardProps {
 }
 
 export function MCPSkillCard({ skill }: MCPSkillCardProps) {
+  const { add, remove, isSelected } = useCompare();
+  const isCompareSelected = isSelected(skill.id);
   const cat = skill.category?.[0] || 'Utilities';
   const colors = getCategoryColors(cat);
   const faviconUrl = getMcpFaviconUrl(skill.name);
   const CategoryIcon = useMemo(() => getCategoryIcon(cat), [cat]);
   return (
     <MotionDiv
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: (skill.id.length % 6) * 0.05 }}
+      whileHover={{ scale: 1.02 }}
+      transition={{ type: 'spring', stiffness: 300, damping: 20 }}
     >
       <GlassCard
         className={`p-6 h-full flex flex-col ${skill.x402_enabled ? 'border-green-500/30 shadow-lg shadow-green-500/10' : ''}`}
@@ -82,7 +83,6 @@ export function MCPSkillCard({ skill }: MCPSkillCardProps) {
               <p className="text-xs text-gray-500">by @{skill.author}</p>
             </div>
           </div>
-          <StarRating rating={skill.rating} size={14} />
         </div>
 
         {/* Description */}
@@ -146,6 +146,25 @@ export function MCPSkillCard({ skill }: MCPSkillCardProps) {
               <ExternalLink size={14} />
             </Link>
           )}
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              if (isCompareSelected) {
+                remove(skill.id);
+              } else {
+                add(skill);
+              }
+            }}
+            className={`px-4 py-2.5 rounded-lg transition-colors flex items-center gap-2 text-sm font-medium ${
+              isCompareSelected
+                ? 'bg-violet-600 text-white'
+                : 'bg-zinc-800 hover:bg-zinc-700 text-white'
+            }`}
+            title={isCompareSelected ? 'Remove from compare' : 'Add to compare'}
+          >
+            <GitCompare size={14} />
+          </button>
         </div>
       </GlassCard>
     </MotionDiv>

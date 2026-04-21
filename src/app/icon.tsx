@@ -14,25 +14,15 @@ export default function Icon() {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          background: '#09090b',
-          borderRadius: '50%',
+          background: '#09090B',
+          borderRadius: '8px',
         }}
       >
-        <div style={{
-          width: '80%',
-          height: '80%',
-          background: 'linear-gradient(135deg, #a855f7 0%, #ec4899 100%)',
-          borderRadius: '50%',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          color: 'white',
-          fontWeight: 'bold',
-          fontSize: '18px',
-          fontFamily: 'sans-serif'
-        }}>
-          O
-        </div>
+        {/* Outer ring */}
+        <svg width="32" height="32" viewBox="0 0 32 32" style={{ position: 'absolute' }}>
+          <circle cx="16" cy="16" r="11" fill="none" stroke="#8B5CF6" strokeWidth="2.5" />
+          <circle cx="16" cy="16" r="5" fill="#8B5CF6" />
+        </svg>
       </div>
     ),
     { ...size }
