@@ -1,12 +1,12 @@
 # Ralph: OMA-AI Venice-style UI/UX Redesign
 
-## Status: In Progress 🚧
+## Status: COMPLETE ✅
 
 ## Iterations
 - [x] **Iteration 1: globals.css** — Deepened dark theme to #000, zinc-800/700 borders, violet-500/cyan-400 accents, subtle glow effects ✅
 - [x] **Iteration 2: MCPSkillCard** — Cleaner layout, x402 glow, pricing right-aligned ✅
-- [ ] **Iteration 3:** hero-section.tsx update
-- [ ] **Iteration 4:** features-section.tsx update
+- [x] **Iteration 3: hero-section** — Dark #000 bg, clear value prop, MCP marketplace CTA ✅
+- [x] **Iteration 4: features-section** — 4 Venice-style cards (MCP marketplace, x402, agent wallets, open ecosystem) ✅
 
 ## Build Status
 - TypeScript: ✅ Passes (--skipLibCheck)
