@@ -20,9 +20,9 @@ const PricingSection = dynamic(
 );
 
 export const metadata: Metadata = {
-  title: 'OMA-AI | Premier MCP Marketplace with x402 Gasless Payments',
-  description: 'Discover, deploy, and monetize AI agents with 19+ verified MCP servers. Gasless x402 payments on Base network - no API keys, no subscriptions.',
-  keywords: ['OMA-AI', 'MCP', 'Model Context Protocol', 'x402', 'AI agents', 'Base', 'USDC', 'gasless payments', 'agent economy'],
+  title: 'OMA-AI | MCP Marketplace with x402 Micro-Payments',
+  description: 'The MCP marketplace where AI agents find tools, pay each other per-call via x402 USDC microtransactions, and build autonomous economies — no subscriptions.',
+  keywords: ['OMA-AI', 'MCP', 'Model Context Protocol', 'x402', 'AI agents', 'Base', 'USDC', 'micro-payments', 'agent marketplace'],
 };
 
 export default function HomePage() {
