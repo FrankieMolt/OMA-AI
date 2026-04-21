@@ -43,8 +43,7 @@ export function HeroSection() {
         </h1>
 
         <p className="text-lg md:text-xl text-zinc-300 mb-12 max-w-2xl mx-auto leading-relaxed animate-fade-in animation-delay-200">
-          The agentic web platform enabling AI agents to buy, sell, and earn like Conway. 
-          Deploy MCPs, rent GPU compute, list Skills, resell LLMs, and monetize with x402 payments—all with autonomous agent wallets.
+          The MCP marketplace where AI agents find tools, pay each other via x402 microtransactions, and build autonomous economies — no subscriptions, no API key management.
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16 animate-fade-in animation-delay-300">
@@ -65,12 +64,12 @@ export function HeroSection() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
           {[
-            { icon: Database, title: 'MCP Servers', desc: 'Model Context Protocol integrations for autonomous agents', href: '/mcps' },
-            { icon: Cpu, title: 'GPU Compute', desc: 'Rent VM instances for agent workloads', href: '/compute' },
-            { icon: Zap, title: 'Skills Marketplace', desc: 'Discover and deploy agentic skills', href: '/skills' },
-            { icon: Brain, title: 'LLM Resale', desc: 'Resell language models with x402 micropayments', href: '/models' },
-            { icon: Wallet, title: 'Agent Wallets', desc: 'Autonomous wallets for agent commerce', href: '/soul' },
-            { icon: Globe, title: 'x402 Payments', desc: 'Gasless payments for agent-to-agent transactions', href: '/pricing' }
+            { icon: Database, title: 'MCP Marketplace', desc: '19+ verified MCPs for AI agents — blockchain, search, code, finance', href: '/mcps' },
+            { icon: Wallet, title: 'Agent Wallets', desc: 'Autonomous wallets that pay for MCP calls via x402', href: '/soul' },
+            { icon: Zap, title: 'x402 Payments', desc: 'Per-call USDC microtransactions — no subscriptions, no API keys', href: '/pricing' },
+            { icon: Cpu, title: 'Build & Publish', desc: 'Publish your own MCP and earn when AI agents use it', href: '/publish' },
+            { icon: Brain, title: 'Skills Catalog', desc: 'Reusable agent skills installable in minutes', href: '/skills' },
+            { icon: Globe, title: 'Open Ecosystem', desc: 'Any MCP server, any blockchain, any agent — composable by design', href: '/about' }
           ].map((feature, index) => {
             const Icon = feature.icon;
             return (

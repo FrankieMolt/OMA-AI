@@ -1,62 +1,68 @@
 @import "tailwindcss";
 
-/* Smooth scroll */
+/* Venice-style ultra dark theme */
 html {
   scroll-behavior: smooth;
 }
 
 /* ============================================
    Tailwind CSS v4 Theme Configuration
-   Migrated from tailwind.config.js
+   Venice.ai inspired ultra-dark theme
    ============================================ */
 
 @theme {
   /* Primary color system */
-  --color-primary: hsl(258.9 89% 66%);
+  --color-primary: hsl(258 89% 66%);
   --color-primary-foreground: hsl(0 0% 100%);
 
   /* HSL CSS variable colors (used by shadcn/ui components) */
-  --border: 240 5% 26%;
-  --input: 240 5% 26%;
-  --ring: 258.9 89% 66%;
-  --background: 240 31% 8%;
-  --foreground: 240 33% 96%;
+  --border: 240 5% 17%;
+  --input: 240 5% 17%;
+  --ring: 258 89% 66%;
+  
+  /* Ultra dark Venice backgrounds */
+  --background: 0 0% 0%;
+  --foreground: 0 0% 100%;
 
-  --primary: 258.9 89% 66%;
+  /* Card surfaces - near black with subtle depth */
+  --card: 0 0% 4%;
+  --card-foreground: 0 0% 100%;
+  --popover: 0 0% 4%;
+  --popover-foreground: 0 0% 100%;
+
+  --primary: 258 89% 66%;
   --primary-foreground: 0 0% 100%;
 
-  --secondary: 240 5% 18%;
-  --secondary-foreground: 240 5% 90%;
+  /* Secondary - muted zinc for subtle UI */
+  --secondary: 240 5% 11%;
+  --secondary-foreground: 0 0% 70%;
 
   --destructive: 0 84% 60%;
   --destructive-foreground: 0 0% 100%;
 
-  --muted: 240 5% 18%;
+  /* Muted text - zinc-400 equivalent */
+  --muted: 240 5% 11%;
   --muted-foreground: 240 5% 55%;
 
-  --accent: 240 5% 18%;
-  --accent-foreground: 240 5% 90%;
+  --accent: 240 5% 15%;
+  --accent-foreground: 0 0% 90%;
 
-  --popover: 240 31% 8%;
-  --popover-foreground: 240 33% 96%;
+  /* Venice color palette */
+  --color-primary: #8b5cf6;
+  --color-primary-hover: #7c3aed;
+  --color-success: #14f195;
+  --color-warning: #f59e0b;
+  --color-destructive: #ef4444;
+  --color-bg: #000000;
+  --color-surface: #0a0a0a;
+  --color-surface-hover: #141414;
+  --color-border: #1c1c1c;
+  --color-text: #ffffff;
+  --color-text-secondary: #a1a1aa;
+  --color-text-muted: #71717a;
 
-  --card: 240 29% 10%;
-  --card-foreground: 240 33% 96%;
-
-  /* Memoria brand colors */
-  --memoria-bg-ultra-dark: #0a0a0f;
-  --memoria-bg-card: hsl(240 29% 10% / 0.8);
-  --memoria-bg-surface: hsl(240 29% 8% / 0.6);
-  --memoria-border-muted: hsl(240 5% 20%);
-  --memoria-border-default: hsl(240 5% 30%);
-  --memoria-border-active: hsl(258.9 89% 66%);
-  --memoria-text-hero: #ffffff;
-  --memoria-text-secondary: #a1a1aa;
-  --memoria-text-whisper: #71717a;
-  --memoria-text-meta: #52525b;
-
-  /* Chart colors */
-  --chart-1: 258.9 89% 66%;
+  /* Chart colors - violet/cyan accents */
+  --chart-1: 258 89% 66%;
   --chart-2: 168 84% 52%;
   --chart-3: 38 92% 50%;
   --chart-4: 258 89% 66%;
@@ -70,7 +76,7 @@ html {
   --font-mono: 'JetBrains Mono', monospace;
   --font-heading: 'Space Grotesk', var(--font-space-grotesk), sans-serif;
 
-  /* Custom gradients (not natively in Tailwind) */
+  /* Custom gradients */
   --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
   --gradient-tertiary: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
@@ -118,34 +124,80 @@ html {
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: #0a0a0f;
+  color: var(--color-text);
+  background: var(--color-bg);
   min-height: 100vh;
 }
 
 /* ============================================
-   Utility Classes
+   Venice-style Utility Classes
    ============================================ */
 
+/* Card with subtle border glow */
+.venice-card {
+  background: #0c0c0c;
+  border: 1px solid #1e1e1e;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.venice-card:hover {
+  border-color: #2e2e2e;
+}
+
+.venice-card-glow:hover {
+  box-shadow: 0 0 30px rgba(139, 92, 246, 0.08);
+  border-color: rgba(139, 92, 246, 0.2);
+}
+
+/* x402 badge styling */
+.x402-badge {
+  background: rgba(20, 241, 149, 0.1);
+  border: 1px solid rgba(20, 241, 149, 0.2);
+  color: #14f195;
+  font-size: 0.75rem;
+  padding: 0.25rem 0.625rem;
+  border-radius: 9999px;
+  font-weight: 500;
+}
+
+/* Pricing pill */
+.price-pill {
+  background: rgba(255, 255, 255, 0.05);
+  color: #a1a1aa;
+  font-size: 0.75rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-weight: 500;
+}
+
+/* Glass effect (lighter variant for Venice) */
 .glass {
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.03);
   backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .glass-card {
-  background: linear-gradient(135deg, rgba(139, 92, 246, 0.08) 0%, rgba(30, 30, 50, 0.4) 100%);
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.06) 0%, rgba(20, 20, 35, 0.3) 100%);
   backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
 }
 
 .glow-violet {
-  box-shadow: 0 0 40px rgba(139, 92, 246, 0.15);
+  box-shadow: 0 0 40px rgba(139, 92, 246, 0.12);
+}
+
+.glow-cyan {
+  box-shadow: 0 0 30px rgba(6, 182, 212, 0.1);
+}
+
+.glow-green {
+  box-shadow: 0 0 30px rgba(20, 241, 149, 0.08);
 }
 
 .glow-amber {
-  box-shadow: 0 0 40px rgba(251, 191, 36, 0.15);
+  box-shadow: 0 0 40px rgba(251, 191, 36, 0.12);
 }
 
 .gradient {
@@ -174,6 +226,34 @@ body {
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   pointer-events: none;
+}
+
+/* Featured card glow effect */
+.featured-card {
+  position: relative;
+}
+
+.featured-card::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.3), transparent 50%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.featured-card:hover::before {
+  opacity: 1;
+}
+
+.featured-card:hover {
+  box-shadow: 0 0 50px rgba(139, 92, 246, 0.1), 0 20px 40px rgba(0, 0, 0, 0.4);
 }
 
 /* ============================================
