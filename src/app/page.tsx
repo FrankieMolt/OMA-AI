@@ -1,6 +1,8 @@
 import { Metadata } from 'next';
 import dynamic from 'next/dynamic';
 import { HeroSection } from '@/components/hero-section';
+import { TrustMarquee } from '@/components/TrustMarquee';
+import { AnimatedStats } from '@/components/AnimatedStats';
 
 const MarketSignals = dynamic(
   () => import('@/components/live-trading-status').then(mod => ({ default: mod.MarketSignals })),
@@ -18,6 +20,10 @@ const PricingSection = dynamic(
   () => import('@/components/pricing-section').then(mod => ({ default: mod.PricingSection })),
   { loading: () => <div className="h-96 animate-pulse bg-zinc-950" /> }
 );
+const TestimonialsPreview = dynamic(
+  () => import('@/components/TestimonialsPreview').then(mod => ({ default: mod.TestimonialsPreview })),
+  { loading: () => <div className="h-64 animate-pulse bg-zinc-950" /> }
+);
 
 export const metadata: Metadata = {
   title: 'OMA-AI | MCP Marketplace with x402 Micro-Payments',
@@ -29,10 +35,19 @@ export default function HomePage() {
   return (
     <>
       <HeroSection />
+      
+      {/* Trust Marquee - Social proof strip */}
+      <TrustMarquee />
+      
       <div className="max-w-7xl mx-auto px-4 -mt-12 relative z-20">
         <MarketSignals />
       </div>
+      
+      {/* Animated Stats */}
+      <AnimatedStats />
+      
       <FeaturesSection />
+      <TestimonialsPreview />
       <EcosystemSection />
       <PricingSection />
     </>

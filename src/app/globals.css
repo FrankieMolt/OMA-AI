@@ -611,3 +611,9 @@ textarea:focus-visible {
 .link-underline:hover::after {
   width: 100%;
 }
+
+/* Trust Marquee animation */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
