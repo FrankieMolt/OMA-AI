@@ -8,6 +8,10 @@ const MarketSignals = dynamic(
   () => import('@/components/live-trading-status').then(mod => ({ default: mod.MarketSignals })),
   { loading: () => <div className="h-48 animate-pulse bg-zinc-900/50 rounded-2xl" /> }
 );
+const HowItWorks = dynamic(
+  () => import('@/components/HowItWorks').then(mod => ({ default: mod.HowItWorks })),
+  { loading: () => <div className="h-96 animate-pulse bg-zinc-950" /> }
+);
 const FeaturesSection = dynamic(
   () => import('@/components/features-section').then(mod => ({ default: mod.FeaturesSection })),
   { loading: () => <div className="h-96 animate-pulse bg-zinc-950" /> }
@@ -45,6 +49,9 @@ export default function HomePage() {
       
       {/* Animated Stats */}
       <AnimatedStats />
+      
+      {/* How It Works - 3 step process */}
+      <HowItWorks />
       
       <FeaturesSection />
       <TestimonialsPreview />
