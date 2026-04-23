@@ -12,8 +12,8 @@ interface Stat {
 
 const stats: Stat[] = [
   { value: 19, suffix: '+', label: 'MCP Servers', color: 'text-violet-400' },
-  { value: 300, suffix: '+', label: 'AI Tools', color: 'text-cyan-400' },
-  { value: 50, suffix: '+', label: 'Models', color: 'text-green-400' },
+  { value: 400, suffix: 'ms', label: 'Avg Settlement', color: 'text-green-400' },
+  { value: 0, suffix: ' API Keys', label: 'Required to Start', color: 'text-cyan-400' },
   { value: 5, suffix: '%', label: 'Platform Fee', color: 'text-amber-400' },
 ];
 
