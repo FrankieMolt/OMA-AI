@@ -1,19 +1,22 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
+import { useRef } from 'react';
 
 const trustedBy = [
-  '19+ MCP Servers',
-  '300+ Tools',
-  'x402 Payments',
-  'No Subscriptions',
-  '5% Platform Fee',
-  '24/7 Uptime',
-  'Gasless Transactions',
-  'Base Network',
-  'USDC Powered',
-  'AI Native',
+  'Built on Base',
+  'USDC Native',
+  'x402 Standard',
+  'No API Keys',
+  'Per-Call Billing',
+  '400ms Settlements',
+  'Open Protocol',
+  'ERC-7579 Wallets',
+  'MCP v1.0 Compliant',
+  'Gasless Paymaster',
+  'ERC-7521 Standard',
+  'AI Agent Native',
+  'Onchain Settlement',
+  'ERC-20 Compatible',
 ];
 
 export function TrustMarquee() {
@@ -42,7 +45,7 @@ export function TrustMarquee() {
           100% { transform: translateX(-50%); }
         }
         .animate-marquee {
-          animation: marquee 30s linear infinite;
+          animation: marquee 35s linear infinite;
           display: flex;
           width: max-content;
         }
