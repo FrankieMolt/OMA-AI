@@ -1,25 +1,37 @@
-name: "CodeQL"
+name: CodeQL Security
 
 on:
   push:
-    branches: [main, master]
+    branches: [main]
   pull_request:
-    branches: [main, master]
+    branches: [main]
   schedule:
-    - cron: "0 0 * * 0"
+    - cron: '0 0 * * 0'  # Weekly Sunday scan
 
 jobs:
   codeql:
     runs-on: ubuntu-latest
     permissions:
       security-events: write
+      actions: read
       contents: read
+
     steps:
       - uses: actions/checkout@v4
-      - uses: github/codeql-action/init@v3
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
         with:
-          languages: javascript typescript python
+          languages: typescript
           queries: security-extended
-      - uses: github/codeql-action/analyze@v3
+
+      - name: Autobuild
+        uses: github/codeql-action/autobuild@v3
         with:
-          category: "/language:javascript-typescript"
+          build-mode: manual
+          command: npm install && npm run build
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
+        with:
+          category: "/language:typescript"
