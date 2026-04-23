@@ -1,10 +1,9 @@
-# This workflow is intentionally empty - using codeql.yml (custom) instead
-# GitHub's default CodeQL is disabled to avoid duplicate runs
+# This workflow is DISABLED - GitHub's default CodeQL (managed) is disabled.
+# Custom CodeQL Security workflow is in codeql.yml (different filename)
+# This empty file prevents GitHub from auto-creating a default CodeQL workflow
 name: CodeQL (disabled)
 
-on:
-  # Disable this workflow completely
-  workflow_dispatch:
+on: {}  # No triggers - completely disabled
 
 jobs:
   disabled:
