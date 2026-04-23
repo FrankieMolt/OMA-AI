@@ -1,37 +1,13 @@
-name: CodeQL Security
+# This workflow is intentionally empty - using codeql.yml (custom) instead
+# GitHub's default CodeQL is disabled to avoid duplicate runs
+name: CodeQL (disabled)
 
 on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
-  schedule:
-    - cron: '0 0 * * 0'  # Weekly Sunday scan
+  # Disable this workflow completely
+  workflow_dispatch:
 
 jobs:
-  codeql:
+  disabled:
     runs-on: ubuntu-latest
-    permissions:
-      security-events: write
-      actions: read
-      contents: read
-
     steps:
-      - uses: actions/checkout@v4
-
-      - name: Initialize CodeQL
-        uses: github/codeql-action/init@v3
-        with:
-          languages: typescript
-          queries: security-extended
-
-      - name: Autobuild
-        uses: github/codeql-action/autobuild@v3
-        with:
-          build-mode: manual
-          command: npm install && npm run build
-
-      - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v3
-        with:
-          category: "/language:typescript"
+      - run: echo "This workflow is disabled. Use CodeQL Security instead."
