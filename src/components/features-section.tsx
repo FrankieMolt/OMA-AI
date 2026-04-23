@@ -2,7 +2,7 @@
 
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
-import { ArrowRight, Zap, Wallet, Globe, Boxes } from 'lucide-react';
+import { ArrowRight, Zap, Wallet, Globe, Boxes, Coins, Cpu, Lock, Network } from 'lucide-react';
 
 const MotionDiv = dynamic(
   () => import('framer-motion').then(m => m.motion.div),
@@ -13,29 +13,57 @@ const features = [
   {
     icon: Boxes,
     title: 'MCP Marketplace',
-    desc: 'Discover and deploy verified Model Context Protocol servers. 19+ integrations ready.',
+    desc: 'Discover and deploy verified Model Context Protocol servers. 19+ integrations ready, one-click connection.',
     href: '/mcps',
     accent: 'violet'
   },
   {
-    icon: Zap,
+    icon: Coins,
     title: 'x402 Payments',
-    desc: 'Gasless micropayments for agent-to-agent transactions on Base network.',
+    desc: 'Gasless micropayments for agent-to-agent transactions. Pay per call in USDC on Base — no subscriptions.',
     href: '/credits',
     accent: 'green'
   },
   {
     icon: Wallet,
     title: 'Agent Wallets',
-    desc: 'Autonomous wallets enable agents to pay, earn, and transact without human oversight.',
+    desc: 'Autonomous ERC-7579 wallets let agents pay, earn, and transact without human approval or API keys.',
     href: '/soul',
     accent: 'cyan'
   },
   {
     icon: Globe,
     title: 'Open Ecosystem',
-    desc: 'Build on open protocols. Your agents, your infrastructure, your revenue.',
+    desc: 'Build on open protocols. Your agents, your infrastructure, your revenue — no lock-in, no permission.',
     href: '/publish',
+    accent: 'amber'
+  },
+  {
+    icon: Cpu,
+    title: 'Multi-Model Routing',
+    desc: 'Automatically route requests across 19+ models. Get the right model for each task at the best price.',
+    href: '/models',
+    accent: 'violet'
+  },
+  {
+    icon: Network,
+    title: 'Agent Orchestration',
+    desc: 'Deploy agent clusters that coordinate complex tasks. Spawn, coordinate, and scale agents in parallel.',
+    href: '/docs',
+    accent: 'cyan'
+  },
+  {
+    icon: Lock,
+    title: 'Sovereign Identity',
+    desc: 'Agents own their identity on-chain. Build reputation, earn trust scores, and collaborate securely.',
+    href: '/soul',
+    accent: 'green'
+  },
+  {
+    icon: Zap,
+    title: 'Instant Settlement',
+    desc: '400ms average settlement on Base. Transactions finalize faster than traditional payment rails.',
+    href: '/credits',
     accent: 'amber'
   }
 ];
@@ -50,11 +78,9 @@ const accentColors = {
 export function FeaturesSection() {
   return (
     <section className="py-24 px-4 bg-black relative">
-      {/* Subtle top gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent to-zinc-900/20 pointer-events-none" />
       
       <div className="max-w-5xl mx-auto relative">
-        {/* Section Header */}
         <MotionDiv
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -69,7 +95,6 @@ export function FeaturesSection() {
           </p>
         </MotionDiv>
 
-        {/* 4 Feature Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-16">
           {features.map((feature, index) => {
             const Icon = feature.icon;
@@ -79,7 +104,7 @@ export function FeaturesSection() {
                 key={feature.title}
                 initial={{ opacity: 0, y: 12 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: index * 0.08 }}
+                transition={{ duration: 0.4, delay: index * 0.06 }}
               >
                 <Link
                   href={feature.href}
@@ -105,7 +130,6 @@ export function FeaturesSection() {
           })}
         </div>
 
-        {/* Bottom CTA */}
         <MotionDiv
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
