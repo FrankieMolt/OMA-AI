@@ -61,6 +61,7 @@ const nextConfig: NextConfig = {
   // Redirects
   async redirects() {
     return [
+      { source: '/marketplace', destination: '/mcps', permanent: true },
       { source: '/mcp', destination: '/mcps', permanent: true },
       { source: '/register', destination: '/signup', permanent: true },
     ];

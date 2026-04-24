@@ -62,7 +62,7 @@ const mcpFeatures = [
   },
   {
     icon: Cpu,
-    title: '19+ Live Tools',
+    title: 'Live MCP Tools',
     description: 'From web search and database queries to blockchain interactions and code execution — the tools agents need, unified.'
   }
 ];
@@ -95,7 +95,7 @@ export default function MCPMarketplaceClient() {
           >
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-violet-900/30 border border-violet-700/50 rounded-full text-violet-300 text-sm font-medium mb-6">
               <Zap className="w-4 h-4" />
-              19+ MCP Servers Now Live
+              MCP Marketplace
             </div>
             
             <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
@@ -103,7 +103,7 @@ export default function MCPMarketplaceClient() {
             </h1>
             
             <p className="text-xl text-gray-300 mb-8 leading-relaxed max-w-3xl mx-auto">
-              The Model Context Protocol connects AI agents to the tools they need. Browse, subscribe, and integrate 19+ verified MCP servers — from blockchain data to web search, database queries to code execution. All payments settled automatically via x402 microtransactions on Base.
+              The Model Context Protocol connects AI agents to the tools they need. Browse, subscribe, and integrate verified MCP servers — from blockchain data to web search, database queries to code execution. All payments settled automatically via x402 microtransactions on Base.
             </p>
             
             <div className="flex flex-wrap gap-4 justify-center">

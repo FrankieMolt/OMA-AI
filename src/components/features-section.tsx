@@ -13,7 +13,7 @@ const features = [
   {
     icon: Boxes,
     title: 'MCP Marketplace',
-    desc: 'Discover and deploy verified Model Context Protocol servers. 19+ integrations ready, one-click connection.',
+    desc: 'Discover and deploy verified Model Context Protocol servers. 21+ integrations ready.',
     href: '/mcps',
     accent: 'violet'
   },
