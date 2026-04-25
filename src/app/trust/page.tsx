@@ -1,13 +1,10 @@
-import { Metadata } from 'next';
+'use client';
+
 import { Shield, CheckCircle, Star, Users, Globe, Lock, Eye, Award, TrendingUp, Zap, Server } from 'lucide-react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 
-export const metadata: Metadata = {
-  title: 'Trust & Security | OMA-AI',
-  description: 'Learn how OMA-AI vets MCP servers, protects user data, and maintains a secure, reliable marketplace.',
-  keywords: ['OMA-AI', 'Trust', 'Security', 'MCP verification', 'Data privacy', 'Verified MCPs'],
-};
+// trust page - no metadata export (client component with framer-motion, metadata handled by parent layout)
 
 const stats = [
   { value: '34+', label: 'Verified MCPs' },
