@@ -9,11 +9,40 @@ import { Search, AlertCircle, Download } from 'lucide-react';
 import { useMCPMarketplace } from '@/hooks/useMCPMarketplace';
 import { MarketplaceFilters } from './MarketplaceFilters';
 import { MCPSkillCard } from './MCPSkillCard';
+import { useCompare } from '@/stores/compare-store';
 
 const MotionDiv = dynamic(
   () => import('framer-motion').then(m => m.motion.div),
   { ssr: false }
 );
+
+function CompareBar() {
+  const { items, remove, clear } = useCompare();
+  if (items.length === 0) return null;
+  return (
+    <div className="fixed bottom-0 left-0 right-0 z-50 bg-zinc-900 border-t border-zinc-700 p-4">
+      <div className="container mx-auto px-4 max-w-7xl flex items-center justify-between gap-4">
+        <div className="flex items-center gap-3">
+          <span className="text-sm text-gray-400">Compare ({items.length}/3):</span>
+          {items.map((item) => (
+            <button
+              key={item.id}
+              onClick={() => remove(item.id)}
+              className="px-3 py-1.5 bg-zinc-800 hover:bg-zinc-700 text-white text-sm rounded-lg flex items-center gap-2 transition-colors"
+            >
+              {item.name}
+              <span className="text-gray-500 hover:text-white">×</span>
+            </button>
+          ))}
+        </div>
+        <div className="flex items-center gap-2">
+          <button onClick={clear} className="px-3 py-1.5 text-sm text-gray-400 hover:text-white transition-colors">Clear</button>
+          <a href="/compare" className="px-4 py-1.5 bg-violet-600 hover:bg-violet-700 text-white text-sm font-medium rounded-lg transition-colors">Compare Now</a>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function MCPMarketplace() {
   const {
@@ -27,7 +56,6 @@ export default function MCPMarketplace() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  // Memoize stats display values
   const statsDisplay = useMemo(() => ({
     total: stats.total.toLocaleString(),
     x402Enabled: stats.x402Enabled.toLocaleString(),
@@ -35,7 +63,6 @@ export default function MCPMarketplace() {
     avgRating: `${stats.avgRating.toFixed(1)}★`,
   }), [stats]);
 
-  // Memoize pagination range
   const paginationRange = useMemo(() => {
     const range: number[] = [];
     const maxVisible = 5;
@@ -50,6 +77,7 @@ export default function MCPMarketplace() {
 
   return (
     <div className="min-h-screen bg-[#0a0a0f] pt-24 pb-12">
+      <CompareBar />
       <div className="container mx-auto px-4 max-w-7xl">
         <MotionDiv initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="mb-12">
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">MCP Marketplace</h1>

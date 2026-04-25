@@ -1,140 +1,146 @@
-# OMA-AI - MCP Marketplace with x402 Payments
+# OMA-AI — MCP Marketplace with x402 Payments
 
 ![Next.js](https://img.shields.io/badge/Next.js-15-black)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.2-blue)
 ![License](https://img.shields.io/badge/License-Apache%202.0-green)
+![MCP Tools](https://img.shields.io/badge/MCP%20Tools-229+-green)
+![Pages](https://img.shields.io/badge/Pages-57+-blue)
 
-**OMA-AI** is a premier MCP (Model Context Protocol) marketplace platform enabling AI agents to earn, trade, and monetize autonomous services using x402 gasless payments on Base/Solana networks.
+**OMA-AI** is the premier MCP (Model Context Protocol) marketplace where AI agents discover, install, and pay for tools using x402 gasless USDC microtransactions on Base.
 
-## 🎯 What It Is
+Unlike traditional API marketplaces with monthly subscriptions, OMA-AI enables **per-call pricing** — agents pay fractions of a cent only when they actually use a tool.
 
-A fully-featured MCP marketplace where:
-- **Users** discover and install MCP servers
-- **Creators** publish and monetize their MCPs
-- **AI Agents** autonomously purchase and use MCPs with USDC via x402 protocol
+---
 
-## ✨ Features
+## Why OMA-AI?
 
-### Core Platform
-- ✅ MCP Marketplace with 19+ MCP servers
-- ✅ Search, filter by category, verified badges
-- ✅ Multi-step MCP submission/publishing flow
-- ✅ User dashboard with usage tracking
+| | Traditional API Marketplace | OMA-AI |
+|---|---|---|
+| **Pricing** | Monthly subscriptions ($10-100/mo) | Pay-per-call ($0.001/call) |
+| **Authentication** | API keys to manage | x402 HTTP 402 protocol |
+| **Payments** | Credit cards, slow payouts | USDC on Base, instant settlement |
+| **Platform fee** | 20-40% | 5% |
+| **For agents** | Requires human oversight | Fully autonomous |
 
-### Monetization (Built-in)
-- ✅ **Credits System** - Prepaid credit wallet
-- ✅ **Per-Call Pricing** - Pay per API request
-- ✅ **Subscriptions** - Monthly/yearly plans
-- ✅ **License Keys** - One-time purchase MCPs
-- ✅ **x402 Payments** - USDC on Base/Solana
+---
 
-### APIs
-- ✅ `/api/crypto` → CoinGecko (real prices)
-- ✅ `/api/weather` → wttr.in (real data)
-- ✅ `/api/embeddings` → HuggingFace
-- ✅ Full MCP CRUD APIs
+## What's MCP?
 
-## 🚀 Quick Start
+The **Model Context Protocol** is a standardized interface that lets AI agents connect to external tools and services. Think of it as USB for AI — a universal plug that lets any AI model use any tool without custom integration code.
+
+MCPs include:
+- **Data sources** — Crypto prices, weather, web search, stock data
+- **Compute** — File operations, code execution, database queries
+- **Services** — GitHub, Slack, email, payment APIs
+- **Blockchain** — Solana RPC, Ethereum RPC, token swaps
+
+---
+
+## Features
+
+### For AI Agents
+- ✅ Browse and install 229+ MCP tools from verified creators
+- ✅ Pay per call via x402 — no subscriptions, no wasted spend
+- ✅ Auto-topup wallet when balance runs low
+- ✅ Rate limiting and quota management
+- ✅ Multi-chain support (Base + Solana)
+
+### For MCP Creators
+- ✅ 4-step publish wizard — go live in minutes
+- ✅ Keep 95% of revenue (only 5% platform fee)
+- ✅ Multiple pricing models: per-call, subscriptions, license keys
+- ✅ Real-time analytics: calls, revenue, success rates
+- ✅ USDC payouts on Base or Solana
+
+### Platform
+- ✅ 57+ pages of content and documentation
+- ✅ 13 blog posts on AI agents and x402 payments
+- ✅ Interactive MCP marketplace with search and filtering
+- ✅ Verified MCP badges for trusted tools
+- ✅ Row Level Security on all database tables
+
+---
+
+## Quick Start
 
 ```bash
 # Install dependencies
 npm install
 
-# Run development
+# Run development server
 npm run dev
 
 # Build for production
-npm run build
-npm start
+npm run build && npm start
 ```
 
-## ⚙️ Environment Variables
+---
+
+## Environment Variables
 
 Create `.env.local`:
 
 ```env
-# Supabase (for full functionality)
+# Supabase (required for full functionality)
 NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
 SUPABASE_SERVICE_ROLE_KEY=your-service-key
 
-# Payment wallet (receive USDC)
+# Payment wallet (receive USDC earnings)
 OMA_AI_PAYMENT_WALLET=0xYOUR_BASE_WALLET
 
-# Optional RPCs (defaults provided)
+# Optional RPCs (defaults work out of the box)
 BASE_RPC_URL=https://mainnet.base.org
 SOLANA_RPC_URL=https://api.mainnet-beta.solana.com
 ```
 
-## 📦 Database Schema
+---
+
+## Database Setup
 
 Run `database/schema-updated.sql` on Supabase to create:
-- `users`, `wallets`, `user_settings`
-- `mcps`, `mcp_tools`, `mcp_categories`, `mcp_reviews`
-- `credits_packages`, `credit_purchases`
-- `license_keys`, `subscriptions`
-- `transactions`, `payouts`
-- `api_keys`, `api_usage_logs`, `usage_stats`
-- `agent_resale_markups`, `webhooks`
-- `x402_nonces`, `notifications`, `audit_logs`
 
-## 💰 Revenue Model
+**Core tables:** `users`, `wallets`, `user_settings`
 
-| Revenue Stream | OMA-AI | Creator |
-|-----------------|--------|---------|
-| Credit purchases | 100% | - |
-| MCP Sales | 15% | 85% |
-| Per-call API | 15% | 85% |
-| Subscription | 15% | 85% |
+**MCP tables:** `mcps`, `mcp_tools`, `mcp_categories`, `mcp_reviews`, `mcp_favorites`
 
-## 📁 Project Structure
+**Monetization:** `credits_packages`, `credit_purchases`, `license_keys`, `subscriptions`
 
-```
-src/
-├── app/                # Next.js 15 app router
-│   ├── api/           # API routes
-│   ├── mcps/          # MCP marketplace pages
-│   ├── dashboard/     # User dashboard
-│   └── publish/       # MCP submission
-├── components/        # React components
-├── lib/               # Utilities
-│   ├── x402/          # x402 payment logic
-│   └── monetization/   # Credits, billing
-└── styles/            # Global styles
+**Transactions:** `transactions`, `payouts`, `api_keys`, `api_usage_logs`, `x402_nonces`
 
-database/
-└── schema-updated.sql # Full database schema
-```
-
-## 🌐 Routes
-
-| Route | Description |
-|-------|-------------|
-| `/` | Landing page |
-| `/mcps` | MCP marketplace |
-| `/mcps/[slug]` | MCP detail page |
-| `/publish` | Submit new MCP |
-| `/dashboard` | User dashboard |
-| `/wallet` | Wallet management |
-| `/pricing` | Pricing plans |
-
-## 🔒 Security
-
-- Row Level Security (RLS) enabled on all tables
-- API key hashing for storage
-- Webhook signature verification
-- x402 payment verification
-
-## 📄 License
-
-Apache 2.0 - See LICENSE file
-
-## 🔗 Links
-
-- Website: https://oma-ai.com
-- x402 Protocol: https://docs.x402.org
-- MCP Spec: https://modelcontextprotocol.io
+**Agent features:** `agent_resale_markups`, `webhooks`, `notifications`, `audit_logs`
 
 ---
 
-**Built with**: Next.js 15, React 19, TypeScript, TailwindCSS, Supabase, x402
+## Revenue Split
+
+| Revenue Stream | OMA-AI | Creator |
+|----------------|--------|---------|
+| Credit purchases | 0% | 100% |
+| MCP sales | 5% | 95% |
+| Per-call API | 5% | 95% |
+| Subscriptions | 5% | 95% |
+
+---
+
+## Tech Stack
+
+- **Framework:** Next.js 15 (App Router)
+- **Language:** TypeScript 5.2
+- **Styling:** TailwindCSS
+- **Database:** Supabase (PostgreSQL + Auth + Realtime)
+- **Payments:** x402 protocol on Base (USDC)
+- **Blockchain:** Base + Solana
+
+---
+
+## Links
+
+- 🌐 **Website:** https://oma-ai.com
+- 📖 **x402 Protocol:** https://docs.x402.org
+- 🔧 **MCP Spec:** https://modelcontextprotocol.io
+- 📂 **GitHub:** https://github.com/NosytLabs/OMA-AI
+
+---
+
+Built with Next.js, React, TypeScript, TailwindCSS, Supabase, and x402.

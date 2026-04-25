@@ -42,12 +42,9 @@ export default function Navigation() {
   ];
 
   const navItems = [
-    { name: 'Agents', href: '/agents', dropdown: undefined },
-    { name: 'Services', href: '/services', dropdown: undefined },
-    { name: 'Docs', href: '/docs', dropdown: undefined },
-    { name: 'Pricing', href: '/pricing', dropdown: undefined },
-    { name: 'Blog', href: '/blog', dropdown: undefined },
-    { name: 'Roadmap', href: '/roadmap', dropdown: undefined },
+    { name: 'Docs', href: '/docs' },
+    { name: 'Pricing', href: '/pricing' },
+    { name: 'Publish', href: '/publish' },
   ];
 
   return (
@@ -80,7 +77,7 @@ export default function Navigation() {
               {/* Products Dropdown */}
               <div className="relative" ref={productsRef}>
                 <button
-                  className="px-4 py-2.5 text-gray-300 hover:text-white flex items-center gap-1 rounded-lg hover:bg-zinc-800/50"
+                  className="px-4 py-2.5 text-gray-300 hover:text-white flex items-center gap-1 rounded-lg hover:bg-zinc-800/50 transition-colors"
                   aria-expanded={productsOpen}
                   aria-haspopup="true"
                   onClick={() => setProductsOpen(!productsOpen)}
@@ -95,7 +92,12 @@ export default function Navigation() {
                 >
                   <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-2 shadow-xl min-w-48">
                     {products.map((p) => (
-                      <Link key={p.href} href={p.href} className="flex items-center gap-3 px-4 py-3 text-gray-300 hover:text-white hover:bg-zinc-800 rounded-lg">
+                      <Link 
+                        key={p.href} 
+                        href={p.href} 
+                        className="flex items-center gap-3 px-4 py-3 text-gray-300 hover:text-white hover:bg-zinc-800 rounded-lg transition-colors"
+                        onClick={() => setProductsOpen(false)}
+                      >
                         <span>{p.icon}</span>
                         {p.name}
                       </Link>
@@ -104,8 +106,12 @@ export default function Navigation() {
                 </div>
               </div>
               
-              {navItems.filter(n => !n.dropdown).map((item) => (
-                <Link key={item.href} href={item.href} className="px-4 py-2.5 text-zinc-400 hover:text-white relative after:absolute after:-bottom-px after:left-4 after:right-4 after:h-0.5 after:bg-violet-400 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:origin-left rounded-lg hover:bg-zinc-800/50 transition-colors">
+              {navItems.map((item) => (
+                <Link 
+                  key={item.href} 
+                  href={item.href} 
+                  className="px-4 py-2.5 text-zinc-400 hover:text-white transition-colors rounded-lg hover:bg-zinc-800/50"
+                >
                   {item.name}
                 </Link>
               ))}
@@ -113,12 +119,18 @@ export default function Navigation() {
 
             {/* CTA & Wallet */}
             <div className="hidden md:flex items-center gap-3">
-              <Link href="/wallet" className="flex items-center gap-2 px-3 py-2 text-gray-300 hover:text-white">
+              <Link 
+                href="/credits" 
+                className="flex items-center gap-2 px-3 py-2 text-gray-300 hover:text-white transition-colors"
+              >
                 <Wallet className="w-4 h-4" />
-                Connect
+                Credits
               </Link>
-              <Link href="/mcps" className="px-5 py-2.5 bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white rounded-lg hover:from-violet-500 hover:to-fuchsia-500 font-medium transition-all">
-                Explore Marketplace
+              <Link 
+                href="/mcps" 
+                className="px-5 py-2.5 bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white rounded-lg hover:from-violet-500 hover:to-fuchsia-500 font-medium transition-all"
+              >
+                Explore MCPs
               </Link>
             </div>
           </div>
@@ -133,25 +145,26 @@ export default function Navigation() {
         >
           <div className="container mx-auto px-4 py-4 space-y-2">
             <div className="py-2">
-              <span className="text-xs font-semibold text-zinc-500 px-3">PRODUCTS</span>
+              <span className="text-xs font-semibold text-zinc-500 px-3 uppercase tracking-widest">Products</span>
             </div>
             {products.map((p) => (
-              <Link key={p.href} href={p.href} className="flex items-center gap-3 px-4 py-3 text-gray-300 hover:text-white hover:bg-zinc-800 rounded-lg" onClick={() => setIsOpen(false)}>
+              <Link key={p.href} href={p.href} className="flex items-center gap-3 px-4 py-3 text-gray-300 hover:text-white hover:bg-zinc-800 rounded-lg transition-colors" onClick={() => setIsOpen(false)}>
                 <span>{p.icon}</span>
                 {p.name}
               </Link>
             ))}
             <div className="border-t border-zinc-800 my-2" />
-            {navItems.filter(n => !n.dropdown).map((item) => (
-              <Link key={item.href} href={item.href} className="block px-4 py-3 text-gray-300 hover:text-white hover:bg-zinc-800 rounded-lg" onClick={() => setIsOpen(false)}>
+            {navItems.map((item) => (
+              <Link key={item.href} href={item.href} className="block px-4 py-3 text-gray-300 hover:text-white hover:bg-zinc-800 rounded-lg transition-colors" onClick={() => setIsOpen(false)}>
                 {item.name}
               </Link>
             ))}
-            <Link href="/wallet" className="flex items-center gap-2 px-4 py-3 text-gray-300 hover:text-white">
-              <Wallet className="w-4 h-4" /> Connect Wallet
+            <div className="border-t border-zinc-800 my-2 pt-2" />
+            <Link href="/credits" className="flex items-center gap-2 px-4 py-3 text-gray-300 hover:text-white transition-colors" onClick={() => setIsOpen(false)}>
+              <Wallet className="w-4 h-4" /> Credits
             </Link>
-            <Link href="/mcps" className="block px-4 py-3 bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white rounded-lg text-center font-medium" onClick={() => setIsOpen(false)}>
-              Explore Marketplace
+            <Link href="/mcps" className="block px-4 py-3 bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white rounded-lg text-center font-medium transition-all" onClick={() => setIsOpen(false)}>
+              Explore MCPs
             </Link>
           </div>
         </MotionDiv>

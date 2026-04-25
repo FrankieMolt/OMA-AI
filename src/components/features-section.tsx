@@ -2,184 +2,145 @@
 
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
-import {
-  Search,
-  FileText,
-  Calculator,
-  Cloud,
-  ArrowRight,
-  Zap,
-  Shield,
-  Wallet,
-  Gauge,
-  Database,
-  Cpu
-} from 'lucide-react';
+import { ArrowRight, Zap, Wallet, Globe, Boxes, Coins, Cpu, Lock, Network } from 'lucide-react';
 
 const MotionDiv = dynamic(
   () => import('framer-motion').then(m => m.motion.div),
   { ssr: false }
 );
 
-const endpoints = [
+const features = [
   {
-    icon: Search,
-    name: 'Web Search',
-    description: 'AI-powered semantic search that understands context, not just keywords',
-    price: 'From $0.004',
-    gradient: 'from-cyan-500/20 to-blue-500/20'
+    icon: Boxes,
+    title: 'MCP Marketplace',
+    desc: 'Discover and deploy verified Model Context Protocol servers. 21+ integrations ready.',
+    href: '/mcps',
+    accent: 'violet'
   },
   {
-    icon: FileText,
-    name: 'Embeddings',
-    description: 'High-dimensional vector embeddings for RAG, search, and similarity tasks',
-    price: 'From $0.008',
-    gradient: 'from-amber-500/20 to-orange-500/20'
+    icon: Coins,
+    title: 'x402 Payments',
+    desc: 'Gasless micropayments for agent-to-agent transactions. Pay per call in USDC on Base — no subscriptions.',
+    href: '/credits',
+    accent: 'green'
   },
   {
-    icon: Calculator,
-    name: 'Live Crypto',
-    description: 'Real-time prices, market data, and trading pairs for 10,000+ cryptocurrencies',
-    price: 'FREE',
-    gradient: 'from-green-500/20 to-emerald-500/20'
+    icon: Wallet,
+    title: 'Agent Wallets',
+    desc: 'Autonomous ERC-7579 wallets let agents pay, earn, and transact without human approval or API keys.',
+    href: '/soul',
+    accent: 'cyan'
   },
   {
-    icon: Cloud,
-    name: 'Weather',
-    description: 'Global weather data with forecasts, historical data, and severe weather alerts',
-    price: 'From $0.0015',
-    gradient: 'from-sky-500/20 to-blue-500/20'
-  },
-  {
-    icon: Database,
-    name: 'MCP Marketplace',
-    description: 'Access 19+ MCP servers including AI models, databases, and developer tools',
-    price: 'From $0.001',
-    gradient: 'from-indigo-500/20 to-violet-500/20'
+    icon: Globe,
+    title: 'Open Ecosystem',
+    desc: 'Build on open protocols. Your agents, your infrastructure, your revenue — no lock-in, no permission.',
+    href: '/publish',
+    accent: 'amber'
   },
   {
     icon: Cpu,
-    name: 'Compute Providers',
-    description: 'Deploy agents on decentralized networks like Akash and traditional clouds',
-    price: 'From $4.50/hour',
-    gradient: 'from-pink-500/20 to-rose-500/20'
+    title: 'Multi-Model Routing',
+    desc: 'Automatically route requests across 19+ models. Get the right model for each task at the best price.',
+    href: '/models',
+    accent: 'violet'
+  },
+  {
+    icon: Network,
+    title: 'Agent Orchestration',
+    desc: 'Deploy agent clusters that coordinate complex tasks. Spawn, coordinate, and scale agents in parallel.',
+    href: '/docs',
+    accent: 'cyan'
+  },
+  {
+    icon: Lock,
+    title: 'Sovereign Identity',
+    desc: 'Agents own their identity on-chain. Build reputation, earn trust scores, and collaborate securely.',
+    href: '/soul',
+    accent: 'green'
   },
   {
     icon: Zap,
-    name: 'x402 Payments',
-    description: 'Gasless micropayments on Base network for true agent-to-agent commerce',
-    price: 'FREE protocol',
-    gradient: 'from-purple-500/20 to-fuchsia-500/20'
+    title: 'Instant Settlement',
+    desc: '400ms average settlement on Base. Transactions finalize faster than traditional payment rails.',
+    href: '/credits',
+    accent: 'amber'
   }
 ];
 
-const benefits = [
-  { icon: Zap, title: 'Gasless Payments', description: 'x402 protocol enables feeless micropayments on Base network' },
-  { icon: Shield, title: 'Enterprise Security', description: 'SOC 2 compliant with end-to-end encryption and audit logs' },
-  { icon: Wallet, title: 'Transparent Pricing', description: 'Pay-per-use pricing with no hidden fees or subscriptions' },
-  { icon: Gauge, title: '99.9% Uptime', description: 'Globally distributed infrastructure with automatic failover' },
-  { icon: Database, title: '19+ MCPs', description: 'Growing marketplace of verified MCP servers for all use cases' },
-  { icon: Zap, title: 'Instant Deployment', description: 'Deploy AI agents in seconds with pre-configured templates' }
-];
+const accentColors = {
+  violet: { bg: 'bg-violet-500/10', border: 'border-violet-500/20', icon: 'text-violet-400', hover: 'hover:border-violet-500/40' },
+  green: { bg: 'bg-green-500/10', border: 'border-green-500/20', icon: 'text-green-400', hover: 'hover:border-green-500/40' },
+  cyan: { bg: 'bg-cyan-500/10', border: 'border-cyan-500/20', icon: 'text-cyan-400', hover: 'hover:border-cyan-500/40' },
+  amber: { bg: 'bg-amber-500/10', border: 'border-amber-500/20', icon: 'text-amber-400', hover: 'hover:border-amber-500/40' }
+};
 
 export function FeaturesSection() {
   return (
-    <section className="py-28 px-4 bg-[#0a0a0f] relative">
-      {/* Background Effects */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-purple-900/10 to-transparent" />
+    <section className="py-24 px-4 bg-black relative">
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-zinc-900/20 pointer-events-none" />
       
-      <div className="max-w-7xl mx-auto relative">
+      <div className="max-w-5xl mx-auto relative">
         <MotionDiv
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          transition={{ duration: 0.5 }}
+          className="text-center mb-14"
         >
-          <h2 className="text-5xl font-bold text-white mb-4">
-            AI Agent Infrastructure
+          <h2 className="text-4xl font-bold text-white mb-3">
+            Built for the agentic web
           </h2>
-          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-            Build, deploy, and monetize AI agents with MCP integrations, x402 payments, and developer APIs
+          <p className="text-zinc-400 text-lg max-w-lg mx-auto">
+            The infrastructure layer where AI agents trade, pay, and coordinate at machine speed.
           </p>
         </MotionDiv>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
-          {endpoints.map((endpoint, index) => {
-            const Icon = endpoint.icon;
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-16">
+          {features.map((feature, index) => {
+            const Icon = feature.icon;
+            const colors = accentColors[feature.accent as keyof typeof accentColors];
             return (
               <MotionDiv
-                key={endpoint.name}
-                initial={{ opacity: 0, y: 20 }}
+                key={feature.title}
+                initial={{ opacity: 0, y: 12 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className={`rounded-2xl p-6 bg-gradient-to-br ${endpoint.gradient} border border-white/10 hover:-translate-y-1 hover:shadow-xl transition-all duration-200 cursor-pointer`}
+                transition={{ duration: 0.4, delay: index * 0.06 }}
               >
-                <div className="flex items-start justify-between mb-4">
-                  <div className="p-3 bg-white/10 rounded-lg">
-                    <Icon className="w-8 h-8 text-white" />
+                <Link
+                  href={feature.href}
+                  className={`block p-6 bg-[#0c0c0c] border ${colors.border} ${colors.hover} rounded-xl transition-all duration-200 group`}
+                >
+                  <div className="flex items-start gap-4">
+                    <div className={`p-3 ${colors.bg} rounded-lg shrink-0`}>
+                      <Icon size={22} className={colors.icon} />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-lg font-semibold text-white mb-1 group-hover:text-zinc-200 transition-colors">
+                        {feature.title}
+                      </h3>
+                      <p className="text-sm text-zinc-400 leading-relaxed">
+                        {feature.desc}
+                      </p>
+                    </div>
+                    <ArrowRight size={16} className="text-zinc-600 group-hover:text-zinc-400 transition-colors shrink-0 mt-1" />
                   </div>
-                  <span className="text-sm font-semibold text-white bg-white/20 px-3 py-1 rounded-full">
-                    {endpoint.price}
-                  </span>
-                </div>
-                <h3 className="text-2xl font-bold text-white mb-2">
-                  {endpoint.name}
-                </h3>
-                <p className="text-gray-300 text-sm">
-                  {endpoint.description}
-                </p>
+                </Link>
               </MotionDiv>
             );
           })}
         </div>
 
         <MotionDiv
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-12"
-        >
-          <h2 className="text-3xl font-bold text-white mb-8">
-            Why Choose OMA-AI?
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {benefits.map((benefit, index) => {
-              const Icon = benefit.icon;
-              return (
-                <MotionDiv
-                  key={benefit.title}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="text-center"
-                >
-                  <div className="inline-flex p-4 bg-gradient-to-br from-purple-500/20 to-blue-500/20 rounded-full mb-4">
-                    <Icon className="w-8 h-8 text-purple-400" />
-                  </div>
-                  <h3 className="text-lg font-semibold text-white mb-2">
-                    {benefit.title}
-                  </h3>
-                  <p className="text-gray-400 text-sm">
-                    {benefit.description}
-                  </p>
-                </MotionDiv>
-              );
-            })}
-          </div>
-        </MotionDiv>
-
-        <MotionDiv
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
           className="text-center"
         >
           <Link
             href="/mcps"
-            className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white px-8 py-4 rounded-full font-semibold text-lg hover:from-purple-700 hover:to-blue-700 transition-all focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-offset-2 focus:ring-offset-[#0a0a0f]"
+            className="inline-flex items-center gap-2 bg-zinc-800 hover:bg-zinc-700 text-white px-6 py-3 rounded-full font-medium text-sm transition-colors border border-zinc-700"
           >
-            Explore MCP Marketplace
-            <ArrowRight className="w-5 h-5" />
+            Browse Marketplace <ArrowRight size={14} />
           </Link>
         </MotionDiv>
       </div>

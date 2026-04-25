@@ -1,97 +1,148 @@
 'use client';
 
 import Link from 'next/link';
-import { Sparkles, ArrowRight, Database, Zap, Cpu, Brain, Wallet, Globe } from 'lucide-react';
+import { ArrowRight, Zap } from 'lucide-react';
+import { AnimatedHeroBackground } from './AnimatedHeroBackground';
+import { motion } from 'framer-motion';
 
 export function HeroSection() {
   return (
-    <div className="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-[#0a0a0f]">
+    <div className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-black">
       
-      {/* Static gradient background - no animation blocking */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#1e1e3f] via-[#12121f] to-[#0a0a14] opacity-90" />
+      {/* Animated particle background */}
+      <AnimatedHeroBackground />
 
-        <div
-          className="absolute inset-0 z-0 opacity-[0.02]"
-          style={{
-            backgroundImage: `linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)`,
-            backgroundSize: '60px 60px'
-          }}
-        />
+      {/* Gradient orbs */}
+      <div className="absolute top-[15%] left-[5%] w-[600px] h-[600px] bg-violet-600/10 rounded-full blur-[150px] animate-orb-1" />
+      <div className="absolute bottom-[10%] right-[5%] w-[500px] h-[500px] bg-cyan-600/10 rounded-full blur-[120px] animate-orb-2" />
+      <div className="absolute top-[50%] left-[50%] w-[400px] h-[400px] bg-purple-600/8 rounded-full blur-[100px] animate-orb-3" />
 
-        {/* CSS-only animated gradients - no JS blocking */}
-        <div className="absolute top-[15%] left-[15%] w-[600px] h-[600px] bg-gradient-to-r from-violet-600/15 to-fuchsia-600/15 rounded-full blur-[150px] animate-pulse-slow" />
-        <div className="absolute bottom-[15%] right-[10%] w-[500px] h-[500px] bg-gradient-to-r from-amber-600/10 to-orange-600/10 rounded-full blur-[120px] animate-pulse-slow animation-delay-3000" />
-        <div className="absolute top-[60%] left-[60%] w-[400px] h-[400px] bg-gradient-to-r from-indigo-600/10 to-violet-600/10 rounded-full blur-[100px] animate-pulse-slow animation-delay-1000" />
-      </div>
+      {/* Subtle grid background */}
+      <div 
+        className="absolute inset-0 opacity-[0.02]" 
+        style={{
+          backgroundImage: `linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)`,
+          backgroundSize: '60px 60px'
+        }}
+      />
 
-      <div className="relative z-10 max-w-5xl mx-auto px-6 py-32 text-center">
-        <div className="mb-10 animate-fade-in">
-          <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full backdrop-blur-xl bg-violet-500/10 border border-violet-500/20 mb-10">
-            <Sparkles className="w-4 h-4 text-amber-400" />
-            <span className="text-sm font-medium text-violet-200/80">MCP Marketplace</span>
-          </div>
-        </div>
-
-        <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-8 tracking-tight text-white animate-fade-in animation-delay-100">
-          <span className="block text-zinc-100">OMA-AI</span>
-          <span className="block mt-2">
-            <span className="bg-gradient-to-r from-violet-400 via-fuchsia-400 to-pink-400 bg-clip-text text-transparent">
-              Where AI Agents Earn, Trade & Build
-            </span>
-          </span>
-        </h1>
-
-        <p className="text-lg md:text-xl text-zinc-300 mb-12 max-w-2xl mx-auto leading-relaxed animate-fade-in animation-delay-200">
-          The agentic web platform enabling AI agents to buy, sell, and earn like Conway. 
-          Deploy MCPs, rent GPU compute, list Skills, resell LLMs, and monetize with x402 payments—all with autonomous agent wallets.
-        </p>
-
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16 animate-fade-in animation-delay-300">
+      <div className="relative z-10 max-w-4xl mx-auto px-6 py-24 text-center">
+        
+        {/* Badge */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="mb-8"
+        >
           <Link
             href="/mcps"
-            className="inline-flex items-center gap-2 bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white px-8 py-4 rounded-full font-semibold text-lg hover:from-violet-500 hover:to-fuchsia-500 hover:shadow-xl hover:shadow-violet-500/25 hover:-translate-y-0.5 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-violet-400 focus:ring-offset-2 focus:ring-offset-zinc-950"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#0c0c0c] border border-zinc-800 hover:border-violet-500/50 transition-all duration-300 hover:shadow-[0_0_20px_rgba(139,92,246,0.15)] group"
           >
-            Explore Marketplace
-            <ArrowRight className="w-5 h-5" />
+            <Zap size={14} className="text-green-400 animate-pulse" />
+            <span className="text-sm text-zinc-400 group-hover:text-zinc-300 transition-colors">MCP Marketplace Live</span>
           </Link>
-          <Link
-            href="/publish"
-            className="inline-flex items-center gap-2 backdrop-blur-xl bg-violet-500/10 border border-violet-500/20 text-violet-300 px-8 py-4 rounded-full font-semibold text-lg hover:bg-violet-500/20 transition-all focus:outline-none focus:ring-2 focus:ring-violet-400 focus:ring-offset-2 focus:ring-offset-zinc-950"
-          >
-            Start Building
-          </Link>
-        </div>
+        </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        {/* Headline */}
+        <motion.h1
+          initial={{ opacity: 0, y: 30, filter: 'blur(8px)' }}
+          animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+          transition={{ duration: 0.7, delay: 0.2, ease: 'easeOut' }}
+          className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 tracking-tight leading-[1.1]"
+        >
+          AI agents that<br className="hidden sm:block" /> 
+          <span className="animate-gradient-text">pay each other</span>
+        </motion.h1>
+
+        {/* Subtext */}
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.35 }}
+          className="text-lg text-zinc-400 mb-10 max-w-xl mx-auto leading-relaxed"
+        >
+          The MCP marketplace where agents buy, sell, and earn with x402 micropayments. 
+          <span className="text-zinc-500"> No API keys. No subscriptions.</span>
+        </motion.p>
+
+        {/* CTA Buttons */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.45 }}
+          className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
+        >
+          <motion.div
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.97 }}
+            className="animate-glow-pulse"
+          >
+            <Link
+              href="/mcps"
+              className="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white px-8 py-4 rounded-full font-semibold text-base transition-all duration-300 shadow-lg shadow-violet-600/25 btn-shine"
+            >
+              Explore MCPs
+              <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </motion.div>
+          <motion.div
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.97 }}
+          >
+            <Link
+              href="/publish"
+              className="inline-flex items-center gap-2 bg-zinc-800/80 hover:bg-zinc-700 text-white px-8 py-4 rounded-full font-semibold text-base transition-all duration-300 border border-zinc-700 hover:border-zinc-600 hover:shadow-lg hover:shadow-black/50"
+            >
+              List Your MCP
+            </Link>
+          </motion.div>
+        </motion.div>
+
+        {/* Feature Grid */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.55 }}
+          className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto"
+        >
           {[
-            { icon: Database, title: 'MCP Servers', desc: 'Model Context Protocol integrations for autonomous agents', href: '/mcps' },
-            { icon: Cpu, title: 'GPU Compute', desc: 'Rent VM instances for agent workloads', href: '/compute' },
-            { icon: Zap, title: 'Skills Marketplace', desc: 'Discover and deploy agentic skills', href: '/skills' },
-            { icon: Brain, title: 'LLM Resale', desc: 'Resell language models with x402 micropayments', href: '/models' },
-            { icon: Wallet, title: 'Agent Wallets', desc: 'Autonomous wallets for agent commerce', href: '/soul' },
-            { icon: Globe, title: 'x402 Payments', desc: 'Gasless payments for agent-to-agent transactions', href: '/pricing' }
-          ].map((feature, index) => {
-            const Icon = feature.icon;
-            return (
-              <Link
-                key={feature.title}
-                href={feature.href}
-                className="glass-card border border-violet-500/10 rounded-2xl p-6 animate-fade-in hover:border-violet-500/30 hover:-translate-y-1 hover:shadow-xl hover:shadow-violet-500/10 transition-all duration-200"
-                style={{ animationDelay: `${400 + index * 100}ms` }}
-              >
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="p-3 bg-gradient-to-br from-violet-500/20 to-fuchsia-500/20 rounded-lg">
-                    <Icon className="w-6 h-6 text-violet-400" />
-                  </div>
-                  <h2 className="text-lg font-semibold text-white">{feature.title}</h2>
-                </div>
-                <p className="text-zinc-400 text-sm">{feature.desc}</p>
-              </Link>
-            );
-          })}
-        </div>
+            { label: '34+', sub: 'MCPs verified', icon: '⚡' },
+            { label: 'x402', sub: 'gasless pay', icon: '💎' },
+            { label: '<5ms', sub: 'avg latency', icon: '🚀' },
+            { label: 'Free', sub: 'to start', icon: '🎁' }
+          ].map((item, i) => (
+            <motion.div
+              key={item.label}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.6 + i * 0.08 }}
+              whileHover={{ y: -4, scale: 1.02 }}
+              className="p-5 bg-[#0c0c0c]/80 backdrop-blur-sm border border-zinc-800/80 rounded-xl hover:border-violet-500/40 hover:shadow-[0_0_30px_rgba(139,92,246,0.1)] transition-all duration-300 cursor-pointer group"
+            >
+              <div className="text-2xl mb-2">{item.icon}</div>
+              <div className="text-xl font-bold text-white group-hover:text-violet-300 transition-colors">{item.label}</div>
+              <div className="text-xs text-zinc-500 mt-1">{item.sub}</div>
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
+
+      {/* Scroll indicator */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.2 }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+      >
+        <div className="w-6 h-10 rounded-full border-2 border-zinc-600 flex justify-center p-1">
+          <motion.div
+            animate={{ y: [0, 12, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+            className="w-1.5 h-3 bg-zinc-500 rounded-full"
+          />
+        </div>
+      </motion.div>
     </div>
   );
 }

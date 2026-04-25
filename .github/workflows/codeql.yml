@@ -1,12 +1,24 @@
-name: "CodeQL"
+name: CodeQL Security
 
 on:
   push:
-    branches: [main, master]
+    branches: [ main ]
+    paths:
+      - 'src/**'
+      - 'app/**'
+      - 'components/**'
+      - 'lib/**'
+      - '.github/workflows/codeql.yml'
   pull_request:
-    branches: [main, master]
-  schedule:
-    - cron: "0 0 * * 0"
+    branches: [ main ]
+    paths:
+      - 'src/**'
+      - 'app/**'
+      - 'components/**'
+      - 'lib/**'
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
 
 jobs:
   codeql:
@@ -14,12 +26,18 @@ jobs:
     permissions:
       security-events: write
       contents: read
+
     steps:
       - uses: actions/checkout@v4
-      - uses: github/codeql-action/init@v3
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v4
         with:
-          languages: javascript typescript python
-          queries: security-extended
-      - uses: github/codeql-action/analyze@v3
+          languages: javascript, typescript
+          queries: security-and-quality
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v4
         with:
           category: "/language:javascript-typescript"
+          upload: always

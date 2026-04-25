@@ -1,128 +1,112 @@
 'use client';
 
-import { useState, useEffect, useMemo } from 'react';
-import { Activity, TrendingUp, TrendingDown, Clock } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Activity } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import React from 'react';
 
-function LiveTradingStatusInner() {
-  const [status, setStatus] = useState<Record<string, unknown> | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [nextScanEta, setNextScanEta] = useState<number>(60);
+interface CoinPrice {
+  usd: number;
+  change_24h: number;
+}
 
-  const signalsMemo = useMemo(() => {
-    if (!status) return [];
-    return Object.entries((status.signals as Record<string, unknown>) || {}).map(([symbol, signal]: [string, unknown]) => ({ symbol, signal }));
-  }, [status]);
+interface Prices {
+  [coin: string]: CoinPrice;
+}
+
+function MarketSignalsInner() {
+  const [prices, setPrices] = useState<Prices | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [lastUpdated, setLastUpdated] = useState<string>('');
 
   useEffect(() => {
-    const fetchStatus = async () => {
+    const fetchPrices = async () => {
       try {
-        const apiUrl = '/api/trading/status';
-        const res = await fetch(apiUrl);
+        const res = await fetch('/api/crypto?coins=bitcoin,ethereum,solana');
         if (res.ok) {
           const data = await res.json();
-          setStatus(data);
-          // Only reset ETA if it just finished a cycle — avoid jitter on slow fetches
-          setNextScanEta((prev) => (prev <= 1 ? 60 : prev));
+          if (data.success && data.prices) {
+            setPrices(data.prices);
+            setLastUpdated(new Date().toLocaleTimeString());
+          }
         }
       } catch {
-        // Silent fail - trading status not critical for UX
+        // Silent fail
       } finally {
         setLoading(false);
       }
     };
 
-    fetchStatus();
-    const statusInterval = setInterval(fetchStatus, 60000);
-
-    // ETA Countdown timer
-    const etaInterval = setInterval(() => {
-      setNextScanEta((prev) => (prev > 0 ? prev - 1 : 60));
-    }, 1000);
-
-    return () => {
-      clearInterval(statusInterval);
-      clearInterval(etaInterval);
-    };
+    fetchPrices();
+    const interval = setInterval(fetchPrices, 60000);
+    return () => clearInterval(interval);
   }, []);
 
-  if (loading || !status) return null;
+  if (loading) {
+    return (
+      <div className="bg-zinc-900/50 border border-white/10 rounded-2xl p-6 backdrop-blur-sm">
+        <div className="flex items-center gap-2 mb-4">
+          <Activity className="w-5 h-5 text-violet-400" />
+          <h2 className="text-lg font-bold text-white tracking-tight">Market Signals</h2>
+        </div>
+        <div className="grid grid-cols-3 gap-4">
+          {[1, 2, 3].map((i) => (
+            <div key={i} className="h-20 bg-zinc-800/50 rounded-xl animate-pulse" />
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  if (!prices) return null;
+
+  const coinData = [
+    { symbol: 'bitcoin', name: 'BTC', label: 'Bitcoin' },
+    { symbol: 'ethereum', name: 'ETH', label: 'Ethereum' },
+    { symbol: 'solana', name: 'SOL', label: 'Solana' },
+  ];
 
   return (
-    <div className="bg-zinc-900/50 border border-white/10 rounded-2xl p-6 backdrop-blur-sm shadow-2xl">
+    <div className="bg-zinc-900/50 border border-white/10 rounded-2xl p-6 backdrop-blur-sm">
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-2">
-          <div className="relative">
-            <Activity className="w-5 h-5 text-emerald-400" />
-            <span className="absolute inset-0 w-5 h-5 bg-emerald-400/20 rounded-full animate-ping" />
-          </div>
-          <h2 className="text-lg font-bold text-white tracking-tight">Agentic Alpha Stream</h2>
+          <Activity className="w-5 h-5 text-violet-400" />
+          <h2 className="text-lg font-bold text-white tracking-tight">Market Signals</h2>
         </div>
-        <div className="flex items-center gap-4">
-          <div className="flex items-center gap-1.5 text-[10px] font-mono text-emerald-400 bg-emerald-400/5 px-2 py-1 rounded-md border border-emerald-400/10">
-            <Clock className="w-3 h-3" />
-            NEXT SCAN: {nextScanEta}s
+        {lastUpdated && (
+          <div className="text-[10px] font-mono text-zinc-500">
+            Updated {lastUpdated}
           </div>
-          <div className="text-[10px] font-mono text-gray-400 uppercase tracking-widest bg-white/5 px-2 py-1 rounded-md border border-white/5">
-            Node: nosyt-trader-v16
-          </div>
-        </div>
+        )}
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div className="bg-gradient-to-br from-white/5 to-transparent rounded-xl p-4 border border-white/5 group hover:border-emerald-500/20 transition-colors">
-          <div className="text-gray-400 text-[10px] mb-1 uppercase font-black tracking-tighter">Portfolio Balance</div>
-          <div className="text-2xl font-black text-white flex items-center gap-1 group-hover:text-emerald-400 transition-colors">
-            {(status.solBalance as number | undefined)?.toFixed(4) || '0.0000'} <span className="text-gray-500 text-sm font-bold tracking-normal">SOL</span>
-          </div>
-        </div>
-
-        <div className="bg-gradient-to-br from-white/5 to-transparent rounded-xl p-4 border border-white/5 group hover:border-blue-500/20 transition-colors">
-          <div className="text-gray-400 text-[10px] mb-1 uppercase font-black tracking-tighter">Active Positions</div>
-          <div className="text-2xl font-black text-white group-hover:text-blue-400 transition-colors">
-            {Object.keys((status.positions as Record<string, unknown>) || {}).length}
-          </div>
-        </div>
-
-        <div className="bg-gradient-to-br from-white/5 to-transparent rounded-xl p-4 border border-white/5 group hover:border-purple-500/20 transition-colors">
-          <div className="text-gray-400 text-[10px] mb-1 uppercase font-black tracking-tighter">Win Rate (24h)</div>
-          <div className="text-2xl font-black text-white group-hover:text-purple-400 transition-colors">
-            {((status.dailyTrades as number | undefined) ?? 0) > 0 ? '68.4%' : 'CALC...'}
-          </div>
-        </div>
-      </div>
-
-      {Object.keys((status.signals as Record<string, unknown>) || {}).length > 0 && (
-        <div className="mt-6 border-t border-white/5 pt-4">
-          <div className="text-gray-500 text-[9px] uppercase font-black mb-3 tracking-[0.2em] text-center opacity-50">Real-time Alpha Signals</div>
-          <div className="flex flex-wrap gap-2 justify-center">
-            {signalsMemo.map(({ symbol, signal }: { symbol: string; signal: unknown }) => (
-              <div key={symbol} className={cn(
-                "px-3 py-1.5 rounded-lg border flex items-center gap-2 transition-all",
-                signal === 'BUY' ? "bg-emerald-400/10 border-emerald-400/20" :
-                signal === 'SELL' ? "bg-rose-400/10 border-rose-400/20" :
-                "bg-black/40 border-white/5"
-              )}>
-                <span className="text-xs font-black text-gray-300 tracking-tight">{symbol}</span>
-                {signal === 'BUY' ? (
-                  <span className="text-[10px] font-black text-emerald-400 flex items-center gap-0.5 animate-pulse">
-                    <TrendingUp className="w-3 h-3" /> BUY
-                  </span>
-                ) : signal === 'SELL' ? (
-                  <span className="text-[10px] font-black text-rose-400 flex items-center gap-0.5 animate-pulse">
-                    <TrendingDown className="w-3 h-3" /> SELL
-                  </span>
-                ) : (
-                  <span className="text-[10px] font-black text-gray-600">HOLD</span>
-                )}
+        {coinData.map(({ symbol, name, label }) => {
+          const price = prices[symbol];
+          if (!price) return null;
+          const isPositive = price.change_24h >= 0;
+          return (
+            <div
+              key={symbol}
+              className="bg-gradient-to-br from-white/5 to-transparent rounded-xl p-4 border border-white/5 group hover:border-violet-500/20 transition-colors"
+            >
+              <div className="text-gray-400 text-[10px] mb-1 uppercase font-black tracking-tighter">{name}</div>
+              <div className="text-2xl font-black text-white group-hover:text-violet-400 transition-colors">
+                ${price.usd.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
               </div>
-            ))}
-          </div>
-        </div>
-      )}
+              <div className={cn(
+                "text-sm font-medium mt-1 flex items-center gap-1",
+                isPositive ? "text-green-400" : "text-red-400"
+              )}>
+                <span>{isPositive ? '+' : ''}{price.change_24h.toFixed(2)}%</span>
+                <span className="text-gray-500 text-xs font-normal">24h</span>
+              </div>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }
 
-export const LiveTradingStatus = React.memo(LiveTradingStatusInner);
+export const MarketSignals = React.memo(MarketSignalsInner);
