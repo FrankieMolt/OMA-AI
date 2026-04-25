@@ -1,58 +1,43 @@
 import { Metadata } from 'next';
-import { Brain, Sparkles, Code, Zap, Shield, Search } from 'lucide-react';
+import { Suspense } from 'react';
+import SkillsClient from './SkillsClient';
+
+export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
   title: 'Agent Skills | OMA-AI',
-  description: 'Discover and deploy pre-built skills for AI agents on the OMA-AI marketplace.',
+  description: 'Discover and deploy pre-built skills for AI agents. Skills extend agents with specialized capabilities — browser control, contract auditing, data analysis, and more.',
+  keywords: ['AI agent skills', 'MCP skills', 'agent capabilities', 'AI tools'],
 };
 
-export default function SkillsPage() {
+function SkillsLoading() {
   return (
     <div className="min-h-screen bg-[#0a0a0f] pt-24 pb-16">
-      <div className="max-w-5xl mx-auto px-6">
-        <div className="text-center mb-16">
+      <div className="max-w-6xl mx-auto px-6">
+        <div className="text-center mb-12">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full backdrop-blur-xl bg-violet-500/10 border border-violet-500/20 mb-6">
-            <Brain className="w-4 h-4 text-violet-400" />
             <span className="text-sm text-violet-300/80">Skills Marketplace</span>
           </div>
           <h1 className="text-5xl font-bold text-white mb-4">Agent Skills</h1>
-          <p className="text-xl text-zinc-400 max-w-2xl mx-auto">
-            Pre-built capabilities that extend AI agents with specialized functionality. Browse, install, and compose skills for your autonomous workflows.
-          </p>
         </div>
-
-        <div className="text-center py-20">
-          <div className="inline-flex p-6 bg-violet-500/10 rounded-3xl mb-6">
-            <Sparkles className="w-16 h-16 text-violet-400" />
-          </div>
-          <h2 className="text-2xl font-bold text-white mb-3">Coming Soon</h2>
-          <p className="text-zinc-400 max-w-md mx-auto mb-8">
-            The Skills Marketplace is under active development. Publish and discover agent skills with one-click deployment and x402 payments.
-          </p>
-          <a href="/publish" className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white rounded-full font-semibold hover:from-violet-500 hover:to-fuchsia-500 transition-all">
-            Publish a Skill <Zap className="w-4 h-4" />
-          </a>
+        <div className="flex gap-4 mb-8">
+          <div className="h-12 flex-1 bg-zinc-900/50 rounded-xl animate-pulse" />
+          <div className="h-12 w-40 bg-zinc-900/50 rounded-xl animate-pulse" />
         </div>
-
-        <div className="grid md:grid-cols-3 gap-6 mt-8">
-          {[
-            { icon: Code, title: 'One-Click Install', desc: 'Add skills to any MCP-compatible agent with a single configuration line' },
-            { icon: Shield, title: 'Verified & Audited', desc: 'Every skill is reviewed for security, performance, and reliability' },
-            { icon: Search, title: 'Smart Discovery', desc: 'AI-powered search finds the perfect skill for your agent workflow' },
-          ].map((item) => {
-            const Icon = item.icon;
-            return (
-              <div key={item.title} className="bg-zinc-900/50 border border-zinc-800 backdrop-blur-xl rounded-2xl p-6">
-                <div className="p-3 bg-violet-500/20 rounded-lg w-fit mb-4">
-                  <Icon className="w-6 h-6 text-violet-400" />
-                </div>
-                <h3 className="text-lg font-semibold text-white mb-2">{item.title}</h3>
-                <p className="text-zinc-400 text-sm">{item.desc}</p>
-              </div>
-            );
-          })}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {Array.from({ length: 6 }).map((_, i) => (
+            <div key={i} className="h-36 bg-zinc-900/50 rounded-xl animate-pulse" />
+          ))}
         </div>
       </div>
     </div>
+  );
+}
+
+export default function SkillsPage() {
+  return (
+    <Suspense fallback={<SkillsLoading />}>
+      <SkillsClient />
+    </Suspense>
   );
 }

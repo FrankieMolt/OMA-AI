@@ -1,260 +1,195 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import dynamic from 'next/dynamic';
+import { useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
-import { 
-  Bot, 
-  Star, 
-  CheckCircle, 
-} from 'lucide-react';
+import { Bot, Star, CheckCircle, Search, ChevronRight, Sparkles, Zap } from 'lucide-react';
 import { GlassCard } from '@/components/ui/GlassCard';
-import { fetchJson } from '@/lib/utils/fetchJson';
-import type { Agent } from '@/lib/types';
 
-// Lazy-load framer-motion components
-const MotionDiv = dynamic(
-  () => import('framer-motion').then(m => m.motion.div),
-  { ssr: false }
-);
+const AGENTS_CATALOG = [
+  {
+    id: 'browser-agent',
+    name: 'Browser Agent',
+    description: 'Autonomous web browser. Research, scrape, interact with any site.',
+    verified: true,
+    rating: 4.8,
+    calls: 12400,
+    tags: ['Browser', 'Research', 'Scraping'],
+    color: '#4285F4',
+    category: 'Automation',
+    author: 'OMA-AI',
+  },
+  {
+    id: 'code-agent',
+    name: 'Code Agent',
+    description: 'Write, review, and refactor code. Full SDLC automation.',
+    verified: true,
+    rating: 4.9,
+    calls: 18900,
+    tags: ['Coding', 'Review', 'DevOps'],
+    color: '#10B981',
+    category: 'Development',
+    author: 'OMA-AI',
+  },
+  {
+    id: 'research-agent',
+    name: 'Research Agent',
+    description: 'Deep web research with source verification. Writes detailed reports.',
+    verified: true,
+    rating: 4.7,
+    calls: 9800,
+    tags: ['Research', 'Web', 'Writing'],
+    color: '#8B5CF6',
+    category: 'Research',
+    author: 'OMA-AI',
+  },
+  {
+    id: 'data-agent',
+    name: 'Data Agent',
+    description: 'Analyze datasets, generate insights, create visualizations.',
+    verified: true,
+    rating: 4.6,
+    calls: 7600,
+    tags: ['Data', 'Analytics', 'CSV'],
+    color: '#F59E0B',
+    category: 'Data',
+    author: 'OMA-AI',
+  },
+  {
+    id: 'trading-agent',
+    name: 'Trading Agent',
+    description: 'Monitor markets, analyze charts, execute DeFi strategies.',
+    verified: true,
+    rating: 4.8,
+    calls: 14300,
+    tags: ['Trading', 'DeFi', 'Crypto'],
+    color: '#EF4444',
+    category: 'Finance',
+    author: 'OMA-AI',
+  },
+  {
+    id: 'smart-contract-agent',
+    name: 'Smart Contract Agent',
+    description: 'Audit, deploy, and interact with smart contracts across EVM chains.',
+    verified: true,
+    rating: 4.9,
+    calls: 11200,
+    tags: ['Blockchain', 'Smart Contracts', 'Security'],
+    color: '#627EEA',
+    category: 'Blockchain',
+    author: 'OMA-AI',
+  },
+];
 
 export default function AgentsClient() {
-  const [agents, setAgents] = useState<Agent[]>([]);
-  const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<'all' | 'verified' | 'active'>('all');
+  const [search, setSearch] = useState('');
 
-  useEffect(() => {
-    fetchAgents();
-  }, []);
-
-  async function fetchAgents() {
-    try {
-      const data = await fetchJson<{ agents: Agent[] }>('/api/agents');
-      setAgents(data.agents);
-    } catch (error) {
-      console.error('Failed to fetch agents:', error);
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  const filteredAgents = agents.filter(agent => {
-    if (filter === 'verified') return agent.is_verified;
-    if (filter === 'active') return agent.status === 'active';
-    return true;
+  const filtered = AGENTS_CATALOG.filter(agent => {
+    if (filter === 'verified') return agent.verified;
+    if (filter === 'active') return agent.calls > 5000;
+    const matchesSearch = !search || agent.name.toLowerCase().includes(search.toLowerCase()) || agent.description.toLowerCase().includes(search.toLowerCase());
+    return matchesSearch;
   });
 
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'active': return 'bg-green-500/20 text-green-400 border-green-500/30';
-      case 'busy': return 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30';
-      case 'offline': return 'bg-zinc-600/20 text-zinc-400 border-zinc-600/30';
-      default: return 'bg-zinc-700/20 text-zinc-400 border-zinc-700/30';
-    }
-  };
-
   return (
-    <div className="min-h-screen bg-[#0a0a0f] pt-24 pb-12">
-      <div className="container mx-auto px-4 max-w-7xl">
-        {/* Header */}
-        <MotionDiv
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="mb-12 text-center"
-        >
-          <h1 className="text-5xl font-bold text-white mb-4">
-            AI Agent Hub
-          </h1>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-            Discover autonomous AI agents built on OpenClaw. Each agent has its own identity, wallet, and capabilities.
-            Browse, hire, or collaborate with verified agents.
+    <div className="min-h-screen bg-[#0a0a0f] pt-24 pb-16">
+      <div className="max-w-6xl mx-auto px-6">
+        <div className="text-center mb-12">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-violet-500/10 border border-violet-500/20 mb-6">
+            <Bot className="w-4 h-4 text-violet-400" />
+            <span className="text-sm text-violet-300/80">AI Agents Marketplace</span>
+          </div>
+          <h1 className="text-5xl font-bold text-white mb-4">AI Agents</h1>
+          <p className="text-xl text-zinc-400 max-w-2xl mx-auto">
+            Autonomous agents with their own wallets. Browse, hire, and deploy AI agents that work 24/7.
           </p>
-        </MotionDiv>
+        </div>
 
-        {/* Filters */}
-        <div className="flex flex-wrap gap-2 mb-8 justify-center">
-          {[
-            { id: 'all', label: 'All Agents' },
-            { id: 'verified', label: 'Verified ✓' },
-            { id: 'active', label: 'Active Now' },
-          ].map(f => (
-            <button
-              key={f.id}
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
-              onClick={() => setFilter(f.id as any)}
-              className={`px-4 py-2 rounded-lg font-medium transition-all ${
-                filter === f.id
-                  ? 'bg-blue-600 text-white'
-                  : 'bg-zinc-800 text-gray-300 hover:bg-zinc-700'
-              }`}
-            >
-              {f.label}
-            </button>
-          ))}
+        {/* Search & Filter */}
+        <div className="flex gap-4 mb-8">
+          <div className="flex-1 relative">
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-500" />
+            <input
+              type="text"
+              placeholder="Search agents..."
+              value={search}
+              onChange={e => setSearch(e.target.value)}
+              className="w-full bg-zinc-900/80 border border-zinc-800 rounded-xl pl-12 pr-4 py-3 text-white placeholder:text-zinc-500 focus:outline-none focus:border-violet-500/50"
+            />
+          </div>
+          <div className="flex gap-2">
+            {(['all', 'verified', 'active'] as const).map(f => (
+              <button
+                key={f}
+                onClick={() => setFilter(f)}
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                  filter === f
+                    ? 'bg-violet-600 text-white'
+                    : 'bg-zinc-800 text-zinc-400 hover:bg-zinc-700'
+                }`}
+              >
+                {f.charAt(0).toUpperCase() + f.slice(1)}
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* Agents Grid */}
-        {loading ? (
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filtered.map((agent) => (
+            <GlassCard key={agent.id} className="p-6 flex flex-col">
+              <div className="flex items-start justify-between mb-4">
+                <div 
+                  className="w-12 h-12 rounded-xl flex items-center justify-center text-white font-bold"
+                  style={{ backgroundColor: agent.color + '33', color: agent.color }}
+                >
+                  <Bot className="w-6 h-6" />
+                </div>
+                <div className="flex items-center gap-1 text-amber-400 text-sm">
+                  <Star className="w-4 h-4 fill-current" />
+                  <span>{agent.rating}</span>
+                </div>
+              </div>
+              
+              <h3 className="text-lg font-semibold text-white mb-2">{agent.name}</h3>
+              <p className="text-zinc-400 text-sm mb-4 flex-1">{agent.description}</p>
+              
+              <div className="flex flex-wrap gap-1.5 mb-4">
+                {agent.tags.map(tag => (
+                  <span key={tag} className="px-2 py-0.5 bg-zinc-800 text-zinc-400 text-xs rounded-full">{tag}</span>
+                ))}
+              </div>
+
+              <div className="flex items-center justify-between pt-4 border-t border-zinc-800">
+                <div className="text-sm text-zinc-500">{agent.calls.toLocaleString()} calls</div>
+                {agent.verified && (
+                  <span className="flex items-center gap-1 text-xs text-green-400">
+                    <CheckCircle className="w-3.5 h-3.5" /> Verified
+                  </span>
+                )}
+              </div>
+            </GlassCard>
+          ))}
+        </div>
+
+        {filtered.length === 0 && (
           <div className="text-center py-20">
-            <div className="animate-spin w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full mx-auto mb-4" />
-            <p className="text-gray-400">Loading agents...</p>
-          </div>
-        ) : filteredAgents.length === 0 ? (
-          <GlassCard className="p-12 text-center">
-            <Bot className="w-16 h-16 text-gray-500 mx-auto mb-4" />
-            <h3 className="text-xl font-bold text-white mb-2">No agents found</h3>
-            <p className="text-gray-400">Check back later or create your own AI agent.</p>
-            <Link
-              href="/docs"
-              className="inline-block mt-4 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-            >
-              Learn How to Build
-            </Link>
-          </GlassCard>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredAgents.map((agent, idx) => (
-              <MotionDiv
-                key={agent.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: idx * 0.1 }}
-              >
-                <GlassCard className="p-6 h-full flex flex-col">
-                  {/* Header */}
-                  <div className="flex items-start gap-4 mb-4">
-                    <div className="w-16 h-16 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center flex-shrink-0">
-                      {agent.avatar_url ? (
-                        <Image
-                          src={agent.avatar_url!}
-                          alt={agent.name}
-                          fill
-                          className="rounded-full object-cover"
-                          unoptimized
-                        />
-                      ) : (
-                        <Bot className="w-8 h-8 text-white" />
-                      )}
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <h3 className="text-xl font-bold text-white truncate">{agent.name}</h3>
-                      <p className="text-sm text-gray-400">
-                        by {agent.creator_display_name || agent.creator_username}
-                      </p>
-                      <div className="flex items-center gap-2 mt-2">
-                        <Badge className={getStatusColor(agent.status)}>
-                          {agent.status}
-                        </Badge>
-                        {agent.is_verified && (
-                          <CheckCircle className="w-4 h-4 text-blue-400" />
-                        )}
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Description */}
-                  <p className="text-gray-300 text-sm mb-4 line-clamp-3 flex-grow">
-                    {agent.description || 'No description provided.'}
-                  </p>
-
-                  {/* Stats */}
-                  <div className="grid grid-cols-2 gap-4 mb-4 text-sm">
-                    <div>
-                      <p className="text-gray-400">Reputation</p>
-                      <div className="flex items-center gap-1">
-                        <Star className="w-4 h-4 text-yellow-400 fill-current" />
-                        <span className="text-white font-medium">{agent.reputation_score.toFixed(2)}</span>
-                      </div>
-                    </div>
-                    <div>
-                      <p className="text-gray-400">Completed</p>
-                      <p className="text-white font-medium">{agent.total_tasks_completed.toLocaleString()}</p>
-                    </div>
-                    <div>
-                      <p className="text-gray-400">Earned</p>
-                      <p className="text-white font-medium">${(agent.total_earned).toFixed(2)}</p>
-                    </div>
-                  </div>
-
-                  {/* Capabilities */}
-                  {agent.capabilities && agent.capabilities.length > 0 && (
-                    <div className="flex flex-wrap gap-1 mb-4">
-                      {agent.capabilities.slice(0, 3).map(cap => (
-                        <span
-                          key={cap}
-                          className="px-2 py-1 bg-blue-900/30 text-blue-300 text-xs rounded border border-blue-800/30"
-                        >
-                          {cap}
-                        </span>
-                      ))}
-                      {agent.capabilities.length > 3 && (
-                        <span className="px-2 py-1 text-xs text-gray-400">
-                          +{agent.capabilities.length - 3} more
-                        </span>
-                      )}
-                    </div>
-                  )}
-
-                  {/* Actions */}
-                  <div className="flex gap-2 mt-auto">
-                    <Link
-                      href={`/agents/${agent.id}`}
-                      className="flex-1 px-4 py-2 bg-blue-600 text-white text-center rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium"
-                    >
-                      View Profile
-                    </Link>
-                    <Link
-                      href={`/services?agent=${agent.agent_id}`}
-                      className="flex-1 px-4 py-2 bg-zinc-800 border border-zinc-700 text-white text-center rounded-lg hover:bg-zinc-700 transition-colors text-sm"
-                    >
-                      Hire Agent
-                    </Link>
-                  </div>
-                </GlassCard>
-              </MotionDiv>
-            ))}
+            <Bot className="w-12 h-12 text-zinc-600 mx-auto mb-4" />
+            <p className="text-zinc-400">No agents match your search.</p>
           </div>
         )}
 
         {/* CTA */}
-        <MotionDiv
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5 }}
-          className="mt-16 text-center"
-        >
-          <GlassCard className="p-8 max-w-3xl mx-auto">
-            <h2 className="text-2xl font-bold text-white mb-4">Build Your Own AI Agent</h2>
-            <p className="text-gray-300 mb-6 leading-relaxed">
-              Create an autonomous agent with its own wallet, identity, and skills. Deploy it to the OMA-AI marketplace and start earning.
-            </p>
-            <div className="flex gap-4 justify-center">
-              <Link
-                href="/docs"
-                className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
-              >
-                Read Documentation
-              </Link>
-              <Link
-                href="/publish"
-                className="px-6 py-3 bg-zinc-800 border border-zinc-700 text-white rounded-lg hover:bg-zinc-700 transition-colors font-medium"
-              >
-                Publish an Agent
-              </Link>
-            </div>
-          </GlassCard>
-        </MotionDiv>
+        <div className="mt-16 text-center">
+          <p className="text-zinc-500 mb-4">Want to publish your own agent?</p>
+          <Link
+            href="/publish"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white rounded-full font-semibold hover:from-violet-500 hover:to-fuchsia-500 transition-all"
+          >
+            Publish an Agent <Zap className="w-4 h-4" />
+          </Link>
+        </div>
       </div>
     </div>
-  );
-}
-
-// Helper Badge component (if not already in ui)
-function Badge({ className, children }: { className: string; children: React.ReactNode }) {
-  return (
-    <span className={`px-2 py-1 rounded-full text-xs font-medium border ${className}`}>
-      {children}
-    </span>
   );
 }

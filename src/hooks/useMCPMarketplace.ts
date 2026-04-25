@@ -1,8 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
+import { useSearchParams, useRouter } from 'next/navigation';
 import type { MCPSkill } from '@/lib/types';
 
-// Re-export for backward compatibility with components importing from this hook
 export type { MCPSkill } from '@/lib/types';
 
 interface UseMCPMarketplaceOptions {
@@ -14,7 +14,6 @@ async function fetchSkills(page: number, limit: number): Promise<MCPSkill[]> {
     page: String(page),
     limit: String(limit),
   });
-  // Client-side timeout — if API doesn't respond in 12s, fail fast so skeleton doesn't hang
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 12_000);
   try {
@@ -63,6 +62,27 @@ export function useMCPMarketplace({ skillsPerPage = 12 }: UseMCPMarketplaceOptio
   const [category, setCategory] = useState('all');
   const [verified, setVerified] = useState('all');
   const [sortBy, setSortBy] = useState('rating');
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  // Sync state FROM URL on mount
+  useEffect(() => {
+    const urlSearch = searchParams.get('q') || '';
+    const urlCategory = searchParams.get('cat') || 'all';
+    if (urlSearch !== search) setSearch(urlSearch);
+    if (urlCategory !== category) setCategory(urlCategory);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Sync state TO URL when it changes
+  useEffect(() => {
+    const params = new URLSearchParams();
+    if (search) params.set('q', search);
+    if (category !== 'all') params.set('cat', category);
+    const newUrl = params.toString() ? `?${params.toString()}` : '/mcps';
+    router.replace(newUrl, { scroll: false });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [search, category]);
 
   const { data, isLoading, error } = useQuery({
     queryKey: ['mcp-skills', page, skillsPerPage],

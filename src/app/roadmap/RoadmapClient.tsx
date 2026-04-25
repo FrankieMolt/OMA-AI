@@ -85,7 +85,7 @@ const roadmapItems = [
   {
     title: 'Micro-Payment Channels',
     description: 'Batched transactions for high-frequency API calls, reducing on-chain overhead.',
-    status: 'planned',
+    status: 'in-progress',
     phase: 'q3',
     pillars: ['payments'],
     dependencies: ['x402']
@@ -118,7 +118,7 @@ const roadmapItems = [
   {
     title: 'Cross-Platform Plugins',
     description: 'One agent, multiple backends: Telegram, Discord, Slack, WhatsApp, webhooks.',
-    status: 'in-progress',
+    status: 'completed',
     phase: 'q2',
     pillars: ['mobility']
   },
@@ -127,7 +127,7 @@ const roadmapItems = [
   {
     title: 'Programmable Guardrails',
     description: 'Spending limits, contract allowlists, multi-party approvals for high-value transactions.',
-    status: 'planned',
+    status: 'in-progress',
     phase: 'q3',
     pillars: ['security', 'payments'],
     dependencies: ['x402', 'Portable Agents']
@@ -152,7 +152,7 @@ const roadmapItems = [
   {
     title: 'Publisher Dashboard',
     description: 'MCP publishers can view earnings, manage payouts, and see usage analytics.',
-    status: 'in-progress',
+    status: 'completed',
     phase: 'q2',
     pillars: ['ecosystem']
   },

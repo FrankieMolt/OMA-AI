@@ -3,8 +3,8 @@
  * Implements JSON-RPC 2.0 over SSE (Server-Sent Events)
  *
  * Supports:
- * - tools/list: List all available tools
- * - tools/call: Execute a tool
+ * - tools/list: List all available tools (per-MCP + platform-wide)
+ * - tools/call: Execute a tool (built-in + crypto platform tools)
  * - resources/list: List resources
  * - prompts/list: List prompts
  * - initialize: MCP handshake
@@ -13,7 +13,7 @@
 
 import { NextRequest } from 'next/server';
 import { getSupabaseClient } from '@/lib/supabase/config';
-
+import { MARKETPLACE_MCPS, getMCPBySlug } from '@/lib/mcp-data';
 
 interface MCPRequest {
   jsonrpc: '2.0';
@@ -41,66 +41,14 @@ const COIN_IDS: Record<string, string> = {
   OP: 'optimism', MATIC: 'matic-network',
 };
 
-// Built-in tools
-const BUILT_IN_TOOLS: Record<string, Tool> = {
-  'hello': {
-    name: 'hello',
-    description: 'Returns a personalized greeting message',
-    inputSchema: {
-      type: 'object',
-      properties: { name: { type: 'string', description: 'Name to greet' } },
-      required: ['name'],
-    },
-  },
-  'echo': {
-    name: 'echo',
-    description: 'Echoes back the input text',
-    inputSchema: {
-      type: 'object',
-      properties: { message: { type: 'string', description: 'Message to echo' } },
-      required: ['message'],
-    },
-  },
-  'time': {
-    name: 'time',
-    description: 'Returns current server time in multiple formats',
-    inputSchema: { type: 'object', properties: {} },
-  },
-  'health': {
-    name: 'health',
-    description: 'Health check for the OMA-AI MCP server',
-    inputSchema: { type: 'object', properties: {} },
-  },
-  'list_mcps': {
-    name: 'list_mcps',
-    description: 'List all MCPs available in the OMA-AI marketplace',
-    inputSchema: { type: 'object', properties: {} },
-  },
-  'search_mcp': {
-    name: 'search_mcp',
-    description: 'Search MCPs in the OMA-AI marketplace by keyword',
-    inputSchema: {
-      type: 'object',
-      properties: { query: { type: 'string', description: 'Search query' } },
-      required: ['query'],
-    },
-  },
-  'mcp_info': {
-    name: 'mcp_info',
-    description: 'Get details about a specific MCP by slug',
-    inputSchema: {
-      type: 'object',
-      properties: { slug: { type: 'string', description: 'MCP slug (e.g. jupiter-swap-mcp)' } },
-      required: ['slug'],
-    },
-  },
-  // Trading & DeFi
-  'solana_price': {
+// Platform-wide crypto/trading tools available to ALL MCPs
+const PLATFORM_TOOLS: Tool[] = [
+  {
     name: 'solana_price',
     description: 'Get current Solana price in USD from CoinGecko',
     inputSchema: { type: 'object', properties: {} },
   },
-  'price_check': {
+  {
     name: 'price_check',
     description: 'Check crypto prices from CoinGecko (SOL, BTC, ETH, DOGE, BONK, RAY, WIF, ARB, OP)',
     inputSchema: {
@@ -109,17 +57,17 @@ const BUILT_IN_TOOLS: Record<string, Tool> = {
       required: ['symbol'],
     },
   },
-  'trending_tokens': {
+  {
     name: 'trending_tokens',
     description: 'Get trending Solana memecoins',
     inputSchema: { type: 'object', properties: {} },
   },
-  'market_stats': {
+  {
     name: 'market_stats',
     description: 'Get crypto market stats — total cap, BTC dominance',
     inputSchema: { type: 'object', properties: {} },
   },
-  'trading_quote': {
+  {
     name: 'trading_quote',
     description: 'Get a Jupiter DEX swap quote for SOL/USDC',
     inputSchema: {
@@ -131,9 +79,126 @@ const BUILT_IN_TOOLS: Record<string, Tool> = {
       },
     },
   },
-};
+  {
+    name: 'list_mcps',
+    description: 'List all MCPs available in the OMA-AI marketplace',
+    inputSchema: { type: 'object', properties: {} },
+  },
+  {
+    name: 'search_mcp',
+    description: 'Search MCPs in the OMA-AI marketplace by keyword',
+    inputSchema: {
+      type: 'object',
+      properties: { query: { type: 'string', description: 'Search query' } },
+      required: ['query'],
+    },
+  },
+  {
+    name: 'mcp_info',
+    description: 'Get details about a specific MCP by slug',
+    inputSchema: {
+      type: 'object',
+      properties: { slug: { type: 'string', description: 'MCP slug (e.g. jupiter-swap-mcp)' } },
+      required: ['slug'],
+    },
+  },
+];
 
-// Execute a tool
+// Built-in general tools
+const BUILT_IN_TOOLS: Tool[] = [
+  {
+    name: 'hello',
+    description: 'Returns a personalized greeting message',
+    inputSchema: {
+      type: 'object',
+      properties: { name: { type: 'string', description: 'Name to greet' } },
+      required: ['name'],
+    },
+  },
+  {
+    name: 'echo',
+    description: 'Echoes back the input text',
+    inputSchema: {
+      type: 'object',
+      properties: { message: { type: 'string', description: 'Message to echo' } },
+      required: ['message'],
+    },
+  },
+  {
+    name: 'time',
+    description: 'Returns current server time in multiple formats',
+    inputSchema: { type: 'object', properties: {} },
+  },
+  {
+    name: 'health',
+    description: 'Health check for the OMA-AI MCP server',
+    inputSchema: { type: 'object', properties: {} },
+  },
+];
+
+// Normalize tools from simple {name, description} objects to full Tool schema
+function normalizeTools(rawTools: unknown[]): Tool[] {
+  return (rawTools as Array<Record<string, string>>).map((t) => ({
+    name: t.name || 'unknown',
+    description: t.description || '',
+    inputSchema: { type: 'object', properties: {}, required: [] },
+  }));
+}
+
+// Look up MCP by slug from hardcoded data (synchronous)
+function findMCPInCache(slug: string) {
+  return MARKETPLACE_MCPS.find((m) => {
+    const m2 = m as Record<string, string>;
+    return m2.slug === slug;
+  });
+}
+
+// Get MCP tools by slug (tries Supabase first, falls back to cache)
+async function getMCPToolsForSlug(slug: string): Promise<{ mcpTools: Tool[]; isSkill: boolean; mcpName: string }> {
+  // Try Supabase first
+  try {
+    const supabase = getSupabaseClient();
+    if (supabase) {
+      const { data } = await supabase
+        .from('mcp_servers')
+        .select('name,mcp_endpoint,tools_count')
+        .eq('slug', slug)
+        .single();
+      if (data) {
+        // Try to get tools from mcp_tools table
+        const { data: toolsData } = await supabase
+          .from('mcp_tools')
+          .select('name,description')
+          .eq('mcp_id', slug)
+          .limit(50);
+        if (toolsData && toolsData.length > 0) {
+          return {
+            mcpTools: normalizeTools(toolsData),
+            isSkill: false,
+            mcpName: data.name || slug,
+          };
+        }
+      }
+    }
+  } catch {}
+
+  // Fall back to mcp-data.ts cache
+  const cached = findMCPInCache(slug);
+  if (cached) {
+    const m2 = cached as Record<string, string | unknown>;
+    const isSkill = m2.mcp_endpoint === 'SKILL';
+    const rawTools = (m2.tools as unknown[]) || [];
+    return {
+      mcpTools: normalizeTools(rawTools),
+      isSkill,
+      mcpName: String(m2.name || slug),
+    };
+  }
+
+  return { mcpTools: [], isSkill: false, mcpName: slug };
+}
+
+// Execute a tool (all executeTool calls are synchronous)
 async function executeTool(name: string, args: Record<string, unknown>) {
   switch (name) {
     case 'hello': {
@@ -163,7 +228,13 @@ async function executeTool(name: string, args: Record<string, unknown>) {
     case 'list_mcps': {
       try {
         const supabase = getSupabaseClient();
-        if (!supabase) return { error: 'Database not configured', mcps: [] };
+        if (!supabase) {
+          const all = MARKETPLACE_MCPS.map((m) => {
+            const m2 = m as Record<string, string>;
+            return { name: m2.name, slug: m2.slug, category: m2.category, pricing: m2.pricing_usdc };
+          });
+          return { count: all.length, mcps: all, source: 'cache' };
+        }
         const { data, error } = await supabase
           .from('mcp_servers')
           .select('name,slug,category,pricing_usdc,x402_enabled,verified')
@@ -191,7 +262,17 @@ async function executeTool(name: string, args: Record<string, unknown>) {
       if (!query) return { error: 'query required' };
       try {
         const supabase = getSupabaseClient();
-        if (!supabase) return { error: 'Database not configured' };
+        if (!supabase) {
+          const results = MARKETPLACE_MCPS.filter((m) => {
+            const m2 = m as Record<string, string>;
+            return (m2.name || '').toLowerCase().includes(query) ||
+              (m2.description || '').toLowerCase().includes(query);
+          }).map((m) => {
+            const m2 = m as Record<string, string>;
+            return { name: m2.name, slug: m2.slug, description: m2.description, category: m2.category };
+          });
+          return { query, results, count: results.length };
+        }
         const { data } = await supabase
           .from('mcp_servers')
           .select('name,slug,description,category,pricing_usdc')
@@ -205,17 +286,29 @@ async function executeTool(name: string, args: Record<string, unknown>) {
     }
 
     case 'mcp_info': {
-      const slug = args.slug as string;
-      if (!slug) return { error: 'slug required' };
+      const infoSlug = args.slug as string;
+      if (!infoSlug) return { error: 'slug required' };
       try {
         const supabase = getSupabaseClient();
-        if (!supabase) return { error: 'Database not configured' };
+        if (!supabase) {
+          const m = findMCPInCache(infoSlug);
+          if (!m) return { error: `MCP not found: ${infoSlug}` };
+          const m2 = m as Record<string, string>;
+          return {
+            name: m2.name,
+            slug: m2.slug,
+            description: m2.description,
+            category: m2.category,
+            pricing: m2.pricing_usdc === '0' ? 'Free' : `${m2.pricing_usdc} USDC/call`,
+            x402_enabled: m2.x402_enabled === 'true',
+          };
+        }
         const { data } = await supabase
           .from('mcp_servers')
           .select('*')
-          .eq('slug', slug)
+          .eq('slug', infoSlug)
           .single();
-        if (!data) return { error: `MCP not found: ${slug}` };
+        if (!data) return { error: `MCP not found: ${infoSlug}` };
         return {
           name: data.name,
           slug: data.slug,
@@ -264,7 +357,6 @@ async function executeTool(name: string, args: Record<string, unknown>) {
 
     case 'trending_tokens': {
       try {
-        // Try Jupiter pump.fun first
         const res = await fetch(
           'https://frontend-api.pump.fun/v1/markets?limit=10&sort=volume&order=desc',
           { headers: { Accept: 'application/json' } },
@@ -317,7 +409,6 @@ async function executeTool(name: string, args: Record<string, unknown>) {
     case 'trading_quote': {
       const amount = (args.amount as number) || 1;
       try {
-        // Jupiter API for SOL → USDC quote
         const url = `https://quote-api.jup.ag/v6/quote?inputMint=So11111111111111111111111111111111111111112&outputMint=EPjFWdd5AufqSSqeM2qNStxevVCvQeGKDzDuHGGCAj&amount=${amount * 1e9}&slippage=0.5`;
         const res = await fetch(url);
         if (!res.ok) throw new Error(`Jupiter API: ${res.status}`);
@@ -326,7 +417,7 @@ async function executeTool(name: string, args: Record<string, unknown>) {
           input: `${amount} SOL`,
           output_amount: data?.outAmount ? `${(parseInt(data.outAmount) / 1e6).toFixed(2)} USDC` : 'N/A',
           price_impact: data?.priceImpactPct || 'N/A',
-         DEX: data?.DEX || 'Jupiter',
+          dex: data?.dex || 'Jupiter',
           source: 'Jupiter DEX Aggregator',
           timestamp: new Date().toISOString(),
         };
@@ -336,7 +427,10 @@ async function executeTool(name: string, args: Record<string, unknown>) {
     }
 
     default:
-      return { error: `Unknown tool: "${name}". Available: ${Object.keys(BUILT_IN_TOOLS).join(', ')}` };
+      return {
+        error: `Unknown tool: "${name}"`,
+        hint: 'This MCP may not implement this tool. Check the MCP documentation.',
+      };
   }
 }
 
@@ -413,13 +507,72 @@ export async function POST(
           },
         });
 
-      case 'tools/list':
+      case 'tools/list': {
+        const { mcpTools, isSkill, mcpName } = await getMCPToolsForSlug(slug);
+        // Combine: built-in general + MCP-specific + platform-wide
+        const allTools = [...BUILT_IN_TOOLS, ...mcpTools, ...PLATFORM_TOOLS];
+
         return Response.json({
           jsonrpc: '2.0', id,
-          result: { tools: Object.values(BUILT_IN_TOOLS) },
+          result: {
+            tools: allTools,
+            _meta: {
+              mcp: mcpName,
+              is_skill: isSkill,
+              tools_count: allTools.length,
+              mcp_specific_count: mcpTools.length,
+            },
+          },
         });
+      }
 
       case 'tools/call': {
+        // x402 payment enforcement — check if this MCP requires payment
+        const mcp = getMCPBySlug(slug);
+        const x402Enabled = Boolean(mcp?.x402_enabled);
+        const pricingUsdc = typeof mcp?.pricing_usdc === 'number' ? mcp.pricing_usdc : parseFloat(String(mcp?.pricing_usdc || '0'));
+        const requiresPayment = x402Enabled && pricingUsdc > 0;
+
+        if (requiresPayment) {
+          // Check for payment header
+          const paymentHeader = request.headers.get('x-402-payment');
+          const payRequiredHeader = request.headers.get('x-payment-required');
+
+          if (!paymentHeader) {
+            // Return 402 with payment requirement
+            const paymentWallet = process.env.X402_PAYMENT_WALLET || '0x7BAfC79B0C11ead78d653695A7A3C4F78A0139Ea';
+            const amount = Math.round(pricingUsdc * 1_000_000).toString(); // micro-units
+            const body = {
+              version: 1,
+              scheme: 'exact',
+              currency: 'USDC',
+              amount,
+              description: `Payment for ${mcp?.name || slug} MCP call`,
+              recipient: paymentWallet,
+              network: 'eip155:8453',
+            };
+            const encoded = Buffer.from(JSON.stringify(body)).toString('base64');
+            return new Response(JSON.stringify({
+              jsonrpc: '2.0', id,
+              error: {
+                code: -32001,
+                message: `Payment required: ${pricingUsdc} USDC per call. Send x-402-payment header with payment proof.`,
+                data: { payment_requirement: body },
+              },
+            }), {
+              status: 402,
+              headers: {
+                'Content-Type': 'application/json',
+                'X-Payment-Required': encoded,
+                'X-Payment-Amount': amount,
+                'X-Payment-Asset': 'USDC',
+                'X-Payment-Network': 'base',
+                'X-Payment-Recipient': paymentWallet,
+              },
+            });
+          }
+        }
+
         const { name, arguments: toolArgs = {} } = (body.params || {}) as {
           name: string; arguments?: Record<string, unknown>;
         };

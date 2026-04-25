@@ -19,7 +19,7 @@ export const Footer = memo(function Footer() {
               The premier MCP marketplace with x402 micropayments. Build, monetize, and discover AI agents with crypto-native payments.
             </p>
             <div className="flex items-center gap-4">
-              <a href="https://github.com/FrankieMolt" target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="w-10 h-10 rounded-lg glass-card flex items-center justify-center text-zinc-400 hover:text-white hover:border-violet-500/30 transition-all">
+              <a href="https://github.com/NosytLabs" target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="w-10 h-10 rounded-lg glass-card flex items-center justify-center text-zinc-400 hover:text-white hover:border-violet-500/30 transition-all">
                 <Code className="w-5 h-5" />
               </a>
               <a href="https://twitter.com/OMA_AI" target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="w-10 h-10 rounded-lg glass-card flex items-center justify-center text-zinc-400 hover:text-white hover:border-violet-500/30 transition-all">
@@ -43,10 +43,8 @@ export const Footer = memo(function Footer() {
             <ul className="space-y-3">
               <li><Link href="/mcps" className="text-zinc-400 hover:text-violet-400 transition-colors text-sm">MCP Marketplace</Link></li>
               <li><Link href="/skills" className="text-zinc-400 hover:text-violet-400 transition-colors text-sm">Agent Skills</Link></li>
-              <li><Link href="/models" className="text-zinc-400 hover:text-violet-400 transition-colors text-sm">AI Models</Link></li>
-              <li><Link href="/compute" className="text-zinc-400 hover:text-violet-400 transition-colors text-sm flex items-center gap-2">
-                GPU Compute <Cpu className="w-3 h-3 text-green-400" />
-              </Link></li>
+              <li><Link href="/llms" className="text-zinc-400 hover:text-violet-400 transition-colors text-sm">AI Models</Link></li>
+              <li><Link href="/credits" className="text-zinc-400 hover:text-violet-400 transition-colors text-sm">Credits</Link></li>
               <li><Link href="/pricing" className="text-zinc-400 hover:text-violet-400 transition-colors text-sm">Pricing</Link></li>
             </ul>
           </div>
@@ -62,7 +60,7 @@ export const Footer = memo(function Footer() {
               <li><Link href="/docs/api" className="text-zinc-400 hover:text-violet-400 transition-colors text-sm">API Reference</Link></li>
               <li><Link href="/docs/guides" className="text-zinc-400 hover:text-violet-400 transition-colors text-sm">Guides & Tutorials</Link></li>
               <li><Link href="/publish" className="text-zinc-400 hover:text-violet-400 transition-colors text-sm">Publish MCP</Link></li>
-              <li><Link href="https://github.com/FrankieMolt" className="text-zinc-400 hover:text-violet-400 transition-colors text-sm">GitHub</Link></li>
+              <li><Link href="https://github.com/NosytLabs" className="text-zinc-400 hover:text-violet-400 transition-colors text-sm">GitHub</Link></li>
             </ul>
           </div>
 
@@ -76,8 +74,7 @@ export const Footer = memo(function Footer() {
               <li><Link href="/blog" className="text-zinc-400 hover:text-violet-400 transition-colors text-sm">Blog</Link></li>
               <li><Link href="/blog/quick-start-5-minutes" className="text-zinc-400 hover:text-violet-400 transition-colors text-sm">Quick Start</Link></li>
               <li><Link href="/blog/how-to-monetize-your-mcps" className="text-zinc-400 hover:text-violet-400 transition-colors text-sm">Monetization Guide</Link></li>
-              <li><Link href="/faq" className="text-zinc-400 hover:text-violet-400 transition-colors text-sm">FAQ</Link></li>
-              <li><Link href="/security" className="text-zinc-400 hover:text-violet-400 transition-colors text-sm">Security</Link></li>
+              <li><Link href="/roadmap" className="text-zinc-400 hover:text-violet-400 transition-colors text-sm">Roadmap</Link></li>
             </ul>
           </div>
 
