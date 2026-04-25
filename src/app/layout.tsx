@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     default: 'OMA-AI | MCP Marketplace with x402 Payments',
     template: '%s'
   },
-  description: 'Discover, deploy, and monetize AI agents with the premier MCP Marketplace. Access 19+ verified MCP servers with gasless x402 payments on Base network - no API keys, no subscriptions.',
+  description: 'Discover, deploy, and monetize AI agents with the premier MCP Marketplace. Access 34+ verified MCP servers with gasless x402 payments on Base network - no API keys, no subscriptions.',
   keywords: ['MCP', 'Model Context Protocol', 'x402', 'AI agents', 'MCP marketplace', 'gasless payments', 'Base network', 'USDC', 'agent economy', 'AI infrastructure'],
   authors: [{ name: 'OMA-AI Team' }],
   icons: {
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     url: 'https://oma-ai.com',
     siteName: 'OMA-AI',
     title: 'OMA-AI | MCP Marketplace with x402 Payments',
-    description: 'Discover, deploy, and monetize AI agents with the premier MCP Marketplace. Access 19+ verified MCP servers with gasless x402 payments on Base network.',
+    description: 'Discover, deploy, and monetize AI agents with the premier MCP Marketplace. Access 34+ verified MCP servers with gasless x402 payments on Base network.',
     images: [
       {
         url: '/icon-512.svg',
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'OMA-AI | Premier MCP Marketplace with x402 Payments',
-    description: 'Discover, deploy, and monetize AI agents with the premier MCP Marketplace. Access 19+ verified MCP servers with gasless x402 payments on Base network.',
+    description: 'Discover, deploy, and monetize AI agents with the premier MCP Marketplace. Access 34+ verified MCP servers with gasless x402 payments on Base network.',
     creator: '@OMA_AI',
   },
   robots: {
@@ -99,7 +99,7 @@ export default function RootLayout({
                   "@id": "https://oma-ai.com/#webapp",
                   "name": "OMA-AI MCP Marketplace",
                   "url": "https://oma-ai.com",
-                  "description": "Discover, deploy, and monetize AI agents with the premier MCP Marketplace. Access 19+ verified MCP servers with gasless x402 payments on Base network.",
+                  "description": "Discover, deploy, and monetize AI agents with the premier MCP Marketplace. Access 34+ verified MCP servers with gasless x402 payments on Base network.",
                   "applicationCategory": "DeveloperApplication",
                   "operatingSystem": "Any",
                   "offers": {

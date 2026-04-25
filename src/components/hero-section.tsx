@@ -107,7 +107,7 @@ export function HeroSection() {
           className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto"
         >
           {[
-            { label: '21+', sub: 'MCPs verified', icon: '⚡' },
+            { label: '34+', sub: 'MCPs verified', icon: '⚡' },
             { label: 'x402', sub: 'gasless pay', icon: '💎' },
             { label: '<5ms', sub: 'avg latency', icon: '🚀' },
             { label: 'Free', sub: 'to start', icon: '🎁' }
