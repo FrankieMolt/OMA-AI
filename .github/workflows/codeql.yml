@@ -1,12 +1,43 @@
-# This workflow is DISABLED - GitHub's default CodeQL (managed) is disabled.
-# Custom CodeQL Security workflow is in codeql.yml (different filename)
-# This empty file prevents GitHub from auto-creating a default CodeQL workflow
-name: CodeQL (disabled)
+name: CodeQL Security
 
-on: {}  # No triggers - completely disabled
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'src/**'
+      - 'app/**'
+      - 'components/**'
+      - 'lib/**'
+      - '.github/workflows/codeql.yml'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'src/**'
+      - 'app/**'
+      - 'components/**'
+      - 'lib/**'
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
 
 jobs:
-  disabled:
+  codeql:
     runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+      contents: read
+
     steps:
-      - run: echo "This workflow is disabled. Use CodeQL Security instead."
+      - uses: actions/checkout@v4
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v4
+        with:
+          languages: javascript, typescript
+          queries: security-and-quality
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v4
+        with:
+          category: "/language:javascript-typescript"
+          upload: always
