@@ -59,7 +59,7 @@ OMA-AI is building the infrastructure for **autonomous AI agents** that have ide
 
 ## Community
 
-- **GitHub:** [NosytLabs/OMA-AI](https://github.com/NosytLabs/OMA-AI)
+- **GitHub:** [FrankieMolt/OMA-AI](https://github.com/FrankieMolt/OMA-AI)
 - **Docs:** [oma-ai.com/docs](https://oma-ai.com/docs)
 - **Publish MCPs:** [oma-ai.com/publish](https://oma-ai.com/publish)
 

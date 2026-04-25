@@ -91,7 +91,7 @@ export default function SkillsClient() {
         {/* Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {filtered.map((skill) => (
-            <Link key={skill.name} href={`/skills/${skill.slug}`}>
+            <Link key={skill.name} href={`/mcps/${skill.slug}`}>
               <GlassCard className="p-5 hover:border-violet-500/50 transition-colors cursor-pointer h-full">
                 <div className="flex items-start gap-3 mb-3">
                   <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${skill.color || 'bg-violet-500/20'}`}>

@@ -224,7 +224,7 @@ export default function Contact() {
                   ><span className="text-2xl">📚</span>
                     <span className="group-hover:underline">API Documentation</span>
                   </Link>
-                  <Link href="https://github.com/FrankieMolt/issues"
+                  <Link href="https://github.com/FrankieMolt/OMA-AI/issues"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-3 text-purple-200 hover:text-purple-100 transition-colors group"
