@@ -1,0 +1,96 @@
+{
+  "site": "SpendThrone",
+  "url": "https://spendthrone.com",
+  "timestamp": "2026-02-14T05:12:06.556Z",
+  "tests": {
+    "performance": {
+      "error": "lighthouse is not a function"
+    },
+    "accessibility": {
+      "violations": 0,
+      "routesTested": 7,
+      "routesWithIssues": 0,
+      "details": [],
+      "warnings": [
+        {
+          "route": "/",
+          "error": "page.goto: net::ERR_NAME_NOT_RESOLVED at https://spendthrone.com/\nCall log:\n  - navigating to \"https://spendthrone.com/\", waiting until \"networkidle\"\n"
+        },
+        {
+          "route": "/about",
+          "error": "page.goto: net::ERR_NAME_NOT_RESOLVED at https://spendthrone.com/about\nCall log:\n  - navigating to \"https://spendthrone.com/about\", waiting until \"networkidle\"\n"
+        },
+        {
+          "route": "/features",
+          "error": "page.goto: net::ERR_NAME_NOT_RESOLVED at https://spendthrone.com/features\nCall log:\n  - navigating to \"https://spendthrone.com/features\", waiting until \"networkidle\"\n"
+        },
+        {
+          "route": "/pricing",
+          "error": "page.goto: net::ERR_NAME_NOT_RESOLVED at https://spendthrone.com/pricing\nCall log:\n  - navigating to \"https://spendthrone.com/pricing\", waiting until \"networkidle\"\n"
+        },
+        {
+          "route": "/contact",
+          "error": "page.goto: net::ERR_NAME_NOT_RESOLVED at https://spendthrone.com/contact\nCall log:\n  - navigating to \"https://spendthrone.com/contact\", waiting until \"networkidle\"\n"
+        },
+        {
+          "route": "/login",
+          "error": "page.goto: net::ERR_NAME_NOT_RESOLVED at https://spendthrone.com/login\nCall log:\n  - navigating to \"https://spendthrone.com/login\", waiting until \"networkidle\"\n"
+        },
+        {
+          "route": "/signup",
+          "error": "page.goto: net::ERR_NAME_NOT_RESOLVED at https://spendthrone.com/signup\nCall log:\n  - navigating to \"https://spendthrone.com/signup\", waiting until \"networkidle\"\n"
+        }
+      ]
+    },
+    "seo": {
+      "routes": [],
+      "globalIssues": [
+        {
+          "route": "/",
+          "error": "page.goto: net::ERR_NAME_NOT_RESOLVED at https://spendthrone.com/\nCall log:\n  - navigating to \"https://spendthrone.com/\", waiting until \"networkidle\"\n"
+        },
+        {
+          "route": "/about",
+          "error": "page.goto: net::ERR_NAME_NOT_RESOLVED at https://spendthrone.com/about\nCall log:\n  - navigating to \"https://spendthrone.com/about\", waiting until \"networkidle\"\n"
+        },
+        {
+          "route": "/features",
+          "error": "page.goto: net::ERR_NAME_NOT_RESOLVED at https://spendthrone.com/features\nCall log:\n  - navigating to \"https://spendthrone.com/features\", waiting until \"networkidle\"\n"
+        },
+        {
+          "route": "/pricing",
+          "error": "page.goto: net::ERR_NAME_NOT_RESOLVED at https://spendthrone.com/pricing\nCall log:\n  - navigating to \"https://spendthrone.com/pricing\", waiting until \"networkidle\"\n"
+        },
+        {
+          "route": "/contact",
+          "error": "page.goto: net::ERR_NAME_NOT_RESOLVED at https://spendthrone.com/contact\nCall log:\n  - navigating to \"https://spendthrone.com/contact\", waiting until \"networkidle\"\n"
+        },
+        {
+          "route": "/login",
+          "error": "page.goto: net::ERR_NAME_NOT_RESOLVED at https://spendthrone.com/login\nCall log:\n  - navigating to \"https://spendthrone.com/login\", waiting until \"networkidle\"\n"
+        },
+        {
+          "route": "/signup",
+          "error": "page.goto: net::ERR_NAME_NOT_RESOLVED at https://spendthrone.com/signup\nCall log:\n  - navigating to \"https://spendthrone.com/signup\", waiting until \"networkidle\"\n"
+        }
+      ],
+      "score": 100
+    },
+    "visual": {
+      "screenshots": 0,
+      "routes": [
+        "/",
+        "/about",
+        "/features",
+        "/pricing"
+      ],
+      "viewports": [
+        "desktop",
+        "laptop",
+        "tablet",
+        "mobile"
+      ],
+      "details": []
+    }
+  }
+}

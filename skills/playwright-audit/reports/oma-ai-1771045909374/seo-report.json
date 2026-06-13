@@ -1,0 +1,201 @@
+{
+  "routes": [
+    {
+      "route": "/",
+      "url": "https://oma-ai.com/",
+      "title": "OMA-AI - API Marketplace for Autonomous AI Agents",
+      "titleLength": 49,
+      "metaDescription": "Discover, access, and pay for 450+ verified APIs and MCP servers. OMA-AI provides the decentralized infrastructure for autonomous agent commerce using x402 payments on Base network.",
+      "metaDescriptionLength": 181,
+      "h1": "Connect Your Agents to Global APIs",
+      "h1Count": 1,
+      "h2Count": 6,
+      "imagesWithoutAlt": 0,
+      "canonical": "https://oma-ai.com",
+      "ogTags": {
+        "title": "OMA-AI - API Marketplace for AI Agents",
+        "description": "Autonomous infrastructure for the agent economy. Discover and integrate 450+ APIs with instant crypto payments.",
+        "image": "https://oma-ai.com/og-image.png",
+        "url": "https://oma-ai.com"
+      },
+      "twitterTags": {
+        "card": "summary_large_image",
+        "title": "OMA-AI - Agent Commerce Platform",
+        "description": "The premier API marketplace for AI agents.",
+        "image": "https://oma-ai.com/og-image.png"
+      },
+      "structuredData": [],
+      "issues": [
+        "Meta description length issue: 181 characters"
+      ]
+    },
+    {
+      "route": "/about",
+      "url": "https://oma-ai.com/about",
+      "title": "About OMA-AI - Autonomous Agent Economy Vision | OMA-AI",
+      "titleLength": 55,
+      "metaDescription": "Discover the mission behind OMA-AI. We are building the open-source infrastructure for autonomous AI agents to interact, trade, and scale in a decentralized economy.",
+      "metaDescriptionLength": 165,
+      "h1": "Building the Future ofAgent Economies",
+      "h1Count": 1,
+      "h2Count": 6,
+      "imagesWithoutAlt": 0,
+      "canonical": "https://oma-ai.com/about",
+      "ogTags": {
+        "title": "About OMA-AI - Autonomous Agent Economy Vision",
+        "description": "Building the open-source infrastructure for autonomous AI agents to interact, trade, and scale in a decentralized economy.",
+        "image": "https://oma-ai.com/og-image.png",
+        "url": "https://oma-ai.com/about"
+      },
+      "twitterTags": {
+        "card": "summary_large_image",
+        "title": "OMA-AI - Agent Commerce Platform",
+        "description": "The premier API marketplace for AI agents.",
+        "image": "https://oma-ai.com/og-image.png"
+      },
+      "structuredData": [],
+      "issues": [
+        "Meta description length issue: 165 characters"
+      ]
+    },
+    {
+      "route": "/features",
+      "url": "https://oma-ai.com/features",
+      "title": "Platform Features - Advanced Autonomous Agent Infrastructure | OMA-AI",
+      "titleLength": 69,
+      "metaDescription": "Explore the powerful features of OMA-AI. From autonomous agent deployment and x402 payments to the skills library and real-time analytics. Build the future of AI commerce.",
+      "metaDescriptionLength": 171,
+      "h1": "SystemFeatures",
+      "h1Count": 1,
+      "h2Count": 3,
+      "imagesWithoutAlt": 0,
+      "canonical": "https://oma-ai.com",
+      "ogTags": {
+        "title": "OMA-AI - Agent Commerce Platform",
+        "description": "The premier API marketplace for AI agents. Discovery, access, and pay-per-use payments with x402 on Base.",
+        "image": "https://oma-ai.com/og-image.png",
+        "url": "https://oma-ai.com"
+      },
+      "twitterTags": {
+        "card": "summary_large_image",
+        "title": "OMA-AI - Agent Commerce Platform",
+        "description": "The premier API marketplace for AI agents.",
+        "image": "https://oma-ai.com/og-image.png"
+      },
+      "structuredData": [],
+      "issues": [
+        "Meta description length issue: 171 characters"
+      ]
+    },
+    {
+      "route": "/pricing",
+      "url": "https://oma-ai.com/pricing",
+      "title": "Pricing & Network Economics - OMA-AI | OMA-AI",
+      "titleLength": 45,
+      "metaDescription": "Flexible pricing models for the AI agent economy. Choose between subscription-based infrastructure and decentralized x402 micropayments on Base network.",
+      "metaDescriptionLength": 152,
+      "h1": "Scale YourAgent Workforce",
+      "h1Count": 1,
+      "h2Count": 3,
+      "imagesWithoutAlt": 0,
+      "canonical": "https://oma-ai.com/pricing",
+      "ogTags": {
+        "title": "Pricing & Network Economics - OMA-AI",
+        "description": "Flexible pricing models for the AI agent economy. Choose between subscription-based infrastructure and decentralized x402 micropayments on Base network.",
+        "image": "https://oma-ai.com/og-image.png",
+        "url": "https://oma-ai.com/pricing"
+      },
+      "twitterTags": {
+        "card": "summary_large_image",
+        "title": "OMA-AI - Agent Commerce Platform",
+        "description": "The premier API marketplace for AI agents.",
+        "image": "https://oma-ai.com/og-image.png"
+      },
+      "structuredData": [],
+      "issues": []
+    },
+    {
+      "route": "/contact",
+      "url": "https://oma-ai.com/contact",
+      "title": "Contact Us - OMA-AI Agent Ecosystem Support | OMA-AI",
+      "titleLength": 52,
+      "metaDescription": "Connect with the OMA-AI team for support, partnerships, and technical inquiries. We are here to help you navigate the autonomous AI agent economy.",
+      "metaDescriptionLength": 146,
+      "h1": "ContactOMA-AI",
+      "h1Count": 1,
+      "h2Count": 2,
+      "imagesWithoutAlt": 0,
+      "canonical": "https://oma-ai.com/contact",
+      "ogTags": {
+        "title": "Contact Us - OMA-AI Agent Ecosystem Support",
+        "description": "Connect with the OMA-AI team for support, partnerships, and technical inquiries.",
+        "image": "https://oma-ai.com/og-image.png",
+        "url": "https://oma-ai.com/contact"
+      },
+      "twitterTags": {
+        "card": "summary_large_image",
+        "title": "OMA-AI - Agent Commerce Platform",
+        "description": "The premier API marketplace for AI agents.",
+        "image": "https://oma-ai.com/og-image.png"
+      },
+      "structuredData": [],
+      "issues": []
+    },
+    {
+      "route": "/login",
+      "url": "https://oma-ai.com/login",
+      "title": "Sign In - OMA-AI | OMA-AI",
+      "titleLength": 25,
+      "metaDescription": "Secure access to your autonomous agent fleet. Manage API keys, monitor usage, and configure payment methods.",
+      "metaDescriptionLength": 108,
+      "h1": "Welcome Back",
+      "h1Count": 1,
+      "h2Count": 0,
+      "imagesWithoutAlt": 0,
+      "canonical": "https://oma-ai.com/login",
+      "ogTags": {
+        "title": "OMA-AI - Agent Commerce Platform",
+        "description": "The premier API marketplace for AI agents. Discovery, access, and pay-per-use payments with x402 on Base.",
+        "image": "https://oma-ai.com/og-image.png",
+        "url": "https://oma-ai.com"
+      },
+      "twitterTags": {
+        "card": "summary_large_image",
+        "title": "OMA-AI - Agent Commerce Platform",
+        "description": "The premier API marketplace for AI agents.",
+        "image": "https://oma-ai.com/og-image.png"
+      },
+      "structuredData": [],
+      "issues": []
+    },
+    {
+      "route": "/dashboard",
+      "url": "https://oma-ai.com/dashboard",
+      "title": "Dashboard - OMA-AI Agent Command Center | OMA-AI",
+      "titleLength": 48,
+      "metaDescription": "Monitor your autonomous agents, track API usage in real-time, and manage your x402 payment history. The central hub for all your agent economy operations.",
+      "metaDescriptionLength": 154,
+      "h1": "Something went wrong",
+      "h1Count": 1,
+      "h2Count": 0,
+      "imagesWithoutAlt": 0,
+      "canonical": "https://oma-ai.com/dashboard",
+      "ogTags": {
+        "title": "Dashboard - OMA-AI Agent Command Center",
+        "description": "Monitor your autonomous agents, track API usage in real-time, and manage your x402 payment history.",
+        "image": "https://oma-ai.com/og-image.png",
+        "url": "https://oma-ai.com/dashboard"
+      },
+      "twitterTags": {
+        "card": "summary_large_image",
+        "title": "OMA-AI - Agent Commerce Platform",
+        "description": "The premier API marketplace for AI agents.",
+        "image": "https://oma-ai.com/og-image.png"
+      },
+      "structuredData": [],
+      "issues": []
+    }
+  ],
+  "globalIssues": [],
+  "score": 85
+}

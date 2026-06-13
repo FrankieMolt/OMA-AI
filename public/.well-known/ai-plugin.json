@@ -1,0 +1,18 @@
+{
+  "schema_version": "v1",
+  "name_for_model": "OMA_AI",
+  "name_for_human": "OMA-AI (Open Market Access)",
+  "description_for_model": "Access 50+ AI models, MCP servers, and agent tools through a unified, private, and crypto-native gateway. Supports x402 protocol for ad-hoc payments.",
+  "description_for_human": "The foundational infrastructure for the agentic web. Pay per call with USDC.",
+  "auth": {
+    "type": "none"
+  },
+  "api": {
+    "type": "openapi",
+    "url": "https://oma-ai.com/openapi.json",
+    "is_user_authenticated": false
+  },
+  "logo_url": "https://oma-ai.com/logo.svg",
+  "contact_email": "support@oma-ai.com",
+  "legal_info_url": "https://oma-ai.com/terms"
+}
