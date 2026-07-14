@@ -68,20 +68,20 @@ export default function CreditsPage() {
         <div className="container mx-auto px-4 relative z-10 text-center">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-amber-600/20 border border-amber-500/30 rounded-full mb-6">
             <Coins className="w-4 h-4 text-amber-300" />
-            <span className="text-sm font-semibold text-amber-300">Optional — Bulk Discount</span>
+            <span className="text-sm font-semibold text-amber-300">Optional, Bulk Discount</span>
           </div>
           <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
             Credits for power users
           </h1>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-            Pay-per-call via x402 is the default — no signup, no prepayment needed.
+            Pay-per-call via x402 is the default, no signup, no prepayment needed.
             <br />
             <span className="text-gray-400">Credits are an <strong className="text-amber-400">optional</strong> bulk discount: buy once, save up to 45%, credits never expire.</span>
           </p>
         </div>
       </div>
 
-      {/* Credits Client — handles wallet connection + purchase flow */}
+      {/* Credits Client, handles wallet connection + purchase flow */}
       <CreditsClient packages={creditPackages} treasuryAddress={TREASURY_ADDRESS} />
 
       {/* Comparison */}
@@ -111,7 +111,7 @@ export default function CreditsPage() {
                   </li>
                   <li className="flex items-start gap-2 text-sm text-gray-300">
                     <Check className="w-4 h-4 text-green-400 flex-shrink-0 mt-0.5" />
-                    <span>Pay exactly for what you use — no prepayment</span>
+                    <span>Pay exactly for what you use, no prepayment</span>
                   </li>
                   <li className="flex items-start gap-2 text-sm text-gray-300">
                     <Check className="w-4 h-4 text-green-400 flex-shrink-0 mt-0.5" />
@@ -132,7 +132,7 @@ export default function CreditsPage() {
                 <ul className="space-y-3">
                   <li className="flex items-start gap-2 text-sm text-gray-300">
                     <Check className="w-4 h-4 text-amber-400 flex-shrink-0 mt-0.5" />
-                    <span>Buy once, use forever — credits never expire</span>
+                    <span>Buy once, use forever, credits never expire</span>
                   </li>
                   <li className="flex items-start gap-2 text-sm text-gray-300">
                     <Check className="w-4 h-4 text-amber-400 flex-shrink-0 mt-0.5" />
@@ -140,7 +140,7 @@ export default function CreditsPage() {
                   </li>
                   <li className="flex items-start gap-2 text-sm text-gray-300">
                     <Check className="w-4 h-4 text-amber-400 flex-shrink-0 mt-0.5" />
-                    <span>Works across ALL MCPs — free and paid</span>
+                    <span>Works across ALL MCPs, free and paid</span>
                   </li>
                   <li className="flex items-start gap-2 text-sm text-gray-300">
                     <Check className="w-4 h-4 text-amber-400 flex-shrink-0 mt-0.5" />
@@ -162,7 +162,7 @@ export default function CreditsPage() {
           <div className="space-y-4">
             <GlassCard className="p-5">
               <h3 className="text-base font-semibold text-white mb-2">Do I need credits to use the marketplace?</h3>
-              <p className="text-sm text-gray-400">No. Pay-per-call via x402 is the default. Credits are completely optional — they exist purely as a bulk discount for regular users.</p>
+              <p className="text-sm text-gray-400">No. Pay-per-call via x402 is the default. Credits are completely optional, they exist purely as a bulk discount for regular users.</p>
             </GlassCard>
             <GlassCard className="p-5">
               <h3 className="text-base font-semibold text-white mb-2">Do credits expire?</h3>

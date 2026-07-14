@@ -1,4 +1,4 @@
-// lib/mcp-icons.ts — MCP server logo/favicon utilities
+// lib/mcp-icons.ts, MCP server logo/favicon utilities
 // Uses DuckDuckGo favicon API for server logos
 
 const FAVICON_BASE = 'https://icons.duckduckgo.com/ip3';

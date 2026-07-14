@@ -17,13 +17,13 @@ import { USDC_CONTRACTS, CHAIN_IDS } from '@/lib/x402/services/evm';
 export const dynamic = 'force-dynamic';
 
 /**
- * GET: Health check — reports OWS wallet status
+ * GET: Health check, reports OWS wallet status
  */
 export async function GET() {
   if (!isOWSConfigured()) {
     return NextResponse.json({
       ows: false,
-      status: 'OWS wallet "oma-treasury" not found — run `ows wallet create --name oma-treasury`',
+      status: 'OWS wallet "oma-treasury" not found, run `ows wallet create --name oma-treasury`',
       docs: 'https://docs.openwallet.sh',
     });
   }
@@ -44,10 +44,10 @@ export async function GET() {
  * POST: Sign x402 payment using OWS
  *
  * Body: {
- *   amount: string       — amount in micro-USDC
- *   mcp_id: string       — MCP server ID
- *   network?: string     — network name (default: base)
- *   pay_to?: string      — recipient address (default: OMA_AI_PAYMENT_WALLET env)
+ *   amount: string      , amount in micro-USDC
+ *   mcp_id: string      , MCP server ID
+ *   network?: string    , network name (default: base)
+ *   pay_to?: string     , recipient address (default: OMA_AI_PAYMENT_WALLET env)
  *   caller_address?: string
  *   caller_signature?: string
  * }
@@ -121,7 +121,7 @@ export async function POST(request: NextRequest) {
     const payTo = (pay_to as string) || process.env.OMA_AI_PAYMENT_WALLET || process.env.NEXT_PUBLIC_WALLET_ADDRESS;
     if (!payTo) {
       return NextResponse.json(
-        { error: 'No payTo address — set OMA_AI_PAYMENT_WALLET or NEXT_PUBLIC_WALLET_ADDRESS',
+        { error: 'No payTo address, set OMA_AI_PAYMENT_WALLET or NEXT_PUBLIC_WALLET_ADDRESS',
           code: 'PAYTO_NOT_SET' },
         { status: 500 }
       );

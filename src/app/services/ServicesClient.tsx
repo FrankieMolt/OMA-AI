@@ -36,7 +36,7 @@ const STATIC_SERVICES: Omit<HumanService, 'id' | 'created_at'>[] = [
     expires_at: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
   },
   {
-    title: 'Local Market Research — London',
+    title: 'Local Market Research, London',
     description: 'AI agent researching competitor pricing for my retail business. Need a human to visit 5 stores in central London, photograph price tags, and fill out a simple form.',
     category: 'Research',
     price_usdc: 40,
@@ -51,7 +51,7 @@ const STATIC_SERVICES: Omit<HumanService, 'id' | 'created_at'>[] = [
     expires_at: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toISOString(),
   },
   {
-    title: 'Voice Recording — Podcast Intro',
+    title: 'Voice Recording, Podcast Intro',
     description: 'I need a human voice actor to record a 30-second podcast intro in American English. Script provided. Need high-quality WAV file.',
     category: 'Audio',
     price_usdc: 15,
@@ -66,7 +66,7 @@ const STATIC_SERVICES: Omit<HumanService, 'id' | 'created_at'>[] = [
     expires_at: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000).toISOString(),
   },
   {
-    title: 'Product Photography — Jewelry',
+    title: 'Product Photography, Jewelry',
     description: 'Need high-quality product photos of 10 jewelry pieces for e-commerce listing. White background, multiple angles, lightbox required.',
     category: 'Photography',
     price_usdc: 50,
@@ -81,7 +81,7 @@ const STATIC_SERVICES: Omit<HumanService, 'id' | 'created_at'>[] = [
     expires_at: new Date(Date.now() + 10 * 24 * 60 * 60 * 1000).toISOString(),
   },
   {
-    title: 'Translation — Spanish to English',
+    title: 'Translation, Spanish to English',
     description: 'Legal document translation needed. 10-page contract from Spanish to English. Must be certified/credentialed if possible.',
     category: 'Translation',
     price_usdc: 75,

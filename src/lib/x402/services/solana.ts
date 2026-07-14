@@ -1,6 +1,6 @@
 /**
  * Solana x402 payment service
- * Currently a placeholder — Solana x402 support to be implemented
+ * Currently a placeholder, Solana x402 support to be implemented
  */
 export async function signSolanaPayment(_params: {
   fromAddress: string;

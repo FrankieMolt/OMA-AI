@@ -7,7 +7,7 @@ export function ComingSoon({ title }: { title: string }) {
         <div className="text-6xl mb-6">🚧</div>
         <h1 className="text-4xl font-bold text-white mb-4">{title}</h1>
         <p className="text-zinc-400 mb-8">
-          Coming soon. The MCP marketplace is live — check it out.
+          Coming soon. The MCP marketplace is live, check it out.
         </p>
         <Link
           href="/mcps"

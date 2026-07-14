@@ -13,7 +13,7 @@ const steps = [
     href: '/mcps',
     accent: 'violet',
     details: [
-      '19+ pre-verified MCP servers',
+      '34+ pre-verified MCP servers',
       'Real-time pricing and availability',
       'Community ratings and reviews',
     ]
@@ -22,7 +22,7 @@ const steps = [
     icon: Zap,
     number: '02',
     title: 'Connect & Deploy',
-    description: 'One-click integration. Agents connect via the standard MCP protocol — no custom code, SDK installation, or configuration files needed.',
+    description: 'One-click integration. Agents connect via the standard MCP protocol, no custom code, SDK installation, or configuration files needed.',
     href: '/docs',
     accent: 'cyan',
     details: [
@@ -79,7 +79,7 @@ const accentColors = {
 const benefits = [
   { icon: Key, text: 'No API keys to manage' },
   { icon: Shield, text: 'Verified MCP servers' },
-  { icon: Globe, text: 'Open ecosystem — build or publish' },
+  { icon: Globe, text: 'Open ecosystem, build or publish' },
   { icon: CheckCircle, text: 'Automatic revenue distribution' },
 ];
 
@@ -265,7 +265,7 @@ export default function HowItWorksClient() {
               Ready to get started?
             </h2>
             <p className="text-zinc-400 text-lg mb-8">
-              Whether you&apos;re building an agent that needs tools or creating tools that agents need — OMA-AI has the infrastructure.
+              Whether you&apos;re building an agent that needs tools or creating tools that agents need, OMA-AI has the infrastructure.
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
               <Link

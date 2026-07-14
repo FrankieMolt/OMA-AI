@@ -12,7 +12,7 @@ export function logError(context: string, error: any): void {
   if (isDevelopment) {
     console.error(`[${context}]`, error);
   }
-  // Sentry integration pending — errors will surface in Vercel logs for now
+  // Sentry integration pending, errors will surface in Vercel logs for now
 }
 
 export function logInfo(context: string, message: string): void {

@@ -18,18 +18,27 @@ const stats: Stat[] = [
 ];
 
 function Counter({ value, suffix, color }: { value: number; suffix: string; color: string }) {
-  const [count, setCount] = useState(0);
+  // SSR-safe: render the final value on server so search engines and slow clients see "34+" not "0+"
+  // Client animates from 0 -> value on first mount after hydration
+  const [count, setCount] = useState(value);
+  const [hasMounted, setHasMounted] = useState(false);
   const ref = useRef<HTMLSpanElement>(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
   useEffect(() => {
+    setHasMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!hasMounted) return;
     if (!isInView) return;
-    
+
+    setCount(0); // animate from 0 on client
     const duration = 1500;
     const steps = 60;
     const increment = value / steps;
     let current = 0;
-    
+
     const timer = setInterval(() => {
       current += increment;
       if (current >= value) {
@@ -39,9 +48,9 @@ function Counter({ value, suffix, color }: { value: number; suffix: string; colo
         setCount(Math.floor(current));
       }
     }, duration / steps);
-    
+
     return () => clearInterval(timer);
-  }, [isInView, value]);
+  }, [hasMounted, isInView, value]);
 
   return (
     <span ref={ref} className={`font-bold ${color}`}>
@@ -54,7 +63,7 @@ export function AnimatedStats() {
   return (
     <section className="py-20 px-4 bg-black relative">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(139,92,246,0.06)_0%,transparent_70%)]" />
-      
+
       <div className="max-w-5xl mx-auto relative">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

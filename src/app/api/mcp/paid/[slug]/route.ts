@@ -42,7 +42,7 @@ export async function POST(
   if (paymentHeader) {
     try {
       const payment = JSON.parse(paymentHeader);
-      // Verify payment proof (stub — wire to on-chain verification)
+      // Verify payment proof (stub, wire to on-chain verification)
       return NextResponse.json({ success: true, message: 'Payment verified' });
     } catch {
       return NextResponse.json({ error: 'Invalid payment proof' }, { status: 400 });

@@ -245,7 +245,7 @@ export function MCPInstallCard({ server }: MCPInstallCardProps) {
           </>
         )}
 
-        {/* INSTALL TAB — npm / npx / Docker */}
+        {/* INSTALL TAB, npm / npx / Docker */}
         {activeTab === 'install' && isLocalSkill && npmPkg && (
           <div className="space-y-4">
             {/* npm install */}

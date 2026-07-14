@@ -194,7 +194,7 @@ export async function POST(request: NextRequest) {
 
       if (!recovered) {
         return NextResponse.json(
-          { error: 'Caller signature verification failed — address mismatch', code: 'SIGNATURE_MISMATCH' },
+          { error: 'Caller signature verification failed, address mismatch', code: 'SIGNATURE_MISMATCH' },
           { status: 401 }
         );
       }
@@ -209,7 +209,7 @@ export async function POST(request: NextRequest) {
           expires_at: new Date(timestampSeconds * 1000 + 10 * 60 * 1000).toISOString(),
         }, { onConflict: 'nonce' });
       } catch {
-        // Nonce table may not exist yet — continue without replay protection
+        // Nonce table may not exist yet, continue without replay protection
       }
     } else {
       if (!user_id) {
@@ -219,7 +219,7 @@ export async function POST(request: NextRequest) {
         );
       }
       verifiedCallerAddress = null;
-      console.warn(`[x402] Unauthenticated request for user_id: ${user_id} — consider upgrading to EIP-712 signature`);
+      console.warn(`[x402] Unauthenticated request for user_id: ${user_id}, consider upgrading to EIP-712 signature`);
     }
 
     // ============================================================

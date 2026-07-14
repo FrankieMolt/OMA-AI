@@ -19,7 +19,7 @@ const SEARCH_CACHE_TTL_MS = 60_000; // 60 seconds
 
 
 /**
- * Fetch search results from SearXNG JSON API (no auth — works when limiter is off).
+ * Fetch search results from SearXNG JSON API (no auth, works when limiter is off).
  */
 async function fetchSearxngJSON(query: string, limit: number): Promise<SearxngResult[] | null> {
   try {
@@ -148,15 +148,15 @@ function getCuratedFallback(query: string): SearchResult[] {
   const q = query.toLowerCase();
   if (q.includes('solana') || q.includes('crypto') || q.includes('defi') || q.includes('trading')) {
     return [
-      { title: 'Solana Docs — Official Developer Documentation', url: 'https://docs.solana.com', snippet: 'Official Solana blockchain documentation for developers.', engine: 'curated' },
-      { title: 'Jupiter Aggregator — DEX Swaps on Solana', url: 'https://jup.ag', snippet: 'Swap any Solana SPL token with the best prices via Jupiter.', engine: 'curated' },
-      { title: 'Pump.fun — Token Launchpad on Solana', url: 'https://pump.fun', snippet: 'Launch and trade new meme coins on Solana.', engine: 'curated' },
-      { title: 'Helius — Solana RPC & Developer Platform', url: 'https://helius.xyz', snippet: 'Enterprise-grade Solana infrastructure.', engine: 'curated' },
-      { title: 'OMA-AI — MCP Marketplace', url: 'https://www.oma-ai.com', snippet: 'Discover and integrate AI agent tools and MCP servers.', engine: 'curated' },
+      { title: 'Solana Docs, Official Developer Documentation', url: 'https://docs.solana.com', snippet: 'Official Solana blockchain documentation for developers.', engine: 'curated' },
+      { title: 'Jupiter Aggregator, DEX Swaps on Solana', url: 'https://jup.ag', snippet: 'Swap any Solana SPL token with the best prices via Jupiter.', engine: 'curated' },
+      { title: 'Pump.fun, Token Launchpad on Solana', url: 'https://pump.fun', snippet: 'Launch and trade new meme coins on Solana.', engine: 'curated' },
+      { title: 'Helius, Solana RPC & Developer Platform', url: 'https://helius.xyz', snippet: 'Enterprise-grade Solana infrastructure.', engine: 'curated' },
+      { title: 'OMA-AI, MCP Marketplace', url: 'https://www.oma-ai.com', snippet: 'Discover and integrate AI agent tools and MCP servers.', engine: 'curated' },
     ];
   }
   return [
-    { title: 'OMA-AI — AI Agent Tools Marketplace', url: 'https://www.oma-ai.com', snippet: 'Your AI agent tools marketplace on Solana.', engine: 'curated' },
+    { title: 'OMA-AI, AI Agent Tools Marketplace', url: 'https://www.oma-ai.com', snippet: 'Your AI agent tools marketplace on Solana.', engine: 'curated' },
     { title: 'Google Search', url: `https://www.google.com/search?q=${encodeURIComponent(query)}`, snippet: 'Search the web for more results.', engine: 'curated' },
   ];
 }

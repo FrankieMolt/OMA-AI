@@ -64,7 +64,7 @@ export async function GET(request: Request) {
   let total = data.length;
   let useSupabase = false;
 
-  // Try direct REST fetch — anon key works from Vercel (service role key returns 401)
+  // Try direct REST fetch, anon key works from Vercel (service role key returns 401)
   const sbUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const sbKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
   if (sbUrl && sbKey) {
@@ -83,7 +83,7 @@ export async function GET(request: Request) {
 
       const res = await fetch(`${sbUrl}/rest/v1/mcp_servers?${searchParams}`, {
         headers: {
-          // apikey is sufficient for PostgREST anon read — Authorization Bearer causes 401 from some Vercel infra
+          // apikey is sufficient for PostgREST anon read, Authorization Bearer causes 401 from some Vercel infra
           'apikey': sbKey,
           'Content-Type': 'application/json',
           'Prefer': 'count=exact',

@@ -81,12 +81,12 @@ export default function CompareClient() {
       { label: 'Category', key: 'category', compareFn: (m) => m.category.join(', ') },
       { label: 'Author', key: 'author', compareFn: (m) => m.author },
       { label: 'Pricing', key: 'pricing_display', compareFn: (m) => <span className={m.pricing_usdc === 0 ? 'text-green-400' : 'text-amber-400'}>{getPricingDisplay(m.pricing_usdc)}</span> },
-      { label: 'x402', key: 'x402_enabled', compareFn: (m) => m.x402_enabled ? <CheckCircle className="w-5 h-5 text-green-400 mx-auto" /> : <span className="text-gray-600">—</span> },
-      { label: 'Rating', key: 'rating', compareFn: (m) => <span className={getRatingColor(m.rating)}>{m.rating > 0 ? `${m.rating}★` : '—'}</span> },
-      { label: 'Total Calls', key: 'total_calls', compareFn: (m) => m.total_calls > 0 ? m.total_calls.toLocaleString() : '—' },
-      { label: 'Success Rate', key: 'success_rate', compareFn: (m) => m.success_rate > 0 ? (() => { const c = getSuccessRateColor(m.success_rate); return <span className={c.text}>{m.success_rate}%</span>; })() : '—' },
+      { label: 'x402', key: 'x402_enabled', compareFn: (m) => m.x402_enabled ? <CheckCircle className="w-5 h-5 text-green-400 mx-auto" /> : <span className="text-gray-600">-</span> },
+      { label: 'Rating', key: 'rating', compareFn: (m) => <span className={getRatingColor(m.rating)}>{m.rating > 0 ? `${m.rating}★` : '-'}</span> },
+      { label: 'Total Calls', key: 'total_calls', compareFn: (m) => m.total_calls > 0 ? m.total_calls.toLocaleString() : '-' },
+      { label: 'Success Rate', key: 'success_rate', compareFn: (m) => m.success_rate > 0 ? (() => { const c = getSuccessRateColor(m.success_rate); return <span className={c.text}>{m.success_rate}%</span>; })() : '-' },
       { label: 'Verified', key: 'verified', compareFn: (m) => m.verified ? <Check className="w-5 h-5 text-violet-400 mx-auto" /> : <X className="w-5 h-5 text-gray-600 mx-auto" /> },
-      { label: 'Tools', key: 'tools', compareFn: (m) => m.tools?.length || '—' },
+      { label: 'Tools', key: 'tools', compareFn: (m) => m.tools?.length || '-' },
     ];
     return r;
   }, []);
@@ -189,7 +189,7 @@ export default function CompareClient() {
                         const mcp = allMCPs.find((m) => m.id === item.id);
                         return (
                           <td key={item.id} className="p-4 text-white text-sm">
-                            {mcp ? row.compareFn(mcp) : '—'}
+                            {mcp ? row.compareFn(mcp) : '-'}
                           </td>
                         );
                       })}

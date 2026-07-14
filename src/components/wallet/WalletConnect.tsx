@@ -140,7 +140,7 @@ export function WalletConnect() {
     );
   }
 
-  // Disconnected but provider available — show "ready" indicator
+  // Disconnected but provider available, show "ready" indicator
   if (hasProvider) {
     return (
       <div className="flex items-center gap-2 px-3 py-1.5 bg-zinc-800/80 text-white rounded-lg border border-zinc-700">
@@ -161,7 +161,7 @@ export function WalletConnect() {
     );
   }
 
-  // No provider — show generic connect button
+  // No provider, show generic connect button
   return (
     <button
       onClick={handleConnect}

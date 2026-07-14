@@ -39,7 +39,7 @@ export default async function DashboardPage({ searchParams }: { searchParams: Pr
 
         <div className="container mx-auto px-4 max-w-7xl py-8">
           <div className="mb-6 p-3 bg-amber-500/10 text-amber-400 border border-amber-500/20 rounded-lg text-sm">
-            Demo Mode — Supabase not configured. Showing mock data.
+            Demo Mode, Supabase not configured. Showing mock data.
           </div>
 
           <div className="mb-8">

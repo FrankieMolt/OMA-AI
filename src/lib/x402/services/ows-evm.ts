@@ -54,7 +54,7 @@ export async function signEVMPaymentWithOWS(params: {
   const ows = getOWS();
   const { fromAddress, payTo, amountBigInt, validAfter, validBefore, nonce, chainId, assetContract } = params;
 
-  // Convert nonce to bytes32 hex — ensure it's exactly 32 bytes
+  // Convert nonce to bytes32 hex, ensure it's exactly 32 bytes
   const nonceClean = nonce.startsWith('0x') ? nonce.slice(2) : nonce;
   const nonceBytes = Buffer.from(nonceClean, 'hex');
   if (nonceBytes.length !== 32) {
@@ -110,12 +110,12 @@ export async function signEVMPaymentWithOWS(params: {
   const sigHex = result.signature;
 
   if (sigHex.length === 128) {
-    // r (32) + s (32) without v — append v
+    // r (32) + s (32) without v, append v
     return sigHex + v.toString(16).padStart(2, '0');
   } else if (sigHex.length === 130) {
     return sigHex;
   } else {
-    // Unexpected — return as-is
+    // Unexpected, return as-is
     return sigHex;
   }
 }

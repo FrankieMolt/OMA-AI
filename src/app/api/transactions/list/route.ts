@@ -71,7 +71,7 @@ export async function GET(request: NextRequest) {
         hasMore: allTxs.length > offset + limit,
       },
       notice: allTxs.length === 0
-        ? 'No transactions yet — connect a wallet and make a payment'
+        ? 'No transactions yet, connect a wallet and make a payment'
         : undefined,
     });
   } catch (error) {

@@ -38,7 +38,7 @@ export default function LLMsPage() {
           </div>
           <h1 className="text-5xl font-bold text-white mb-4">AI Models</h1>
           <p className="text-xl text-zinc-400 max-w-2xl mx-auto">
-            50+ models from OpenAI, Anthropic, Google, Meta and more. Pay per token via x402 — no subscriptions, no API key management.
+            50+ models from OpenAI, Anthropic, Google, Meta and more. Pay per token via x402, no subscriptions, no API key management.
           </p>
         </div>
 
@@ -147,7 +147,7 @@ export default function LLMsPage() {
         <GlassCard className="p-8 text-center bg-gradient-to-br from-violet-900/30 to-cyan-900/20 border-violet-500/30">
           <h2 className="text-2xl font-bold text-white mb-3">Get Started with OMA-AI Models</h2>
           <p className="text-zinc-400 mb-6 max-w-lg mx-auto">
-            Connect your wallet to get an API key. Your AI agent can then call any model — paying automatically via x402 microtransactions.
+            Connect your wallet to get an API key. Your AI agent can then call any model, paying automatically via x402 microtransactions.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a href="/wallet" className="inline-flex items-center gap-2 px-6 py-3 bg-violet-600 hover:bg-violet-700 text-white font-semibold rounded-lg transition-colors">

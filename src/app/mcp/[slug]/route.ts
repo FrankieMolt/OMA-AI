@@ -1,5 +1,5 @@
 /**
- * Dynamic MCP Server — Real MCP Protocol Implementation
+ * Dynamic MCP Server, Real MCP Protocol Implementation
  * Implements JSON-RPC 2.0 over SSE (Server-Sent Events)
  *
  * Supports:
@@ -64,7 +64,7 @@ const PLATFORM_TOOLS: Tool[] = [
   },
   {
     name: 'market_stats',
-    description: 'Get crypto market stats — total cap, BTC dominance',
+    description: 'Get crypto market stats, total cap, BTC dominance',
     inputSchema: { type: 'object', properties: {} },
   },
   {
@@ -203,7 +203,7 @@ async function executeTool(name: string, args: Record<string, unknown>) {
   switch (name) {
     case 'hello': {
       const n = (args.name as string) || 'World';
-      return { greeting: `Hello, ${n}! Welcome to OMA-AI — the MCP Marketplace.` };
+      return { greeting: `Hello, ${n}! Welcome to OMA-AI, the MCP Marketplace.` };
     }
 
     case 'echo':
@@ -527,7 +527,7 @@ export async function POST(
       }
 
       case 'tools/call': {
-        // x402 payment enforcement — check if this MCP requires payment
+        // x402 payment enforcement, check if this MCP requires payment
         const mcp = getMCPBySlug(slug);
         const x402Enabled = Boolean(mcp?.x402_enabled);
         const pricingUsdc = typeof mcp?.pricing_usdc === 'number' ? mcp.pricing_usdc : parseFloat(String(mcp?.pricing_usdc || '0'));

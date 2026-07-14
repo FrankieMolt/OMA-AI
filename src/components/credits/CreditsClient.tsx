@@ -101,7 +101,7 @@ export function CreditsClient({ packages, treasuryAddress }: CreditsClientProps)
     setPurchaseState('signing');
 
     try {
-      // Step 1: Initiate purchase — get payment requirement from server
+      // Step 1: Initiate purchase, get payment requirement from server
       const purchaseRes = await fetch('/api/credits/purchase', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

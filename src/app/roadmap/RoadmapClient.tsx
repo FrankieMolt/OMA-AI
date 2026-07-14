@@ -144,7 +144,7 @@ const roadmapItems = [
   // Ecosystem Pillar
   {
     title: 'MCP Marketplace',
-    description: 'Browse, subscribe, and call 19+ MCP servers with x402 payments. Live now.',
+    description: 'Browse, subscribe, and call 34+ MCP servers with x402 payments. Live now.',
     status: 'completed',
     phase: 'now',
     pillars: ['ecosystem', 'payments']

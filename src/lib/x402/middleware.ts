@@ -26,9 +26,9 @@
  * 
  * NETWORKS:
  * ---------
- * - Base (eip155:8453) — primary, via Coinbase x402 facilitator
- * - Base Sepolia (eip155:84532) — testnet
- * - Solana (solana:...) — future support planned
+ * - Base (eip155:8453), primary, via Coinbase x402 facilitator
+ * - Base Sepolia (eip155:84532), testnet
+ * - Solana (solana:...), future support planned
  * 
  * HEADERS:
  * --------
@@ -70,7 +70,7 @@ export interface PaymentCheckResult {
   paymentReq?: MCPaymentRequirement;
 }
 
-// OMA-AI's receiving wallet address — configure via env in production
+// OMA-AI's receiving wallet address, configure via env in production
 const PAYMENT_WALLET = process.env.X402_PAYMENT_WALLET || '0xYourWalletAddressHere';
 const PAYMENT_NETWORK = (process.env.X402_PAYMENT_NETWORK || 'base') as 'base' | 'base-sepolia';
 
@@ -218,7 +218,7 @@ export async function x402Middleware(
       const paymentHeader = request.headers.get('x402-payment');
       
       if (!paymentHeader) {
-        // No payment proof — return 402
+        // No payment proof, return 402
         const response = create402Response(check.paymentReq!);
         return { allowed: false, response, paymentReq: check.paymentReq };
       }

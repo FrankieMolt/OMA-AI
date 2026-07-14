@@ -109,7 +109,7 @@ export default function EcosystemPage() {
             
             <p className="text-xl text-zinc-400 mb-8 leading-relaxed">
               The Model Context Protocol (MCP) is creating the first plug-and-play ecosystem for AI agents. 
-              Like USB standardized device connections, MCP standardizes how agents connect to tools — 
+              Like USB standardized device connections, MCP standardizes how agents connect to tools, 
               enabling interoperability, innovation, and autonomous commerce at scale.
             </p>
             
@@ -144,7 +144,7 @@ export default function EcosystemPage() {
               Why MCP Matters
             </h2>
             <p className="text-zinc-400 text-lg max-w-2xl mx-auto">
-              MCP is more than a protocol — it's the foundation for an agentic internet where AI agents 
+              MCP is more than a protocol, it's the foundation for an agentic internet where AI agents 
               can discover, connect, and pay for tools autonomously.
             </p>
           </motion.div>
@@ -182,7 +182,7 @@ export default function EcosystemPage() {
               MCP Servers by Category
             </h2>
             <p className="text-zinc-400 text-lg max-w-2xl mx-auto">
-              From blockchain data to web search, databases to AI memory — 
+              From blockchain data to web search, databases to AI memory, 
               discover the tools that power autonomous agents.
             </p>
           </motion.div>
@@ -251,7 +251,7 @@ export default function EcosystemPage() {
               Build the Agentic Future
             </h2>
             <p className="text-zinc-400 text-lg mb-8 max-w-xl mx-auto">
-              Whether you're building AI agents or creating tools for them — 
+              Whether you're building AI agents or creating tools for them, 
               the MCP ecosystem is where the action is. Join the open standard that's 
               connecting the AI infrastructure stack.
             </p>

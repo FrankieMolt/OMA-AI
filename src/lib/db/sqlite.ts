@@ -3,10 +3,10 @@
  * Database file: .data/oma-ai.db
  * 
  * Schema:
- *   x402_transactions  — payment transactions log
- *   x402_nonces        — per-caller nonces used by EIP-3009
- *   mcp_servers        — MCP server registry with x402 config
- *   user_credentials   — BYOK: encrypted API keys per user per MCP
+ *   x402_transactions , payment transactions log
+ *   x402_nonces       , per-caller nonces used by EIP-3009
+ *   mcp_servers       , MCP server registry with x402 config
+ *   user_credentials  , BYOK: encrypted API keys per user per MCP
  */
 
 import Database from 'better-sqlite3';

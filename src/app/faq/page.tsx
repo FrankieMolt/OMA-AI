@@ -6,7 +6,7 @@ import Link from 'next/link';
 const faqs = [
   {
     question: "What is OMA-AI?",
-    answer: "OMA-AI is the premier MCP (Model Context Protocol) marketplace, enabling AI agents to discover, integrate, and pay for tools seamlessly. We host 19+ verified MCP servers with x402 gasless payments.",
+    answer: "OMA-AI is the premier MCP (Model Context Protocol) marketplace, enabling AI agents to discover, integrate, and pay for tools seamlessly. We host 34+ verified MCP servers with x402 gasless payments.",
     category: "General",
   },
   {

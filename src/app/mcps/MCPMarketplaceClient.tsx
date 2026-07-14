@@ -54,7 +54,7 @@ const mcpFeatures = [
   {
     icon: Globe,
     title: 'Cross-Platform',
-    description: 'Works with any runtime that speaks MCP — OpenClaw, Claude Code, Codex, more.'
+    description: 'Works with any runtime that speaks MCP, OpenClaw, Claude Code, Codex, more.'
   },
   {
     icon: Code,
@@ -64,7 +64,7 @@ const mcpFeatures = [
   {
     icon: Cpu,
     title: 'Live MCP Tools',
-    description: 'Web search, database queries, blockchain calls, code execution — unified.'
+    description: 'Web search, database queries, blockchain calls, code execution, unified.'
   }
 ];
 
@@ -104,7 +104,7 @@ export default function MCPMarketplaceClient() {
             </h1>
             
             <p className="text-xl text-gray-300 mb-8 leading-relaxed max-w-3xl mx-auto">
-              The Model Context Protocol connects AI agents to external tools. Browse, subscribe, and integrate MCP servers — from blockchain data to web search, database queries to code execution. Payments happen automatically via x402 microtransactions on Base.
+              The Model Context Protocol connects AI agents to external tools. Browse, subscribe, and integrate MCP servers, from blockchain data to web search, database queries to code execution. Payments happen automatically via x402 microtransactions on Base.
             </p>
             
             <div className="flex flex-wrap gap-4 justify-center mb-10">
@@ -147,7 +147,7 @@ export default function MCPMarketplaceClient() {
               What is the Model Context Protocol?
             </h2>
             <p className="text-lg text-gray-300 mb-6 leading-relaxed">
-              MCP is an open standard that lets AI agents connect to external tools and data sources through one interface. Instead of building custom integrations for every tool, developers expose capabilities as MCP servers — and any compatible agent can use them instantly.
+              MCP is an open standard that lets AI agents connect to external tools and data sources through one interface. Instead of building custom integrations for every tool, developers expose capabilities as MCP servers, and any compatible agent can use them instantly.
             </p>
             <p className="text-lg text-gray-300 mb-8 leading-relaxed">
               Think of it like USB for AI agents. Just as USB standardized how devices connect to computers, MCP standardizes how AI agents connect to the internet, databases, APIs, and services. The result? Agents can find the tools they need when they need them.
@@ -191,7 +191,7 @@ export default function MCPMarketplaceClient() {
                   <div className="w-10 h-10 rounded-lg bg-violet-600 flex items-center justify-center text-white font-bold flex-shrink-0">2</div>
                   <div>
                     <h4 className="text-white font-semibold mb-1">MCP Server Executes</h4>
-                    <p className="text-gray-400 text-sm">The MCP server runs the requested operation — query, API call, computation.</p>
+                    <p className="text-gray-400 text-sm">The MCP server runs the requested operation, query, API call, computation.</p>
                   </div>
                 </div>
                 <div className="flex gap-4">
@@ -360,7 +360,7 @@ export default function MCPMarketplaceClient() {
         >
           <h2 className="text-4xl font-bold text-white mb-6">Ready to Build?</h2>
           <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-            Whether you're building agents or building tools — OMA-AI has the infrastructure to make it work.
+            Whether you're building agents or building tools, OMA-AI has the infrastructure to make it work.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
             <Link

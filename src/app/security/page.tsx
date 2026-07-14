@@ -396,7 +396,7 @@ export default function SecurityPage() {
             Trust is Everything
           </h2>
           <p className="text-xl text-purple-100 mb-8 max-w-2xl mx-auto leading-relaxed">
-            Security isn&apos;t just technology—it&apos;s our commitment to protecting your data,
+            Security isn&apos;t just technology-it&apos;s our commitment to protecting your data,
             revenue, and reputation. Every decision is guided by security-first principles.
           </p>
           <Link href="/docs"

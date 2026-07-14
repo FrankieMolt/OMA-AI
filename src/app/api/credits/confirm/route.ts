@@ -79,7 +79,7 @@ async function verifyEIP3009OnChain(params: {
     return { valid: false, error: 'Invalid signature format' };
   }
 
-  // Use public client to simulate/verify — actual execution is done by the user's wallet signature
+  // Use public client to simulate/verify, actual execution is done by the user's wallet signature
   const publicClient = createPublicClient({
     chain: network === 'base_sepolia' ? baseSepolia : base,
     transport: http(network === 'base_sepolia'
@@ -97,7 +97,7 @@ async function verifyEIP3009OnChain(params: {
       account: from as `0x${string}`,
       args: [from as `0x${string}`, to as `0x${string}`, BigInt(value), BigInt(validAfter), BigInt(validBefore), nonce as `0x${string}`, v, r as `0x${string}`, s as `0x${string}`],
     });
-    // Simulation succeeded — signature is valid
+    // Simulation succeeded, signature is valid
     // In production, you would submit the signed tx to the network and wait for receipt
     // For now, we trust the simulation and the user has already signed
     return { valid: true };
@@ -173,7 +173,7 @@ export async function POST(request: NextRequest) {
       } catch (dbErr) {
         console.warn('[Credits Confirm] DB not available, using package mapping only');
         // Fallback: look up by package from purchaseId (not ideal but functional)
-        const pkg = CREDIT_PACKAGES['starter']; // This won't work — better to reject
+        const pkg = CREDIT_PACKAGES['starter']; // This won't work, better to reject
         return NextResponse.json({ error: 'Database not available', code: 'DB_UNAVAILABLE' }, { status: 503 });
       }
     } else {
@@ -192,7 +192,7 @@ export async function POST(request: NextRequest) {
       validBefore = validAfter + 600;
       nonce = ethers.keccak256(ethers.toBeArray(signature)).slice(0, 66);
     } catch {
-      // Continue — we'll do a best-effort verification
+      // Continue, we'll do a best-effort verification
     }
 
     // Verify signature on-chain (skip for now if DB isn't fully configured)

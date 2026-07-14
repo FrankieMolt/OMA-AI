@@ -51,7 +51,7 @@ export default function LoginPage() {
 
         {!isSupabaseConfigured() && (
           <div className="mb-4 p-3 bg-amber-500/10 text-amber-400 border border-amber-500/20 rounded-lg text-sm">
-            Demo mode — Supabase not configured. Using mock auth.
+            Demo mode, Supabase not configured. Using mock auth.
           </div>
         )}
 

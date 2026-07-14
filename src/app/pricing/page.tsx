@@ -11,7 +11,7 @@ const creditsPackages = [
 ];
 
 export const metadata: Metadata = {
-  title: 'Pricing | OMA-AI — Pay-Per-Call MCP Marketplace',
+  title: 'Pricing | OMA-AI, Pay-Per-Call MCP Marketplace',
   description: 'Pay per MCP call. No subscription needed. BYOK key management included free.',
   keywords: ['MCP pricing', 'pay per call', 'credits', 'USDC', 'AI agent payments'],
 };
@@ -55,7 +55,7 @@ export default function PricingPage() {
                 <span className="text-2xl font-bold text-violet-400">2</span>
               </div>
               <h3 className="text-lg font-bold text-white mb-2">Browse MCP Tools</h3>
-              <p className="text-sm text-gray-400">Pick from 7 working MCPs — Solana RPC, Ethereum, GitHub, Alpha Vantage, Jupiter DEX, and more.</p>
+              <p className="text-sm text-gray-400">Pick from 7 working MCPs, Solana RPC, Ethereum, GitHub, Alpha Vantage, Jupiter DEX, and more.</p>
             </GlassCard>
             <GlassCard className="p-6 text-center">
               <div className="w-14 h-14 bg-violet-600/20 border border-violet-500/40 rounded-2xl flex items-center justify-center mx-auto mb-4">
@@ -85,9 +85,9 @@ export default function PricingPage() {
               <div className="flex items-center gap-3 mb-4"><div className="w-10 h-10 bg-amber-500/20 rounded-xl flex items-center justify-center"><Coins className="w-5 h-5 text-amber-400" /></div><h3 className="text-xl font-bold text-white">Paid MCPs</h3></div>
               <div className="text-3xl font-bold text-amber-400 mb-4">From $0.001 / call</div>
               <ul className="space-y-2">
-                <li className="flex items-center gap-2 text-sm text-gray-300"><Check className="w-4 h-4 text-green-400 flex-shrink-0" />Ethereum RPC — $0.001/call</li>
-                <li className="flex items-center gap-2 text-sm text-gray-300"><Check className="w-4 h-4 text-green-400 flex-shrink-0" />RugCheck Scanner — $0.001/call</li>
-                <li className="flex items-center gap-2 text-sm text-gray-300"><Check className="w-4 h-4 text-green-400 flex-shrink-0" />Overlay Protocol — $0.001/call</li>
+                <li className="flex items-center gap-2 text-sm text-gray-300"><Check className="w-4 h-4 text-green-400 flex-shrink-0" />Ethereum RPC, $0.001/call</li>
+                <li className="flex items-center gap-2 text-sm text-gray-300"><Check className="w-4 h-4 text-green-400 flex-shrink-0" />RugCheck Scanner, $0.001/call</li>
+                <li className="flex items-center gap-2 text-sm text-gray-300"><Check className="w-4 h-4 text-green-400 flex-shrink-0" />Overlay Protocol, $0.001/call</li>
                 <li className="flex items-center gap-2 text-sm text-gray-300"><Check className="w-4 h-4 text-green-400 flex-shrink-0" />Pay with USDC on Base (coming soon)</li>
               </ul>
             </GlassCard>
@@ -116,16 +116,16 @@ export default function PricingPage() {
                   <tr key={pkg.credits} className="border-b border-zinc-800/50 text-white">
                     <td className="py-3 pr-4 font-bold">{pkg.credits}</td>
                     <td className="py-3 pr-4 font-mono">{pkg.price}</td>
-                    <td className="py-3 pr-4 text-emerald-400">{pkg.bonus || '—'}</td>
+                    <td className="py-3 pr-4 text-emerald-400">{pkg.bonus || '-'}</td>
                     <td className="py-3 pr-4 text-gray-400">{pkg.costPerCall}</td>
-                    <td className="py-3 font-bold text-amber-400">{pkg.savings || '—'}</td>
+                    <td className="py-3 font-bold text-amber-400">{pkg.savings || '-'}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </GlassCard>
           <p className="text-center text-gray-500 text-sm mt-4">
-            Credits apply to paid MCPs. Buying credits is optional — free MCPs don&apos;t require any payment.
+            Credits apply to paid MCPs. Buying credits is optional, free MCPs don&apos;t require any payment.
           </p>
         </div>
 

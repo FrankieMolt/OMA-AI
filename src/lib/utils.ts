@@ -1,4 +1,4 @@
-// Utilities — keep small and focused
+// Utilities, keep small and focused
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 

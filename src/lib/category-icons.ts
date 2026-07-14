@@ -2,10 +2,10 @@
  * OMA-AI Category Configuration
  *
  * SINGLE SOURCE OF TRUTH for category metadata (icon + color).
- * Icons and colors are NOT maintained separately — they're co-located here.
+ * Icons and colors are NOT maintained separately, they're co-located here.
  *
  * Adding a new MCP category? Add one entry to CATEGORY_CONFIG.
- * Both CATEGORY_ICONS and CATEGORY_COLORS are derived from this array —
+ * Both CATEGORY_ICONS and CATEGORY_COLORS are derived from this array -
  * they stay in sync automatically.
  *
  * Categories must match: MARKETPLACE_MCPS[].category values (mcp-data.ts)
@@ -32,7 +32,7 @@ export interface CategoryEntry {
 }
 
 /**
- * Canonical category registry — add new categories HERE only.
+ * Canonical category registry, add new categories HERE only.
  * Icon and color are always kept in sync per category.
  */
 const CATEGORY_CONFIG: CategoryEntry[] = [
@@ -107,7 +107,7 @@ export function getAllCategories(): string[] {
 }
 
 /**
- * CATEGORIES — array of { id, name, count } for UI dropdowns.
+ * CATEGORIES, array of { id, name, count } for UI dropdowns.
  * count is dynamic (set by the caller from MARKETPLACE_MCPS).
  */
 export const CATEGORIES = CATEGORY_CONFIG.map((c) => ({

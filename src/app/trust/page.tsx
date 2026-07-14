@@ -49,7 +49,7 @@ const securityMeasures = [
   {
     icon: Shield,
     title: 'x402 Protocol Security',
-    description: 'Payments are secured by Base L2 blockchain. No credit card storage — all transactions use USDC with cryptographic finality.',
+    description: 'Payments are secured by Base L2 blockchain. No credit card storage, all transactions use USDC with cryptographic finality.',
   },
   {
     icon: Eye,
@@ -69,7 +69,7 @@ const securityMeasures = [
   {
     icon: Award,
     title: 'Verified Publisher Badges',
-    description: 'Publishers who maintain high-quality MCPs earn verification badges — visible trust signals for users.',
+    description: 'Publishers who maintain high-quality MCPs earn verification badges, visible trust signals for users.',
   },
 ];
 
@@ -130,7 +130,7 @@ export default function TrustPage() {
             
             <p className="text-xl text-zinc-400 mb-8 leading-relaxed">
               Every MCP on OMA-AI is verified. Every payment is secured by blockchain. 
-              Every publisher is accountable. We built trust into the protocol — 
+              Every publisher is accountable. We built trust into the protocol, 
               so you don't have to trust us.
             </p>
           </div>

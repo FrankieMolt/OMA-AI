@@ -1,5 +1,5 @@
 /**
- * Credits Purchase API — x402 EIP-3009 USDC Payment Flow
+ * Credits Purchase API, x402 EIP-3009 USDC Payment Flow
  *
  * POST: Initiate a credits purchase
  *   Body: { packageId, walletAddress, network?, userId? }
@@ -18,7 +18,7 @@ import { ethers } from 'ethers';
 
 const TREASURY_ADDRESS = process.env.OMA_AI_PAYMENT_WALLET || process.env.NEXT_PUBLIC_WALLET_ADDRESS || '0x1D74Eb7BeC21aa9bC6D23D664E40b97E74472D21';
 
-// Credit packages mapping — mirrors credits page display
+// Credit packages mapping, mirrors credits page display
 const CREDIT_PACKAGES: Record<string, { credits: number; bonus: number; price: number; name: string }> = {
   starter:    { credits: 5_000,   bonus: 0,       price: 10,  name: 'Starter' },
   growth:     { credits: 25_000,  bonus: 2_500,   price: 40,  name: 'Growth' },
@@ -26,7 +26,7 @@ const CREDIT_PACKAGES: Record<string, { credits: number; bonus: number; price: n
   enterprise: { credits: 500_000, bonus: 50_000,  price: 600, name: 'Enterprise' },
 };
 
-// POST /api/credits/purchase — initiate purchase
+// POST /api/credits/purchase, initiate purchase
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json().catch(() => null);
@@ -96,7 +96,7 @@ export async function POST(request: NextRequest) {
           created_at: new Date().toISOString(),
         });
       } catch (dbErr) {
-        // Table may not exist — log and continue
+        // Table may not exist, log and continue
         console.warn('[Credits Purchase] Could not insert purchase record:', dbErr);
       }
     }
@@ -106,7 +106,7 @@ export async function POST(request: NextRequest) {
       recipientAddress: TREASURY_ADDRESS,
       network: network as 'base' | 'base-sepolia',
       price: pkg.price.toString(),
-      description: `Credits purchase: ${pkg.name} package — ${totalCredits.toLocaleString()} credits`,
+      description: `Credits purchase: ${pkg.name} package, ${totalCredits.toLocaleString()} credits`,
       expiresInMinutes: 10,
     });
 

@@ -3,7 +3,7 @@ import { getSupabaseClient } from '@/lib/supabase/client';
 
 export const dynamic = 'force-dynamic';
 
-// Health check — no self-referential HTTP fetches
+// Health check, no self-referential HTTP fetches
 // Checks what actually matters: DB connectivity and data availability
 async function checkSupabase() {
   const sb = getSupabaseClient();

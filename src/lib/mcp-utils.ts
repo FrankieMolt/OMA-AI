@@ -1,5 +1,5 @@
 /**
- * MCP utility functions — shared by MCPSkillCard and compare/page.
+ * MCP utility functions, shared by MCPSkillCard and compare/page.
  * Extracted from compare/page.tsx lines 19-37.
  */
 

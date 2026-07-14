@@ -56,7 +56,7 @@ export interface ServiceAgent {
 // ============ MCP TYPES ============
 
 /**
- * Canonical MCP skill interface — single source of truth for all data layers.
+ * Canonical MCP skill interface, single source of truth for all data layers.
  *
  * Observed across:
  *   - types.ts          (base fields)

@@ -1,4 +1,4 @@
-// Skills catalog — maps OpenClaw workspace skills to installable MCP configs
+// Skills catalog, maps OpenClaw workspace skills to installable MCP configs
 // Scanned from: ~/.openclaw/workspace/skills/
 
 export interface SkillEntry {

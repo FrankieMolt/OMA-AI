@@ -57,7 +57,7 @@ export function HeroSection() {
           className="text-lg text-zinc-400 mb-10 max-w-xl mx-auto leading-relaxed"
         >
           Connect your API keys → access MCP tools → pay per call. 
-          <span className="text-zinc-500"> Helius, Jupiter, Alchemy, and more — with your own credentials.</span>
+          <span className="text-zinc-500"> Helius, Jupiter, Alchemy, and more, with your own credentials.</span>
         </motion.p>
 
         {/* CTA Buttons */}

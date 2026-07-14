@@ -2,8 +2,8 @@
  * Demo GitHub MCP - actually works!
  * Proxies GitHub API calls. GitHub is free tier on OMA-AI.
  * 
- * GET  /api/demo/github  — healthcheck
- * POST /api/demo/github — tool call { tool: string, args: object }
+ * GET  /api/demo/github , healthcheck
+ * POST /api/demo/github, tool call { tool: string, args: object }
  */
 
 import { NextRequest, NextResponse } from 'next/server';

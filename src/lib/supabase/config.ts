@@ -34,7 +34,7 @@ export const supabaseService = isConfigured()
     }))
   : (null as unknown as SupabaseClient);
 
-// Admin client with service role — bypasses RLS for server-side operations
+// Admin client with service role, bypasses RLS for server-side operations
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const supabaseAdmin = isConfigured() && supabaseServiceKey
   ? (_supabaseAdmin ??= createClient(supabaseUrl!, supabaseServiceKey, {
@@ -51,7 +51,7 @@ export function handleSupabaseError(
   return { data: null, error, isGraceful: false };
 }
 
-// Primary client factory — use this in API routes (always prefer this over direct supabase import)
+// Primary client factory, use this in API routes (always prefer this over direct supabase import)
 // Uses separate storage key to avoid GoTrueClient multiple instances warning
 export function getSupabaseClient(): SupabaseClient | null {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;

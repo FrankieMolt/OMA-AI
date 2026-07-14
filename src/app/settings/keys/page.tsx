@@ -25,7 +25,7 @@ interface MCPStatus {
   [mcpId: string]: 'unknown' | 'configured' | 'tested' | 'error';
 }
 
-// Known MCP configs — add fields here as we discover which MCPs need what
+// Known MCP configs, add fields here as we discover which MCPs need what
 const MCP_FIELD_CONFIGS: Record<string, MCPConfigField[]> = {
   'helius-solana': [
     {
@@ -42,7 +42,7 @@ const MCP_FIELD_CONFIGS: Record<string, MCPConfigField[]> = {
       field_name: 'JUPITER_API_KEY',
       type: 'password',
       label: 'Jupiter API Key',
-      description: 'Optional — adds rate limit priority on Jupiter',
+      description: 'Optional, adds rate limit priority on Jupiter',
       placeholder: 'Optional Jupiter API key',
       required: false,
     },
@@ -62,7 +62,7 @@ const MCP_FIELD_CONFIGS: Record<string, MCPConfigField[]> = {
       field_name: 'ALCHEMY_API_KEY',
       type: 'password',
       label: 'Alchemy API Key',
-      description: 'From app.alchemy.com — used for Ethereum RPC calls',
+      description: 'From app.alchemy.com, used for Ethereum RPC calls',
       placeholder: 'Enter your Alchemy API key',
       required: true,
     },
@@ -72,7 +72,7 @@ const MCP_FIELD_CONFIGS: Record<string, MCPConfigField[]> = {
       field_name: 'ALPHA_VANTAGE_KEY',
       type: 'password',
       label: 'Alpha Vantage API Key',
-      description: 'Free key from alphavantage.co — for stock/FX/crypto data',
+      description: 'Free key from alphavantage.co, for stock/FX/crypto data',
       placeholder: 'Enter your Alpha Vantage API key',
       required: true,
     },
@@ -93,7 +93,7 @@ const MCP_FIELD_CONFIGS: Record<string, MCPConfigField[]> = {
       type: 'password',
       label: 'SearXNG API Key',
       description: 'If your SearXNG instance requires authentication',
-      placeholder: 'Optional — leave blank if self-hosted instance',
+      placeholder: 'Optional, leave blank if self-hosted instance',
       required: false,
     },
   ],
@@ -266,7 +266,7 @@ function MCPKeyCard({ mcpId, fields, walletAddress }: {
                     onClick={() => {
                       const savedCred = storedKeys.find(k => k.field_name === field.field_name);
                       if (savedCred) {
-                        // Can't test without decrypting — just show a message
+                        // Can't test without decrypting, just show a message
                         setTestStatus(prev => ({ ...prev, [field.field_name]: 'ok' }));
                         setTimeout(() => setTestStatus(prev => ({ ...prev, [field.field_name]: 'idle' })), 3000);
                       }

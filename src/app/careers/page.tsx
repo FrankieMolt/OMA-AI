@@ -12,7 +12,7 @@ const openings = [
     title: 'Senior Full-Stack Engineer',
     type: 'Full-time',
     location: 'Remote (Global)',
-    salary: '$120k–$180k',
+    salary: '$120k-$180k',
     description: 'Build and scale OMA-AI MCP marketplace, payment infrastructure, and agentic AI tools.',
     tags: ['Next.js', 'TypeScript', 'Solidity', 'PostgreSQL'],
   },
@@ -20,7 +20,7 @@ const openings = [
     title: 'MCP Developer Advocate',
     type: 'Full-time',
     location: 'Remote (Global)',
-    salary: '$80k–$130k',
+    salary: '$80k-$130k',
     description: 'Grow the MCP ecosystem. Build sample MCPs, write documentation, and help publishers succeed.',
     tags: ['Python', 'Node.js', 'Technical Writing', 'Community'],
   },
@@ -28,7 +28,7 @@ const openings = [
     title: 'DevOps / Platform Engineer',
     type: 'Full-time',
     location: 'Remote (Global)',
-    salary: '$110k–$160k',
+    salary: '$110k-$160k',
     description: 'Manage cloud infrastructure (Coolify, Cloudflare, Vercel), CI/CD pipelines, and 99.9% uptime.',
     tags: ['Docker', 'Kubernetes', 'Cloudflare', 'CI/CD'],
   },
@@ -48,7 +48,7 @@ export default function CareersPage() {
             Work with us
           </h1>
           <p className="text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
-            NOSYT LLC builds infrastructure for agentic AI. OMA-AI is our flagship product — 
+            NOSYT LLC builds infrastructure for agentic AI. OMA-AI is our flagship product, 
             the premier MCP marketplace with x402 gasless payments.
           </p>
           <p className="text-gray-400 mt-4">

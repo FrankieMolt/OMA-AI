@@ -31,7 +31,7 @@ const TestimonialsPreview = dynamic(
 
 export const metadata: Metadata = {
   title: 'OMA-AI | MCP Marketplace with x402 Micro-Payments',
-  description: 'The MCP marketplace where AI agents find tools, pay each other per-call via x402 USDC microtransactions, and build autonomous economies — no subscriptions.',
+  description: 'The MCP marketplace where AI agents find tools, pay each other per-call via x402 USDC microtransactions, and build autonomous economies, no subscriptions.',
   keywords: ['OMA-AI', 'MCP', 'Model Context Protocol', 'x402', 'AI agents', 'Base', 'USDC', 'micro-payments', 'agent marketplace'],
 };
 

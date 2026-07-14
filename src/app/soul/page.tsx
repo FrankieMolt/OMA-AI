@@ -36,7 +36,7 @@ export default function SoulPage() {
 
         <div className="grid md:grid-cols-3 gap-6 mt-8">
           {[
-            { icon: Shield, title: 'Self-Custodial', desc: 'Agents hold their own keys — no custodian, no single point of failure' },
+            { icon: Shield, title: 'Self-Custodial', desc: 'Agents hold their own keys, no custodian, no single point of failure' },
             { icon: Globe, title: 'Multi-Chain', desc: 'Support for Base, Ethereum, Solana, and more chains coming soon' },
             { icon: Zap, title: 'x402 Native', desc: 'Seamless integration with the x402 payment protocol for agent commerce' },
           ].map((item) => {

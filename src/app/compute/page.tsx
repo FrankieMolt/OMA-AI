@@ -17,7 +17,7 @@ export default function ComputePage() {
           </div>
           <h1 className="text-5xl font-bold text-white mb-4">GPU Compute</h1>
           <p className="text-xl text-zinc-400 max-w-2xl mx-auto">
-            Deploy agent workloads on decentralized GPU networks like Akash, or traditional clouds — all paid via x402 micropayments.
+            Deploy agent workloads on decentralized GPU networks like Akash, or traditional clouds, all paid via x402 micropayments.
           </p>
         </div>
 

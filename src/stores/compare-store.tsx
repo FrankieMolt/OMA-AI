@@ -47,7 +47,7 @@ function saveToStorage(items: CompareItem[]) {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
   } catch {
-    // quota exceeded or private mode — ignore
+    // quota exceeded or private mode, ignore
   }
 }
 

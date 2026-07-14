@@ -29,7 +29,7 @@ export function MCPHowToUse({ slug, mcp_endpoint }: MCPHowToUseProps) {
     },
   }, null, 2);
 
-  // Use streamable-http transport pointing directly at the MCP endpoint — no fake npm package
+  // Use streamable-http transport pointing directly at the MCP endpoint, no fake npm package
   const claudeConfig = JSON.stringify({
     mcpServers: {
       [slug]: {

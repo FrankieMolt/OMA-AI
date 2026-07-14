@@ -9,7 +9,7 @@ import { getCredentialsForMCP } from '@/lib/credentials';
 
 export const dynamic = 'force-dynamic';
 
-// Helius public free tier endpoint — allows basic reads without API key
+// Helius public free tier endpoint, allows basic reads without API key
 const HELIUS_PUBLIC_URL = 'https://mainnet.helius-rpc.com/?api-key=free-tier';
 
 function getHeliusUrl(key: string) {

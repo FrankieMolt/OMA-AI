@@ -27,7 +27,7 @@ describe('dollarsToMicroUnits', () => {
   });
 
   it('throws on dollar-sign prefixed strings (parseFloat limitation)', () => {
-    // parseFloat('$0.01') returns NaN — this is actual behavior
+    // parseFloat('$0.01') returns NaN, this is actual behavior
     expect(() => dollarsToMicroUnits('$0.01')).toThrow('Invalid price');
   });
 

@@ -19,7 +19,7 @@ export async function GET() {
       totalCalls = data.reduce((sum, m) => sum + (m.total_calls || 0), 0);
     }
   } else {
-    // Fallback to static data — cast for type-safe field access
+    // Fallback to static data, cast for type-safe field access
     const mcps = MARKETPLACE_MCPS as unknown as MCPSkill[];
     verifiedMcpCount = mcps.filter((m) => m.verified).length;
     totalCalls = mcps.reduce((sum, m) => sum + (m.total_calls ?? m.calls ?? 0), 0);

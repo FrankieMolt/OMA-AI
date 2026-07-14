@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   description: 'Connect OMA-AI MCPs to your favorite platforms and agents.',
 };
 
-// Redirect to MCP marketplace — integrations are listed there
+// Redirect to MCP marketplace, integrations are listed there
 export default function IntegrationsPage() {
   redirect('/mcps');
 }

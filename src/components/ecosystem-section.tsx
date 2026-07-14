@@ -9,7 +9,7 @@ export function EcosystemSection() {
             The Stack Underneath
           </h2>
           <p className="text-xl text-zinc-400 max-w-3xl mx-auto">
-            Everything you need to run AI agents in production — MCP for tools, x402 for payments.
+            Everything you need to run AI agents in production, MCP for tools, x402 for payments.
           </p>
         </div>
         

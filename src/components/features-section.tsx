@@ -13,7 +13,7 @@ const features = [
   {
     icon: Boxes,
     title: 'MCP Marketplace',
-    desc: 'Browse and subscribe to MCP servers. 21+ ready to connect.',
+    desc: 'Browse and subscribe to MCP servers. 34+ ready to connect.',
     href: '/mcps',
     accent: 'violet'
   },

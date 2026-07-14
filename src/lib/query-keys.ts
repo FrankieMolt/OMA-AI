@@ -1,5 +1,5 @@
 /**
- * React Query Keys — centralized for type safety and cache management
+ * React Query Keys, centralized for type safety and cache management
  */
 
 export enum QueryKeys {

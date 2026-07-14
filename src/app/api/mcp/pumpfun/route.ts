@@ -26,7 +26,7 @@ export async function GET(request: NextRequest) {
   try {
     switch (tool) {
       case 'get_tokens': {
-        // PumpFun dashboard scraper — returns trending tokens
+        // PumpFun dashboard scraper, returns trending tokens
         const res = await fetch('https://pump.fun/api/feed?limit=20', {
           headers: { 'Accept': 'application/json' },
           signal: AbortSignal.timeout(8000),

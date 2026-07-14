@@ -20,7 +20,7 @@ const MotionDiv = dynamic(
 export default function MCPSkillDetail({ slug }: { slug: string }) {
   const { skill, loading, error } = useMCPSkillDetail(slug);
 
-  // Must be called before any early returns — hook rules require consistent call order
+  // Must be called before any early returns, hook rules require consistent call order
   const cat = skill?.category?.[0] || 'Utilities';
   const CategoryIcon = useMemo(() => getCategoryIcon(cat), [cat]);
 
@@ -175,7 +175,7 @@ export default function MCPSkillDetail({ slug }: { slug: string }) {
             <MCPHowToUse slug={skill.slug} mcp_endpoint={skill.mcp_endpoint} />
           </MotionDiv>
 
-          {/* Right Column — MCPInstallCard */}
+          {/* Right Column, MCPInstallCard */}
           <div>
             <MCPInstallCard server={{
               slug: skill.slug,

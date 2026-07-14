@@ -1,8 +1,8 @@
 /**
- * OMA-AI x402 Payment Integration — Barrel re-export
+ * OMA-AI x402 Payment Integration, Barrel re-export
  *
  * All actual implementations live in ./server.ts.
- * Import from here or from './server' — both are equivalent.
+ * Import from here or from './server', both are equivalent.
  *
  * ⚠️  Do NOT add implementations here. Add them to ./server.ts.
  */

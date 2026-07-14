@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   const stats = [
-    { value: '19+', label: 'MCP Servers' },
+    { value: '34+', label: 'MCP Servers' },
     { value: '300+', label: 'MCP Tools' },
     { value: '13', label: 'Blog Posts' },
     { value: '5%', label: 'Platform Fee' },

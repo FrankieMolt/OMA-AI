@@ -8,7 +8,7 @@ const steps = [
     icon: Search,
     number: '01',
     title: 'Find Your MCP',
-    description: 'Browse 19+ verified Model Context Protocol servers. Filter by capability, pricing, and reviews.',
+    description: 'Browse 34+ verified Model Context Protocol servers. Filter by capability, pricing, and reviews.',
     href: '/mcps',
     accent: 'violet'
   },
@@ -16,7 +16,7 @@ const steps = [
     icon: Zap,
     number: '02',
     title: 'Connect & Deploy',
-    description: 'One-click integration. Agents connect via standard MCP protocol — no custom code needed.',
+    description: 'One-click integration. Agents connect via standard MCP protocol, no custom code needed.',
     href: '/docs',
     accent: 'cyan'
   },

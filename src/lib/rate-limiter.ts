@@ -4,7 +4,7 @@ import { createClient } from '@supabase/supabase-js';
 /**
  * Supabase-backed rate limiting.
  *
- * ✅  Uses Supabase `rate_limits` table — safe for multi-instance deployments.
+ * ✅  Uses Supabase `rate_limits` table, safe for multi-instance deployments.
  *    State is persisted in Postgres, not in-process memory.
  * ❌  Falls back to pass-through (no limiting) if Supabase is unavailable.
  *    Plan: add Redis as a fast-path fallback once OMA-AI reaches scale.
@@ -59,7 +59,7 @@ async function checkSupabaseRateLimit(
   windowMs: number
 ): Promise<{ allowed: boolean; current: number; resetAt: number }> {
   if (!supabase) {
-    // No Supabase — skip rate limiting (fail open for dev)
+    // No Supabase, skip rate limiting (fail open for dev)
     return { allowed: true, current: 0, resetAt: Date.now() + windowMs };
   }
 

@@ -125,7 +125,7 @@ const response = await client.request("https://api.example.com/data", {
     steps: [
       {
         title: "What is MCP?",
-        content: "MCP (Model Context Protocol) is an open standard by Anthropic that lets AI assistants connect to external tools, databases, and data sources. Think of it as 'USB-C for AI' — a universal adapter for AI模型 to interact with external systems."
+        content: "MCP (Model Context Protocol) is an open standard by Anthropic that lets AI assistants connect to external tools, databases, and data sources. Think of it as 'USB-C for AI', a universal adapter for AI模型 to interact with external systems."
       },
       {
         title: "Initialize the Project",
@@ -182,7 +182,7 @@ main();`,
       },
       {
         title: "Install x402 SDK",
-        content: "npm install @x402/express @x402/core — The SDK provides middleware to easily add payment requirements to any Express/HTTP server."
+        content: "npm install @x402/express @x402/core, The SDK provides middleware to easily add payment requirements to any Express/HTTP server."
       },
       {
         title: "Configure Payment Requirements",

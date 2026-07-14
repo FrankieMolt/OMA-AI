@@ -4,7 +4,7 @@ import { supabaseService } from '@/lib/supabase/config';
 
 export async function POST(request: Request) {
   try {
-    // Check if Supabase URL is configured (service role key may be expired — falls back to anon key)
+    // Check if Supabase URL is configured (service role key may be expired, falls back to anon key)
     if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
       return NextResponse.json(
         { success: false, error: 'Supabase not configured' },
@@ -198,7 +198,7 @@ export async function GET(request: Request) {
   return NextResponse.json({
     success: true,
     source: hasSupabase ? 'database' : 'fallback',
-    warning: hasSupabase ? undefined : 'Supabase not configured — serving cached data',
+    warning: hasSupabase ? undefined : 'Supabase not configured, serving cached data',
     data: paginated,
     pagination: {
       page,
